@@ -1,0 +1,2 @@
+GET http://localhost:3001/getHikes HTTP/1.1
+
