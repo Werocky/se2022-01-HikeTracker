@@ -1,8 +1,9 @@
 import AuthContext from '../AuthContext';
-import { Col, Container, Row } from 'react-bootstrap';
+import { Col, Container, Navbar, Row } from 'react-bootstrap';
 import { useContext, useState, useEffect } from "react";
 import HikeList from './HikeList';
 import API from '../API';
+import Sidebar from './Sidebar';
 
 
 function MainLayout(props) {
@@ -26,25 +27,29 @@ function MainLayout(props) {
 
   return (
     <>
+      <Navigation /> {console.log(hikes)}
       <Container fluid className={'vh-100'}>
+        <p></p>
+        { !loading &&
         <Row>
-          <Col>
-            <Sidebar /> {console.log(hikes)}
-          </Col>
-          <Col>
-            {!loading &&
+          <Col sm={9}>
               <HikeList hikes={hikes} />
-            }
+          </Col>
+          <Col sm={3}>
+            <Sidebar />
           </Col>
         </Row>
+        }
       </Container>
     </>
   );
 }
 
-function Sidebar(props) {
+function Navigation(props) {
   return (
-    <>LOGIN</>
+    <Navbar bg="light">
+      login form here / sign up link
+    </Navbar>
   );
 }
 
