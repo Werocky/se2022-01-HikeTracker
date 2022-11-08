@@ -13,7 +13,7 @@ function App() {
   });
 
   const login = async (email, password) => {  
-    const user = await API.login(email, password)
+    const user = await API.logIn(email, password)
     setAuth({
       login: true,
       user: user,
@@ -21,7 +21,7 @@ function App() {
   };
 
   const logout = async () => { 
-    await API.logout();
+    await API.logOut();
     setAuth({
       login: false,
       user: undefined,
