@@ -24,16 +24,16 @@ function LoginComponent(props) {
 }
 
 function LoginForm(props) {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [email, setEmail] = useState('b@polito.it');
+  const [password, setPassword] = useState('password');
 
   const navigate = useNavigate();
 
   const handleSubmit = async (event) => {
     event.preventDefault();
     const credentials = { email: email, password };
-    const user = await props.login(credentials);
-    navigate('/'+ user.id);
+    await props.login(credentials);
+    navigate('/');
   };
 
   return (

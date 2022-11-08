@@ -4,6 +4,7 @@ import { useContext, useState, useEffect } from "react";
 import HikeList from './HikeList';
 import API from '../API';
 import Sidebar from './Sidebar';
+import { LoginComponent } from './LoginComponent';
 
 
 function MainLayout(props) {
@@ -27,7 +28,7 @@ function MainLayout(props) {
 
   return (
     <>
-      <Navigation /> {console.log(hikes)}
+      <Navigation login={props.login}/> {console.log(hikes)}
       <Container fluid className={'vh-100'}>
         <p></p>
         { !loading &&
@@ -48,7 +49,7 @@ function MainLayout(props) {
 function Navigation(props) {
   return (
     <Navbar bg="light">
-      login form here / sign up link
+      <LoginComponent login={props.login}/>
     </Navbar>
   );
 }

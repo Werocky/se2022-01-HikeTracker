@@ -12,7 +12,10 @@ const authN = require('./modules/authN.js');
 
 /*** Set up Passport ***/
 //configurating function to verify login and password
-passport.use(new LocalStrategy(
+passport.use(new LocalStrategy({
+    usernameField: 'email',
+    passwordField: 'password'
+  },
   function(username, password, done) {
     authN.checkCredentials(username, password).then((user) => {
       if (!user)
@@ -106,7 +109,6 @@ app.get('/getFilteredHikes', async (req, res) => {
   //filtering function
 let filtering = (filters, list) => {
     let vec = [];
-    let flag = true;
     list.forEach(l => {
             if(typeof filters.Difficulty !== 'undefined')
             {

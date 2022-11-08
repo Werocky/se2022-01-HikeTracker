@@ -9,13 +9,13 @@ exports.checkCredentials = (email, password) => {
         if (err) { reject(err); }
         else if (row === undefined) { resolve(false); }
         else {
-          const user = {Id: row.Id, email: row.email};
+          const user = {Id: row.Id, email: row.email, role: row.role};
           const salt = row.salt;
           crypto.scrypt(password, salt, 32, (err, hashedPassword) => {
             if (err) reject(err);
-
-            const passwordHex = Buffer.from(row.hash, 'hex');
-
+          
+            const passwordHex = Buffer.from(row.Hash, 'hex');
+            
             if(!crypto.timingSafeEqual(passwordHex, hashedPassword))
               resolve(false);
             else resolve(user); 
