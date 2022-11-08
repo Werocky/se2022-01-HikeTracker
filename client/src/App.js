@@ -3,6 +3,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import { useContext, useEffect, useState } from 'react';
 import AuthContext from './AuthContext'
 import MainLayout from './Layout-components/MainLayout';
+import API from './API';
 
 function App() {
 
@@ -11,31 +12,31 @@ function App() {
     user: undefined,
   });
 
-  const login = async (email, password) => {  // NEEDS API LOGIN
-    /*const user = await API.login(email, password)
+  const login = async (email, password) => {  
+    const user = await API.login(email, password)
     setAuth({
       login: true,
       user: user,
-    });*/
+    });
   };
 
-  const logout = async () => {    // NEEDS API LOGOUT
-    /*await API.logout();
+  const logout = async () => { 
+    await API.logout();
     setAuth({
       login: false,
       user: undefined,
-    })*/
+    })
   };
 
-  useEffect(() => {   // check login      NEEDS API GETUSERINFO
+  useEffect(() => {   // check login     
     const checkAuth = async () => {
-      /*const user = await API.getUserInfo();
+      const user = await API.getUserInfo();
       if (user) {
         setAuth({
           login: true,
           user: user,
         });
-      }*/
+      }
     };
     checkAuth();
   }, []);

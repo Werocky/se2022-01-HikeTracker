@@ -2,6 +2,7 @@ import AuthContext from '../AuthContext';
 import { Col, Container, Row } from 'react-bootstrap';
 import { useContext, useState, useEffect } from "react";
 import HikeList from './HikeList';
+import API from '../API';
 
 
 function MainLayout(props) {
@@ -12,7 +13,7 @@ function MainLayout(props) {
 
   useEffect(() => {
     const reloadHikes = async () => {
-      const hikes_array = /*API.getHikes();*/[{ "k": "h1", "v": "hike 1" }, { "k": "h2", "v": "hike 2" }, { "k": "h3", "v": "hike 3" }]
+      const hikes_array = await API.getHikes();/*[{ "k": "h1", "v": "hike 1" }, { "k": "h2", "v": "hike 2" }, { "k": "h3", "v": "hike 3" }]*/
       setHikes(hikes_array);
       setLoading(false);
     }

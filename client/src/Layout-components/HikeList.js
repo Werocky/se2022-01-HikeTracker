@@ -3,7 +3,7 @@ function HikeList(props) {
   return (
     <>
       {props.hikes.map((hike) => (
-        <HikeElement key={hike.k} hike={hike.v} />
+        <HikeElement key={hike.HikeId} hike={hike.Title} />
       ))}
     </>
   );
