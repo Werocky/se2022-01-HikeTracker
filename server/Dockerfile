@@ -12,4 +12,4 @@ RUN npm ci
 # Expose the port on which the server will be running
 EXPOSE 3001
 # Start the app
-CMD [ "npm", "start", "server.js"]
+CMD [ "npm", "start", "index.js"]
