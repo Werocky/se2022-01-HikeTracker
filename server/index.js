@@ -19,6 +19,19 @@ app.get('/getHikes', (req, res) => {
       .catch(() => res.status(500).end());
   });
 
+//get the filtered hikes
+app.get('/getFilteredHikes', (req, res) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(422).json({error: 'cannot process request'});
+    }
+
+    let filters = req.body;
+    hikes.getFilteredHikes(filters)
+      .then(list => res.json(list))
+      .catch(() => res.status(500).end());
+  });
+
 // activate the server
 app.listen(port, () => {
     console.log(`Server listening at http://localhost:${port}`);
