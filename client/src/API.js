@@ -69,5 +69,22 @@ async function logIn(credentials) {
     }
   }
 
-const API = {getHikes, logIn, logOut, getUserInfo, getFilteredHikes};
+  async function register(hash, salt, email, role){
+    const response = await fetch ((APIURL+'/sessions/new'), {
+      credentials: 'include',
+      method: 'POST',
+      body: JSON.stringify({ 
+        'hash': hash,
+        'salt': salt,
+        'email': email,
+        'role': role
+      }),
+      headers: {
+        'Content-Type': 'application/json',
+      }
+    });
+    return response.ok ? true : false;
+  }
+
+const API = {getHikes, logIn, logOut, getUserInfo, getFilteredHikes, register};
 export default API;
