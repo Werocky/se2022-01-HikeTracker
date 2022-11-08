@@ -4,6 +4,8 @@ import { useContext, useEffect, useState } from 'react';
 import AuthContext from './AuthContext'
 import MainLayout from './Layout-components/MainLayout';
 import API from './API';
+import { LoginComponent } from './Layout-components/LoginComponent';
+import { RegisterComponent } from './Layout-components/RegisterComponent';
 
 function App() {
 
@@ -64,6 +66,12 @@ function AppLayout(props) {
         />
       }>
       </Route>
+      <Route path='/login' element={
+        <LoginComponent login={props.login}/>
+      }/>
+      <Route path='/register' element={
+        <RegisterComponent register={props.register}/>
+      }/>
     </Routes>
   );
 }
