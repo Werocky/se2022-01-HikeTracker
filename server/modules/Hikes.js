@@ -2,12 +2,12 @@
 
 const db = require('./DB').db;
 
-/*class Hike{
-    constructor(){
-
-    }
-}*/
 //get hikes
+
+
+
+
+
 exports.getHikes = () => {
     return new Promise((resolve, reject) => {
       const sql = 'SELECT * FROM Hikes';
@@ -21,3 +21,26 @@ exports.getHikes = () => {
     });
   };
 
+
+exports.addHike=(HikeID, Length, ExpectedTime, Ascent,Difficulty,Start, End, Description)=>{
+  return new Promise(async (resolve, reject) => {
+    db.run("INSERT INTO Hikes (HikeID, Length, ExpectedTime, Ascent,Difficulty,Start, End, Description) VALUES (?, ?, ?, ?, ?, ?, ?, ?)",
+        [HikeID, Length, ExpectedTime, Ascent,Difficulty,Start, End, Description], function (err) {
+            if (err)
+                reject(err);
+            else
+                resolve('New Hike inserted');
+        });
+});
+}  
+
+  exports.deleteHikes=()=>{
+    return new Promise(async (resolve, reject) => {
+      db.run("DELETE FROM Hikes", [], function (err) {
+          if (err)
+              reject(err);
+          else
+              resolve('Hikes emptied');
+      });
+  })
+  }
