@@ -1,0 +1,22 @@
+version: "3"
+services:
+    frontend:
+        container_name: hike-tracker-client
+        build:
+            context: ./client
+            dockerfile: Dockerfile
+        image: warocky/hike-tracker-client
+        ports:
+            - "3000:3000"
+        volumes:
+            - ./client:/usr/src/app
+    backend:
+        container_name: hike-tracker-server
+        build:
+            context: ./server
+            dockerfile: Dockerfile
+        image: warocky/hike-tracker-server
+        ports:
+            - "3001:3001"
+        volumes:
+            - ./server:/usr/src/app
