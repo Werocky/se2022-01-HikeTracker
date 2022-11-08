@@ -1,24 +1,69 @@
-import logo from './logo.svg';
 import './App.css';
+import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import { useContext, useEffect, useState } from 'react';
+import AuthContext from './AuthContext'
+import MainLayout from './Layout-components/MainLayout';
 
 function App() {
+
+  const [auth, setAuth] = useState({  // login information
+    login: false,
+    user: undefined,
+  });
+
+  const login = async (email, password) => {  // NEEDS API LOGIN
+    /*const user = await API.login(email, password)
+    setAuth({
+      login: true,
+      user: user,
+    });*/
+  };
+
+  const logout = async () => {    // NEEDS API LOGOUT
+    /*await API.logout();
+    setAuth({
+      login: false,
+      user: undefined,
+    })*/
+  };
+
+  useEffect(() => {   // check login      NEEDS API GETUSERINFO
+    const checkAuth = async () => {
+      /*const user = await API.getUserInfo();
+      if (user) {
+        setAuth({
+          login: true,
+          user: user,
+        });
+      }*/
+    };
+    checkAuth();
+  }, []);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <BrowserRouter>
+      <AuthContext.Provider value={auth}>   {/* this is used to pass user information*/}
+        <AppLayout login={login} logout={logout} />
+      </AuthContext.Provider>
+    </BrowserRouter>
+  );
+}
+
+function AppLayout(props) {
+  const auth = useContext(AuthContext);   // contains user information 
+
+
+
+  return (
+    <Routes>
+      <Route path='/' element={
+        <MainLayout
+          login={props.login}
+          logout={props.logout}
+        />
+      }>
+      </Route>
+    </Routes>
   );
 }
 
