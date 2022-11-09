@@ -110,15 +110,19 @@ app.post('/getFilteredHikes', async (req, res) => {
 let filtering = (filters, list) => {
     let vec = [];
     list.forEach(l => {
-            if(typeof filters.Difficulty !== 'undefined')
+            if(typeof filters.Difficulty !== 'undefined' && filters.Difficulty !== '')
             {
                 if(l.Difficulty !== filters.Difficulty){return;}
                 
             }
-            /*if(typeof filters.MapId !== 'undefined')
+            if(typeof filters.Province !== 'undefined' && filters.Province !== '')
             {
-                if(l.MapId !== filters.MapId){return;}
-            }*/
+                if(l.Province !== filters.Province){return;}
+            }
+            if(typeof filters.City !== 'undefined' && filters.City !== '')
+            {
+                if(l.City !== filters.City){return;}
+            }
             if(typeof filters.minAscent !== 'undefined')
             {
                 if(l.Ascent < filters.minAscent){return;}

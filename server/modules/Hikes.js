@@ -15,17 +15,17 @@ exports.getHikes = () => {
         if (err) {
           reject(err);
         }
-        const hikes = rows.map((r) => ({ HikeId: r.HikeId, MapId: r.MapId, start: r.start, end: r.end, Title: r.Title, Length: r.Length, ExpectedTime: r.ExpectedTime, Ascent: r.Ascent, Difficulty: r.Difficulty, ReferencePoints: r.ReferencePoints, Description: r.Description}));
+        const hikes = rows.map((r) => ({ HikeID: r.HikeID, City: r.City, Province: r.Province, start: r.Start, end: r.End, Title: r.Title, Length: r.Length, ExpectedTime: r.ExpectedTime, Ascent: r.Ascent, Difficulty: r.Difficulty, ReferencePoints: r.ReferencePoints, Description: r.Description}));
         resolve(hikes);
       });
     });
   };
 
 
-exports.addHike=(HikeID, Length, ExpectedTime, Ascent,Difficulty,Start, End, Description)=>{
+exports.addHike=(HikeID, Province, City, Length, ExpectedTime, Ascent,Difficulty,Start, End, Description)=>{
   return new Promise(async (resolve, reject) => {
-    db.run("INSERT INTO Hikes (HikeID, Length, ExpectedTime, Ascent,Difficulty,Start, End, Description) VALUES (?, ?, ?, ?, ?, ?, ?, ?)",
-        [HikeID, Length, ExpectedTime, Ascent,Difficulty,Start, End, Description], function (err) {
+    db.run("INSERT INTO Hikes (HikeID, Province, City, Length, ExpectedTime, Ascent,Difficulty,Start, End, Description) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
+        [HikeID, Province, City, Length, ExpectedTime, Ascent,Difficulty,Start, End, Description], function (err) {
             if (err)
                 reject(err);
             else
