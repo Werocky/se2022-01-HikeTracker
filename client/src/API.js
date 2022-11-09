@@ -29,7 +29,6 @@ async function getFilteredHikes(minExpectedTime, maxExpectedTime ,minAscent ,max
         },
     });
         const hikes = await response.json();
-        console.log(hikes);
         if (response.ok) {
         return hikes.map((r) => ({ HikeId: r.HikeID, Length: r.Length, ExpectedTime: r.ExpectedTime, Start: r.Start, end: r.End, Ascent: r.Ascent, Difficulty: r.Difficulty, Description: r.Description}) )
         } else {

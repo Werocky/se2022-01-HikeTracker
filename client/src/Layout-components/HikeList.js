@@ -1,7 +1,7 @@
 import { Table } from "react-bootstrap";
 
 function HikeList(props) {
-
+  console.log(props.hikes);
   return (
     <Table >
       <thead>
