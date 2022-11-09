@@ -28,18 +28,18 @@ function MainLayout(props) {
 
   return (
     <>
-      <Navigation login={props.login} logout={props.logout}/>
+      <Navigation login={props.login} logout={props.logout} />
       <Container fluid className={'vh-100'}>
         <p></p>
-        { !loading &&
-        <Row>
-          <Col sm={9}>
-              <HikeList hikes={hikes} />
-          </Col>
-          <Col sm={3}>
-            <Sidebar setHikes={setHikes}/>
-          </Col>
-        </Row>
+        {!loading &&
+          <Row>
+            <Col sm={9}>
+              <HikeList hikes={hikes} />{console.log(hikes[0])}
+            </Col>
+            <Col sm={3}>
+              <Sidebar setHikes={setHikes} />
+            </Col>
+          </Row>
         }
       </Container>
     </>
@@ -51,7 +51,7 @@ function Navigation(props) {
 
   return (
     <Navbar bg="light">
-      <LoginComponent login={props.login}/>
+      <LoginComponent login={props.login} />
     </Navbar>
   );
 }

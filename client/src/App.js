@@ -7,6 +7,7 @@ import MainLayout from './Layout-components/MainLayout';
 import API from './API';
 import { LoginComponent } from './Layout-components/LoginComponent';
 import { RegisterComponent } from './Layout-components/RegisterComponent';
+import HikeDetails from './Layout-components/HikeDetails';
 
 function App() {
 
@@ -15,7 +16,7 @@ function App() {
     user: undefined,
   });
 
-  const login = async (email, password) => {  
+  const login = async (email, password) => {
     const user = await API.logIn(email, password)
     setAuth({
       login: true,
@@ -23,7 +24,7 @@ function App() {
     });
   };
 
-  const logout = async () => { 
+  const logout = async () => {
     await API.logOut();
     setAuth({
       login: false,
@@ -67,9 +68,10 @@ function AppLayout(props) {
         />
       }>
       </Route>
+      <Route path='/:hikeID' element={<HikeDetails />} />
       <Route path='/register' element={
-        <RegisterComponent register={props.register}/>
-      }/>
+        <RegisterComponent register={props.register} />
+      } />
     </Routes>
   );
 }

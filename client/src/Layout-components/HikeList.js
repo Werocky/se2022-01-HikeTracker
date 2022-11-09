@@ -1,4 +1,5 @@
 import { Button, Table } from "react-bootstrap";
+import { useNavigate } from "react-router-dom";
 
 function HikeList(props) {
   return (
@@ -27,6 +28,8 @@ function HikeList(props) {
 }
 
 function HikeElement(props) {
+  const navigate = useNavigate();
+
   const hike = props.hike;
 
   return (
@@ -39,7 +42,7 @@ function HikeElement(props) {
       <td>{hike.start}</td>
       <td>{hike.end}</td>
       <td>
-        <Button>Details</Button>
+        <Button onClick={() => navigate("/" + hike.HikeId)} >Details</Button>
       </td>
     </tr>
   );
