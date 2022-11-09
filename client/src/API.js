@@ -40,6 +40,27 @@ async function getFilteredHikes(minExpectedTime, maxExpectedTime ,minAscent ,max
     }
 }
 
+function setDescription(Description, HikeID) {
+  return new Promise((resolve, reject) => {
+    fetch((APIURL+'/setDescription'), {
+      method: 'PUT',
+      credentials: 'include',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ Description: Description, HikeID: HikeID }),
+    }).then((response) => {
+      if (response.ok) {
+        resolve(null);
+      } else {
+        response.json()
+          .then((obj) => { reject(obj); }) 
+          .catch(() => { reject({ error: "Cannot parse server response." }) }); 
+      }
+    }).catch(() => { reject({ error: "Cannot communicate with the server." }) }); 
+  });
+}
+
 /* LOGIN FUNCTIONS */
 async function logIn(credentials) {
     let response = await fetch((APIURL+'/sessions'), {
@@ -90,5 +111,5 @@ async function logIn(credentials) {
     return response.ok ? true : false;
   }
 
-const API = {getHikes, logIn, logOut, getUserInfo, getFilteredHikes, register};
+const API = {getHikes, logIn, logOut, getUserInfo, getFilteredHikes, register, setDescription};
 export default API;

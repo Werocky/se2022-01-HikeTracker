@@ -21,6 +21,17 @@ exports.getHikes = () => {
     });
   };
 
+exports.setDescription=(Description, HikeID)=>{
+  return new Promise(async (resolve, reject) => {
+    db.run("UPDATE Hikes SET Description = ? WHERE HikeID = ?",
+        [Description, HikeID], function (err) {
+            if (err)
+                reject(err);
+            else
+                resolve(`Description added for Hike ${HikeID}`);
+        });
+  });
+}  
 
 exports.addHike=(HikeID, Province, City, Length, ExpectedTime, Ascent,Difficulty,Start, End, Description)=>{
   return new Promise(async (resolve, reject) => {

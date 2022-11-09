@@ -152,6 +152,26 @@ let filtering = (filters, list) => {
     return vec;
 }
 
+//add and modify description
+app.put('/setDescription', /*isLoggedIn,*/ [
+  check('Description').notEmpty(),
+  check('HikeID').notEmpty(),
+],
+  async (req, res) => {
+  const errors = validationResult(res);
+    if (!errors.isEmpty()) {
+      return res.status(422).json({error: 'cannot process request'});
+    }
+  const Description = req.body.Description;
+  const HikeID = req.body.HikeID;
+  try {
+    await hikes.setDescription(Description, HikeID);
+    res.status(201).end();
+  } catch(err) {
+    res.status(503).json({error: `Internal Error`});
+  }
+});
+
 /*** Users APIs ***/
 
 // POST /sessions 
