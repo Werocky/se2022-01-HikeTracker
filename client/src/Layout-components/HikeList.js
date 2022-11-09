@@ -1,18 +1,18 @@
-import { Table } from "react-bootstrap";
+import { Button, Table } from "react-bootstrap";
 
 function HikeList(props) {
-  console.log(props.hikes);
   return (
     <Table >
       <thead>
         <tr>
           <th>Title</th>
-          <th>Length</th>
-          <th>Ascent</th>
+          <th>Length (km)</th>
+          <th>Ascent (m)</th>
           <th>Difficulty</th>
-          <th>Expected time</th>
+          <th>Expected time (mm)</th>
           <th>Start</th>
           <th>End</th>
+          <th></th>
         </tr>
       </thead>
       <tbody>
@@ -38,6 +38,9 @@ function HikeElement(props) {
       <td>{hike.ExpectedTime}</td>
       <td>{hike.start}</td>
       <td>{hike.end}</td>
+      <td>
+        <Button>Details</Button>
+      </td>
     </tr>
   );
 }

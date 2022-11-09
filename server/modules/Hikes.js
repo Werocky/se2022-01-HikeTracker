@@ -17,17 +17,28 @@ exports.getHikes = () => {
         if (err) {
           reject(err);
         }
-        const hikes = rows.map((r) => ({ HikeID: r.HikeID,  Start: r.Start, End: r.End, Title: r.Title, Length: r.Length, ExpectedTime: r.ExpectedTime, Ascent: r.Ascent, Difficulty: r.Difficulty, Description: r.Description}));
+        const hikes = rows.map((r) => ({ HikeID: r.HikeID, Start: r.Start, End: r.End, Title: r.Title, Length: r.Length, ExpectedTime: r.ExpectedTime, Ascent: r.Ascent, Difficulty: r.Difficulty, Description: r.Description}));
         resolve(hikes);
       });
     });
 };
 
+exports.setDescription=(Description, HikeID)=>{
+  return new Promise(async (resolve, reject) => {
+    db.run("UPDATE Hikes SET Description = ? WHERE HikeID = ?",
+        [Description, HikeID], function (err) {
+            if (err)
+                reject(err);
+            else
+                resolve(`Description added for Hike ${HikeID}`);
+        });
+  });
+}  
 
-exports.addHike=(HikeID,Title, Length, ExpectedTime, Ascent,Difficulty,Start, End, Description)=>{
+exports.addHike=(HikeID, Length, ExpectedTime, Ascent,Difficulty,Start, End, Description)=>{
   return new Promise(async (resolve, reject) => {
     db.run("INSERT INTO Hikes (HikeID,Title, Length, ExpectedTime, Ascent,Difficulty,Start, End, Description) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)",
-        [HikeID,Title, Length, ExpectedTime, Ascent, Difficulty,Start, End, Description], function (err) {
+        [HikeID, Length, ExpectedTime, Ascent,Difficulty,Start, End, Description], function (err) {
             if (err)
                 reject(err);
             else

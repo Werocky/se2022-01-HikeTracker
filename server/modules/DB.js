@@ -10,6 +10,7 @@ class DatabaseConnection {
         //add any create table function that is created in the future to create a database from 0
         await this.createTableHikes();
         await this.createTableUsers();
+        await this.createTableHikeLocations();
 
     }
 
@@ -22,6 +23,19 @@ class DatabaseConnection {
                     reject(err);
                 else {
                     resolve('Table Hikes created');
+                }
+            });
+        });
+    }
+
+    static createTableHikeLocations() {
+        return new Promise(async (resolve, reject) => {
+            const sql = "CREATE TABLE IF NOT EXISTS HikeLocations (HikeID TEXT PRIMARY KEY UNIQUE NOT NULL,Province TEXT, City TEXT);";
+            this.db.run(sql, [], function (err) {
+                if (err)
+                    reject(err);
+                else {
+                    resolve('Table HikeLocations created');
                 }
             });
         });

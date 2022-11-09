@@ -18,7 +18,7 @@ describe("Get/add Hikes",()=>{
 
     test('insert a new Hike', async()=>{
         await expect(hikes.addHike(0,0,0,0,0,0,0,0,0)).resolves.toEqual('New Hike inserted')
-        await expect(hikes.getHikes()).resolves.toEqual([{"Ascent":0,"Description":"0","Difficulty":"0","ExpectedTime":0,"HikeID":"0","Length":0,"End":"0","Start":"0","Title":"0"}]);
+        await expect(hikes.getHikes()).resolves.toEqual([{"Ascent":0,"Description":null,"Difficulty":"0","ExpectedTime":0,"HikeID":"0","Length":0,"End":"0","Start":"0","Title":"0"}]);
     })
 
     test('Empty hikes db', async()=>{

@@ -4,9 +4,9 @@ import API from '../API';
 
 function Sidebar(props) {
 
-  const [city, setCity] = useState('');
-  const [province, setProvince] = useState('');
-  const [difficulty, setDifficulty] = useState('');
+  const [city, setCity] = useState(undefined);
+  const [province, setProvince] = useState(undefined);
+  const [difficulty, setDifficulty] = useState(undefined);
   const [minDist, setMinDist] = useState(undefined);
   const [maxDist, setMaxDist] = useState(undefined);
   const [minAscent, setMinAscent] = useState(undefined);
@@ -20,7 +20,7 @@ function Sidebar(props) {
     event.preventDefault();
     // call the API and pass all the filter params
     console.log(city+"\n"+province+"\n"+difficulty+"\n"+minDist+"\n"+maxDist+"\n"+minAscent+"\n"+maxAscent+"\n"+minExTime+"\n"+maxExTime);
-    API.getFilteredHikes(minExTime, maxExTime, minAscent, maxAscent, minDist, maxDist, difficulty).then(array => props.setHikes(array));
+    API.getFilteredHikes(minExTime, maxExTime, minAscent, maxAscent, province, city, minDist, maxDist, difficulty).then(array => props.setHikes(array));
   }
 
 

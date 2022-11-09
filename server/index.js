@@ -110,15 +110,19 @@ app.post('/getFilteredHikes', async (req, res) => {
 let filtering = (filters, list) => {
     let vec = [];
     list.forEach(l => {
-            if(typeof filters.Difficulty !== 'undefined')
+            if(typeof filters.Difficulty !== 'undefined' && filters.Difficulty !== '')
             {
                 if(l.Difficulty !== filters.Difficulty){return;}
                 
             }
-            /*if(typeof filters.MapId !== 'undefined')
+            if(typeof filters.Province !== 'undefined' && filters.Province !== '')
             {
-                if(l.MapId !== filters.MapId){return;}
-            }*/
+                if(l.Province !== filters.Province){return;}
+            }
+            if(typeof filters.City !== 'undefined' && filters.City !== '')
+            {
+                if(l.City !== filters.City){return;}
+            }
             if(typeof filters.minAscent !== 'undefined')
             {
                 if(l.Ascent < filters.minAscent){return;}
@@ -147,6 +151,26 @@ let filtering = (filters, list) => {
         });
     return vec;
 }
+
+//add and modify description
+app.put('/setDescription', /*isLoggedIn,*/ [
+  check('Description').notEmpty(),
+  check('HikeID').notEmpty(),
+],
+  async (req, res) => {
+  const errors = validationResult(res);
+    if (!errors.isEmpty()) {
+      return res.status(422).json({error: 'cannot process request'});
+    }
+  const Description = req.body.Description;
+  const HikeID = req.body.HikeID;
+  try {
+    await hikes.setDescription(Description, HikeID);
+    res.status(201).end();
+  } catch(err) {
+    res.status(503).json({error: `Internal Error`});
+  }
+});
 
 /*** Users APIs ***/
 

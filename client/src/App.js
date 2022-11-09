@@ -67,9 +67,6 @@ function AppLayout(props) {
         />
       }>
       </Route>
-      <Route path='/login' element={
-        <LoginComponent login={props.login}/>
-      }/>
       <Route path='/register' element={
         <RegisterComponent register={props.register}/>
       }/>
