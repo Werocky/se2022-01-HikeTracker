@@ -16,7 +16,7 @@ class DatabaseConnection {
     //example:
    static createTableHikes() {
         return new Promise(async (resolve, reject) => {
-            const sql = "CREATE TABLE IF NOT EXISTS Hikes (HikeID TEXT PRIMARY KEY UNIQUE NOT NULL, Length FLOAT,  ExpectedTime TEXT, Ascent FLOAT, Difficulty TEXT, Start TEXT, End TEXT, Description TEXT);";
+            const sql = "CREATE TABLE IF NOT EXISTS Hikes (HikeID TEXT PRIMARY KEY UNIQUE NOT NULL,Title TEXT, Length FLOAT,  ExpectedTime FLOAT, Ascent FLOAT, Difficulty TEXT, Start TEXT, End TEXT, Description TEXT);";
             this.db.run(sql, [], function (err) {
                 if (err)
                     reject(err);
