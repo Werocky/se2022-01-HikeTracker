@@ -1,8 +1,13 @@
-GET http://localhost:3001/getFilteredHikes HTTP/1.1
+POST http://localhost:3001/getFilteredHikes HTTP/1.1
 Content-Type: application/json
 
 {
-    "Length" : 0,
-    "Difficulty": "0",
-    "MapId": 0
+    "minExpectedTime": 0,
+    "maxExpectedTime": 3,
+    "minAscent": 0,
+    "maxAscent": 3,
+    //"MapId": MapId,
+    "minDist": 0,
+    "maxDist": 3,
+    "Difficulty": "T"
 }

@@ -11,24 +11,27 @@ async function getHikes() {
     }
 }
 
-async function getFilteredHikes(ExpectedTime, Ascent, MapId, Length, Difficulty) {
+async function getFilteredHikes(minExpectedTime, maxExpectedTime ,minAscent ,maxAscent /*, way to filter for geog.*/, minDist, maxDist, Difficulty) {
     try
         {const response = await fetch(APIURL+'/getFilteredHikes', {
-            method: 'GET',
+            method: 'POST',
             body: JSON.stringify({ 
-                "ExpectedTime": ExpectedTime,
-                "Ascent": Ascent,
-                "MapId": MapId,
-                "Length": Length,
-                "Difficulty": Difficulty,
+                "minExpectedTime": minExpectedTime,
+                "maxExpectedTime": maxExpectedTime,
+                "minAscent": minAscent,
+                "maxAscent": maxAscent,
+                "minDist": minDist,
+                "maxDist": maxDist,
+                "Difficulty": Difficulty
             }),
             headers: {
             'Content-Type': 'application/json',
         },
     });
         const hikes = await response.json();
+        console.log(hikes);
         if (response.ok) {
-        return hikes.map((r) => ({ HikeId: r.HikeId, MapId: r.MapId, start: r.start, end: r.end, Title: r.Title, Length: r.Length, ExpectedTime: r.ExpectedTime, Ascent: r.Ascent, Difficulty: r.Difficulty, ReferencePoints: r.ReferencePoints, Description: r.Description}) )
+        return hikes.map((r) => ({ HikeId: r.HikeID, Length: r.Length, ExpectedTime: r.ExpectedTime, Start: r.Start, end: r.End, Ascent: r.Ascent, Difficulty: r.Difficulty, Description: r.Description}) )
         } else {
         throw hikes; //which will contain an error if it is the case
     }} catch (ex) {

@@ -89,7 +89,7 @@ app.get('/getHikes', (req, res) => {
   });
 
 //get the filtered hikes
-app.get('/getFilteredHikes', async (req, res) => {
+app.post('/getFilteredHikes', async (req, res) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
       return res.status(422).json({error: 'cannot process request'});
@@ -115,21 +115,33 @@ let filtering = (filters, list) => {
                 if(l.Difficulty !== filters.Difficulty){return;}
                 
             }
-            if(typeof filters.MapId !== 'undefined')
+            /*if(typeof filters.MapId !== 'undefined')
             {
                 if(l.MapId !== filters.MapId){return;}
-            }
-            if(typeof filters.Ascent !== 'undefined')
+            }*/
+            if(typeof filters.minAscent !== 'undefined')
             {
-                if(l.Ascent !== filters.Ascent){return;}
+                if(l.Ascent < filters.minAscent){return;}
             }
-            if(typeof filters.ExpectedTime !== 'undefined')
+            if(typeof filters.maxAscent !== 'undefined')
             {
-                if(l.ExpectedTime !== filters.ExpectedTime){return;}
+                if(l.Ascent > filters.maxAscent){return;}
             }
-            if(typeof filters.Length !== 'undefined')
+            if(typeof filters.minExpectedTime !== 'undefined')
             {
-                if(l.Length !== filters.Length){return;}
+                if(l.ExpectedTime < filters.minExpectedTime){return;}
+            }
+            if(typeof filters.maxExpectedTime !== 'undefined')
+            {
+                if(l.ExpectedTime > filters.maxExpectedTime){return;}
+            }
+            if(typeof filters.minDist !== 'undefined')
+            {
+                if(l.Length < filters.minDist){return;}
+            }
+            if(typeof filters.maxDist !== 'undefined')
+            {
+                if(l.Length > filters.maxDist){return;}
             }
             vec.push(l);
         });

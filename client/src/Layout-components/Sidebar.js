@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Button, Col, Form, InputGroup, Row } from "react-bootstrap";
+import API from '../API';
 
 function Sidebar(props) {
 
@@ -19,6 +20,7 @@ function Sidebar(props) {
     event.preventDefault();
     // call the API and pass all the filter params
     console.log(city+"\n"+province+"\n"+difficulty+"\n"+minDist+"\n"+maxDist+"\n"+minAscent+"\n"+maxAscent+"\n"+minExTime+"\n"+maxExTime);
+    props.setHikes(async (h) => await API.getFilteredHikes(minExTime, maxExTime ,minAscent ,maxAscent /*, filtering according to city*/, minDist, maxDist, difficulty));
   }
 
 

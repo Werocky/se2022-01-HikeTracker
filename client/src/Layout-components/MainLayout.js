@@ -37,7 +37,7 @@ function MainLayout(props) {
               <HikeList hikes={hikes} />
           </Col>
           <Col sm={3}>
-            <Sidebar />
+            <Sidebar setHikes={setHikes}/>
           </Col>
         </Row>
         }
