@@ -28,7 +28,7 @@ function MainLayout(props) {
 
   return (
     <>
-      <Navigation login={props.login}/> {console.log(hikes)}
+      <Navigation login={props.login} logout={props.logout}/>
       <Container fluid className={'vh-100'}>
         <p></p>
         { !loading &&
@@ -47,6 +47,8 @@ function MainLayout(props) {
 }
 
 function Navigation(props) {
+  const auth = useContext(AuthContext);
+
   return (
     <Navbar bg="light">
       <LoginComponent login={props.login}/>
