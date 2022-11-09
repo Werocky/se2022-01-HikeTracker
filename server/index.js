@@ -9,6 +9,7 @@ const LocalStrategy = require('passport-local').Strategy; // username and passwo
 const session = require('express-session'); // enable sessions
 const hikes=require('./modules/Hikes.js');
 const authN = require('./modules/authN.js');
+const locations = require('./modules/HikeLocations.js')
 
 /*** Set up Passport ***/
 //configurating function to verify login and password
@@ -109,7 +110,9 @@ app.post('/getFilteredHikes', async (req, res) => {
   //filtering function
 let filtering = (filters, list) => {
     let vec = [];
-    list.forEach(l => {
+    let pair = {};
+  list.forEach(async l => {
+            await locations.getHikeLocationsPerID(l.HikeID).then(l => pair = {Province: l.Province, City: l.City}).catch(() => res.status(500).end());
             if(typeof filters.Difficulty !== 'undefined' && filters.Difficulty !== '')
             {
                 if(l.Difficulty !== filters.Difficulty){return;}
@@ -117,11 +120,11 @@ let filtering = (filters, list) => {
             }
             if(typeof filters.Province !== 'undefined' && filters.Province !== '')
             {
-                if(l.Province !== filters.Province){return;}
+                if(pair.Province !== filters.Province){return;}
             }
             if(typeof filters.City !== 'undefined' && filters.City !== '')
             {
-                if(l.City !== filters.City){return;}
+                if(pair.City !== filters.City){return;}
             }
             if(typeof filters.minAscent !== 'undefined')
             {
