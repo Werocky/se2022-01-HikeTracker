@@ -11,6 +11,28 @@ async function getHikes() {
     }
 }
 
+//get Hike, given its HikeID
+async function getHike(HikeID) {
+  try
+        {const response = await fetch(APIURL+'/getHikeByID', {
+            method: 'POST',
+            body: JSON.stringify({ 
+                "HikeID": HikeID,
+            }),
+            headers: {
+            'Content-Type': 'application/json',
+        },
+    });
+        const hike = await response.json();
+        if (response.ok) {
+        return hike;
+        } else {
+        throw hike; //which will contain an error if it is the case
+    }} catch (ex) {
+        throw ex;
+  }
+}
+
 async function getFilteredHikes(minExpectedTime, maxExpectedTime ,minAscent ,maxAscent , Province, City, minDist, maxDist, Difficulty) {
     try
         {const response = await fetch(APIURL+'/getFilteredHikes', {
@@ -111,5 +133,5 @@ async function logIn(credentials) {
     return response.ok ? true : false;
   }
 
-const API = {getHikes, logIn, logOut, getUserInfo, getFilteredHikes, register, setDescription};
+const API = {getHikes, logIn, logOut, getUserInfo, getFilteredHikes, register, setDescription, getHike};
 export default API;
