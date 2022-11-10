@@ -3,6 +3,7 @@ import '../Login.css'
 import { Form, Button, Row, Col } from 'react-bootstrap';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import bcrypt from 'bcryptjs';
 
 function RegisterComponent(props) {
   return (
@@ -35,9 +36,10 @@ function RegisterForm(props) {
     if(confirmPassword !== password){
       return; //TODO: display error in case passwords are not matching
     }
-    //TODO: generate salt for the password
-    //TODO: add hashing for the password
-    const credentials = { email: email, role: 'user' };
+    const genRanHex = size => [...Array(size)].map(() => Math.floor(Math.random() * 16).toString(16)).join('');
+    const salt = genRanHex(16);
+    const hashedPassword = bcrypt.hashSync(password, salt)
+    const credentials = { email: email, role: 'user', salt: salt, password: hashedPassword };
     const user = await props.register(credentials);
     navigate('/'+ user.id);
   };
