@@ -3,7 +3,7 @@ import { useContext, useEffect, useState } from "react";
 import { Col, Container, Row } from "react-bootstrap";
 import { useParams } from "react-router-dom";
 import AuthContext from "../AuthContext";
-import { MapContainer, Marker, Popup, TileLayer, useMap } from 'react-leaflet'
+import { MapContainer, Marker, Polyline, Popup, TileLayer, useMap } from 'react-leaflet'
 
 function HikeDetails(props) {
   const auth = useContext(AuthContext);
@@ -25,13 +25,18 @@ function HikeDetails(props) {
       start: "none",
     }
   );
+  const [gpxData, setGpxData] = useState(undefined);  // array of [p.lat, p.lon]
   const [loading, setLoading] = useState(true);
 
+
   useEffect(() => {
-    const loadHike = async () => {    // NEED API TO GET HIKE GIVEN ID
+    const loadHike = async () => {    // NEED API TO GET HIKE GIVEN ID, NEED API TO GET PARSED GPX DATA
       /*const hikeObj = await API.getHike(params.hikeID);
       setHike(hikeObj);
-      setLoading(false);*/
+      const gpxObj = await API.getGpx(params.hikeID);
+      setGpxData(gpxObj);
+      setLoading(false);
+      */
     }
     try {
       loadHike();
@@ -64,16 +69,15 @@ function HikeDetails(props) {
         <Col xs={1}></Col>
         <Col>
 
-          <MapContainer center={[45.063, 7.661]} zoom={90} scrollWheelZoom={false} style={{ height: '90vh', width: '90wh' }}>
+          <MapContainer center={[45.936, 7.626]} zoom={50} scrollWheelZoom={false} style={{ height: '90vh', width: '90wh' }}>
             <TileLayer
               attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
               url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
             />
-            <Marker position={[45.063, 7.661]}>
-              <Popup>
-                A pretty CSS3 popup. <br /> Easily customizable.
-              </Popup>
-            </Marker>
+            {/*<Polyline
+              pathOptions={{ fillColor: 'red', color: 'blue' }}
+              positions={gpxData}
+            />*/}
           </MapContainer>
 
         </Col>
