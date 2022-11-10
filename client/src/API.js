@@ -94,15 +94,15 @@ async function logIn(credentials) {
     }
   }
 
-  async function register(hash, salt, email, role){
+  async function register(credentials){
     const response = await fetch ((APIURL+'/sessions/new'), {
       credentials: 'include',
       method: 'POST',
       body: JSON.stringify({ 
-        'hash': hash,
-        'salt': salt,
-        'email': email,
-        'role': role
+        'hash': credentials.hash,
+        'salt': credentials.salt,
+        'email': credentials.email,
+        'role': credentials.role
       }),
       headers: {
         'Content-Type': 'application/json',
