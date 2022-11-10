@@ -9,6 +9,7 @@ const LocalStrategy = require('passport-local').Strategy; // username and passwo
 const session = require('express-session'); // enable sessions
 const hikes=require('./modules/Hikes.js');
 const authN = require('./modules/authN.js');
+const { db } = require('./modules/DB.js');
 
 /*** Set up Passport ***/
 //configurating function to verify login and password
@@ -166,6 +167,21 @@ app.get('/sessions/current', (req, res) => {  if(req.isAuthenticated()) {
   else
     res.status(401).json({error: 'Unauthenticated user!'});;
 });
+
+// POST /sessions/new
+// creates a new user's account
+app.post('/sessions/new', async (req, res) => {
+  try {
+    const hash = req.param.hash;
+    const salt = req.param.salt;
+    const email = req.param.email;
+    const role = req.param.role;
+    const result = await db.register(hash, salt, email, role);
+    return res.status(200).json(result);
+  } catch (err) {
+    return res.status(500).json(err);
+  }
+})
 
 // activate the server
 app.listen(port, () => {

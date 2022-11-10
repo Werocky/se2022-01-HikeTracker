@@ -14,7 +14,7 @@ class DatabaseConnection {
     }
 
     //example:
-   static createTableHikes() {
+    static createTableHikes() {
         return new Promise(async (resolve, reject) => {
             const sql = "CREATE TABLE IF NOT EXISTS Hikes (HikeID TEXT PRIMARY KEY UNIQUE NOT NULL, Length FLOAT,  ExpectedTime TEXT, Ascent FLOAT, Difficulty TEXT, Start TEXT, End TEXT, Description TEXT);";
             this.db.run(sql, [], function (err) {
@@ -48,6 +48,18 @@ class DatabaseConnection {
         
             console.log("Delete File successfully.");
         })
+    }
+
+    register(hash, salt, email, role){
+        return new Promise( async (resolve, reject) => {
+            const sql = "INSERT INTO Users VALUES(?, ?, ?, ?)";
+            this.db.run(sql, [hash, salt, email, role], function(err){
+                if(err)
+                    reject(err);
+                else
+                    resolve('User created correctly');
+            });
+        });
     }
     
 }
