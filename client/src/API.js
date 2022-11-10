@@ -5,22 +5,26 @@ async function getHikes() {
     const response = await fetch(APIURL+'/getHikes');
     const hikes = await response.json();
     if (response.ok) {
-      return hikes.map((r) => ({ HikeId: r.HikeId, MapId: r.MapId, start: r.start, end: r.end, Title: r.Title, Length: r.Length, ExpectedTime: r.ExpectedTime, Ascent: r.Ascent, Difficulty: r.Difficulty, ReferencePoints: r.ReferencePoints, Description: r.Description}) )
+      return hikes.map((r) => ({ HikeId: r.HikeID, start: r.start, end: r.end, Title: r.Title, Length: r.Length, ExpectedTime: r.ExpectedTime, Ascent: r.Ascent, Difficulty: r.Difficulty, Description: r.Description}) )
     } else {
       throw hikes; //which will contain an error if it is the case
     }
 }
 
-async function getFilteredHikes(ExpectedTime, Ascent, MapId, Length, Difficulty) {
+async function getFilteredHikes(minExpectedTime, maxExpectedTime ,minAscent ,maxAscent , Province, City, minDist, maxDist, Difficulty) {
     try
         {const response = await fetch(APIURL+'/getFilteredHikes', {
-            method: 'GET',
+            method: 'POST',
             body: JSON.stringify({ 
-                "ExpectedTime": ExpectedTime,
-                "Ascent": Ascent,
-                "MapId": MapId,
-                "Length": Length,
-                "Difficulty": Difficulty,
+                "minExpectedTime": minExpectedTime,
+                "maxExpectedTime": maxExpectedTime,
+                "minAscent": minAscent,
+                "maxAscent": maxAscent,
+                "Province": Province,
+                "City": City,
+                "minDist": minDist,
+                "maxDist": maxDist,
+                "Difficulty": Difficulty
             }),
             headers: {
             'Content-Type': 'application/json',
@@ -28,12 +32,33 @@ async function getFilteredHikes(ExpectedTime, Ascent, MapId, Length, Difficulty)
     });
         const hikes = await response.json();
         if (response.ok) {
-        return hikes.map((r) => ({ HikeId: r.HikeId, MapId: r.MapId, start: r.start, end: r.end, Title: r.Title, Length: r.Length, ExpectedTime: r.ExpectedTime, Ascent: r.Ascent, Difficulty: r.Difficulty, ReferencePoints: r.ReferencePoints, Description: r.Description}) )
+        return hikes.map((r) => ({ HikeId: r.HikeID, start: r.start, end: r.end, Title: r.Title, Length: r.Length, ExpectedTime: r.ExpectedTime, Ascent: r.Ascent, Difficulty: r.Difficulty, Description: r.Description}) )
         } else {
         throw hikes; //which will contain an error if it is the case
     }} catch (ex) {
         throw ex;
     }
+}
+
+function setDescription(Description, HikeID) {
+  return new Promise((resolve, reject) => {
+    fetch((APIURL+'/setDescription'), {
+      method: 'PUT',
+      credentials: 'include',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ Description: Description, HikeID: HikeID }),
+    }).then((response) => {
+      if (response.ok) {
+        resolve(null);
+      } else {
+        response.json()
+          .then((obj) => { reject(obj); }) 
+          .catch(() => { reject({ error: "Cannot parse server response." }) }); 
+      }
+    }).catch(() => { reject({ error: "Cannot communicate with the server." }) }); 
+  });
 }
 
 /* LOGIN FUNCTIONS */
@@ -86,5 +111,5 @@ async function logIn(credentials) {
     return response.ok ? true : false;
   }
 
-const API = {getHikes, logIn, logOut, getUserInfo, getFilteredHikes, register};
+const API = {getHikes, logIn, logOut, getUserInfo, getFilteredHikes, register, setDescription};
 export default API;

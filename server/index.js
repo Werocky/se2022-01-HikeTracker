@@ -9,11 +9,15 @@ const LocalStrategy = require('passport-local').Strategy; // username and passwo
 const session = require('express-session'); // enable sessions
 const hikes=require('./modules/Hikes.js');
 const authN = require('./modules/authN.js');
+const locations = require('./modules/HikeLocations.js')
 const { db } = require('./modules/DB.js');
 
 /*** Set up Passport ***/
 //configurating function to verify login and password
-passport.use(new LocalStrategy(
+passport.use(new LocalStrategy({
+    usernameField: 'email',
+    passwordField: 'password'
+  },
   function(username, password, done) {
     authN.checkCredentials(username, password).then((user) => {
       if (!user)
@@ -87,7 +91,7 @@ app.get('/getHikes', (req, res) => {
   });
 
 //get the filtered hikes
-app.get('/getFilteredHikes', async (req, res) => {
+app.post('/getFilteredHikes', async (req, res) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
       return res.status(422).json({error: 'cannot process request'});
@@ -107,33 +111,70 @@ app.get('/getFilteredHikes', async (req, res) => {
   //filtering function
 let filtering = (filters, list) => {
     let vec = [];
-    let flag = true;
-    list.forEach(l => {
-            if(typeof filters.Difficulty !== 'undefined')
+    let pair = {};
+  list.forEach(async l => {
+            await locations.getHikeLocationsPerID(l.HikeID).then(l => pair = {Province: l.Province, City: l.City}).catch(() => res.status(500).end());
+            if(typeof filters.Difficulty !== 'undefined' && filters.Difficulty !== '')
             {
                 if(l.Difficulty !== filters.Difficulty){return;}
                 
             }
-            if(typeof filters.MapId !== 'undefined')
+            if(typeof filters.Province !== 'undefined' && filters.Province !== '')
             {
-                if(l.MapId !== filters.MapId){return;}
+                if(pair.Province !== filters.Province){return;}
             }
-            if(typeof filters.Ascent !== 'undefined')
+            if(typeof filters.City !== 'undefined' && filters.City !== '')
             {
-                if(l.Ascent !== filters.Ascent){return;}
+                if(pair.City !== filters.City){return;}
             }
-            if(typeof filters.ExpectedTime !== 'undefined')
+            if(typeof filters.minAscent !== 'undefined')
             {
-                if(l.ExpectedTime !== filters.ExpectedTime){return;}
+                if(l.Ascent < filters.minAscent){return;}
             }
-            if(typeof filters.Length !== 'undefined')
+            if(typeof filters.maxAscent !== 'undefined')
             {
-                if(l.Length !== filters.Length){return;}
+                if(l.Ascent > filters.maxAscent){return;}
+            }
+            if(typeof filters.minExpectedTime !== 'undefined')
+            {
+                if(l.ExpectedTime < filters.minExpectedTime){return;}
+            }
+            if(typeof filters.maxExpectedTime !== 'undefined')
+            {
+                if(l.ExpectedTime > filters.maxExpectedTime){return;}
+            }
+            if(typeof filters.minDist !== 'undefined')
+            {
+                if(l.Length < filters.minDist){return;}
+            }
+            if(typeof filters.maxDist !== 'undefined')
+            {
+                if(l.Length > filters.maxDist){return;}
             }
             vec.push(l);
         });
     return vec;
 }
+
+//add and modify description
+app.put('/setDescription', /*isLoggedIn,*/ [
+  check('Description').notEmpty(),
+  check('HikeID').notEmpty(),
+],
+  async (req, res) => {
+  const errors = validationResult(res);
+    if (!errors.isEmpty()) {
+      return res.status(422).json({error: 'cannot process request'});
+    }
+  const Description = req.body.Description;
+  const HikeID = req.body.HikeID;
+  try {
+    await hikes.setDescription(Description, HikeID);
+    res.status(201).end();
+  } catch(err) {
+    res.status(503).json({error: `Internal Error`});
+  }
+});
 
 /*** Users APIs ***/
 
