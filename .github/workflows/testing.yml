@@ -16,8 +16,10 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: ${{ matrix.node-version }}
-      - name: cd server
-        run: ./server/
+      - name: experiment
+        run: |
+          pwd
+          mkdir hello
       - name: npm install
         run: npm ci
       - name: tests
