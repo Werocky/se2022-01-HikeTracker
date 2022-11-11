@@ -18,9 +18,8 @@ jobs:
           node-version: ${{ matrix.node-version }}
       - name: experiment
         run: |
-          pwd
-          mkdir hello
-      - name: npm install
-        run: npm ci
+          cd server
+      - name: npm install --save-dev jest
+        run: npm install --save-dev jest
       - name: tests
         run: npm test
