@@ -95,7 +95,7 @@ exports.getHikesByFilter=(filterType, filterMinValue, MaxValue=null)=>{
             }
           });  
           } else {
-           let sql = 'SELECT * FROM Hikes WHERE ' + filterType + '= ?'
+           let sql = 'SELECT * FROM Hikes H, HikeLocations L WHERE ' + filterType + '= ? AND H.HikeID =L.HikeID'
            //console.log(sql);
            db.all(sql,[filterMinValue],(err,rows)=>{
             if(err)reject(err);

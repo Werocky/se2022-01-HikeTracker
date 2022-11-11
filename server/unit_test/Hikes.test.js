@@ -42,9 +42,9 @@ describe("get Hikes by Filter",()=>{
                 await hikes.deleteHikes();
             }
         )
-    describe("get Hikes by a specific Filter", ()=>{
+    describe("get Hikes by a specific Filter or higher(for lenght|ExpectedTime|Ascent)", ()=>{
         
-        test("get an existing ID",async()=>{
+        test("get a existing ID",async()=>{
             await expect(hikes.getHikesByFilter('HikeID',1)).resolves.toEqual([{
                     "Ascent": 300.5,
                     "Description": null,
@@ -57,7 +57,7 @@ describe("get Hikes by Filter",()=>{
                      "Title": "title2",
                 }]);
         })
-        test("get an ExpectedTime",async()=>{
+        test("get by ExpectedTime",async()=>{
             await expect(hikes.getHikesByFilter('ExpectedTime',60)).resolves.toEqual([{
                 "Ascent": 500,
          "Description": null,
@@ -91,7 +91,7 @@ describe("get Hikes by Filter",()=>{
                          "Title": "title3",
                         },]);
         })
-        test("get an Lenght",async()=>{
+        test("get by Lenght",async()=>{
             await expect(hikes.getHikesByFilter('Length',5)).resolves.toEqual([{
                      "Ascent": 500,
                      "Description": null,
@@ -126,7 +126,7 @@ describe("get Hikes by Filter",()=>{
                      "Title": "title3",
                    },]);
         })
-        test("get an Ascent",async()=>{
+        test("get by Ascent",async()=>{
             await expect(hikes.getHikesByFilter('Ascent',300.5)).resolves.toEqual([{
                          "Ascent": 500,
                          "Description": null,
@@ -179,6 +179,7 @@ describe("get Hikes by Filter",()=>{
         test("get by a non acceptable field",async()=>{
             await expect(hikes.getHikesByFilter('Unacceptable')).rejects.toEqual('No such field');
         })
+
         
     });
 
@@ -247,6 +248,43 @@ describe("get Hikes by Filter",()=>{
 
         }
     );
+
+    describe('testing added the Join with HikeLocations', ()=>{
+        test("get by ExpectedTime",async()=>{
+            await expect(hikes.getHikesByFilter('ExpectedTime',60)).resolves.toEqual([{
+                "Ascent": 500,
+         "Description": null,
+         "Difficulty": "begginer",
+         "End": "1.2",
+         "ExpectedTime": 180,
+         "HikeID": "0",
+         "Length": 12.5,
+         "Start": "0",
+         "Title": "title1",
+       },{
+                "Ascent": 300.5,
+                "Description": null,
+                 "Difficulty": "Professional",
+                 "End": "1.454",
+                 "ExpectedTime": 60,
+                 "HikeID": "1",
+                 "Length": 5,
+                 "Start": "0.1",
+                 "Title": "title2",
+                },
+                {
+                         "Ascent": -190,
+                         "Description": null,
+                         "Difficulty": "undertermined",
+                         "End": "0.5567",
+                         "ExpectedTime": 90,
+                         "HikeID": "2",
+                         "Length": 7,
+                         "Start": "232.56",
+                         "Title": "title3",
+                        },]);
+        })
+    })
 
 
 
