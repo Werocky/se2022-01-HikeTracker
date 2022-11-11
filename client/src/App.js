@@ -32,6 +32,10 @@ function App() {
     })
   };
 
+  const register = async (credentials) => {
+    await API.register(credentials.hash, credentials.salt, credentials.email, credentials.role)
+  }
+
   useEffect(() => {   // check login     
     const checkAuth = async () => {
       const user = await API.getUserInfo();
@@ -48,7 +52,7 @@ function App() {
   return (
     <BrowserRouter>
       <AuthContext.Provider value={auth}>   {/* this is used to pass user information*/}
-        <AppLayout login={login} logout={logout} />
+        <AppLayout login={login} logout={logout} /*register=*//>
       </AuthContext.Provider>
     </BrowserRouter>
   );

@@ -15,7 +15,7 @@ function MainLayout(props) {
 
   useEffect(() => {
     const reloadHikes = async () => {
-      const hikes_array = await API.getHikes();/*[{ "k": "h1", "v": "hike 1" }, { "k": "h2", "v": "hike 2" }, { "k": "h3", "v": "hike 3" }]*/
+      const hikes_array = await API.getHikes();
       setHikes(hikes_array);
       setLoading(false);
     }

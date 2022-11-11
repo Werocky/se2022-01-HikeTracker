@@ -60,7 +60,9 @@ function LoginForm(props) {
         <Form.Control className="form-control" type='password' value={password} onChange={ev => setPassword(ev.target.value)} required={true} minLength={4} />
       </Form.Group>
 
-      <div className="d-grid"><Button type="submit" className="btn btn-success">Login</Button></div>
+      <div className="d-grid"><Button type="submit" variant='success'>Login</Button></div>
+      <p></p>
+      <div className="d-grid"><Button type="button" variant='primary' onClick={() => navigate("/register")}>Register</Button></div>
     </Form>
   )
 };

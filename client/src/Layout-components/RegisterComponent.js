@@ -28,20 +28,21 @@ function RegisterForm(props) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
+  const [role, setRole] = useState('');
 
   const navigate = useNavigate();
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    if(confirmPassword !== password){
+    if (confirmPassword !== password) {
       return; //TODO: display error in case passwords are not matching
     }
     const genRanHex = size => [...Array(size)].map(() => Math.floor(Math.random() * 16).toString(16)).join('');
     const salt = genRanHex(16);
     const hashedPassword = bcrypt.hashSync(password, salt)
-    const credentials = { email: email, role: 'user', salt: salt, password: hashedPassword };
+    const credentials = { email: email, role: role, salt: salt, hash: hashedPassword };
     const user = await props.register(credentials);
-    navigate('/'+ user.id);
+    navigate('/'/*+ user.id*/);
   };
 
   return (
@@ -49,6 +50,16 @@ function RegisterForm(props) {
       <Form.Group controlId='email' className="mb-3">
         <Form.Label className='label'>Email</Form.Label>
         <Form.Control className="form-control" type='email' value={email} onChange={ev => setEmail(ev.target.value)} required={true} />
+      </Form.Group>
+
+      <Form.Group>
+      <Form.Label className='label'>Role</Form.Label>
+        <Form.Control as="select" value={role} aria-label="select" onChange={ev => setRole(ev.target.value)} required={true} >
+          <option>select the type of user you are</option>
+          <option value="HK">Hiker</option>
+          <option value="LG">Local Guide</option>
+          <option value="O">Other to be defined</option>
+        </Form.Control>
       </Form.Group>
 
       <Form.Group controlId='password' className="mb-3">

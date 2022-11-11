@@ -16,14 +16,14 @@ function HikeDetails(props) {
       City: "City1",
       Description: "a simple test description added with API and after modified",
       Difficulty: "T",
-      ExpectedTime: "3",
+      ExpectedTime: 33,
       HikeId: "1",
       Length: 1.1,
       Province: "Province1",
-      ReferencePoints: "none",
+      ReferencePoints: undefined,
       Title: "Hike1",
-      end: "none",
-      start: "none",
+      end: "end1",
+      start: "start1",
     }
   );
   const [gpxData, setGpxData] = useState(undefined);  // array of [p.lat, p.lon]
@@ -67,25 +67,33 @@ function HikeDetails(props) {
         <Col>Description: {hike.Description}</Col>
       </Row>
       <p></p>
-      <Row>
-        <Col xs={1}></Col>
-        <Col>
+      <hr />
+      <p></p>
+      {auth.login &&
+        <Row>
+          <Col xs={1}></Col>
+          <Col>
 
-          <MapContainer center={[45.936, 7.626]} zoom={50} scrollWheelZoom={false} style={{ height: '90vh', width: '90wh' }}>
-            <TileLayer
-              attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-              url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-            />
-            {/*<Polyline
+            <MapContainer center={[45.936, 7.626]} zoom={50} scrollWheelZoom={false} style={{ height: '90vh', width: '90wh' }}>
+              <TileLayer
+                attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+                url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+              />
+              {/*<Polyline
               pathOptions={{ fillColor: 'red', color: 'blue' }}
               positions={gpxData}
             />*/}
-          </MapContainer>
+            </MapContainer>
 
-        </Col>
-        <Col xs={1}></Col>
+          </Col>
+          <Col xs={1}></Col>
 
-      </Row>
+        </Row>
+      }
+      {!auth.login &&
+        <Row>
+          <Col>You should be logged to see the map</Col>
+        </Row>}
 
 
     </Container>

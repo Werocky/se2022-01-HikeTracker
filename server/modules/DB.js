@@ -75,7 +75,7 @@ class DatabaseConnection {
     static populateHikes() {
         return new Promise(async (resolve, reject) => {
             const sql = "INSERT INTO Hikes(HikeID, Title, Length,  ExpectedTime, Ascent, Difficulty, Start, End, Description) VALUES "+
-            "('h1', 'Hike to hut Duca degli Abruzzi', 5.26, 200, 794, 'H', 'id_start1', 'id_end1', 'Classico e frequentato percorso da Cervinia al Rifugio all’Orionde Duca degli Abruzzi (2.805 m.).');";
+            "('h1', 'Hike to hut Duca degli Abruzzi', 5.26, 200, 794, 'H', 'id_start1', 'id_end1', 'Classic and popular route from Cervinia to Rifugio all’Orionde Duca degli Abruzzi (2.805 m.).');";
             this.db.run(sql, [], function (err) {
                 if (err)
                     reject(err);
