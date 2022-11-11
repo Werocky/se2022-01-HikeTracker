@@ -23,6 +23,18 @@ function Sidebar(props) {
     API.getFilteredHikes(minExTime, maxExTime, minAscent, maxAscent, province, city, minDist, maxDist, difficulty).then(array => props.setHikes(array));
   }
 
+  const handleReset = (event) =>{
+    setCity(() => undefined);
+    setProvince(() => undefined);
+    setMinExTime(() => undefined);
+    setMinDist(() => undefined);
+    setMinAscent(() => undefined);
+    setDifficulty(() => undefined);
+    setMaxDist(() => undefined);
+    setMaxAscent(() => undefined);
+    setMaxExTime(() => undefined);
+  }
+
 
   return (
     <Form onSubmit={handleSubmit}>
@@ -163,7 +175,7 @@ function Sidebar(props) {
           </Button>
         </Col>
         <Col>
-          <Button variant="primary" type="reset">
+          <Button variant="primary" type="reset" onClick={handleReset}>
             Reset
           </Button>
         </Col>
