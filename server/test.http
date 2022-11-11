@@ -4,6 +4,7 @@ Content-Type: application/json
 {
   "Length": [ null, null ],
   "ExpectedTime": [ null, null ],
-  "Ascent": [ null, null ],
-  "City": "Teramo"
+  "Ascent": [ null ],
+  "City": "Teramo",
+  "Province": "pz"
 }

@@ -146,7 +146,9 @@ app.post('/getFilteredHikes', async (req, res) => {
       list = await hikes.getHikes();
     }
     else
-      await filtering(filters, list);
+      {
+        await filtering(filters, list);
+      }
     try {
         res.status(200).json(list);
       } catch(err) {
@@ -185,7 +187,7 @@ app.post('/getFilteredHikes', async (req, res) => {
   const searchHikeInArray = (HikeID, array) =>{
     let flag = false;
     array.forEach(function(element){
-      if(element.HikeID === HikeID)
+      if(element.HikeID == HikeID)
         flag = true;
     });
     return flag;
@@ -199,17 +201,23 @@ app.post('/getFilteredHikes', async (req, res) => {
     const list_filters = Object.getOwnPropertyNames(filters);
     for (var i = 0; i < list_filters.length; i++) {
       flag = checkFiltersPresent(filters[list_filters[i]], list_filters[i]);
-      console.log(filters[list_filters[i]], list_filters[i], flag);  
+      //console.log(filters[list_filters[i]], list_filters[i], flag);  
       if(flag=== true){
-          j = 1;
           if(list_filters[i] !== 'Province' && list_filters[i] !== 'City')
             list_prev = await hikes.getHikesByFilter(list_filters[i], ...filters[list_filters[i]])
             .then(l => l);
-          else
+            else
             list_prev = await hikes.getHikesByFilter(list_filters[i], filters[list_filters[i]])
             .then(l => l);
-        if(i !== 0 && j === 0){
+        if(j === 0){
+          prov_list = [...list_prev];
+          j = 1;
+        }
+        if(i !== 0 && j === 1){
+          console.log("before filtering", list_prev);
+          console.log("reference", prov_list);
           list_prev = list_prev.filter(value => (searchHikeInArray(value.HikeID, prov_list)));
+          console.log("After filtering", list_prev);
         }
         prov_list = [...list_prev];
       }

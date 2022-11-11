@@ -80,13 +80,12 @@ It Allows to set a specific filter if MaxValue is not specified or a range if a 
 exports.getHikesByFilter=(filterType, filterMinValue, MaxValue=null)=>{
   return new Promise(
     async (resolve,reject)=>{
-      //console.log(filterType, filterMinValue, MaxValue);
-      //console.log(filterType,filterMinValue,MaxValue,MinValue);
+      console.log(filterType, filterMinValue, MaxValue);
       if(acceptableFilters.includes(filterType)){
         if(MaxValue==null){
           if(filterType == 'Length' || filterType == 'ExpectedTime' || filterType == 'Ascent'){
             let sql = 'SELECT * FROM Hikes WHERE ' + filterType + '>= ?'
-            //console.log(sql);
+            console.log(sql);
             db.all(sql,[filterMinValue],(err,rows)=>{
               //console.log("rows:"+rows);
               if(err)reject(err);
@@ -97,7 +96,7 @@ exports.getHikesByFilter=(filterType, filterMinValue, MaxValue=null)=>{
           });  
           } else {
             let sql ='';
-            if(filterType!= 'Province' && filterType !='City'){
+            if(filterType != 'Province' && filterType !='City'){
               sql = 'SELECT * FROM Hikes WHERE Hikes.' + filterType + ' = ?'
 
             }else{
@@ -108,7 +107,7 @@ exports.getHikesByFilter=(filterType, filterMinValue, MaxValue=null)=>{
            db.all(sql,[filterMinValue],(err,rows)=>{
             if(err)reject(err);
             else{
-              console.log("rows:"+rows);
+            
               const hikes = rows.map((r) => ({ HikeID: r.HikeID,  Start: r.Start, End: r.End, Title: r.Title, Length: r.Length, ExpectedTime: r.ExpectedTime, Ascent: r.Ascent, Difficulty: r.Difficulty, Description: r.Description}));
               
               resolve(hikes);
@@ -118,7 +117,7 @@ exports.getHikesByFilter=(filterType, filterMinValue, MaxValue=null)=>{
         }else{
           if(filterType == 'Length' || filterType == 'ExpectedTime' || filterType == 'Ascent'){
             let sql = 'SELECT * FROM Hikes WHERE ' + filterType + ' <= ? AND ' + filterType + ' >= ?' 
-            //console.log(sql);
+            console.log(sql);
             db.all(sql,[MaxValue,filterMinValue],(err,rows)=>{
               if(err)reject(err);
               else{
