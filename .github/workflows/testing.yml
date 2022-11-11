@@ -19,8 +19,5 @@ jobs:
       - name: experiment
         run: |
           cd server
-          pwd
-      - name: npm install --save-dev jest
-        run: npm install --save-dev jest
-      - name: tests
-        run: npm run
+      - name: Run Jest
+        uses: stefanoeb/jest-action@1.0.3
