@@ -1,14 +1,13 @@
 const hikes = require('../modules/Hikes');
 const db = require("../modules/DB");
 
-beforeAll(
-   async() =>{
+beforeAll(async() =>{   
     await db.createConnection();
-    await hikes.deleteHikes();
    } 
 )
 afterAll(async()=>{
-    //await db.deleteDB();
+   await hikes.deleteHikes();
+   
 })
 
 describe("Get/add Hikes",()=>{
@@ -31,9 +30,10 @@ describe("get Hikes by Filter",()=>{
             async ()=>{
                 await hikes.deleteHikes();
                 //                 (ID Title  Length, ExTime, Ascent Difficulty  , Start, End      Description
-                await hikes.addHike(0,'title1' ,12.5, 180,    500  ,'begginer'     ,0.00  ,1.2   ,null);
-                await hikes.addHike(1,'title2',5   ,  60 ,    300.5,'Professional' ,0.1   ,1.454 ,null);
-                await hikes.addHike(2,'title3',7.0 ,90 ,-190 ,'undertermined',232.56,0.5567,null);
+                // await hikes.addHike(0,'title1' ,12.5, 180,    500  ,'begginer'     ,0.00  ,1.2   ,null);
+                // await hikes.addHike(1,'title2',5   ,  60 ,    300.5,'Professional' ,0.1   ,1.454 ,null);
+                // await hikes.addHike(2,'title3',7.0 ,90 ,-190 ,'undertermined',232.56,0.5567,null);
+                await hikes.populateHikes();
             }
         );
         afterEach(

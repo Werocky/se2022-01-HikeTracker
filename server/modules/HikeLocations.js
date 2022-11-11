@@ -30,3 +30,27 @@ exports.getHikeLocationsPerID = (HikeID) => {
     });
   });
 };
+
+exports.populateLocations= ()=>{
+  return new Promise(async (resolve, reject) => {
+    const sql = "INSERT INTO HikeLocations(HikeID, Province, City) VALUES ('1', 'Aosta', 'Cervinia');";
+    db.run(sql, [], function (err) {
+        if (err)
+            reject(err);
+        else {
+            resolve('Tables filled');
+        }
+    });
+  });
+};
+
+exports.emptyLocations=()=>{
+  return new Promise(async (resolve, reject) => {
+    db.run("DELETE FROM HikeLocations", [], function (err) {
+        if (err)
+            reject(err);
+        else
+            resolve('HikeLocations emptied');
+    });
+  })
+}

@@ -15,6 +15,7 @@ exports.getHikes = () => {
       db.all(sql, [], (err, rows) => {
 
         if (err) {
+          console.log('/rejected');
           reject(err);
         }
         const hikes = rows.map((r) => ({ HikeID: r.HikeID, Start: r.Start, End: r.End, Title: r.Title, Length: r.Length, ExpectedTime: r.ExpectedTime, Ascent: r.Ascent, Difficulty: r.Difficulty, Description: r.Description}));
@@ -108,5 +109,13 @@ exports.getHikesByFilter=(filterType, filterMinValue, MaxValue=null)=>{
         
     }
   );
+
+}
+
+
+exports.populateHikes= async ()=>{
+  await this.addHike(0,'title1' ,12.5, 180,    500  ,'begginer'     ,0.00  ,1.2   ,null);
+  await this.addHike(1,'title2',5   ,  60 ,    300.5,'Professional' ,0.1   ,1.454 ,null);
+  await this.addHike(2,'title3',7.0 ,90 ,-190 ,'undertermined',232.56,0.5567,null);
 
 }
