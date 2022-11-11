@@ -43,6 +43,18 @@ exports.populateLocations= ()=>{
     });
   });
 };
+exports.addLocation= (hikeID,Province,City)=>{
+  return new Promise(async (resolve, reject) => {
+    const sql = "INSERT INTO HikeLocations(HikeID, Province, City) VALUES (?,?,?);";
+    db.run(sql, [hikeID,Province,City], function (err) {
+        if (err)
+            reject(err);
+        else {
+            resolve('New location added');
+        }
+    });
+  });
+};
 
 exports.emptyLocations=()=>{
   return new Promise(async (resolve, reject) => {

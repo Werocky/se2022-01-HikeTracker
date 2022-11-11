@@ -2,6 +2,7 @@
 
 const db = require('./DB').db;
 
+
 //get hikes
 
 const acceptableFilters = ['HikeID','Length','ExpectedTime','Ascent', 'Difficulty', 'Start', 'End','Title', 'Province', 'City'];
@@ -95,26 +96,39 @@ exports.getHikesByFilter=(filterType, filterMinValue, MaxValue=null)=>{
             }
           });  
           } else {
-           let sql = 'SELECT * FROM Hikes H, HikeLocations L WHERE ' + filterType + '= ? AND H.HikeID =L.HikeID'
-           //console.log(sql);
+            let sql ='';
+            if(filterType!= 'Province' && filterType !='City'){
+              sql = 'SELECT * FROM Hikes WHERE Hikes.' + filterType + ' = ?'
+
+            }else{
+              sql = 'SELECT * FROM Hikes JOIN HikeLocations ON Hikes.HikeID = HikeLocations.HikeID WHERE HikeLocations.' + filterType + ' = ?'
+            } 
+                console.log(sql);
+
            db.all(sql,[filterMinValue],(err,rows)=>{
             if(err)reject(err);
             else{
+              console.log("rows:"+rows);
               const hikes = rows.map((r) => ({ HikeID: r.HikeID,  Start: r.Start, End: r.End, Title: r.Title, Length: r.Length, ExpectedTime: r.ExpectedTime, Ascent: r.Ascent, Difficulty: r.Difficulty, Description: r.Description}));
+              
               resolve(hikes);
+
             }
           });}
         }else{
-          let sql = 'SELECT * FROM Hikes WHERE ' + filterType + ' <= ? AND ' + filterType + ' >= ?' 
-          //console.log(sql);
-          db.all(sql,[MaxValue,filterMinValue],(err,rows)=>{
-            if(err)reject(err);
-            else{
+          if(filterType == 'Length' || filterType == 'ExpectedTime' || filterType == 'Ascent'){
+            let sql = 'SELECT * FROM Hikes WHERE ' + filterType + ' <= ? AND ' + filterType + ' >= ?' 
+            //console.log(sql);
+            db.all(sql,[MaxValue,filterMinValue],(err,rows)=>{
+              if(err)reject(err);
+              else{
               const hikes = rows.map((r) => ({ HikeID: r.HikeID,  Start: r.Start, End: r.End, Title: r.Title, Length: r.Length, ExpectedTime: r.ExpectedTime, Ascent: r.Ascent, Difficulty: r.Difficulty, Description: r.Description}));
               resolve(hikes);
-            }
-          });
-
+              }
+            });
+          }else{
+            reject('problem deciphering data')
+          }
         }
       }else reject('No such field');
         
@@ -124,6 +138,12 @@ exports.getHikesByFilter=(filterType, filterMinValue, MaxValue=null)=>{
 
 
 exports.populateHikes= async ()=>{
+  const locations =require ("./HikeLocations");
+  await locations.emptyLocations();
+  await locations.addLocation(1,'Baviera','Monaco');
+  await locations.addLocation(2,'Dpto La Paz','La paz');
+  await locations.addLocation(0,'Piemonte','Torino');
+  await this.deleteHikes();
   await this.addHike(0,'title1' ,12.5, 180,    500  ,'begginer'     ,0.00  ,1.2   ,null);
   await this.addHike(1,'title2',5   ,  60 ,    300.5,'Professional' ,0.1   ,1.454 ,null);
   await this.addHike(2,'title3',7.0 ,90 ,-190 ,'undertermined',232.56,0.5567,null);
