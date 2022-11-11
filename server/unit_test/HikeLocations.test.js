@@ -35,4 +35,15 @@ describe("Get/add HikeLocations",()=>{
         ]);
     });
 
+    test('Get Hike location By ID', async()=>{
+        await expect(HL.populateLocations()).resolves.toEqual('Tables filled');
+        await expect(HL.getHikeLocationsPerID(1)).resolves.toEqual([
+            {
+                     "City": "Cervinia",
+                     "HikeID": "1",
+                     "Province": "Aosta",
+                   },
+        ]);
+    });
+
 });

@@ -19,7 +19,7 @@ exports.getHikeLocations = () => {
 
 exports.getHikeLocationsPerID = (HikeID) => {
   return new Promise((resolve, reject) => {
-    const sql = 'SELECT * FROM HikeLocations WHERE HikeID=?';
+    const sql = 'SELECT * FROM HikeLocations WHERE HikeID = ?';
     db.all(sql, [HikeID], (err, rows) => {
 
       if (err) {
