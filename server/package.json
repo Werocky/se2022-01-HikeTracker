@@ -18,6 +18,7 @@
   },
   "scripts": {
     "test": "jest",
+    "coverage":"jest --collectCoverage --",
     "start": "node index.js"
   }
 }
