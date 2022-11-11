@@ -158,10 +158,10 @@ app.post('/getFilteredHikes', async (req, res) => {
 
   //check wheter filter are specified and which
   const checkFiltersPresent = (filter, name) =>{
-    if(name === 'ExpectedTime' || name === 'Ascent' || name === 'Length')
+    if(name == 'ExpectedTime' || name == 'Ascent' || name == 'Length')
      return filter[0] !== null;
     else
-    return typeof filter !== 'undefined';
+    return typeof filter != 'undefined';
   }
 
   //check if filters are specified, otherwise getFilteredHikes returns same value as getHikes
@@ -174,7 +174,7 @@ app.post('/getFilteredHikes', async (req, res) => {
           if(filters[name[i]][0] !== null)
             flag = true;
           }
-      else if( name[i] ==='Province' || name[i] === 'City')
+      else if( name[i] ==='Province' || name[i] === 'City' || name[i] === 'Difficulty')
         {
           if(filters[name[i]] !== '' && typeof filters[name[i]] !== 'undefined')
             flag = true;
@@ -202,8 +202,8 @@ app.post('/getFilteredHikes', async (req, res) => {
     for (var i = 0; i < list_filters.length; i++) {
       flag = checkFiltersPresent(filters[list_filters[i]], list_filters[i]);
       //console.log(filters[list_filters[i]], list_filters[i], flag);  
-      if(flag=== true){
-          if(list_filters[i] !== 'Province' && list_filters[i] !== 'City')
+      if(flag == true){
+          if(list_filters[i] !== 'Province' && list_filters[i] !== 'City' && list_filters[i] !== 'Difficulty')
             list_prev = await hikes.getHikesByFilter(list_filters[i], ...filters[list_filters[i]])
             .then(l => l);
             else
@@ -214,10 +214,7 @@ app.post('/getFilteredHikes', async (req, res) => {
           j = 1;
         }
         if(i !== 0 && j === 1){
-          console.log("before filtering", list_prev);
-          console.log("reference", prov_list);
           list_prev = list_prev.filter(value => (searchHikeInArray(value.HikeID, prov_list)));
-          console.log("After filtering", list_prev);
         }
         prov_list = [...list_prev];
       }
