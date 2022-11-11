@@ -4,6 +4,7 @@ import { Col, Container, Row } from "react-bootstrap";
 import { useParams } from "react-router-dom";
 import AuthContext from "../AuthContext";
 import { MapContainer, Marker, Polyline, Popup, TileLayer, useMap } from 'react-leaflet'
+import API from '../API';
 
 function HikeDetails(props) {
   const auth = useContext(AuthContext);
@@ -31,9 +32,10 @@ function HikeDetails(props) {
 
   useEffect(() => {
     const loadHike = async () => {    // NEED API TO GET HIKE GIVEN ID, NEED API TO GET PARSED GPX DATA
-      /*const hikeObj = await API.getHike(params.hikeID);
+      const hikeObj = await API.getHike(params.hikeID);
+      console.log(hikeObj);
       setHike(hikeObj);
-      const gpxObj = await API.getGpx(params.hikeID);
+      /*const gpxObj = await API.getGpx(params.hikeID);
       setGpxData(gpxObj);
       setLoading(false);
       */

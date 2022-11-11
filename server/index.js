@@ -90,6 +90,24 @@ app.get('/getHikes', (req, res) => {
       .catch(() => res.status(500).end());
   });
 
+//get hike, given HikeID
+app.post('/getHikeByID', async (req, res) => {
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    return res.status(422).json({error: 'cannot process request'});
+  }
+
+  let HikeID = req.body.HikeID;
+
+  try {
+      let hike = await hikes.getHike(HikeID);
+      res.status(200).json(hike);
+    } catch(err) {
+      res.status(503).json({error: `Error`});
+    }
+});
+
+
 //get the filtered hikes
 app.post('/getFilteredHikes', async (req, res) => {
     const errors = validationResult(req);

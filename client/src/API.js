@@ -11,6 +11,28 @@ async function getHikes() {
     }
 }
 
+//get Hike, given its HikeID
+async function getHike(HikeID) {
+  try
+        {const response = await fetch(APIURL+'/getHikeByID', {
+            method: 'POST',
+            body: JSON.stringify({ 
+                "HikeID": HikeID,
+            }),
+            headers: {
+            'Content-Type': 'application/json',
+        },
+    });
+        const hike = await response.json();
+        if (response.ok) {
+        return hike;
+        } else {
+        throw hike; //which will contain an error if it is the case
+    }} catch (ex) {
+        throw ex;
+  }
+}
+
 async function getFilteredHikes(minExpectedTime, maxExpectedTime ,minAscent ,maxAscent , Province, City, minDist, maxDist, Difficulty) {
     try
         {const response = await fetch(APIURL+'/getFilteredHikes', {
@@ -94,15 +116,15 @@ async function logIn(credentials) {
     }
   }
 
-  async function register(hash, salt, email, role){
+  async function register(credentials){
     const response = await fetch ((APIURL+'/sessions/new'), {
       credentials: 'include',
       method: 'POST',
       body: JSON.stringify({ 
-        'hash': hash,
-        'salt': salt,
-        'email': email,
-        'role': role
+        'hash': credentials.hash,
+        'salt': credentials.salt,
+        'email': credentials.email,
+        'role': credentials.role
       }),
       headers: {
         'Content-Type': 'application/json',
@@ -111,5 +133,5 @@ async function logIn(credentials) {
     return response.ok ? true : false;
   }
 
-const API = {getHikes, logIn, logOut, getUserInfo, getFilteredHikes, register, setDescription};
+const API = {getHikes, logIn, logOut, getUserInfo, getFilteredHikes, register, setDescription, getHike};
 export default API;

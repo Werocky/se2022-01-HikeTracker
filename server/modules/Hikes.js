@@ -23,6 +23,21 @@ exports.getHikes = () => {
     });
 };
 
+exports.getHike = (HikeID) => {
+
+  return new Promise((resolve, reject) => {
+    const sql = 'SELECT * FROM Hikes WHERE HikeID=?';
+    db.get(sql, [HikeID], (err, row) => {
+
+      if (err) {
+        reject(err);
+      }
+      const hike = { HikeID: row.HikeID, Start: row.Start, End: row.End, Title: row.Title, Length: row.Length, ExpectedTime: row.ExpectedTime, Ascent: row.Ascent, Difficulty: row.Difficulty, Description: row.Description};
+      resolve(hike);
+    });
+  });
+};
+
 exports.setDescription=(Description, HikeID)=>{
   return new Promise(async (resolve, reject) => {
     db.run("UPDATE Hikes SET Description = ? WHERE HikeID = ?",
