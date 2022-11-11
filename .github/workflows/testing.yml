@@ -19,6 +19,7 @@ jobs:
       - name: experiment
         run: |
           cd server
+          pwd
       - name: npm install --save-dev jest
         run: npm install --save-dev jest
       - name: tests
