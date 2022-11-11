@@ -5,10 +5,12 @@ const db = require("../modules/DB");
 beforeAll(async() =>{   
     await db.createConnection();
     await hikes.deleteHikes();
+    await new Promise(process.nextTick);
    } 
 )
 afterAll(async()=>{
    await hikes.deleteHikes();
+   await new Promise(process.nextTick);
 
 })
 

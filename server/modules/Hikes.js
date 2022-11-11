@@ -80,12 +80,12 @@ It Allows to set a specific filter if MaxValue is not specified or a range if a 
 exports.getHikesByFilter=(filterType, filterMinValue, MaxValue=null)=>{
   return new Promise(
     async (resolve,reject)=>{
-      console.log(filterType, filterMinValue, MaxValue);
+      //console.log(filterType, filterMinValue, MaxValue);
       if(acceptableFilters.includes(filterType)){
         if(MaxValue==null){
           if(filterType == 'Length' || filterType == 'ExpectedTime' || filterType == 'Ascent'){
             let sql = 'SELECT * FROM Hikes WHERE ' + filterType + '>= ?'
-            console.log(sql);
+            //console.log(sql);
             db.all(sql,[filterMinValue],(err,rows)=>{
               //console.log("rows:"+rows);
               if(err)reject(err);
@@ -102,7 +102,7 @@ exports.getHikesByFilter=(filterType, filterMinValue, MaxValue=null)=>{
             }else{
               sql = 'SELECT * FROM Hikes JOIN HikeLocations ON Hikes.HikeID = HikeLocations.HikeID WHERE HikeLocations.' + filterType + ' = ?'
             } 
-                console.log(sql);
+                //console.log(sql);
 
            db.all(sql,[filterMinValue],(err,rows)=>{
             if(err)reject(err);
@@ -117,7 +117,7 @@ exports.getHikesByFilter=(filterType, filterMinValue, MaxValue=null)=>{
         }else{
           if(filterType == 'Length' || filterType == 'ExpectedTime' || filterType == 'Ascent'){
             let sql = 'SELECT * FROM Hikes WHERE ' + filterType + ' <= ? AND ' + filterType + ' >= ?' 
-            console.log(sql);
+            //console.log(sql);
             db.all(sql,[MaxValue,filterMinValue],(err,rows)=>{
               if(err)reject(err);
               else{

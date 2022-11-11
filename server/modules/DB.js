@@ -1,12 +1,10 @@
 'use strict';
 
 const sqlite = require('sqlite3');
-const fs = require('fs');
-const { fail } = require('assert');
+
 
 class DatabaseConnection {
     static db = new sqlite.Database("./HikeTracker.db", (err) => { if (err) throw err; });
-
     static async createConnection() {
         //add any create table function that is created in the future to create a database from 0
         await this.createTableHikes();

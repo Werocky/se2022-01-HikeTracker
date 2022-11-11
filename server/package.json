@@ -17,8 +17,8 @@
     "jest": "^29.3.1"
   },
   "scripts": {
-    "test": "jest",
-    "coverage":"jest --collectCoverage --",
+    "test": "jest -i",
+    "cover":"jest --coverage --runInBand",
     "start": "node index.js"
   }
 }
