@@ -20,6 +20,6 @@ jobs:
         run: |
           cd server
       - name: Install Jest
-        run: npm install --save-dev jest
+        run: npm ci
       - name: Run Tests
-        run: npm run
+        run: npm test
