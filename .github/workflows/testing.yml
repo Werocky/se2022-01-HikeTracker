@@ -19,5 +19,7 @@ jobs:
       - name: experiment
         run: |
           cd server
-      - name: Run Jest
-        uses: stefanoeb/jest-action@1.0.3
+      - name: Install Jest
+        uses: install jest
+      - name: Run Tests
+        uses: npm test
