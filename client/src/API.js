@@ -5,7 +5,7 @@ async function getHikes() {
     const response = await fetch(APIURL+'/getHikes');
     const hikes = await response.json();
     if (response.ok) {
-      return hikes.map((r) => ({ HikeId: r.HikeID, start: r.start, end: r.end, Title: r.Title, Length: r.Length, ExpectedTime: r.ExpectedTime, Ascent: r.Ascent, Difficulty: r.Difficulty, Description: r.Description}) )
+      return hikes.map((r) => ({ HikeId: r.HikeID, Start: r.Start, End: r.End, Title: r.Title, Length: r.Length, ExpectedTime: r.ExpectedTime, Ascent: r.Ascent, Difficulty: r.Difficulty, Description: r.Description}) )
     } else {
       throw hikes; //which will contain an error if it is the case
     }
@@ -33,19 +33,16 @@ async function getHike(HikeID) {
   }
 }
 
-async function getFilteredHikes(minExpectedTime, maxExpectedTime ,minAscent ,maxAscent , Province, City, minDist, maxDist, Difficulty) {
+async function getFilteredHikes(minExpectedTime, maxExpectedTime ,minAscent ,maxAscent , Province, City, minLength, maxLength, Difficulty) {
     try
         {const response = await fetch(APIURL+'/getFilteredHikes', {
             method: 'POST',
             body: JSON.stringify({ 
-                "minExpectedTime": minExpectedTime,
-                "maxExpectedTime": maxExpectedTime,
-                "minAscent": minAscent,
-                "maxAscent": maxAscent,
+                "Length": [minLength, maxLength],
+                "ExpectedTime": [minExpectedTime, maxExpectedTime],
+                "Ascent": [minAscent, maxAscent],
                 "Province": Province,
                 "City": City,
-                "minDist": minDist,
-                "maxDist": maxDist,
                 "Difficulty": Difficulty
             }),
             headers: {
@@ -54,7 +51,8 @@ async function getFilteredHikes(minExpectedTime, maxExpectedTime ,minAscent ,max
     });
         const hikes = await response.json();
         if (response.ok) {
-        return hikes.map((r) => ({ HikeId: r.HikeID, start: r.start, end: r.end, Title: r.Title, Length: r.Length, ExpectedTime: r.ExpectedTime, Ascent: r.Ascent, Difficulty: r.Difficulty, Description: r.Description}) )
+          console.log(hikes);
+        return hikes;
         } else {
         throw hikes; //which will contain an error if it is the case
     }} catch (ex) {
@@ -81,6 +79,28 @@ function setDescription(Description, HikeID) {
       }
     }).catch(() => { reject({ error: "Cannot communicate with the server." }) }); 
   });
+}
+
+//retrieve points of the hike's track, given HikeID
+async function getPointsHike(HikeID) {
+  try
+        {const response = await fetch(APIURL+'/getPointsHike', {
+            method: 'POST',
+            body: JSON.stringify({ 
+                "HikeID": HikeID,
+            }),
+            headers: {
+            'Content-Type': 'application/json',
+        },
+    });
+        const points = await response.json();
+        if (response.ok) {
+        return points;
+        } else {
+        throw points; //which will contain an error if it is the case
+    }} catch (ex) {
+        throw ex;
+  }
 }
 
 /* LOGIN FUNCTIONS */
@@ -133,5 +153,5 @@ async function logIn(credentials) {
     return response.ok ? true : false;
   }
 
-const API = {getHikes, logIn, logOut, getUserInfo, getFilteredHikes, register, setDescription, getHike};
+const API = {getHikes, logIn, logOut, getUserInfo, getFilteredHikes, register, setDescription, getHike, getPointsHike};
 export default API;

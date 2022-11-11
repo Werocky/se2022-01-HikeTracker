@@ -3,11 +3,12 @@ const db = require("../modules/DB");
 
 beforeAll(async() =>{   
     await db.createConnection();
+    await hikes.deleteHikes();
    } 
 )
 afterAll(async()=>{
    await hikes.deleteHikes();
-   
+
 })
 
 describe("Get/add Hikes",()=>{

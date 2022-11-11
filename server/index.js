@@ -11,6 +11,11 @@ const hikes=require('./modules/Hikes.js');
 const authN = require('./modules/authN.js');
 const locations = require('./modules/HikeLocations.js')
 const { db } = require('./modules/DB.js');
+const fileNames = require('./modules/FileNames.js');
+let gpxParser = require('gpxparser');
+var fs = require('fs'); 
+
+
 
 /*** Set up Passport ***/
 //configurating function to verify login and password
@@ -77,6 +82,25 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 
+//get hikes full list
+app.post('/getPointsHike', (req, res) => {
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    return res.status(422).json({error: 'cannot process request'});
+  }
+  const HikeID = req.body.HikeID;
+  var gpx = new gpxParser(); //Create gpxParser Object
+  fileNames.getFileName(HikeID)
+    .then(filename => {
+      fs.readFile(filename, function(err, data) {
+        if (err) throw err;
+          gpx.parse(data); //parse gpx file from string data
+          const points = gpx.tracks[0].points;
+          res.status(200).json(points);
+        });
+      })
+    .catch(() => res.status(500).end());
+});
 
 
 //get hikes full list
@@ -116,63 +140,82 @@ app.post('/getFilteredHikes', async (req, res) => {
     }
 
     let filters = req.body;
-
+    let list = []; 
+  
+    if(checkFiltersPresence(filters) === false){
+      list = await hikes.getHikes();
+    }
+    else
+      await filtering(filters, list);
     try {
-        let list = await hikes.getHikes();
-        let returned = filtering(filters, list);
-        res.status(200).json(returned);
+        res.status(200).json(list);
       } catch(err) {
         res.status(503).json({error: `Error`});
       }
   });
 
+  //check wheter filter are specified and which
+  const checkFiltersPresent = (filter, name) =>{
+    if(name === 'ExpectedTime' || name === 'Ascent' || name === 'Length')
+     return filter[0] !== null;
+    else
+    return typeof filter !== 'undefined';
+  }
+
+  //check if filters are specified, otherwise getFilteredHikes returns same value as getHikes
+  const checkFiltersPresence = (filters) =>{
+    let flag = false;
+    const name = Object.getOwnPropertyNames(filters);
+    for(let i = 0; i < name.length; i++){
+      if(name[i] === 'ExpectedTime' || name[i] === 'Ascent' || name[i] === 'Length')
+        {
+          if(filters[name[i]][0] !== null)
+            flag = true;
+          }
+      else if( name[i] ==='Province' || name[i] === 'City')
+        {
+          if(filters[name[i]] !== '' && typeof filters[name[i]] !== 'undefined')
+            flag = true;
+          }
+      }
+    return flag;
+  }
+
+  //function used to search if an HikeID is presents, given an array of Hikes
+  const searchHikeInArray = (HikeID, array) =>{
+    let flag = false;
+    array.forEach(function(element){
+      if(element.HikeID === HikeID)
+        flag = true;
+    });
+    return flag;
+  }
   //filtering function
-let filtering = (filters, list) => {
-    let vec = [];
-    let pair = {};
-  list.forEach(async l => {
-            await locations.getHikeLocationsPerID(l.HikeID).then(l => pair = {Province: l.Province, City: l.City}).catch(() => res.status(500).end());
-            if(typeof filters.Difficulty !== 'undefined' && filters.Difficulty !== '')
-            {
-                if(l.Difficulty !== filters.Difficulty){return;}
-                
-            }
-            if(typeof filters.Province !== 'undefined' && filters.Province !== '')
-            {
-                if(pair.Province !== filters.Province){return;}
-            }
-            if(typeof filters.City !== 'undefined' && filters.City !== '')
-            {
-                if(pair.City !== filters.City){return;}
-            }
-            if(typeof filters.minAscent !== 'undefined')
-            {
-                if(l.Ascent < filters.minAscent){return;}
-            }
-            if(typeof filters.maxAscent !== 'undefined')
-            {
-                if(l.Ascent > filters.maxAscent){return;}
-            }
-            if(typeof filters.minExpectedTime !== 'undefined')
-            {
-                if(l.ExpectedTime < filters.minExpectedTime){return;}
-            }
-            if(typeof filters.maxExpectedTime !== 'undefined')
-            {
-                if(l.ExpectedTime > filters.maxExpectedTime){return;}
-            }
-            if(typeof filters.minDist !== 'undefined')
-            {
-                if(l.Length < filters.minDist){return;}
-            }
-            if(typeof filters.maxDist !== 'undefined')
-            {
-                if(l.Length > filters.maxDist){return;}
-            }
-            vec.push(l);
-        });
-    return vec;
-}
+  const filtering = async (filters, list_curr) => {
+    let list_prev = []; 
+    let prov_list = [];
+    let flag = false;
+    let j = 0;
+    const list_filters = Object.getOwnPropertyNames(filters);
+    for (var i = 0; i < list_filters.length; i++) {
+      flag = checkFiltersPresent(filters[list_filters[i]], list_filters[i]);
+      console.log(filters[list_filters[i]], list_filters[i], flag);  
+      if(flag=== true){
+          j = 1;
+          if(list_filters[i] !== 'Province' && list_filters[i] !== 'City')
+            list_prev = await hikes.getHikesByFilter(list_filters[i], ...filters[list_filters[i]])
+            .then(l => l);
+          else
+            list_prev = await hikes.getHikesByFilter(list_filters[i], filters[list_filters[i]])
+            .then(l => l);
+        if(i !== 0 && j === 0){
+          list_prev = list_prev.filter(value => (searchHikeInArray(value.HikeID, prov_list)));
+        }
+        prov_list = [...list_prev];
+      }
+    }
+      list_prev.forEach(function(element){list_curr.push(element)})
+    }
 
 //add and modify description
 app.put('/setDescription', /*isLoggedIn,*/ [
