@@ -34,7 +34,7 @@ function MainLayout(props) {
         {!loading &&
           <Row>
             <Col sm={9}>
-              <HikeList hikes={hikes} />{console.log(hikes[0])}
+              <HikeList hikes={hikes} />
             </Col>
             <Col sm={3}>
               <Sidebar setHikes={setHikes} />

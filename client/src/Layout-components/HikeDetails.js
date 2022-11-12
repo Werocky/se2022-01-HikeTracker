@@ -33,19 +33,20 @@ function HikeDetails(props) {
   useEffect(() => {
     const loadHike = async () => {    // NEED API TO GET HIKE GIVEN ID, NEED API TO GET PARSED GPX DATA
       const hikeObj = await API.getHike(params.hikeID);
-      console.log(hikeObj);
+      //console.log(hikeObj);
       setHike(hikeObj);
-      /*const gpxObj = await API.getGpx(params.hikeID);
-      setGpxData(gpxObj);
+      const gpxObj = await API.getPointsHike(params.hikeID);
+      //setGpxData(gpxObj);
+      console.log(gpxObj);
       setLoading(false);
-      */
+      
     }
     try {
       loadHike();
     } catch (err) {
       //handling error
     }
-  }, [])
+  }, [params.hikeID])
 
   return (
     <Container fluid className={'vh-100'}>

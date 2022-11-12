@@ -18,7 +18,7 @@
   },
   "scripts": {
     "test": "jest -i",
-    "cover":"jest --coverage --runInBand",
+    "cover": "jest --coverage --runInBand",
     "start": "node index.js"
   }
 }

@@ -11,6 +11,7 @@ const hikes=require('./modules/Hikes.js');
 const authN = require('./modules/authN.js');
 const locations = require('./modules/HikeLocations.js')
 const { db } = require('./modules/DB.js');
+const users = require('./modules/Users');
 const fileNames = require('./modules/FileNames.js');
 let gpxParser = require('gpxparser');
 var fs = require('fs'); 
@@ -283,7 +284,7 @@ app.post('/sessions/new', async (req, res) => {
     const salt = req.param.salt;
     const email = req.param.email;
     const role = req.param.role;
-    const result = await db.register(hash, salt, email, role);
+    const result = await users.register(hash, salt, email, role);
     return res.status(200).json(result);
   } catch (err) {
     return res.status(500).json(err);

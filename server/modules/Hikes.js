@@ -146,5 +146,6 @@ exports.populateHikes= async ()=>{
   await this.addHike(0,'title1' ,12.5, 180,    500  ,'begginer'     ,0.00  ,1.2   ,null);
   await this.addHike(1,'title2',5   ,  60 ,    300.5,'Professional' ,0.1   ,1.454 ,null);
   await this.addHike(2,'title3',7.0 ,90 ,-190 ,'undertermined',232.56,0.5567,null);
-
+  /*await locations.addLocation(1,'Aosta','Cervinia');
+  await this.addHike(1,'Hike to hut Duca degli Abruzzi' ,5.26, 200, 794  ,'Hiker', 'id_start1', 'id_end1', null);*/
 }

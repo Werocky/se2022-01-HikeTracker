@@ -31,7 +31,7 @@ exports.getHikeLocationsPerID = (HikeID) => {
   });
 };
 
-exports.populateLocations= ()=>{
+exports.populateLocations= ()=>{ // NOT NECESSARY
   return new Promise(async (resolve, reject) => {
     const sql = "INSERT INTO HikeLocations(HikeID, Province, City) VALUES ('1', 'Aosta', 'Cervinia');";
     db.run(sql, [], function (err) {

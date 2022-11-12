@@ -52,7 +52,7 @@ function App() {
   return (
     <BrowserRouter>
       <AuthContext.Provider value={auth}>   {/* this is used to pass user information*/}
-        <AppLayout login={login} logout={logout} /*register=*//>
+        <AppLayout login={login} logout={logout} register={register}/>
       </AuthContext.Provider>
     </BrowserRouter>
   );
