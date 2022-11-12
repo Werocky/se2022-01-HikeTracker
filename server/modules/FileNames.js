@@ -5,7 +5,7 @@ const db = require('./DB').db;
 exports.getFileName = (HikeID) => {
 
     return new Promise((resolve, reject) => {
-      const sql = 'SELECT * FROM FileNamesHikes WHERE HikeID=?';
+      const sql = 'SELECT * FROM FileNames WHERE HikeID=?';
       db.get(sql, [HikeID], (err, row) => {
   
         if (err) {

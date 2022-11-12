@@ -36,7 +36,7 @@ function HikeDetails(props) {
       //console.log(hikeObj);
       setHike(hikeObj);
       const gpxObj = await API.getPointsHike(params.hikeID);
-      //setGpxData(gpxObj);
+      setGpxData(gpxObj);
       console.log(gpxObj);
       setLoading(false);
       

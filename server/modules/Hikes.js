@@ -34,6 +34,7 @@ exports.getHike = (HikeID) => {
       if (err) {
         reject(err);
       }
+      console.log(HikeID);
       const hike = { HikeID: row.HikeID, Start: row.Start, End: row.End, Title: row.Title, Length: row.Length, ExpectedTime: row.ExpectedTime, Ascent: row.Ascent, Difficulty: row.Difficulty, Description: row.Description};
       resolve(hike);
     });

@@ -1,10 +1,6 @@
-POST http://localhost:3001/getFilteredHikes HTTP/1.1
+POST http://localhost:3001/getPointsHike HTTP/1.1
 Content-Type: application/json
 
 {
-  "Length": [ null, null ],
-  "ExpectedTime": [ null, null ],
-  "Ascent": [ null ],
-  "City": "Teramo",
-  "Province": "pz"
+  "HikeID": 1
 }
