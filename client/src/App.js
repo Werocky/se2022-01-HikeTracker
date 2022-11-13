@@ -9,6 +9,7 @@ import { LoginComponent } from './Layout-components/LoginComponent';
 import { RegisterComponent } from './Layout-components/RegisterComponent';
 import HikeDetails from './Layout-components/HikeDetails';
 import NavigationBar from './Layout-components/Navigationbar';
+import { HikeDescription } from './Layout-components/HikeDescription';
 
 function App() {
 
@@ -95,6 +96,12 @@ function AppLayout(props) {
           <LoginComponent login={props.login} />
         </>
       } />
+      <Route path='/modifyHikeDesc/:hikeID' element={
+        <>
+          <NavigationBar logged={auth} setLogged={props.setLogged}/>
+          <HikeDescription />
+        </>
+      }/>
     </Routes>
   );
 }
