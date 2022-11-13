@@ -19,7 +19,6 @@ function Sidebar(props) {
   const handleSubmit = async (event) => {
     event.preventDefault();
     // call the API and pass all the filter params
-    console.log(city+"\n"+province+"\n"+difficulty+"\n"+minDist+"\n"+maxDist+"\n"+minAscent+"\n"+maxAscent+"\n"+minExTime+"\n"+maxExTime);
     API.getFilteredHikes(minExTime, maxExTime, minAscent, maxAscent, province, city, minDist, maxDist, difficulty).then(array => props.setHikes(array));
   }
 

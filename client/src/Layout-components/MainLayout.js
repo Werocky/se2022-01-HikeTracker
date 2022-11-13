@@ -31,7 +31,7 @@ function MainLayout(props) {
         {!loading &&
           <Row>
             <Col sm={9}>
-              <HikeList hikes={hikes} />
+              <HikeList hikes={hikes} auth={props.auth}/>
             </Col>
             <Col sm={3}>
               <Sidebar setHikes={setHikes} />

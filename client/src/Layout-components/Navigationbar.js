@@ -10,7 +10,7 @@ function NavigationBar(props){
                 <i className="bi bi-building"></i>
                 <span className="d-none d-md-inline">Hike-Tracker</span>
             </h2>
-            <h3 className='text-white'>Welcome, {props.logged.login === false ? 'Guest' : props.logged.user.Id}!</h3>
+            <h3 className='text-white'>Welcome, {props.logged.login .login === false ? 'Guest' : props.logged.user.Id}!</h3>
             {props.logged.login ? <Logout setLogged = {props.setLogged} navigate={navigate} user={props.logged}/> : <Login navigate={navigate}/>}
         </Container>
     </Navbar>
@@ -39,7 +39,7 @@ const handleLogout = async (setLogged, navigate, id) => {
     if (await API.logOut()){
         setLogged({
             login: false,
-            user: undefined,
+            user: {role: ''},
         });
         navigate('/');
     }

@@ -40,7 +40,7 @@ function HikeElement(props) {
       <td>{hike.Difficulty}</td>
       <td>{hike.ExpectedTime}</td>
       <td>{hike.start}</td>
-      <td>{hike.end}</td>
+      <td>{hike.end}</td>s
       <td>
         <Button onClick={() => navigate("/" + hike.HikeId)} >Details</Button>
       </td>

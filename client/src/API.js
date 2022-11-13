@@ -16,6 +16,7 @@ async function getHike(HikeID) {
   try
         {const response = await fetch(APIURL+'/getHikeByID', {
             method: 'POST',
+            credentials: 'include',
             body: JSON.stringify({ 
                 "HikeID": HikeID,
             }),
@@ -86,6 +87,7 @@ async function getPointsHike(HikeID) {
   try
         {const response = await fetch(APIURL+'/getPointsHike', {
             method: 'POST',
+            credentials: 'include',
             body: JSON.stringify({ 
                 "HikeID": HikeID,
             }),

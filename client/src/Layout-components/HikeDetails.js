@@ -38,7 +38,6 @@ function HikeDetails(props) {
       if (auth.login) {
         const gpxObj = await API.getPointsHike(params.hikeID);
         setGpxData(gpxObj);
-        console.log(gpxObj);
       }
       setLoading(false);
 

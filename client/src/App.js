@@ -14,7 +14,7 @@ function App() {
 
   const [auth, setAuth] = useState({  // login information
     login: false,
-    user: undefined,
+    user: {role: ''},
   });
 
   const login = async (email, password) => {
@@ -29,7 +29,7 @@ function App() {
     await API.logOut();
     setAuth({
       login: false,
-      user: undefined,
+      user: {role: ''},
     })
   };
 
@@ -70,6 +70,7 @@ function AppLayout(props) {
         <>
           <NavigationBar logged={auth} setLogged={props.setLogged}/>
           <MainLayout
+            auth={auth}
             login={props.login}
             logout={props.logout}
           />
