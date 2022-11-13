@@ -8,6 +8,7 @@ import API from './API';
 import { LoginComponent } from './Layout-components/LoginComponent';
 import { RegisterComponent } from './Layout-components/RegisterComponent';
 import HikeDetails from './Layout-components/HikeDetails';
+import NavigationBar from './Layout-components/Navigationbar';
 
 function App() {
 
@@ -52,7 +53,7 @@ function App() {
   return (
     <BrowserRouter>
       <AuthContext.Provider value={auth}>   {/* this is used to pass user information*/}
-        <AppLayout login={login} logout={logout} register={register}/>
+        <AppLayout login={login} logout={logout} register={register} setLogged={setAuth}/>
       </AuthContext.Provider>
     </BrowserRouter>
   );
@@ -66,15 +67,32 @@ function AppLayout(props) {
   return (
     <Routes>
       <Route path='/' element={
-        <MainLayout
-          login={props.login}
-          logout={props.logout}
-        />
+        <>
+          <NavigationBar logged={auth} setLogged={props.setLogged}/>
+          <MainLayout
+            login={props.login}
+            logout={props.logout}
+          />
+        </>
       }>
       </Route>
-      <Route path='/:hikeID' element={<HikeDetails />} />
+      <Route path='/:hikeID' element={
+        <>
+          <NavigationBar logged={auth} setLogged={props.setLogged}/>
+          <HikeDetails />
+        </>
+      }/>
       <Route path='/register' element={
-        <RegisterComponent register={props.register} />
+        <>
+          <NavigationBar logged={auth} setLogged={props.setLogged}/>
+          <RegisterComponent register={props.register} />
+        </>
+      } />
+      <Route path='/login' element={
+        <>
+          <NavigationBar logged={auth} setLogged={props.setLogged}/>
+          <LoginComponent login={props.login} />
+        </>
       } />
     </Routes>
   );
