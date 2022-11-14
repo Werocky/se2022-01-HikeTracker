@@ -18,8 +18,19 @@ function Sidebar(props) {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+    const t_minExTime = minExTime;
+    const t_maxExTime = maxExTime;
+    const t_minAscent = minAscent;
+    const t_maxAscent = maxAscent;
+    const t_province = province;
+    const t_city = city;
+    const t_minDist = minDist;
+    const t_maxDist = maxDist;
+    const t_difficulty = difficulty;
+    handleReset();
+    //console.log(city+"\n"+province+"\n"+difficulty+"\n"+minDist+"\n"+maxDist+"\n"+minAscent+"\n"+maxAscent+"\n"+minExTime+"\n"+maxExTime);
     // call the API and pass all the filter params
-    API.getFilteredHikes(minExTime, maxExTime, minAscent, maxAscent, province, city, minDist, maxDist, difficulty).then(array => props.setHikes(array));
+    API.getFilteredHikes(t_minExTime, t_maxExTime, t_minAscent, t_maxAscent, t_province, t_city, t_minDist, t_maxDist, t_difficulty).then(array => props.setHikes(array));
   }
 
   const handleReset = (event) =>{
