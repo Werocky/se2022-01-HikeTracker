@@ -12,7 +12,7 @@ RETROSPECTIVE (Team 1)
 
 - 4 of stories committed vs. 4 done 
 - Total of 24 points committed vs. 24 points done 
--  hours planned vs. spent (as a team)
+-  72 hours planned (12h per person) vs. 50 spent (as a team)
 
 Definition of Done: 
 - Unit Tests passing
@@ -25,11 +25,40 @@ Definition of Done:
 
 | Story  | # Tasks | Points | Hours est. | Hours actual |
 |--------|---------|--------|------------|--------------|
-| _#0_   |         |       |            |              |
-| n      |         |        |            |              |
+| _1 - Browse Hikes_ | _3_ | _8_ | _1d 7h_ | _2d 50m_ |
+| _2 - Describe Hikes_ | _6_ | _8_ | _1d 3h_ | _1d 5h 20m_ |
+| _3 - Register_ | _3_ | _3_ | _4h_ | _4h_ |
+| _4 - See hikes' details_ | _2_ | _5_ | _6h_ | _2h 10m_ |
    
+### Tasks statistics
+#### 1 - Browse Hikes
+| Task | Hours est. | Hours actual |
+|------|------------|--------------|
+| _DB Hike_  |  _4h_  |  _5h 50m_  |
+| _basic layout [client]_  |  _4h_  |  _4h_  |
+| _API with filters_  |  _7h_  |  _7h_  |
 
-> place technical tasks corresponding to story `#0` and leave out story points (not applicable in this case)
+#### 2 - Describe Hikes
+| Task | Hours est. | Hours actual |
+|------|------------|--------------|
+| _login_  |  _1h_  |  _3h_  |
+| _Add description [client]_  |  _1h 30m_  |  _5h_  |
+| _API save description_  |  _1h 30m_  |  _30m_  |
+| _DB gpx_  |  _3h_  |  _1h 10m_  |
+| _DB Guide_  |  _2h_  |  _??????????_  |
+| _map integration for hikes [client]_  |  _2h_  |  _3h 10m_  |
+
+
+#### 3 - Register
+| Task | Hours est. | Hours actual |
+|------|------------|--------------|
+| __  |  __  |  __  |
+
+#### 4 - See hikes' details
+| Task | Hours est. | Hours actual |
+|------|------------|--------------|
+| __  |  __  |  __  |
+
 
 - Hours per task average, standard deviation (estimate and actual)
 - Total task estimation error ratio: sum of total hours estimation / sum of total hours spent - 1
