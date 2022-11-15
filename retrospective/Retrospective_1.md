@@ -43,21 +43,25 @@ Definition of Done:
 |------|------------|--------------|
 | _login_  |  _1h_  |  _3h_  |
 | _Add description [client]_  |  _1h 30m_  |  _5h_  |
-| _API save description_  |  _1h 30m_  |  _30m_  |
+| _API save description [server]_  |  _1h 30m_  |  _30m_  |
 | _DB gpx_  |  _3h_  |  _1h 10m_  |
 | _DB Guide_  |  _2h_  |  _??????????_  |
 | _map integration for hikes [client]_  |  _2h_  |  _3h 10m_  |
 
+> We did the DB guide together with the DB hiker
 
 #### 3 - Register
 | Task | Hours est. | Hours actual |
 |------|------------|--------------|
-| __  |  __  |  __  |
+| _DB hiker_  |  _2h_  |  _30m_  |
+| _API add user [server]_  |  _1h_  |  _30m_  |
+| _Sign-up form [client]_  |  _1h_  |  _3h_  |
 
 #### 4 - See hikes' details
 | Task | Hours est. | Hours actual |
 |------|------------|--------------|
-| __  |  __  |  __  |
+| _GPX data into tracks [client]_  |  _3h_  |  _40m_  |
+| _API get gpx file [server]_  |  _3h_  |  _1h 30m_  |
 
 
 - Hours per task average, standard deviation (estimate and actual)
@@ -83,7 +87,7 @@ Definition of Done:
 ## ASSESSMENT
 
 - What caused your errors in estimation (if any)?  
-We had to read documentation about some new libraries (for example the ones related to the parsing of gpx file and integration of maps). Creating automated testing took longer than exprected. We had some problem managing the databases.
+We had to read documentation about some new libraries (for example the ones related to the parsing of gpx file and integration of maps). Creating automated testing took longer than exprected. We had some problem managing the databases. On the contrary, we took less time than expected to implement map features after reading the docs.
 
 
 - What lessons did you learn (both positive and negative) in this sprint?  
@@ -99,7 +103,6 @@ We weren't able to improve the time managment related to testing because we star
 Improve time management, related to testing with more teamwork in order to speed up the process.  
 Improve meetings quality and frequency to alert other team members about project problems/issues and overall progress.
 
-> Propose one or two
 
 - One thing you are proud of as a Team!!  
 We were able to commit all the stories we started working on without exceed to much on the time budget.
