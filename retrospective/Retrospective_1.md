@@ -45,7 +45,7 @@ Definition of Done:
 | _Add description [client]_  |  _1h 30m_  |  _5h_  |
 | _API save description [server]_  |  _1h 30m_  |  _30m_  |
 | _DB gpx_  |  _3h_  |  _1h 10m_  |
-| _DB Guide_  |  _2h_  |  _??????????_  |
+| _DB Guide_  |  _2h_  |  _1h 30m_  |
 | _map integration for hikes [client]_  |  _2h_  |  _3h 10m_  |
 
 > We did the DB guide together with the DB hiker
@@ -71,16 +71,56 @@ Definition of Done:
 ## QUALITY MEASURES 
 
 - Unit Testing:
-  - Total hours estimated
-  - Total hours spent
-  - Nr of automated unit test cases 
+  - Total hours estimated:
+    - 1h30m
+  - Total hours spent: 
+    - 1h30m
+  - Nr of automated unit test cases: 
+    - 19
+
+#### 1 - Browse Hikes
+| Task | Hours est. | Hours actual | Nr tests |
+|------|------------|--------------|---|
+| _DB Hike_  |  _20m_  |  _15m_  | _3_ |
+| _DB Hike Location_  |  _-not previewed-_  |  _15m_  | _3_ |
+
+#### 2 - Describe Hikes
+| Task | Hours est. | Hours actual |Nr tests |
+|------|------------|--------------|---|
+| _DB Guide_  |  _30m_  |  _50m_  | _13_ |
+
+> We did the DB guide together with the DB hiker
+
+#### 3 - Register
+| Task | Hours est. | Hours actual | Nr tests |
+|------|------------|--------------|---|
+| _DB hiker_  |  _1h_  |  _10m_  | _3_ |
+
+#### 4 - See hikes' details
+| Task | Hours est. | Hours actual | Nr tests |
+|------|------------|--------------|--|
+
+
+
   - Coverage (if available)
+
+File              | % Stmts | % Branch | % Funcs | % Lines | Uncovered Line #s        
+------------------|---------|----------|---------|---------|--------------------------
+All files         |   80.45 |    60.65 |   90.76 |   81.59 | 
+ DB.js            |   84.61 |       50 |     100 |    87.5 | 26,39,52
+ HikeLocations.js |   87.17 |       50 |     100 |   86.48 | 12,26,39,51,63
+ Hikes.js         |      75 |    68.57 |      76 |   76.71 | 20,30-39,45-51,61,72,130
+ Users.js         |   82.75 |       50 |     100 |   82.75 | 11-12,25,38,49
+
 - E2E testing:
   - Total hours estimated
   - Total hours spent
+
 - Code review 
-  - Total hours estimated 
-  - Total hours spent
+  - Total hours estimated:
+    - 3h
+  - Total hours spent:
+    - 3h20m 
   
 
 
@@ -88,6 +128,7 @@ Definition of Done:
 
 - What caused your errors in estimation (if any)?  
 We had to read documentation about some new libraries (for example the ones related to the parsing of gpx file and integration of maps). Creating automated testing took longer than exprected. We had some problem managing the databases. On the contrary, we took less time than expected to implement map features after reading the docs.
+The implementation of automatic testing on github and the docker took unexpected resources out of the project implementation.
 
 
 - What lessons did you learn (both positive and negative) in this sprint?  

@@ -3,6 +3,7 @@ const db = require("../modules/DB");
 
 beforeAll(async() =>{   
     await db.createConnection();
+    await
     await Users.emptyUsers();
    } 
 )

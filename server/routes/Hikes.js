@@ -10,12 +10,10 @@ router.use(express.json());
 
 ///api
 
-//testing
-router.get('/', async (req, res) => {
-    try {
-        let hikes = await Hikes_DAO.getHikes();
-        res.status(200).json(items);
-    } catch (err) {
-        res.status(500).end();
+app.get('/sessions/current', (req, res) => {
+    if (req.isAuthenticated()) {
+      res.status(200).json(req.user);
     }
-});
+    else
+      res.status(401).json({ error: 'Unauthenticated user!' });;
+  });

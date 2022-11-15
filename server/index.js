@@ -322,6 +322,6 @@ app.post('/saveFile/:hikeID', async (req, res) => {
 })
 
 // activate the server
-app.listen(port, () => {
+module.exports = app.listen(port, () => {
   console.log(`Server listening at http://localhost:${port}`);
 });
