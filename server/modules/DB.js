@@ -127,9 +127,25 @@ class DatabaseConnection {
          end="Monte Ferra | 3094 m slm circa";
         
          this.wrapperPopulate(HikeID,file,province,city,title,length,expTime,Ascent,Description,Difficulty,start,end);
-      }
+         HikeID='2';
+         file="2017-01-25_14059413_Sperenberger Gipsbrüche.gpx"
+         province='Germany';
+         city ='Berlin';
+         title="Sperenberger Gipsbrüche";
+         length=3.2;
+         expTime=169;
+         Ascent=50;
+         Description="Intermediate Hiking Tour. Good fitness required. Easily-accessible paths. Suitable for all skill levels. The starting point of the Tour is accessible with public transport."
+         Difficulty="H";
+         start="Chausseestraße";
+         end="Zossener Allee";
+        
+         this.wrapperPopulate(HikeID,file,province,city,title,length,expTime,Ascent,Description,Difficulty,start,end);
+
       
-     static wrapperPopulate =async (HikeID,file,province,city,title,length,expTime,Ascent,Description,Difficulty,start,end)=>{
+    }
+      
+    static wrapperPopulate =async (HikeID,file,province,city,title,length,expTime,Ascent,Description,Difficulty,start,end)=>{
         let path="../gpx/"+file;
         const locations =require ("./HikeLocations");
         const hikes =require("./Hikes");
@@ -139,7 +155,7 @@ class DatabaseConnection {
         await locations.addLocation(HikeID,province,city);
         await fileLocation.addFile(HikeID,path);
     
-      }
+    }
 
 
 }

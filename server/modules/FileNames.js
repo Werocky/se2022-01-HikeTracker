@@ -20,13 +20,13 @@ exports.getFileName = (HikeID) => {
   exports.getFiles = () => {
 
     return new Promise((resolve, reject) => {
-      const sql = 'SELECT * FROM Hikes';
+      const sql = 'SELECT * FROM FileNames';
       db.all(sql, [], (err, rows) => {
         if (err) {
           //console.log('/rejected');
           reject(err);
         }
-        console.log(rows);
+        //console.log(rows);
         const hikes = rows.map((r) => ({ HikeID: r.HikeID, FileName: r.FileName}));
         resolve(hikes);
       });

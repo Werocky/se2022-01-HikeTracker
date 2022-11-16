@@ -2,7 +2,7 @@ const db = require("../modules/DB");
 const hikesLoc =require("../modules/HikeLocations");
 const hikes =require("../modules/Hikes");
 const Files= require("../modules/FileNames");
-const totalEntries= 2;
+const totalEntries= 3;
 describe("Get/add HikeLocations",()=>{
   
     test('Populate DB',async()=>{
