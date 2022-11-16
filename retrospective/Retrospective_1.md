@@ -88,7 +88,7 @@ standard deviation: (estimated) 1.55
 
 standard deviation: (actual) 1.93
 
-- Total task estimation error ratio: ( $4\times2$ + 7 + $1\times3$ + $2\times5$ + $3\times3$) / (6 + 4 + + 7 + $3\times3$ + 5 + $1\times5$ + $2\times2$) - 1 = 0.03
+- Total task estimation error ratio: ( $4\times2$ + 7 + $1\times3$ + $2\times5$ + $3\times3$) / (6 + 4 + 7 + $3\times3$ + 5 + $1\times5$ + $2\times2$) - 1 = 0.03
   
 ## QUALITY MEASURES 
 
