@@ -64,9 +64,31 @@ Definition of Done:
 | _API get gpx file [server]_  |  _3h_  |  _1h 30m_  |
 
 
-- Hours per task average, standard deviation (estimate and actual)
-- Total task estimation error ratio: sum of total hours estimation / sum of total hours spent - 1
+- Hours per task average: (estimated) 2.57 (actual) 2.64
 
+- ##### Table for estimate standard deviation
+| Group | Frequency |
+|------|------------|
+| _1h_ |  _3_ |
+| _2h_ | _5_ |
+| _3h_ | _3_ |
+| _4h_ | _2_ |
+| _5h_-_7h_  | _1_ |
+
+standard deviation: (estimated) 1.55
+
+- ##### Table for actual standard deviation
+| Group | Frequency |
+|------|------------|
+| _1h_ |  _5_ |
+| _2h_ | _2_ |
+| _3h_ | _3_ |
+| _4h_ | _1_ |
+| _5h_-_7h_  | _3_ |
+
+standard deviation: (actual) 1.93
+
+- Total task estimation error ratio: ($4\times2$ + 7 + $1\times3$ + $2\times5$ + $3\times3$) / (6 + 4 + + 7 + $3\times3$ + 5 + $1\times5$ + $2\times2$) - 1 = 0.03
   
 ## QUALITY MEASURES 
 
