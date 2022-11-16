@@ -16,3 +16,42 @@ exports.getFileName = (HikeID) => {
       });
     });
   };
+
+  exports.getFiles = () => {
+
+    return new Promise((resolve, reject) => {
+      const sql = 'SELECT * FROM Hikes';
+      db.all(sql, [], (err, rows) => {
+        if (err) {
+          //console.log('/rejected');
+          reject(err);
+        }
+        console.log(rows);
+        const hikes = rows.map((r) => ({ HikeID: r.HikeID, FileName: r.FileName}));
+        resolve(hikes);
+      });
+    });
+  };
+  exports.addFile=(HikeID,Path)=>{
+    return new Promise(async (resolve, reject) => {
+      const sql = "INSERT INTO FileNames(HikeID, FileName) VALUES (?,?);";
+      db.run(sql, [HikeID,Path], function (err) {
+          if (err)
+              reject(err);
+          else {
+              resolve('New file path added');
+          }
+      });
+    });
+  }
+
+  exports.emptyConnection=()=>{
+    return new Promise(async (resolve, reject) => {
+      db.run("DELETE FROM FileNames", [], function (err) {
+          if (err)
+              reject(err);
+          else
+              resolve('Files emptied');
+      });
+  })
+  }

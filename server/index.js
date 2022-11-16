@@ -16,6 +16,7 @@ const fileNames = require('./modules/FileNames.js');
 let gpxParser = require('gpxparser');
 var fs = require('fs');
 const fileUpload = require("express-fileupload");
+const { builtinModules } = require('module');
 
 
 
@@ -322,6 +323,8 @@ app.post('/saveFile/:hikeID', async (req, res) => {
 })
 
 // activate the server
-module.exports = app.listen(port, () => {
+app.listen(port, () => {
   console.log(`Server listening at http://localhost:${port}`);
 });
+
+module.exports = app;

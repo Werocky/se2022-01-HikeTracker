@@ -1,5 +1,6 @@
 const hikes = require('../modules/Hikes');
 const db = require("../modules/DB");
+const locations = require ("../modules/HikeLocations")
 
 
 beforeAll(async() =>{   
@@ -20,8 +21,8 @@ describe("Get/add Hikes",()=>{
     });
 
     test('insert a new Hike', async()=>{
-        await expect(hikes.addHike(0,0,0,0,0,0,0,0,0)).resolves.toEqual('New Hike inserted')
-        await expect(hikes.getHikes()).resolves.toEqual([{"Ascent":0,"Description":null,"Difficulty":"0","ExpectedTime":0,"HikeID":"0","Length":0,"End":"0","Start":"0","Title":"0"}]);
+        await expect(hikes.addHike(0,0,0,0,0,0,0,0,0,0)).resolves.toEqual('New Hike inserted')
+        await expect(hikes.getHikes()).resolves.toEqual([{"Ascent":0,"Description":"0","Difficulty":"0","ExpectedTime":0,"HikeID":"0","Length":0,"End":"0","Start":"0","Title":"0"}]);
     })
 
     test('Empty hikes db', async()=>{
@@ -32,17 +33,20 @@ describe("Get/add Hikes",()=>{
 describe("get Hikes by Filter",()=>{
     beforeEach(
             async ()=>{
+                await locations.emptyLocations();
+                await locations.addLocation(1,'Baviera','Monaco');
+                await locations.addLocation(2,'Dpto La Paz','La paz');
+                await locations.addLocation(0,'Piemonte','Torino');
                 await hikes.deleteHikes();
-                //                 (ID Title  Length, ExTime, Ascent Difficulty  , Start, End      Description
-                // await hikes.addHike(0,'title1' ,12.5, 180,    500  ,'begginer'     ,0.00  ,1.2   ,null);
-                // await hikes.addHike(1,'title2',5   ,  60 ,    300.5,'Professional' ,0.1   ,1.454 ,null);
-                // await hikes.addHike(2,'title3',7.0 ,90 ,-190 ,'undertermined',232.56,0.5567,null);
-                await hikes.populateHikes();
+                await hikes.addHike(0,'title1' ,12.5, 180,    500  ,'begginer'     ,0.00  ,1.2   ,null);
+                await hikes.addHike(1,'title2',5   ,  60 ,    300.5,'Professional' ,0.1   ,1.454 ,null);
+                await hikes.addHike(2,'title3',7.0 ,90 ,-190 ,'undertermined',232.56,0.5567,null);
             }
         );
         afterEach(
             async()=>{
                 await hikes.deleteHikes();
+                await locations.emptyLocations();
             }
         )
     describe("get Hikes by a specific Filter or higher(for lenght|ExpectedTime|Ascent)", ()=>{
