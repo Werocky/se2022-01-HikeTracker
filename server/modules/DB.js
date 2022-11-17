@@ -299,7 +299,38 @@ class DatabaseConnection {
             +"Purtroppo noi abbiamo trovato il rifugio chiuso, non so se perché era un giorno infrasettimanale oppure a causa dell’emergenza sanitaria."
       this.wrapperPopulate(HikeID,file,province,city,title,length,expTime,Ascent,Description,Difficulty,start,end);
        
-    
+      HikeID='10';
+      title="Sentiero per CIMA BOSSOLA da INVERSO | 1510 m slm";
+      province='Piemonte';
+      city ='CIASPOLATE'; 
+      Ascent=435;
+      start="Inverso – Vico Canavese (TO) / 1074 m circa";
+      end="Cima Bossola / 1510 m circa"
+      length=6;
+      Difficulty="H";
+      expTime=75; 
+      file="cima bossola.gpx"    
+      Description="LLascia l’auto nell’ampio spiazzo al casotto Cima Bossola, che puoi raggiungere proseguendo per qualche km sulla piccola strada che sale da Inverso."
+
+      +"Troverai i cartelli indicanti il Colletto Bossola, che si raggiunge poco dopo la Cima."
+      
+      +"Il percorso inizia su uno stradone ben evidente e taglia su una dorsale di media pendenza."
+      
+      +"In inverno questo tratto è un po’ faticoso, bisogna valutare bene le condizioni neve e soprattutto avere l’attrezzatura adatta (ciaspole, bastoncini, ramponcini)."
+      
+      +"È anche possibile proseguire sullo stradone, allungando leggermente il sentiero ma rendendo la salita più semplice."
+      
+      +"Una volta scollinato, si può decidere anche in questo caso se proseguire sullo stradone oppure se tagliare nuovamente la dorsale."
+      
+      +"Proseguendo sullo stradone è possibile raggiungere le splendide e scenografiche Case Bossola, un luogo perfetto anche per una piccola pausa."
+      
+      +"Da Case Bossola si può ammirare un panorama davvero spettacolare sul Monviso, sul Monte Calvo, sul Lago di Viverone e sulla Serra morenica di Ivrea."
+      
+      +"A questo punto manca l’ultimo spunto in salita, per poi raggiungere la suggestiva croce incorniciata dalle montagne circostanti, che segna la fine del sentiero per Cima Bossola."
+      
+      +"Puoi decidere se proseguire un pezzo fino al Colletto Bossola."
+      
+      this.wrapperPopulate(HikeID,file,province,city,title,length,expTime,Ascent,Description,Difficulty,start,end);
     
     
     }
