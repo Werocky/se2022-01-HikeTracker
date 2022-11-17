@@ -1,4 +1,3 @@
-import 'leaflet/dist/leaflet.css';
 import { useContext, useEffect, useState, React } from "react";
 import { Container, Form, Button, Alert, } from "react-bootstrap";
 import { useParams } from "react-router-dom";

@@ -1,4 +1,3 @@
-import 'leaflet/dist/leaflet.css';
 import { useContext, useEffect, useState } from "react";
 import { Button, Col, Container, Row } from "react-bootstrap";
 import { useNavigate, useParams } from "react-router-dom";
@@ -34,6 +33,7 @@ function HikeDetails(props) {
   useEffect(() => {
     const loadHike = async () => {    // NEED API TO GET HIKE GIVEN ID, NEED API TO GET PARSED GPX DATA
       const hikeObj = await API.getHike(params.hikeID);
+      console.log(hikeObj);
       setHike(hikeObj);
       if (auth.login) {
         const gpxObj = await API.getPointsHike(params.hikeID);
@@ -63,8 +63,8 @@ function HikeDetails(props) {
           <Row>
             <Col>City: {hike.City}</Col>
             <Col>Province: {hike.Province}</Col>
-            <Col>Start: {hike.start}</Col>
-            <Col>End: {hike.end}</Col>
+            <Col>Start: {hike.Start}</Col>
+            <Col>End: {hike.End}</Col>
             <Col></Col>
           </Row>
           <Row>

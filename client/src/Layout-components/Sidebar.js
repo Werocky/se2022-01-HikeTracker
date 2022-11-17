@@ -1,6 +1,8 @@
 import { useState } from "react";
-import { Button, Col, Form, InputGroup, Row } from "react-bootstrap";
+import { Alert, Button, Col, Form, InputGroup, Row } from "react-bootstrap";
+import { MapContainer, TileLayer, Marker, Popup, useMapEvents } from 'react-leaflet';
 import API from '../API';
+
 
 function Sidebar(props) {
 
@@ -33,7 +35,7 @@ function Sidebar(props) {
     API.getFilteredHikes(t_minExTime, t_maxExTime, t_minAscent, t_maxAscent, t_province, t_city, t_minDist, t_maxDist, t_difficulty).then(array => props.setHikes(array));
   }
 
-  const handleReset = (event) =>{
+  const handleReset = (event) => {
     setCity(() => undefined);
     setProvince(() => undefined);
     setMinExTime(() => undefined);
@@ -47,150 +49,258 @@ function Sidebar(props) {
 
 
   return (
-    <Form onSubmit={handleSubmit}>
-      <Form.Group className="mb-3" controlId="formGeographical">
-        <Form.Label>Geographical filter</Form.Label>
-        <Form.Control type="text" placeholder="Insert City"
-          onChange={(event) => {
-            setCity(event.target.value)
-          }} />
-        <Form.Control type="text" placeholder="Insert Province"
-          onChange={(event) => {
-            setProvince(event.target.value)
-          }} />
-        <Form.Text className="text-muted">
-          City or Province
-        </Form.Text>
-      </Form.Group>
+    <>
+      <Form onSubmit={handleSubmit}>
+        <Form.Group className="mb-3" controlId="formGeographical">
+          <Form.Label>Geographical filter</Form.Label>
+          <Form.Control type="text" placeholder="Insert City"
+            onChange={(event) => {
+              setCity(event.target.value)
+            }} />
+          <Form.Control type="text" placeholder="Insert Province"
+            onChange={(event) => {
+              setProvince(event.target.value)
+            }} />
+          <Form.Text className="text-muted">
+            City or Province
+          </Form.Text>
+        </Form.Group>
 
-      <Form.Group className="mb-3" controlId="formDifficulty">
-        <Form.Label>Difficulty filter</Form.Label>
-        <Form.Control as="select" value={difficulty} aria-label="Select Difficulty"
-          onChange={(event) => {
-            setDifficulty(event.target.value)
-          }}>
-          <option>Select difficulty</option>
-          <option value="T">Tourist</option>
-          <option value="H">Hiker</option>
-          <option value="PH">Professional Hiker</option>
-        </Form.Control>
-      </Form.Group>
+        <Form.Group className="mb-3" controlId="formDifficulty">
+          <Form.Label>Difficulty filter</Form.Label>
+          <Form.Control as="select" value={difficulty} aria-label="Select Difficulty"
+            onChange={(event) => {
+              setDifficulty(event.target.value)
+            }}>
+            <option>Select difficulty</option>
+            <option value="T">Tourist</option>
+            <option value="H">Hiker</option>
+            <option value="PH">Professional Hiker</option>
+          </Form.Control>
+        </Form.Group>
 
-      <Form.Group className="mb-3" controlId="formLength">
-        <Form.Label>Length filter</Form.Label>
+        <Form.Group className="mb-3" controlId="formLength">
+          <Form.Label>Length filter</Form.Label>
+          <Row>
+            <Col>
+              <InputGroup>
+                <Form.Control
+                  placeholder="Distance"
+                  onChange={(event) => {
+                    setMinDist(event.target.value)
+                  }}
+                />
+                <InputGroup.Text id="basic-addon2">km</InputGroup.Text>
+              </InputGroup>
+              <Form.Text className="text-muted">
+                Min dist.
+              </Form.Text>
+            </Col>
+            <Col>
+              <InputGroup>
+                <Form.Control
+                  placeholder="Distance"
+                  onChange={(event) => {
+                    setMaxDist(event.target.value)
+                  }}
+                />
+                <InputGroup.Text id="basic-addon2">km</InputGroup.Text>
+              </InputGroup>
+              <Form.Text className="text-muted">
+                Max dist.
+              </Form.Text>
+            </Col>
+          </Row>
+        </Form.Group>
+
+        <Form.Group className="mb-3" controlId="formAscent">
+          <Form.Label>Ascent filter</Form.Label>
+          <Row>
+            <Col>
+              <InputGroup>
+                <Form.Control
+                  placeholder="Ascent"
+                  onChange={(event) => {
+                    setMinAscent(event.target.value)
+                  }}
+                />
+                <InputGroup.Text id="basic-addon2">m</InputGroup.Text>
+              </InputGroup>
+              <Form.Text className="text-muted">
+                Min asc.
+              </Form.Text>
+            </Col>
+            <Col>
+              <InputGroup>
+                <Form.Control
+                  placeholder="Ascent"
+                  onChange={(event) => {
+                    setMaxAscent(event.target.value)
+                  }}
+                />
+                <InputGroup.Text id="basic-addon2">m</InputGroup.Text>
+              </InputGroup>
+              <Form.Text className="text-muted">
+                Max asc.
+              </Form.Text>
+            </Col>
+          </Row>
+        </Form.Group>
+
+        <Form.Group className="mb-3" controlId="formExpectedTime">
+          <Form.Label>Expected Time filter</Form.Label>
+          <Row>
+            <Col>
+              <InputGroup>
+                <Form.Control
+                  placeholder="Time"
+                  onChange={(event) => {
+                    setMinExTime(event.target.value)
+                  }}
+                />
+                <InputGroup.Text id="basic-addon2">mins</InputGroup.Text>
+              </InputGroup>
+              <Form.Text className="text-muted">
+                Min Time.
+              </Form.Text>
+            </Col>
+            <Col>
+              <InputGroup>
+                <Form.Control
+                  placeholder="Time"
+                  onChange={(event) => {
+                    setMaxExTime(event.target.value)
+                  }}
+                />
+                <InputGroup.Text id="basic-addon2">mins</InputGroup.Text>
+              </InputGroup>
+              <Form.Text className="text-muted">
+                Max Time.
+              </Form.Text>
+            </Col>
+          </Row>
+        </Form.Group>
+
         <Row>
+          <Col>
+            <Button variant="primary" type="submit">
+              Submit
+            </Button>
+          </Col>
+          <Col>
+            <Button variant="primary" type="reset" onClick={handleReset}>
+              Reset
+            </Button>
+          </Col>
+        </Row>
+      </Form>
+
+      <hr style={{
+        background: 'black',
+        height: '10px',
+      }} />
+
+      <GeogForm setHikes={props.setHikes} />
+
+    </>
+  );
+}
+
+function GeogForm(props) {
+
+  const [coord, setCoord] = useState(null);
+  const [radius, setRadius] = useState(undefined);
+  const [msg, setMsg] = useState('');
+
+  const ClickPick = () => {
+    useMapEvents({
+      click(e) {
+        if (e !== undefined) {
+          setCoord(e.latlng);
+        }
+      }
+    })
+
+    return (
+      <>
+        {coord !== null &&
+          <Marker position={{ lat: coord.lat, lng: coord.lng }}>
+            <Popup>
+              You selected this point <br /> Click on another place to change it.
+            </Popup>
+          </Marker>
+        }
+      </>
+    )
+  }
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    console.log("Radius " + radius + "\nCoord: " + coord);
+    if (coord === null) {
+      setMsg("You did not selected any point!");
+    } else if(radius === undefined) {
+      setMsg("You did not select a distance!");
+    } else {
+      setMsg('');
+      //API.getNearHikes(radius, coord);
+    }
+  }
+
+
+  return (
+    <>
+      <Form onSubmit={handleSubmit}>
+        <Form.Group className="mb-3" controlId="formLength">
+          <Form.Label>Geographical filter</Form.Label>
           <Col>
             <InputGroup>
               <Form.Control
-                placeholder="Distance"
+                placeholder="Radius"
                 onChange={(event) => {
-                  setMinDist(event.target.value)
+                  setRadius(event.target.value);
                 }}
               />
               <InputGroup.Text id="basic-addon2">km</InputGroup.Text>
             </InputGroup>
             <Form.Text className="text-muted">
-              Min dist.
+              Distance from selected point
             </Form.Text>
           </Col>
-          <Col>
-            <InputGroup>
-              <Form.Control
-                placeholder="Distance"
-                onChange={(event) => {
-                  setMaxDist(event.target.value)
-                }}
-              />
-              <InputGroup.Text id="basic-addon2">km</InputGroup.Text>
-            </InputGroup>
-            <Form.Text className="text-muted">
-              Max dist.
-            </Form.Text>
-          </Col>
-        </Row>
-      </Form.Group>
+        </Form.Group>
 
-      <Form.Group className="mb-3" controlId="formAscent">
-        <Form.Label>Ascent filter</Form.Label>
+        <Form.Group>
+          <MapContainer center={{ lat: 45.063128, lng: 7.661272 }} zoom={8} scrollWheelZoom style={{ height: 250 + "px", width: "100%", }}>
+            <ClickPick />
+            <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
+          </MapContainer>
+        </Form.Group>
+
+        <br />
+
+        {msg &&
+          <Alert variant="danger" onClose={() => setMsg('')} dismissible>
+            {msg}
+          </Alert>
+        }
+
         <Row>
           <Col>
-            <InputGroup>
-              <Form.Control
-                placeholder="Ascent"
-                onChange={(event) => {
-                  setMinAscent(event.target.value)
-                }}
-              />
-              <InputGroup.Text id="basic-addon2">m</InputGroup.Text>
-            </InputGroup>
-            <Form.Text className="text-muted">
-              Min asc.
-            </Form.Text>
+            <Button variant="primary" type="submit">
+              Submit
+            </Button>
           </Col>
           <Col>
-            <InputGroup>
-              <Form.Control
-                placeholder="Ascent"
-                onChange={(event) => {
-                  setMaxAscent(event.target.value)
-                }}
-              />
-              <InputGroup.Text id="basic-addon2">m</InputGroup.Text>
-            </InputGroup>
-            <Form.Text className="text-muted">
-              Max asc.
-            </Form.Text>
+            <Button variant="primary" type="reset" /*onClick={}*/>
+              Reset
+            </Button>
           </Col>
         </Row>
-      </Form.Group>
 
-      <Form.Group className="mb-3" controlId="formExpectedTime">
-        <Form.Label>Expected Time filter</Form.Label>
-        <Row>
-          <Col>
-            <InputGroup>
-              <Form.Control
-                placeholder="Time"
-                onChange={(event) => {
-                  setMinExTime(event.target.value)
-                }}
-              />
-              <InputGroup.Text id="basic-addon2">mins</InputGroup.Text>
-            </InputGroup>
-            <Form.Text className="text-muted">
-              Min Time.
-            </Form.Text>
-          </Col>
-          <Col>
-            <InputGroup>
-              <Form.Control
-                placeholder="Time"
-                onChange={(event) => {
-                  setMaxExTime(event.target.value)
-                }}
-              />
-              <InputGroup.Text id="basic-addon2">mins</InputGroup.Text>
-            </InputGroup>
-            <Form.Text className="text-muted">
-              Max Time.
-            </Form.Text>
-          </Col>
-        </Row>
-      </Form.Group>
+      </Form>
 
-      <Row>
-        <Col>
-          <Button variant="primary" type="submit">
-            Submit
-          </Button>
-        </Col>
-        <Col>
-          <Button variant="primary" type="reset" onClick={handleReset}>
-            Reset
-          </Button>
-        </Col>
-      </Row>
-    </Form>
+      <br />
+    </>
   );
 }
 

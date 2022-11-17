@@ -11,8 +11,6 @@ function HikeList(props) {
           <th>Ascent (m)</th>
           <th>Difficulty</th>
           <th>Expected time (mm)</th>
-          <th>Start</th>
-          <th>End</th>
           <th></th>
         </tr>
       </thead>
@@ -39,8 +37,6 @@ function HikeElement(props) {
       <td>{hike.Ascent}</td>
       <td>{hike.Difficulty}</td>
       <td>{hike.ExpectedTime}</td>
-      <td>{hike.start}</td>
-      <td>{hike.end}</td>
       <td>
         <Button onClick={() => navigate("/" + hike.HikeId)} >Details</Button>
       </td>
