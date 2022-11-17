@@ -288,11 +288,11 @@ app.get('/sessions/current', (req, res) => {
 // creates a new user's account
 app.post('/sessions/new', async (req, res) => {
   try {
-    const hash = req.param.hash;
-    const salt = req.param.salt;
-    const email = req.param.email;
-    const role = req.param.role;
-    const result = await users.register(hash, salt, email, role);
+    const Hash = req.body.Hash;
+    const Salt = req.body.Salt;
+    const Id = req.body.Id;
+    const Role = req.body.Role;
+    const result = await users.register(Hash, Salt, Id, Role);
     return res.status(200).json(result);
   } catch (err) {
     return res.status(500).json(err);

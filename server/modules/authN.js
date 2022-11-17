@@ -1,6 +1,7 @@
 'use strict';
 const db = require('./DB').db;
 const crypto = require('crypto');
+var bcrypt = require('bcrypt');
 
 exports.checkCredentials = (Id, password) => {
     return new Promise((resolve, reject) => {
@@ -9,17 +10,12 @@ exports.checkCredentials = (Id, password) => {
         if (err) { reject(err); }
         else if (row === undefined) { resolve(false); }
         else {
-          const user = {Id: row.Id, role: row.role};
-          const salt = row.salt;
-          crypto.scrypt(password, salt, 32, (err, hashedPassword) => {
-            if (err) reject(err);
-          
-            const passwordHex = Buffer.from(row.Hash, 'hex');
-            
-            if(!crypto.timingSafeEqual(passwordHex, hashedPassword))
-              resolve(false);
-            else resolve(user); 
-          });
+          const user = {Id: row.Id, Role: row.Role};
+          const Hash = row.Hash;
+          bcrypt.compare(password, Hash, function(err, result) {
+            if(err) resolve(err);
+            if(result == true) resolve(user);  
+        });
         }
       });
     });
@@ -34,7 +30,7 @@ exports.getUserbyId = (id) => {
           else if (row === undefined)
             resolve({error: 'User not found.'});
           else {
-            const user = {Id: row.Id, role: row.role}
+            const user = {Id: row.Id, role: row.Role}
             resolve(user);
           }
       });

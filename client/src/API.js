@@ -170,13 +170,12 @@ async function getUserInfo() {
 
 async function register(credentials) {
   const response = await fetch((APIURL + '/sessions/new'), {
-    credentials: 'include',
     method: 'POST',
     body: JSON.stringify({
-      'hash': credentials.hash,
-      'salt': credentials.salt,
-      'email': credentials.email,
-      'role': credentials.role
+      'Hash': credentials.Hash,
+      'Salt': credentials.Salt,
+      'Id': credentials.email,
+      'Role': credentials.Role
     }),
     headers: {
       'Content-Type': 'application/json',

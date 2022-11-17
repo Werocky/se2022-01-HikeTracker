@@ -30,10 +30,10 @@ exports.populateUsers =()=>{
     });
 }
 
-exports.register=(hash, salt, email, role)=>{
+exports.register=(Hash, Salt, Id, Role)=>{
     return new Promise( async (resolve, reject) => {
-        const sql = "INSERT INTO Users (Hash, salt, Id, role) VALUES(?, ?, ?, ?)";
-        db.run(sql, [hash, salt, email, role], function(err){
+        const sql = "INSERT INTO Users (Hash, Salt, Id, Role) VALUES(?, ?, ?, ?)";
+        db.run(sql, [Hash, Salt, Id, Role], function(err){
             if(err)
                 reject(err);
             else

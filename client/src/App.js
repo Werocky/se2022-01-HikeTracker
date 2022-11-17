@@ -35,7 +35,7 @@ function App() {
   };
 
   const register = async (credentials) => {
-    await API.register(credentials.hash, credentials.salt, credentials.email, credentials.role)
+    await API.register(credentials.email, credentials.Role, credentials.Salt, credentials.Hash)
   }
 
   useEffect(() => {   // check login     
