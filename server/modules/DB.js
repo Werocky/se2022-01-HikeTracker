@@ -78,7 +78,11 @@ class DatabaseConnection {
         const locations =require ("./HikeLocations");
         const hikes =require("./Hikes");
         const fileLocation= require("./FileNames");
-        
+        const Users =require("./Users");
+
+        await Users.emptyUsers()
+        await Users.populateUsers();
+
         await hikes.deleteHikes();
         await locations.emptyLocations();
         await fileLocation.emptyConnection();
@@ -470,7 +474,7 @@ class DatabaseConnection {
       
     
 
-    static wrapperPopulate =async (HikeID,file,province,city,title,length,expTime,Ascent,Description,Difficulty,start,end)=>{
+    static  wrapperPopulate =async (HikeID,file,province,city,title,length,expTime,Ascent,Description,Difficulty,start,end)=>{
         let path="./gpx/"+file;
         const locations =require ("./HikeLocations");
         const hikes =require("./Hikes");
