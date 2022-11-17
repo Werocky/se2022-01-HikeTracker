@@ -470,6 +470,35 @@ class DatabaseConnection {
       this.wrapperPopulate(HikeID,file,province,city,title,length,expTime,Ascent,Description,Difficulty,start,end);
 
 
+      HikeID='15';
+      title="Sentiero per il RIFUGIO WILLY JERVIS | 1732 m slm";
+      province='Piemonte';
+      city ='CIASPOLATE'; 
+      Ascent=507;
+      start="Villanova – Bobbio Pellice (TO) / 1225 m circa";
+      end="Rifugio Willy Jervis / 1732 m circa"
+      length=8;
+      Difficulty="H";
+      expTime=100; 
+      file="willy jervis.gpx"    
+      Description="Bella escursione in ambiente, quello dell’alta val Pellice, molto eterogeneo e a tratti spettacolare. Il sentiero parte dalla borgata Villanova, edificata accanto a una bella cascata."
+
+      +"Il percorso è sempre ben segnalato (a meno che non prendiate il più avventuroso percorso alternativo, dall’altra parte del torrente)."
+      
+      +"La prima parte del sentiero è su mulattiera  e guadagna quota abbastanza rapidamente fino a intersecare la pista carrozzabile, dopo ca. 30 minuti di cammino."
+      
+      +"Da qui la pendenza si addolcisce, fino ad arrivare alla spettacolare cascata del Pis."
+      
+      +"Non potrete fare a meno di fermarvi ad ammirarla e, se siete in estate, avvicinarvi per godere della frescura."
+      
+      +"Da qui in avanti potete tranquillamente seguire la carrozzabile fino alla Conca del Pra’; volendo, sono presenti diversi sentieri che tagliano vari tornanti, ma li sconsiglio con presenza di neve perché un po’ rischiosi."
+      
+      +"La conca del Pra, idilliaca in estate e incantevole in inverno, è ulteriore partenza per stupende escursioni: salendo verso sud, al fondo della conca ci troveremo al cospetto del Monviso."
+      
+      +"Verso Ovest le creste che rappresentano il confine francese con il colle della Croce; verso est, il sentiero per il rifugio Barant, (a ca. 1.45h) e Rifugio Barbara Lowrie (a ca. 3 h)"
+
+      this.wrapperPopulate(HikeID,file,province,city,title,length,expTime,Ascent,Description,Difficulty,start,end);
+
     }
       
     
