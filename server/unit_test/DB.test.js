@@ -6,7 +6,7 @@ const totalEntries= 4;
 
 beforeAll(async()=>{
     await db.createConnection();
-    await db.populateHikes();
+    await db.populate();
 })
 describe("Get/add HikeLocations",()=>{
   

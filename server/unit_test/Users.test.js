@@ -9,6 +9,7 @@ beforeAll(async() =>{
 )
 afterAll(async()=>{
    await Users.emptyUsers();
+   await db.populate();
    
 })
 

@@ -11,6 +11,7 @@ beforeAll(async() =>{
 )
 afterAll(async()=>{
    await hikes.deleteHikes();
+   await db.populate();
    await new Promise(process.nextTick);
 
 })

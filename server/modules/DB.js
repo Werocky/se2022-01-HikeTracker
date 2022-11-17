@@ -73,7 +73,7 @@ class DatabaseConnection {
         });
     }
 
-    static populateHikes= async ()=>{
+    static populate= async ()=>{
 
         const locations =require ("./HikeLocations");
         const hikes =require("./Hikes");
@@ -469,7 +469,7 @@ class DatabaseConnection {
 
       this.wrapperPopulate(HikeID,file,province,city,title,length,expTime,Ascent,Description,Difficulty,start,end);
 
-        
+
     }
       
     

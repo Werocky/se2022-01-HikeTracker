@@ -8,6 +8,7 @@ beforeAll(async() =>{
 )
 afterAll(async()=>{
    await HL.emptyLocations();
+   await db.populate();
    
 })
 
