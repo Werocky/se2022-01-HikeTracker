@@ -135,8 +135,10 @@ All files         |   80.45 |    60.65 |   90.76 |   81.59 |
  Users.js         |   82.75 |       50 |     100 |   82.75 | 11-12,25,38,49
 
 - E2E testing:
-  - Total hours estimated
-  - Total hours spent
+  - Total hours estimated:
+    - 4h
+  - Total hours spent:
+    - 5h
 
 - Code review 
   - Total hours estimated:
