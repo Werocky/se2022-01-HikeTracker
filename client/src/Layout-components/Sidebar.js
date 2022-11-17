@@ -29,7 +29,7 @@ function Sidebar(props) {
     const t_minDist = minDist;
     const t_maxDist = maxDist;
     const t_difficulty = difficulty;
-    handleReset();
+    //handleReset();
     //console.log(city+"\n"+province+"\n"+difficulty+"\n"+minDist+"\n"+maxDist+"\n"+minAscent+"\n"+maxAscent+"\n"+minExTime+"\n"+maxExTime);
     // call the API and pass all the filter params
     API.getFilteredHikes(t_minExTime, t_maxExTime, t_minAscent, t_maxAscent, t_province, t_city, t_minDist, t_maxDist, t_difficulty).then(array => props.setHikes(array));

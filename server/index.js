@@ -151,7 +151,7 @@ app.post('/getFilteredHikes', async (req, res) => {
 
   let filters = req.body;
   let list = [];
-
+  console.log(filters);
   if (checkFiltersPresence(filters) === false) {
     list = await hikes.getHikes();
   }
