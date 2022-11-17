@@ -254,12 +254,60 @@ class DatabaseConnection {
  
         this.wrapperPopulate(HikeID,file,province,city,title,length,expTime,Ascent,Description,Difficulty,start,end);
 
+        
+        HikeID='8';
+        title="Sentiero per il CANALE DI MARIA BONA | 1350 m slm";
+        province='Piemonte';
+        city ='Val di Susa'; 
+        Ascent=200;
+        start="Pian d’le Ruine, Giaglione (TO) / 1060 m circa";
+        end="Canale di Maria Bona / 1350 m circa";
+        length=4.5;
+        Difficulty="H";
+        expTime=105; 
+        file="CANALE+di+MARIA+BONA++e+fondo+Val+Clarea.gpx"    
+        Description="Sempre al lato Dx della strada provinciale, reperire l’evidente inizio sentiero, il Sentiero Balcone (S.B)n.820B che, transitando tra baite e case in rovina si snoda sinuoso alternativamente fra ombrose boscaglie di acacie e le verticali pareti granitiche della Gran Rotsa (rinomata e agevole palestra di roccia), fiancheggiando sempre il gorgogliante Canale di Maria Bona."
+            +"Il Canale, che prende l’acqua dalle prese poste nel cuore della Val Clarea a 1100, presso le Grange Buttigliera, deve il suo nome al quello di una nobildonna Giaglionese, già moglie del Signore Feudatario locale, tale Andrea Aschier de Jalliono quale contributrice dei fondi che hanno potuto dare inizio ai lavori, è stato interamente scavato nella roccia viva, dalla popolazione giaglionese, terminandolo nella metà del xv° secolo da progetti iniziati fine dal 1200."
+            +"Da tale opera di artigianale “ingegneria idraulica”, la popolazione, ebbe grande fioritura, sulla montagna, attività e sviluppo, potendo provvedervi all’irrigazione e coltura delle campagne fino ad allora impossibile se non incanalando i ruscelli di scioglimento stagionale, limitati a inizio primavera."
+            +"Proseguendo lungo il rilassante percorso, sempre reso pulito e sicuro, non mancando gli scorci panoramici in alto, sul prospiciente Vallone di Tiraculo o la Cima Arià e in basso, talvolta su strapiombi di oltre 200 metri, attraverso ombrosi boschi o esposti al sole si arriva alle “prese” ove il Canale attinge le acque, nella località di Grange Buttigiera al termine del Sentiero 820b."
+            +"Posta nel fondo piano del vallone, la frazione risulta bella e interessante da esplorare, specie in estate quando il Campo Suola e le bergerie sono aperte."
+            +"Riprendendo la carrareccia in salita si attravesano diverse pittoresche frazioncine, alcune con deliziose baite ristrutturate con gusto, altre in posizioni pazzescamente “ardite”, come a ridosso di roccioni al centro del letto fluviale!"
+            +"Attraversati i villaggi di Moraretto, S.Giacomo e di Pietraporchera, presso cui ammirare i resti delle abitazioni, spesso inglobate nelle essenze arboree d’intorno e le strutture murarie operate dall’uomo nei secoli scorsi, ci si inoltra nel bosco vero e proprio dove, terminata la carrareccia, trae inizio il sentiero 805 S.B. che porta al Colle Clapier inerpicandosi nelle suggestive serpentine."
+            +"Il luogo di gita, incassato nello stretto vallone, e’ dimora di molte specie animali e non e’ raro assistere, in base alla stagione,alle evoluzioni di corvidi e grandi rapaci, inoltre, il greto del torrente Clarea e’ riferimento di abbeveraggio di numerosi ungulati di montagna."
+            +"Percorso di ritorno, in 1 ora circa, uguale a quello di andata."
+       this.wrapperPopulate(HikeID,file,province,city,title,length,expTime,Ascent,Description,Difficulty,start,end);
+    
+       HikeID='9';
+       title="Sentiero per il RIFUGIO I RE MAGI | 1770 m slm";
+       province='Piemonte';
+       city ='CIASPOLATE'; 
+       Ascent=345;
+       start="Pian del Colle – Bardonecchia (TO) / 1430 m circa";
+       end="Rifugio I Re Magi – Grange di Valle Stretta (FR) / 1770 m circa"
+       length=11;
+       Difficulty="T";
+       expTime=135; 
+       file="rifugio re magi.gpx"    
+       Description="Lascia l’auto in uno dei comodi e ampi parcheggi subito dopo il camping Pian del Colle."
+            +"A quel punto torna indietro per un tratto e imbocca il sentiero che trovi appena prima il camping. Troverai dei cartelli indicanti Grange Valle Stretta (anche detta Vallèe Etroite)."    
+            +"Passerai tra gli alberi fino a costeggiare un piccolo lago artificiale, e nelle vicinanze troverai una biforcazione."    
+            +"Prosegui dritto e rimani sull’evidente traccia sulla neve. In breve raggiungerai un ponte molto suggestivo, che ti regalerà una splendida vista sull’intera vallata." 
+            +"A questo punto attraversa il ponte ricongiungedoti dall’altro lato (puoi anche decidere di percorrere il sentiero parallelo andando dritto, ma te lo sconsiglio in inverno perché potrebbe essere inagibile causa slavine)." 
+            +"Continua sul sentiero, fino a sbucare sullo stradone sterrato (ricoperto di neve in inverno). A questo punto, non ti resta che proseguire sullo stradone (tagliando i curvoni di tanto in tanto, se preferisci)."    
+            +"Troverai tanti cartelli e segnavia bianco-rossi lungo il percorso."    
+            +"In un paio d’ore raggiungerai Grange di Valle Stretta, costeggiando il rio, fino a raggiungere la fine del Sentiero per il Rifugio I Re Magi."    
+            +"Purtroppo noi abbiamo trovato il rifugio chiuso, non so se perché era un giorno infrasettimanale oppure a causa dell’emergenza sanitaria."
+      this.wrapperPopulate(HikeID,file,province,city,title,length,expTime,Ascent,Description,Difficulty,start,end);
+       
+    
+    
+    
     }
       
     
 
     static wrapperPopulate =async (HikeID,file,province,city,title,length,expTime,Ascent,Description,Difficulty,start,end)=>{
-        let path="../gpx/"+file;
+        let path="./gpx/"+file;
         const locations =require ("./HikeLocations");
         const hikes =require("./Hikes");
         const fileLocation= require("./FileNames");
