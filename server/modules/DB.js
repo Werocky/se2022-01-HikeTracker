@@ -73,12 +73,16 @@ class DatabaseConnection {
         });
     }
 
-    static populateHikes= async ()=>{
+    static populate= async ()=>{
 
         const locations =require ("./HikeLocations");
         const hikes =require("./Hikes");
         const fileLocation= require("./FileNames");
-        
+        const Users =require("./Users");
+
+        await Users.emptyUsers()
+        await Users.populateUsers();
+
         await hikes.deleteHikes();
         await locations.emptyLocations();
         await fileLocation.emptyConnection();
@@ -254,12 +258,224 @@ class DatabaseConnection {
  
         this.wrapperPopulate(HikeID,file,province,city,title,length,expTime,Ascent,Description,Difficulty,start,end);
 
+        
+        HikeID='8';
+        title="Sentiero per il CANALE DI MARIA BONA | 1350 m slm";
+        province='Piemonte';
+        city ='Val di Susa'; 
+        Ascent=200;
+        start="Pian d’le Ruine, Giaglione (TO) / 1060 m circa";
+        end="Canale di Maria Bona / 1350 m circa";
+        length=4.5;
+        Difficulty="H";
+        expTime=105; 
+        file="CANALE+di+MARIA+BONA++e+fondo+Val+Clarea.gpx"    
+        Description="Sempre al lato Dx della strada provinciale, reperire l’evidente inizio sentiero, il Sentiero Balcone (S.B)n.820B che, transitando tra baite e case in rovina si snoda sinuoso alternativamente fra ombrose boscaglie di acacie e le verticali pareti granitiche della Gran Rotsa (rinomata e agevole palestra di roccia), fiancheggiando sempre il gorgogliante Canale di Maria Bona."
+            +"Il Canale, che prende l’acqua dalle prese poste nel cuore della Val Clarea a 1100, presso le Grange Buttigliera, deve il suo nome al quello di una nobildonna Giaglionese, già moglie del Signore Feudatario locale, tale Andrea Aschier de Jalliono quale contributrice dei fondi che hanno potuto dare inizio ai lavori, è stato interamente scavato nella roccia viva, dalla popolazione giaglionese, terminandolo nella metà del xv° secolo da progetti iniziati fine dal 1200."
+            +"Da tale opera di artigianale “ingegneria idraulica”, la popolazione, ebbe grande fioritura, sulla montagna, attività e sviluppo, potendo provvedervi all’irrigazione e coltura delle campagne fino ad allora impossibile se non incanalando i ruscelli di scioglimento stagionale, limitati a inizio primavera."
+            +"Proseguendo lungo il rilassante percorso, sempre reso pulito e sicuro, non mancando gli scorci panoramici in alto, sul prospiciente Vallone di Tiraculo o la Cima Arià e in basso, talvolta su strapiombi di oltre 200 metri, attraverso ombrosi boschi o esposti al sole si arriva alle “prese” ove il Canale attinge le acque, nella località di Grange Buttigiera al termine del Sentiero 820b."
+            +"Posta nel fondo piano del vallone, la frazione risulta bella e interessante da esplorare, specie in estate quando il Campo Suola e le bergerie sono aperte."
+            +"Riprendendo la carrareccia in salita si attravesano diverse pittoresche frazioncine, alcune con deliziose baite ristrutturate con gusto, altre in posizioni pazzescamente “ardite”, come a ridosso di roccioni al centro del letto fluviale!"
+            +"Attraversati i villaggi di Moraretto, S.Giacomo e di Pietraporchera, presso cui ammirare i resti delle abitazioni, spesso inglobate nelle essenze arboree d’intorno e le strutture murarie operate dall’uomo nei secoli scorsi, ci si inoltra nel bosco vero e proprio dove, terminata la carrareccia, trae inizio il sentiero 805 S.B. che porta al Colle Clapier inerpicandosi nelle suggestive serpentine."
+            +"Il luogo di gita, incassato nello stretto vallone, e’ dimora di molte specie animali e non e’ raro assistere, in base alla stagione,alle evoluzioni di corvidi e grandi rapaci, inoltre, il greto del torrente Clarea e’ riferimento di abbeveraggio di numerosi ungulati di montagna."
+            +"Percorso di ritorno, in 1 ora circa, uguale a quello di andata."
+       this.wrapperPopulate(HikeID,file,province,city,title,length,expTime,Ascent,Description,Difficulty,start,end);
+    
+       HikeID='9';
+       title="Sentiero per il RIFUGIO I RE MAGI | 1770 m slm";
+       province='Piemonte';
+       city ='CIASPOLATE'; 
+       Ascent=345;
+       start="Pian del Colle – Bardonecchia (TO) / 1430 m circa";
+       end="Rifugio I Re Magi – Grange di Valle Stretta (FR) / 1770 m circa"
+       length=11;
+       Difficulty="T";
+       expTime=135; 
+       file="rifugio re magi.gpx"    
+       Description="Lascia l’auto in uno dei comodi e ampi parcheggi subito dopo il camping Pian del Colle."
+            +"A quel punto torna indietro per un tratto e imbocca il sentiero che trovi appena prima il camping. Troverai dei cartelli indicanti Grange Valle Stretta (anche detta Vallèe Etroite)."    
+            +"Passerai tra gli alberi fino a costeggiare un piccolo lago artificiale, e nelle vicinanze troverai una biforcazione."    
+            +"Prosegui dritto e rimani sull’evidente traccia sulla neve. In breve raggiungerai un ponte molto suggestivo, che ti regalerà una splendida vista sull’intera vallata." 
+            +"A questo punto attraversa il ponte ricongiungedoti dall’altro lato (puoi anche decidere di percorrere il sentiero parallelo andando dritto, ma te lo sconsiglio in inverno perché potrebbe essere inagibile causa slavine)." 
+            +"Continua sul sentiero, fino a sbucare sullo stradone sterrato (ricoperto di neve in inverno). A questo punto, non ti resta che proseguire sullo stradone (tagliando i curvoni di tanto in tanto, se preferisci)."    
+            +"Troverai tanti cartelli e segnavia bianco-rossi lungo il percorso."    
+            +"In un paio d’ore raggiungerai Grange di Valle Stretta, costeggiando il rio, fino a raggiungere la fine del Sentiero per il Rifugio I Re Magi."    
+            +"Purtroppo noi abbiamo trovato il rifugio chiuso, non so se perché era un giorno infrasettimanale oppure a causa dell’emergenza sanitaria."
+      this.wrapperPopulate(HikeID,file,province,city,title,length,expTime,Ascent,Description,Difficulty,start,end);
+       
+      HikeID='10';
+      title="Sentiero per CIMA BOSSOLA da INVERSO | 1510 m slm";
+      province='Piemonte';
+      city ='CIASPOLATE'; 
+      Ascent=435;
+      start="Inverso – Vico Canavese (TO) / 1074 m circa";
+      end="Cima Bossola / 1510 m circa"
+      length=6;
+      Difficulty="H";
+      expTime=75; 
+      file="cima bossola.gpx"    
+      Description="LLascia l’auto nell’ampio spiazzo al casotto Cima Bossola, che puoi raggiungere proseguendo per qualche km sulla piccola strada che sale da Inverso."
+
+      +"Troverai i cartelli indicanti il Colletto Bossola, che si raggiunge poco dopo la Cima."
+      
+      +"Il percorso inizia su uno stradone ben evidente e taglia su una dorsale di media pendenza."
+      
+      +"In inverno questo tratto è un po’ faticoso, bisogna valutare bene le condizioni neve e soprattutto avere l’attrezzatura adatta (ciaspole, bastoncini, ramponcini)."
+      
+      +"È anche possibile proseguire sullo stradone, allungando leggermente il sentiero ma rendendo la salita più semplice."
+      
+      +"Una volta scollinato, si può decidere anche in questo caso se proseguire sullo stradone oppure se tagliare nuovamente la dorsale."
+      
+      +"Proseguendo sullo stradone è possibile raggiungere le splendide e scenografiche Case Bossola, un luogo perfetto anche per una piccola pausa."
+      
+      +"Da Case Bossola si può ammirare un panorama davvero spettacolare sul Monviso, sul Monte Calvo, sul Lago di Viverone e sulla Serra morenica di Ivrea."
+      
+      +"A questo punto manca l’ultimo spunto in salita, per poi raggiungere la suggestiva croce incorniciata dalle montagne circostanti, che segna la fine del sentiero per Cima Bossola."
+      
+      +"Puoi decidere se proseguire un pezzo fino al Colletto Bossola."
+      
+      this.wrapperPopulate(HikeID,file,province,city,title,length,expTime,Ascent,Description,Difficulty,start,end);
+        
+
+      HikeID='11';
+      title="Sentiero per il RIFUGIO MEIRA GARNERI da SAMPEYRE";
+      province='Piemonte';
+      city ='CIASPOLATE'; 
+      Ascent=850;
+      start="Sampeyre (CN) / 1000 m circa";
+      end="Rifugio Meira Garneri / 1850 m circa"
+      length=8.5;
+      Difficulty="H";
+      expTime=120; 
+      file="Rifugio Meira Garneri da Sampeyre.gpx"    
+      Description="Lascia l’auto nel parcheggio della seggiovia di Sampeyre."
+
+        +"Lasciato il parcheggio saliamo subito a destra degli impianti di risalita, dove alcuni cartelli rossi ci segnalano il sentiero attraverso il bosco."
+
+        +"Prendendo rapidamente quota, alla fine del primo tratto di boscoso, raggiungiamo la frazione Sodani dove possiamo osservare la bella chiesa affrescata."
+
+        +"Usciti dalla borgata proseguiamo nuovamente lungo il sentiero circondati da larici, faggi, betulle e dopo alcune deviazione, sempre ben segnalate, usciamo in una splendida radura."
+
+        +"Saliamo gli ultimi 200m a lato della pista o volendo possiamo proseguire più a destra incrociando la strada carrozzabile che nel periodo estivo porta al rifugio."
+
+        +"Il ritorno è sullo stesso sentiero dell’andata."
+
+        +"In alternativa al sentiero nel bosco sopra descritto è possibile raggiungere il Rifugio Meira Garneri salendo direttamente la ripida pista da sci."
+
+        +"Essendo molto larga e sempre costeggiata da vegetazione non si da fastidio agli sciatori, ed è facile trovare una traccia precedentemente battuta da seguire."
+
+      this.wrapperPopulate(HikeID,file,province,city,title,length,expTime,Ascent,Description,Difficulty,start,end);
+        
+      HikeID='12';
+      title="Sentiero per il RIFUGIO FONTANA MURA | 1726 m slm";
+      province='Piemonte';
+      city ='CIASPOLATE'; 
+      Ascent=766;
+      start="Pian Neiretto (TO) / 1027 m circa";
+      end="Rifugio Fontana Mura / 1726 m circa"
+      length=13;
+      Difficulty="H";
+      expTime=150; 
+      file="Rifugio Fontana Mura Ciaspole.gpx"    
+      Description="Una volta parcheggiata la macchina, si imbocca subito la strada agro silvo pastorale dove sono presenti diverse indicazioni per il rifugio."+
+        "L’itinerario infatti si sviluppa prevalentemente su questa strada che in inverno è ricoperta di neve."+
+        "Subito dopo la partenza è presente la Fontana del Biutun, una bella fontana dove è possibile fare scorta di acqua. Il sentiero procede con alcuni saliscendi ma senza pendenze troppo marcate."+
+        "Il dislivello infatti si accumula poco alla volta rendendo molto piacevole la camminata in mezzo al bosco."+
+        "Il percorso costeggia il letto del torrente Sangone e lungo il tragitto sono presenti diversi rigagnoli che “interrompono” il manto nevoso."+
+        "Dopo circa 2Km dalla partenza proprio il torrente Sangone ci regala una fantastica cascata: infatti con una piccola deviazione si raggiunge la Loja Scura dove nelle immediate vicinanze sono presenti dei tavoli da picnic."+
+        "Proseguendo lungo la strada sempre ben battuta si arriva ad un bivio: andando dritti si segue l’itinerario per il Rifugio Fontana Mura, mentre svoltando a sinistra ci si dirige verso la Palazzina Sertorio."+
+        "La deviazione per quest’ultima è vivamente consigliata in quanto è corta e racconta, tramite diversi cartelli informativi, un pezzo importate della nostra storia partigiana."+
+        "Lungo il percorso è anche presente una statua raffigurante Liborio Ilardi, sentinella Partigiana."+
+        "Ripresa la strada “principale” ci ritroviamo davanti un ampio vallone con incastonato nella neve il Rifugio."+
+        "A questo punto sono possibili due vie per raggiungerlo: si può continuare a seguire la strada sterrata oppure il sentiero estivo che prosegue proprio al centro della vallata."+
+        "Con le ciaspole è consigliabile proseguire per la strada che, seppur più lunga come tragitto, garantisce una minore pendenza e regala degli splendidi paesaggi."+
+        "Lungo la sterrata si arriva agli Alpeggi Sellery inferiori e poco dopo a un piccolo colle dove è presente un’altra interessante deviazione: seguendo una corta cresta infatti, si raggiungono i resti del Forte di San Moritio."+
+        "Ritornando sui propri passi si riprende la strada e in poco tempo si raggiunge la fine del Sentiero per il Rifugio Fontana Mura."+
+        "Ci troviamo proprio sotto il Colle della Roussa e da qui si può godere di uno splendido panorama sulla sottostante Val Sangone."+
+        "Il ritorno si svolge sul medesimo tracciato di andata, evitando le varie deviazioni se già effettuate in precedenza."
+
+      this.wrapperPopulate(HikeID,file,province,city,title,length,expTime,Ascent,Description,Difficulty,start,end);
+        
+      HikeID='13';
+      title="Sentiero per il RIFUGIO SELLERIES – 2023 m";
+      province='Piemonte';
+      city ='CIASPOLATE'; 
+      Ascent=476;
+      start="Pracatinat – Fenestrelle (TO) / 1700 m circa";
+      end="Rifugio Selleries / 2023 m circa"
+      length=14.5;
+      Difficulty="H";
+      expTime=150; 
+      file="Rif. Selleries.gpx"    
+      Description="Si prosegue quindi a piedi sulla strada principale, che dopo due tornanti e circa 2Km presenta un bivio, a cui si svolta a destra seguendo le indicazioni per il Rifugio Selleries."+
+
+      "La strada, sempre molto ampia e battuta dal gatto delle nevi dei gestori del rifugio in inverno, sale con pendenza costante non troppo impegnativa in mezzo al bosco, quando a quota circa 1780m e 2.5Km dalla partenza la salita spiana e il paesaggio si apre con grandi prati, siamo giunti nella località Pra Catinat e davanti a noi si stagliano le cime del gruppo dell’Orsiera che ospitano l’omonimo Parco Naturale."+
+      
+      "Si prosegue sempre dritto sulla strada principale attraversando i prati e ignorando una deviazione sulla destra che conduce a una malga. Da qui l’itinerario riprende in salita decisa e costante con piena esposizione a Sud e un lungo mezzacosta nel bosco di larici fino a quota di circa 2100m."+
+      
+      "La strada curva a sinistra per attraversare una grande conca naturale, scendiamo leggermente di quota e il bosco cede il passo ai prati e pascoli."+
+      
+      "Attraversata la conca e superato il vicino crinale con una pendenza ormai prossima al piano, si giunge alla valle in cui sorge il Rifugio Selleries a quota di circa 2000m."+
+      
+      "Il rifugio è punto di arrivo in inverno, ma d’estate può essere punto di partenza, in quanto è possibile arrivarci in auto, e proseguire per altri itinerari nel Parco dell’Orsiera."+
+      
+      "D’altra parte la salita a piedi d’estate da Pra Catinat può perdere parte del suo fascino proprio per il traffico veicolare, a tratti eccessivo specie nel weekend. Il ritorno è previsto sullo stesso percorso dell’andata."
+      
+      this.wrapperPopulate(HikeID,file,province,city,title,length,expTime,Ascent,Description,Difficulty,start,end);
+        
+      HikeID='14';
+      title="Sentiero per il LAGO DI MALCIAUSSIA | 1800 m slm";
+      province='Piemonte';
+      city ='CIASPOLATE'; 
+      Ascent=500;
+      start="Margone – Usseglio (TO) / 1400 m circa";
+      end="Lago di Malciaussia / 1810 m circa"
+      length=9;
+      Difficulty="H";
+      expTime=150; 
+      file="Lago Malciaussias.gpx"    
+      Description="Calza subito le ciaspole (o i ramponcini, in base allo stato della neve) e prosegui lungo la strada innevata che in estate è percorribile in auto fino al lago."+
+
+      "Il sentiero inizia con una leggera pendenza con salita costante, ma è decisamente semplice da seguire."+
+      
+      "Basta continuare seguendo la traccia dei numerosi escursionisti che ogni anno si avventurano in questo percorso."+
+      
+      "All’altezza dei curvoni, spesso avrai la possibilità di tagliare, proseguendo lungo le tracce che avanzano sicure sui pendii."+
+      
+      "Dopo circa un km avrai già modo di ammirare lo splendido panorama che si apre sulle montagne circostanti."+
+      
+      "Prosegui sulla strada e goditi il panorama, finché non ti imbatti in due grotte che oggi vengono utilizzate come deposito."+
+      
+      "All’interno delle grotte è possibile fare delle belle foto, ma la vera attrazione si trova nella seconda grotta che, infatti, contiene una vecchia autovettura abbandonata da chissà quanti anni."+
+      
+      "ATTENZIONE: per visitare le grotte bisogna avere una torcia con sé."+
+      
+      "A questo punto la diga è ormai ben visibile davanti a te e segnerà la fine del sentiero per il lago di Malciaussia."+
+      
+      "Qui avrai la possibilità di ammirare il Monte Lera, il Rocciamelone, e il Colle dell’Autaret, raggiungibile tramite un sentiero che parte dall’altro lato del lago."+
+      
+      "Fai molta attenzione nell’ultimo km di strada verso il lago, perché in alcuni tratti, nel periodo invernale, si verificano delle slavine che rendono il passaggio più difficile e in alcune occasioni anche un po’ pericoloso, se non si ha l’attrezzatura adeguata e un po’ di conoscenza della neve."+
+      
+      "Sebbene sia una passeggiata percorribile anche in estate, la sconsiglio quando la strada è aperta alle auto perché potrebbe rivelarsi un po’ pericolosa."+
+      
+      "È possibile durante la bella stagione percorrere un sentiero alternativo che costeggia la strada all’interno del vallone, non battuto da nessuno in inverno."+
+      
+      "Se, una volta arrivato, decidi che non sei stanco e vuoi allungare di 40 minuti circa il tuo percorso, prosegui costeggiando il lago sul sentiero a destra, verso il rifugio Vulpot fino alla suggestiva località Pera Morta."+
+      
+      "Qui troverai diverse sculture in legno appese lungo le pareti rocciose 🙂"+
+      
+      "Il lago è anche un ottimo punto di partenza per altri sentieri più impegnativi."
+      
+
+      this.wrapperPopulate(HikeID,file,province,city,title,length,expTime,Ascent,Description,Difficulty,start,end);
+
+
     }
       
     
 
-    static wrapperPopulate =async (HikeID,file,province,city,title,length,expTime,Ascent,Description,Difficulty,start,end)=>{
-        let path="../gpx/"+file;
+    static  wrapperPopulate =async (HikeID,file,province,city,title,length,expTime,Ascent,Description,Difficulty,start,end)=>{
+        let path="./gpx/"+file;
         const locations =require ("./HikeLocations");
         const hikes =require("./Hikes");
         const fileLocation= require("./FileNames");
