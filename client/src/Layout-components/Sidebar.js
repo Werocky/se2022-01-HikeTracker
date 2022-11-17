@@ -20,16 +20,29 @@ function Sidebar(props) {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    const t_minExTime = minExTime;
-    const t_maxExTime = maxExTime;
-    const t_minAscent = minAscent;
-    const t_maxAscent = maxAscent;
+    let t_minExTime = minExTime;
+    let t_maxExTime = maxExTime;
+    let t_minAscent = minAscent;
+    let t_maxAscent = maxAscent;
     const t_province = province;
+    let t_minDist = minDist;
+    let t_maxDist = maxDist;
     const t_city = city;
-    const t_minDist = minDist;
-    const t_maxDist = maxDist;
     const t_difficulty = difficulty;
-    //handleReset();
+
+    if(t_minExTime=="")
+      t_minExTime=undefined;
+    if(t_maxExTime=="")
+      t_maxExTime=undefined;
+    if(t_minAscent=="")
+      t_minAscent=undefined;
+    if(t_maxAscent=="")
+      t_maxAscent=undefined;
+    if(t_minDist=="")
+      t_minDist=undefined;
+    if(t_maxDist=="")
+      t_maxDist=undefined;
+
     //console.log(city+"\n"+province+"\n"+difficulty+"\n"+minDist+"\n"+maxDist+"\n"+minAscent+"\n"+maxAscent+"\n"+minExTime+"\n"+maxExTime);
     // call the API and pass all the filter params
     API.getFilteredHikes(t_minExTime, t_maxExTime, t_minAscent, t_maxAscent, t_province, t_city, t_minDist, t_maxDist, t_difficulty).then(array => props.setHikes(array));
