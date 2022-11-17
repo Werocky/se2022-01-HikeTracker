@@ -469,7 +469,7 @@ class DatabaseConnection {
 
       this.wrapperPopulate(HikeID,file,province,city,title,length,expTime,Ascent,Description,Difficulty,start,end);
 
-
+        
     }
       
     

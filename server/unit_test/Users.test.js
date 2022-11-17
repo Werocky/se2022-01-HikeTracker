@@ -25,13 +25,14 @@ describe("Get/add HikeUsers",()=>{
         await expect(Users.getUsers()).resolves.toEqual([]);
     });
     test('Get all Users',async()=>{
-        await expect(Users.populateUsers()).resolves.toEqual('Tables filled');
+        await expect(Users.register("1a42b2b340fb544339c01cf46a523f08abdf2f214b43058e163087a4ecd8dfbe",
+        "1234","b@polito.it", "h")).resolves.toEqual('User created correctly');
         await expect(Users.getUsers()).resolves.toEqual([
             {
                 "Hash": "1a42b2b340fb544339c01cf46a523f08abdf2f214b43058e163087a4ecd8dfbe",
                 "Id": "b@polito.it",
-                "role": "h",
-                "salt": "1234",
+                "Role": "h",
+                "Salt": "1234",
             },
         ]);
     });
@@ -42,8 +43,8 @@ describe("Get/add HikeUsers",()=>{
             {
                 "Hash": "hashNoCHecks",
                 "Id": "mail@123.com",
-                "role": "roleTrial",
-                "salt": "1235",
+                "Role": "roleTrial",
+                "Salt": "1235",
             },    
         ])
     });
