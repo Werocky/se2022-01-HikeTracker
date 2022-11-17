@@ -1,16 +1,38 @@
 import { Button, Table } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
+import { useContext, useState, useEffect } from "react";
 
 function HikeList(props) {
+  const [data, setData] = useState([]);
+  const [sortType, setSortType] = useState('title');
+  useEffect(() => {
+    if(sortType!="")
+    {
+    const sortArray = type => {
+      const types = {
+        Title: 'Title',
+        Length: 'Length',
+        Ascent: 'Ascent',
+        Difficulty:'Difficulty',
+        ExpectedTime:'ExpectedTime'
+      };
+      const sortProperty = types[type];
+      const sorted = [...props.hikes].sort((a, b) => b[sortProperty] - a[sortProperty]);
+      props.setHikes(sorted);
+    };
+    sortArray(sortType);
+    setSortType("");
+  }
+  }, [sortType]); 
   return (
     <Table >
       <thead>
         <tr>
-          <th>Title</th>
-          <th>Length (km)</th>
-          <th>Ascent (m)</th>
-          <th>Difficulty</th>
-          <th>Expected time (mm)</th>
+          <th onClick={()=> {setSortType("Title");}}>Title</th>
+          <th onClick={()=> {setSortType("Length")}}>Length (km)</th>
+          <th onClick={()=> {setSortType("Ascent")}}>Ascent (m)</th>
+          <th onClick={()=> {setSortType("Difficulty")}}>Difficulty</th>
+          <th onClick={()=> {setSortType("ExpectedTime")}}>Expected time (mm)</th>
           <th></th>
         </tr>
       </thead>
