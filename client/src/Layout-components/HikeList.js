@@ -4,7 +4,7 @@ import { useContext, useState, useEffect } from "react";
 
 function HikeList(props) {
   const [data, setData] = useState([]);
-  const [sortType, setSortType] = useState('title');
+  const [sortType, setSortType] = useState('Title');
   useEffect(() => {
     if(sortType!="")
     {
@@ -17,7 +17,20 @@ function HikeList(props) {
         ExpectedTime:'ExpectedTime'
       };
       const sortProperty = types[type];
-      const sorted = [...props.hikes].sort((a, b) => b[sortProperty] - a[sortProperty]);
+      let sorted;
+      if(sortProperty=="Title" || sortProperty=="Difficulty")
+      sorted = [...props.hikes].sort((a, b) =>
+      {
+        if(a[sortProperty]>b[sortProperty])
+          {return -1}
+        if(a[sortProperty]<b[sortProperty])
+          return 1
+        return 0
+        
+      });
+  
+      else
+        sorted = [...props.hikes].sort((a, b) => b[sortProperty] - a[sortProperty]);
       props.setHikes(sorted);
     };
     sortArray(sortType);
