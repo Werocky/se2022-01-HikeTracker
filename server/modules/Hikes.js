@@ -81,7 +81,7 @@ exports.deleteHikes = () => {
 /*
 It Allows to set a specific filter if MaxValue is not specified or a range if a max value is set
  */
-exports.getHikesByFilter = (filterType, filterMinValue, MaxValue = null) => {
+exports.getHikesByFilter = (filterType, filterMinValue=-8000, MaxValue = null) => {
   return new Promise(
     async (resolve, reject) => {
       //console.log(filterType, filterMinValue, MaxValue);
