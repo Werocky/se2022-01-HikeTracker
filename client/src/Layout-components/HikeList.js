@@ -6,46 +6,43 @@ function HikeList(props) {
   const [data, setData] = useState([]);
   const [sortType, setSortType] = useState('Title');
   useEffect(() => {
-    if(sortType!="")
-    {
-    const sortArray = type => {
-      const types = {
-        Title: 'Title',
-        Length: 'Length',
-        Ascent: 'Ascent',
-        Difficulty:'Difficulty',
-        ExpectedTime:'ExpectedTime'
+    if (sortType != "") {
+      const sortArray = type => {
+        const types = {
+          Title: 'Title',
+          Length: 'Length',
+          Ascent: 'Ascent',
+          Difficulty: 'Difficulty',
+          ExpectedTime: 'ExpectedTime'
+        };
+        const sortProperty = types[type];
+        let sorted;
+        if (sortProperty == "Title" || sortProperty == "Difficulty")
+          sorted = [...props.hikes].sort((a, b) => {
+            if (a[sortProperty] > b[sortProperty]) { return -1 }
+            if (a[sortProperty] < b[sortProperty])
+              return 1
+            return 0
+
+          });
+
+        else
+          sorted = [...props.hikes].sort((a, b) => b[sortProperty] - a[sortProperty]);
+        props.setHikes(sorted);
       };
-      const sortProperty = types[type];
-      let sorted;
-      if(sortProperty=="Title" || sortProperty=="Difficulty")
-      sorted = [...props.hikes].sort((a, b) =>
-      {
-        if(a[sortProperty]>b[sortProperty])
-          {return -1}
-        if(a[sortProperty]<b[sortProperty])
-          return 1
-        return 0
-        
-      });
-  
-      else
-        sorted = [...props.hikes].sort((a, b) => b[sortProperty] - a[sortProperty]);
-      props.setHikes(sorted);
-    };
-    sortArray(sortType);
-    setSortType("");
-  }
-  }, [sortType]); 
+      sortArray(sortType);
+      setSortType("");
+    }
+  }, [sortType]);
   return (
     <Table >
       <thead>
         <tr>
-          <th onClick={()=> {setSortType("Title");}}>Title</th>
-          <th onClick={()=> {setSortType("Length")}}>Length (km)</th>
-          <th onClick={()=> {setSortType("Ascent")}}>Ascent (m)</th>
-          <th onClick={()=> {setSortType("Difficulty")}}>Difficulty</th>
-          <th onClick={()=> {setSortType("ExpectedTime")}}>Expected time (mm)</th>
+          <th onClick={() => { setSortType("Title"); }}>Title</th>
+          <th onClick={() => { setSortType("Length") }}>Length (km)</th>
+          <th onClick={() => { setSortType("Ascent") }}>Ascent (m)</th>
+          <th onClick={() => { setSortType("Difficulty") }}>Difficulty</th>
+          <th onClick={() => { setSortType("ExpectedTime") }}>Expected time (h:m)</th>
           <th></th>
         </tr>
       </thead>
@@ -65,13 +62,16 @@ function HikeElement(props) {
 
   const hike = props.hike;
 
+  const hh = Math.ceil(hike.ExpectedTime / 60);
+  const mm = Math.ceil(hike.ExpectedTime % 60);
+
   return (
     <tr>
       <td>{hike.Title}</td>
       <td>{hike.Length}</td>
       <td>{hike.Ascent}</td>
       <td>{hike.Difficulty}</td>
-      <td>{hike.ExpectedTime}</td>
+      <td>{hh < 10 ? "0" + hh : hh}:{mm < 10 ? "0" + mm : mm}</td>
       <td>
         <Button onClick={() => navigate("/" + hike.HikeId)} >Details</Button>
       </td>

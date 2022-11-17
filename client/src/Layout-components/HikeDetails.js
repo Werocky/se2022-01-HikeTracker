@@ -9,31 +9,16 @@ function HikeDetails(props) {
   const auth = useContext(AuthContext);
 
   const params = useParams();
-  const [hike, setHike] = useState(undefined
-    /*{
-      Ascent: 2,
-      City: "City1",
-      Description: "a simple test description added with API and after modified",
-      Difficulty: "T",
-      ExpectedTime: 33,
-      HikeId: "1",
-      Length: 1.1,
-      Province: "Province1",
-      ReferencePoints: undefined,
-      Title: "Hike1",
-      end: "end1",
-      start: "start1",
-    }*/
-  );
+  const [hike, setHike] = useState(undefined);
   const [gpxData, setGpxData] = useState(undefined);  // array of [p.lat, p.lon]
   const [loading, setLoading] = useState(true);
 
   const navigate = useNavigate();
 
   useEffect(() => {
-    const loadHike = async () => {    // NEED API TO GET HIKE GIVEN ID, NEED API TO GET PARSED GPX DATA
+    const loadHike = async () => {
       const hikeObj = await API.getHike(params.hikeID);
-      console.log(hikeObj);
+      //console.log(hikeObj);
       setHike(hikeObj);
       if (auth.login) {
         const gpxObj = await API.getPointsHike(params.hikeID);
@@ -49,6 +34,9 @@ function HikeDetails(props) {
     }
   }, [params.hikeID, auth.login])
 
+  const hh = Math.ceil(hike.ExpectedTime / 60);
+  const mm = Math.ceil(hike.ExpectedTime % 60);
+
   return (
     <>
       {!loading &&
@@ -56,7 +44,7 @@ function HikeDetails(props) {
           <Row>
             <Col>Title: {hike.Title}</Col>
             <Col>Length: {hike.Length} km</Col>
-            <Col>Expected Time: {hike.ExpectedTime} mm</Col>
+            <Col>Expected Time: {hh < 10 ? "0" + hh : hh}:{mm < 10 ? "0" + mm : mm}</Col>
             <Col>Ascent: {hike.Ascent} m</Col>
             <Col>Difficulty: {hike.Difficulty}</Col>
           </Row>
@@ -71,7 +59,7 @@ function HikeDetails(props) {
             <Col>Description: {hike.Description}</Col>
             {auth.user.role === 'l' &&
               <Col>
-                <Button onClick={() => navigate("/modifyHikeDesc/"+params.hikeID)}>Modify</Button>
+                <Button onClick={() => navigate("/modifyHikeDesc/" + params.hikeID)}>Modify</Button>
               </Col>
             }
           </Row>
@@ -82,16 +70,14 @@ function HikeDetails(props) {
             <Row>
               <Col xs={1}></Col>
               <Col>
-
-                <MapContainer center={[45.936, 7.626]} zoom={20} scrollWheelZoom={false} style={{ height: '90vh', width: '90wh' }}>
-                  <TileLayer
-                    attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-                    url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-                  />
+                <MapContainer center={[gpxData[Math.ceil(gpxData.length / 2)].lat, gpxData[Math.ceil(gpxData.length / 2)].lon]} zoom={14} scrollWheelZoom style={{ height: 500 + "px", width: "100%", }}>
                   <Polyline
                     pathOptions={{ fillColor: 'red', color: 'blue' }}
                     positions={gpxData}
                   />
+                  <StartPoint position={gpxData[0]} />
+                  <EndPoint position={gpxData.at(-1)} />
+                  <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
                 </MapContainer>
 
               </Col>
@@ -108,6 +94,26 @@ function HikeDetails(props) {
         </Container>
       }
     </>
+  );
+}
+
+function StartPoint(props) {
+  return (
+    <Marker position={props.position}>
+      <Popup>
+        This is the starting point
+      </Popup>
+    </Marker>
+  );
+}
+
+function EndPoint(props) {
+  return (
+    <Marker position={props.position}>
+      <Popup>
+        This is the ending point
+      </Popup>
+    </Marker>
   );
 }
 
