@@ -30,16 +30,16 @@ function Sidebar(props) {
     const t_city = city;
     const t_difficulty = difficulty;
 
-    if(t_minExTime=="")
-      t_minExTime=undefined;
-    if(t_maxExTime=="")
+    if(t_minExTime=="" || t_minExTime==undefined)
+      t_minExTime=0;
+    if(t_maxExTime=="" )
       t_maxExTime=undefined;
-    if(t_minAscent=="")
-      t_minAscent=undefined;
+    if(t_minAscent=="" || t_minAscent==undefined)
+      t_minAscent=0;
     if(t_maxAscent=="")
       t_maxAscent=undefined;
-    if(t_minDist=="")
-      t_minDist=undefined;
+    if(t_minDist=="" || t_minDist==undefined)
+      t_minDist=0;
     if(t_maxDist=="")
       t_maxDist=undefined;
 
@@ -58,6 +58,8 @@ function Sidebar(props) {
     setMaxDist(() => undefined);
     setMaxAscent(() => undefined);
     setMaxExTime(() => undefined);
+
+    API.getHikes().then(array=>props.setHikes(array));
   }
 
 
