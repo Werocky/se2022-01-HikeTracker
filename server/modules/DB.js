@@ -741,19 +741,31 @@ class DatabaseConnection {
       this.wrapperPopulate(HikeID,file,province,city,title,length,expTime,Ascent,Description,Difficulty,start,end);
 
 
-      HikeID='24';
-      title="Ta Van and Lao Chai (Sapa trekking)";
-      province='VIETNAM';
-      city ='Thào Hồng Dín(Lào Cai)'; 
-      Ascent=440;
-      start=null
-      end=null
-      length=12.93;
-      Difficulty="T";
-      expTime=391; 
-      file="ta-van-and-lao-chai-sapa-trekking.gpx"    
-      Description="Easy (although a bit long) trekking with many terrific spots. We stop for lunch and also many times for pictures, so actually it can be done much faster."
+      HikeID='25';
+      title="West MacDonnell National Park - Ormiston Pound, Mt Giles, Chewings Range and Heavitree Range";
+      province='AUSTRALIA';
+      city ='Glen Helen(Northern Territory)'; 
+      Ascent=2660;
+      start="ORMISTON GORGE"
+      end="COUNTS POINT"
+      length=78.09;
+      Difficulty="PH";
+      expTime=null; 
+      file="west-macdonnell-national-park-ormiston-pound-mt-giles-chewin.gpx"    
+      Description="This is a fantastic area to walk but is only for experienced parties."+
+
+      "BE WARNED"+
+      "- This walk is off track through rugged, remote and mountainous terrain. You must be confident at navigation, and route finding. The GPS track may be inaccurate in some of the gorges due to poor signal."+
+      "- While we found adequate water in the gorges of the Chewings Range to replenish supplies, depending on season water can be hard to find and of variable quality."+
+      "There is no water on the top of the Chewing or Heavitree ranges. Plan to carry an extra days water and have an exit strategy worked out if you can't locate further supplies."+
+      "- You need to be fit enough to carry everything you need for a week over and up/down rugged terrain."+
+      "- The area is very isolated we saw no other living souls for the entire trip after leaving Ormiston Gorge, there is some phone reception on top of the mountains but elsewhere a PLB is required in case of emergency."+
+      "- to complete this route we did a fair bit of advanced scrambling (AKA rock climbing with a pack). You must be happy with scrambling and exposure to negotiate the gorges."+
+      "- one of our party, a wild hairy beast called Garn still wanders the Chewings Ranges looking for lost Bush walkers to eat."+
       
+      "We started at Ormiston Gorge and finished at Serpentine Chalet Dam (arriving around midday). With an extra day it could converted to a circuit returning to Ormiston Gorge via the Larapinta Trail."
+      
+
       this.wrapperPopulate(HikeID,file,province,city,title,length,expTime,Ascent,Description,Difficulty,start,end);
 
 
