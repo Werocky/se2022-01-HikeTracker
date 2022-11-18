@@ -741,6 +741,20 @@ class DatabaseConnection {
       this.wrapperPopulate(HikeID,file,province,city,title,length,expTime,Ascent,Description,Difficulty,start,end);
 
 
+      HikeID='24';
+      title="Ta Van and Lao Chai (Sapa trekking)";
+      province='VIETNAM';
+      city ='Thào Hồng Dín(Lào Cai)'; 
+      Ascent=440;
+      start=null
+      end=null
+      length=12.93;
+      Difficulty="T";
+      expTime=391; 
+      file="ta-van-and-lao-chai-sapa-trekking.gpx"    
+      Description="Easy (although a bit long) trekking with many terrific spots. We stop for lunch and also many times for pictures, so actually it can be done much faster."
+      
+      this.wrapperPopulate(HikeID,file,province,city,title,length,expTime,Ascent,Description,Difficulty,start,end);
 
 
     }
