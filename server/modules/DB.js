@@ -607,6 +607,33 @@ class DatabaseConnection {
       this.wrapperPopulate(HikeID,file,province,city,title,length,expTime,Ascent,Description,Difficulty,start,end);
 
 
+      HikeID='19';
+      title="Sentiero per BRICCAS da BRICH | 2430 m slm";
+      province='Piemonte';
+      city ='CIASPOLATE'; 
+      Ascent=950;
+      start="Brich (CN) / 1460 mslm circa";
+      end="Briccas / 2430 mslm circa"
+      length=8;
+      Difficulty="H";
+      expTime=120; 
+      file="Monte Briccas da Brich.gpx"    
+      Description="Lasciata l’auto, proseguiamo lungo la strada dapprima asfaltata e successivamente sterrata."+
+
+      "In caso di poco innevamento o temperature elevate è possibile fare i primi 150m di dislivello senza ciaspole."+
+      
+      "Appena incontrata la prima neve infiliamo le ciaspole e ci incamminiamo su di un sentiero ben definito che attraversa un boschetto."+
+      
+      "Dopo esserci lasciati alle spalle le ultime baite giriamo a destra verso Nord/Est in prossimità di un segnavia GTA verniciato su di un masso."+
+      
+      "Da qui, superata l’ultima boscaglia, si apre davanti a noi un enorme pendio molto ampio che culmina proprio con la nostra vetta."+
+      
+      "La linea da seguire è molto libera ma possiamo prendere come riferimento alcuni massi che troviamo circa a metà del percorso o seguire altre tracce lasciate in precedenza, essendo questo un sentiero molto frequentato."+
+      
+      "Arrivati in cima al pendio percorriamo i pochi metri che ci separano dalla croce di vetta su di una cresta molto panoramica."
+    
+      this.wrapperPopulate(HikeID,file,province,city,title,length,expTime,Ascent,Description,Difficulty,start,end);
+
 
 
 
