@@ -711,6 +711,38 @@ class DatabaseConnection {
       "Details coming soon."
       
       this.wrapperPopulate(HikeID,file,province,city,title,length,expTime,Ascent,Description,Difficulty,start,end);
+
+      
+      HikeID='23';
+      title="Toubkal Circuit";
+      province='MOROCCO';
+      city ='Imelil(Marrakesh-Safi)'; 
+      Ascent=7967;
+      start="Imlil"
+      end="Imlil"
+      length=87.48;
+      Difficulty="T";
+      expTime=5924; 
+      file="toubkal-circuit.gpx"    
+      Description="The Toubkal circuit performed counterclockwise, with some variation."+
+      "From Imlil to Sidi Chamarouch and to the Toubkal and Mouflon refuges."+
+      "Ascent to Toubkal by the normal route, descent through a slightly different route. Ascent to Timseguida and Ouanoukrim with descent via the couloir."+
+      "Crossing of Tizi-n-Ouanoums and descent to Lake d'Ifni and Amsouzert."+
+      "From here the track leaves the classical loop, remaining closer to the Toubkal summit. After going up the Tisgui valley, it climbs the slope of an unnamed 3740 m summit dominating, on the other side, Tizi-n-Terhaline which is the natural crossing between Sidi Chamarouch and the Ourika valley. Skirting this pass, the track leads down a gorge to the wonderfully isolated sposts of Azib Tamenzift and Azib Likemt, where the classical loop is joined again to tackle the last ascent, the one to Tizi Likemt, whose smooth NW slope would also be good for ski-mountaineering."+
+      "The path reaches the road connecting Imlil to Tacheddirt via Tizi-n-Tamatert, and actually the conclusion is a long stroll on the gravel road."+
+      
+      "The loop was performed in December 2007 after reaching Imlil by bicycle from Marrakech: 28 hours to climb the Toubkal from Marrakech 'by fair means'. The days were the following;"+
+      "0) Marrakech - Imlil by bicycle, then hike to Sidi Chamarouch;"+
+      "1) Ascent to Toubkal and, in the afternoon, to Timesguida and Ouanoukrim, completing hte ascent of three 4000 in one day. Night at the Refuge Mouflon;"+
+      "2) Crossing of Tizi-n-Ouamoums, and then down to Amsouzert. Night at the known gite d'etape run by Omar;"+
+      "3) Up the Tisgui and down to the azib before the gorge. Night under te stars in the sleeping bag;"+
+      "4) Crossing of Tizi Likemt and back to Imlil."
+      
+      this.wrapperPopulate(HikeID,file,province,city,title,length,expTime,Ascent,Description,Difficulty,start,end);
+
+
+
+
     }
     
 
