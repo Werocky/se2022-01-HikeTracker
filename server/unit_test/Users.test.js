@@ -5,13 +5,13 @@ beforeAll(async() =>{
     await db.createConnection();
     await
     await Users.emptyUsers();
-   } 
+   },10000 
 )
 afterAll(async()=>{
    await Users.emptyUsers();
    await db.populate();
    
-})
+},10000 )
 
 describe("Get/add HikeUsers",()=>{
     beforeEach(async() =>{   
