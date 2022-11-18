@@ -947,7 +947,7 @@ class DatabaseConnection {
   length=7.5;
   Difficulty="PH";
   expTime=1359; 
-  file="choro-trek-bolivia.gpx"    
+  file="huayna-potosi-from-base-camp-to-summit.gpx"    
   Description="From Huayna Potosi Base Camp to Summit"+
   "Day 1: La Paz - Huayna Potosi Base Camp - Refugio Anselme Baud/Casa de Guias"+
   "Day 2: Refugio Anselme Baud/Casa de Guias - Summit - La Paz"+
@@ -955,6 +955,26 @@ class DatabaseConnection {
   "https://www.facebook.com/lucasbaruzzi/media_set?set=a.10207861573721238&type=3&pnref=story"
         
 this.wrapperPopulate(HikeID,file,province,city,title,length,expTime,Ascent,Description,Difficulty,start,end);
+
+
+HikeID='32';
+title="Laguna Glacial de Sorata (Illampu y Janq'u Uma)";
+province='BOLIVIA';
+city ='Tusca Jahuira(La Paz)'; 
+Ascent=1035;
+start="Laguna Chillata"
+end="The Glacier Lake"
+length=8.04;
+Difficulty="H";
+expTime=216; 
+file="laguna-glacial-de-sorata-illampu-y-janqu-uma.gpx"    
+Description="Sorata's Glacier Lake is located at more than 5000 meters in elevation. You best way to start the hike is to take a taxi as far up towards Laguna Chillata as you can (80-100 bolivianos). From there, the Glacier Lake is still pretty far away (1000 meters higher) and so it's best to camp at Laguna Chillata and not do the entire hike in a single day. From Laguna Chillata, it takes 4-6 hours to hike up the Glacier Lake. Te get back to Sorata, it's best to talk to the locals on your way down and see if you can hire a driver."+
+
+"La Laguna Glacial de Sorata de encuentra a más que 5000 metros de altura. Se recomiende tomar taxi hasta lo más cerca posible a laguna Chillata (80-100 bolivianos). De ese punto la Laguna Glacial esta todavía lejos con una subida de 1000 metros, así que se recomiende acampar por la Laguna Chillata y no hacer la caminata en un solo día. Desde la Laguna Chillata se puede subir a la Laguna Glacial en 4-6 horas. Para volver a Sorata, se debe preguntar a los comunarios de los pueblos si se puede contratar transporte."
+this.wrapperPopulate(HikeID,file,province,city,title,length,expTime,Ascent,Description,Difficulty,start,end);
+
+
+
 
 }
     
