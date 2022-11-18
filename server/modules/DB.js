@@ -499,6 +499,38 @@ class DatabaseConnection {
 
       this.wrapperPopulate(HikeID,file,province,city,title,length,expTime,Ascent,Description,Difficulty,start,end);
 
+
+      HikeID='16';
+      title="Sentiero per il RIFUGIO CAPANNA MAUTINO | 2100 m slm";
+      province='Piemonte';
+      city ='CIASPOLATE'; 
+      Ascent=700;
+      start="Bousson – Cesana (TO) / 1400 m circa";
+      end="Rifugio Capanna Mautino / 2100 m circa"
+      length=13;
+      Difficulty="H";
+      expTime=160; 
+      file="capanna Mautino .gpx"    
+      Description="Abbiamo trovato un sentiero davvero ben curato. Inizia percorrendo dal parcheggio la strada asfaltata in salita. Troverai diversi cartelli che ti indicheranno la via da seguire."+
+
+      "Spesso potrai scegliere tra due (o tre) varianti, noi solitamente in questi casi, se non conosciamo il sentiero, cerchiamo di procedere sulla via più battuta."+
+      
+      "La salita è costante ma non eccessivamente faticosa, salvo in alcui punti."+
+      
+      "Abbiamo trovato poca neve e ben ghiacciata, quindi sono stati indispensabili i ramponcini quel giorno (no ciaspole)."+
+      
+      "Il percorso viene battuto egregiamente dalla motoslitta, quindi non farai assolutamente difficoltà a individuarlo."+
+      
+      "Nonostante i 700 m di dislivello +, il sentiero era talmente battuto che ci ha reso il percorso abbastanza semplice."+
+      
+      "L’ultimo tratto fino al Lago Nero è un po’ pendente, ma lo raggiungerai in poco tempo. Dal punto di partenza al lago impiegherai 2 ore circa."+
+      
+      "A quel punto, in un’altra ventina di minuti sarai arrivato al Rifugio Capanna Mautino, ai piedi del Col Saurel, e potrai gustarti la tua polenta fumante."+
+      
+      "Nel periodo estivo, ti consiglio di percorrere il sentiero parallelo che taglia sui pendii per evitare la strada carrozzabile 🙂"
+      
+      this.wrapperPopulate(HikeID,file,province,city,title,length,expTime,Ascent,Description,Difficulty,start,end);
+
     }
       
     
