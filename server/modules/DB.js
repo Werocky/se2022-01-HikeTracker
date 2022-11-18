@@ -839,6 +839,22 @@ class DatabaseConnection {
 
       this.wrapperPopulate(HikeID,file,province,city,title,length,expTime,Ascent,Description,Difficulty,start,end);
 
+
+      HikeID='27';
+      title="Samaipata Bosque de los Helechos Gigantes";
+      province='BOLIVIA';
+      city =' Samaipata(Samaipata)'; 
+      Ascent=1428;
+      start="Samaipata"
+      end="Helechos Gigantes"
+      length=31.53;
+      Difficulty="T";
+      expTime=424; 
+      file="samaipata-bosque-de-los-helechos-gigantes.gpx"    
+      Description="It was very easy but I couldn't find the waterfall. So I couldn't make circle in the Parque Nacional."
+
+      this.wrapperPopulate(HikeID,file,province,city,title,length,expTime,Ascent,Description,Difficulty,start,end);
+
     }
     
 
