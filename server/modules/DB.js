@@ -741,81 +741,313 @@ class DatabaseConnection {
       this.wrapperPopulate(HikeID,file,province,city,title,length,expTime,Ascent,Description,Difficulty,start,end);
 
 
-      HikeID='48';
-      title="Parco burcina";
-      province='Biella';
-      city ='Pollone'; 
-      Ascent=280;
-      start="Area Parcheggio Comunale"
-      end="Parco Burcina | Torre Martini"
-      length=3.13;
+      HikeID='24';
+      title="West MacDonnell National Park - Ormiston Pound, Mt Giles, Chewings Range and Heavitree Range";
+      province='AUSTRALIA';
+      city ='Glen Helen(Northern Territory)'; 
+      Ascent=2660;
+      start="ORMISTON GORGE"
+      end="COUNTS POINT"
+      length=78.09;
+      Difficulty="PH";
+      expTime=null; 
+      file="west-macdonnell-national-park-ormiston-pound-mt-giles-chewin.gpx"    
+      Description="This is a fantastic area to walk but is only for experienced parties."+
+
+      "BE WARNED"+
+      "- This walk is off track through rugged, remote and mountainous terrain. You must be confident at navigation, and route finding. The GPS track may be inaccurate in some of the gorges due to poor signal."+
+      "- While we found adequate water in the gorges of the Chewings Range to replenish supplies, depending on season water can be hard to find and of variable quality."+
+      "There is no water on the top of the Chewing or Heavitree ranges. Plan to carry an extra days water and have an exit strategy worked out if you can't locate further supplies."+
+      "- You need to be fit enough to carry everything you need for a week over and up/down rugged terrain."+
+      "- The area is very isolated we saw no other living souls for the entire trip after leaving Ormiston Gorge, there is some phone reception on top of the mountains but elsewhere a PLB is required in case of emergency."+
+      "- to complete this route we did a fair bit of advanced scrambling (AKA rock climbing with a pack). You must be happy with scrambling and exposure to negotiate the gorges."+
+      "- one of our party, a wild hairy beast called Garn still wanders the Chewings Ranges looking for lost Bush walkers to eat."+
+      
+      "We started at Ormiston Gorge and finished at Serpentine Chalet Dam (arriving around midday). With an extra day it could converted to a circuit returning to Ormiston Gorge via the Larapinta Trail."
+      
+      this.wrapperPopulate(HikeID,file,province,city,title,length,expTime,Ascent,Description,Difficulty,start,end);
+
+      
+      HikeID='25';
+      title="Uyuni (3 days tour)";
+      province='BOLIVIA';
+      city ='Uyuni(Potosi)'; 
+      Ascent=3652;
+      start="Cementerio de Trenes"
+      end="Chilean Migration Checkpoint"
+      length=557.1;
+      Difficulty="H";
+      expTime=4320; 
+      file="uyuni-3-days-tour.gpx"    
+      Description="THE TRIP"+
+      "Round trip vs. Atacama connection: the tour its basically a one way trip, the 500km you do in 2 days and 1 morning you will do through another path to go back in just one afternoon, making almost non stops."+
+      "Altitude: you will reach almost 5000 meters, but Uyuni is at 3700 same as the first night of the tour, should be ok ONLY if you spend some days in Uyuni to get used to the 4000 range (or any other high place like Potosi) don’t underestimate this, so many people get altitude sickness because they climb too fast. Avoid alcohol, its not good and you will get drunk so much easier than normal."+
+      "Times: the early you leave the better, avoid crowds, have more time to enjoy, 3rd day before going to the geyser wake up 4am, make sure to go outside the hotel as soon as possible to take a look at the sky, the stars there are amazing (wear warm) then go inside for breakfast."+
+      "Wildlife: flamingos easy to find, fox and viscachas (rabbit like animal) not so easy."+
+      "Geyser: avoid breathing for long the fumes, its toxic."+
+      "Bags: if you do the trip with a tour agency leave all the food, medicine, some water, warm cloth and windbreaker in your small backpack with you (in your seat or the trunk) the rest will be put outside the car on the top tied up, they will give to you at the end of the day when you get to the hotel."+
+      "Electricity: this can change on where you stay but should be similar anywhere. 1st night there is light in the rooms but no plug, for charging your devices you have to go to the common area where there is a table full of splitters and plug it there. 2nd night cannot charge anything, if you are lucky  have light it will be only for few hours before sleeping or the whole night (no lights on the toilet in my case) tip: pack your back before night falls, next day you wake up 4am."+
+      "Shower: 1st night there is hot shower for extra price, 2nd night if you are lucky you will have shower and if you are very very lucky hot water but better not count on any kind of shower for the whole trip, specially for the second night."+
+      "Winter: so strong wind it break the window of the car sometimes. -20C."+
+      "Summer: ok weather but still cold and windy, around -5C at night. daytime t-shirt hot, cold when the wind blows."+
+      "For more info about the weather check pictures: yearly graphic (link on description to full info)"+
+      
+      "VARIANTS"+
+      "4 days: same as this one plus Vocán Tunupa area (northern part of the salt flat)"+
+      "4 days: Uyuni -> Tupiza, after the southern part of the 3 days trip you head to Tupiza. Careful: Tupiza -> Uyuni can be done, even easier to find agency but you will climb very fast in short time, faster than starting in Uyuni."+
+      "1 day: only the salt flat (going to Isla Incahuasi and come back)"+
+      
+      "DRIVE IT YOURSELF"+
+      "Bring all the fuel you need."+
+      "Bring all the water you need."+
+      "Food maybe you can get on the hotels but the tour drivers they cook in the hotels."+
+      "No ATM, no card accepted anywhere in the tour."+
+      "Avoid the rainy season (december to february) the path get flooded making it very hard even imposible, the secondary route miss many attractions."+
+      "Places not included in the normal tour might be worth it: Ojos de Sal (Salar de Uyuni) Cueva Galaxias (north of San Pedro de Quemez)"+
+      "Bike: looks very hard and you need to arrange for the fuel with some vehicle probably, but possible, I saw at least 4 bikes in the whole trip. Very strong winds you don't feel inside the car."+
+      
+      "ABOUT THE AGENCIES"+
+      "Almost every the cars are Toyota Land Cruise, they put all the big stuff on top of the car, including big containers with fuel for the full trip, good agencies are hard to find, I heard only 3 companies have own drivers, the rest just hire any driver for the tour merging with other agencies, Hodaka Mountain is one of the few with selected list of drivers, a bit more expensive but in my 1 experience is worth it. They merge with other companies if not enough passenger but they have a selected partners same as drivers, my experience was good, the car looks normal/nice at first but after comparing with the rest (glasses filled with marks on the dark film, horrible for pictures, some cannot even open the window) I realice it was one of the bests, even the driver was specially careful (speed, attention, he even clean the windows couple times a day, something so small nobody notices but makes the difference, specially for the pictures)"+
+      "You will make some stops but the time is limited but the place is huge, so you will have to take pictures from the car a lot, make sure the car can open the windows. The Lexus version of the car have windows in the 3rd row of seat (the normal Toyota version has fixed glass, cannot open)"
+      
+
+
+      this.wrapperPopulate(HikeID,file,province,city,title,length,expTime,Ascent,Description,Difficulty,start,end);
+
+
+      HikeID='26';
+      title="Nevado Sajama, 6542";
+      province='BOLIVIA';
+      city ='Estancia Junchusuma(Oruro)'; 
+      Ascent=2240;
+      start="path to Aychuta"
+      end="Nevado Sajama"
+      length=11.07;
+      Difficulty="H";
+      expTime=null; 
+      file="nevado-sajama-6542.gpx"    
+      Description="The present track describes the normal route to Nevado Sajama."+
+      "IT IS DRAWN BY HAND, following the well definite path visible on Google Earth."+
+      "It has no meaning from the penitentes to the top, since there the path has to be established according to the conditions."+
+      "The path start at 4300 m from the flat road joining Pueblo Sajama to Laguna Huayna Chota before and Estancia Tomarapi next. This road is part of a whole loop that could be done around the volcano. I planned to do it by bicycle, but then I had no time, reaching only Tomarapi on a return trip."+
+      "The base camp at Aychuta lies at 4810 m, an altitute curiously equal to that of Mont Blanc. The high camp lies at 5670 m. The only slightly technical stretch is a short couloir, with mixed terrain, little below 6000 m. It gives access to the upper stretch of the ridge, which begins with a stretch of hard ice and penitentes, giving them place to more comfortable snow."+
+      "On the flat and very wide top once was played also a football match, as a test for performance at altitude."+
+      "The view from the top, contrarily to what one can expect, is not so exciting, because the Sajama is just too high and isolated!"
+
+
+      this.wrapperPopulate(HikeID,file,province,city,title,length,expTime,Ascent,Description,Difficulty,start,end);
+
+
+      HikeID='27';
+      title="Samaipata Bosque de los Helechos Gigantes";
+      province='BOLIVIA';
+      city =' Samaipata(Samaipata)'; 
+      Ascent=1428;
+      start="Samaipata"
+      end="Helechos Gigantes"
+      length=31.53;
       Difficulty="T";
-      expTime=60; 
-      file="segmentoBurcinaPollone.gpx"    
-      Description= "RISERVA NATURALE SPECIALE PARCO BURCINA 'FELICE PIACENZA'"+
-      "Is a historic garden located on the homonymous 'Brik Burcina' a gentle hill close to the Biella Alps."+
-      "The origins of the Burcina Park date back to the mid-1800s when the Piacenza family began to buy the land on the hill to set it up with a great variety of plants from around the world until, in 1980, the Nature Reserve was established."
-      "The park is located in the territory of the municipalities of Biella and Pollone, has a total area of 57 hectares and the altimetric excursion ranges from 570 to 830 m a.s.l."+
-      "The dirt road that leads to the top of the hill, where the tower that overlooks the surrounding vegetation is located, is slightly uphill, constant throughout the route where it is possible to admire a great variety of plants and flowers at all times of the year."+
-      "It is also possible to reach the peaks by choosing one of the many paths that branch off from the main route, lengthening or shortening the journey"+
-      "This is a very busy place, especially on weekends and during flowering or foliage periods, but it is worth a visit for an easy walk."
-
+      expTime=1620; 
+      file="samaipata-bosque-de-los-helechos-gigantes.gpx"    
+      Description="It was very easy but I couldn't find the waterfall. So I couldn't make circle in the Parque Nacional."
 
       this.wrapperPopulate(HikeID,file,province,city,title,length,expTime,Ascent,Description,Difficulty,start,end);
 
 
-      HikeID='49';
-      title="Monte Mucrone via Normale";
-      province='Biella';
-      city ='Oropa'; 
-      Ascent=1059;
-      start="Parcheggio Piazzale di Oropa"
-      end="Monte Mucrone | 2335 m"
-      length=5.48;
-      Difficulty="H";
-      expTime=200; 
-      file="mucrone via normale.gpx"    
-      Description="Starting from the Oropa car park next to the cable car, take the path that climbs along the Busancano slope (now disused ski slope)."+
-      "After a first piece in the vegetation you come to a crossroads towards a road that descends but you continue uphill to the left. And immediately after you meet two steep switchbacks called the 'Z'."+
-      "At this point the path continues with a constant slope, until after about 3 km you reach the Savoia refuge."+
-      "The path turns left before the refuge (in fact you will not pass by it) and continues up to the Mucrone lake, a small lake nestled under the mountain."+
-      "From here you climb in a straight line until you reach the pass from which, turning left, the last stretch of climb begins."+
-      "The last part is a real mountain path. After a few ramps uphill you reach what remains of the old cable car station in the place called 'anticima'."+
-      "From here we continue climbing towards the top of the mountain. At its top there is a cross about 3/4 meters high and you can enjoy a fantastic panorama."+
-      "in front of you opens a view of the foothills of the Alps and the entire Po valley. On the clearest days you get to see the skyscrapers of Milan and the Ligurian Alps."+
-      "On the other side, however, you can see the peaks of the Aosta valley such as Cervino and Monte Rosa."
-      "The same path can be followed for the way back."+
-      "This is not a very long trail but the trail is in poor condition with little maintenance so extreme care must be taken. The effort is certainly rewarded by the view once at the top."
+      HikeID='28';
+      title="El Choro Trek, In 3 days from La Cumbre (4885m) to Chairo (1350m)";
+      province='BOLIVIA';
+      city ='  Rinconada (La Paz)'; 
+      Ascent=1809;
+      start="Chairo"
+      end="Villa Fatima"
+      length=53.37;
+      Difficulty="T";
+      expTime=424; 
+      file="el-choro-trek-in-3-days-from-la-cumbre-4885m-to-chairo-1350m.gpx"    
+      Description="You hike along an old really beautiful Inca way through different types of vegetation. The trek can easily be done by yourself without any guide or mules / horses that carry your equipment. The first night you can not sleep in a lodge, you therefore have to carry your own tent. Along the way you will find a couple of small stores selling snacks and food. It's best to bring your own food from 'La Paz'. Some guidebooks write, that the locals are unfriendly or even worse, that you get robbed. We did not experience anything like it, everyone was really friendly and helpful."+
 
+      "Day 1:"+
+      "There are three options to reach the starting point of the trek. 1) take any bus that goes from 'La Paz' ('Villa Fatima' district) to 'Coroico' and tell the driver to let you off at 'La Cumbre' 2) same as 1 but with minibuses, they leave when there are full and they also depart from 'Villa Fatima' 3) take a taxi (we paid 80 Bolivianos). Of course you can also hitch hike, there are many cars passing. 'La Cumbre' is also the starting point for the famous 'Death Road'. You need to register at the small house next to the lagoon. After that you follow the dirt-road up to the pass. From here it all goes down... down .. down. You will pass a small village (Samaña Pampa) where you have to sign again. Further down the path you reach the village 'Chucura' where you have to pay the trail fee of 10 Bolivianos. The money is collected to keep the way clean and for the maintenance for all the bridges. We spent the first night in 'Challapampa' (2820m), you have to bring your own tent. They charge 10 Bolivianos per person. You can also buy snacks and drinks here."+
+      
+      "Day 2:"+
+      "The second day is really long and tiring so better get up early. First you go down on the true left side of the river until 'Choro' where you cross the river. On the other side you have to go up again. Now there are several possibilities to camp along the way. We walked until 'Sandillani' where you can also stay in a nice lodge, run by an old lady. If you want to camp it's 5 Bolivianos per person. There is no hot water and the toilets costs extra (1 Boliviano). The lady does also sell beers and snacks, it's also possible to eat breakfast there. On this second day we walked almost 9 hours and the way is going up and down."+
+      
+      "Day 3:"+
+      "From 'Sandillani' it only goes down to 'Chairo', it takes roughly 2 - 3 hours until you arrive in 'Chairo'. From here you can get a (really) expensive taxi to either the junction of the 'La Paz - Coroico' route or directly to 'Coroico'. I guess they charge about 100 Bolivianos. Another option is to walk or hitch hike, there are quite some cars passing by. At the junction you can take a taxi/minibus back to 'Villa Fatima' (25 Bolivianos per person)"+
+      
+      "Don't forget to bring sunscreen, repellent and some small bills to buy snacks/water along the way."+
+      
+      "Helpful maps:"+
+      "- http://www.azimutexplorer.com/img/content/photos_big/trek_choro_4dias/mapa_choro.jpg"+
+      "- http://www.trekkingchile.com/Images/choro-trail-map.jpg"+
+      "- http://www.turismoboliviaperu.com/imgs/mapa-choro.gif"+
+      "- http://coroico-info.com/webs/incatrail/sitebuilder/images/mappage-572x557.jpg"
       this.wrapperPopulate(HikeID,file,province,city,title,length,expTime,Ascent,Description,Difficulty,start,end);
 
 
-      HikeID='50';
-      title="Hike to Rifugio Duca degli Abruzzi";
-      province='Aosta';
-      city ='Cervinia'; 
-      Ascent=794;
-      start="Cervinia. Parking lot near Golf"
-      end="Rifugio Duca degli Abruzzi | 2803 m"
-      length=5.26;
+      HikeID='29';
+      title="Parinacota";
+      province='BOLIVIA';
+      city ='Estancia Milluri (Oruro)'; 
+      Ascent=2196;
+      start="Pueblo Sajama"
+      end="Crater rim, NW"
+      length=25.98;
       Difficulty="H";
-      expTime=420; 
-      file="rifugio-orionde-duca-degli-abruzzi-da-cervinia-segnavia-13ee.gpx"    
-      Description="Once in Cervinia, go as far as the roundabout, turn left and you will find yourself in front of a large parking area, called the Golf area."+
-      "Departure. From here you enter the village and pass the last houses and hotels, taking the wide mule track which gently cuts through the meadows and begins to climb."+
-      "At the beginning metal pole with classic yellow trail sign used in Valle d'Aosta, indicates nr. 13 the path to the Rifugio all'Oriondè at 2,802 m. in 3 hours, difficulty H hiking."+
-      "You can get to the refuge along the wide road or the various paths that cross along the way."+
-      "You pass several pastures and after a long traverse the road passes the marvelous waterfall of the Porteiller torrent, formed by the rocky leap of the overhanging beautiful plain of the Alpe de l'Eura."+
-      "After this passage, only the last more steep stretch must be overcome and you will arrive at the refuge."+
-      "Arriving at the gray building of the Duca degli Abruzzi Refuge we are close to the Italian side of the Grande Becca, Monte Cervino. its massive rock mass that rises so severely inspires fear and respect."+
-      "From here you can enjoy a complete and stupendous view over a good part of Valtournenche. To the left the Furggen, then the sequence of the Piccolo Cervino, the crest of the Breithorn, the Plateau Rosà, the Gobba di Rollin, up to Cime Bianche and below the Lago del Goliet."+
-      "Simple excursion, without particular difficulties, of moderate length suitable for good legs and breath"+
-      "It is advisable, paying attention to the last rocky stretch, to continue for half an hour to touch the Carrel cross, which has marked the history of mountaineering, following the route which then becomes mountaineering, leading to Colle del Leone and the refuge dedicated to J.A. Carrel, support point for the Italian ascent route to Monte Cervino."
+      expTime=null; 
+      file="parinacota.gpx"    
+      Description="You hike along an old really beautiful Inca way through different types of vegetation. The trek can easily be done by yourself without any guide or mules / horses that carry your equipment. The first night you can not sleep in a lodge, you therefore have to carry your own tent. Along the way you will find a couple of small stores selling snacks and food. It's best to bring your own food from 'La Paz'. Some guidebooks write, that the locals are unfriendly or even worse, that you get robbed. We did not experience anything like it, everyone was really friendly and helpful."+
+
+      "Day 1:"+
+      "There are three options to reach the starting point of the trek. 1) take any bus that goes from 'La Paz' ('Villa Fatima' district) to 'Coroico' and tell the driver to let you off at 'La Cumbre' 2) same as 1 but with minibuses, they leave when there are full and they also depart from 'Villa Fatima' 3) take a taxi (we paid 80 Bolivianos). Of course you can also hitch hike, there are many cars passing. 'La Cumbre' is also the starting point for the famous 'Death Road'. You need to register at the small house next to the lagoon. After that you follow the dirt-road up to the pass. From here it all goes down... down .. down. You will pass a small village (Samaña Pampa) where you have to sign again. Further down the path you reach the village 'Chucura' where you have to pay the trail fee of 10 Bolivianos. The money is collected to keep the way clean and for the maintenance for all the bridges. We spent the first night in 'Challapampa' (2820m), you have to bring your own tent. They charge 10 Bolivianos per person. You can also buy snacks and drinks here."+
+      
+      "Day 2:"+
+      "The second day is really long and tiring so better get up early. First you go down on the true left side of the river until 'Choro' where you cross the river. On the other side you have to go up again. Now there are several possibilities to camp along the way. We walked until 'Sandillani' where you can also stay in a nice lodge, run by an old lady. If you want to camp it's 5 Bolivianos per person. There is no hot water and the toilets costs extra (1 Boliviano). The lady does also sell beers and snacks, it's also possible to eat breakfast there. On this second day we walked almost 9 hours and the way is going up and down."+
+      
+      "Day 3:"+
+      "From 'Sandillani' it only goes down to 'Chairo', it takes roughly 2 - 3 hours until you arrive in 'Chairo'. From here you can get a (really) expensive taxi to either the junction of the 'La Paz - Coroico' route or directly to 'Coroico'. I guess they charge about 100 Bolivianos. Another option is to walk or hitch hike, there are quite some cars passing by. At the junction you can take a taxi/minibus back to 'Villa Fatima' (25 Bolivianos per person)"+
+      
+      "Don't forget to bring sunscreen, repellent and some small bills to buy snacks/water along the way."+
+      
+      "Helpful maps:"+
+      "- http://www.azimutexplorer.com/img/content/photos_big/trek_choro_4dias/mapa_choro.jpg"+
+      "- http://www.trekkingchile.com/Images/choro-trail-map.jpg"+
+      "- http://www.turismoboliviaperu.com/imgs/mapa-choro.gif"+
+      "- http://coroico-info.com/webs/incatrail/sitebuilder/images/mappage-572x557.jpg"
+            
+    this.wrapperPopulate(HikeID,file,province,city,title,length,expTime,Ascent,Description,Difficulty,start,end);
+
+
+    HikeID='30';
+    title="Choro Trek Bolivia";
+    province='BOLIVIA';
+    city =' Rinconada (La Paz)'; 
+    Ascent=-4280;
+    start="Pueblo Sajama"
+    end="Crater rim, NW"
+    length=51.97;
+    Difficulty="PH";
+    expTime=null; 
+    file="choro-trek-bolivia.gpx"    
+    Description="3 days of trekking along an old paved Inca road, with a pass over 4700 m and the chance to go down till the humid climate of the Yungas where the mountains are green and coffe, bananas and coca grows. A world class trekking with Inca ruins, remote villages, delicious camping spots and a very special encouter with the fascinating Japanese old men that lives here since the 50's"
+          
+  this.wrapperPopulate(HikeID,file,province,city,title,length,expTime,Ascent,Description,Difficulty,start,end);
+
     
-      this.wrapperPopulate(HikeID,file,province,city,title,length,expTime,Ascent,Description,Difficulty,start,end);
+  HikeID='31';
+  title="Huayna Potosi - From Base Camp to Summit";
+  province='BOLIVIA';
+  city ='Milluni(La Paz)'; 
+  Ascent=1350;
+  start="CampArgent"
+  end="RefCasadeG"
+  length=7.5;
+  Difficulty="PH";
+  expTime=1359; 
+  file="huayna-potosi-from-base-camp-to-summit.gpx"    
+  Description="From Huayna Potosi Base Camp to Summit"+
+  "Day 1: La Paz - Huayna Potosi Base Camp - Refugio Anselme Baud/Casa de Guias"+
+  "Day 2: Refugio Anselme Baud/Casa de Guias - Summit - La Paz"+
+  "For a full report see '20 days in the Cordillera Real - Trekking and Montanhism'"+
+  "https://www.facebook.com/lucasbaruzzi/media_set?set=a.10207861573721238&type=3&pnref=story"
+        
+this.wrapperPopulate(HikeID,file,province,city,title,length,expTime,Ascent,Description,Difficulty,start,end);
 
 
-    }
+HikeID='32';
+title="Laguna Glacial de Sorata (Illampu y Janq'u Uma)";
+province='BOLIVIA';
+city ='Tusca Jahuira(La Paz)'; 
+Ascent=1035;
+start="Laguna Chillata"
+end="The Glacier Lake"
+length=8.04;
+Difficulty="H";
+expTime=216; 
+file="laguna-glacial-de-sorata-illampu-y-janqu-uma.gpx"    
+Description="Sorata's Glacier Lake is located at more than 5000 meters in elevation. You best way to start the hike is to take a taxi as far up towards Laguna Chillata as you can (80-100 bolivianos). From there, the Glacier Lake is still pretty far away (1000 meters higher) and so it's best to camp at Laguna Chillata and not do the entire hike in a single day. From Laguna Chillata, it takes 4-6 hours to hike up the Glacier Lake. Te get back to Sorata, it's best to talk to the locals on your way down and see if you can hire a driver."+
+
+"La Laguna Glacial de Sorata de encuentra a más que 5000 metros de altura. Se recomiende tomar taxi hasta lo más cerca posible a laguna Chillata (80-100 bolivianos). De ese punto la Laguna Glacial esta todavía lejos con una subida de 1000 metros, así que se recomiende acampar por la Laguna Chillata y no hacer la caminata en un solo día. Desde la Laguna Chillata se puede subir a la Laguna Glacial en 4-6 horas. Para volver a Sorata, se debe preguntar a los comunarios de los pueblos si se puede contratar transporte."
+this.wrapperPopulate(HikeID,file,province,city,title,length,expTime,Ascent,Description,Difficulty,start,end);
+
+
+HikeID='48';
+title="Parco burcina";
+province='Biella';
+city ='Pollone'; 
+Ascent=280;
+start="Area Parcheggio Comunale"
+end="Parco Burcina | Torre Martini"
+length=3.13;
+Difficulty="T";
+expTime=60; 
+file="segmentoBurcinaPollone.gpx"    
+Description= "RISERVA NATURALE SPECIALE PARCO BURCINA 'FELICE PIACENZA'"+
+"Is a historic garden located on the homonymous 'Brik Burcina' a gentle hill close to the Biella Alps."+
+"The origins of the Burcina Park date back to the mid-1800s when the Piacenza family began to buy the land on the hill to set it up with a great variety of plants from around the world until, in 1980, the Nature Reserve was established."
+"The park is located in the territory of the municipalities of Biella and Pollone, has a total area of 57 hectares and the altimetric excursion ranges from 570 to 830 m a.s.l."+
+"The dirt road that leads to the top of the hill, where the tower that overlooks the surrounding vegetation is located, is slightly uphill, constant throughout the route where it is possible to admire a great variety of plants and flowers at all times of the year."+
+"It is also possible to reach the peaks by choosing one of the many paths that branch off from the main route, lengthening or shortening the journey"+
+"This is a very busy place, especially on weekends and during flowering or foliage periods, but it is worth a visit for an easy walk."
+
+
+this.wrapperPopulate(HikeID,file,province,city,title,length,expTime,Ascent,Description,Difficulty,start,end);
+
+
+HikeID='49';
+title="Monte Mucrone via Normale";
+province='Biella';
+city ='Oropa'; 
+Ascent=1059;
+start="Parcheggio Piazzale di Oropa"
+end="Monte Mucrone | 2335 m"
+length=5.48;
+Difficulty="H";
+expTime=200; 
+file="mucrone via normale.gpx"    
+Description="Starting from the Oropa car park next to the cable car, take the path that climbs along the Busancano slope (now disused ski slope)."+
+"After a first piece in the vegetation you come to a crossroads towards a road that descends but you continue uphill to the left. And immediately after you meet two steep switchbacks called the 'Z'."+
+"At this point the path continues with a constant slope, until after about 3 km you reach the Savoia refuge."+
+"The path turns left before the refuge (in fact you will not pass by it) and continues up to the Mucrone lake, a small lake nestled under the mountain."+
+"From here you climb in a straight line until you reach the pass from which, turning left, the last stretch of climb begins."+
+"The last part is a real mountain path. After a few ramps uphill you reach what remains of the old cable car station in the place called 'anticima'."+
+"From here we continue climbing towards the top of the mountain. At its top there is a cross about 3/4 meters high and you can enjoy a fantastic panorama."+
+"in front of you opens a view of the foothills of the Alps and the entire Po valley. On the clearest days you get to see the skyscrapers of Milan and the Ligurian Alps."+
+"On the other side, however, you can see the peaks of the Aosta valley such as Cervino and Monte Rosa."
+"The same path can be followed for the way back."+
+"This is not a very long trail but the trail is in poor condition with little maintenance so extreme care must be taken. The effort is certainly rewarded by the view once at the top."
+
+this.wrapperPopulate(HikeID,file,province,city,title,length,expTime,Ascent,Description,Difficulty,start,end);
+
+
+HikeID='50';
+title="Hike to Rifugio Duca degli Abruzzi";
+province='Aosta';
+city ='Cervinia'; 
+Ascent=794;
+start="Cervinia. Parking lot near Golf"
+end="Rifugio Duca degli Abruzzi | 2803 m"
+length=5.26;
+Difficulty="H";
+expTime=420; 
+file="rifugio-orionde-duca-degli-abruzzi-da-cervinia-segnavia-13ee.gpx"    
+Description="Once in Cervinia, go as far as the roundabout, turn left and you will find yourself in front of a large parking area, called the Golf area."+
+"Departure. From here you enter the village and pass the last houses and hotels, taking the wide mule track which gently cuts through the meadows and begins to climb."+
+"At the beginning metal pole with classic yellow trail sign used in Valle d'Aosta, indicates nr. 13 the path to the Rifugio all'Oriondè at 2,802 m. in 3 hours, difficulty H hiking."+
+"You can get to the refuge along the wide road or the various paths that cross along the way."+
+"You pass several pastures and after a long traverse the road passes the marvelous waterfall of the Porteiller torrent, formed by the rocky leap of the overhanging beautiful plain of the Alpe de l'Eura."+
+"After this passage, only the last more steep stretch must be overcome and you will arrive at the refuge."+
+"Arriving at the gray building of the Duca degli Abruzzi Refuge we are close to the Italian side of the Grande Becca, Monte Cervino. its massive rock mass that rises so severely inspires fear and respect."+
+"From here you can enjoy a complete and stupendous view over a good part of Valtournenche. To the left the Furggen, then the sequence of the Piccolo Cervino, the crest of the Breithorn, the Plateau Rosà, the Gobba di Rollin, up to Cime Bianche and below the Lago del Goliet."+
+"Simple excursion, without particular difficulties, of moderate length suitable for good legs and breath"+
+"It is advisable, paying attention to the last rocky stretch, to continue for half an hour to touch the Carrel cross, which has marked the history of mountaineering, following the route which then becomes mountaineering, leading to Colle del Leone and the refuge dedicated to J.A. Carrel, support point for the Italian ascent route to Monte Cervino."
+
+this.wrapperPopulate(HikeID,file,province,city,title,length,expTime,Ascent,Description,Difficulty,start,end);
+
+
+
+}
     
 
     static  wrapperPopulate =async (HikeID,file,province,city,title,length,expTime,Ascent,Description,Difficulty,start,end)=>{
