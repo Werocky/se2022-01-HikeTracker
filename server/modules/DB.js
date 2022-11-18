@@ -741,7 +741,7 @@ class DatabaseConnection {
       this.wrapperPopulate(HikeID,file,province,city,title,length,expTime,Ascent,Description,Difficulty,start,end);
 
 
-      HikeID='25';
+      HikeID='24';
       title="West MacDonnell National Park - Ormiston Pound, Mt Giles, Chewings Range and Heavitree Range";
       province='AUSTRALIA';
       city ='Glen Helen(Northern Territory)'; 
@@ -765,6 +765,54 @@ class DatabaseConnection {
       
       "We started at Ormiston Gorge and finished at Serpentine Chalet Dam (arriving around midday). With an extra day it could converted to a circuit returning to Ormiston Gorge via the Larapinta Trail."
       
+
+      this.wrapperPopulate(HikeID,file,province,city,title,length,expTime,Ascent,Description,Difficulty,start,end);
+
+
+      
+      HikeID='25';
+      title="Uyuni (3 days tour)";
+      province='BOLIVIA';
+      city ='Uyuni(Potosi)'; 
+      Ascent=3652;
+      start="Cementerio de Trenes"
+      end="Chilean Migration Checkpoint"
+      length=557.1;
+      Difficulty="H";
+      expTime=4320; 
+      file="uyuni-3-days-tour.gpx"    
+      Description="THE TRIP"+
+      "Round trip vs. Atacama connection: the tour its basically a one way trip, the 500km you do in 2 days and 1 morning you will do through another path to go back in just one afternoon, making almost non stops."+
+      "Altitude: you will reach almost 5000 meters, but Uyuni is at 3700 same as the first night of the tour, should be ok ONLY if you spend some days in Uyuni to get used to the 4000 range (or any other high place like Potosi) don’t underestimate this, so many people get altitude sickness because they climb too fast. Avoid alcohol, its not good and you will get drunk so much easier than normal."+
+      "Times: the early you leave the better, avoid crowds, have more time to enjoy, 3rd day before going to the geyser wake up 4am, make sure to go outside the hotel as soon as possible to take a look at the sky, the stars there are amazing (wear warm) then go inside for breakfast."+
+      "Wildlife: flamingos easy to find, fox and viscachas (rabbit like animal) not so easy."+
+      "Geyser: avoid breathing for long the fumes, its toxic."+
+      "Bags: if you do the trip with a tour agency leave all the food, medicine, some water, warm cloth and windbreaker in your small backpack with you (in your seat or the trunk) the rest will be put outside the car on the top tied up, they will give to you at the end of the day when you get to the hotel."+
+      "Electricity: this can change on where you stay but should be similar anywhere. 1st night there is light in the rooms but no plug, for charging your devices you have to go to the common area where there is a table full of splitters and plug it there. 2nd night cannot charge anything, if you are lucky  have light it will be only for few hours before sleeping or the whole night (no lights on the toilet in my case) tip: pack your back before night falls, next day you wake up 4am."+
+      "Shower: 1st night there is hot shower for extra price, 2nd night if you are lucky you will have shower and if you are very very lucky hot water but better not count on any kind of shower for the whole trip, specially for the second night."+
+      "Winter: so strong wind it break the window of the car sometimes. -20C."+
+      "Summer: ok weather but still cold and windy, around -5C at night. daytime t-shirt hot, cold when the wind blows."+
+      "For more info about the weather check pictures: yearly graphic (link on description to full info)"+
+      
+      "VARIANTS"+
+      "4 days: same as this one plus Vocán Tunupa area (northern part of the salt flat)"+
+      "4 days: Uyuni -> Tupiza, after the southern part of the 3 days trip you head to Tupiza. Careful: Tupiza -> Uyuni can be done, even easier to find agency but you will climb very fast in short time, faster than starting in Uyuni."+
+      "1 day: only the salt flat (going to Isla Incahuasi and come back)"+
+      
+      "DRIVE IT YOURSELF"+
+      "Bring all the fuel you need."+
+      "Bring all the water you need."+
+      "Food maybe you can get on the hotels but the tour drivers they cook in the hotels."+
+      "No ATM, no card accepted anywhere in the tour."+
+      "Avoid the rainy season (december to february) the path get flooded making it very hard even imposible, the secondary route miss many attractions."+
+      "Places not included in the normal tour might be worth it: Ojos de Sal (Salar de Uyuni) Cueva Galaxias (north of San Pedro de Quemez)"+
+      "Bike: looks very hard and you need to arrange for the fuel with some vehicle probably, but possible, I saw at least 4 bikes in the whole trip. Very strong winds you don't feel inside the car."+
+      
+      "ABOUT THE AGENCIES"+
+      "Almost every the cars are Toyota Land Cruise, they put all the big stuff on top of the car, including big containers with fuel for the full trip, good agencies are hard to find, I heard only 3 companies have own drivers, the rest just hire any driver for the tour merging with other agencies, Hodaka Mountain is one of the few with selected list of drivers, a bit more expensive but in my 1 experience is worth it. They merge with other companies if not enough passenger but they have a selected partners same as drivers, my experience was good, the car looks normal/nice at first but after comparing with the rest (glasses filled with marks on the dark film, horrible for pictures, some cannot even open the window) I realice it was one of the bests, even the driver was specially careful (speed, attention, he even clean the windows couple times a day, something so small nobody notices but makes the difference, specially for the pictures)"+
+      "You will make some stops but the time is limited but the place is huge, so you will have to take pictures from the car a lot, make sure the car can open the windows. The Lexus version of the car have windows in the 3rd row of seat (the normal Toyota version has fixed glass, cannot open)"
+      
+
 
       this.wrapperPopulate(HikeID,file,province,city,title,length,expTime,Ascent,Description,Difficulty,start,end);
 
