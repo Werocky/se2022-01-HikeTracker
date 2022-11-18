@@ -661,8 +661,57 @@ class DatabaseConnection {
       this.wrapperPopulate(HikeID,file,province,city,title,length,expTime,Ascent,Description,Difficulty,start,end);
 
 
-    }
+      HikeID='21';
+      title="Circuito Wulaia via Puerto Navarino";
+      province='CHILE';
+      city ='Puerto Navarino (Magallanes)'; 
+      Ascent=1515;
+      start=null
+      end="Wulaia bay"
+      length=30.26;
+      Difficulty="PH";
+      expTime=1850; 
+      file="circuito-wulaia-via-puerto-navarino.gpx"    
+      Description="Beautiful, splendid isolated coast trail following the old marks from 2002/2003 (as far as possible). Mostly in woodlands near the shore, interrupted by fair bay areas und a land passage."+
+
+      "- there is unfortunately no public transport to/from PW und few private traffic. You can go by hitch-hiking or take a lift by Ushuaia Booting."+
+      "- at the beginning are some animals trails and it is easy, later most time on pathless terrain"+
+      "- ~70% of the old marks are still existing in varying quality"+
+      "- from hito 7 to Wulaia it is continuously getting harder, some areas are strongly changed by beaver work or storm damages with lots of trunks over the ground of every size and the signs are lacking."+
+      "- beautiful bay areas with remains from the Yámana. Please don't touch the conchales, they are one of last evidence of this vanished folk and protected by chilean law."+
+      "- in the bay areas also you can find high nasty spiny shrubs (calafate & mata negra) were you have to pass through."+
       
+      "some remarks:"+
+      "- between hito 7 and hito 8 are some steep passages, take care when it is wet, also the trunks can get slippery"+
+      "- go with proper gear and knowledge to use it."+
+      "- plan at least 3-4 days, even it es possible to do it in two days. The weather can change and become inhospitable quickly at every time."+
+      "- it is recommendable to stay on the track."+
+      "- be aware of the risk that in case of trouble nobody will or can help you in this remote area"+
+      "- under 'Cabo de Hornos, Walaia – Ruta Patrimonial Nº16' you can find in the WWW a good description (68 pages) of the track from the 'Ministerio de Bienes Nacionale'. But note: all named GPS-coordinates are wrong. Even with transformation from datum PSAD56 or SA69 to WSG84. The named datum 'P. South America 69' is not existing."
+      
+      
+      this.wrapperPopulate(HikeID,file,province,city,title,length,expTime,Ascent,Description,Difficulty,start,end);
+
+
+      HikeID='22';
+      title="Salkantay via Llaqtapata (self-guided)";
+      province='PERU';
+      city ='Soray(Cusco)'; 
+      Ascent=3657;
+      start="Abra Salkantay"
+      end="Wayramachay"
+      length=66.38;
+      Difficulty="H";
+      expTime=5924; 
+      file="salkantay-via-llaqtapata-self-guided.gpx"    
+      Description="Salkantay via Llaqtapata (self-guided) by Luana e Leandro from Expllorers channel."+
+
+      "Days: 6 days / 5 nights (Machu Picchu visit included)."+
+      
+      "Details coming soon."
+      
+      this.wrapperPopulate(HikeID,file,province,city,title,length,expTime,Ascent,Description,Difficulty,start,end);
+    }
     
 
     static  wrapperPopulate =async (HikeID,file,province,city,title,length,expTime,Ascent,Description,Difficulty,start,end)=>{
