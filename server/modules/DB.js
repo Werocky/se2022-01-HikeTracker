@@ -510,7 +510,7 @@ class DatabaseConnection {
       length=13;
       Difficulty="H";
       expTime=160; 
-      file="capanna Mautino .gpx"    
+      file="capanna Mautino.gpx"    
       Description="Abbiamo trovato un sentiero davvero ben curato. Inizia percorrendo dal parcheggio la strada asfaltata in salita. Troverai diversi cartelli che ti indicheranno la via da seguire."+
 
       "Spesso potrai scegliere tra due (o tre) varianti, noi solitamente in questi casi, se non conosciamo il sentiero, cerchiamo di procedere sulla via più battuta."+
@@ -530,6 +530,85 @@ class DatabaseConnection {
       "Nel periodo estivo, ti consiglio di percorrere il sentiero parallelo che taglia sui pendii per evitare la strada carrozzabile 🙂"
       
       this.wrapperPopulate(HikeID,file,province,city,title,length,expTime,Ascent,Description,Difficulty,start,end);
+
+
+      HikeID='17';
+      title="Sentiero per il POGGIO TRE CROCI | 2115 m slm";
+      province='Piemonte';
+      city ='CIASPOLATE'; 
+      Ascent=803;
+      start="Bardonecchia (TO) / 1326 mslm circa";
+      end="Poggio Tre Croci / 2115 mslm circa"
+      length=10.4;
+      Difficulty="H";
+      expTime=165; 
+      file="Poggio Tre Croci Ciaspole.gpx"    
+      Description="L’escursione ha inizio proprio dal piazzale della Fiera di Bardonecchia."+
+
+        "Attraversando la strada basterà infatti oltrepassare il ponte sul Rio della Rho per trovarsi davanti dei cartelli indicatori che ci indicheranno la via da seguire."+
+        
+        "Il sentiero di questa escursione è una strada sterrata che in inverno si ricopre di neve."+
+        
+        "Il percorso si sviluppa all’interno di un fitto bosco che nei giorni successivi ad una nevicata regala una cornice davvero fiabesca."+
+        
+        "Durante il tratto iniziale del sentiero la pendenza è molto blanda e ci permette di godere a pieno ciò che ci circonda."+
+        
+        "Proseguendo lungo la tratta si arriva ad un primo punto panoramico su Bardonecchia: oltre alla cittadina è notevole il colpo d’occhio sullo Jafferau."+
+        
+        "Da questo punto in avanti però la strada diventa meno larga ed evidente."+
+        
+        "Dopo circa 3,5 Km vi è un piccolo strappo e la pendenza aumenta notevolmente facendoci guadagnare velocemente la maggior parte del dislivello di questa gita: i tornanti a questo punto iniziano a farsi sempre più stretti e sempre più ripidi e si susseguono con maggiore frequenza."+
+        
+        "Dopo un susseguirsi di diversi tornanti ravvicinati si esce dal bosco e ci si ritrova davanti agli occhi un panorama molto ampio sul Melezet e sulla Valle Stretta."+
+        
+        "Spostandosi di qualche metro dalla strada si giunge alla nostra meta, dove ad accoglierci sono presenti le Tre Croci che danno il nome a questo posto."+
+        
+        "Il sentiero per il ritorno si svolge sul medesimo di andata anche se sono presenti diversi tratti dove poter “tagliare” alcuni tornanti."
+      
+      this.wrapperPopulate(HikeID,file,province,city,title,length,expTime,Ascent,Description,Difficulty,start,end);
+
+      
+      HikeID='18';
+      title="Sentiero per CIMA DEL BOSCO | 2376 m slm";
+      province='Piemonte';
+      city ='CIASPOLATE'; 
+      Ascent=826;
+      start="Sauze di Cesana (TO) / 1550 mslm circa";
+      end="Cima del Bosco / 2376 mslm circa"
+      length=17;
+      Difficulty="H";
+      expTime=210; 
+      file="Cima del Bosco.gpx"    
+      Description="Cima del Bosco è una facile punta a poco meno di 2400m che nonostante l’altitudine modesta consente di godere di un panorama a 360° sull’alta Valle di Susa."+
+
+      "Può essere raggiunta in diversi modi, in questa descrizione vedremo l’accesso più facile, da strada forestale a partire dalla località di Sauze di Cesana."+
+      
+      "Dal ponte del Torrente Ripa, ci si incammina verso il ponte e si attraversa il torrente, oltrepassato il quale si prosegue a destra seguendo l’indicazione su palina in legno per Cima del Bosco."+
+      
+      "La strada inizia a salire in un bel bosco misto di pini e larici, con pendenza costante, che manterrà pressochè fino in cima."+
+      
+      "Dopo circa 1Km si tralascia la deviazione in discesa sulla destra e si prosegue a sinistra."+
+      
+      "Si prosegue sulla strada principale, che prosegue sempre ben larga e visibile con alcuni ampi tornanti."+
+      
+      "A quota 1900 al termine di un tornante si incontra il sentiero che sale dalla Valle Argentera, indicato da palina in legno, che potrebbe costituire una variante della salita, è da considerare però che il tracciato è più difficile della strada forestale e consigliato solo ad esperti, specialmente nella stagione invernale."+
+      
+      "Proseguendo lungo la strada principale il panorama via via si apre salendo di quota, finchè a circa 2300m la vegetazione scompare e lascia il posto a pendii erbosi."+
+      
+      "Essendo ben visibile e prevedibile il tracciato della forestale che porta sulla cima sopra di noi, è possibile effettuare anche dei tagli in prossimità dei tornanti."+
+      
+      "Arrivati a quota 2376m il panorama si apre, è molto ampio e spazia dalle cime francesi di confine alle località di Sestriere e Cesana."+
+      
+      "È possibile trovare rifugio nella piccola e graziosa cappella di Cima del Bosco, che costituisce un bivacco a tutti gli effetti ed è normalmente aperto e provvisto di tavolo per un eventuale pranzo."+
+      
+     "La discesa si effettua sullo stesso facile tracciato di salita."
+
+    
+      this.wrapperPopulate(HikeID,file,province,city,title,length,expTime,Ascent,Description,Difficulty,start,end);
+
+
+
+
 
     }
       
