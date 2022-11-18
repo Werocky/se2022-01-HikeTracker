@@ -16,6 +16,8 @@ function Sidebar(props) {
   const [minExTime, setMinExTime] = useState(undefined);
   const [maxExTime, setMaxExTime] = useState(undefined);
 
+  const [msgLength, setMsgLength] = useState('');
+
   // Need to reset the filter params with useEffect
 
   const handleSubmit = async (event) => {
@@ -30,18 +32,18 @@ function Sidebar(props) {
     const t_city = city;
     const t_difficulty = difficulty;
 
-    if(t_minExTime==="" || t_minExTime===undefined)
-      t_minExTime=0;
-    if(t_maxExTime==="" )
-      t_maxExTime=undefined;
-    if(t_minAscent==="" || t_minAscent===undefined)
-      t_minAscent=0;
-    if(t_maxAscent==="")
-      t_maxAscent=undefined;
-    if(t_minDist==="" || t_minDist===undefined)
-      t_minDist=0;
-    if(t_maxDist==="")
-      t_maxDist=undefined;
+    if (t_minExTime === "" || t_minExTime === undefined)
+      t_minExTime = 0;
+    if (t_maxExTime === "")
+      t_maxExTime = undefined;
+    if (t_minAscent === "" || t_minAscent === undefined)
+      t_minAscent = 0;
+    if (t_maxAscent === "")
+      t_maxAscent = undefined;
+    if (t_minDist === "" || t_minDist === undefined)
+      t_minDist = 0;
+    if (t_maxDist === "")
+      t_maxDist = undefined;
 
     //console.log(city+"\n"+province+"\n"+difficulty+"\n"+minDist+"\n"+maxDist+"\n"+minAscent+"\n"+maxAscent+"\n"+minExTime+"\n"+maxExTime);
     // call the API and pass all the filter params
@@ -59,7 +61,7 @@ function Sidebar(props) {
     setMaxAscent(() => undefined);
     setMaxExTime(() => undefined);
 
-    API.getHikes().then(array=>props.setHikes(array));
+    API.getHikes().then(array => props.setHikes(array));
   }
 
 
@@ -102,7 +104,12 @@ function Sidebar(props) {
                 <Form.Control
                   placeholder="Distance"
                   onChange={(event) => {
-                    setMinDist(event.target.value)
+                    if (isNaN(event.target.value)) {
+                      setMsgLength("This field should be a number (e.g. 4.52)");
+                    } else {
+                      setMinDist(event.target.value)
+                      setMsgLength('');
+                    }
                   }}
                 />
                 <InputGroup.Text id="basic-addon2">km</InputGroup.Text>
@@ -116,7 +123,12 @@ function Sidebar(props) {
                 <Form.Control
                   placeholder="Distance"
                   onChange={(event) => {
-                    setMaxDist(event.target.value)
+                    if (isNaN(event.target.value)) {
+                      setMsgLength("This field should be a number (e.g. 4.52)");
+                    } else {
+                      setMinDist(event.target.value)
+                      setMsgLength('');
+                    }
                   }}
                 />
                 <InputGroup.Text id="basic-addon2">km</InputGroup.Text>
@@ -125,6 +137,11 @@ function Sidebar(props) {
                 Max dist.
               </Form.Text>
             </Col>
+            {msgLength &&
+              <Alert variant="danger">
+                {msgLength}
+              </Alert>
+            }
           </Row>
         </Form.Group>
 
@@ -198,7 +215,7 @@ function Sidebar(props) {
 
         <Row>
           <Col>
-            <Button variant="primary" type="submit">
+            <Button variant="primary" type="submit" disabled={msgLength ? true : false} >
               Submit
             </Button>
           </Col>
@@ -254,7 +271,7 @@ function GeogForm(props) {
     console.log("Radius " + radius + "\nCoord: " + coord);
     if (coord === null) {
       setMsg("You did not selected any point!");
-    } else if(radius === undefined) {
+    } else if (radius === undefined) {
       setMsg("You did not select a distance!");
     } else {
       setMsg('');

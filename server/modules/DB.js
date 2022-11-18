@@ -737,10 +737,82 @@ class DatabaseConnection {
       "2) Crossing of Tizi-n-Ouamoums, and then down to Amsouzert. Night at the known gite d'etape run by Omar;"+
       "3) Up the Tisgui and down to the azib before the gorge. Night under te stars in the sleeping bag;"+
       "4) Crossing of Tizi Likemt and back to Imlil."
-      
+
       this.wrapperPopulate(HikeID,file,province,city,title,length,expTime,Ascent,Description,Difficulty,start,end);
 
 
+      HikeID='48';
+      title="Parco burcina";
+      province='Biella';
+      city ='Pollone'; 
+      Ascent=280;
+      start="Area Parcheggio Comunale"
+      end="Parco Burcina | Torre Martini"
+      length=3.13;
+      Difficulty="T";
+      expTime=60; 
+      file="segmentoBurcinaPollone.gpx"    
+      Description= "RISERVA NATURALE SPECIALE PARCO BURCINA 'FELICE PIACENZA'"+
+      "Is a historic garden located on the homonymous 'Brik Burcina' a gentle hill close to the Biella Alps."+
+      "The origins of the Burcina Park date back to the mid-1800s when the Piacenza family began to buy the land on the hill to set it up with a great variety of plants from around the world until, in 1980, the Nature Reserve was established."
+      "The park is located in the territory of the municipalities of Biella and Pollone, has a total area of 57 hectares and the altimetric excursion ranges from 570 to 830 m a.s.l."+
+      "The dirt road that leads to the top of the hill, where the tower that overlooks the surrounding vegetation is located, is slightly uphill, constant throughout the route where it is possible to admire a great variety of plants and flowers at all times of the year."+
+      "It is also possible to reach the peaks by choosing one of the many paths that branch off from the main route, lengthening or shortening the journey"+
+      "This is a very busy place, especially on weekends and during flowering or foliage periods, but it is worth a visit for an easy walk."
+
+
+      this.wrapperPopulate(HikeID,file,province,city,title,length,expTime,Ascent,Description,Difficulty,start,end);
+
+
+      HikeID='49';
+      title="Monte Mucrone via Normale";
+      province='Biella';
+      city ='Oropa'; 
+      Ascent=1059;
+      start="Parcheggio Piazzale di Oropa"
+      end="Monte Mucrone | 2335 m"
+      length=5.48;
+      Difficulty="H";
+      expTime=200; 
+      file="mucrone via normale.gpx"    
+      Description="Starting from the Oropa car park next to the cable car, take the path that climbs along the Busancano slope (now disused ski slope)."+
+      "After a first piece in the vegetation you come to a crossroads towards a road that descends but you continue uphill to the left. And immediately after you meet two steep switchbacks called the 'Z'."+
+      "At this point the path continues with a constant slope, until after about 3 km you reach the Savoia refuge."+
+      "The path turns left before the refuge (in fact you will not pass by it) and continues up to the Mucrone lake, a small lake nestled under the mountain."+
+      "From here you climb in a straight line until you reach the pass from which, turning left, the last stretch of climb begins."+
+      "The last part is a real mountain path. After a few ramps uphill you reach what remains of the old cable car station in the place called 'anticima'."+
+      "From here we continue climbing towards the top of the mountain. At its top there is a cross about 3/4 meters high and you can enjoy a fantastic panorama."+
+      "in front of you opens a view of the foothills of the Alps and the entire Po valley. On the clearest days you get to see the skyscrapers of Milan and the Ligurian Alps."+
+      "On the other side, however, you can see the peaks of the Aosta valley such as Cervino and Monte Rosa."
+      "The same path can be followed for the way back."+
+      "This is not a very long trail but the trail is in poor condition with little maintenance so extreme care must be taken. The effort is certainly rewarded by the view once at the top."
+
+      this.wrapperPopulate(HikeID,file,province,city,title,length,expTime,Ascent,Description,Difficulty,start,end);
+
+
+      HikeID='50';
+      title="Hike to Rifugio Duca degli Abruzzi";
+      province='Aosta';
+      city ='Cervinia'; 
+      Ascent=794;
+      start="Cervinia. Parking lot near Golf"
+      end="Rifugio Duca degli Abruzzi | 2803 m"
+      length=5.26;
+      Difficulty="H";
+      expTime=420; 
+      file="rifugio-orionde-duca-degli-abruzzi-da-cervinia-segnavia-13ee.gpx"    
+      Description="Once in Cervinia, go as far as the roundabout, turn left and you will find yourself in front of a large parking area, called the Golf area."+
+      "Departure. From here you enter the village and pass the last houses and hotels, taking the wide mule track which gently cuts through the meadows and begins to climb."+
+      "At the beginning metal pole with classic yellow trail sign used in Valle d'Aosta, indicates nr. 13 the path to the Rifugio all'Oriondè at 2,802 m. in 3 hours, difficulty H hiking."+
+      "You can get to the refuge along the wide road or the various paths that cross along the way."+
+      "You pass several pastures and after a long traverse the road passes the marvelous waterfall of the Porteiller torrent, formed by the rocky leap of the overhanging beautiful plain of the Alpe de l'Eura."+
+      "After this passage, only the last more steep stretch must be overcome and you will arrive at the refuge."+
+      "Arriving at the gray building of the Duca degli Abruzzi Refuge we are close to the Italian side of the Grande Becca, Monte Cervino. its massive rock mass that rises so severely inspires fear and respect."+
+      "From here you can enjoy a complete and stupendous view over a good part of Valtournenche. To the left the Furggen, then the sequence of the Piccolo Cervino, the crest of the Breithorn, the Plateau Rosà, the Gobba di Rollin, up to Cime Bianche and below the Lago del Goliet."+
+      "Simple excursion, without particular difficulties, of moderate length suitable for good legs and breath"+
+      "It is advisable, paying attention to the last rocky stretch, to continue for half an hour to touch the Carrel cross, which has marked the history of mountaineering, following the route which then becomes mountaineering, leading to Colle del Leone and the refuge dedicated to J.A. Carrel, support point for the Italian ascent route to Monte Cervino."
+    
+      this.wrapperPopulate(HikeID,file,province,city,title,length,expTime,Ascent,Description,Difficulty,start,end);
 
 
     }
