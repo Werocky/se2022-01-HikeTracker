@@ -817,6 +817,28 @@ class DatabaseConnection {
       this.wrapperPopulate(HikeID,file,province,city,title,length,expTime,Ascent,Description,Difficulty,start,end);
 
 
+      HikeID='26';
+      title="Nevado Sajama, 6542";
+      province='BOLIVIA';
+      city ='Estancia Junchusuma(Oruro)'; 
+      Ascent=2240;
+      start="path to Aychuta"
+      end="Nevado Sajama"
+      length=11.07;
+      Difficulty="H";
+      expTime=null; 
+      file="nevado-sajama-6542.gpx"    
+      Description="The present track describes the normal route to Nevado Sajama."+
+      "IT IS DRAWN BY HAND, following the well definite path visible on Google Earth."+
+      "It has no meaning from the penitentes to the top, since there the path has to be established according to the conditions."+
+      "The path start at 4300 m from the flat road joining Pueblo Sajama to Laguna Huayna Chota before and Estancia Tomarapi next. This road is part of a whole loop that could be done around the volcano. I planned to do it by bicycle, but then I had no time, reaching only Tomarapi on a return trip."+
+      "The base camp at Aychuta lies at 4810 m, an altitute curiously equal to that of Mont Blanc. The high camp lies at 5670 m. The only slightly technical stretch is a short couloir, with mixed terrain, little below 6000 m. It gives access to the upper stretch of the ridge, which begins with a stretch of hard ice and penitentes, giving them place to more comfortable snow."+
+      "On the flat and very wide top once was played also a football match, as a test for performance at altitude."+
+      "The view from the top, contrarily to what one can expect, is not so exciting, because the Sajama is just too high and isolated!"
+
+
+      this.wrapperPopulate(HikeID,file,province,city,title,length,expTime,Ascent,Description,Difficulty,start,end);
+
     }
     
 
