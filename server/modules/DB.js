@@ -635,6 +635,30 @@ class DatabaseConnection {
       this.wrapperPopulate(HikeID,file,province,city,title,length,expTime,Ascent,Description,Difficulty,start,end);
 
 
+      
+      HikeID='20';
+      title="Sentiero per l’ALPE ATTIA | 1740 m slm";
+      province='Piemonte';
+      city ='Valli di Lanzo'; 
+      Ascent=607;
+      start="Pian del Tetto – Ala di Stura (TO) | 1133 m slm circa";
+      end="Alpe Attia | 1740 m slm circa"
+      length=6.6;
+      Difficulty="H";
+      expTime=120; 
+      file="alpe dattia da ala.gpx"    
+      Description="Itinerario piacevole che attraversa un bosco per poi aprirsi sull’Alpe Attia, dalla quale si ha uno splendido panorama sulla Val d’Ala e sulle cime circostanti, tra cui l’Uja di Mondrone."+
+
+      "Parcheggiata l’auto ad Ala di Stura, sali per la ripida strada asfaltata oltre la chiesa, al tornante si vedranno i primi cartelli che indicano il sentiero 238, passa il ponte e prosegui per la carreggiata che dopo poco si farà sterrata (Strada Pian d’Attia)."+
+      
+      "Oltrepassata la borgata Lombarda, si arriva al primo bivio, dove trovi la segnaletica che indica altezza e distanze per Pian d’Attia, Alpe d’Attia e Colle d’Attia."+
+      
+      "Il sentiero taglia nel bosco con una dolce salita e ti permette di evitare la carreggiata principale e il possibile passaggio di auto. Proseguendo per l’evidente traccia si raggiunge il Pian d’Attia (1382 Mt), dove troverai dei casolari e una fontana dove fare rifornimento d’acqua."+
+      
+      "Qui potrai rilassarti qualche minuto, prima di imboccare il sentiero dietro la fontana e proseguire ancora una volta nel boschetto di faggi. In quest’ultimo tratto la salita si fa più dura, ma il percorso è molto ombreggiato ed il silenzio della natura ti accompagna regalandoti anche la possibilità di avvistare qualche daino. "+
+      
+      "Ad un certo punto il bosco sparisce e di fronte a te si aprirà lo spettacolo dell’Alpe Attia. Passeggia sulla piana e raggiungi i caseggiati in pietra, dove troverai un’altra fontana e la possibilità di rilassarti sognando di raggiungere le cime intorno."
+      this.wrapperPopulate(HikeID,file,province,city,title,length,expTime,Ascent,Description,Difficulty,start,end);
 
 
     }
