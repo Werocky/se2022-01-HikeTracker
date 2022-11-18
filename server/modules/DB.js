@@ -510,7 +510,7 @@ class DatabaseConnection {
       length=13;
       Difficulty="H";
       expTime=160; 
-      file="capanna Mautino .gpx"    
+      file="capanna Mautino.gpx"    
       Description="Abbiamo trovato un sentiero davvero ben curato. Inizia percorrendo dal parcheggio la strada asfaltata in salita. Troverai diversi cartelli che ti indicheranno la via da seguire."+
 
       "Spesso potrai scegliere tra due (o tre) varianti, noi solitamente in questi casi, se non conosciamo il sentiero, cerchiamo di procedere sulla via più battuta."+
@@ -531,8 +531,219 @@ class DatabaseConnection {
       
       this.wrapperPopulate(HikeID,file,province,city,title,length,expTime,Ascent,Description,Difficulty,start,end);
 
-    }
+
+      HikeID='17';
+      title="Sentiero per il POGGIO TRE CROCI | 2115 m slm";
+      province='Piemonte';
+      city ='CIASPOLATE'; 
+      Ascent=803;
+      start="Bardonecchia (TO) / 1326 mslm circa";
+      end="Poggio Tre Croci / 2115 mslm circa"
+      length=10.4;
+      Difficulty="H";
+      expTime=165; 
+      file="Poggio Tre Croci Ciaspole.gpx"    
+      Description="L’escursione ha inizio proprio dal piazzale della Fiera di Bardonecchia."+
+
+        "Attraversando la strada basterà infatti oltrepassare il ponte sul Rio della Rho per trovarsi davanti dei cartelli indicatori che ci indicheranno la via da seguire."+
+        
+        "Il sentiero di questa escursione è una strada sterrata che in inverno si ricopre di neve."+
+        
+        "Il percorso si sviluppa all’interno di un fitto bosco che nei giorni successivi ad una nevicata regala una cornice davvero fiabesca."+
+        
+        "Durante il tratto iniziale del sentiero la pendenza è molto blanda e ci permette di godere a pieno ciò che ci circonda."+
+        
+        "Proseguendo lungo la tratta si arriva ad un primo punto panoramico su Bardonecchia: oltre alla cittadina è notevole il colpo d’occhio sullo Jafferau."+
+        
+        "Da questo punto in avanti però la strada diventa meno larga ed evidente."+
+        
+        "Dopo circa 3,5 Km vi è un piccolo strappo e la pendenza aumenta notevolmente facendoci guadagnare velocemente la maggior parte del dislivello di questa gita: i tornanti a questo punto iniziano a farsi sempre più stretti e sempre più ripidi e si susseguono con maggiore frequenza."+
+        
+        "Dopo un susseguirsi di diversi tornanti ravvicinati si esce dal bosco e ci si ritrova davanti agli occhi un panorama molto ampio sul Melezet e sulla Valle Stretta."+
+        
+        "Spostandosi di qualche metro dalla strada si giunge alla nostra meta, dove ad accoglierci sono presenti le Tre Croci che danno il nome a questo posto."+
+        
+        "Il sentiero per il ritorno si svolge sul medesimo di andata anche se sono presenti diversi tratti dove poter “tagliare” alcuni tornanti."
       
+      this.wrapperPopulate(HikeID,file,province,city,title,length,expTime,Ascent,Description,Difficulty,start,end);
+
+      
+      HikeID='18';
+      title="Sentiero per CIMA DEL BOSCO | 2376 m slm";
+      province='Piemonte';
+      city ='CIASPOLATE'; 
+      Ascent=826;
+      start="Sauze di Cesana (TO) / 1550 mslm circa";
+      end="Cima del Bosco / 2376 mslm circa"
+      length=17;
+      Difficulty="H";
+      expTime=210; 
+      file="Cima del Bosco.gpx"    
+      Description="Cima del Bosco è una facile punta a poco meno di 2400m che nonostante l’altitudine modesta consente di godere di un panorama a 360° sull’alta Valle di Susa."+
+
+      "Può essere raggiunta in diversi modi, in questa descrizione vedremo l’accesso più facile, da strada forestale a partire dalla località di Sauze di Cesana."+
+      
+      "Dal ponte del Torrente Ripa, ci si incammina verso il ponte e si attraversa il torrente, oltrepassato il quale si prosegue a destra seguendo l’indicazione su palina in legno per Cima del Bosco."+
+      
+      "La strada inizia a salire in un bel bosco misto di pini e larici, con pendenza costante, che manterrà pressochè fino in cima."+
+      
+      "Dopo circa 1Km si tralascia la deviazione in discesa sulla destra e si prosegue a sinistra."+
+      
+      "Si prosegue sulla strada principale, che prosegue sempre ben larga e visibile con alcuni ampi tornanti."+
+      
+      "A quota 1900 al termine di un tornante si incontra il sentiero che sale dalla Valle Argentera, indicato da palina in legno, che potrebbe costituire una variante della salita, è da considerare però che il tracciato è più difficile della strada forestale e consigliato solo ad esperti, specialmente nella stagione invernale."+
+      
+      "Proseguendo lungo la strada principale il panorama via via si apre salendo di quota, finchè a circa 2300m la vegetazione scompare e lascia il posto a pendii erbosi."+
+      
+      "Essendo ben visibile e prevedibile il tracciato della forestale che porta sulla cima sopra di noi, è possibile effettuare anche dei tagli in prossimità dei tornanti."+
+      
+      "Arrivati a quota 2376m il panorama si apre, è molto ampio e spazia dalle cime francesi di confine alle località di Sestriere e Cesana."+
+      
+      "È possibile trovare rifugio nella piccola e graziosa cappella di Cima del Bosco, che costituisce un bivacco a tutti gli effetti ed è normalmente aperto e provvisto di tavolo per un eventuale pranzo."+
+      
+     "La discesa si effettua sullo stesso facile tracciato di salita."
+
+    
+      this.wrapperPopulate(HikeID,file,province,city,title,length,expTime,Ascent,Description,Difficulty,start,end);
+
+
+      HikeID='19';
+      title="Sentiero per BRICCAS da BRICH | 2430 m slm";
+      province='Piemonte';
+      city ='CIASPOLATE'; 
+      Ascent=950;
+      start="Brich (CN) / 1460 mslm circa";
+      end="Briccas / 2430 mslm circa"
+      length=8;
+      Difficulty="H";
+      expTime=120; 
+      file="Monte Briccas da Brich.gpx"    
+      Description="Lasciata l’auto, proseguiamo lungo la strada dapprima asfaltata e successivamente sterrata."+
+
+      "In caso di poco innevamento o temperature elevate è possibile fare i primi 150m di dislivello senza ciaspole."+
+      
+      "Appena incontrata la prima neve infiliamo le ciaspole e ci incamminiamo su di un sentiero ben definito che attraversa un boschetto."+
+      
+      "Dopo esserci lasciati alle spalle le ultime baite giriamo a destra verso Nord/Est in prossimità di un segnavia GTA verniciato su di un masso."+
+      
+      "Da qui, superata l’ultima boscaglia, si apre davanti a noi un enorme pendio molto ampio che culmina proprio con la nostra vetta."+
+      
+      "La linea da seguire è molto libera ma possiamo prendere come riferimento alcuni massi che troviamo circa a metà del percorso o seguire altre tracce lasciate in precedenza, essendo questo un sentiero molto frequentato."+
+      
+      "Arrivati in cima al pendio percorriamo i pochi metri che ci separano dalla croce di vetta su di una cresta molto panoramica."
+    
+      this.wrapperPopulate(HikeID,file,province,city,title,length,expTime,Ascent,Description,Difficulty,start,end);
+
+
+      
+      HikeID='20';
+      title="Sentiero per l’ALPE ATTIA | 1740 m slm";
+      province='Piemonte';
+      city ='Valli di Lanzo'; 
+      Ascent=607;
+      start="Pian del Tetto – Ala di Stura (TO) | 1133 m slm circa";
+      end="Alpe Attia | 1740 m slm circa"
+      length=6.6;
+      Difficulty="H";
+      expTime=120; 
+      file="alpe dattia da ala.gpx"    
+      Description="Itinerario piacevole che attraversa un bosco per poi aprirsi sull’Alpe Attia, dalla quale si ha uno splendido panorama sulla Val d’Ala e sulle cime circostanti, tra cui l’Uja di Mondrone."+
+
+      "Parcheggiata l’auto ad Ala di Stura, sali per la ripida strada asfaltata oltre la chiesa, al tornante si vedranno i primi cartelli che indicano il sentiero 238, passa il ponte e prosegui per la carreggiata che dopo poco si farà sterrata (Strada Pian d’Attia)."+
+      
+      "Oltrepassata la borgata Lombarda, si arriva al primo bivio, dove trovi la segnaletica che indica altezza e distanze per Pian d’Attia, Alpe d’Attia e Colle d’Attia."+
+      
+      "Il sentiero taglia nel bosco con una dolce salita e ti permette di evitare la carreggiata principale e il possibile passaggio di auto. Proseguendo per l’evidente traccia si raggiunge il Pian d’Attia (1382 Mt), dove troverai dei casolari e una fontana dove fare rifornimento d’acqua."+
+      
+      "Qui potrai rilassarti qualche minuto, prima di imboccare il sentiero dietro la fontana e proseguire ancora una volta nel boschetto di faggi. In quest’ultimo tratto la salita si fa più dura, ma il percorso è molto ombreggiato ed il silenzio della natura ti accompagna regalandoti anche la possibilità di avvistare qualche daino. "+
+      
+      "Ad un certo punto il bosco sparisce e di fronte a te si aprirà lo spettacolo dell’Alpe Attia. Passeggia sulla piana e raggiungi i caseggiati in pietra, dove troverai un’altra fontana e la possibilità di rilassarti sognando di raggiungere le cime intorno."
+      this.wrapperPopulate(HikeID,file,province,city,title,length,expTime,Ascent,Description,Difficulty,start,end);
+
+
+      HikeID='21';
+      title="Circuito Wulaia via Puerto Navarino";
+      province='CHILE';
+      city ='Puerto Navarino (Magallanes)'; 
+      Ascent=1515;
+      start=null
+      end="Wulaia bay"
+      length=30.26;
+      Difficulty="PH";
+      expTime=1850; 
+      file="circuito-wulaia-via-puerto-navarino.gpx"    
+      Description="Beautiful, splendid isolated coast trail following the old marks from 2002/2003 (as far as possible). Mostly in woodlands near the shore, interrupted by fair bay areas und a land passage."+
+
+      "- there is unfortunately no public transport to/from PW und few private traffic. You can go by hitch-hiking or take a lift by Ushuaia Booting."+
+      "- at the beginning are some animals trails and it is easy, later most time on pathless terrain"+
+      "- ~70% of the old marks are still existing in varying quality"+
+      "- from hito 7 to Wulaia it is continuously getting harder, some areas are strongly changed by beaver work or storm damages with lots of trunks over the ground of every size and the signs are lacking."+
+      "- beautiful bay areas with remains from the Yámana. Please don't touch the conchales, they are one of last evidence of this vanished folk and protected by chilean law."+
+      "- in the bay areas also you can find high nasty spiny shrubs (calafate & mata negra) were you have to pass through."+
+      
+      "some remarks:"+
+      "- between hito 7 and hito 8 are some steep passages, take care when it is wet, also the trunks can get slippery"+
+      "- go with proper gear and knowledge to use it."+
+      "- plan at least 3-4 days, even it es possible to do it in two days. The weather can change and become inhospitable quickly at every time."+
+      "- it is recommendable to stay on the track."+
+      "- be aware of the risk that in case of trouble nobody will or can help you in this remote area"+
+      "- under 'Cabo de Hornos, Walaia – Ruta Patrimonial Nº16' you can find in the WWW a good description (68 pages) of the track from the 'Ministerio de Bienes Nacionale'. But note: all named GPS-coordinates are wrong. Even with transformation from datum PSAD56 or SA69 to WSG84. The named datum 'P. South America 69' is not existing."
+      
+      
+      this.wrapperPopulate(HikeID,file,province,city,title,length,expTime,Ascent,Description,Difficulty,start,end);
+
+
+      HikeID='22';
+      title="Salkantay via Llaqtapata (self-guided)";
+      province='PERU';
+      city ='Soray(Cusco)'; 
+      Ascent=3657;
+      start="Abra Salkantay"
+      end="Wayramachay"
+      length=66.38;
+      Difficulty="H";
+      expTime=5924; 
+      file="salkantay-via-llaqtapata-self-guided.gpx"    
+      Description="Salkantay via Llaqtapata (self-guided) by Luana e Leandro from Expllorers channel."+
+
+      "Days: 6 days / 5 nights (Machu Picchu visit included)."+
+      
+      "Details coming soon."
+      
+      this.wrapperPopulate(HikeID,file,province,city,title,length,expTime,Ascent,Description,Difficulty,start,end);
+
+      
+      HikeID='23';
+      title="Toubkal Circuit";
+      province='MOROCCO';
+      city ='Imelil(Marrakesh-Safi)'; 
+      Ascent=7967;
+      start="Imlil"
+      end="Imlil"
+      length=87.48;
+      Difficulty="T";
+      expTime=5924; 
+      file="toubkal-circuit.gpx"    
+      Description="The Toubkal circuit performed counterclockwise, with some variation."+
+      "From Imlil to Sidi Chamarouch and to the Toubkal and Mouflon refuges."+
+      "Ascent to Toubkal by the normal route, descent through a slightly different route. Ascent to Timseguida and Ouanoukrim with descent via the couloir."+
+      "Crossing of Tizi-n-Ouanoums and descent to Lake d'Ifni and Amsouzert."+
+      "From here the track leaves the classical loop, remaining closer to the Toubkal summit. After going up the Tisgui valley, it climbs the slope of an unnamed 3740 m summit dominating, on the other side, Tizi-n-Terhaline which is the natural crossing between Sidi Chamarouch and the Ourika valley. Skirting this pass, the track leads down a gorge to the wonderfully isolated sposts of Azib Tamenzift and Azib Likemt, where the classical loop is joined again to tackle the last ascent, the one to Tizi Likemt, whose smooth NW slope would also be good for ski-mountaineering."+
+      "The path reaches the road connecting Imlil to Tacheddirt via Tizi-n-Tamatert, and actually the conclusion is a long stroll on the gravel road."+
+      
+      "The loop was performed in December 2007 after reaching Imlil by bicycle from Marrakech: 28 hours to climb the Toubkal from Marrakech 'by fair means'. The days were the following;"+
+      "0) Marrakech - Imlil by bicycle, then hike to Sidi Chamarouch;"+
+      "1) Ascent to Toubkal and, in the afternoon, to Timesguida and Ouanoukrim, completing hte ascent of three 4000 in one day. Night at the Refuge Mouflon;"+
+      "2) Crossing of Tizi-n-Ouamoums, and then down to Amsouzert. Night at the known gite d'etape run by Omar;"+
+      "3) Up the Tisgui and down to the azib before the gorge. Night under te stars in the sleeping bag;"+
+      "4) Crossing of Tizi Likemt and back to Imlil."
+      
+      this.wrapperPopulate(HikeID,file,province,city,title,length,expTime,Ascent,Description,Difficulty,start,end);
+
+
+
+
+    }
     
 
     static  wrapperPopulate =async (HikeID,file,province,city,title,length,expTime,Ascent,Description,Difficulty,start,end)=>{
