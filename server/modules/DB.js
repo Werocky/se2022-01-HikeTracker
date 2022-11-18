@@ -849,13 +849,114 @@ class DatabaseConnection {
       end="Helechos Gigantes"
       length=31.53;
       Difficulty="T";
-      expTime=424; 
+      expTime=1620; 
       file="samaipata-bosque-de-los-helechos-gigantes.gpx"    
       Description="It was very easy but I couldn't find the waterfall. So I couldn't make circle in the Parque Nacional."
 
       this.wrapperPopulate(HikeID,file,province,city,title,length,expTime,Ascent,Description,Difficulty,start,end);
 
-    }
+
+      HikeID='28';
+      title="El Choro Trek, In 3 days from La Cumbre (4885m) to Chairo (1350m)";
+      province='BOLIVIA';
+      city ='  Rinconada (La Paz)'; 
+      Ascent=1809;
+      start="Chairo"
+      end="Villa Fatima"
+      length=53.37;
+      Difficulty="T";
+      expTime=424; 
+      file="el-choro-trek-in-3-days-from-la-cumbre-4885m-to-chairo-1350m.gpx"    
+      Description="You hike along an old really beautiful Inca way through different types of vegetation. The trek can easily be done by yourself without any guide or mules / horses that carry your equipment. The first night you can not sleep in a lodge, you therefore have to carry your own tent. Along the way you will find a couple of small stores selling snacks and food. It's best to bring your own food from 'La Paz'. Some guidebooks write, that the locals are unfriendly or even worse, that you get robbed. We did not experience anything like it, everyone was really friendly and helpful."+
+
+      "Day 1:"+
+      "There are three options to reach the starting point of the trek. 1) take any bus that goes from 'La Paz' ('Villa Fatima' district) to 'Coroico' and tell the driver to let you off at 'La Cumbre' 2) same as 1 but with minibuses, they leave when there are full and they also depart from 'Villa Fatima' 3) take a taxi (we paid 80 Bolivianos). Of course you can also hitch hike, there are many cars passing. 'La Cumbre' is also the starting point for the famous 'Death Road'. You need to register at the small house next to the lagoon. After that you follow the dirt-road up to the pass. From here it all goes down... down .. down. You will pass a small village (Samaña Pampa) where you have to sign again. Further down the path you reach the village 'Chucura' where you have to pay the trail fee of 10 Bolivianos. The money is collected to keep the way clean and for the maintenance for all the bridges. We spent the first night in 'Challapampa' (2820m), you have to bring your own tent. They charge 10 Bolivianos per person. You can also buy snacks and drinks here."+
+      
+      "Day 2:"+
+      "The second day is really long and tiring so better get up early. First you go down on the true left side of the river until 'Choro' where you cross the river. On the other side you have to go up again. Now there are several possibilities to camp along the way. We walked until 'Sandillani' where you can also stay in a nice lodge, run by an old lady. If you want to camp it's 5 Bolivianos per person. There is no hot water and the toilets costs extra (1 Boliviano). The lady does also sell beers and snacks, it's also possible to eat breakfast there. On this second day we walked almost 9 hours and the way is going up and down."+
+      
+      "Day 3:"+
+      "From 'Sandillani' it only goes down to 'Chairo', it takes roughly 2 - 3 hours until you arrive in 'Chairo'. From here you can get a (really) expensive taxi to either the junction of the 'La Paz - Coroico' route or directly to 'Coroico'. I guess they charge about 100 Bolivianos. Another option is to walk or hitch hike, there are quite some cars passing by. At the junction you can take a taxi/minibus back to 'Villa Fatima' (25 Bolivianos per person)"+
+      
+      "Don't forget to bring sunscreen, repellent and some small bills to buy snacks/water along the way."+
+      
+      "Helpful maps:"+
+      "- http://www.azimutexplorer.com/img/content/photos_big/trek_choro_4dias/mapa_choro.jpg"+
+      "- http://www.trekkingchile.com/Images/choro-trail-map.jpg"+
+      "- http://www.turismoboliviaperu.com/imgs/mapa-choro.gif"+
+      "- http://coroico-info.com/webs/incatrail/sitebuilder/images/mappage-572x557.jpg"
+      this.wrapperPopulate(HikeID,file,province,city,title,length,expTime,Ascent,Description,Difficulty,start,end);
+
+
+      HikeID='29';
+      title="Parinacota";
+      province='BOLIVIA';
+      city ='Estancia Milluri (Oruro)'; 
+      Ascent=2196;
+      start="Pueblo Sajama"
+      end="Crater rim, NW"
+      length=25.98;
+      Difficulty="H";
+      expTime=null; 
+      file="parinacota.gpx"    
+      Description="You hike along an old really beautiful Inca way through different types of vegetation. The trek can easily be done by yourself without any guide or mules / horses that carry your equipment. The first night you can not sleep in a lodge, you therefore have to carry your own tent. Along the way you will find a couple of small stores selling snacks and food. It's best to bring your own food from 'La Paz'. Some guidebooks write, that the locals are unfriendly or even worse, that you get robbed. We did not experience anything like it, everyone was really friendly and helpful."+
+
+      "Day 1:"+
+      "There are three options to reach the starting point of the trek. 1) take any bus that goes from 'La Paz' ('Villa Fatima' district) to 'Coroico' and tell the driver to let you off at 'La Cumbre' 2) same as 1 but with minibuses, they leave when there are full and they also depart from 'Villa Fatima' 3) take a taxi (we paid 80 Bolivianos). Of course you can also hitch hike, there are many cars passing. 'La Cumbre' is also the starting point for the famous 'Death Road'. You need to register at the small house next to the lagoon. After that you follow the dirt-road up to the pass. From here it all goes down... down .. down. You will pass a small village (Samaña Pampa) where you have to sign again. Further down the path you reach the village 'Chucura' where you have to pay the trail fee of 10 Bolivianos. The money is collected to keep the way clean and for the maintenance for all the bridges. We spent the first night in 'Challapampa' (2820m), you have to bring your own tent. They charge 10 Bolivianos per person. You can also buy snacks and drinks here."+
+      
+      "Day 2:"+
+      "The second day is really long and tiring so better get up early. First you go down on the true left side of the river until 'Choro' where you cross the river. On the other side you have to go up again. Now there are several possibilities to camp along the way. We walked until 'Sandillani' where you can also stay in a nice lodge, run by an old lady. If you want to camp it's 5 Bolivianos per person. There is no hot water and the toilets costs extra (1 Boliviano). The lady does also sell beers and snacks, it's also possible to eat breakfast there. On this second day we walked almost 9 hours and the way is going up and down."+
+      
+      "Day 3:"+
+      "From 'Sandillani' it only goes down to 'Chairo', it takes roughly 2 - 3 hours until you arrive in 'Chairo'. From here you can get a (really) expensive taxi to either the junction of the 'La Paz - Coroico' route or directly to 'Coroico'. I guess they charge about 100 Bolivianos. Another option is to walk or hitch hike, there are quite some cars passing by. At the junction you can take a taxi/minibus back to 'Villa Fatima' (25 Bolivianos per person)"+
+      
+      "Don't forget to bring sunscreen, repellent and some small bills to buy snacks/water along the way."+
+      
+      "Helpful maps:"+
+      "- http://www.azimutexplorer.com/img/content/photos_big/trek_choro_4dias/mapa_choro.jpg"+
+      "- http://www.trekkingchile.com/Images/choro-trail-map.jpg"+
+      "- http://www.turismoboliviaperu.com/imgs/mapa-choro.gif"+
+      "- http://coroico-info.com/webs/incatrail/sitebuilder/images/mappage-572x557.jpg"
+            
+    this.wrapperPopulate(HikeID,file,province,city,title,length,expTime,Ascent,Description,Difficulty,start,end);
+
+
+    HikeID='30';
+    title="Choro Trek Bolivia";
+    province='BOLIVIA';
+    city =' Rinconada (La Paz)'; 
+    Ascent=-4280;
+    start="Pueblo Sajama"
+    end="Crater rim, NW"
+    length=51.97;
+    Difficulty="PH";
+    expTime=null; 
+    file="choro-trek-bolivia.gpx"    
+    Description="3 days of trekking along an old paved Inca road, with a pass over 4700 m and the chance to go down till the humid climate of the Yungas where the mountains are green and coffe, bananas and coca grows. A world class trekking with Inca ruins, remote villages, delicious camping spots and a very special encouter with the fascinating Japanese old men that lives here since the 50's"
+          
+  this.wrapperPopulate(HikeID,file,province,city,title,length,expTime,Ascent,Description,Difficulty,start,end);
+
+    
+  HikeID='31';
+  title="Huayna Potosi - From Base Camp to Summit";
+  province='BOLIVIA';
+  city ='Milluni(La Paz)'; 
+  Ascent=1350;
+  start="CampArgent"
+  end="RefCasadeG"
+  length=7.5;
+  Difficulty="PH";
+  expTime=1359; 
+  file="choro-trek-bolivia.gpx"    
+  Description="From Huayna Potosi Base Camp to Summit"+
+  "Day 1: La Paz - Huayna Potosi Base Camp - Refugio Anselme Baud/Casa de Guias"+
+  "Day 2: Refugio Anselme Baud/Casa de Guias - Summit - La Paz"+
+  "For a full report see '20 days in the Cordillera Real - Trekking and Montanhism'"+
+  "https://www.facebook.com/lucasbaruzzi/media_set?set=a.10207861573721238&type=3&pnref=story"
+        
+this.wrapperPopulate(HikeID,file,province,city,title,length,expTime,Ascent,Description,Difficulty,start,end);
+
+}
     
 
     static  wrapperPopulate =async (HikeID,file,province,city,title,length,expTime,Ascent,Description,Difficulty,start,end)=>{
