@@ -17,9 +17,9 @@ class DatabaseConnection {
 
         await this.createTableHikeRefPoints();
 
-        // await this.deleteDB();
+        //await this.deleteDB();
 
-        //await this.populateTables();
+        await this.populate();
 
     }
 
@@ -79,7 +79,7 @@ class DatabaseConnection {
 
     static cresteTableReferencePoints(){
         return new Promise(async (resolve, reject) => {
-            const sql = "CREATE TABLE IF NOT EXISTS ReferencePoints (RefPointID INTEGER PRIMARY KEY NOT NULL, Lat TEXT NOT NULL, Lng TEXT NOT NULL, Type TEXT);";
+            const sql = "CREATE TABLE IF NOT EXISTS ReferencePoints (RefPointID TEXT PRIMARY KEY NOT NULL, Lat TEXT NOT NULL, Lng TEXT NOT NULL, Type TEXT);";
             this.db.run(sql, [], function (err) {
                 if (err)
                     reject(err);
@@ -323,7 +323,7 @@ class DatabaseConnection {
         length=4.5;
         Difficulty="H";
         expTime=105; 
-        file="CANALE+di+MARIA+BONA++e+fondo+Val+Clarea.gpx"    
+        file="CANALE_di_MARIA_BONA__e_fondo_Val_Clarea.gpx"    
         Description="Sempre al lato Dx della strada provinciale, reperire l’evidente inizio sentiero, il Sentiero Balcone (S.B)n.820B che, transitando tra baite e case in rovina si snoda sinuoso alternativamente fra ombrose boscaglie di acacie e le verticali pareti granitiche della Gran Rotsa (rinomata e agevole palestra di roccia), fiancheggiando sempre il gorgogliante Canale di Maria Bona."
             +"Il Canale, che prende l’acqua dalle prese poste nel cuore della Val Clarea a 1100, presso le Grange Buttigliera, deve il suo nome al quello di una nobildonna Giaglionese, già moglie del Signore Feudatario locale, tale Andrea Aschier de Jalliono quale contributrice dei fondi che hanno potuto dare inizio ai lavori, è stato interamente scavato nella roccia viva, dalla popolazione giaglionese, terminandolo nella metà del xv° secolo da progetti iniziati fine dal 1200."
             +"Da tale opera di artigianale “ingegneria idraulica”, la popolazione, ebbe grande fioritura, sulla montagna, attività e sviluppo, potendo provvedervi all’irrigazione e coltura delle campagne fino ad allora impossibile se non incanalando i ruscelli di scioglimento stagionale, limitati a inizio primavera."
@@ -335,8 +335,8 @@ class DatabaseConnection {
             +"Percorso di ritorno, in 1 ora circa, uguale a quello di andata."
        
             this.wrapperPopulate(HikeID,file,province,city,title,length,expTime,Ascent,Description,Difficulty,start,end);
-        this.wrapperPopulateRefP(HikeID, 16, "","","",1,0); // start
-        this.wrapperPopulateRefP(HikeID, 17, "","","",0,1); // end
+        this.wrapperPopulateRefP(HikeID, 16, "45.13911717299068","6.988669510628613","",1,0); // start
+        this.wrapperPopulateRefP(HikeID, 17, "45.155868912540512","45.155868912540512","",0,1); // end
     
        HikeID='9';
        title="Sentiero per il RIFUGIO I RE MAGI | 1770 m slm";
@@ -500,7 +500,7 @@ class DatabaseConnection {
       length=9;
       Difficulty="H";
       expTime=150; 
-      file="Lago Malciaussias.gpx"    
+      file="Lago Malciaussia.gpx"    
       Description="Calza subito le ciaspole (o i ramponcini, in base allo stato della neve) e prosegui lungo la strada innevata che in estate è percorribile in auto fino al lago."+
 
       "Il sentiero inizia con una leggera pendenza con salita costante, ma è decisamente semplice da seguire."+
@@ -535,8 +535,8 @@ class DatabaseConnection {
       
 
       this.wrapperPopulate(HikeID,file,province,city,title,length,expTime,Ascent,Description,Difficulty,start,end);
-      this.wrapperPopulateRefP(HikeID, 28, "","","",1,0); // start
-        this.wrapperPopulateRefP(HikeID, 29, "","","",0,1); // end
+      this.wrapperPopulateRefP(HikeID, 28, "45.219954","7.188861","parking",1,0); // start
+        this.wrapperPopulateRefP(HikeID, 29, "45.206823","7.144343","",0,1); // end
 
 
       HikeID='15';
@@ -567,8 +567,8 @@ class DatabaseConnection {
       +"Verso Ovest le creste che rappresentano il confine francese con il colle della Croce; verso est, il sentiero per il rifugio Barant, (a ca. 1.45h) e Rifugio Barbara Lowrie (a ca. 3 h)"
 
       this.wrapperPopulate(HikeID,file,province,city,title,length,expTime,Ascent,Description,Difficulty,start,end);
-      this.wrapperPopulateRefP(HikeID, 30, "","","",1,0); // start
-        this.wrapperPopulateRefP(HikeID, 31, "","","",0,1); // end
+      this.wrapperPopulateRefP(HikeID, 30, "44.799133","7.055148","parking",1,0); // start
+        this.wrapperPopulateRefP(HikeID, 31, "44.773504","7.039264","hut",0,1); // end
 
 
       HikeID='16';
@@ -601,8 +601,8 @@ class DatabaseConnection {
       "Nel periodo estivo, ti consiglio di percorrere il sentiero parallelo che taglia sui pendii per evitare la strada carrozzabile 🙂"
       
       this.wrapperPopulate(HikeID,file,province,city,title,length,expTime,Ascent,Description,Difficulty,start,end);
-      this.wrapperPopulateRefP(HikeID, 32, "","","",1,0); // start
-        this.wrapperPopulateRefP(HikeID, 33, "","","",0,1); // end
+      this.wrapperPopulateRefP(HikeID, 32, "44.930862","6.820079","parking",1,0); // start
+        this.wrapperPopulateRefP(HikeID, 33, "44.902731","6.789709","hut",0,1); // end
 
 
       HikeID='17';
@@ -639,8 +639,8 @@ class DatabaseConnection {
         "Il sentiero per il ritorno si svolge sul medesimo di andata anche se sono presenti diversi tratti dove poter “tagliare” alcuni tornanti."
       
       this.wrapperPopulate(HikeID,file,province,city,title,length,expTime,Ascent,Description,Difficulty,start,end);
-      this.wrapperPopulateRefP(HikeID, 34, "","","",1,0); // start
-        this.wrapperPopulateRefP(HikeID, 35, "","","",0,1); // end
+      this.wrapperPopulateRefP(HikeID, 34, "45.079073","6.695705","parking",1,0); // start
+        this.wrapperPopulateRefP(HikeID, 35, "45.079097","6.695723","parking",0,1); // end
 
       
       HikeID='18';
@@ -680,8 +680,8 @@ class DatabaseConnection {
 
     
       this.wrapperPopulate(HikeID,file,province,city,title,length,expTime,Ascent,Description,Difficulty,start,end);
-      this.wrapperPopulateRefP(HikeID, 36, "","","",1,0); // start
-      this.wrapperPopulateRefP(HikeID, 37, "","","",0,1); // end
+      this.wrapperPopulateRefP(HikeID, 36, "44.937484078109264373779296875","6.86268364079296588897705078125","parking",1,0); // start
+      this.wrapperPopulateRefP(HikeID, 37, "44.9376612715423107147216796875","6.8631246127188205718994140625","parking",0,1); // end
 
 
       HikeID='19';
@@ -710,8 +710,8 @@ class DatabaseConnection {
       "Arrivati in cima al pendio percorriamo i pochi metri che ci separano dalla croce di vetta su di una cresta molto panoramica."
     
       this.wrapperPopulate(HikeID,file,province,city,title,length,expTime,Ascent,Description,Difficulty,start,end);
-      this.wrapperPopulateRefP(HikeID, 38, "","","",1,0); // start
-      this.wrapperPopulateRefP(HikeID, 39, "","","",0,1); // end
+      this.wrapperPopulateRefP(HikeID, 38, "44.708426780998707","7.159385243430734","parking",1,0); // start
+      this.wrapperPopulateRefP(HikeID, 39, "44.708156045526266","7.158207753673196","parking",0,1); // end
 
 
       
@@ -738,8 +738,8 @@ class DatabaseConnection {
       
       "Ad un certo punto il bosco sparisce e di fronte a te si aprirà lo spettacolo dell’Alpe Attia. Passeggia sulla piana e raggiungi i caseggiati in pietra, dove troverai un’altra fontana e la possibilità di rilassarti sognando di raggiungere le cime intorno."
       this.wrapperPopulate(HikeID,file,province,city,title,length,expTime,Ascent,Description,Difficulty,start,end);
-      this.wrapperPopulateRefP(HikeID, 40, "","","",1,0); // start
-      this.wrapperPopulateRefP(HikeID, 41, "","","",0,1); // end
+      this.wrapperPopulateRefP(HikeID, 40, "45.316959","7.304834","parking",1,0); // start
+      this.wrapperPopulateRefP(HikeID, 41, "45.331211","7.298011","hut",0,1); // end
 
 
       HikeID='21';
@@ -772,8 +772,8 @@ class DatabaseConnection {
       
       
       this.wrapperPopulate(HikeID,file,province,city,title,length,expTime,Ascent,Description,Difficulty,start,end);
-      this.wrapperPopulateRefP(HikeID, 42, "","","",1,0); // start
-      this.wrapperPopulateRefP(HikeID, 43, "","","",0,1); // end
+      this.wrapperPopulateRefP(HikeID, 42, "-54.925734","-68.323590","",1,0); // start
+      this.wrapperPopulateRefP(HikeID, 43, "-55.047550","-68.148442","",0,1); // end
 
 
       HikeID='22';
@@ -794,8 +794,8 @@ class DatabaseConnection {
       "Details coming soon."
       
       this.wrapperPopulate(HikeID,file,province,city,title,length,expTime,Ascent,Description,Difficulty,start,end);
-      this.wrapperPopulateRefP(HikeID, 44, "","","",1,0); // start
-      this.wrapperPopulateRefP(HikeID, 45, "","","",0,1); // end
+      this.wrapperPopulateRefP(HikeID, 44, "-13.386589","-72.573909","hut",1,0); // start
+      this.wrapperPopulateRefP(HikeID, 45, "-13.153162","-72.522880","hut",0,1); // end
 
       
       HikeID='23';
@@ -824,8 +824,8 @@ class DatabaseConnection {
       "4) Crossing of Tizi Likemt and back to Imlil."
 
       this.wrapperPopulate(HikeID,file,province,city,title,length,expTime,Ascent,Description,Difficulty,start,end);
-      this.wrapperPopulateRefP(HikeID, 46, "","","",1,0); // start
-      this.wrapperPopulateRefP(HikeID, 47, "","","",0,1); // end
+      this.wrapperPopulateRefP(HikeID, 46, "31.135638","-7.919335","hut",1,0); // start
+      this.wrapperPopulateRefP(HikeID, 47, "31.135613","-7.919305","hut",0,1); // end
 
 
       HikeID='24';
@@ -853,8 +853,8 @@ class DatabaseConnection {
       "We started at Ormiston Gorge and finished at Serpentine Chalet Dam (arriving around midday). With an extra day it could converted to a circuit returning to Ormiston Gorge via the Larapinta Trail."
       
       this.wrapperPopulate(HikeID,file,province,city,title,length,expTime,Ascent,Description,Difficulty,start,end);
-      this.wrapperPopulateRefP(HikeID, 48, "","","",1,0); // start
-      this.wrapperPopulateRefP(HikeID, 49, "","","",0,1); // end
+      this.wrapperPopulateRefP(HikeID, 48, "-23.632482","132.727095","parking",1,0); // start
+      this.wrapperPopulateRefP(HikeID, 49, "-23.736232","132.910421","",0,1); // end
 
       
       HikeID='25';
@@ -902,8 +902,8 @@ class DatabaseConnection {
 
 
       this.wrapperPopulate(HikeID,file,province,city,title,length,expTime,Ascent,Description,Difficulty,start,end);
-      this.wrapperPopulateRefP(HikeID, 50, "","","",1,0); // start
-      this.wrapperPopulateRefP(HikeID, 51, "","","",0,1); // end
+      this.wrapperPopulateRefP(HikeID, 50, "-20.463319","-66.823034","parking",1,0); // start
+      this.wrapperPopulateRefP(HikeID, 51, "-22.910191","-68.198311","parking",0,1); // end
 
 
       HikeID='26';
@@ -927,8 +927,8 @@ class DatabaseConnection {
 
 
       this.wrapperPopulate(HikeID,file,province,city,title,length,expTime,Ascent,Description,Difficulty,start,end);
-      this.wrapperPopulateRefP(HikeID, 52, "","","",1,0); // start
-      this.wrapperPopulateRefP(HikeID, 53, "","","",0,1); // end
+      this.wrapperPopulateRefP(HikeID, 52, "-18.110549","-68.966962","parking",1,0); // start
+      this.wrapperPopulateRefP(HikeID, 53, "-18.108194","-68.882919","",0,1); // end
 
 
       HikeID='27';
@@ -945,8 +945,8 @@ class DatabaseConnection {
       Description="It was very easy but I couldn't find the waterfall. So I couldn't make circle in the Parque Nacional."
 
       this.wrapperPopulate(HikeID,file,province,city,title,length,expTime,Ascent,Description,Difficulty,start,end);
-      this.wrapperPopulateRefP(HikeID, 54, "","","",1,0); // start
-      this.wrapperPopulateRefP(HikeID, 55, "","","",0,1); // end
+      this.wrapperPopulateRefP(HikeID, 54, "-18.178785","-63.873352","parking",1,0); // start
+      this.wrapperPopulateRefP(HikeID, 55, "-18.178865","-63.873278","parking",0,1); // end
 
 
       HikeID='28';
@@ -979,8 +979,8 @@ class DatabaseConnection {
       "- http://www.turismoboliviaperu.com/imgs/mapa-choro.gif"+
       "- http://coroico-info.com/webs/incatrail/sitebuilder/images/mappage-572x557.jpg"
       this.wrapperPopulate(HikeID,file,province,city,title,length,expTime,Ascent,Description,Difficulty,start,end);
-      this.wrapperPopulateRefP(HikeID, 56, "","","",1,0); // start
-      this.wrapperPopulateRefP(HikeID, 57, "","","",0,1); // end
+      this.wrapperPopulateRefP(HikeID, 56, "-16.338158","-68.040294","hut",1,0); // start
+      this.wrapperPopulateRefP(HikeID, 57, "-16.203923","-67.837319","parking",0,1); // end
 
 
       HikeID='29';
@@ -1014,26 +1014,28 @@ class DatabaseConnection {
       "- http://coroico-info.com/webs/incatrail/sitebuilder/images/mappage-572x557.jpg"
             
     this.wrapperPopulate(HikeID,file,province,city,title,length,expTime,Ascent,Description,Difficulty,start,end);
-    this.wrapperPopulateRefP(HikeID, 58, "","","",1,0); // start
-      this.wrapperPopulateRefP(HikeID, 59, "","","",0,1); // end
+    this.wrapperPopulateRefP(HikeID, 58, "-18.136138","-68.975651","parking",1,0); // start
+      this.wrapperPopulateRefP(HikeID, 59, "-18.160969","-69.140142","",0,1); // end
 
 
     HikeID='30';
-    title="Choro Trek Bolivia";
-    province='BOLIVIA';
-    city =' Rinconada (La Paz)'; 
-    Ascent=-4280;
-    start="Pueblo Sajama"
-    end="Crater rim, NW"
-    length=51.97;
-    Difficulty="PH";
-    expTime=null; 
-    file="choro-trek-bolivia.gpx"    
-    Description="3 days of trekking along an old paved Inca road, with a pass over 4700 m and the chance to go down till the humid climate of the Yungas where the mountains are green and coffe, bananas and coca grows. A world class trekking with Inca ruins, remote villages, delicious camping spots and a very special encouter with the fascinating Japanese old men that lives here since the 50's"
+    title="Trek Breuil-Cervinia - lago di Cignana - Valtournenche";
+    province='Aosta';
+    city ="Cervinia"; 
+    Ascent=834;
+    start="Cervinia Town"
+    end="Valtournenche Village"
+    length=17;
+    Difficulty="H";
+    expTime=320; 
+    file="breuil-cervinia-lago-di-cignana-valtournenche.gpx"    
+    Description="Departure from Cervinia, following the path towards the Lago Blu, we take the path 107 after a few meters of the state road where there is then the indication for the lake of Cignana (about 2 hours)."+
+    "Arriving at the lake, we went to visit the church and then continue the path towards the Barmasse refuge crossing the dam. From the latter, following path 1 we went down to Valtournenche."+
+    "Not so difficult but it's a long path, worth it for the evocative landscape and the route itself.";
           
   this.wrapperPopulate(HikeID,file,province,city,title,length,expTime,Ascent,Description,Difficulty,start,end);
-  this.wrapperPopulateRefP(HikeID, 60, "","","",1,0); // start
-      this.wrapperPopulateRefP(HikeID, 61, "","","",0,1); // end
+  this.wrapperPopulateRefP(HikeID, 60, "45.933929","7.630021","parking",1,0); // start
+      this.wrapperPopulateRefP(HikeID, 61, "45.877608","7.623348","parking",0,1); // end
 
     
   HikeID='31';
@@ -1054,8 +1056,8 @@ class DatabaseConnection {
   "https://www.facebook.com/lucasbaruzzi/media_set?set=a.10207861573721238&type=3&pnref=story"
         
 this.wrapperPopulate(HikeID,file,province,city,title,length,expTime,Ascent,Description,Difficulty,start,end);
-this.wrapperPopulateRefP(HikeID, 62, "","","",1,0); // start
-      this.wrapperPopulateRefP(HikeID, 63, "","","",0,1); // end
+this.wrapperPopulateRefP(HikeID, 62, "-16.287185","-68.130311","hut",1,0); // start
+      this.wrapperPopulateRefP(HikeID, 63, "-16.274170","-68.139751","hut",0,1); // end
 
 
 HikeID='32';
@@ -1073,8 +1075,8 @@ Description="Sorata's Glacier Lake is located at more than 5000 meters in elevat
 
 "La Laguna Glacial de Sorata de encuentra a más que 5000 metros de altura. Se recomiende tomar taxi hasta lo más cerca posible a laguna Chillata (80-100 bolivianos). De ese punto la Laguna Glacial esta todavía lejos con una subida de 1000 metros, así que se recomiende acampar por la Laguna Chillata y no hacer la caminata en un solo día. Desde la Laguna Chillata se puede subir a la Laguna Glacial en 4-6 horas. Para volver a Sorata, se debe preguntar a los comunarios de los pueblos si se puede contratar transporte."
 this.wrapperPopulate(HikeID,file,province,city,title,length,expTime,Ascent,Description,Difficulty,start,end);
-this.wrapperPopulateRefP(HikeID, 64, "","","",1,0); // start
-      this.wrapperPopulateRefP(HikeID, 65, "","","",0,1); // end
+this.wrapperPopulateRefP(HikeID, 64, "-15.800923","-68.598910","",1,0); // start
+      this.wrapperPopulateRefP(HikeID, 65, "-15.828727","-68.564683","",0,1); // end
 
 
 HikeID='33';
@@ -1098,8 +1100,8 @@ Description= "RISERVA NATURALE SPECIALE PARCO BURCINA 'FELICE PIACENZA'"+
 
 
 this.wrapperPopulate(HikeID,file,province,city,title,length,expTime,Ascent,Description,Difficulty,start,end);
-this.wrapperPopulateRefP(HikeID, 66, "","","",1,0); // start
-      this.wrapperPopulateRefP(HikeID, 67, "","","",0,1); // end
+this.wrapperPopulateRefP(HikeID, 66, "45.585815","8.006584","parking",1,0); // start
+      this.wrapperPopulateRefP(HikeID, 67, "45.589508","8.013503","",0,1); // end
 
 
 HikeID='34';
@@ -1126,8 +1128,8 @@ Description="Starting from the Oropa car park next to the cable car, take the pa
 "This is not a very long trail but the trail is in poor condition with little maintenance so extreme care must be taken. The effort is certainly rewarded by the view once at the top."
 
 this.wrapperPopulate(HikeID,file,province,city,title,length,expTime,Ascent,Description,Difficulty,start,end);
-this.wrapperPopulateRefP(HikeID, 68, "","","",1,0); // start
-      this.wrapperPopulateRefP(HikeID, 69, "","","",0,1); // end
+this.wrapperPopulateRefP(HikeID, 68, "45.628837","7.97223","parking",1,0); // start
+      this.wrapperPopulateRefP(HikeID, 69, "45.62042","7.944596","",0,1); // end
 
 HikeID='35';
 title="Hike to Rifugio Duca degli Abruzzi";
@@ -1152,8 +1154,8 @@ Description="Once in Cervinia, go as far as the roundabout, turn left and you wi
 "It is advisable, paying attention to the last rocky stretch, to continue for half an hour to touch the Carrel cross, which has marked the history of mountaineering, following the route which then becomes mountaineering, leading to Colle del Leone and the refuge dedicated to J.A. Carrel, support point for the Italian ascent route to Monte Cervino."
 
 this.wrapperPopulate(HikeID,file,province,city,title,length,expTime,Ascent,Description,Difficulty,start,end);
-this.wrapperPopulateRefP(HikeID, 70, "","","",1,0); // start
-      this.wrapperPopulateRefP(HikeID, 71, "","","",0,1); // end
+this.wrapperPopulateRefP(HikeID, 70, "45.936518","7.626726","parking",1,0); // start
+      this.wrapperPopulateRefP(HikeID, 71, "45.959146","7.644060","hut",0,1); // end
 
 
 }
@@ -1175,7 +1177,7 @@ this.wrapperPopulateRefP(HikeID, 70, "","","",1,0); // start
         const refPoints = require("./ReferencePoints");
         const HikeRefPoints = require("./HikeRefPoints");
 
-        await refPoints.addReferencePoint(lat,lng, type);
+        await refPoints.addReferencePoint(RefPointID, lat,lng, type);
         await HikeRefPoints.addHikeRefPoints(HikeID, RefPointID, IsStart, IsEnd);
 
     }
