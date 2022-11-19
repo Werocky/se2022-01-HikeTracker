@@ -6,7 +6,7 @@ function HikeList(props) {
   const [data, setData] = useState([]);
   const [sortType, setSortType] = useState('Title');
   useEffect(() => {
-    if (sortType != "") {
+    if (sortType !== "") {
       const sortArray = type => {
         const types = {
           Title: 'Title',
@@ -17,7 +17,7 @@ function HikeList(props) {
         };
         const sortProperty = types[type];
         let sorted;
-        if (sortProperty == "Title" || sortProperty == "Difficulty")
+        if (sortProperty === "Title" || sortProperty === "Difficulty")
           sorted = [...props.hikes].sort((a, b) => {
             if (a[sortProperty] > b[sortProperty]) { return -1 }
             if (a[sortProperty] < b[sortProperty])
@@ -62,8 +62,8 @@ function HikeElement(props) {
 
   const hike = props.hike;
 
-  const hh = Math.ceil(hike.ExpectedTime / 60);
-  const mm = Math.ceil(hike.ExpectedTime % 60);
+  const hh = Math.floor(hike.ExpectedTime / 60);
+  const mm = Math.floor(hike.ExpectedTime % 60);
 
   return (
     <tr>

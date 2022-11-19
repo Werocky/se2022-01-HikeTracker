@@ -7,11 +7,11 @@ import API from '../API';
 
 function HikeDetails(props) {
   const auth = useContext(AuthContext);
-
   const params = useParams();
   const [hike, setHike] = useState(undefined);
   const [gpxData, setGpxData] = useState(undefined);  // array of [p.lat, p.lon]
   const [loading, setLoading] = useState(true);
+
 
   const navigate = useNavigate();
 
@@ -34,8 +34,6 @@ function HikeDetails(props) {
     }
   }, [params.hikeID, auth.login])
 
-  const hh = Math.ceil(hike.ExpectedTime / 60);
-  const mm = Math.ceil(hike.ExpectedTime % 60);
 
   return (
     <>
@@ -44,7 +42,11 @@ function HikeDetails(props) {
           <Row>
             <Col>Title: {hike.Title}</Col>
             <Col>Length: {hike.Length} km</Col>
-            <Col>Expected Time: {hh < 10 ? "0" + hh : hh}:{mm < 10 ? "0" + mm : mm}</Col>
+            <Col>Expected Time: {
+              Math.floor(hike.ExpectedTime / 60) < 10 ?
+                "0" + Math.floor(hike.ExpectedTime / 60) : Math.floor(hike.ExpectedTime / 60)}:{
+                Math.floor(hike.ExpectedTime % 60) < 10 ?
+                  "0" + Math.floor(hike.ExpectedTime % 60) : Math.floor(hike.ExpectedTime % 60)}</Col>
             <Col>Ascent: {hike.Ascent} m</Col>
             <Col>Difficulty: {hike.Difficulty}</Col>
           </Row>
@@ -70,7 +72,11 @@ function HikeDetails(props) {
             <Row>
               <Col xs={1}></Col>
               <Col>
-                <MapContainer center={[gpxData[Math.ceil(gpxData.length / 2)].lat, gpxData[Math.ceil(gpxData.length / 2)].lon]} zoom={14} scrollWheelZoom style={{ height: 500 + "px", width: "100%", }}>
+                <MapContainer
+                  center={[gpxData[Math.ceil(gpxData.length / 2)].lat, gpxData[Math.ceil(gpxData.length / 2)].lon]}
+                  bounds={[gpxData[0],gpxData.at(-1),]}
+                  scrollWheelZoom
+                  style={{ height: 500 + "px", width: "100%", }}>
                   <Polyline
                     pathOptions={{ fillColor: 'red', color: 'blue' }}
                     positions={gpxData}
