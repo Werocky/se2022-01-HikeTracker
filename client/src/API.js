@@ -5,7 +5,7 @@ async function getHikes() {
   const response = await fetch(APIURL + '/getHikes');
   const hikes = await response.json();
   if (response.ok) {
-    return hikes.map((r) => ({ HikeId: r.HikeID, Start: r.Start, End: r.End, Title: r.Title, Length: r.Length, ExpectedTime: r.ExpectedTime, Ascent: r.Ascent, Difficulty: r.Difficulty, Description: r.Description }))
+    return hikes.map((r) => ({ HikeID: r.HikeID, Start: r.Start, End: r.End, Title: r.Title, Length: r.Length, ExpectedTime: r.ExpectedTime, Ascent: r.Ascent, Difficulty: r.Difficulty, Description: r.Description }))
   } else {
     throw hikes; //which will contain an error if it is the case
   }
@@ -52,6 +52,7 @@ async function getFilteredHikes(minExpectedTime, maxExpectedTime, minAscent, max
       },
     });
     const hikes = await response.json();
+    console.log(hikes);
     if (response.ok) {
       //console.log(hikes);
       return hikes;

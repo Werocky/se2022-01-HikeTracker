@@ -17,6 +17,8 @@ function Sidebar(props) {
   const [maxExTime, setMaxExTime] = useState(undefined);
 
   const [msgLength, setMsgLength] = useState('');
+  const [msgAscent, setMsgAscent] = useState('');
+  const [msgExTime, setMsgExTime] = useState('');
 
   // Need to reset the filter params with useEffect
 
@@ -60,6 +62,10 @@ function Sidebar(props) {
     setMaxDist(() => undefined);
     setMaxAscent(() => undefined);
     setMaxExTime(() => undefined);
+
+    setMsgLength('');
+    setMsgAscent('');
+    setMsgExTime('');
 
     API.getHikes().then(array => props.setHikes(array));
   }
@@ -126,7 +132,7 @@ function Sidebar(props) {
                     if (isNaN(event.target.value)) {
                       setMsgLength("This field should be a number (e.g. 4.52)");
                     } else {
-                      setMinDist(event.target.value)
+                      setMaxDist(event.target.value)
                       setMsgLength('');
                     }
                   }}
@@ -153,7 +159,12 @@ function Sidebar(props) {
                 <Form.Control
                   placeholder="Ascent"
                   onChange={(event) => {
-                    setMinAscent(event.target.value)
+                    if (isNaN(event.target.value)) {
+                      setMsgAscent("This field should be a number (e.g. 256)");
+                    } else {
+                      setMinAscent(event.target.value)
+                      setMsgAscent('');
+                    }
                   }}
                 />
                 <InputGroup.Text id="basic-addon2">m</InputGroup.Text>
@@ -167,7 +178,12 @@ function Sidebar(props) {
                 <Form.Control
                   placeholder="Ascent"
                   onChange={(event) => {
-                    setMaxAscent(event.target.value)
+                    if (isNaN(event.target.value)) {
+                      setMsgAscent("This field should be a number (e.g. 256)");
+                    } else {
+                      setMaxAscent(event.target.value)
+                      setMsgAscent('');
+                    }
                   }}
                 />
                 <InputGroup.Text id="basic-addon2">m</InputGroup.Text>
@@ -176,6 +192,11 @@ function Sidebar(props) {
                 Max asc.
               </Form.Text>
             </Col>
+            {msgAscent &&
+              <Alert variant="danger">
+                {msgAscent}
+              </Alert>
+            }
           </Row>
         </Form.Group>
 
@@ -187,7 +208,12 @@ function Sidebar(props) {
                 <Form.Control
                   placeholder="Time"
                   onChange={(event) => {
-                    setMinExTime(event.target.value)
+                    if (isNaN(event.target.value)) {
+                      setMsgExTime("This field should be a number (e.g. 120 as 2 Hours)");
+                    } else {
+                      setMinExTime(event.target.value)
+                      setMsgExTime('');
+                    }
                   }}
                 />
                 <InputGroup.Text id="basic-addon2">mins</InputGroup.Text>
@@ -201,7 +227,12 @@ function Sidebar(props) {
                 <Form.Control
                   placeholder="Time"
                   onChange={(event) => {
-                    setMaxExTime(event.target.value)
+                    if (isNaN(event.target.value)) {
+                      setMsgExTime("This field should be a number (e.g. 120 as 2 Hours)");
+                    } else {
+                      setMaxExTime(event.target.value)
+                      setMsgExTime('');
+                    }
                   }}
                 />
                 <InputGroup.Text id="basic-addon2">mins</InputGroup.Text>
@@ -210,12 +241,20 @@ function Sidebar(props) {
                 Max Time.
               </Form.Text>
             </Col>
+            {msgExTime &&
+              <Alert variant="danger">
+                {msgExTime}
+              </Alert>
+            }
           </Row>
         </Form.Group>
 
         <Row>
           <Col>
-            <Button variant="primary" type="submit" disabled={msgLength ? true : false} >
+            <Button variant="primary" type="submit"
+              disabled={
+                msgLength ? true : msgAscent ? true : msgExTime ? true : false
+              } >
               Submit
             </Button>
           </Col>

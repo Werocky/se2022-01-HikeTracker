@@ -34,6 +34,7 @@ function HikeList(props) {
       setSortType("");
     }
   }, [sortType]);
+
   return (
     <Table >
       <thead>
@@ -49,7 +50,7 @@ function HikeList(props) {
       <tbody>
         {
           props.hikes.map((hike) => (
-            <HikeElement key={hike.HikeId} hike={hike} />
+            <HikeElement key={hike.HikeID} hike={hike} />
           ))
         }
       </tbody>
@@ -61,6 +62,7 @@ function HikeElement(props) {
   const navigate = useNavigate();
 
   const hike = props.hike;
+  console.log(hike);
 
   const hh = Math.floor(hike.ExpectedTime / 60);
   const mm = Math.floor(hike.ExpectedTime % 60);
@@ -73,7 +75,7 @@ function HikeElement(props) {
       <td>{hike.Difficulty}</td>
       <td>{hh < 10 ? "0" + hh : hh}:{mm < 10 ? "0" + mm : mm}</td>
       <td>
-        <Button onClick={() => navigate("/" + hike.HikeId)} >Details</Button>
+        <Button onClick={() => navigate("/" + hike.HikeID)} >Details</Button>
       </td>
     </tr>
   );
