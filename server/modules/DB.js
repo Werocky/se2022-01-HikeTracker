@@ -12,10 +12,12 @@ class DatabaseConnection {
         await this.createTableUsers();
         await this.createTableHikeLocations();
         await this.createTableGPXFileLocation(); 
+        
         await this.cresteTableReferencePoints();
+
         await this.createTableHikeRefPoints();
 
-        //await this.deleteDB();
+        // await this.deleteDB();
 
         //await this.populateTables();
 
