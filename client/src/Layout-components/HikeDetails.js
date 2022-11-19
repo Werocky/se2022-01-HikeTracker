@@ -23,6 +23,7 @@ function HikeDetails(props) {
       if (auth.login) {
         const gpxObj = await API.getPointsHike(params.hikeID);
         setGpxData(gpxObj);
+        console.log(gpxObj[0].lat+"\t"+gpxObj[0].lon+"\n"+gpxObj.at(-1).lat+"\t"+gpxObj.at(-1).lon);
       }
       setLoading(false);
 

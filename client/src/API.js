@@ -52,7 +52,6 @@ async function getFilteredHikes(minExpectedTime, maxExpectedTime, minAscent, max
       },
     });
     const hikes = await response.json();
-    console.log(hikes);
     if (response.ok) {
       //console.log(hikes);
       return hikes;

@@ -62,7 +62,7 @@ function HikeElement(props) {
   const navigate = useNavigate();
 
   const hike = props.hike;
-  console.log(hike);
+  //console.log(hike);
 
   const hh = Math.floor(hike.ExpectedTime / 60);
   const mm = Math.floor(hike.ExpectedTime % 60);
