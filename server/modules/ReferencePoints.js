@@ -25,3 +25,17 @@ exports.emptyReferencePoint = () => {
     });
   })
 }
+
+exports.getStartingPoints = () => {
+  return new Promise(async (resolve, reject) => {
+    const sql = "SELECT HikeID, Lat, Lng FROM HikeRefPoints JOIN ReferencePoints ON HikeRefPoints.RefPointID = ReferencePoints.RefPointID WHERE IsStart=1;";
+    db.all(sql, [], function (err, rows) {
+      if (err)
+        reject(err);
+      else {
+        const points = rows.map((r) => ({ HikeID: r.HikeID, Lat: r.Lat, Lng: r.Lng }));
+        resolve(points);
+      }
+    });
+  })
+};

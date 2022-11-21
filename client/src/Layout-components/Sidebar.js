@@ -307,15 +307,21 @@ function GeogForm(props) {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    console.log("Radius " + radius + "\nCoord: " + coord);
+    //console.log("Radius " + radius + "\nCoord: " + coord.lat + " " + coord.lng);
     if (coord === null) {
       setMsg("You did not selected any point!");
     } else if (radius === undefined) {
       setMsg("You did not select a distance!");
     } else {
       setMsg('');
-      //API.getNearHikes(radius, coord);
+      API.getNearHikes(radius, coord.lat, coord.lng).then(array => props.setHikes(array));
     }
+  }
+
+  const handleReset = (event) => {
+    setRadius(undefined);
+    setCoord(null);
+    API.getHikes().then(array => props.setHikes(array));
   }
 
 
@@ -362,7 +368,7 @@ function GeogForm(props) {
             </Button>
           </Col>
           <Col>
-            <Button variant="primary" type="reset" /*onClick={}*/>
+            <Button variant="primary" type="reset" onClick={handleReset}>
               Reset
             </Button>
           </Col>

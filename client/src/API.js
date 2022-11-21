@@ -109,14 +109,14 @@ async function getPointsHike(HikeID) {
 }
 
 // retrieve list of near hikes, given radius and coordinates
-async function getNearHikes(radius, coord) {
+async function getNearHikes(radius, lat, lng) {
   try {
-    const response = await fetch(APIURL + 'getNear/Hikes', {
+    const response = await fetch(APIURL + '/getNearHikes', {
       method: 'POST',
       body: JSON.stringify({
         "radius": radius,
-        "lat": coord.lat,
-        "lng": coord.lng,
+        "lat": lat,
+        "lng": lng,
       }),
       headers: {
         'Content-Type': 'application/json',

@@ -24,4 +24,5 @@ exports.emptyHikeRefPoint = () => {
         resolve('HikeRefPoints emptied');
     });
   })
-}
+};
+
