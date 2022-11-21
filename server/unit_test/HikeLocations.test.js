@@ -4,13 +4,13 @@ const db = require("../modules/DB");
 beforeAll(async() =>{   
     await db.createConnection();
     await HL.emptyLocations();
-   },100000  
+   },db.timeout  
 )
 afterAll(async()=>{
    await HL.emptyLocations();
    await db.populate();
    
-},100000 )
+},db.timeout )
 
 describe("Get/add HikeLocations",()=>{
     beforeEach(async() =>{   
