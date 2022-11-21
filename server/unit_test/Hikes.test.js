@@ -7,14 +7,14 @@ beforeAll(async() =>{
     await db.createConnection();
     await hikes.deleteHikes();
     await new Promise(process.nextTick);
-   } ,10000 
+   } ,100000 
 )
 afterAll(async()=>{
    await hikes.deleteHikes();
    await db.populate();
    await new Promise(process.nextTick);
 
-},10000 )
+},100000 )
 
 describe("Get/add Hikes",()=>{
     test('Get all Hikes empty db',async()=>{
