@@ -1,23 +1,25 @@
 const hikes = require('../modules/Hikes');
 const db = require("../modules/DB");
-const locations = require ("../modules/HikeLocations")
+const locations = require ("../modules/HikeLocations");
+
 
 
 beforeAll(async() =>{   
     await db.createConnection();
     await hikes.deleteHikes();
     await new Promise(process.nextTick);
-   } ,100000 
+   } ,db.timeout 
 )
 afterAll(async()=>{
    await hikes.deleteHikes();
    await db.populate();
    await new Promise(process.nextTick);
 
-},100000 )
+},db.timeout )
 
 describe("Get/add Hikes",()=>{
     test('Get all Hikes empty db',async()=>{
+        await expect(hikes.deleteHikes()).resolves.toEqual('Hikes emptied');
         await expect(hikes.getHikes()).resolves.toEqual([]);
     });
 

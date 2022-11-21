@@ -4,13 +4,13 @@ const db = require("../modules/DB");
 beforeAll(async() =>{   
     await db.createConnection();
     await Users.emptyUsers();
-   },10000 
+   },db.timeout 
 )
 afterAll(async()=>{
    await Users.emptyUsers();
    await db.populate();
    
-},10000 )
+},db.timeout )
 
 describe("Get/add HikeUsers",()=>{
     beforeEach(async() =>{   
