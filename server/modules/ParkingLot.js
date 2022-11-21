@@ -62,4 +62,4 @@ function deleteParkingLot(id){
     })
 }
 
-export {createParkingLot, updateParkingLot, getParkingLots, getParkingLot, deleteParkingLot}
+module.exports = {createParkingLot, updateParkingLot, getParkingLots, getParkingLot, deleteParkingLot};
