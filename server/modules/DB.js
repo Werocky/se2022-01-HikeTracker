@@ -1157,6 +1157,41 @@ this.wrapperPopulate(HikeID,file,province,city,title,length,expTime,Ascent,Descr
 this.wrapperPopulateRefP(HikeID, 70, "45.936518","7.626726","parking",1,0); // start
       this.wrapperPopulateRefP(HikeID, 71, "45.959146","7.644060","hut",0,1); // end
 
+      HikeID='36';
+      title="Sentiero per il BIVACCO GIAS NUOVO | 1893 m slm";
+      province='Torino';
+      city ='Forno Alpi Graie'; 
+      Ascent=674;
+      start="Forno Alpi Graie (Torino) | 1219 m slm circa"
+      end="Bivacco Gias Nuovo | 1893 m slm circa"
+      length=14,6;
+      Difficulty="H";
+      expTime=150; 
+      file="bivacco gias nuovo.gpx"    
+      Description="Il sentiero si presenta come una larga carreggiata sterrata che prende subito quota, trasformandosi in un sentiero circondato da pietroni e bassa vegetazione. Lungo le pareti laterali è possibile vedere pareti attrezzate per l’arrampicata, mentre su qualche grosso masso sono affisse targhette che riportano famose frasi di alpinisti."
+      
+      this.wrapperPopulate(HikeID,file,province,city,title,length,expTime,Ascent,Description,Difficulty,start,end);
+      this.wrapperPopulateRefP(HikeID, 72, "45.36415136038603, 7.223066687443649","parking",1,0); // start
+            this.wrapperPopulateRefP(HikeID, 73, "45.339875433428176", "7.183488184285876","hut",0,1); // end
+      
+            HikeID='36';
+            title="Sentiero per il BIVACCO GIAS NUOVO | 1893 m slm";
+            province='Torino';
+            city ='Forno Alpi Graie'; 
+            Ascent=674;
+            start="Forno Alpi Graie (Torino) | 1219 m slm circa"
+            end="Bivacco Gias Nuovo | 1893 m slm circa"
+            length=14,6;
+            Difficulty="H";
+            expTime=150; 
+            file="bivacco gias nuovo.gpx"    
+            Description="Il sentiero si presenta come una larga carreggiata sterrata che prende subito quota, trasformandosi in un sentiero circondato da pietroni e bassa vegetazione. Lungo le pareti laterali è possibile vedere pareti attrezzate per l’arrampicata, mentre su qualche grosso masso sono affisse targhette che riportano famose frasi di alpinisti."
+            
+            this.wrapperPopulate(HikeID,file,province,city,title,length,expTime,Ascent,Description,Difficulty,start,end);
+            this.wrapperPopulateRefP(HikeID, 72, "45.36415136038603, 7.223066687443649","parking",1,0); // start
+                  this.wrapperPopulateRefP(HikeID, 73, "45.339875433428176", "7.183488184285876","hut",0,1); // end
+            
+            
 
 }
     
