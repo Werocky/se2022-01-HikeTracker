@@ -17,6 +17,8 @@ class DatabaseConnection {
 
         await this.createTableHikeRefPoints();
 
+        await this.createParkingLots();
+
         //await this.deleteDB();
 
         await this.populate();
@@ -101,6 +103,18 @@ class DatabaseConnection {
                 }
             });
         });
+    }
+
+    static createParkingLots(){
+        return new Promise( async (resolve, reject) => {
+            const sql = "CREATE TABLE IF NOT EXIST ParkingLots (ParkingId TEXT NOT NULL, Description TEXT NOT NULL, Free INTEGER, PRIMARY KEY ParkingID);";
+            this.db.run(sql, [], function (err) {
+                if (err)
+                    reject(err);
+                else
+                    resolve('Table ParkingLot created');
+            })
+        })
     }
 
     static populate= async ()=>{
@@ -1154,9 +1168,125 @@ Description="Once in Cervinia, go as far as the roundabout, turn left and you wi
 "It is advisable, paying attention to the last rocky stretch, to continue for half an hour to touch the Carrel cross, which has marked the history of mountaineering, following the route which then becomes mountaineering, leading to Colle del Leone and the refuge dedicated to J.A. Carrel, support point for the Italian ascent route to Monte Cervino."
 
 this.wrapperPopulate(HikeID,file,province,city,title,length,expTime,Ascent,Description,Difficulty,start,end);
-this.wrapperPopulateRefP(HikeID, 70, "45.936518","7.626726","parking",1,0); // start
-      this.wrapperPopulateRefP(HikeID, 71, "45.959146","7.644060","hut",0,1); // end
+this.wrapperPopulateRefP(HikeID, 70, "45.93651","7.62672","parking",1,0); // start
+      this.wrapperPopulateRefP(HikeID, 71, "45.95914","7.64406","hut",0,1); // end
 
+      HikeID='36';
+      title="Sentiero per il BIVACCO GIAS NUOVO | 1893 m slm";
+      province='Torino';
+      city ='Forno Alpi Graie'; 
+      Ascent=674;
+      start="Forno Alpi Graie (Torino) | 1219 m slm circa"
+      end="Bivacco Gias Nuovo | 1893 m slm circa"
+      length=14,6;
+      Difficulty="H";
+      expTime=150; 
+      file="bivacco gias nuovo.gpx"    
+      Description="Il sentiero si presenta come una larga carreggiata sterrata che prende subito quota, trasformandosi in un sentiero circondato da pietroni e bassa vegetazione. Lungo le pareti laterali è possibile vedere pareti attrezzate per l’arrampicata, mentre su qualche grosso masso sono affisse targhette che riportano famose frasi di alpinisti."
+      
+      this.wrapperPopulate(HikeID,file,province,city,title,length,expTime,Ascent,Description,Difficulty,start,end);
+      this.wrapperPopulateRefP(HikeID, 72, "45.36415, 7.22306","parking",1,0); // start
+            this.wrapperPopulateRefP(HikeID, 73, "45.33987", "7.18348","hut",0,1); // end
+      
+    HikeID='37';
+    title="Sentiero per il BIVACCO BRUNO MOLINO | 2280 m slm";
+    province='Torino';
+    city ='Molette'; 
+    Ascent=888;
+    start="Molette – Balme (Torino) | 1392 m slm circa"
+    end="Bivacco Bruno Molino | 2280 m slm circa"
+    length=9;
+    Difficulty="H";
+    expTime=170; 
+    file="Bivacco Molino.gpx"    
+    Description="Se hai lasciato la macchina sul ciglio della strada principale, segui le indicazioni per Bivacco Molino e Uja di Mondrone, sentiero 233 che sembra addentrarsi nel borgo ma che si sposta subito nel bosco, sfociando nella stradina asfaltata poco sopra (questa è la strada che sale a destra della SP1). Seguila per poche centinaia di metri incrocerai il cartello segnaletico per la tua destinazione."
+
+    +"Prosegui per il sentiero nel bosco e arriverai ad una carreggiata sterrata che ti conduce all’Alpe Pian Bosco (1700 metri circa). Qui continua a seguire le bandiere bianco/rosse e aggira i caseggiati ricollegandoti allo sterrato poco più sopra."
+    
+    +"A questo punto puoi scegliere se tenerti sul sentiero che sale a sinistra fino al bivacco (segnalato da cartelli GTA Bivacco Molino), o se percorrere il sentiero balcone lungo la strada sterrata che per circa 500 metri ti regalerà una fantastica vista sul Monte Rosso d’Ala, portandoti ad un’alpe nella quale potresti trovare mucche al pascolo (segnalato con cartelli GTA Bivacco Molino/Lago Vasuero)."
+    
+    +"Consigliamo il sentiero che sale a sinistra poiché più intuitivo a livello di segnaletica, puoi tenere l’altro pezzo di sentiero per creare un anello per il ritorno. "
+    
+    this.wrapperPopulate(HikeID,file,province,city,title,length,expTime,Ascent,Description,Difficulty,start,end);
+    this.wrapperPopulateRefP(HikeID, 74,"45.30900", "7.24348","parking",1,0); // start
+            this.wrapperPopulateRefP(HikeID, 75, "45.32672", "7.23196","",0,1); // end
+
+    HikeID='38';
+    title=" Sentiero per il BIVACCO BERARDO | 2700 m slm";
+    province='Cuneo';
+    city ='Pontechianale'; 
+    Ascent=1100 ;
+    start="Rifugio Alevè – Fraz. Castello, Pontechianale (CN) | 1600 m slm circa"
+    end="Bivacco Berardo | 2710 m slm circa"
+    length=10;
+    Difficulty="PH";
+    expTime=180; 
+    file="Bivacco_Berardo.gpx"    
+    Description="Lasciata la macchina nel parcheggio raggiungiamo la fontana poco più avanti sotto i cartelli con tutte le informazioni sui vari percorsi che si possono intraprendere dalla Fraz. Castello."
+
+    +"Iniziamo la salita con un primo tratto molto ripido che affianca il letto artificiale del torrente Vallanta, prima che esso sfoci nel lago di Pontechianale."
+    
+    +"Più avanti il sentiero si addolcisce addentrandosi nel caratteristico bosco dell’Alevè, la più grande estensione di Pino Cembro d’Italia e una delle più grandi d’Europa. "
+    
+    +"Usciti dalla zona boschiva incontriamo un gruppo di ruderi in pietra chiamate Grange Gheite."
+    
+    +"Giunti al bivio per il Sentiero Ezio Nicoli svoltiamo a destra, dopo 100 metri un nuovo bivio ci indica il sentiero per il Bivacco Berardo a sinistra (2,00h circa) e per il Bivacco Boarelli a destra (2,30h circa). "
+    
+    +"Proseguiamo verso sinistra (Bivacco Berardo) e ci immergiamo completamente nel bosco seguendo un sentiero stretto e che non lascia prendere fiato nemmeno un secondo."
+    
+    +"Passiamo dai 2000 m (bivio sentiero Ezio Nicoli) ai 2710 del Bivacco Berardo in 2km circa."
+    
+    +"Il sentiero non presenta grandi difficoltà se non nella sua ripidità specialmente nel tratto finale dove il fondo risulta un po’ scivoloso e polveroso."
+    this.wrapperPopulate(HikeID,file,province,city,title,length,expTime,Ascent,Description,Difficulty,start,end);
+    this.wrapperPopulateRefP(HikeID,76, "44.61340", "7.05332" ,"hut",1,0); // start
+            this.wrapperPopulateRefP(HikeID, 77, "44.65110", "7.07395","hut",0,1); // end
+
+
+        HikeID='39';
+        title=" Monte Fertazza e Ristoro Belvedere: escursione ad anello da Pescul";
+        province='Belluno';
+        city ='Selva di Cadore'; 
+        Ascent=700 ;
+        start=" Pescul (Val Fiorentina Seggiovie) 1433 m"
+        end="Cima Fertazza (Cima dei Viai) – 2101 m"
+        length=12;
+        Difficulty="H";
+        expTime=240; 
+        file="Monte-fertazza.gpx"    
+        Description="Dall’ammaliante Val Fiorentina, uno dei monti sicuramente più conosciuti e frequentati di questa fascia alpina è quello del Monte Fertazza, sia d’inverno, per la presenza delle diverse piste sciistiche, che d’estate, dove le relative seggiovie, per un certo lasso di tempo, le rimettono in funzione per giungere con facilità presso i rispettivi ristoranti Fertazza e Belvedere. Tuttavia, il Monte Fertazza può soddisfare anche chi desidera svolgere una camminata mediamente impegnativa, affrontando un sentiero relativamente facile che ci porta, anch’esso, a raggiungere la punta più alta del codesto monte, ovvero la Cima dei Viai, che ci permette, per di più, di raggiungere l’apice panoramico dell’intera uscita. Infatti, questa escursione, seppur risulti relativamente facile, sin dall’inizio della camminata è caratterizzata da un susseguirsi di sorprendenti vedute paesaggistiche che si affacciano, sostanzialmente, sulla suggestiva Val Fiorentina, nonché sugli innumerevoli monti sovrastanti che contraddistinguono una considerevole fascia delle fantastiche Dolomiti; la cima, invece, è una veduta a 360° “esplosivamente” meravigliosa, praticamente inaspettata per chi la raggiunge per la prima volta, che ci permette di ammirare, di fatto con un estensione ancora più notevole, degli ulteriori massicci Dolomitici, molti di questi tra i più conosciuti."
+        this.wrapperPopulate(HikeID,file,province,city,title,length,expTime,Ascent,Description,Difficulty,start,end);
+        this.wrapperPopulateRefP(HikeID,78, "46.43647", "12.07019" ,"",1,0); // start
+                this.wrapperPopulateRefP(HikeID, 79, "46.42411", "12.04409","",0,1); // end
+
+        HikeID='40';
+        title="Rifugio Casera Bosconero da Lago di Pontesei";
+        province='Belluno';
+        city ='Forno di Zoldo'; 
+        Ascent=800 ;
+        start=" Pescul (Val Fiorentina Seggiovie) 1433 m"
+        end="Rifugio Casera Bosconero 1457 m"
+        length=10;
+        Difficulty="H";
+        expTime=180; 
+        file="Rifugio-Bosconero.gpx"    
+        Description="Dal Lago di Pontesei, seguiamo le indicazioni per il Rifugio Bosconero imboccando il sentiero 485 che sale moderatamente sino alla Casera dei Zot; da qui, con maggiore pendenza sino ad arrivare alla Casera Bosconero. Effettuiamo, quindi, il ritorno ad anello ritornando brevemente indietro all’ultimo bivio,"
+        +" imboccando il sentiero 490 che porta l’indicazione del Pian e della Casera del Mugon, oppure effettuiamo una variante un po’ più lunga e difficile attraverso il sentiero che porta a Le Calades, ma svoltiamo, al relativo bivio, verso Pontesei, attraversando, quindi, un ghiaione e, ricongiungendoci, appunto, con il segnavia 490."
+        +" A propria discrezione, la deviazione attraverso il “Sentiero Lago delle Streghe” per ricongiungerci, nuovamente, con il sentiero 490 e ritornare, quindi, a Pontesei."
+
+        this.wrapperPopulate(HikeID,file,province,city,title,length,expTime,Ascent,Description,Difficulty,start,end);
+        this.wrapperPopulateRefP(HikeID,79,"46.33957", "12.22392" ,"parking",1,0); // start
+                this.wrapperPopulateRefP(HikeID, 80, "46.33835", "12.25160","hut",0,1); // end
+
+        
+
+        
+
+    
+
+           
+    
+    
+            
 
 }
     

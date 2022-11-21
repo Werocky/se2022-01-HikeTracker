@@ -134,6 +134,105 @@ async function getNearHikes(radius, lat, lng) {
   }
 }
 
+/*** PARKING LOT FUNCTIONS ***/
+
+async function createParkingLot(description, parkingId, free, RefPointID, coord){
+  try {
+    const response = await fetch(APIURL + 'ParkingLots', {
+      method: 'POST',
+      body: JSON.stringify({
+        "Description" : description,
+        "ParkingID" : parkingId,
+        "free" : free,
+        "RefPointID" : RefPointID,
+        "lat": coord.lat,
+        "lng": coord.lng,
+      }),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+    return response.ok ? true : false;
+  } catch (err) {
+    throw err;
+  }
+}
+
+async function updateParkingLot(description, parkingId, free, RefPointID, coord){
+  try {
+    const response = await fetch(APIURL + 'ParkingLots', {
+      method: 'PUT',
+      body: JSON.stringify({
+        "Description" : description,
+        "ParkingID" : parkingId,
+        "free" : free,
+        "RefPointID" : RefPointID,
+        "lat": coord.lat,
+        "lng": coord.lng,
+      }),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+    return response.ok ? true : false;
+  } catch (err) {
+    throw err;
+  }
+}
+
+async function getParkingLots(){
+  try {
+    const response = await fetch(APIURL + 'ParkingLots', {
+      method: 'GET',
+    });
+    const result = await response.json();
+    if(response.ok)
+      return result
+    else
+      throw result;
+  } catch (err) {
+    throw err;
+  }
+}
+
+async function getParkingLot(id){
+  try {
+    const response = await fetch(APIURL + 'ParkingLots', {
+      method: 'GET',
+      body: JSON.stringify({
+        "ParkingID" : id
+      }),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+    const result = await response.json();
+    if(response.ok)
+      return result
+    else
+      throw result;
+  } catch (err) {
+    throw err;
+  }
+}
+
+async function deleteParkingLot(id){
+  try {
+    const response = await fetch(APIURL + 'ParkingLots', {
+      method: 'DELETE',
+      body: JSON.stringify({
+        "ParkingID" : id
+      }),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+    return response.ok ? true : false;
+  } catch (err) {
+    throw err;
+  }
+}
+
 /* LOGIN FUNCTIONS */
 async function logIn(credentials) {
   let response = await fetch((APIURL + '/sessions'), {
@@ -184,5 +283,5 @@ async function register(credentials) {
   return response.ok ? true : false;
 }
 
-const API = { getHikes, logIn, logOut, getUserInfo, getFilteredHikes, register, setDescription, getHike, getPointsHike, getNearHikes };
+const API = { getHikes, logIn, logOut, getUserInfo, getFilteredHikes, register, setDescription, getHike, getPointsHike, getNearHikes, getParkingLot, getParkingLots, updateParkingLot, createParkingLot, deleteParkingLot };
 export default API;

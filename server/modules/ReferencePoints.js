@@ -15,6 +15,18 @@ exports.addReferencePoint = (RefPointID, lat, lng, type) => {
   });
 };
 
+exports.updateReferencePoint = (RefPointID, lat, lng, type) =>{
+  return new Promise(async (resolve, reject) =>{
+    const sql = 'UPDATE ReferencePoints SET lat = ?, lng = ?, type = ? WHERE RefPointID = ?';
+    db.run(sql, [lat, lng, type, RefPointID], function (err){
+      if(err)
+        reject(err);
+      else
+        resolve('Entry updated');
+    })
+  })
+}
+
 exports.emptyReferencePoint = () => {
   return new Promise(async (resolve, reject) => {
     db.run("DELETE FROM ReferencePoints;", [], function (err) {
