@@ -17,6 +17,8 @@ let gpxParser = require('gpxparser');
 var fs = require('fs');
 const fileUpload = require("express-fileupload");
 const { builtinModules } = require('module');
+const { createParkingLot, updateParkingLot, getParkingLots, getParkingLot, deleteParkingLot } = require('./modules/ParkingLot.js');
+const { addReferencePoint, updateReferencePoint } = require('./modules/ReferencePoints.js');
 
 
 
@@ -248,6 +250,120 @@ app.put('/setDescription', /*isLoggedIn,*/[
       res.status(503).json({ error: `Internal Error` });
     }
   });
+
+
+/*** PARKING LOT APIs ***/
+
+//POST
+//Create parking lot
+app.post('/ParkingLots',
+  [check('Description').notEmpty(),
+  check('ParkingId').notEmpty(),
+  check('free').notEmpty(),
+  check('RefPointID'), 
+  check('lat'),
+  check('lng')], async (req, res) => {
+  
+    const errors = validationResult(res);
+    if (!errors.isEmpty()) {
+      return res.status(422).json({ error: 'cannot process request' });
+    }
+    const description = req.body.Description;
+    const id = req.body.ParkingId;
+    const free = req.body.free;
+    const refPoint = req.body.RefPointID;
+    const lat = req.body.lat;
+    const lng = req.body.lng;
+    try {
+      await createParkingLot(id, description, free);
+      await addReferencePoint(refPoint, lat, lng, 'parking')
+      res.status(201).end();
+    } catch (err) {
+      res.status(503).json({error: 'Internal error'});
+    }
+});
+
+//PUT
+//Update parking lot
+app.put('/ParkingLots',
+  [check('Description').notEmpty(),
+  check('ParkingId').notEmpty(),
+  check('free').notEmpty(),
+  check('RefPointID'), 
+  check('lat'),
+  check('lng')], async (req, res) => {
+  
+    const errors = validationResult(res);
+    if (!errors.isEmpty()) {
+      return res.status(422).json({ error: 'cannot process request' });
+    }
+    const description = req.body.Description;
+    const id = req.body.ParkingId;
+    const free = req.body.free;
+    const refPoint = req.body.RefPointID;
+    const lat = req.body.lat;
+    const lng = req.body.lng;
+    try {
+      await updateParkingLot(id, description, free);
+      await updateReferencePoint(refPoint, lat, lng, 'parking');
+      res.status(201).end();
+    } catch (err) {
+      res.status(503).json({error: 'Internal error'});
+    }
+});
+
+//GET
+//Return all parking lots
+app.get('/ParkingLots', async (req, res) => {
+  
+    const errors = validationResult(res);
+    if (!errors.isEmpty()) {
+      return res.status(422).json({ error: 'cannot process request' });
+    }
+
+    try {
+      const parkingLots = await getParkingLots();
+      res.status(201).json(parkingLots);
+    } catch (err) {
+      res.status(503).json({error: 'Internal error'});
+    }
+});
+
+//Return parking lot identified by id
+app.post('/ParkingLots',
+  [check('ParkingId').notEmpty()], async (req, res) => {
+  
+    const errors = validationResult(res);
+    if (!errors.isEmpty()) {
+      return res.status(422).json({ error: 'cannot process request' });
+    }
+
+    const id = req.body.ParkingId;
+    try {
+      const parkingLot = await getParkingLot(id);
+      res.status(201).json(parkingLot);
+    } catch (err) {
+      res.status(503).json({error: 'Internal error'});
+    }
+});
+
+//DELETE
+//delete parking lot
+app.post('/ParkingLots',
+  [check('ParkingId').notEmpty()], async (req, res) => {
+  
+    const errors = validationResult(res);
+    if (!errors.isEmpty()) {
+      return res.status(422).json({ error: 'cannot process request' });
+    }
+    const id = req.body.ParkingId;
+    try {
+      await deleteParkingLot(id);
+      res.status(201).end();
+    } catch (err) {
+      res.status(503).json({error: 'Internal error'});
+    }
+});
 
 /*** Users APIs ***/
 

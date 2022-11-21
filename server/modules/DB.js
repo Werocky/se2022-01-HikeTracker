@@ -17,6 +17,8 @@ class DatabaseConnection {
 
         await this.createTableHikeRefPoints();
 
+        await this.createParkingLots();
+
         //await this.deleteDB();
 
         await this.populate();
@@ -101,6 +103,18 @@ class DatabaseConnection {
                 }
             });
         });
+    }
+
+    static createParkingLots(){
+        return new Promise( async (resolve, reject) => {
+            const sql = "CREATE TABLE IF NOT EXIST ParkingLots (ParkingId TEXT NOT NULL, Description TEXT NOT NULL, Free INTEGER, PRIMARY KEY ParkingID);";
+            this.db.run(sql, [], function (err) {
+                if (err)
+                    reject(err);
+                else
+                    resolve('Table ParkingLot created');
+            })
+        })
     }
 
     static populate= async ()=>{
