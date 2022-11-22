@@ -1,16 +1,20 @@
 import AuthContext from '../AuthContext';
-import { Col, Container, Row } from 'react-bootstrap';
+import { Button, Col, Container, Row } from 'react-bootstrap';
 import { useContext, useState, useEffect } from "react";
 import HikeList from './HikeList';
 import API from '../API';
 import Sidebar from './Sidebar';
 import NavigationBar from './Navigationbar';
+import { useNavigate } from 'react-router-dom';
 
 
 function MainLayout(props) {
 
   const [hikes, setHikes] = useState([]); //empty array of hikes
   const [loading, setLoading] = useState(true);
+
+  const auth = useContext(AuthContext);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const reloadHikes = async () => {
@@ -27,13 +31,14 @@ function MainLayout(props) {
 
   return (
     <>
-    <NavigationBar logout={props.logout} />
+      <NavigationBar logout={props.logout} />
       <Container fluid className={'vh-100'}>
         <p></p>
+
         {!loading &&
           <Row>
             <Col sm={9}>
-              <HikeList hikes={hikes} auth={props.auth} setHikes={setHikes}/>
+              <HikeList hikes={hikes} auth={props.auth} setHikes={setHikes} />
             </Col>
             <Col sm={3}>
               <Sidebar setHikes={setHikes} />

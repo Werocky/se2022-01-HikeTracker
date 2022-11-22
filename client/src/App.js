@@ -8,8 +8,9 @@ import API from './API';
 import { LoginComponent } from './Layout-components/LoginComponent';
 import { RegisterComponent } from './Layout-components/RegisterComponent';
 import HikeDetails from './Layout-components/HikeDetails';
-import NavigationBar from './Layout-components/Navigationbar';
 import { HikeDescription } from './Layout-components/HikeDescription';
+import ProfilePage from './Layout-components/ProfilePage';
+import HutsPage from './Layout-components/Huts-components/HutsPage';
 
 function App() {
 
@@ -69,36 +70,27 @@ function AppLayout(props) {
   return (
     <Routes>
       <Route path='/' element={
-        <>
           <MainLayout
             logout={props.logout}
           />
-        </>
-      }>
-      </Route>
+      } />
       <Route path='/:hikeID' element={
-        <>
-          {/* <NavigationBar logged={auth} setLogged={props.setLogged}/> */}
           <HikeDetails logout={props.logout} />
-        </>
       } />
       <Route path='/register' element={
-        <>
-          {/* <NavigationBar logged={auth} setLogged={props.setLogged}/> */}
           <RegisterComponent register={props.register} />
-        </>
       } />
       <Route path='/login' element={
-        <>
-          {/* <NavigationBar logged={auth} setLogged={props.setLogged}/> */}
           <LoginComponent login={props.login} />
-        </>
       } />
       <Route path='/modifyHikeDesc/:hikeID' element={
-        <>
-          {/* <NavigationBar logged={auth} setLogged={props.setLogged}/> */}
           <HikeDescription />
-        </>
+      } />
+      <Route path='/profile/:userId' element={
+        <ProfilePage logout={props.logout} />
+      } />
+      <Route path='/huts' element={
+        <HutsPage logout={props.logout} />
       } />
     </Routes>
   );
