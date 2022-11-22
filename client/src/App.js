@@ -10,6 +10,7 @@ import { RegisterComponent } from './Layout-components/RegisterComponent';
 import HikeDetails from './Layout-components/HikeDetails';
 import NavigationBar from './Layout-components/Navigationbar';
 import { HikeDescription } from './Layout-components/HikeDescription';
+import {ParkingForm} from './Layout-components/ParkingForm'
 
 function App() {
 
@@ -98,6 +99,12 @@ function AppLayout(props) {
         <>
           {/* <NavigationBar logged={auth} setLogged={props.setLogged}/> */}
           <HikeDescription />
+        </>
+      } />
+      <Route path='/addParkingLot' element={
+        <>
+          {/* <NavigationBar logged={auth} setLogged={props.setLogged}/> */}
+          <ParkingForm />
         </>
       } />
     </Routes>

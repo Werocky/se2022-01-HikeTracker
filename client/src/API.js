@@ -136,9 +136,9 @@ async function getNearHikes(radius, lat, lng) {
 
 /*** PARKING LOT FUNCTIONS ***/
 
-async function createParkingLot(description, parkingId, free, RefPointID, coord){
+async function createParkingLot(description, free, coord){
   try {
-    const response = await fetch(APIURL + 'ParkingLots', {
+    const response = await fetch(APIURL + '/ParkingLots', {
       method: 'POST',
       body: JSON.stringify({
         "Description" : description,
