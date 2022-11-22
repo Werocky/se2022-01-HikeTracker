@@ -18,23 +18,21 @@ function ParkingForm() {
 
     event.preventDefault();
     //console.log("Radius " + radius + "\nCoord: " + coord.lat + " " + coord.lng);
-   
-    if (coord === null) {
+    if(description===''){
+      setMsg("Insert a description or a name for the parking");}
+    else if(gratis==="" || gratis===null || gratis===undefined){
+      setMsg("select if the parking is gratis or not");}
+    else if (coord === null) {
       setMsg("You did not selected any point!");
     } else if (radius === undefined) {
       setMsg("You did not select a distance!");
     } 
-     // API.getNearHikes(radius, coord.lat, coord.lng).then(array => props.setHikes(array));
-    
-    else if(description===''){
-      setMsg("Insert a description or a name for the parking");}
-    else if(gratis==="" || gratis===null || gratis===undefined){
-      setMsg("select if the parking is gratis or not");}
     else {
       setMsg('');
-    }
-    API.createParkingLot(description,gratis,coord).then(setMsg("ciao"));
+      API.createParkingLot(description,gratis,coord).then(setMsg("ciao"));
   
+    }
+   
   }
 
   const ClickPick = () => {
@@ -45,7 +43,7 @@ function ParkingForm() {
         }
       }
     })
-    return (
+   return (
         <>
           {coord !== null &&
             <Marker position={{ lat: coord.lat, lng: coord.lng }}>
@@ -118,7 +116,7 @@ function ParkingForm() {
           </MapContainer>
         </Form.Group>
       
-      <hr style={{
+        <hr style={{
         background: 'black',
         height: '10px',
       }} />
