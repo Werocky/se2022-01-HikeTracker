@@ -14,10 +14,11 @@ class DatabaseConnection {
         await this.createTableGPXFileLocation(); 
         
         await this.cresteTableReferencePoints();
-
         await this.createTableHikeRefPoints();
 
         await this.createParkingLots();
+
+        await this.createHuts();
 
         //await this.deleteDB();
 
@@ -117,6 +118,19 @@ class DatabaseConnection {
         })
     }
 
+    static createHuts(){
+        return new Promise(async(resolve, reject) => {
+            const sql = "CREATE TABLE IF NOT EXISTS Huts(RefPointID TEXT PRIMARY KEY NOT NULL, Name TEXT NOT NULL, Elevation INTEGER NOT NULL, City TEXT NOT NULL, Province TEXT, Region TEXT, Country TEXT, WhenOpen TEXT, Beds INTEGER, AvgPrice FLOAT, Description TEXT);";
+            this.db.run(sql,[],function (err) {
+                if (err)
+                    reject(err);
+                else
+                    resolve('Table Huts created');
+            });
+        });
+    }
+
+
     static populate= async ()=>{
 
         const locations =require ("./HikeLocations");
@@ -125,6 +139,7 @@ class DatabaseConnection {
         const Users =require("./Users");
         const refPoints = require("./ReferencePoints");
         const HikeRefPoints = require("./HikeRefPoints");
+        const hut = require("./Huts");
 
         await Users.emptyUsers()
         await Users.populateUsers();
@@ -135,6 +150,9 @@ class DatabaseConnection {
 
         await refPoints.emptyReferencePoint();
         await HikeRefPoints.emptyHikeRefPoint();
+
+        await hut.emptyHuts();
+ 
 
         let refPoint=0;
         let HikeID='0';
@@ -1280,8 +1298,8 @@ await this.wrapperPopulateRefP(HikeID, refPoint++, "45.93651","7.62672","parking
 
         
 
+        await this.populateHuts();
         
-
     
 
            
@@ -1311,6 +1329,98 @@ await this.wrapperPopulateRefP(HikeID, refPoint++, "45.93651","7.62672","parking
         await refPoints.addReferencePoint(RefPointID, lat,lng, type);
         await HikeRefPoints.addHikeRefPoints(HikeID, RefPointID, IsStart, IsEnd);
 
+    }
+
+    static populateHuts = async () => {
+        const huts = require("./Huts");
+        let description = "";
+
+        description = "Il Rifugio La Riposa si trova in località Riposa, Mompantero di Susa, a 2185 m di altitudine ed è raggiungibile anche in auto."+
+        "Dispone di 3 camere da 6 posti ed una camerata da 22 posti con letti a castello."+"Ristorante per gli ospiti con possibilità di pernottamento e in aggiunta servizio mezza pensione o pensione completa."+
+        "Le tariffe variano da 15 euro per pernottamento a 40/50 euro con mezza pensione o completa.";
+        await huts.addHut('0', 'Rifugio La riposa', 2185, "Mompantero, Susa", "Torino", "Piemonte", "Italy", "S", 28, 40,description );
+        
+        description= "Il Rifugio Melezè si trova a Bellino a 1812 metri d’altitudine, vicino a Borgata Sant'Anna."+
+        "L'edificio era una caserma militare ed è stato ristrutturato interamente in legno e pietra."+
+        "Il piano terreno ospita il bar, la cucina e la sala ristorante, dove è possibile gustare i migliori piatti della tradizione montana e locale."+
+        "E' possibile inoltre pranzare all'esterno."+
+        "Al piano superiore, si trovano le 7 camere in legno, per un totale di 50 posti letto."+
+        "La struttura è dotata di servizi igienici esterni ed interni al piano terra; al piano superiore, vi sono i bagni per le camere con docce ed acqua calda.";
+        await huts.addHut('2',"Rifugio Meleze'",1812, "Bellino", "Cuneo", "Piemonte", "Italy", "Y", 50, 40, description);
+        
+        description= "Situato tra le montagne della Valle Stretta, questo rifugio rustico dista 8 km dal monte Thabor nel massiccio dei Cerces"+
+         "Inoltre è a 32 km dalla stazione ferroviaria di Brianzoni e 39 km dal comprensorio sciistico Serre Chevalier."+
+        "Il dormitorio semplice può ospitare fino a 15 persone e offre letti a castello."+
+        "Le camere private invece, possono ospitare da 2 a 4 persone."+
+        "La struttura comprende un ristorante sobrio che serve piatti semplici della cucina regionale e un bar con caminetto."+
+        "Dispone inoltre di due aree lounge, terrazza, deposito biciclette e locale per l'asciugatura degli sci. Offre anche la colazione.";
+        await huts.addHut('19',"Rifugio I Re Magi",1769,"Névache","","Provenza-Alpi-Costa Azzurra","France", "SW", 35, 52,description);
+        
+        description= "Una vecchia baita nell’incantevole Vallone di S. Anna di Sampeyre, a quota 1850 mt, ristrutturata con cura per creare un ambiente accogliente"+
+        "Pensato per il piacere di una vacanza o una semplice sosta, in cui riscoprire se stessi e l'amore per le cose semplici, per vivere un momento \"d'altri tempi\", senza rinunciare alle comodità odierne."+
+        "Gli ospiti che scelgono di soggiornare presso Rifugio Meira Garneri possono usufruire di tutti i servizi messi a disposizione dalle strutture del Torinetto: l’ampio parco verde attrezzato con piscina e solarium, giochi bimbi, giochi bocce, la palestra, la sala per lo squash, il Rifugio in quota e trasporto con gatto delle nevi e motoslitte.";
+        await huts.addHut('23',"Rifugio Meira Garnieri",1810,"Sampeyre","Cuneo","Piemonte","Italy", "Y",23,60, description);
+        
+        description= "Si trova all’interno del parco naturale Orsiera-Rocciavrè, ai piedi del Colle della Roussa"+
+        "Ed è inoltre un’ottima base per salire sopra i 2000 m (Colle della Roussa) e scoprire gli affascinanti sentieri tra le vette del Parco  con i suoi spettacolari laghi, Rouen (2391 m), Sottano e Soprano (2200 m c.a)."+
+        "E’ raggiungibile solo a piedi e in mountain bike."+
+        "Un luogo familiare, una cucina come una volta, con gli ingredienti migliori tutto l’anno anche d’inverno, per un pranzo o una cena o una bella chiaccherata davanti ad una fetta delle nostre torte.";
+        await huts.addHut('25',"Rifugio Fontana Mura",1726,"Coazze", "Torino", "Piemonte", "Italy","SW",11,60,description);
+        
+        description= "Il rifugio Selleries è un rifugio situato in val Chisone, nel cuore del Parco Regionale Orsiera."+
+        "Il rifugio è aperto tutto l’anno e, nei mesi estivi, é raggiungibile in macchina su strada sterrata."+
+        "Dispone di 12 stanze dislocate su 2 piani, alcune matrimoniali ed altre con letti a castello. In 2 stanze sono presenti i servizi in camera, mentre per le altre ci sono bagni e docce ai piani."+
+        "Dispone di un ampio salone ristorante con 80 posti."+
+        "È dotato di tutte le infrastrutture necessarie per l’accoglienza di portatori di handicap, compreso un ascensore per raggiungere dalla sala ristorante i piani superiori.";
+        await huts.addHut('27',"Rifugio Selleries",2023,"Roure","Torino","Piemonte","Italy","Y",70,44,description);
+        
+        description= "Di proprietà del CAI. Inaugurato nel 1950 e così chiamato in memoria dell’accademico del CAI e partigiano ucciso dai nazifascisti nel 1944."+ 
+        "(Willy Jervis, 43 anni, ingegnere meccanico membro del partito d'azione, è stato fucilato a Villar Pellice, la notte fra il 4 e 5 agosto 1944.)"+
+        "Si trova all'astremo inferiore del grande e pittoresco Piano del Prà, ricoperto da pascoli, interrotti nella parte superiore da boschetti di larici."+
+        "Il Rifugio Jervis, aperto tutto l'anno, dispone di 90 posti letto con servizi e docce ai piani. La struttura si è arricchito nel 2015 di una dèpendance ricavata dalla ristrutturazione della casermetta ex-militare.";
+        await huts.addHut('31',"Rifugio Jervis Cruello",1732,"Bobbio Pellice","Torino","Piemonte","Italy","Y",90,50,description);
+        
+        /*description= 
+        await huts.addHut('33',)
+        
+        description= 
+        await huts.addHut('41',)
+        
+        description= 
+        await huts.addHut('44',)
+        
+        description= 
+        await huts.addHut('45',)
+        
+        description= 
+        await huts.addHut('46',)
+        
+        description= 
+        await huts.addHut('47',)
+        
+        description= 
+        await huts.addHut('56',)
+        
+        description= 
+        await huts.addHut('62',)
+        
+        description= 
+        await huts.addHut('63',)
+        
+        description= 
+        await huts.addHut('71',)
+        
+        description= 
+        await huts.addHut('73',)
+        
+        description= 
+        await huts.addHut('76',)
+        
+        description= 
+        await huts.addHut('77',)
+        
+        description= 
+        await huts.addHut('81',)*/
     }
 
 

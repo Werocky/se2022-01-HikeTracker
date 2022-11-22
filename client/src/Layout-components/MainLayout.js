@@ -4,6 +4,7 @@ import { useContext, useState, useEffect } from "react";
 import HikeList from './HikeList';
 import API from '../API';
 import Sidebar from './Sidebar';
+import NavigationBar from './Navigationbar';
 
 
 function MainLayout(props) {
@@ -26,6 +27,7 @@ function MainLayout(props) {
 
   return (
     <>
+    <NavigationBar logout={props.logout} />
       <Container fluid className={'vh-100'}>
         <p></p>
         {!loading &&

@@ -1,17 +1,23 @@
+import { useContext } from 'react';
 import { Navbar, Container, Button } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 import API from '../API';
+import AuthContext from '../AuthContext';
 
 function NavigationBar(props){
+
+    const auth = useContext(AuthContext);
+
     const navigate = useNavigate();
-    return <Navbar className='navbar navbar-dark bg-dark position-sticky top-0'>
+
+    return <Navbar className='navbar navbar-dark bg-dark' position='sticky' fixed='top' >
         <Container fluid>
             <h2 className="main-title col-4 text-white" onClick={ ()=> navigate('/')}>
                 <i className="bi bi-building"></i>
                 <span className="d-none d-md-inline">Hike-Tracker</span>
             </h2>
-            <h3 className='text-white'>Welcome, {props.logged.login === false ? 'Guest' : props.logged.user.Id}!</h3>
-            {props.logged.login ? <Logout setLogged = {props.setLogged} navigate={navigate} user={props.logged}/> : <Login navigate={navigate}/>}
+            <h3 className='text-white'>Welcome, {auth.login === false ? 'Guest' : auth.user.Id}!</h3>
+            {auth.login ? <Logout logout={props.logout} navigate={navigate}/> : <Login navigate={navigate}/>}
         </Container>
     </Navbar>
 }
@@ -29,20 +35,11 @@ function Login(props){
 
 function Logout(props){
     return <div className='col-4 d-flex flex-row-reverse'>
-        <Button variant="outline-danger" onClick={() => handleLogout(props.setLogged, props.navigate, props.user.id)}>
+        <Button variant="outline-danger" onClick={() => props.logout(props.navigate)}>
             <span className='btn-icon'><i className="bi bi-box-arrow-left"></i></span><span>Logout</span>
         </Button>
     </div>
 }
 
-const handleLogout = async (setLogged, navigate, id) => {
-    if (await API.logOut()){
-        setLogged({
-            login: false,
-            user: {role: ''},
-        });
-        navigate('/');
-    }
-};
 
 export default NavigationBar;

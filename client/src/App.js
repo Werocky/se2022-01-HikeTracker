@@ -15,7 +15,7 @@ function App() {
 
   const [auth, setAuth] = useState({  // login information
     login: false,
-    user: {role: ''},
+    user: { role: '' },
   });
 
   const login = async (email, password) => {
@@ -26,12 +26,13 @@ function App() {
     });
   };
 
-  const logout = async () => {
+  const logout = async (navigate) => {
     await API.logOut();
     setAuth({
       login: false,
-      user: {role: ''},
+      user: { role: '' },
     })
+    navigate('/');
   };
 
   const register = async (credentials) => {
@@ -54,7 +55,7 @@ function App() {
   return (
     <BrowserRouter>
       <AuthContext.Provider value={auth}>   {/* this is used to pass user information*/}
-        <AppLayout login={login} logout={logout} register={register} setLogged={setAuth}/>
+        <AppLayout login={login} logout={logout} register={register} setLogged={setAuth} />
       </AuthContext.Provider>
     </BrowserRouter>
   );
@@ -69,10 +70,7 @@ function AppLayout(props) {
     <Routes>
       <Route path='/' element={
         <>
-          <NavigationBar logged={auth} setLogged={props.setLogged}/>
           <MainLayout
-            auth={auth}
-            login={props.login}
             logout={props.logout}
           />
         </>
@@ -80,28 +78,28 @@ function AppLayout(props) {
       </Route>
       <Route path='/:hikeID' element={
         <>
-          <NavigationBar logged={auth} setLogged={props.setLogged}/>
-          <HikeDetails />
+          {/* <NavigationBar logged={auth} setLogged={props.setLogged}/> */}
+          <HikeDetails logout={props.logout} />
         </>
-      }/>
+      } />
       <Route path='/register' element={
         <>
-          <NavigationBar logged={auth} setLogged={props.setLogged}/>
+          {/* <NavigationBar logged={auth} setLogged={props.setLogged}/> */}
           <RegisterComponent register={props.register} />
         </>
       } />
       <Route path='/login' element={
         <>
-          <NavigationBar logged={auth} setLogged={props.setLogged}/>
+          {/* <NavigationBar logged={auth} setLogged={props.setLogged}/> */}
           <LoginComponent login={props.login} />
         </>
       } />
       <Route path='/modifyHikeDesc/:hikeID' element={
         <>
-          <NavigationBar logged={auth} setLogged={props.setLogged}/>
+          {/* <NavigationBar logged={auth} setLogged={props.setLogged}/> */}
           <HikeDescription />
         </>
-      }/>
+      } />
     </Routes>
   );
 }

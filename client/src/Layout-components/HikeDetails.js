@@ -4,6 +4,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import AuthContext from "../AuthContext";
 import { MapContainer, Marker, Polyline, Popup, TileLayer, useMap } from 'react-leaflet';
 import API from '../API';
+import NavigationBar from "./Navigationbar";
 
 function HikeDetails(props) {
   const auth = useContext(AuthContext);
@@ -23,7 +24,7 @@ function HikeDetails(props) {
       if (auth.login) {
         const gpxObj = await API.getPointsHike(params.hikeID);
         setGpxData(gpxObj);
-        console.log(gpxObj[0].lat+"\t"+gpxObj[0].lon+"\n"+gpxObj.at(-1).lat+"\t"+gpxObj.at(-1).lon);
+        console.log(gpxObj[0].lat + "\t" + gpxObj[0].lon + "\n" + gpxObj.at(-1).lat + "\t" + gpxObj.at(-1).lon);
       }
       setLoading(false);
 
@@ -38,8 +39,9 @@ function HikeDetails(props) {
 
   return (
     <>
-      {!loading &&
-        <Container fluid className={'vh-100'}>
+      <Container fluid className={'vh-100'}>
+        <NavigationBar logout={props.logout} />
+        {!loading && <>
           <Row>
             <Col>Title: {hike.Title}</Col>
             <Col>Length: {hike.Length} km</Col>
@@ -75,7 +77,7 @@ function HikeDetails(props) {
               <Col>
                 <MapContainer
                   center={[gpxData[Math.ceil(gpxData.length / 2)].lat, gpxData[Math.ceil(gpxData.length / 2)].lon]}
-                  bounds={[gpxData[0],gpxData.at(-1),]}
+                  bounds={[gpxData[0], gpxData.at(-1),]}
                   scrollWheelZoom
                   style={{ height: 500 + "px", width: "100%", }}>
                   <Polyline
@@ -97,9 +99,9 @@ function HikeDetails(props) {
               <Col>You should be logged to see the map</Col>
             </Row>}
 
+        </>}
+      </Container>
 
-        </Container>
-      }
     </>
   );
 }

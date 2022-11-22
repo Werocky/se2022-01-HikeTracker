@@ -62,4 +62,15 @@ function deleteParkingLot(id){
     })
 }
 
-module.exports = {createParkingLot, updateParkingLot, getParkingLots, getParkingLot, deleteParkingLot};
+function emptyParkingLot() {
+    return new Promise(async (resolve, reject) => {
+        db.run("DELETE FROM ParkingLots;", [], function (err) {
+          if (err)
+            reject(err);
+          else
+            resolve('ParkingLots emptied');
+        });
+      })
+}
+
+module.exports = {createParkingLot, updateParkingLot, getParkingLots, getParkingLot, deleteParkingLot, emptyParkingLot};

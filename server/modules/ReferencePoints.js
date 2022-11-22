@@ -51,3 +51,18 @@ exports.getStartingPoints = () => {
     });
   })
 };
+
+exports.getFromType = (type) => {
+  return new Promise(async (resolve, reject) => {
+    const sql="SELECT RefPointID FROM ReferencePoints WHERE Type=?;";
+    db.all(sql, [type],function (err,rows) {
+      if(err)
+      reject(err);
+      else {
+        const hutPoints = rows.map((r)=> ({RefPointID: r.RefPointID}));
+        console.log(hutPoints);
+        resolve(hutPoints);
+      }
+    })
+  })
+}
