@@ -66,3 +66,15 @@ exports.getFromType = (type) => {
     })
   })
 }
+
+exports.getLastRefPointID = () => {
+  return new Promise(async (resolve, reject) =>{
+    const sql = "SELECT MAX(RefPointID) FROM ReferencePoints";
+    db.run(sql, [], function (err, rows) {
+      if(err)
+        reject(err);
+      else
+        resolve(rows);
+    })
+  })
+}

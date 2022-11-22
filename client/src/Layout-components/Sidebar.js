@@ -96,9 +96,9 @@ function Sidebar(props) {
               setDifficulty(event.target.value)
             }}>
             <option>Select difficulty</option>
-            <option value="T">Tourist</option>
-            <option value="H">Hiker</option>
-            <option value="PH">Professional Hiker</option>
+            <option value="T">Tourist (T)</option>
+            <option value="H">Hiker (H)</option>
+            <option value="PH">Professional Hiker (PH)</option>
           </Form.Control>
         </Form.Group>
 

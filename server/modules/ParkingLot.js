@@ -50,6 +50,8 @@ function getParkingLot(id){
     })
 }
 
+
+
 function deleteParkingLot(id){
     return  new Promise(async (resolve, reject) =>{
         const sql = 'DELETE FROM ParkingLots WHERE id = ?';
@@ -73,4 +75,16 @@ function emptyParkingLot() {
       })
 }
 
-module.exports = {createParkingLot, updateParkingLot, getParkingLots, getParkingLot, deleteParkingLot, emptyParkingLot};
+function getLastParkingID(){
+    return new Promise(async (resolve, reject) =>{
+        const sql = "SELECT MAX(ParkingID) FROM ParkingLots";
+        db.run(sql, [], function (err, rows) {
+            if(err)
+                reject(err);
+            else
+                resolve(rows);
+        })
+    })
+}
+
+module.exports = {createParkingLot, updateParkingLot, getParkingLots, getParkingLot, deleteParkingLot, emptyParkingLot, getLastParkingID};

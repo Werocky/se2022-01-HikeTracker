@@ -142,9 +142,7 @@ async function createParkingLot(description, parkingId, free, RefPointID, coord)
       method: 'POST',
       body: JSON.stringify({
         "Description" : description,
-        "ParkingID" : parkingId,
         "free" : free,
-        "RefPointID" : RefPointID,
         "lat": coord.lat,
         "lng": coord.lng,
       }),
