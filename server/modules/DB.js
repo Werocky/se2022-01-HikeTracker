@@ -55,7 +55,7 @@ class DatabaseConnection {
 
     static createTableUsers() {
         return new Promise(async (resolve, reject) => {
-            const sql = "CREATE TABLE IF NOT EXISTS Users (Id TEXT PRIMARY KEY UNIQUE NOT NULL, Hash TEXT NOT NULL, salt TEXT NOT NULL, role TEXT NOT NULL);";
+            const sql = "CREATE TABLE IF NOT EXISTS Users (Id TEXT PRIMARY KEY UNIQUE NOT NULL, Hash TEXT NOT NULL, Salt TEXT NOT NULL, Role TEXT NOT NULL);";
             this.db.run(sql, [], function (err) {
                 if (err)
                     reject(err);
@@ -130,9 +130,7 @@ class DatabaseConnection {
         });
     }
 
-
-    static populate= async ()=>{
-
+    static cleanUp=async()=>{
         const locations =require ("./HikeLocations");
         const hikes =require("./Hikes");
         const fileLocation= require("./FileNames");
@@ -140,9 +138,6 @@ class DatabaseConnection {
         const refPoints = require("./ReferencePoints");
         const HikeRefPoints = require("./HikeRefPoints");
         const hut = require("./Huts");
-
-        await Users.emptyUsers()
-        await Users.populateUsers();
 
         await hikes.deleteHikes();
         await locations.emptyLocations();
@@ -152,6 +147,20 @@ class DatabaseConnection {
         await HikeRefPoints.emptyHikeRefPoint();
 
         await hut.emptyHuts();
+        await Users.emptyUsers()
+    }
+
+    static populate= async ()=>{
+
+       
+        const Users =require("./Users");
+     
+
+        await this.cleanUp();
+
+        await Users.populateUsers();
+
+        
  
 
         let refPoint=0;

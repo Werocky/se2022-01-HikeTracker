@@ -8,6 +8,12 @@ beforeAll(async()=>{
     await db.createConnection();
     await db.populate();
 }, db.timeout)
+afterAll(async()=>{
+    await db.cleanUp();
+    await new Promise(process.nextTick);
+    
+ },db.timeout )
+
 describe("Get/add HikeLocations",()=>{
   
     test('Populate DB Hikes',async()=>{
@@ -48,6 +54,20 @@ describe("Get/add HikeLocations",()=>{
         //expect(HL).toHaveLength(totalEntries);
       
     });
-    
+       
+    test('cleanUp DB Files',async()=>{
+        // await db.createConnection();
+        // await db.populateHikes();
+        // let HL= await hikes.getHikes();
+        // let HikeList = await hikesLoc.getHikeLocations();
+        await db.cleanUp();
+        let files=await Files.getFiles();
+        // console.log(HL);
+        // console.log(HikeList);
+       // expect(HikeList).toHaveLength(totalEntries);
+        expect(files.length).toBe(0);
+        //expect(HL).toHaveLength(totalEntries);
+      
+    })
 
 });

@@ -8,9 +8,10 @@ beforeAll(async() =>{
 )
 afterAll(async()=>{
    await Users.emptyUsers();
-   await db.populate();
+   //await db.populate();
    
 },db.timeout )
+
 
 describe("Get/add HikeUsers",()=>{
     beforeEach(async() =>{   
