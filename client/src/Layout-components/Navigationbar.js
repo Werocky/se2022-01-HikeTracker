@@ -1,5 +1,6 @@
 import { useContext } from 'react';
 import { Navbar, Container, Button } from 'react-bootstrap';
+import "bootstrap-icons/font/bootstrap-icons.css";
 import { useNavigate } from 'react-router-dom';
 import API from '../API';
 import AuthContext from '../AuthContext';
@@ -13,7 +14,7 @@ function NavigationBar(props){
     return <Navbar className='navbar navbar-dark bg-dark' position='sticky' fixed='top' >
         <Container fluid>
             <h2 className="main-title col-4 text-white" onClick={ ()=> navigate('/')}>
-                <i className="bi bi-building"></i>
+                <i className="bi bi-image-alt"></i>
                 <span className="d-none d-md-inline">Hike-Tracker</span>
             </h2>
             <h3 className='text-white'>Welcome, {auth.login === false ? 'Guest' : auth.user.Id}!</h3>
