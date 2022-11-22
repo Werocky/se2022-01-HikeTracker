@@ -772,7 +772,7 @@ class DatabaseConnection {
       "Ad un certo punto il bosco sparisce e di fronte a te si aprirà lo spettacolo dell’Alpe Attia. Passeggia sulla piana e raggiungi i caseggiati in pietra, dove troverai un’altra fontana e la possibilità di rilassarti sognando di raggiungere le cime intorno."
       await this.wrapperPopulate(HikeID,file,province,city,title,length,expTime,Ascent,Description,Difficulty,start,end);
       await this.wrapperPopulateRefP(HikeID, refPoint++, "45.316959","7.304834","parking",1,0); // start
-      await this.wrapperPopulateRefP(HikeID, refPoint++, "45.331211","7.298011","hut",0,1); // end
+      await this.wrapperPopulateRefP(HikeID, refPoint++, "45.331211","7.298011","",0,1); // end
 
 
       HikeID='21';
@@ -828,7 +828,7 @@ class DatabaseConnection {
       
       await this.wrapperPopulate(HikeID,file,province,city,title,length,expTime,Ascent,Description,Difficulty,start,end);
       await this.wrapperPopulateRefP(HikeID, refPoint++, "-13.386589","-72.573909","hut",1,0); // start
-      await this.wrapperPopulateRefP(HikeID, refPoint++, "-13.153162","-72.522880","hut",0,1); // end
+      await this.wrapperPopulateRefP(HikeID, refPoint++, "-13.153162","-72.522880","",0,1); // end
 
       
       HikeID='23';
@@ -857,8 +857,8 @@ class DatabaseConnection {
       "4) Crossing of Tizi Likemt and back to Imlil."
 
       await this.wrapperPopulate(HikeID,file,province,city,title,length,expTime,Ascent,Description,Difficulty,start,end);
-      await this.wrapperPopulateRefP(HikeID, refPoint++, "31.135638","-7.919335","hut",1,0); // start
-      await this.wrapperPopulateRefP(HikeID, refPoint++, "31.135613","-7.919305","hut",0,1); // end
+      await this.wrapperPopulateRefP(HikeID, refPoint++, "31.135638","-7.919335","parking",1,0); // start
+      await this.wrapperPopulateRefP(HikeID, refPoint++, "31.135613","-7.919305","parking",0,1); // end
 
 
       HikeID='24';
@@ -1012,7 +1012,7 @@ class DatabaseConnection {
       "- http://www.turismoboliviaperu.com/imgs/mapa-choro.gif"+
       "- http://coroico-info.com/webs/incatrail/sitebuilder/images/mappage-572x557.jpg"
       await this.wrapperPopulate(HikeID,file,province,city,title,length,expTime,Ascent,Description,Difficulty,start,end);
-      await this.wrapperPopulateRefP(HikeID, refPoint++, "-16.338158","-68.040294","hut",1,0); // start
+      await this.wrapperPopulateRefP(HikeID, refPoint++, "-16.338158","-68.040294","",1,0); // start
       await this.wrapperPopulateRefP(HikeID, refPoint++, "-16.203923","-67.837319","parking",0,1); // end
 
 
@@ -1380,47 +1380,66 @@ await this.wrapperPopulateRefP(HikeID, refPoint++, "45.93651","7.62672","parking
         "Il Rifugio Jervis, aperto tutto l'anno, dispone di 90 posti letto con servizi e docce ai piani. La struttura si è arricchito nel 2015 di una dèpendance ricavata dalla ristrutturazione della casermetta ex-militare.";
         await huts.addHut('31',"Rifugio Jervis Cruello",1732,"Bobbio Pellice","Torino","Piemonte","Italy","Y",90,50,description);
         
-        /*description= 
-        await huts.addHut('33',)
+        description= "Rifugio di proprietà dello Ski Club Torino, si trova in Alta Val di Susa, sui Monti della Luna, nei pressi del Lago Nero."+
+        "Grazie alla sua posizione è raggiungibile tutto l’anno, meta ideale per comode escursioni in estate e in inverno, a piedi, in mountain bike, con le ciaspole o gli sci, godendo di un grandioso panorama verso i monti del Delfinato e del Queyras."+
+        "Il rifugio, in inverno, è aperto normalmente nei fine settimana di dicembre, in maniera continuativa durante le vacanze natalizie, i fine settimana di gennaio e non stop da febbraio a Pasqua compresa (il tutto è subordinato ovviamente alle condizioni della neve)."+
+        "In estate apre all’inizio di giugno nei fine settimana. Indicativamente dopo la chiusura delle scuole l’apertura è continuativa sino a fine agosto e solamente nei week-end sino a metà settembre circa."+
+        "Il piano terra del rifugio è adibito a bar e ristorante."
+        "Al piano superiore è possibile pernottare con trattamento di mezza pensione."+
+        "Il rifugio dispone di circa 25 posti letto in sobrie ed accoglienti camere da due a otto posti. I servizi sono in comune al pianterreno e dotati acqua corrente calda, la doccia calda è a pagamento (2,00 €).";
+        await huts.addHut('33',"Rifugio Capanna Mautino",2110,"Cesana Torinese", "Torino","Piemonte","Italy","SW",25,45,description);
         
-        description= 
-        await huts.addHut('41',)
+        description= "Gorgeous views surround this location. Look through your dome at the night stars. Flushing toilet with running water for sinks. The lodges have a raised bed and electricity/lights available."+
+        "Great first night accommodation for yours 5 days Salkantay trek!"+
+        "You can have dinner, breakfast and take out lunch. The food is very good, plentiful and can be vegetarian.";
+        await huts.addHut('44', "Salkantay Hostel - Soraypampa",3920,"Mollepata", "","","Perù","Y",undefined,20,description);
         
-        description= 
-        await huts.addHut('44',)
+        description= "Hut for training and acclimatization before the ascent of Huayna Potosi."+
+        "Snacks and water or soft drinks can be bought here."+
+        "Generally if your guide has arranged for a cook he will normally prepare you a small soup or meal."+
+        "Obviously hotter inside than sleeping in a tent and there are basic toilet facilities too.";
+        await huts.addHut('62', "Refugio Casa Blanca",4789,"Milluni","La Paz","","Bolivia","Y",undefined,undefined,description);
         
-        description= 
-        await huts.addHut('45',)
+        description= "Hut used as foothold for the second day of ascent. You can start from here in the morning an and climb from here to the top of Huayna Potosí."+
+        "The place is comfy, all wooden, there is water (from the glacial) and bathroom. Suitable for large groups (maybe 20 at maximum capacity). Depending of season will be Bs. 70 - 50 per night."+
+        "There is a kitchen with gas stove, crockery and a dining room. No food service unless requested several days in advance."+
+        "No electricity.";
+        await huts.addHut('63',"Refugio Anselme Baud",5272,"Milluni","La Paz","","Bolivia","Y",40,undefined,description);
         
-        description= 
-        await huts.addHut('46',)
+        description= "Il rifugio si trova sul dosso montagnoso dell’Oriondé, nell’alta Valtournenche, proprio ai piedi del Cervino."+
+        "Non è una struttura invernale e per questo il rifugio è aperto solo nel periodo estivo."+
+        "Qui è possibile pernottare, il rifugio offre due camere quadruple, cinque doppie e una matrimoniale."+
+        "Ogni camera, dotata di riscaldamento, servizi e doccia, prende il nome da alcune punte della Catena delle Grandes Murailles."+
+        "Il Rifugio è la meta ideale per chiunque voglia provare un'esperienza straordinaria a contatto con la natura e gli animali come stambecchi, camosci, volpi e marmotte."+
+        "Il Rifugio Oriondé offre una cucina tipica regionale."+
+        "Qui è possibile gustare affettati misti valdostani come lardo, mocetta, salsicce e boudin, polenta concia, crespelle , zuppa , minestrone, spezzatino di manzo, salsiccia in umido, cervo, capriolo, e per finire il nostro meraviglioso carrello di dolci fatti in casa con panna fresca, il tutto innaffiato da ottimo vino regionale ed italiano."+
+        "Cene tipiche a lume di candela, con servizio di navetta incluso, possono essere organizzate su richiesta.";
+        await huts.addHut('71',"Rifugio Duca degli Abruzzi (Oriondè)",2802,"Breuil Cervinia","Aosta","Valle d'Aosta","Italy","S",22,80,description);
         
-        description= 
-        await huts.addHut('47',)
+        description= "Bivacco gestito dal CAI della sezione di Lanzo Torinese."+
+        "Struttura nuovissima, realizzata completamente in legno con una forma triangolare, in cui vi è anche la corrente elettrica grazie ad un piccolo pannello solare."+
+        "Accessibile tutto l'anno, al suo interno si trovano 8/10 posti letto."+
+        "Ottimo punto d'appogio per partire per altre escursioni scavallando in Val d’Ala attraverso il Passo dell’Ometto (ai piedi dell’Uja di Mondrone) o proseguire in direzione del Rifugio Eugenio Ferreri."+
+        "Non sono presenti altri servizi per cui è consigliato organizzarsi prima della partenza ed essere informati sulle condizioni meteo.";
+        await huts.addHut('73', "Bivacco Gias Nuovo",1893,"Forno Alpi Graie","Torino","Piemonte","Italy","Y",10,0,description);
         
-        description= 
-        await huts.addHut('56',)
+        description= "Il rifugio Alevè è un rifugio escursionistico situato nel comune di Pontechianale, nella Valle Varaita. Inaugurato nel 2008, dispone di 50 posti letto."+
+        "Offre una biblioteca, una terrazza prendisole, un bar e dista 2.8 km dal Colle dell'Agnello."+
+        "I bagni dispongono di un bidet e di una doccia. Inoltre è presente la connessione Wi-Fi."+
+        "Nei dintorni del rifugio è possible svolgere diverse attività a seconda della stagione.";
+        await huts.addHut('76',"Rifugio Alevè",1580,"Pontechianale","Cuneo","Piemonte","Italy","Y",50,85,description);
         
-        description= 
-        await huts.addHut('62',)
+        description= "dedicato ai fratelli Carlo e Renzo Berardo, alpinisti, saviglianesi, morti tragicamente in una scalata sull'Uia di S.Lucia il 5 giugno 1958."+
+        "Piccola struttura a strapiombo sul crinale della montagna, dalla quale vedere romantici tramonti e frizzanti albe."+
+        "Gestito da CAI sezione di Savigliano, al suo interno si trovano una decina di posti letto."+
+        "Non è presente elettricità; per avere acqua è possbile salire al laghetto soprastane, raggiungibile in 15 minuti di camminata."+
+        "Aperto ed accessibile tutto l'anno.";
+        await huts.addHut('77',"Bivacco Fratelli Berardo",2710,"Pontechianale","Cuneo","Piemonte","Italy","Y",9,0,description);
         
-        description= 
-        await huts.addHut('63',)
-        
-        description= 
-        await huts.addHut('71',)
-        
-        description= 
-        await huts.addHut('73',)
-        
-        description= 
-        await huts.addHut('76',)
-        
-        description= 
-        await huts.addHut('77',)
-        
-        description= 
-        await huts.addHut('81',)*/
+        description= "Magicamente circondato dai Monti Sforniói, Sasso di Bosconero, Sasso di Toanèla, Rocchetta Alta e Bassa, il Rifugio Casera Bosconero è punto di riferimento per bellissime escursioni."+
+        "(punto tappa dell’Alta Via Dolomiti n. 3 e dell’Anello Zoldano) e per ascensioni su roccia, classiche e moderne"+
+        "Offre servizio di ristoro, pernottamento e dal 2006 una sala didattica disponibile all’utilizzo previa prenotazione.";
+        await huts.addHut('81',"Rifugio Casera Bosconero",1457,"Forno di Zoldo","Belluno","Veneto","Italy","S",24,50,description);
     }
 
 
