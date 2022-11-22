@@ -11,6 +11,7 @@ import HikeDetails from './Layout-components/HikeDetails';
 import { HikeDescription } from './Layout-components/HikeDescription';
 import ProfilePage from './Layout-components/ProfilePage';
 import HutsPage from './Layout-components/Huts-components/HutsPage';
+import ParkingForm from './Layout-components/ParkingForm';
 
 function App() {
 
@@ -70,27 +71,30 @@ function AppLayout(props) {
   return (
     <Routes>
       <Route path='/' element={
-          <MainLayout
-            logout={props.logout}
-          />
+        <MainLayout
+          logout={props.logout}
+        />
       } />
       <Route path='/:hikeID' element={
-          <HikeDetails logout={props.logout} />
+        <HikeDetails logout={props.logout} />
       } />
       <Route path='/register' element={
-          <RegisterComponent register={props.register} />
+        <RegisterComponent register={props.register} />
       } />
       <Route path='/login' element={
-          <LoginComponent login={props.login} />
+        <LoginComponent login={props.login} />
       } />
       <Route path='/modifyHikeDesc/:hikeID' element={
-          <HikeDescription />
+        <HikeDescription />
       } />
       <Route path='/profile/:userId' element={
         <ProfilePage logout={props.logout} />
       } />
       <Route path='/huts' element={
         <HutsPage logout={props.logout} />
+      } />
+      <Route path='/addParkingLot' element={
+        <ParkingForm />
       } />
     </Routes>
   );

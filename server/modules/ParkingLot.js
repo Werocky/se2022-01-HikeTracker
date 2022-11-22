@@ -4,8 +4,8 @@ const db = require('./DB').db;
 
 function createParkingLot(id, description, free){
     return new Promise (async (resolve, reject) =>{
-        const sql = 'INSERT INTO ParkingLots(id, description, free) VALUES(?, ?, ?)';
-        this.db.run(db, [id, description, free], function (err){
+        const sql = 'INSERT INTO ParkingLots(ParkingID, Description, Free) VALUES(?, ?, ?)';
+        this.db.run(sql, [id, description, free], function (err){
             if(err)
                 reject(err);
             else
@@ -16,8 +16,8 @@ function createParkingLot(id, description, free){
 
 function updateParkingLot(id, description, free){
     return new Promise(async (resolve, reject) =>{
-        const sql = 'UPDATE ParkingLots SET description = ?, free = ? WHERE id = ?';
-        this.db.run(db, [description, free, id], function (err){
+        const sql = 'UPDATE ParkingLots SET Description = ?, Free = ? WHERE ParkingID = ?';
+        this.db.run(sql, [description, free, id], function (err){
             if(err)
                 reject(err);
             else
@@ -29,7 +29,7 @@ function updateParkingLot(id, description, free){
 function getParkingLots(){
     return new Promise(async (resolve, reject) =>{
         const sql = 'SELECT * FROM ParkingLots';
-        this.db.all(db, [], function (err, rows) {
+        this.db.all(sql, [], function (err, rows) {
             if(err)
                 reject(err);
             else
@@ -41,7 +41,7 @@ function getParkingLots(){
 function getParkingLot(id){
     return new Promise(async (resolve, reject) =>{
         const sql = 'SELECT * FROM ParkingLots WHERE ParkingId = ?';
-        this.db.run(db, [id], function (err, rows) {
+        this.db.run(sql, [id], function (err, rows) {
             if(err)
                 reject(err);
             else
@@ -50,10 +50,12 @@ function getParkingLot(id){
     })
 }
 
+
+
 function deleteParkingLot(id){
     return  new Promise(async (resolve, reject) =>{
-        const sql = 'DELETE FROM ParkingLots WHERE id = ?';
-        this.db.run(db, [id], function (err){
+        const sql = 'DELETE FROM ParkingLots WHERE ParkingID = ?';
+        this.db.run(sql, [id], function (err){
             if (err)
                 reject(err);
             else
@@ -73,4 +75,16 @@ function emptyParkingLot() {
       })
 }
 
-module.exports = {createParkingLot, updateParkingLot, getParkingLots, getParkingLot, deleteParkingLot, emptyParkingLot};
+function getLastParkingID(){
+    return new Promise(async (resolve, reject) =>{
+        const sql = "SELECT MAX(ParkingID) FROM ParkingLots";
+        db.run(sql, [], function (err, rows) {
+            if(err)
+                reject(err);
+            else
+                resolve(rows);
+        })
+    })
+}
+
+module.exports = {createParkingLot, updateParkingLot, getParkingLots, getParkingLot, deleteParkingLot, emptyParkingLot, getLastParkingID};

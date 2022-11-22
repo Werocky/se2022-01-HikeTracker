@@ -19,7 +19,7 @@ let gpxParser = require('gpxparser');
 var fs = require('fs');
 const fileUpload = require("express-fileupload");
 const { builtinModules } = require('module');
-const { createParkingLot, updateParkingLot, getParkingLots, getParkingLot, deleteParkingLot } = require('./modules/ParkingLot.js');
+const { createParkingLot, updateParkingLot, getParkingLots, getParkingLot, deleteParkingLot, getLastParkingID } = require('./modules/ParkingLot.js');
 const { addReferencePoint, updateReferencePoint } = require('./modules/ReferencePoints.js');
 
 
@@ -315,9 +315,7 @@ app.post('/getNearHikes', async (req, res) => {
 //Create parking lot
 app.post('/ParkingLots',
   [check('Description').notEmpty(),
-  check('ParkingId').notEmpty(),
   check('free').notEmpty(),
-  check('RefPointID'), 
   check('lat'),
   check('lng')], async (req, res) => {
   
@@ -326,9 +324,9 @@ app.post('/ParkingLots',
       return res.status(422).json({ error: 'cannot process request' });
     }
     const description = req.body.Description;
-    const id = req.body.ParkingId;
+    const id = getLastParkingID()+1;
     const free = req.body.free;
-    const refPoint = req.body.RefPointID;
+    const refPoint = referencePoints.getLastRefPointID()+1;
     const lat = req.body.lat;
     const lng = req.body.lng;
     try {
