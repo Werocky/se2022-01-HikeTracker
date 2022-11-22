@@ -24,6 +24,7 @@
     "test": "jest -i",
     "cover": "jest --coverage --runInBand",
     "apiTest": "mocha",
-    "start": "node index.js"
+    "start": "node index.js",
+    "populate": "node ./modules/populateRun.js"
   }
 }
