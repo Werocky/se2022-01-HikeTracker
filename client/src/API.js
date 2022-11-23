@@ -231,6 +231,47 @@ async function deleteParkingLot(id){
   }
 }
 
+async function getHutsFilters(name, location, WhenOpen, beds, avgPrice) {
+  try {
+    const response = await fetch(APIURL+'/hutsFilters', {
+      method: 'POST',
+      body: JSON.stringify({
+        "name": name?name:null,
+        "location": location?location:null,
+        "WhenOpen": WhenOpen?WhenOpen:null,
+        "beds": beds?beds:null,
+        "avgPrice": avgPrice?avgPrice:null,
+      }),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+    const huts = await response.json();
+    if(response.ok) {
+      return huts
+    } else {
+      throw huts; //which will contain an error if it is the case
+    }
+  } catch (err) {
+    throw err;
+  }
+}
+
+async function getHutsLocations() {
+  try {
+    const response = await fetch(APIURL+'/hutsLocations', {
+      method: 'GET',
+    });
+    const result = await response.json();
+    if(response.ok)
+      return result
+    else
+      throw result;
+  } catch (err) {
+    throw err;
+  }
+}
+
 /* LOGIN FUNCTIONS */
 async function logIn(credentials) {
   let response = await fetch((APIURL + '/sessions'), {
@@ -281,5 +322,5 @@ async function register(credentials) {
   return response.ok ? true : false;
 }
 
-const API = { getHikes, logIn, logOut, getUserInfo, getFilteredHikes, register, setDescription, getHike, getPointsHike, getNearHikes, getParkingLot, getParkingLots, updateParkingLot, createParkingLot, deleteParkingLot };
+const API = { getHikes, logIn, logOut, getUserInfo, getFilteredHikes, register, setDescription, getHike, getPointsHike, getNearHikes, getParkingLot, getParkingLots, updateParkingLot, createParkingLot, deleteParkingLot, getHutsFilters, getHutsLocations };
 export default API;

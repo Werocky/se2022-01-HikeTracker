@@ -133,4 +133,4 @@ function ParkingForm() {
 }
 
 
-export default {ParkingForm}
+export default ParkingForm

@@ -21,7 +21,7 @@ const fileUpload = require("express-fileupload");
 const { builtinModules } = require('module');
 const { createParkingLot, updateParkingLot, getParkingLots, getParkingLot, deleteParkingLot, getLastParkingID } = require('./modules/ParkingLot.js');
 const { addReferencePoint, updateReferencePoint } = require('./modules/ReferencePoints.js');
-
+const huts = require('./modules/Huts');
 
 
 /*** Set up Passport ***/
@@ -253,6 +253,7 @@ app.put('/setDescription', /*isLoggedIn,*/[
     }
   });
 
+/*** Geographical filter ***/
 function distance(lat1, lon1, lat2, lon2) {
   var R = 6371; // Radius of the earth in km
   var dLat = deg2rad(lat2 - lat1);  // deg2rad below
@@ -271,6 +272,7 @@ function deg2rad(deg) {
   return deg * (Math.PI / 180)
 }
 
+// GET near hikes
 app.post('/getNearHikes', async (req, res) => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
@@ -419,6 +421,51 @@ app.post('/ParkingLots',
       res.status(503).json({error: 'Internal error'});
     }
 });
+
+/*** Huts ***/
+// GET filtered
+app.post('/hutsFilters', async (req, res) => {
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    return res.status(422).json({ error: 'cannot process request' });
+  }
+  const name = req.body.name;
+  const loc = req.body.location;
+  const WhenOpen = req.body.WhenOpen
+  const beds = req.body.beds
+  const avgPrice = req.body.avgPrice;
+  try {
+    const result = await huts.getHutsFilters(name,loc?loc.locationType:null,loc?loc.location:null,WhenOpen,beds,avgPrice);
+    res.status(200).json(result);
+
+  } catch (err) {
+    res.status(503).json({ error: `Error` });
+  }
+});
+
+//GET locations
+app.get('/hutsLocations', async (req,res) => {
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    return res.status(422).json({ error: 'cannot process request' });
+  }
+  try {
+    const city = await huts.getHutCity();
+    const province = await huts.getHutProvince();
+    const region = await huts.getHutRegion();
+    const country = await huts.getHutContry();
+    let location = {
+      City: city.filter((el)=> el!=false),
+      Province: province.filter((el)=> el!=false),
+      Region: region.filter((el)=> el!=false),
+      Country: country.filter((el)=> el!=false)
+    };
+    
+    res.status(200).json(location);
+  } catch (err) {
+    res.status(503).json({ error: `Error` });
+  }
+})
 
 /*** Users APIs ***/
 

@@ -27,13 +27,13 @@ exports.emptyHuts = () => {
   })
 };
 
-exports.getHuts = () =>{
-  return new Promise(async (resolve, reject) =>{
+exports.getHuts = () => {
+  return new Promise(async (resolve, reject) => {
     const sql = "GET * FROM Huts";
-    db.all(sql, [], function (err, rows){
-      if(err)
+    db.all(sql, [], function (err, rows) {
+      if (err)
         reject(err);
-      else{
+      else {
         const huts = rows.map((r) => ({ RefPointID: r.RefPointID, Name: r.Name, Eleveation: r.Elevation, City: r.City, Province: r.Province, Region: r.Region, Country: r.Country, WhenOpen: r.WhenOpen, Beds: r.Beds, AvgPrice: r.AvgPrice, Description: r.Description }));
         resolve(huts);
       }
@@ -41,49 +41,121 @@ exports.getHuts = () =>{
   })
 }
 
-exports.getHut = (id = null, name = null, locationType = null, location = null, WhenOpen = null) =>{
-  return new Promise(async (resolve, reject) =>{
-    let sql = "GET * FROM Huts WHERE ";
+exports.getHutsFilters = (name = null, locationType = null, location = null, WhenOpen = null, beds = null, avgPrice = null) => {
+  return new Promise(async (resolve, reject) => {
+    let sql = "SELECT * FROM Huts WHERE ";
     let parameters = [];
 
-    if(name !== null){
+    if (name !== null) {
       sql += "Name = ?";
       parameters.push(name);
     }
-    if(locationType !== null){
-      if(parameters.length === 0)
+    if (locationType !== null) {
+      if (parameters.length === 0)
         sql += locationType + " = ?";
       else
-        sql += " AND "+ locationType + " = ?";
+        sql += " AND " + locationType + " = ?";
       parameters.push(location);
     }
-    if(WhenOpen !== null){
-      if(parameters.length === 0)
+    if (WhenOpen !== null) {
+      if (parameters.length === 0)
         sql += "WhenOpen = ?";
       else
         sql += " AND WhenOpen = ?";
-      parameters.push(WhenOpen);  
+      parameters.push(WhenOpen);
+    }
+    if (beds !== null) {
+      if (parameters.length === 0)
+        sql += "Beds = ?";
+      else
+        sql += " AND Beds = ?";
+      parameters.push(beds);
+    }
+    if (avgPrice !== null) {
+      if (parameters.length === 0)
+        sql += "AvgPrice = ?";
+      else
+        sql += " AND AvgPrice = ?";
+      parameters.push(avgPrice);
     }
 
-    db.run(sql, parameters, function (err, rows) {
-      if(err)
+    sql += ";"
+    console.log(sql);
+    db.all(sql, parameters, function (err, rows) {
+      if (err)
         reject(err);
-      else{
-        const huts = rows.map((r) => ({ RefPointID: r.RefPointID, Name: r.Name, Eleveation: r.Elevation, City: r.City, Province: r.Province, Region: r.Region, Country: r.Country, WhenOpen: r.WhenOpen, Beds: r.Beds, AvgPrice: r.AvgPrice, Description: r.Description }));
+      else {
+        const huts = rows.map((r) => ({ RefPointID: r.RefPointID, Name: r.Name, Elevation: r.Elevation, City: r.City, Province: r.Province, Region: r.Region, Country: r.Country, WhenOpen: r.WhenOpen, Beds: r.Beds, AvgPrice: r.AvgPrice, Description: r.Description }));
         resolve(huts);
       }
     })
   })
 }
 
-exports.deleteHut = (id) =>{
+exports.deleteHut = (id) => {
   return new Promise((resolve, reject) => {
     const sql = "DELETE FROM Huts WHERE RefPointID = ?";
     db.run(sql, [id], function (err) {
-      if(err)
+      if (err)
         reject(err);
       else
         resolve("Entry deleted");
+    })
+  })
+}
+
+exports.getHutCity = () => {
+  return new Promise((resolve, reject) => {
+    const sql = " SELECT DISTINCT City FROM Huts;"
+    db.all(sql, [], function (err, rows) {
+      if (err)
+        reject(err);
+      else {
+        const city = rows.map((r) => (r.City));
+        resolve(city);
+      }
+    })
+  })
+}
+
+exports.getHutProvince = () => {
+  return new Promise((resolve, reject) => {
+    const sql = " SELECT DISTINCT Province FROM Huts;"
+    db.all(sql, [], function (err, rows) {
+      if (err)
+        reject(err);
+      else {
+        const province = rows.map((r) => (r.Province));
+        resolve(province);
+      }
+    })
+  })
+}
+
+exports.getHutRegion = () => {
+  return new Promise((resolve, reject) => {
+    const sql = " SELECT DISTINCT Region FROM Huts;"
+    db.all(sql, [], function (err, rows) {
+      if (err)
+        reject(err);
+      else {
+        const region = rows.map((r) => (r.Region));
+        resolve(region);
+      }
+    })
+  })
+}
+
+exports.getHutContry = () => {
+  return new Promise((resolve, reject) => {
+    const sql = " SELECT DISTINCT Country FROM Huts;"
+    db.all(sql, [], function (err, rows) {
+      if (err)
+        reject(err);
+      else {
+        const country = rows.map((r) => (r.Country));
+        resolve(country);
+      }
     })
   })
 }
