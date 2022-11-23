@@ -22,7 +22,7 @@ class DatabaseConnection {
 
         //await this.deleteDB();
 
-        await this.populate();
+        //await this.populate();
 
     }
 

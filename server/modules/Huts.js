@@ -2,6 +2,23 @@
 
 const db = require('./DB').db;
 
+
+class Hut{
+    constructor(RefPointID, Name, Elevation, City, Province, Region, Country, WhenOpen, Beds, AvgPrice, Description){
+      this.RefPointID=RefPointID;
+      this.Name=Name;
+      this.Elevation=Elevation;
+      this.City=City;
+      this.Province=Province;
+      this.Region=Region;
+      this.Country=Country;
+      this.WhenOpen=WhenOpen;
+      this.Beds=Beds;
+      this.AvgPrice=AvgPrice;
+      this.Description=Description;
+    }
+}
+
 exports.addHut = (RefPointID, Name, Elevation, City, Province, Region, Country, WhenOpen, Beds, AvgPrice, Description) => {
   return new Promise(async (resolve, reject) => {
     const sql = 'INSERT INTO HUTS(RefPointID, Name, Elevation, City, Province, Region, Country, WhenOpen, Beds, AvgPrice, Description) VALUES(?,?,?,?,?,?,?,?,?,?,?)';
@@ -29,12 +46,20 @@ exports.emptyHuts = () => {
 
 exports.getHuts = () => {
   return new Promise(async (resolve, reject) => {
-    const sql = "GET * FROM Huts";
+    const sql = "SELECT * FROM Huts";
     db.all(sql, [], function (err, rows) {
       if (err)
         reject(err);
       else {
-        const huts = rows.map((r) => ({ RefPointID: r.RefPointID, Name: r.Name, Eleveation: r.Elevation, City: r.City, Province: r.Province, Region: r.Region, Country: r.Country, WhenOpen: r.WhenOpen, Beds: r.Beds, AvgPrice: r.AvgPrice, Description: r.Description }));
+
+        // const huts = rows.map((r) => ({RefPointID: r.RefPointID, Name: r.Name, Elevation: r.Elevation, City: r.City, Province: r.Province, Region: r.Region, Country: r.Country, WhenOpen: r.WhenOpen, Beds: r.Beds, AvgPrice: r.AvgPrice, Description: r.Description }));
+       const huts=[]
+        rows.forEach(r => {
+          let h = new Hut(r.RefPointID, r.Name, r.Elevation, r.City, r.Province, r.Region, r.Country, r.WhenOpen, r.Beds, r.AvgPrice, r.Description)
+          huts.push(h);
+         // console.log(h);
+       });
+        
         resolve(huts);
       }
     })
@@ -85,7 +110,13 @@ exports.getHutsFilters = (name = null, locationType = null, location = null, Whe
       if (err)
         reject(err);
       else {
-        const huts = rows.map((r) => ({ RefPointID: r.RefPointID, Name: r.Name, Elevation: r.Elevation, City: r.City, Province: r.Province, Region: r.Region, Country: r.Country, WhenOpen: r.WhenOpen, Beds: r.Beds, AvgPrice: r.AvgPrice, Description: r.Description }));
+        const huts=[]
+        rows.forEach(r => {
+          let h = new Hut(r.RefPointID, r.Name, r.Elevation, r.City, r.Province, r.Region, r.Country, r.WhenOpen, r.Beds, r.AvgPrice, r.Description)
+          huts.push(h);
+         // console.log(h);
+       });
+        
         resolve(huts);
       }
     })
@@ -146,7 +177,7 @@ exports.getHutRegion = () => {
   })
 }
 
-exports.getHutContry = () => {
+exports.getHutCountry = () => {
   return new Promise((resolve, reject) => {
     const sql = " SELECT DISTINCT Country FROM Huts;"
     db.all(sql, [], function (err, rows) {
