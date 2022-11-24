@@ -1310,7 +1310,7 @@ await this.wrapperPopulateRefP(HikeID, refPoint++, "45.93651","7.62672","parking
         province='Nepal';
         city =' Lobujya(Province 1)'; 
         Ascent=791;
-        start=" Lobuche"
+        start="Lobuche"
         end="Gorak Shep N"
         length=14.56;
         Difficulty="H";
@@ -1320,15 +1320,126 @@ await this.wrapperPopulateRefP(HikeID, refPoint++, "45.93651","7.62672","parking
         +'Maybe in the long stretch inside the base camp there was some trespassing component. Namely, arriving in snow and mist I did not notice that at a certain point there was written "access for climbers only". However, due to the same weather conditions, everybody were well sealed inside their own tents, so I experienced no problem throughout my long visit.'
         await this.wrapperPopulate(HikeID,file,province,city,title,length,expTime,Ascent,Description,Difficulty,start,end);
 
+        HikeID='42';
+        title="LANGTANG CIRCUIT: circular route from Syabrubesi by Tserko Ri, Ganja La 5.183 and Goisankund NEPAL";
+        province='Nepal';
+        city ='Shyaphru(Central Region)'; 
+        Ascent=9711;
+        start="Ama Yangri pass"
+        end="Ama Yangri pass"
+        length=119.3;
+        Difficulty="PH";
+        expTime=17622; 
+        file="langtang-circuit-circular-route-from-syabrubesi-by-tserko-ri.gpx"    
+        Description='THE ROUTE'
+        +"It´s a 120km circular route that runs through the most traditional and interesting Langtang National Park. I've been called Langtang circuit that gives a full turn."
++""
++"All the circuit it is a sum of three different treks:"
++"1.Langtang valley (3.600m)"
++"2.Ganja (5.183m)"
++"3.Goisankund (4.600m)"
++"" 
++"There are lodges throughout the tour except the part of the Ganja La, where we bring tent for two or three nights. The Ganja La (5.183m) may require the use of crampons, especially in the north side climb. We climb it in october and found not enought snow to use crampons."
++"" 
++"STAGES"
++"" 
++"Stage1: Syabrubesi - Rimche"
++"Dist. 10,9 km"
++"Desn. + 1.100 m / -100 m"
++"Temps: 5h45"
++""
++"Stage2: Rimche - Langtang"
++"Dist. 12,6 km"
++"Desn. +1.120 m / -170 m"
++"Temps. 6h15"
++""
++"Stage3: Langtang - Kyangin Gompa"
++"Dist. 6,7 km"
++"Desn. +420 m / -20 m"
++"Temps. 2h15"
++"" 
++"Stage4: Tserko Ri"
++"Dist. 10 km"
++"Desn. +/- 1.135 m"
++"Temps. 5h30"
++""
++"Stage5: Kyangin Gompa - Naya Kanga BC"
++"Dist. 4 km"
++"Desn. +540 m / -100 m"
++"Temps. 2h30"
++""
++"Stage6: Naya Kanga BC - Keldang"
++"Dist. 10 km"
++"Desn. +930 m / -970 m"
++"Temps. 2h15"
++""
++"Stage7: Keldang - Dhukpu"
++"Dist. 7,5 km"
++"Desn. +360 m / -560 m"
++"Temps. 3h30"
++""
++"Stage8: Dhukpu - Tarkeghyang"
++"Dist. 11,1 km"
++"Desn. +350 m / -1.870 m"
++"Temps. 5h45"
++""
++"Stage9: Tarkeghyang - Melanchigaon"
++"Dist. 6,7 km"
++"Desn. +630 m / -690 m"
++"Temps. 3h30"
++""
++"Stage10: Melanchigaon - Gopte"
++"Dist. 8,2 km"
++"Desn. +1.250 m / -400 m"
++"Temps. 5h30"
++"" 
++"Stage11: Gopte - Goisankund"
++"Dist. 11,2 km"
++"Desn. +1.530 m / - 510 m"
++"Temps. 6h30"
++""
++"Stage12: Goisankund - Thulo Syabru"
++"Dist. 8,9 km"
++"Desn. +40 m / -1.150 m"
++"Temps. 3h"
++""
++"Stage13: Thulo Syabru - Suabrubesi"
++"Dist. 11,7 km"
++"Desn. +60 m / -1.900 m"
++"Temps. 6h15"
++""
++""
++"TRANSPORTATION"
++"From Kathamndu thera are 2/3 Buses every morning to Dunche. Thet leave approximately between 6:30 pm-7: 8h-30h."
++""
++"The buses stop for Langtang (GPS 45R 332964 3069049) depart from near the Central Bus Station, north of Kathmandu (taxi 200-300Rp). The bus takes about 8-10am for just over 100km. They usually stop for breakfast and / or lunch. Maybe the bus run only to Dunche, and there may have to change to another bus to take Syabrubesi."
++""
++"ACCOMMODATION & DIFFICULTY"
++"The trekking can be divided into three parts."+
+
+"1. The first is called the classic trek to Langtang (stages 1-4). In this section, we find no difficulty unless the gain high, rising above the Tserko Ri, which is easy, but earn on 1000m altitude in short, which may cause altitude sickness."+
+"2. The second part of the trek would be the Ganja La (stages 5-8). That is where the difficulty of the circuit. During these 3-4 days will not find any accommodation. We carry and store food every day. The climb of the Ganja may require the use of crampons. In October, when we did this route was snow lasts a couple of sections. One of us used them during few meters, while the other member could pass without it. It all depends on the experience of everyone in the use of crampons. During the spring it is possible that there is more snow."
+
++"Pay attention to the temperature. In early October we had the following temperatures:"+""
++
+"Naya Kanga BC 4.300m -8 º C"+
+"South High Camp (5,000 m): -15 ° C"+
+"Keldang (4.300m) slept in the camp high on the rocks"
++"Dhukpu 4.100m -6 º C"
++""
++"3. The last part of the loop (steps 9-13) corresponds to the Goisankund trek where we can find lodgings and restaurants without any difficulty since the end of the trek."
++""
++""
++"ALTERNATIVE ROUTES"
++"Another way to make the circuit would be leaving from Timbu, south Tarkeghyang (3-4hrs walk). From this population may begin around both clockwise (Timbu-Melanchigaon-Goisankund-Thula Syabru Lama Hotel-Langtang Ganja Kyangin Gompa-the-Tarkeghyang-Timbu) or inverse."
++""+
++"The advantage of this option is saving hours bus as Timbu is closer to Kathmandu than Syabrubesi. Conversely, if we do the circuit clockwise (logical acclimating to take the Ganja La acclimated correctly) we charged many days everything needed for the four days of camping (gas, food, matress...)"       
+        await this.wrapperPopulate(HikeID,file,province,city,title,length,expTime,Ascent,Description,Difficulty,start,end);
+
+       
+       
         await this.populateHuts();
         
-    
-
-           
-    
-    
-            
-
 }
     
 
