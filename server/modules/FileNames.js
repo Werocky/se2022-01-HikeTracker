@@ -1,6 +1,12 @@
 'use strict';
 
 const db = require('./DB').db;
+class File{
+  constructor(HikeID,FileName){
+    this.HikeID=HikeID;
+    this.FileName=FileName;
+  }
+}
 
 exports.getFileName = (HikeID) => {
 
@@ -27,7 +33,11 @@ exports.getFileName = (HikeID) => {
           reject(err);
         }
         //console.log(rows);
-        const hikes = rows.map((r) => ({ HikeID: r.HikeID, FileName: r.FileName}));
+        let hikes=[];
+        rows.forEach(r => {
+          hikes.push(new File(r.HikeID,r.FileName));
+        });
+        //const hikes = rows.map((r) => ({ HikeID: r.HikeID, FileName: r.FileName}));
         resolve(hikes);
       });
     });
