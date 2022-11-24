@@ -1437,7 +1437,34 @@ await this.wrapperPopulateRefP(HikeID, refPoint++, "45.93651","7.62672","parking
         await this.wrapperPopulate(HikeID,file,province,city,title,length,expTime,Ascent,Description,Difficulty,start,end);
 
        
+        HikeID='43';
+        title="Monte Mitsutoge Yama(Kawaguchiko)";
+        province='Japan';
+        city ='Funatsu(Yamanashi)'; 
+        Ascent=1136;
+        start=""
+        end="Mitsutoge Yama"
+        length=18.65;
+        Difficulty="T";
+        expTime=413; 
+        file="monte-mitsutoge-yamakawaguchiko.gpx"    
+        Description="We decided to make this climb because on this date Mount Fuji had too much snow at the top, and the conditions were not right for our equipment and our training. The Fujisan views are amazing. It climbs from the town of Kawaguchiko, in the area near Mount Fuji. You haven't got so much technical difficulty and it's not so long, about 20 km. When you reach the first viewpoint there is a poster than say to go the top and come back is about 6 hours; my wife and me aren't professional climbers and we did summit in an hour and a half. On the way you can find animals such as monkeys, one attacked us and it was a difficult time, at the end without losing sight of the monkey and walking up while lambasted us get out of the area, in the end nothing happened more beyond the scare. We had a beautiful cloudless day. AMAZING! The descent we take the way to the Five Pagoda Tower, one of the most typical views of this area before returning by train to the hotel in Kawaguchiko. If you don't climb the majestic Fuji do not miss this climb and views."
+        await this.wrapperPopulate(HikeID,file,province,city,title,length,expTime,Ascent,Description,Difficulty,start,end);
        
+        HikeID='44';
+        title="Takatsuka-yama 高柄山 (Shiotsu Stn. - Uenohara Stn.)";
+        province='Japan';
+        city ='Arakura(Yamanashi)'; 
+        Ascent=1002;
+        start=""
+        end=""
+        length=14.36;
+        Difficulty="H";
+        expTime=176; 
+        file="takatsuka-yama-gao-bing-shan-shiotsu-stn-uebohara-stn-.gpx"    
+        Description="Quite easy and well signed trail, just the very last part at the gate was a bit confusing; nothing very special on this trail but a nice trek if you don’t want to travel that long from Tokyo (just 1.5 hrs); easy access directly from the train stn., no need to take a bus"        await this.wrapperPopulate(HikeID,file,province,city,title,length,expTime,Ascent,Description,Difficulty,start,end);
+       
+
         await this.populateHuts();
         
 }
