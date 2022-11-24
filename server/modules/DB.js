@@ -1462,8 +1462,155 @@ await this.wrapperPopulateRefP(HikeID, refPoint++, "45.93651","7.62672","parking
         Difficulty="H";
         expTime=176; 
         file="takatsuka-yama-gao-bing-shan-shiotsu-stn-uebohara-stn-.gpx"    
-        Description="Quite easy and well signed trail, just the very last part at the gate was a bit confusing; nothing very special on this trail but a nice trek if you don’t want to travel that long from Tokyo (just 1.5 hrs); easy access directly from the train stn., no need to take a bus"        await this.wrapperPopulate(HikeID,file,province,city,title,length,expTime,Ascent,Description,Difficulty,start,end);
-       
+        Description="Quite easy and well signed trail, just the very last part at the gate was a bit confusing; nothing very special on this trail but a nice trek if you don’t want to travel that long from Tokyo (just 1.5 hrs); easy access directly from the train stn., no need to take a bus"
+        await this.wrapperPopulate(HikeID,file,province,city,title,length,expTime,Ascent,Description,Difficulty,start,end);
+
+///////////////////////////////////////////////////
+        HikeID='45';
+        title="Gregorios - Pedreirinha Hill - Vale Fuzeiros archaeological hike";
+        province='Portugal';
+        city ='Canhestros(Faro)'; 
+        Ascent=166;
+        start=""
+        end=""
+        length=8.3;
+        Difficulty="H";
+        expTime=163; 
+        file="gregorios-pedreirinha-hill-vale-fuzeiros-archaeological-hike.gpx"    
+        Description=
+        "Great combination of a good walk with stunning views and archaeology. Mostly on obvious tracks, limited roadways, easy for the most part but with some steep inclines. So I've rated the walk moderate. Latter part a bit tricky as one necropolis seems to be in someone's back yard/garden! Just pick your way through a few houses to get back on track. Also the descent is off the road down a dirt trackway."+
+        "I followed the Wikilocs route by mikeledzep."+
+        "Many thanks Mike        "
+        await this.wrapperPopulate(HikeID,file,province,city,title,length,expTime,Ascent,Description,Difficulty,start,end);
+
+        HikeID='46';
+        title="Carrauntoohil";
+        province='Ireland';
+        city ='Knocknafreaghaun(Munster)'; 
+        Ascent=869;
+        start=""
+        end="Carrauntoohil"
+        length=12.74;
+        Difficulty="T";
+        expTime=291; 
+        file="carrauntoohil.gpx"    
+        Description=
+"OBJETIVO:"+
+"- Cumbre: Carrauntoohil"+
+"    Altitud: 1.039 m."+
+
+"ITINERARIO:"+
+"Cronin's Yard - Devil's Ladder - Carrauntoohil - Devil's Ladder - Cronin's Yard."+
+
+"TIEMPO ESTIMADO:"+
+"- Ascenso:    02:00"+
+"- Descenso: 01:45"+
+
+"DESCRIPCIÓN:"+
+
+"NOTAS:"+
+
+"RUTAS CERCANAS:"+
+"- Torc Mountain  "
+        await this.wrapperPopulate(HikeID,file,province,city,title,length,expTime,Ascent,Description,Difficulty,start,end);
+
+        HikeID='47';
+        title="Carrauntouhill via the Devil's ladder";
+        province='Ireland';
+        city ='Knocknafreaghaun(Munster)'; 
+        Ascent=931;
+        start=""
+        end=""
+        length=12.73;
+        Difficulty="H";
+        expTime=511; 
+        file="carrauntouhill-via-the-devils-ladder.gpx"    
+        Description=
+"The hike starts at Lislebane carpark. We had snow at top of the mountain. Slow pace due to a large number of people in the group. Proper mountain gear is essential for this walk. Bring torch in case of getting dark like in this case we had to use them in the descent."+
+
+"Name: Carrantuohill"+
+"Start time: 02/17/2018 10:54"+
+
+"Finish time: 02/17/2018 19:25"+
+
+"Distance: 12.7km (08:30)"+
+
+"Moving time: 04:22"+
+
+"Average speed: 1.5km/h"+
+
+"Avg. Speed Mov.: 2.9km/h"+
+
+"Max. Speed: 5.5km/h"+
+
+"Minimum altitude: 199m"+
+
+"Maximum altitude: 1039m"+
+
+"Ascent speed: 251.4m/h"+
+
+"Descent speed: -243.3m/h"+
+
+"Elevation gain: 1007m"+
+
+"Elevation loss: -1007m"+
+
+"Ascent time: 04:00"+
+
+"Descent time: 04:08"
+        await this.wrapperPopulate(HikeID,file,province,city,title,length,expTime,Ascent,Description,Difficulty,start,end);
+
+        HikeID='48';
+        title="Garden of the Sleeping Giant";
+        province='Fiji';
+        city ='Natalau(Western)'; 
+        Ascent=8;
+        start=""
+        end=""
+        length=0.54;
+        Difficulty="T";
+        expTime=22; 
+        file="garden-of-the-sleeping-giant.gpx"    
+        Description="Recorded 1/4 of the trail from the lookout to the entrance. Easy trails and boardwalk. Spent 90 minutes in the garden."
+        await this.wrapperPopulate(HikeID,file,province,city,title,length,expTime,Ascent,Description,Difficulty,start,end);
+
+        HikeID='49';
+        title="Veisaru red cross";
+        province='Fiji';
+        city =' Veisaru Settlement(Western)'; 
+        Ascent=36;
+        start=""
+        end=""
+        length=5.55;
+        Difficulty="T";
+        expTime=17; 
+        file="veisaru-red-cross.gpx"    
+        Description="Red cross distribution ..Vesaru"+
+"1. Ame Totoya 70yrs cane farmer"+
+"2. Kolinio Kinikinilau 34yrs labourer residing on his brothers land - mataqali Batinivatu...Sorokoba"+
+"Penisoni Tirau 33yrs labourer"+
+"3. Saimoni Buli 34 yrs labourer"+
+"4. Samu Boa 32yrs labourer"
+        await this.wrapperPopulate(HikeID,file,province,city,title,length,expTime,Ascent,Description,Difficulty,start,end);
+
+        HikeID='50';
+        title="Gjeravica or Đeravica (Prokletije)";
+        province='Kosovo';
+        city ='Belleja(Gjakova)'; 
+        Ascent=952;
+        start=""
+        end=""
+        length=13.32;
+        Difficulty="H";
+        expTime=240; 
+        file="gjeravica-or-deravica-prokletije.gpx"    
+        Description=
+        "Gropa e Erenikut - Gjeravičko Jezero - Gjeravica - Gropa e Erenikut"+
+        "Đeravica or Gjeravica is second highest top on Prokletije (Accursed Mountain) after Maja Jezerce and it is considered as highest top in Kosovo."+
+        "There are 2 start points to reach the top from Kosovo, one is from Dečane and another from Junik off road to Gropa Erenikut where you can find accomodation."+
+        "Trail is moderate with 2 sections wich are bit exposed, one bellow Gjeravica Lake and another bellow the top. Rest of the trail is moderate and well marked."
+        await this.wrapperPopulate(HikeID,file,province,city,title,length,expTime,Ascent,Description,Difficulty,start,end);
+
 
         await this.populateHuts();
         

@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<gpx creator="Wikiloc - https://www.wikiloc.com" version="1.1" xmlns="http://www.topografix.com/GPX/1/1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.topografix.com/GPX/1/1 http://www.topografix.com/GPX/1/1/gpx.xsd">
+  <metadata>
+    <name>Wikiloc - Veisaru red cross</name>
+    <link href="https://www.wikiloc.com/walking-trails/veisaru-red-cross-44872074">
+      <text>Veisaru red cross on Wikiloc</text>
+    </link>
+    <time>2019-12-29T00:12:50Z</time>
+  </metadata>
+  <trk>
+    <name>Veisaru red cross</name>
+    <cmt></cmt>
+    <desc></desc>
+    <trkseg>
+      <trkpt lat="-17.543413" lon="177.731706">
+        <ele>26.032</ele>
+        <time>2019-12-28T23:44:37Z</time>
+      </trkpt>
+      <trkpt lat="-17.542472" lon="177.733161">
+        <ele>25.992</ele>
+        <time>2019-12-28T23:45:03Z</time>
+      </trkpt>
+      <trkpt lat="-17.539712" lon="177.734679">
+        <ele>28.911</ele>
+        <time>2019-12-28T23:47:06Z</time>
+      </trkpt>
+      <trkpt lat="-17.540078" lon="177.735590">
+        <ele>31.308</ele>
+        <time>2019-12-28T23:47:40Z</time>
+      </trkpt>
+      <trkpt lat="-17.540708" lon="177.738315">
+        <ele>41.457</ele>
+        <time>2019-12-28T23:48:41Z</time>
+      </trkpt>
+      <trkpt lat="-17.540428" lon="177.738802">
+        <ele>42.817</ele>
+        <time>2019-12-28T23:49:01Z</time>
+      </trkpt>
+      <trkpt lat="-17.540445" lon="177.739055">
+        <ele>44.211</ele>
+        <time>2019-12-28T23:49:27Z</time>
+      </trkpt>
+      <trkpt lat="-17.540414" lon="177.738815">
+        <ele>44.220</ele>
+        <time>2019-12-29T00:04:07Z</time>
+      </trkpt>
+      <trkpt lat="-17.540725" lon="177.738307">
+        <ele>42.745</ele>
+        <time>2019-12-29T00:04:23Z</time>
+      </trkpt>
+      <trkpt lat="-17.539721" lon="177.734736">
+        <ele>30.553</ele>
+        <time>2019-12-29T00:05:35Z</time>
+      </trkpt>
+      <trkpt lat="-17.542483" lon="177.733136">
+        <ele>27.430</ele>
+        <time>2019-12-29T00:06:28Z</time>
+      </trkpt>
+      <trkpt lat="-17.543456" lon="177.731689">
+        <ele>27.627</ele>
+        <time>2019-12-29T00:06:57Z</time>
+      </trkpt>
+      <trkpt lat="-17.543774" lon="177.731425">
+        <ele>26.712</ele>
+        <time>2019-12-29T00:07:03Z</time>
+      </trkpt>
+      <trkpt lat="-17.546882" lon="177.730771">
+        <ele>26.332</ele>
+        <time>2019-12-29T00:07:46Z</time>
+      </trkpt>
+      <trkpt lat="-17.548446" lon="177.729925">
+        <ele>28.105</ele>
+        <time>2019-12-29T00:08:08Z</time>
+      </trkpt>
+      <trkpt lat="-17.550071" lon="177.729694">
+        <ele>25.308</ele>
+        <time>2019-12-29T00:08:26Z</time>
+      </trkpt>
+      <trkpt lat="-17.551042" lon="177.730577">
+        <ele>22.965</ele>
+        <time>2019-12-29T00:08:50Z</time>
+      </trkpt>
+      <trkpt lat="-17.551773" lon="177.730668">
+        <ele>23.075</ele>
+        <time>2019-12-29T00:09:00Z</time>
+      </trkpt>
+      <trkpt lat="-17.552222" lon="177.730279">
+        <ele>23.899</ele>
+        <time>2019-12-29T00:09:08Z</time>
+      </trkpt>
+      <trkpt lat="-17.553259" lon="177.728793">
+        <ele>32.618</ele>
+        <time>2019-12-29T00:09:30Z</time>
+      </trkpt>
+      <trkpt lat="-17.554345" lon="177.726621">
+        <ele>46.953</ele>
+        <time>2019-12-29T00:09:58Z</time>
+      </trkpt>
+      <trkpt lat="-17.554421" lon="177.725609">
+        <ele>44.581</ele>
+        <time>2019-12-29T00:10:09Z</time>
+      </trkpt>
+      <trkpt lat="-17.554263" lon="177.724334">
+        <ele>43.918</ele>
+        <time>2019-12-29T00:10:23Z</time>
+      </trkpt>
+      <trkpt lat="-17.553708" lon="177.723208">
+        <ele>42.975</ele>
+        <time>2019-12-29T00:10:38Z</time>
+      </trkpt>
+      <trkpt lat="-17.553678" lon="177.722755">
+        <ele>40.729</ele>
+        <time>2019-12-29T00:10:44Z</time>
+      </trkpt>
+      <trkpt lat="-17.554908" lon="177.721130">
+        <ele>35.500</ele>
+        <time>2019-12-29T00:11:14Z</time>
+      </trkpt>
+      <trkpt lat="-17.551859" lon="177.718002">
+        <ele>31.020</ele>
+        <time>2019-12-29T00:11:56Z</time>
+      </trkpt>
+      <trkpt lat="-17.551561" lon="177.717050">
+        <ele>28.608</ele>
+        <time>2019-12-29T00:12:03Z</time>
+      </trkpt>
+      <trkpt lat="-17.550874" lon="177.712673">
+        <ele>21.026</ele>
+        <time>2019-12-29T00:12:35Z</time>
+      </trkpt>
+      <trkpt lat="-17.550401" lon="177.712200">
+        <ele>19.786</ele>
+        <time>2019-12-29T00:12:41Z</time>
+      </trkpt>
+      <trkpt lat="-17.549308" lon="177.711860">
+        <ele>19.990</ele>
+        <time>2019-12-29T00:12:50Z</time>
+      </trkpt>
+    </trkseg>
+  </trk></gpx>
