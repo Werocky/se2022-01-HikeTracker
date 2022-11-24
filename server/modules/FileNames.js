@@ -45,6 +45,18 @@ exports.getFileName = (HikeID) => {
     });
   }
 
+  exports.updateFile = (HikeID, Path) => {
+    return new Promise(async (resolve, reject) =>{
+      const sql = "UPDATE FileNames SET FileName = ? WHERE HikeID = ?";
+      db.run(sql, [Path, HikeID], function (err) {
+        if (err)
+          reject(err);
+        else
+          resolve('File path updated');
+      });
+    });
+  }
+
   exports.emptyConnection=()=>{
     return new Promise(async (resolve, reject) => {
       db.run("DELETE FROM FileNames", [], function (err) {

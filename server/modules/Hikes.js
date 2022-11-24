@@ -78,6 +78,18 @@ exports.deleteHikes = () => {
     });
   })
 }
+
+exports.editStartEndPoints = (start, end, id) => {
+  return new Promise(async (resolve, reject) =>{
+    const sql = "UPDATE Hikes SET Start = ? AND End = ? WHERE HikeID = ?";
+    db.run(sql, [start, end, id], function (err){
+      if(err)
+        reject(err)
+      else
+        resolve("Hike's start and end points updated.");
+    });
+  })
+}
 /*
 It Allows to set a specific filter if MaxValue is not specified or a range if a max value is set
  */
