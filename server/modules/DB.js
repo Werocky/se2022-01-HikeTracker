@@ -1303,9 +1303,22 @@ await this.wrapperPopulateRefP(HikeID, refPoint++, "45.93651","7.62672","parking
 
         await this.wrapperPopulate(HikeID,file,province,city,title,length,expTime,Ascent,Description,Difficulty,start,end);
         await this.wrapperPopulateRefP(HikeID,refPoint++,"46.33957", "12.22392" ,"parking",1,0); // start
-                await this.wrapperPopulateRefP(HikeID, refPoint++, "46.33835", "12.25160","hut",0,1); // end
+        await this.wrapperPopulateRefP(HikeID, refPoint++, "46.33835", "12.25160","hut",0,1); // end
 
-        
+        HikeID='41';
+        title="Lobuche - Everest Base Camp - Gorak Shep";
+        province='Nepal';
+        city =' Lobujya(Province 1)'; 
+        Ascent=791;
+        start=" Lobuche"
+        end="Gorak Shep N"
+        length=14.56;
+        Difficulty="H";
+        expTime=637; 
+        file="lobuche-everest-base-camp-gorak-shep.gpx"    
+        Description='I guess that this is one of the most recorded tracks, I post it only for the sake of photo documentation.'
+        +'Maybe in the long stretch inside the base camp there was some trespassing component. Namely, arriving in snow and mist I did not notice that at a certain point there was written "access for climbers only". However, due to the same weather conditions, everybody were well sealed inside their own tents, so I experienced no problem throughout my long visit.'
+        await this.wrapperPopulate(HikeID,file,province,city,title,length,expTime,Ascent,Description,Difficulty,start,end);
 
         await this.populateHuts();
         
