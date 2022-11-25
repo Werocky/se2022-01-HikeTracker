@@ -26,6 +26,7 @@ describe("Get/add Hikes",()=>{
     test('insert a new Hike', async()=>{
         await expect(hikes.addHike(0,0,0,0,0,0,0,0,0,0)).resolves.toEqual('New Hike inserted')
         await expect(hikes.getHikes()).resolves.toEqual([{"Ascent":0,"Description":"0","Difficulty":"0","ExpectedTime":0,"HikeID":"0","Length":0,"End":"0","Start":"0","Title":"0"}]);
+        //await expect(hikes.getHike(0)).resolves.not.toEqual([])
     })
 
     test('Empty hikes db', async()=>{
@@ -268,27 +269,73 @@ describe("get Hikes by Filter",()=>{
         it("edit start/End points",async()=>{
            
             await expect(hikes.editStartEndPoints(1,1,1)).resolves.toEqual("Hike's start and end points updated.")
-            let h= await hikes.getHikesByFilter('HikeID',1);
-            expect(h).toHaveLength(1);
-            expect(h[0]).toHaveProperty('Ascent');
-            expect(h[0].Ascent).toEqual( 300.5)
-            expect(h[0]).toHaveProperty('Description');
-            expect(h[0].Description).toEqual(null)
-            expect(h[0]).toHaveProperty('Difficulty');
-            expect(h[0].Difficulty).toEqual("Professional")
-            expect(h[0]).toHaveProperty('End');
-            expect(h[0].End).toEqual("1")
-            expect(h[0]).toHaveProperty('ExpectedTime');
-            expect(h[0].ExpectedTime).toEqual(60)
-            expect(h[0]).toHaveProperty('HikeID');
-            expect(h[0].HikeID).toEqual("1")
-            expect(h[0]).toHaveProperty('Length');
-            expect(h[0].Length).toEqual(5)
-            expect(h[0]).toHaveProperty('Start');
-            expect(h[0].Start).toEqual("1")
-            expect(h[0]).toHaveProperty('Title');
-            expect(h[0].Title).toEqual("title2")
+            let h= await hikes.getHike(1);
+            
+            expect(h).toHaveProperty('Ascent');
+            expect(h.Ascent).toEqual( 300.5)
+            expect(h).toHaveProperty('Description');
+            expect(h.Description).toEqual(null)
+            expect(h).toHaveProperty('Difficulty');
+            expect(h.Difficulty).toEqual("Professional")
+            expect(h).toHaveProperty('End');
+            expect(h.End).toEqual("1")
+            expect(h).toHaveProperty('ExpectedTime');
+            expect(h.ExpectedTime).toEqual(60)
+            expect(h).toHaveProperty('HikeID');
+            expect(h.HikeID).toEqual("1")
+            expect(h).toHaveProperty('Length');
+            expect(h.Length).toEqual(5)
+            expect(h).toHaveProperty('Start');
+            expect(h.Start).toEqual("1")
+            expect(h).toHaveProperty('Title');
+            expect(h.Title).toEqual("title2")
         })
+    })
+    test("set description",async()=>{
+        await hikes.deleteHikes();
+        await expect(hikes.addHike(0,0,0,0,0,0,0,0,0,0)).resolves.toEqual('New Hike inserted')
+        await expect(hikes.getHike(0)).resolves.not.toEqual([])
+        let h= await hikes.getHike(0)
+        expect(h).toHaveProperty('Ascent');
+        expect(h.Ascent).toEqual( 0)
+        expect(h).toHaveProperty('Description');
+        expect(h.Description).toEqual("0")
+        expect(h).toHaveProperty('Difficulty');
+        expect(h.Difficulty).toEqual("0")
+        expect(h).toHaveProperty('End');
+        expect(h.End).toEqual("0")
+        expect(h).toHaveProperty('ExpectedTime');
+        expect(h.ExpectedTime).toEqual(0)
+        expect(h).toHaveProperty('HikeID');
+        expect(h.HikeID).toEqual("0")
+        expect(h).toHaveProperty('Length');
+        expect(h.Length).toEqual(0)
+        expect(h).toHaveProperty('Start');
+        expect(h.Start).toEqual("0")
+        expect(h).toHaveProperty('Title');
+        expect(h.Title).toEqual("0")
+
+        await expect(hikes.setDescription("a description",0)).resolves.toEqual(`Description added for Hike 0`)
+        h= await hikes.getHike(0)
+        expect(h).toHaveProperty('Ascent');
+        expect(h.Ascent).toEqual( 0)
+        expect(h).toHaveProperty('Description');
+        expect(h.Description).toEqual("a description")
+        expect(h).toHaveProperty('Difficulty');
+        expect(h.Difficulty).toEqual("0")
+        expect(h).toHaveProperty('End');
+        expect(h.End).toEqual("0")
+        expect(h).toHaveProperty('ExpectedTime');
+        expect(h.ExpectedTime).toEqual(0)
+        expect(h).toHaveProperty('HikeID');
+        expect(h.HikeID).toEqual("0")
+        expect(h).toHaveProperty('Length');
+        expect(h.Length).toEqual(0)
+        expect(h).toHaveProperty('Start');
+        expect(h.Start).toEqual("0")
+        expect(h).toHaveProperty('Title');
+        expect(h.Title).toEqual("0")
+
     })
 
 });

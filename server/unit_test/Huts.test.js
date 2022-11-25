@@ -139,7 +139,7 @@ describe("Hut Filters",()=>{
             
         })
     });
-    describe.skip("Location filter",()=>{
+    describe("Location filter",()=>{
         test("Location is expecteda and location type is expected",async()=>{
             await expect(Huts.getHutsFilters(locationType='City',location='City1')).resolves.not.toEqual(null);
             let h= await Huts.getHutsFilters(locationType='City',location='City1');
