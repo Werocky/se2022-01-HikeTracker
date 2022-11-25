@@ -105,7 +105,7 @@ exports.getHutsFilters = (name = null, locationType = null, location = null, Whe
     }
 
     sql += ";"
-    console.log(sql);
+    // console.log(sql);
     db.all(sql, parameters, function (err, rows) {
       if (err)
         reject(err);

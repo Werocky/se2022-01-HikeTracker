@@ -147,8 +147,12 @@ describe("Hut Filters",()=>{
 
         })
         test("Name is not expected",async()=>{
-            await expect(Huts.getHutsFilters(null,location='NameNotIn')).resolves.not.toEqual(null);
-            let h= await Huts.getHutsFilters(null,location='NameNotIn');
+            await expect(Huts.getHutsFilters(null,location='NameNotIn')).rejects.not.toEqual(null);
+            
+        })
+        test("Name is not expected",async()=>{
+            await expect(Huts.getHutsFilters(null,locationType='City','NameNotIn')).resolves.not.toEqual(null);
+            let h= await Huts.getHutsFilters(null,locationType='City',location='NameNotIn');
             expect(h).toHaveLength(0);
             
         })
