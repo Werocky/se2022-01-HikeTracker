@@ -81,7 +81,7 @@ exports.deleteHikes = () => {
 
 exports.editStartEndPoints = (start, end, id) => {
   return new Promise(async (resolve, reject) =>{
-    const sql = "UPDATE Hikes SET Start = ? AND End = ? WHERE HikeID = ?";
+    const sql = "UPDATE Hikes SET Start = ?, End = ? WHERE HikeID = ?";
     db.run(sql, [start, end, id], function (err){
       if(err)
         reject(err)

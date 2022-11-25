@@ -55,17 +55,28 @@ describe("get Hikes by Filter",()=>{
     describe("get Hikes by a specific Filter or higher(for lenght|ExpectedTime|Ascent)", ()=>{
         
         test("get a existing ID",async()=>{
-            await expect(hikes.getHikesByFilter('HikeID',1)).resolves.toEqual([{
-                    "Ascent": 300.5,
-                    "Description": null,
-                     "Difficulty": "Professional",
-                     "End": "1.454",
-                     "ExpectedTime": 60,
-                     "HikeID": "1",
-                     "Length": 5,
-                     "Start": "0.1",
-                     "Title": "title2",
-                }]);
+            await expect(hikes.getHikesByFilter('HikeID',1)).resolves.not.toEqual([]);
+            let h= await hikes.getHikesByFilter('HikeID',1);
+            expect(h).toHaveLength(1);
+            expect(h[0]).toHaveProperty('Ascent');
+            expect(h[0].Ascent).toEqual( 300.5)
+            expect(h[0]).toHaveProperty('Description');
+            expect(h[0].Description).toEqual(null)
+            expect(h[0]).toHaveProperty('Difficulty');
+            expect(h[0].Difficulty).toEqual("Professional")
+            expect(h[0]).toHaveProperty('End');
+            expect(h[0].End).toEqual("1.454")
+            expect(h[0]).toHaveProperty('ExpectedTime');
+            expect(h[0].ExpectedTime).toEqual(60)
+            expect(h[0]).toHaveProperty('HikeID');
+            expect(h[0].HikeID).toEqual("1")
+            expect(h[0]).toHaveProperty('Length');
+            expect(h[0].Length).toEqual(5)
+            expect(h[0]).toHaveProperty('Start');
+            expect(h[0].Start).toEqual("0.1")
+            expect(h[0]).toHaveProperty('Title');
+            expect(h[0].Title).toEqual("title2")
+           
         })
         test("get by ExpectedTime",async()=>{
             await expect(hikes.getHikesByFilter('ExpectedTime',60)).resolves.toEqual([{
@@ -253,7 +264,31 @@ describe("get Hikes by Filter",()=>{
         })
     })
 
-
-
+    describe("start/ end point editing", ()=>{
+        it("edit start/End points",async()=>{
+           
+            await expect(hikes.editStartEndPoints(1,1,1)).resolves.toEqual("Hike's start and end points updated.")
+            let h= await hikes.getHikesByFilter('HikeID',1);
+            expect(h).toHaveLength(1);
+            expect(h[0]).toHaveProperty('Ascent');
+            expect(h[0].Ascent).toEqual( 300.5)
+            expect(h[0]).toHaveProperty('Description');
+            expect(h[0].Description).toEqual(null)
+            expect(h[0]).toHaveProperty('Difficulty');
+            expect(h[0].Difficulty).toEqual("Professional")
+            expect(h[0]).toHaveProperty('End');
+            expect(h[0].End).toEqual("1")
+            expect(h[0]).toHaveProperty('ExpectedTime');
+            expect(h[0].ExpectedTime).toEqual(60)
+            expect(h[0]).toHaveProperty('HikeID');
+            expect(h[0].HikeID).toEqual("1")
+            expect(h[0]).toHaveProperty('Length');
+            expect(h[0].Length).toEqual(5)
+            expect(h[0]).toHaveProperty('Start');
+            expect(h[0].Start).toEqual("1")
+            expect(h[0]).toHaveProperty('Title');
+            expect(h[0].Title).toEqual("title2")
+        })
+    })
 
 });
