@@ -44,6 +44,21 @@ exports.getHike = (hikeID) => {
   });
 };
 
+exports.getLastHikeId = () => {
+  return new Promise((resolve,reject) => {
+    const sql="SELECT HikeID FROM Hikes;";
+    db.all(sql,[],(err,rows) => {
+      if (err) {
+        reject(err);
+      }
+      const hikes = rows.map((r) => ({ HikeID: +r.HikeID}));
+      let last = 0;
+      hikes.forEach(h => {if(h.HikeID > last) last = h.HikeID})
+      resolve(last);
+    });
+  });
+};
+
 exports.setDescription = (Description, HikeID) => {
   return new Promise(async (resolve, reject) => {
     db.run("UPDATE Hikes SET Description = ? WHERE HikeID = ?",

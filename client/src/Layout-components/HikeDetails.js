@@ -36,7 +36,6 @@ function HikeDetails(props) {
     }
   }, [params.hikeID, auth.login])
 
-
   return (
     <>
       <Container fluid className={'vh-100'}>
@@ -62,11 +61,7 @@ function HikeDetails(props) {
           </Row>
           <Row>
             <Col>Description: {hike.Description}</Col>
-            {auth.user.role === 'l' &&
-              <Col>
-                <Button onClick={() => navigate("/modifyHikeDesc/" + params.hikeID)}>Modify</Button>
-              </Col>
-            }
+            
           </Row>
           <p></p>
           <hr />

@@ -84,6 +84,29 @@ function setDescription(Description, HikeID) {
   });
 }
 
+async function addHike(hike) {
+  try {
+    const response = await fetch((APIURL + '/addHike'), {
+      method: 'POST',
+      credentials: 'include',
+      body: JSON.stringify({
+        "hike": hike,
+      }),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+    const hikeId = await response.json();
+    if (response.ok) {
+      return hikeId;
+    } else {
+      throw hikeId;
+    }
+  } catch (err) {
+    throw err;
+  }
+}
+
 //retrieve points of the hike's track, given HikeID
 async function getPointsHike(HikeID) {
   try {
@@ -123,7 +146,7 @@ async function getNearHikes(radius, lat, lng) {
       },
     });
     const hikes = await response.json();
-    if(response.ok) {
+    if (response.ok) {
       return hikes
     } else {
       throw hikes; //which will contain an error if it is the case
@@ -136,13 +159,13 @@ async function getNearHikes(radius, lat, lng) {
 
 /*** PARKING LOT FUNCTIONS ***/
 
-async function createParkingLot(description, free, coord){
+async function createParkingLot(description, free, coord) {
   try {
     const response = await fetch(APIURL + '/ParkingLots', {
       method: 'POST',
       body: JSON.stringify({
-        "Description" : description,
-        "free" : free,
+        "Description": description,
+        "free": free,
         "lat": coord.lat,
         "lng": coord.lng,
       }),
@@ -156,15 +179,15 @@ async function createParkingLot(description, free, coord){
   }
 }
 
-async function updateParkingLot(description, parkingId, free, RefPointID, coord){
+async function updateParkingLot(description, parkingId, free, RefPointID, coord) {
   try {
     const response = await fetch(APIURL + 'ParkingLots', {
       method: 'PUT',
       body: JSON.stringify({
-        "Description" : description,
-        "ParkingID" : parkingId,
-        "free" : free,
-        "RefPointID" : RefPointID,
+        "Description": description,
+        "ParkingID": parkingId,
+        "free": free,
+        "RefPointID": RefPointID,
         "lat": coord.lat,
         "lng": coord.lng,
       }),
@@ -178,13 +201,13 @@ async function updateParkingLot(description, parkingId, free, RefPointID, coord)
   }
 }
 
-async function getParkingLots(){
+async function getParkingLots() {
   try {
     const response = await fetch(APIURL + 'ParkingLots', {
       method: 'GET',
     });
     const result = await response.json();
-    if(response.ok)
+    if (response.ok)
       return result
     else
       throw result;
@@ -193,19 +216,19 @@ async function getParkingLots(){
   }
 }
 
-async function getParkingLot(id){
+async function getParkingLot(id) {
   try {
     const response = await fetch(APIURL + 'ParkingLots', {
       method: 'GET',
       body: JSON.stringify({
-        "ParkingID" : id
+        "ParkingID": id
       }),
       headers: {
         'Content-Type': 'application/json',
       },
     });
     const result = await response.json();
-    if(response.ok)
+    if (response.ok)
       return result
     else
       throw result;
@@ -214,12 +237,12 @@ async function getParkingLot(id){
   }
 }
 
-async function deleteParkingLot(id){
+async function deleteParkingLot(id) {
   try {
     const response = await fetch(APIURL + 'ParkingLots', {
       method: 'DELETE',
       body: JSON.stringify({
-        "ParkingID" : id
+        "ParkingID": id
       }),
       headers: {
         'Content-Type': 'application/json',
@@ -233,21 +256,21 @@ async function deleteParkingLot(id){
 
 async function getHutsFilters(name, location, WhenOpen, beds, avgPrice) {
   try {
-    const response = await fetch(APIURL+'/hutsFilters', {
+    const response = await fetch(APIURL + '/hutsFilters', {
       method: 'POST',
       body: JSON.stringify({
-        "name": name?name:null,
-        "location": location?location:null,
-        "WhenOpen": WhenOpen?WhenOpen:null,
-        "beds": beds?beds:null,
-        "avgPrice": avgPrice?avgPrice:null,
+        "name": name ? name : null,
+        "location": location ? location : null,
+        "WhenOpen": WhenOpen ? WhenOpen : null,
+        "beds": beds ? beds : null,
+        "avgPrice": avgPrice ? avgPrice : null,
       }),
       headers: {
         'Content-Type': 'application/json',
       },
     });
     const huts = await response.json();
-    if(response.ok) {
+    if (response.ok) {
       return huts
     } else {
       throw huts; //which will contain an error if it is the case
@@ -259,11 +282,11 @@ async function getHutsFilters(name, location, WhenOpen, beds, avgPrice) {
 
 async function getHutsLocations() {
   try {
-    const response = await fetch(APIURL+'/hutsLocations', {
+    const response = await fetch(APIURL + '/hutsLocations', {
       method: 'GET',
     });
     const result = await response.json();
-    if(response.ok)
+    if (response.ok)
       return result
     else
       throw result;
@@ -312,7 +335,7 @@ async function register(credentials) {
     body: JSON.stringify({
       'Hash': credentials.Hash,
       'Salt': credentials.Salt,
-      'Id': credentials.email,
+      'Id': credentials.Id,
       'Role': credentials.Role
     }),
     headers: {
@@ -322,5 +345,24 @@ async function register(credentials) {
   return response.ok ? true : false;
 }
 
-const API = { getHikes, logIn, logOut, getUserInfo, getFilteredHikes, register, setDescription, getHike, getPointsHike, getNearHikes, getParkingLot, getParkingLots, updateParkingLot, createParkingLot, deleteParkingLot, getHutsFilters, getHutsLocations };
+const API = {
+  getHikes,
+  logIn,
+  logOut,
+  getUserInfo,
+  getFilteredHikes,
+  register,
+  setDescription,
+  getHike,
+  getPointsHike,
+  getNearHikes,
+  getParkingLot,
+  getParkingLots,
+  updateParkingLot,
+  createParkingLot,
+  deleteParkingLot,
+  getHutsFilters,
+  getHutsLocations,
+  addHike
+};
 export default API;

@@ -1,14 +1,40 @@
-import { Button } from "react-bootstrap";
+import { useContext } from "react";
+import { Button, Col, Container, Row } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
+import AuthContext from "../AuthContext";
 
 function ProfilePage(props) {
 
+  const auth = useContext(AuthContext);
   const navigate = useNavigate();
 
+
+  console.log(auth.user);
+
   return (
-    <>
-      <Logout logout={props.logout} navigate={navigate} />
-    </>
+    <Container fluid className={'vh-100'}>
+      <Row>
+        <Col>
+          {auth.user.Role === "H" ? "Hiker page"
+            : auth.user.Role === "L" ? "Local Guide page"
+              : "Other role to be implemented"}
+        </Col>
+        <Col>
+          {auth.user.Id}
+        </Col>
+        <Col>
+          <Logout logout={props.logout} navigate={navigate} />
+        </Col>
+      </Row>
+      <hr />
+      <Row>
+        <Col>
+          {auth.user.Role === "L" &&
+            <Button onClick={() => { navigate('/addHike') }}>New Hike</Button>
+          }
+        </Col>
+      </Row>
+    </Container>
   );
 }
 
