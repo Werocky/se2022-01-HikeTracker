@@ -505,7 +505,7 @@ app.get('/hutsLocations', async (req,res) => {
     const city = await huts.getHutCity();
     const province = await huts.getHutProvince();
     const region = await huts.getHutRegion();
-    const country = await huts.getHutContry();
+    const country = await huts.getHutCountry();
     let location = {
       City: city.filter((el)=> el!=false),
       Province: province.filter((el)=> el!=false),
