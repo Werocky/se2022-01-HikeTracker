@@ -5,7 +5,7 @@ const db = require('./DB').db;
 function createParkingLot(id, description, free){
     return new Promise (async (resolve, reject) =>{
         const sql = 'INSERT INTO ParkingLots(ParkingID, Description, Free) VALUES(?, ?, ?)';
-        this.db.run(sql, [id, description, free], function (err){
+        db.run(sql, [id, description, free], function (err){
             if(err)
                 reject(err);
             else
@@ -17,7 +17,7 @@ function createParkingLot(id, description, free){
 function updateParkingLot(id, description, free){
     return new Promise(async (resolve, reject) =>{
         const sql = 'UPDATE ParkingLots SET Description = ?, Free = ? WHERE ParkingID = ?';
-        this.db.run(sql, [description, free, id], function (err){
+        db.run(sql, [description, free, id], function (err){
             if(err)
                 reject(err);
             else
@@ -29,7 +29,7 @@ function updateParkingLot(id, description, free){
 function getParkingLots(){
     return new Promise(async (resolve, reject) =>{
         const sql = 'SELECT * FROM ParkingLots';
-        this.db.all(sql, [], function (err, rows) {
+        db.all(sql, [], function (err, rows) {
             if(err)
                 reject(err);
             else
@@ -41,7 +41,7 @@ function getParkingLots(){
 function getParkingLot(id){
     return new Promise(async (resolve, reject) =>{
         const sql = 'SELECT * FROM ParkingLots WHERE ParkingId = ?';
-        this.db.run(sql, [id], function (err, rows) {
+        db.run(sql, [id], function (err, rows) {
             if(err)
                 reject(err);
             else
@@ -81,8 +81,11 @@ function getLastParkingID(){
         db.run(sql, [], function (err, rows) {
             if(err)
                 reject(err);
-            else
+            else{
+                if(rows === null || rows === undefined)
+                    rows = 0;
                 resolve(rows);
+            }
         })
     })
 }

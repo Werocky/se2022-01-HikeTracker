@@ -359,9 +359,9 @@ app.post('/ParkingLots',
       return res.status(422).json({ error: 'cannot process request' });
     }
     const description = req.body.Description;
-    const id = getLastParkingID()+1;
+    const id = await getLastParkingID()+1;
     const free = req.body.free;
-    const refPoint = referencePoints.getLastRefPointID()+1;
+    const refPoint = await referencePoints.getLastRefPointID()+1;
     const lat = req.body.lat;
     const lng = req.body.lng;
     try {

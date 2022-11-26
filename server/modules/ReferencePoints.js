@@ -74,6 +74,8 @@ exports.getLastRefPointID = () => {
       if(err)
         reject(err);
       else
+        if(rows === null || rows === undefined)
+          rows = 0;
         resolve(rows);
     })
   })
