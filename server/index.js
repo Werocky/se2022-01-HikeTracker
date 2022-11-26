@@ -291,6 +291,39 @@ function deg2rad(deg) {
   return deg * (Math.PI / 180)
 }
 
+//UPDATE START/END POINTS
+
+app.put('setStartEndPoints',
+  [check('Id').notEmpty(),
+  check('Start').notEmpty(),
+  check('End').notEmpty()], async (req, res) =>{
+
+    const errors = validationResult(res);
+    if(!errors.isEmpty()) {
+      return res.status(422).json( { error: 'Cannot process request' });
+    }
+
+    const start = req.params.Start;
+    const end = req.params.End;
+    const id = req.params.Id;
+    const file = req.files.file;
+    const fileDestination = './gpx/' + file.name;
+
+    try {
+      file.mv(fileDestination, function(err){
+        if(err)
+          return res.status(500).json( { error: 'Error uploading the gpx file' });
+      });
+
+      await hikes.editStartEndPoints(start, end, id);
+      await fileNames.updateFile(id, path);
+
+      res.status(201).end();
+    } catch (err) {
+      res.stauts(503).json( { error: 'Internal error' });
+    }
+})
+
 // GET near hikes
 app.post('/getNearHikes', async (req, res) => {
   const errors = validationResult(req);

@@ -60,7 +60,7 @@ exports.getFromType = (type) => {
       reject(err);
       else {
         const hutPoints = rows.map((r)=> ({RefPointID: r.RefPointID}));
-        console.log(hutPoints);
+        // console.log(hutPoints);
         resolve(hutPoints);
       }
     })

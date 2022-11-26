@@ -22,7 +22,7 @@ class DatabaseConnection {
 
         //await this.deleteDB();
 
-        await this.populate();
+        //await this.populate();
 
     }
 
@@ -1303,19 +1303,317 @@ await this.wrapperPopulateRefP(HikeID, refPoint++, "45.93651","7.62672","parking
 
         await this.wrapperPopulate(HikeID,file,province,city,title,length,expTime,Ascent,Description,Difficulty,start,end);
         await this.wrapperPopulateRefP(HikeID,refPoint++,"46.33957", "12.22392" ,"parking",1,0); // start
-                await this.wrapperPopulateRefP(HikeID, refPoint++, "46.33835", "12.25160","hut",0,1); // end
+        await this.wrapperPopulateRefP(HikeID, refPoint++, "46.33835", "12.25160","hut",0,1); // end
 
-        
+        HikeID='41';
+        title="Lobuche - Everest Base Camp - Gorak Shep";
+        province='Nepal';
+        city =' Lobujya(Province 1)'; 
+        Ascent=791;
+        start="Lobuche"
+        end="Gorak Shep N"
+        length=14.56;
+        Difficulty="H";
+        expTime=637; 
+        file="lobuche-everest-base-camp-gorak-shep.gpx"    
+        Description='I guess that this is one of the most recorded tracks, I post it only for the sake of photo documentation.'
+        +'Maybe in the long stretch inside the base camp there was some trespassing component. Namely, arriving in snow and mist I did not notice that at a certain point there was written "access for climbers only". However, due to the same weather conditions, everybody were well sealed inside their own tents, so I experienced no problem throughout my long visit.'
+        await this.wrapperPopulate(HikeID,file,province,city,title,length,expTime,Ascent,Description,Difficulty,start,end);
+
+        HikeID='42';
+        title="LANGTANG CIRCUIT: circular route from Syabrubesi by Tserko Ri, Ganja La 5.183 and Goisankund NEPAL";
+        province='Nepal';
+        city ='Shyaphru(Central Region)'; 
+        Ascent=9711;
+        start="Ama Yangri pass"
+        end="Ama Yangri pass"
+        length=119.3;
+        Difficulty="PH";
+        expTime=17622; 
+        file="langtang-circuit-circular-route-from-syabrubesi-by-tserko-ri.gpx"    
+        Description='THE ROUTE'
+        +"It´s a 120km circular route that runs through the most traditional and interesting Langtang National Park. I've been called Langtang circuit that gives a full turn."
++""
++"All the circuit it is a sum of three different treks:"
++"1.Langtang valley (3.600m)"
++"2.Ganja (5.183m)"
++"3.Goisankund (4.600m)"
++"" 
++"There are lodges throughout the tour except the part of the Ganja La, where we bring tent for two or three nights. The Ganja La (5.183m) may require the use of crampons, especially in the north side climb. We climb it in october and found not enought snow to use crampons."
++"" 
++"STAGES"
++"" 
++"Stage1: Syabrubesi - Rimche"
++"Dist. 10,9 km"
++"Desn. + 1.100 m / -100 m"
++"Temps: 5h45"
++""
++"Stage2: Rimche - Langtang"
++"Dist. 12,6 km"
++"Desn. +1.120 m / -170 m"
++"Temps. 6h15"
++""
++"Stage3: Langtang - Kyangin Gompa"
++"Dist. 6,7 km"
++"Desn. +420 m / -20 m"
++"Temps. 2h15"
++"" 
++"Stage4: Tserko Ri"
++"Dist. 10 km"
++"Desn. +/- 1.135 m"
++"Temps. 5h30"
++""
++"Stage5: Kyangin Gompa - Naya Kanga BC"
++"Dist. 4 km"
++"Desn. +540 m / -100 m"
++"Temps. 2h30"
++""
++"Stage6: Naya Kanga BC - Keldang"
++"Dist. 10 km"
++"Desn. +930 m / -970 m"
++"Temps. 2h15"
++""
++"Stage7: Keldang - Dhukpu"
++"Dist. 7,5 km"
++"Desn. +360 m / -560 m"
++"Temps. 3h30"
++""
++"Stage8: Dhukpu - Tarkeghyang"
++"Dist. 11,1 km"
++"Desn. +350 m / -1.870 m"
++"Temps. 5h45"
++""
++"Stage9: Tarkeghyang - Melanchigaon"
++"Dist. 6,7 km"
++"Desn. +630 m / -690 m"
++"Temps. 3h30"
++""
++"Stage10: Melanchigaon - Gopte"
++"Dist. 8,2 km"
++"Desn. +1.250 m / -400 m"
++"Temps. 5h30"
++"" 
++"Stage11: Gopte - Goisankund"
++"Dist. 11,2 km"
++"Desn. +1.530 m / - 510 m"
++"Temps. 6h30"
++""
++"Stage12: Goisankund - Thulo Syabru"
++"Dist. 8,9 km"
++"Desn. +40 m / -1.150 m"
++"Temps. 3h"
++""
++"Stage13: Thulo Syabru - Suabrubesi"
++"Dist. 11,7 km"
++"Desn. +60 m / -1.900 m"
++"Temps. 6h15"
++""
++""
++"TRANSPORTATION"
++"From Kathamndu thera are 2/3 Buses every morning to Dunche. Thet leave approximately between 6:30 pm-7: 8h-30h."
++""
++"The buses stop for Langtang (GPS 45R 332964 3069049) depart from near the Central Bus Station, north of Kathmandu (taxi 200-300Rp). The bus takes about 8-10am for just over 100km. They usually stop for breakfast and / or lunch. Maybe the bus run only to Dunche, and there may have to change to another bus to take Syabrubesi."
++""
++"ACCOMMODATION & DIFFICULTY"
++"The trekking can be divided into three parts."+
+
+"1. The first is called the classic trek to Langtang (stages 1-4). In this section, we find no difficulty unless the gain high, rising above the Tserko Ri, which is easy, but earn on 1000m altitude in short, which may cause altitude sickness."+
+"2. The second part of the trek would be the Ganja La (stages 5-8). That is where the difficulty of the circuit. During these 3-4 days will not find any accommodation. We carry and store food every day. The climb of the Ganja may require the use of crampons. In October, when we did this route was snow lasts a couple of sections. One of us used them during few meters, while the other member could pass without it. It all depends on the experience of everyone in the use of crampons. During the spring it is possible that there is more snow."
+
++"Pay attention to the temperature. In early October we had the following temperatures:"+""
++
+"Naya Kanga BC 4.300m -8 º C"+
+"South High Camp (5,000 m): -15 ° C"+
+"Keldang (4.300m) slept in the camp high on the rocks"
++"Dhukpu 4.100m -6 º C"
++""
++"3. The last part of the loop (steps 9-13) corresponds to the Goisankund trek where we can find lodgings and restaurants without any difficulty since the end of the trek."
++""
++""
++"ALTERNATIVE ROUTES"
++"Another way to make the circuit would be leaving from Timbu, south Tarkeghyang (3-4hrs walk). From this population may begin around both clockwise (Timbu-Melanchigaon-Goisankund-Thula Syabru Lama Hotel-Langtang Ganja Kyangin Gompa-the-Tarkeghyang-Timbu) or inverse."
++""+
++"The advantage of this option is saving hours bus as Timbu is closer to Kathmandu than Syabrubesi. Conversely, if we do the circuit clockwise (logical acclimating to take the Ganja La acclimated correctly) we charged many days everything needed for the four days of camping (gas, food, matress...)"       
+        await this.wrapperPopulate(HikeID,file,province,city,title,length,expTime,Ascent,Description,Difficulty,start,end);
+
+       
+        HikeID='43';
+        title="Monte Mitsutoge Yama(Kawaguchiko)";
+        province='Japan';
+        city ='Funatsu(Yamanashi)'; 
+        Ascent=1136;
+        start=""
+        end="Mitsutoge Yama"
+        length=18.65;
+        Difficulty="T";
+        expTime=413; 
+        file="monte-mitsutoge-yamakawaguchiko.gpx"    
+        Description="We decided to make this climb because on this date Mount Fuji had too much snow at the top, and the conditions were not right for our equipment and our training. The Fujisan views are amazing. It climbs from the town of Kawaguchiko, in the area near Mount Fuji. You haven't got so much technical difficulty and it's not so long, about 20 km. When you reach the first viewpoint there is a poster than say to go the top and come back is about 6 hours; my wife and me aren't professional climbers and we did summit in an hour and a half. On the way you can find animals such as monkeys, one attacked us and it was a difficult time, at the end without losing sight of the monkey and walking up while lambasted us get out of the area, in the end nothing happened more beyond the scare. We had a beautiful cloudless day. AMAZING! The descent we take the way to the Five Pagoda Tower, one of the most typical views of this area before returning by train to the hotel in Kawaguchiko. If you don't climb the majestic Fuji do not miss this climb and views."
+        await this.wrapperPopulate(HikeID,file,province,city,title,length,expTime,Ascent,Description,Difficulty,start,end);
+       
+        HikeID='44';
+        title="Takatsuka-yama 高柄山 (Shiotsu Stn. - Uenohara Stn.)";
+        province='Japan';
+        city ='Arakura(Yamanashi)'; 
+        Ascent=1002;
+        start=""
+        end=""
+        length=14.36;
+        Difficulty="H";
+        expTime=176; 
+        file="takatsuka-yama-gao-bing-shan-shiotsu-stn-uebohara-stn-.gpx"    
+        Description="Quite easy and well signed trail, just the very last part at the gate was a bit confusing; nothing very special on this trail but a nice trek if you don’t want to travel that long from Tokyo (just 1.5 hrs); easy access directly from the train stn., no need to take a bus"
+        await this.wrapperPopulate(HikeID,file,province,city,title,length,expTime,Ascent,Description,Difficulty,start,end);
+
+///////////////////////////////////////////////////
+        HikeID='45';
+        title="Gregorios - Pedreirinha Hill - Vale Fuzeiros archaeological hike";
+        province='Portugal';
+        city ='Canhestros(Faro)'; 
+        Ascent=166;
+        start=""
+        end=""
+        length=8.3;
+        Difficulty="H";
+        expTime=163; 
+        file="gregorios-pedreirinha-hill-vale-fuzeiros-archaeological-hike.gpx"    
+        Description=
+        "Great combination of a good walk with stunning views and archaeology. Mostly on obvious tracks, limited roadways, easy for the most part but with some steep inclines. So I've rated the walk moderate. Latter part a bit tricky as one necropolis seems to be in someone's back yard/garden! Just pick your way through a few houses to get back on track. Also the descent is off the road down a dirt trackway."+
+        "I followed the Wikilocs route by mikeledzep."+
+        "Many thanks Mike        "
+        await this.wrapperPopulate(HikeID,file,province,city,title,length,expTime,Ascent,Description,Difficulty,start,end);
+
+        HikeID='46';
+        title="Carrauntoohil";
+        province='Ireland';
+        city ='Knocknafreaghaun(Munster)'; 
+        Ascent=869;
+        start=""
+        end="Carrauntoohil"
+        length=12.74;
+        Difficulty="T";
+        expTime=291; 
+        file="carrauntoohil.gpx"    
+        Description=
+"OBJETIVO:"+
+"- Cumbre: Carrauntoohil"+
+"    Altitud: 1.039 m."+
+
+"ITINERARIO:"+
+"Cronin's Yard - Devil's Ladder - Carrauntoohil - Devil's Ladder - Cronin's Yard."+
+
+"TIEMPO ESTIMADO:"+
+"- Ascenso:    02:00"+
+"- Descenso: 01:45"+
+
+"DESCRIPCIÓN:"+
+
+"NOTAS:"+
+
+"RUTAS CERCANAS:"+
+"- Torc Mountain  "
+        await this.wrapperPopulate(HikeID,file,province,city,title,length,expTime,Ascent,Description,Difficulty,start,end);
+
+        HikeID='47';
+        title="Carrauntouhill via the Devil's ladder";
+        province='Ireland';
+        city ='Knocknafreaghaun(Munster)'; 
+        Ascent=931;
+        start=""
+        end=""
+        length=12.73;
+        Difficulty="H";
+        expTime=511; 
+        file="carrauntouhill-via-the-devils-ladder.gpx"    
+        Description=
+"The hike starts at Lislebane carpark. We had snow at top of the mountain. Slow pace due to a large number of people in the group. Proper mountain gear is essential for this walk. Bring torch in case of getting dark like in this case we had to use them in the descent."+
+
+"Name: Carrantuohill"+
+"Start time: 02/17/2018 10:54"+
+
+"Finish time: 02/17/2018 19:25"+
+
+"Distance: 12.7km (08:30)"+
+
+"Moving time: 04:22"+
+
+"Average speed: 1.5km/h"+
+
+"Avg. Speed Mov.: 2.9km/h"+
+
+"Max. Speed: 5.5km/h"+
+
+"Minimum altitude: 199m"+
+
+"Maximum altitude: 1039m"+
+
+"Ascent speed: 251.4m/h"+
+
+"Descent speed: -243.3m/h"+
+
+"Elevation gain: 1007m"+
+
+"Elevation loss: -1007m"+
+
+"Ascent time: 04:00"+
+
+"Descent time: 04:08"
+        await this.wrapperPopulate(HikeID,file,province,city,title,length,expTime,Ascent,Description,Difficulty,start,end);
+
+        HikeID='48';
+        title="Garden of the Sleeping Giant";
+        province='Fiji';
+        city ='Natalau(Western)'; 
+        Ascent=8;
+        start=""
+        end=""
+        length=0.54;
+        Difficulty="T";
+        expTime=22; 
+        file="garden-of-the-sleeping-giant.gpx"    
+        Description="Recorded 1/4 of the trail from the lookout to the entrance. Easy trails and boardwalk. Spent 90 minutes in the garden."
+        await this.wrapperPopulate(HikeID,file,province,city,title,length,expTime,Ascent,Description,Difficulty,start,end);
+
+        HikeID='49';
+        title="Veisaru red cross";
+        province='Fiji';
+        city =' Veisaru Settlement(Western)'; 
+        Ascent=36;
+        start=""
+        end=""
+        length=5.55;
+        Difficulty="T";
+        expTime=17; 
+        file="veisaru-red-cross.gpx"    
+        Description="Red cross distribution ..Vesaru"+
+"1. Ame Totoya 70yrs cane farmer"+
+"2. Kolinio Kinikinilau 34yrs labourer residing on his brothers land - mataqali Batinivatu...Sorokoba"+
+"Penisoni Tirau 33yrs labourer"+
+"3. Saimoni Buli 34 yrs labourer"+
+"4. Samu Boa 32yrs labourer"
+        await this.wrapperPopulate(HikeID,file,province,city,title,length,expTime,Ascent,Description,Difficulty,start,end);
+
+        HikeID='50';
+        title="Gjeravica or Đeravica (Prokletije)";
+        province='Kosovo';
+        city ='Belleja(Gjakova)'; 
+        Ascent=952;
+        start=""
+        end=""
+        length=13.32;
+        Difficulty="H";
+        expTime=240; 
+        file="gjeravica-or-deravica-prokletije.gpx"    
+        Description=
+        "Gropa e Erenikut - Gjeravičko Jezero - Gjeravica - Gropa e Erenikut"+
+        "Đeravica or Gjeravica is second highest top on Prokletije (Accursed Mountain) after Maja Jezerce and it is considered as highest top in Kosovo."+
+        "There are 2 start points to reach the top from Kosovo, one is from Dečane and another from Junik off road to Gropa Erenikut where you can find accomodation."+
+        "Trail is moderate with 2 sections wich are bit exposed, one bellow Gjeravica Lake and another bellow the top. Rest of the trail is moderate and well marked."
+        await this.wrapperPopulate(HikeID,file,province,city,title,length,expTime,Ascent,Description,Difficulty,start,end);
+
 
         await this.populateHuts();
         
-    
-
-           
-    
-    
-            
-
 }
     
 
