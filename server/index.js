@@ -295,6 +295,8 @@ function deg2rad(deg) {
 
 app.put('setStartEndPoints',
   [check('Id').notEmpty(),
+  check('StartId').notEmpty(),
+  check('EndId').notEmpty(),
   check('Start').notEmpty(),
   check('End').notEmpty()], async (req, res) =>{
 
@@ -303,21 +305,16 @@ app.put('setStartEndPoints',
       return res.status(422).json( { error: 'Cannot process request' });
     }
 
+    const startId = req.params.StartId;
+    const endId = req.params.EndId;
     const start = req.params.Start;
     const end = req.params.End;
     const id = req.params.Id;
-    const file = req.files.file;
-    const fileDestination = './gpx/' + file.name;
 
     try {
-      file.mv(fileDestination, function(err){
-        if(err)
-          return res.status(500).json( { error: 'Error uploading the gpx file' });
-      });
-
       await hikes.editStartEndPoints(start, end, id);
-      await fileNames.updateFile(id, path);
-
+      await hikeRefPoints.setIsEnd(id, 1, endId);
+      await hikeRefPoints.setIsStart(id, 1, startId);
       res.status(201).end();
     } catch (err) {
       res.stauts(503).json( { error: 'Internal error' });
