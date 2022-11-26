@@ -8,7 +8,7 @@ import API from './API';
 import { LoginComponent } from './Layout-components/LoginComponent';
 import { RegisterComponent } from './Layout-components/RegisterComponent';
 import HikeDetails from './Layout-components/HikeDetails';
-import { HikeDescription } from './Layout-components/HikeDescription';
+import AddHike from './Layout-components/AddHike';
 import ProfilePage from './Layout-components/ProfilePage';
 import HutsPage from './Layout-components/Huts-components/HutsPage';
 import ParkingForm from './Layout-components/ParkingForm';
@@ -84,8 +84,8 @@ function AppLayout(props) {
       <Route path='/login' element={
         <LoginComponent login={props.login} />
       } />
-      <Route path='/modifyHikeDesc/:hikeID' element={
-        <HikeDescription />
+      <Route path='/addHike' element={
+        <AddHike />
       } />
       <Route path='/profile/:userId' element={
         <ProfilePage logout={props.logout} />

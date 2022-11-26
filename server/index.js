@@ -253,6 +253,25 @@ app.put('/setDescription', /*isLoggedIn,*/[
     }
   });
 
+// add a new Hike
+app.post('/addHike', async (req,res) => {
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    return res.status(422).json({ error: 'cannot process request' });
+  }
+try {
+  const hike = req.body.hike;
+  console.log(hike);
+  const hikeId = await hikes.getLastHikeId()+1;
+  await hikes.addHike(hikeId,hike.Title,hike.Length,hike.ExpectedTime,hike.Ascent,hike.Difficulty,hike.Start,hike.End,hike.Description);
+  await locations.addLocation(hikeId, hike.Province, hike.City);
+  res.status(201).json({hikeId: hikeId});
+} catch (err) {
+  res.status(503).json({error: 'Internal error'});
+}
+
+})
+
 /*** Geographical filter ***/
 function distance(lat1, lon1, lat2, lon2) {
   var R = 6371; // Radius of the earth in km
@@ -486,7 +505,7 @@ app.get('/hutsLocations', async (req,res) => {
     const city = await huts.getHutCity();
     const province = await huts.getHutProvince();
     const region = await huts.getHutRegion();
-    const country = await huts.getHutContry();
+    const country = await huts.getHutCountry();
     let location = {
       City: city.filter((el)=> el!=false),
       Province: province.filter((el)=> el!=false),
@@ -560,12 +579,13 @@ app.post('/saveFile/:hikeID', async (req, res) => {
   try {
     const file = req.files.file;
     const path = __dirname + "/gpx/" + file.name;
+    console.log(path);
     const hikeID = req.params.hikeID; // STORE IT IN THE FileNames db with path
+    const added = await fileNames.addFile(hikeID,path);
     file.mv(path, (err) => {
       if (err) {
         return res.status(500).send(err);
       }
-
       return res.send({ status: "success", path: path });
     });
   } catch (err) {

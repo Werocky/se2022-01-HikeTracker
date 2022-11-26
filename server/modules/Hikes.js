@@ -44,6 +44,21 @@ exports.getHike = (hikeID) => {
   });
 };
 
+exports.getLastHikeId = () => {
+  return new Promise((resolve,reject) => {
+    const sql="SELECT HikeID FROM Hikes;";
+    db.all(sql,[],(err,rows) => {
+      if (err) {
+        reject(err);
+      }
+      const hikes = rows.map((r) => ({ HikeID: +r.HikeID}));
+      let last = 0;
+      hikes.forEach(h => {if(h.HikeID > last) last = h.HikeID})
+      resolve(last);
+    });
+  });
+};
+
 exports.setDescription = (Description, HikeID) => {
   return new Promise(async (resolve, reject) => {
     db.run("UPDATE Hikes SET Description = ? WHERE HikeID = ?",
@@ -81,7 +96,7 @@ exports.deleteHikes = () => {
 
 exports.editStartEndPoints = (start, end, id) => {
   return new Promise(async (resolve, reject) =>{
-    const sql = "UPDATE Hikes SET Start = ? AND End = ? WHERE HikeID = ?";
+    const sql = "UPDATE Hikes SET Start = ?, End = ? WHERE HikeID = ?";
     db.run(sql, [start, end, id], function (err){
       if(err)
         reject(err)

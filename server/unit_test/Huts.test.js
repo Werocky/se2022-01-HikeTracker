@@ -139,16 +139,20 @@ describe("Hut Filters",()=>{
             
         })
     });
-    describe.skip("Location filter",()=>{
+    describe("Location filter",()=>{
         test("Location is expecteda and location type is expected",async()=>{
-            await expect(Huts.getHutsFilters(locationType='City',location='City1')).resolves.not.toEqual(null);
-            let h= await Huts.getHutsFilters(locationType='City',location='City1');
+            await expect(Huts.getHutsFilters(null,locationType='City',location='City1')).resolves.not.toEqual(null);
+            let h= await Huts.getHutsFilters(null,locationType='City',location='City1');
             expect(h).toHaveLength(1);
 
         })
         test("Name is not expected",async()=>{
-            await expect(Huts.getHutsFilters(location='NameNotIn')).resolves.not.toEqual(null);
-            let h= await Huts.getHutsFilters(location='NameNotIn');
+            await expect(Huts.getHutsFilters(null,location='NameNotIn')).rejects.not.toEqual(null);
+            
+        })
+        test("Name is not expected",async()=>{
+            await expect(Huts.getHutsFilters(null,locationType='City','NameNotIn')).resolves.not.toEqual(null);
+            let h= await Huts.getHutsFilters(null,locationType='City',location='NameNotIn');
             expect(h).toHaveLength(0);
             
         })

@@ -42,6 +42,7 @@ exports.getFileName = (HikeID) => {
       });
     });
   };
+  
   exports.addFile=(HikeID,Path)=>{
     return new Promise(async (resolve, reject) => {
       const sql = "INSERT INTO FileNames(HikeID, FileName) VALUES (?,?);";

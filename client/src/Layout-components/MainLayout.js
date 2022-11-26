@@ -31,8 +31,8 @@ function MainLayout(props) {
 
   return (
     <>
-      <NavigationBar logout={props.logout} />
       <Container fluid className={'vh-100'}>
+        <NavigationBar  />
         <p></p>
 
         {!loading &&
