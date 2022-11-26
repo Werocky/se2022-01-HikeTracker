@@ -38,8 +38,8 @@ function HikeDetails(props) {
 
   return (
     <>
-      <Container fluid className={'vh-100'}>
-        <NavigationBar logout={props.logout} />
+      <NavigationBar logout={props.logout} />
+        <Container fluid className={'vh-100'}>
         {!loading && <>
           <Row>
             <Col>Title: {hike.Title}</Col>

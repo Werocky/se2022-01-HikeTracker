@@ -31,8 +31,8 @@ function MainLayout(props) {
 
   return (
     <>
-      <Container fluid className={'vh-100'}>
-        <NavigationBar  />
+      <NavigationBar  />
+        <Container fluid className={'vh-100'}>
         <p></p>
 
         {!loading &&

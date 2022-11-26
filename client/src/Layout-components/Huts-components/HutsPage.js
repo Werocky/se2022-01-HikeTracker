@@ -11,8 +11,8 @@ function HutsPage(props) {
 
   return (
     <>
-      <Container fluid className={'vh-100'} >
-        <NavigationBar logout={props.logout} />
+      <NavigationBar logout={props.logout} />
+        <Container fluid className={'vh-100'} >
         <p></p>
         <Row>
           <SearchHuts setHuts={setHuts} setLoading={setLoading} />
