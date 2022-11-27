@@ -17,7 +17,7 @@ function LoginComponent(props) {
             </Row>
             <Row>
               <Col></Col>
-              <Col xs={10}><LoginForm login={props.login} /></Col>
+              <Col xs={10}><LoginForm login={props.login}/></Col>
               <Col></Col>
             </Row>
           </>
@@ -29,9 +29,7 @@ function LoginComponent(props) {
 function LoginForm(props) {
   const [email, setEmail] = useState('b@polito.it');
   const [password, setPassword] = useState('password');
-
   const navigate = useNavigate();
-
   const handleSubmit = async (event) => {
     event.preventDefault();
     const credentials = { email: email, password };
