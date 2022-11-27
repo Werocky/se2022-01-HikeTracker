@@ -22,6 +22,7 @@ const { builtinModules } = require('module');
 const { createParkingLot, updateParkingLot, getParkingLots, getParkingLot, deleteParkingLot, getLastParkingID } = require('./modules/ParkingLot.js');
 const { addReferencePoint, updateReferencePoint } = require('./modules/ReferencePoints.js');
 const huts = require('./modules/Huts');
+const mail = require('./modules/mail');
 
 
 /*** Set up Passport ***/
@@ -453,6 +454,22 @@ app.post('/ParkingLots',
     }
 });
 
+//verification path
+app.get('/verify', /*isLoggedIn,*/[],
+  async (req, res) => {
+    const errors = validationResult(res);
+    if (!errors.isEmpty()) {
+      return res.status(422).json({ error: 'cannot process request' });
+    }
+    try {
+      await users.checkVerificationCode(req.query.code, req.query.Id);
+      await users.setVerified(req.query.Id);
+      res.status(201).json({message: 'Correctly verified'});
+    } catch (err) {
+      res.status(503).json({ error: `Internal Error` });
+    }
+  });
+
 //DELETE
 //delete parking lot
 app.post('/ParkingLots',
@@ -559,7 +576,9 @@ app.post('/sessions/new', async (req, res) => {
     const Salt = req.body.Salt;
     const Id = req.body.Id;
     const Role = req.body.Role;
-    const result = await users.register(Hash, Salt, Id, Role);
+    const verificationCode = 1234; //static value, logic needed
+    const result = await users.register(Hash, Salt, Id, Role, verificationCode, 0);
+    mail.sendConfirmationMail(req.body.Id, verificationCode);
     return res.status(200).json(result);
   } catch (err) {
     return res.status(500).json(err);

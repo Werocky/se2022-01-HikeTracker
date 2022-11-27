@@ -1,9 +1,1 @@
-POST http://localhost:3001/sessions/new HTTP/1.1
-Content-Type: application/json
-
-{
-  "Id": "b@polito.it",
-  "Hash": "063307bf9dc406145a39486fca06cadaeb205330854ea48d56d952b67912bb2e",
-  "Salt": "4532e6a5736cfd8e21b0c9c324c5e62e",
-  "Role": "H"
-}
+GET http://localhost:3001/verify?Id=giuseppecaruso0990@gmail.com&code=1234 HTTP/1.1

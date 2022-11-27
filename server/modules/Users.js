@@ -26,10 +26,10 @@ exports.populateUsers =async()=>{
 
 }
 
-exports.register=(Hash, Salt, Id, Role)=>{
+exports.register=(Hash, Salt, Id, Role, code)=>{
     return new Promise( async (resolve, reject) => {
-        const sql = "INSERT INTO Users (Hash, Salt, Id, Role) VALUES(?, ?, ?, ?)";
-        db.run(sql, [Hash, Salt, Id, Role], function(err){
+        const sql = "INSERT INTO Users (Hash, Salt, Id, Role, code, verified) VALUES(?, ?, ?, ?, ?, ?)";
+        db.run(sql, [Hash, Salt, Id, Role, code, 0], function(err){
             if(err)
                 reject(err);
             else
@@ -46,5 +46,44 @@ exports.emptyUsers=()=>{
           else
               resolve('Users emptied');
       });
+    })
+  }
+
+exports.checkVerificationCode=(code, Id)=>{
+    return new Promise(async (resolve, reject) => {
+        const sql = 'SELECT * FROM Users WHERE Id = ?';
+        db.get(sql, [Id], (err, rows) => {
+          if (err) {
+            reject(err);
+          }
+          if(rows.code == code && rows.code != 0)
+            resolve(rows);
+          reject("invalid code");
+        });
+    })
+  }
+
+  exports.setVerificationCode=(code, Id)=>{
+    return new Promise(async (resolve, reject) => {
+        const sql = 'UPDATE Users SET code = ? WHERE Id = ?';
+        db.run(sql, [code, Id],function(err){
+            if(err)
+                reject(err);
+            else
+                resolve('verification code set');
+        });
+    })
+  }
+
+  exports.setVerified=(Id)=>{
+    console.log(Id);
+    return new Promise(async (resolve, reject) => {
+        const sql = 'UPDATE Users SET verified = ? WHERE Id = ?';
+        db.run(sql, [1, Id],function(err){
+            if(err)
+                reject(err);
+            else
+                resolve('User verified correctly');
+        });
     })
   }

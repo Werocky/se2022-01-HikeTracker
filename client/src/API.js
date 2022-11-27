@@ -330,7 +330,6 @@ async function getUserInfo() {
 }
 
 async function register(credentials) {
-  console.log(credentials);
   const response = await fetch((APIURL + '/sessions/new'), {
     method: 'POST',
     body: JSON.stringify({
@@ -344,6 +343,29 @@ async function register(credentials) {
     }
   });
   return response.ok ? true : false;
+}
+
+async function verify() {
+  const currentLocation = window.location.href;
+  console.log(currentLocation);
+  const params = currentLocation.split('?')[1];
+  const val = params.split('&')[0];
+  const Id = val.split('=')[1];
+  const val2 = params.split('&')[1];
+  const code = val2.split('=')[1];
+  console.log(Id, code);
+  try {
+    const response = await fetch(APIURL + '/verify' + '?' + params, {
+      method: 'GET',
+    });
+    const result = await response.json();
+    if (response.ok)
+      return result
+    else
+      throw result;
+  } catch (err) {
+    throw err;
+  }
 }
 
 const API = {
@@ -364,6 +386,7 @@ const API = {
   deleteParkingLot,
   getHutsFilters,
   getHutsLocations,
-  addHike
+  addHike,
+  verify
 };
 export default API;

@@ -12,6 +12,7 @@ import AddHike from './Layout-components/AddHike';
 import ProfilePage from './Layout-components/ProfilePage';
 import HutsPage from './Layout-components/Huts-components/HutsPage';
 import ParkingForm from './Layout-components/ParkingForm';
+import VerifiedMessage from './Layout-components/VerificationPage';
 
 function App() {
 
@@ -95,6 +96,9 @@ function AppLayout(props) {
       } />
       <Route path='/addParkingLot' element={
         <ParkingForm />
+      } />
+      <Route path='/verify' element={
+        < VerifiedMessage />
       } />
     </Routes>
   );

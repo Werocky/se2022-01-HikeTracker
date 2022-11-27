@@ -2,6 +2,7 @@
 const db = require('./DB').db;
 const crypto = require('crypto');
 var bcrypt = require('bcrypt');
+let transporter = require('./mail');
 
 exports.checkCredentials = (Id, password) => {
     return new Promise((resolve, reject) => {
