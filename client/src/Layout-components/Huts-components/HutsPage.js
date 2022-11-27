@@ -17,7 +17,7 @@ function HutsPage(props) {
         <Container fluid className={'vh-100'} >
         <p></p>
         <Row>
-          <SearchHuts setHuts={setHuts} setLoading={setLoading} />
+          <SearchHuts setHuts={props.setHuts} setLoading={setLoading} />
         </Row>
         {!loading &&
           <Row>
