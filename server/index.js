@@ -64,14 +64,6 @@ const isLoggedIn = (req, res, next) => {
   return res.status(401).json({ error: 'not authenticated' });
 }
 
-const isLocalGuideLoggedIn = (req, res, next) => {
-  if (req.isAuthenticated() && req.user.Role == 'L')
-    return next();
-
-  return res.status(401).json({ error: 'not authenticated' });
-}
-
-
 /*** Ending setting up passport***/
 
 // init express
@@ -544,11 +536,12 @@ app.get('/hutsLocations', async (req,res) => {
 })
 
 //add and modify hut description
-app.put('/setHutDescription', isLocalGuideLoggedIn,[
+app.put('/setHutDescription', isLoggedIn,[
   check('Description').notEmpty(),
   check('RefPointID').notEmpty(),
 ],
   async (req, res) => {
+    if(req.user.Role !== 'L') return res.status(401).json({error: 'Unauthorized'});
     const errors = validationResult(res);
     if (!errors.isEmpty()) {
       return res.status(422).json({ error: 'cannot process request' });

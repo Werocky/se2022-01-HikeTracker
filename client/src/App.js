@@ -16,9 +16,10 @@ import VerifiedMessage from './Layout-components/VerificationPage';
 
 function App() {
 
+  const [huts, setHuts] = useState([]);
   const [auth, setAuth] = useState({  // login information
     login: false,
-    user: { role: '' },
+    user: { Role: '' },
   });
 
   const login = async (email, password) => {
@@ -33,7 +34,7 @@ function App() {
     await API.logOut();
     setAuth({
       login: false,
-      user: { role: '' },
+      user: { Role: '' },
     })
     navigate('/');
   };
@@ -52,13 +53,18 @@ function App() {
         });
       }
     };
+    const loadHuts = async () => {
+      const huts = await API.getHutsFilters();
+      setHuts(() => huts);
+    }
     checkAuth();
+    loadHuts();
   }, []);
 
   return (
     <BrowserRouter>
       <AuthContext.Provider value={auth}>   {/* this is used to pass user information*/}
-        <AppLayout login={login} logout={logout} register={register} setLogged={setAuth} />
+        <AppLayout login={login} logout={logout} register={register} setLogged={setAuth} huts={huts} setHuts={setHuts}/>
       </AuthContext.Provider>
     </BrowserRouter>
   );
@@ -66,8 +72,6 @@ function App() {
 
 function AppLayout(props) {
   const auth = useContext(AuthContext);   // contains user information 
-
-
 
   return (
     <Routes>
@@ -92,7 +96,7 @@ function AppLayout(props) {
         <ProfilePage logout={props.logout} />
       } />
       <Route path='/huts' element={
-        <HutsPage logout={props.logout} />
+        <HutsPage logout={props.logout} huts={props.huts} setHuts={props.setHuts}/>
       } />
       <Route path='/addParkingLot' element={
         <ParkingForm />

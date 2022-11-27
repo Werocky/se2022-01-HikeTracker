@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState} from "react";
 import { Form, Row, Col, Button } from "react-bootstrap";
 import API from "../../API";
 
@@ -6,7 +6,6 @@ function SearchHuts(props) {
 
   const [locationList, setLocationList] = useState(undefined);
   const [loading, setLoading] = useState(true);
-
   const [locType, setLocType] = useState('');
   const [locVal, setLocVal] = useState('');
   const [whenOpen, setWhenOpen] = useState('');

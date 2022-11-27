@@ -31,7 +31,7 @@ exports.getUserbyId = (id) => {
           else if (row === undefined)
             resolve({error: 'User not found.'});
           else {
-            const user = {Id: row.Id, role: row.Role}
+            const user = {Id: row.Id, Role: row.Role}
             resolve(user);
           }
       });
