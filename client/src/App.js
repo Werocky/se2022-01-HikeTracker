@@ -16,7 +16,6 @@ import VerifiedMessage from './Layout-components/VerificationPage';
 
 function App() {
 
-  const [huts, setHuts] = useState([]);
   const [auth, setAuth] = useState({  // login information
     login: false,
     user: { Role: '' },
@@ -53,17 +52,13 @@ function App() {
         });
       }
     };
-    const loadHuts = async () => {
-      const huts = await API.getHutsFilters();
-      setHuts(() => huts);
-    }
     checkAuth();
   }, []);
 
   return (
     <BrowserRouter>
       <AuthContext.Provider value={auth}>   {/* this is used to pass user information*/}
-        <AppLayout login={login} logout={logout} register={register} setLogged={setAuth} huts={huts} setHuts={setHuts}/>
+        <AppLayout login={login} logout={logout} register={register} setLogged={setAuth}/>
       </AuthContext.Provider>
     </BrowserRouter>
   );
@@ -95,7 +90,7 @@ function AppLayout(props) {
         <ProfilePage logout={props.logout} />
       } />
       <Route path='/huts' element={
-        <HutsPage logout={props.logout} huts={props.huts} setHuts={props.setHuts}/>
+        <HutsPage logout={props.logout}/>
       } />
       <Route path='/addParkingLot' element={
         <ParkingForm />

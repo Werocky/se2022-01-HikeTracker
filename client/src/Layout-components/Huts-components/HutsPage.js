@@ -8,7 +8,7 @@ import NavigationBar from "../Navigationbar";
 import SearchHuts from "./SearchHuts";
 
 function HutsPage(props) {
-
+  const [huts, setHuts] = useState([]);
   const [loading, setLoading] = useState(true);
 
   return (
@@ -17,11 +17,11 @@ function HutsPage(props) {
         <Container fluid className={'vh-100'} >
         <p></p>
         <Row>
-          <SearchHuts setHuts={props.setHuts} setLoading={setLoading} />
+          <SearchHuts setHuts={setHuts} setLoading={setLoading} />
         </Row>
         {!loading &&
           <Row>
-            <DisplayHuts huts={props.huts}/>
+            <DisplayHuts huts={huts}/>
           </Row>
         }
       </Container>
