@@ -330,6 +330,7 @@ async function getUserInfo() {
 }
 
 async function register(credentials) {
+  console.log(credentials);
   const response = await fetch((APIURL + '/sessions/new'), {
     method: 'POST',
     body: JSON.stringify({

@@ -41,7 +41,8 @@ function RegisterForm(props) {
     bcrypt.genSalt(10, function(err, salt) {
       bcrypt.hash(password, salt, async function(err, hashedPassword) {
         const credentials = { Id: email, Role: role, Salt: salt, Hash: hashedPassword };
-        await props.register(credentials);
+        console.log(credentials);
+        await API.register(credentials);
         navigate('/'/*+ user.id*/);    
       });
   });
