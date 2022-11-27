@@ -24,8 +24,7 @@ function VerifiedMessage() {
         </p>
         <hr />
         <p className="mb-0">
-          Whenever you need to, be sure to use margin utilities to keep things
-          nice and tidy.
+          Go back to the main page to login.
         </p>
       </Alert>
     );
