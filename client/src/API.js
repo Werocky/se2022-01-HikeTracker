@@ -389,6 +389,7 @@ async function getUserInfo() {
 }
 
 async function register(credentials) {
+  console.log(credentials);
   const response = await fetch((APIURL + '/sessions/new'), {
     method: 'POST',
     body: JSON.stringify({
@@ -401,7 +402,14 @@ async function register(credentials) {
       'Content-Type': 'application/json',
     }
   });
-  return response.ok ? true : false;
+  if (response.ok) {
+    const res = await response.json();
+    return res;
+  } else {
+    const errDetail = {error: 'something went wrong with your registration!'};
+    return errDetail;
+  }
+
 }
 
 async function verify() {

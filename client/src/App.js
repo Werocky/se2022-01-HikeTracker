@@ -1,6 +1,7 @@
 import 'bootstrap/dist/css/bootstrap.min.css'
 import './App.css';
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import { Container, Row, Col, Alert } from 'react-bootstrap';
 import { useContext, useEffect, useState } from 'react';
 import AuthContext from './AuthContext'
 import MainLayout from './Layout-components/MainLayout';
@@ -16,17 +17,29 @@ import VerifiedMessage from './Layout-components/VerificationPage';
 
 function App() {
 
+  const [message, setMessage] = useState(''); //message error state
   const [auth, setAuth] = useState({  // login information
     login: false,
     user: { Role: '' },
   });
 
-  const login = async (email, password) => {
-    const user = await API.logIn(email, password)
+  function errorHandler(err){
+      {if(err.hasOwnProperty('error'))
+        setMessage(() => err.error.toString());
+        else if (err.hasOwnProperty('message'))
+        setMessage(() => err.message);
+        else
+        setMessage(() => err.toString());}
+  }
+
+  const login = (email, password) => {
+    API.logIn(email, password)
+    .then(user => {
     setAuth({
       login: true,
       user: user,
     });
+  }).catch(err => errorHandler(err));
   };
 
   const logout = async (navigate) => {
@@ -38,8 +51,10 @@ function App() {
     navigate('/');
   };
 
-  const register = async (credentials) => {
-    await API.register(credentials.email, credentials.Role, credentials.Salt, credentials.Hash)
+  const register = (credentials) => {
+    API.register(credentials)
+    .then((res) => {console.log(res);if(res.hasOwnProperty('error')) errorHandler(res); else setMessage('Registration successful! Check email for confirmation and follow the instruction.')})
+    .catch(err => errorHandler(err));
   }
 
   useEffect(() => {   // check login     
@@ -58,7 +73,7 @@ function App() {
   return (
     <BrowserRouter>
       <AuthContext.Provider value={auth}>   {/* this is used to pass user information*/}
-        <AppLayout login={login} logout={logout} register={register} setLogged={setAuth}/>
+        <AppLayout login={login} logout={logout} register={register} setLogged={setAuth} message={message} setMessage={setMessage}/>
       </AuthContext.Provider>
     </BrowserRouter>
   );
@@ -69,6 +84,12 @@ function AppLayout(props) {
   const [huts, setHuts] = useState([]);
 
   return (
+    <>
+    <Container>
+        <Row><Col>
+        {props.message ? <Alert variant='danger' onClose={() => props.setMessage('')} dismissible>{props.message}</Alert> : false}
+        </Col></Row>
+      </Container>
     <Routes>
       <Route path='/' element={
         <MainLayout
@@ -79,7 +100,7 @@ function AppLayout(props) {
         <HikeDetails logout={props.logout} />
       } />
       <Route path='/register' element={
-        <RegisterComponent register={props.register} />
+        <RegisterComponent register={props.register}/>
       } />
       <Route path='/login' element={
         <LoginComponent login={props.login} />
@@ -100,6 +121,7 @@ function AppLayout(props) {
         < VerifiedMessage />
       } />
     </Routes>
+    </>
   );
 }
 

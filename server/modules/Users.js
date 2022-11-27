@@ -40,9 +40,10 @@ exports.getUserById =(Id)=>{
           console.log('/rejected');
           reject(err);
         }
-        const users= new User(rows.Hash,rows.Salt,rows.Id,rows.Role,rows.code,rows.verified);
-
-        resolve(users);
+        if(rows === undefined) resolve('ok');
+        else
+        {const users= new User(rows.Hash,rows.Salt,rows.Id,rows.Role,rows.code,rows.verified);
+        resolve(users);}
       });
     });
 }

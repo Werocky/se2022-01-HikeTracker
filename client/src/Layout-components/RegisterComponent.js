@@ -39,10 +39,10 @@ function RegisterForm(props) {
       return; //TODO: display error in case passwords are not matching
     }
     bcrypt.genSalt(10, function(err, salt) {
+
       bcrypt.hash(password, salt, async function(err, hashedPassword) {
         const credentials = { Id: email, Role: role, Salt: salt, Hash: hashedPassword };
-        console.log(credentials);
-        await API.register(credentials);
+        props.register(credentials);
         navigate('/'/*+ user.id*/);    
       });
   });
