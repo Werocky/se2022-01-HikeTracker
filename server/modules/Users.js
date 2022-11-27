@@ -26,6 +26,19 @@ exports.getUsers =()=>{
       });
 }
 
+exports.getUserById =(Id)=>{
+  return new Promise((resolve, reject) => {
+      const sql = 'SELECT * FROM Users WHERE Id=?';
+      db.get(sql, [Id], (err, rows) => {
+        if (err) {
+          console.log('/rejected');
+          reject(err);
+        }
+        resolve(rows);
+      });
+    });
+}
+
 exports.populateUsers =async()=>{
     await this.register("$2a$10$l6NqsLb7oo8V2slf47ZCBebX4GcgnvGRv3aK288phYdTAJpOO5DMS","$2a$10$l6NqsLb7oo8V2slf47ZCBe","c@polito.it","H");
     await this.register("$2a$10$zOKLnejjPVAlIU/yTG3AauiazkEuYbWy1aMpvqw81i5MfH8TqSGZe","$2a$10$zOKLnejjPVAlIU/yTG3Aau","d@polito.it","L");

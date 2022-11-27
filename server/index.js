@@ -572,6 +572,8 @@ app.get('/sessions/current', (req, res) => {
 // creates a new user's account
 app.post('/sessions/new', async (req, res) => {
   try {
+    const isRegistered = await users.getUserById(req.body.Id);
+    if(typeof isRegistered !== 'undefined') return res.status(203).json({message: 'User registered yet'}); //if the user is registered, nothing happens
     const Hash = req.body.Hash;
     const Salt = req.body.Salt;
     const Id = req.body.Id;
