@@ -15,12 +15,12 @@ exports.addHikeRefPoints = (HikeID, RefPointID, IsStart, IsEnd) => {
   });
 };
 
-exports.getHutsAndParks = (RefPointID) =>{
+exports.getHutsAndParks = () =>{
   return new Promise(async (resolve, reject) =>{
-    const sql = 'SELECT RP.RefPointID, RP.Type, H.Name, PL.Description FROM ReferencePoints RP, ParkingLots PL, Huts H WHERE (RF.RefPointID = H.RefPointID OR RF.RefPointID = PL.ParkingID) AND (RF.Type = "hut" OR RF.Type = "parking")';
-    db.all(sql, [RefPointID], function (err, rows) {
+    const sql = 'SELECT RP.RefPointID, RP.Type, H.Name, PL.Description FROM ReferencePoints RP LEFT JOIN ParkingLots PL ON RP.RefPointID = PL.ParkingID LEFT JOIN Huts H ON RP.RefPointID = H.RefPointID WHERE (RP.Type = ? OR RP.Type = ?)';
+    db.all(sql, ["hut", "parking"], function (err, rows) {
       if(err)
-        reject(err);
+        {console.log(err); reject(err);}
       else{
         const info = rows.map((r) => ({ RefPointID: r.RefPointID, Type: r.Type, Name: r.Name, Description: r.Description }));
         console.log(info)

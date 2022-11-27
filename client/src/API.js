@@ -247,7 +247,7 @@ async function createParkingLot(description, free, coord) {
 
 async function updateParkingLot(description, parkingId, free, RefPointID, coord) {
   try {
-    const response = await fetch(APIURL + 'ParkingLots', {
+    const response = await fetch(APIURL + '/ParkingLots', {
       method: 'PUT',
       body: JSON.stringify({
         "Description": description,
@@ -269,7 +269,7 @@ async function updateParkingLot(description, parkingId, free, RefPointID, coord)
 
 async function getParkingLots() {
   try {
-    const response = await fetch(APIURL + 'ParkingLots', {
+    const response = await fetch(APIURL + '/ParkingLots', {
       method: 'GET',
     });
     const result = await response.json();
@@ -284,7 +284,7 @@ async function getParkingLots() {
 
 async function getParkingLot(id) {
   try {
-    const response = await fetch(APIURL + 'ParkingLots', {
+    const response = await fetch(APIURL + '/ParkingLots', {
       method: 'GET',
       body: JSON.stringify({
         "ParkingID": id
@@ -305,7 +305,7 @@ async function getParkingLot(id) {
 
 async function deleteParkingLot(id) {
   try {
-    const response = await fetch(APIURL + 'ParkingLots', {
+    const response = await fetch(APIURL + '/ParkingLots', {
       method: 'DELETE',
       body: JSON.stringify({
         "ParkingID": id
