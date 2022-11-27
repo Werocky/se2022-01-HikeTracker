@@ -1,5 +1,5 @@
 import 'bootstrap/dist/css/bootstrap.min.css'
-import './App.css';
+//import './App.css';
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import { useContext, useEffect, useState } from 'react';
 import AuthContext from './AuthContext'
@@ -12,6 +12,9 @@ import AddHike from './Layout-components/AddHike';
 import ProfilePage from './Layout-components/ProfilePage';
 import HutsPage from './Layout-components/Huts-components/HutsPage';
 import ParkingForm from './Layout-components/ParkingForm';
+
+import register from "./pages/Signup";
+import login from './pages/Login'
 
 function App() {
 
@@ -82,7 +85,7 @@ function AppLayout(props) {
         <RegisterComponent register={props.register} />
       } />
       <Route path='/login' element={
-        <LoginComponent login={props.login} />
+        < LoginComponent  login={props.login} />
       } />
       <Route path='/addHike' element={
         <AddHike />
