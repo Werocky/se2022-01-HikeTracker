@@ -190,3 +190,16 @@ exports.getHutCountry = () => {
     })
   })
 }
+
+exports.setHutDescription = (Description, RefPointID) => {
+  return new Promise((resolve, reject) => {
+    const sql = " UPDATE Huts SET Description=? WHERE RefPointID=?;"
+    db.run(sql, [Description, RefPointID], function (err, rows) {
+      if (err)
+        reject(err);
+      else {
+        resolve({message: "Description set"});
+      }
+    })
+  })
+}

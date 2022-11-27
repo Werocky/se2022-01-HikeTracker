@@ -234,7 +234,7 @@ const filtering = async (filters, list_curr) => {
   list_prev.forEach(function (element) { list_curr.push(element) })
 }
 
-//add and modify description
+//add and modify hike description
 app.put('/setDescription', /*isLoggedIn,*/[
   check('Description').notEmpty(),
   check('HikeID').notEmpty(),
@@ -532,6 +532,26 @@ app.get('/hutsLocations', async (req,res) => {
     res.status(503).json({ error: `Error` });
   }
 })
+
+//add and modify hut description
+app.put('/setDescription', /*isLoggedIn,*/[
+  check('Description').notEmpty(),
+  check('RefPointID').notEmpty(),
+],
+  async (req, res) => {
+    const errors = validationResult(res);
+    if (!errors.isEmpty()) {
+      return res.status(422).json({ error: 'cannot process request' });
+    }
+    const Description = req.body.Description;
+    const RefPointID = req.body.RefPointID;
+    try {
+      await huts.setHutDescription(Description, RefPointID);
+      res.status(201).end();
+    } catch (err) {
+      res.status(503).json({ error: `Internal Error` });
+    }
+  });
 
 /*** Users APIs ***/
 
