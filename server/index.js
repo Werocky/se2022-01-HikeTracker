@@ -329,7 +329,6 @@ app.get('/HutsAndParks', async (req, res) =>{
   }
   try {
     const HutsAndParks = await hikeRefPoints.getHutsAndParks();
-    console.log(HutsAndParks);
     res.status(200).json(HutsAndParks);
   } catch (err) {
     res.status(503).json ({ error: 'Internal error'});

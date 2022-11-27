@@ -20,10 +20,9 @@ exports.getHutsAndParks = () =>{
     const sql = 'SELECT RP.RefPointID, RP.Type, H.Name, PL.Description FROM ReferencePoints RP LEFT JOIN ParkingLots PL ON RP.RefPointID = PL.ParkingID LEFT JOIN Huts H ON RP.RefPointID = H.RefPointID WHERE (RP.Type = ? OR RP.Type = ?)';
     db.all(sql, ["hut", "parking"], function (err, rows) {
       if(err)
-        {console.log(err); reject(err);}
+        reject(err);
       else{
         const info = rows.map((r) => ({ RefPointID: r.RefPointID, Type: r.Type, Name: r.Name, Description: r.Description }));
-        console.log(info)
         resolve(info);
       }
     })

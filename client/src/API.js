@@ -57,18 +57,11 @@ async function getHikeInfo(HikeID){
   }
 }
 
-async function getHutsAndParks(HikeID){
+async function getHutsAndParks(){
   try {
     const response = await fetch(APIURL + '/HutsAndParks', {
-      method: 'POST',
-      body: JSON.stringify({
-        "HikeID": HikeID,
-      }),
-      headers: {
-        'Content-Type': 'application/json',
-      },
+      method: 'GET',
     });
-    console.log(response)
     const info = await response.json();
     if(response.ok)
       return info;

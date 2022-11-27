@@ -28,12 +28,11 @@ function HikeDetails(props) {
         const gpxObj = await API.getPointsHike(params.hikeID);
         setGpxData(gpxObj);
         console.log(gpxObj[0].lat + "\t" + gpxObj[0].lon + "\n" + gpxObj.at(-1).lat + "\t" + gpxObj.at(-1).lon);
+
+        const hikeInfo = await API.getHutsAndParks(params.hikeID);
+        setLocations(hikeInfo);
       }
 
-      //NOT WORKING FOR WHATEVER REASON
-      // const hikeInfo = await API.getHutsAndParks(params.hikeID);
-      // setLocations(hikeInfo);
-      // console.log(hikeInfo);
       setLoading(false);
     }
     try {
@@ -43,8 +42,19 @@ function HikeDetails(props) {
     }
   }, [params.hikeID, auth.login])
 
-  function handleSubmit(){
-    //TODO: handle data and submit to the server to store into db
+  async function handleSubmit(){
+    const hike = params.hikeID;
+    const refStart = startSelection;
+    const refEnd = endSelection;
+    const startName = locations.find((location) => location.RefPointID === refStart);
+    const endName = locations.find((location) => location.RefPointID === refEnd);
+
+    try {
+      await API.setStartEndPoints(hike, refStart, refEnd, startName, endName);
+      window.location.history(0);
+    } catch (err) {
+      throw err;
+    }
   }
 
   return (
@@ -100,7 +110,7 @@ function HikeDetails(props) {
 
             </Row>
           }
-          {!loading && auth.user && auth.user.Role === 'H' && <Form onSubmit={handleSubmit}>
+          {!loading && auth.user && auth.user.Role === 'L' && <Form onSubmit={handleSubmit}>
             <Row>
               <Col>
                   <Form.Group className='mb-3' controlId='StartPoint'>
@@ -109,8 +119,13 @@ function HikeDetails(props) {
                     setStartSelection(event.target.value)
                   }}>
                   <option>Select the start point of the hike</option>
-                  {startSelection && locations.map((location) =>{
-                    return <option key={location} value={location}></option>
+                  {locations.map((location) =>{
+                    if(location.Name !== null){
+                      return <option key={location.RefPointID} value={location.Name}>{location.Name}</option>
+                    }
+                    if(location.Description !== null){
+                      return <option key={location.RefPointID} value={location.Description}>{location.Description}</option>
+                    }
                   })}
                   </Form.Control>
                   </Form.Group> 
@@ -124,8 +139,13 @@ function HikeDetails(props) {
                     setEndSelection(event.target.value)
                   }}>
                   <option>Select the end point of the hike</option>
-                  {endSelection && locations.map((location) =>{
-                    return <option key={location} value={location}></option>
+                  {locations.map((location) =>{
+                    if(location.Name !== null){
+                      return <option key={location.RefPointID} value={location.Name}>{location.Name}</option>
+                    }
+                    if(location.Description !== null){
+                      return <option key={location.RefPointID} value={location.Description}>{location.Description}</option>
+                    }
                   })}
                   </Form.Control>
                   </Form.Group> 
