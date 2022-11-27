@@ -1,4 +1,4 @@
-import 'bootstrap/dist/css/bootstrap.min.css'
+//import 'bootstrap/dist/css/bootstrap.min.css'
 //import './App.css';
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import { useContext, useEffect, useState } from 'react';
@@ -13,8 +13,12 @@ import ProfilePage from './Layout-components/ProfilePage';
 import HutsPage from './Layout-components/Huts-components/HutsPage';
 import ParkingForm from './Layout-components/ParkingForm';
 
-import register from "./pages/Signup";
-import login from './pages/Login'
+import Register from "./pages/Signup";
+import Login from './pages/Login'
+import "./style.css"
+import "tailwindcss/lib/css/preflight.css"
+import AnimationRevealPage from "./helpers/AnimationRevealPage";
+import Hero from "./components/hero/FullWidthWithImage";
 
 function App() {
 
@@ -82,10 +86,12 @@ function AppLayout(props) {
         <HikeDetails logout={props.logout} />
       } />
       <Route path='/register' element={
-        <RegisterComponent register={props.register} />
+              <Register/>
+        // <RegisterComponent register={props.register} />
       } />
       <Route path='/login' element={
-        < LoginComponent  login={props.login} />
+          <Login/>
+        // < LoginComponent  login={props.login} />
       } />
       <Route path='/addHike' element={
         <AddHike />
