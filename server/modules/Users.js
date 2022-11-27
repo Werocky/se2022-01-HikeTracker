@@ -2,13 +2,14 @@
 
 const db = require('./DB').db;
 
-class user {
-  constructor(Hash, Salt, Id, Role, code){
+class User {
+  constructor(Hash, Salt, Id, Role, code, verified){
     this.Hash=Hash;
     this.Salt=Salt;
     this.Id=Id;
     this.Role=Role;
     this.code=code;
+    this.verified=verified;
   }
 }
 
@@ -16,12 +17,17 @@ exports.getUsers =()=>{
     return new Promise((resolve, reject) => {
         const sql = 'SELECT * FROM Users';
         db.all(sql, [], (err, rows) => {
-  
+       
           if (err) {
             console.log('/rejected');
             reject(err);
+          }else{
+            
+            const userList = rows.map(user => new User(user.Hash, user.Salt, user.Id, user.Role, user.code,user.verified));
+            
+            resolve(userList);
           }
-          resolve(rows);
+          
         });
       });
 }
@@ -34,7 +40,9 @@ exports.getUserById =(Id)=>{
           console.log('/rejected');
           reject(err);
         }
-        resolve(rows);
+        const users= new User(rows.Hash,rows.Salt,rows.Id,rows.Role,rows.code,rows.verified);
+
+        resolve(users);
       });
     });
 }
@@ -99,7 +107,6 @@ exports.checkVerificationCode=(code, Id)=>{
   }
 
   exports.setVerified=(Id)=>{
-    console.log(Id);
     return new Promise(async (resolve, reject) => {
         const sql = 'UPDATE Users SET verified = ? WHERE Id = ?';
         db.run(sql, [1, Id],function(err){

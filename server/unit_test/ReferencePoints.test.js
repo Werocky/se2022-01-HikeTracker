@@ -80,5 +80,11 @@ describe("get/Add reference points",()=>{
        
 
     });
+    ////// 
+    it.skip("Get HikeInfo", async()=>{
+        await refPts.addReferencePoint(1,1,1,"hut");
+        await expect(refPts.getLastRefPointID()).resolves.toEqual(1);
+        await expect(refPts.getHikeInfo(1)).resolves.not.toEqual();
+    })
 
 });
