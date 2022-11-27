@@ -347,13 +347,7 @@ async function register(credentials) {
 
 async function verify() {
   const currentLocation = window.location.href;
-  console.log(currentLocation);
   const params = currentLocation.split('?')[1];
-  const val = params.split('&')[0];
-  const Id = val.split('=')[1];
-  const val2 = params.split('&')[1];
-  const code = val2.split('=')[1];
-  console.log(Id, code);
   try {
     const response = await fetch(APIURL + '/verify' + '?' + params, {
       method: 'GET',
@@ -368,7 +362,7 @@ async function verify() {
   }
 }
 
-function setDescription(Description, RefPointID) {
+function setHutDescription(Description, RefPointID) {
   return new Promise((resolve, reject) => {
     fetch((APIURL + '/setHutDescription'), {
       method: 'PUT',
@@ -409,6 +403,6 @@ const API = {
   getHutsLocations,
   addHike,
   verify,
-  setDescription
+  setHutDescription
 };
 export default API;
