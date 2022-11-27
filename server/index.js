@@ -534,7 +534,7 @@ app.get('/hutsLocations', async (req,res) => {
 })
 
 //add and modify hut description
-app.put('/setDescription', /*isLoggedIn,*/[
+app.put('/setHutDescription', /*isLoggedIn,*/[
   check('Description').notEmpty(),
   check('RefPointID').notEmpty(),
 ],
