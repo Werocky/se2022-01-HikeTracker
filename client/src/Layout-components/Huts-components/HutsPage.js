@@ -1,13 +1,17 @@
-import { useEffect, useState } from "react";
-import { Container, Row, Col, Button, Card } from "react-bootstrap";
+'use strict';
+import { useContext, useEffect, useState } from "react";
+import { Container, Row, Col, Button, Card, Form } from "react-bootstrap";
+import { useNavigate } from 'react-router-dom';
 import API from "../../API";
+import AuthContext from "../../AuthContext";
 import NavigationBar from "../Navigationbar";
 import SearchHuts from "./SearchHuts";
 
 function HutsPage(props) {
 
-  const [loading, setLoading] = useState(true);
   const [huts, setHuts] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [loaded, setLoaded] = useState(false);
 
   return (
     <>
@@ -19,7 +23,7 @@ function HutsPage(props) {
         </Row>
         {!loading &&
           <Row>
-            <DisplayHuts huts={huts} />
+            <DisplayHuts huts={huts}/>
           </Row>
         }
       </Container>
@@ -42,7 +46,17 @@ function DisplayHuts(props) {
 }
 
 function HutCard(props) {
+  const auth = useContext(AuthContext);
   const hut = props.hut;
+  const [descr, setDescr] = useState('');
+  const navigate = useNavigate();
+  
+  const handleSave = (event) => {
+    event.preventDefault();
+    API.setHutDescription(descr, props.hut.RefPointID).then(() => {navigate('/huts')}).catch(err => console.log(err));
+    navigate('/huts');
+  }
+
   return (
     <Card style={{ width: '18rem' }} className="flex-fill">
       <Card.Header>
@@ -77,6 +91,19 @@ function HutCard(props) {
         </Row>
         <Row>
           {hut.Description}
+        </Row>
+        <Row>
+        {auth.user.Role == 'L' ? <>
+          <Form.Control
+            id="description" onChange={ev => setDescr(ev.target.value)}
+          />
+          <Form.Text id="descriptionhelp" muted>
+            Insert here a description for the current hut.
+          </Form.Text>
+        </>: <></>}
+          {auth.user.Role == 'L' ? <Col>
+          <Button variant="secondary" onClick={handleSave} >Set Description</Button>
+          </Col> : <></>}
         </Row>
       </Card.Body>
     </Card>

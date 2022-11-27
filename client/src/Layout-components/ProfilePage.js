@@ -32,6 +32,7 @@ function ProfilePage(props) {
           {auth.user.Role === "L" &&
             <Button onClick={() => { navigate('/addHike') }}>New Hike</Button>
           }
+          <Button onClick={() => { navigate('/') }}>Home Page</Button>
         </Col>
       </Row>
     </Container>

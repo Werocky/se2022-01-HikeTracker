@@ -411,6 +411,44 @@ async function register(credentials) {
   return response.ok ? true : false;
 }
 
+async function verify() {
+  const currentLocation = window.location.href;
+  const params = currentLocation.split('?')[1];
+  try {
+    const response = await fetch(APIURL + '/verify' + '?' + params, {
+      method: 'GET',
+    });
+    const result = await response.json();
+    if (response.ok)
+      return result
+    else
+      throw result;
+  } catch (err) {
+    throw err;
+  }
+}
+
+function setHutDescription(Description, RefPointID) {
+  return new Promise((resolve, reject) => {
+    fetch((APIURL + '/setHutDescription'), {
+      method: 'PUT',
+      credentials: 'include',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ Description: Description, RefPointID: RefPointID }),
+    }).then((response) => {
+      if (response.ok) {
+        resolve(null);
+      } else {
+        response.json()
+          .then((obj) => { reject(obj); })
+          .catch(() => { reject({ error: "Cannot parse server response." }) });
+      }
+    }).catch(() => { reject({ error: "Cannot communicate with the server." }) });
+  });
+}
+
 const API = {
   getHikes,
   logIn,
@@ -432,6 +470,8 @@ const API = {
   addHike,
   getHikeInfo,
   getHutsAndParks,
-  setStartEndPoints
+  setStartEndPoints,
+  verify,
+  setHutDescription
 };
 export default API;

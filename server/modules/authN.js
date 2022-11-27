@@ -2,6 +2,7 @@
 const db = require('./DB').db;
 const crypto = require('crypto');
 var bcrypt = require('bcrypt');
+let transporter = require('./mail');
 
 exports.checkCredentials = (Id, password) => {
     return new Promise((resolve, reject) => {
@@ -30,7 +31,7 @@ exports.getUserbyId = (id) => {
           else if (row === undefined)
             resolve({error: 'User not found.'});
           else {
-            const user = {Id: row.Id, role: row.Role}
+            const user = {Id: row.Id, Role: row.Role}
             resolve(user);
           }
       });

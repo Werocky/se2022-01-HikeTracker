@@ -22,6 +22,7 @@ const { builtinModules } = require('module');
 const { createParkingLot, updateParkingLot, getParkingLots, getParkingLot, deleteParkingLot, getLastParkingID } = require('./modules/ParkingLot.js');
 const { addReferencePoint, updateReferencePoint } = require('./modules/ReferencePoints.js');
 const huts = require('./modules/Huts');
+const mail = require('./modules/mail');
 
 
 /*** Set up Passport ***/
@@ -233,7 +234,7 @@ const filtering = async (filters, list_curr) => {
   list_prev.forEach(function (element) { list_curr.push(element) })
 }
 
-//add and modify description
+//add and modify hike description
 app.put('/setDescription', /*isLoggedIn,*/[
   check('Description').notEmpty(),
   check('HikeID').notEmpty(),
@@ -484,6 +485,22 @@ app.post('/ParkingLots',
     }
 });
 
+//verification path
+app.get('/verify', /*isLoggedIn,*/[],
+  async (req, res) => {
+    const errors = validationResult(res);
+    if (!errors.isEmpty()) {
+      return res.status(422).json({ error: 'cannot process request' });
+    }
+    try {
+      await users.checkVerificationCode(req.query.code, req.query.Id);
+      await users.setVerified(req.query.Id);
+      res.status(201).json({message: 'Correctly verified'});
+    } catch (err) {
+      res.status(503).json({ error: `Internal Error` });
+    }
+  });
+
 //DELETE
 //delete parking lot
 app.post('/ParkingLots',
@@ -509,6 +526,7 @@ app.post('/hutsFilters', async (req, res) => {
   if (!errors.isEmpty()) {
     return res.status(422).json({ error: 'cannot process request' });
   }
+  console.log(req.body);
   const name = req.body.name;
   const loc = req.body.location;
   const WhenOpen = req.body.WhenOpen
@@ -519,6 +537,7 @@ app.post('/hutsFilters', async (req, res) => {
     res.status(200).json(result);
 
   } catch (err) {
+    console.log(err);
     res.status(503).json({ error: `Error` });
   }
 });
@@ -546,6 +565,27 @@ app.get('/hutsLocations', async (req,res) => {
     res.status(503).json({ error: `Error` });
   }
 })
+
+//add and modify hut description
+app.put('/setHutDescription', isLoggedIn,[
+  check('Description').notEmpty(),
+  check('RefPointID').notEmpty(),
+],
+  async (req, res) => {
+    if(req.user.Role !== 'L') return res.status(401).json({error: 'Unauthorized'});
+    const errors = validationResult(res);
+    if (!errors.isEmpty()) {
+      return res.status(422).json({ error: 'cannot process request' });
+    }
+    const Description = req.body.Description;
+    const RefPointID = req.body.RefPointID;
+    try {
+      await huts.setHutDescription(Description, RefPointID);
+      res.status(201).end();
+    } catch (err) {
+      res.status(503).json({ error: `Internal Error` });
+    }
+  });
 
 /*** Users APIs ***/
 
@@ -586,11 +626,15 @@ app.get('/sessions/current', (req, res) => {
 // creates a new user's account
 app.post('/sessions/new', async (req, res) => {
   try {
+    const isRegistered = await users.getUserById(req.body.Id);
+    if(typeof isRegistered !== 'undefined') return res.status(203).json({message: 'User registered yet'}); //if the user is registered, nothing happens
     const Hash = req.body.Hash;
     const Salt = req.body.Salt;
     const Id = req.body.Id;
     const Role = req.body.Role;
-    const result = await users.register(Hash, Salt, Id, Role);
+    const verificationCode = 1234; //static value, logic needed
+    const result = await users.register(Hash, Salt, Id, Role, verificationCode, 0);
+    mail.sendConfirmationMail(req.body.Id, verificationCode);
     return res.status(200).json(result);
   } catch (err) {
     return res.status(500).json(err);
