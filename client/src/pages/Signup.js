@@ -67,7 +67,7 @@ export default ({
                     <span className="text">{submitButtonText}</span>
                   </SubmitButton>
                   <p tw="mt-6 text-xs text-gray-600 text-center">
-                    I agree to abide by treact's{" "}
+                    I agree to abide by Hike-Tracker's{" "}
                     <a href={tosUrl} tw="border-b border-gray-500 border-dotted">
                       Terms of Service
                     </a>{" "}
@@ -79,7 +79,7 @@ export default ({
 
                   <p tw="mt-8 text-sm text-gray-600 text-center">
                     Already have an account?{" "}
-                    <a href={signInUrl} tw="border-b border-gray-500 border-dotted">
+                    <a href="/login" tw="border-b border-gray-500 border-dotted">
                       Sign In
                     </a>
                   </p>

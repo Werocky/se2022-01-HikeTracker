@@ -71,7 +71,7 @@ export default ({
                 </p>
                 <p tw="mt-8 text-sm text-gray-600 text-center">
                   Dont have an account?{" "}
-                  <a href={signupUrl} tw="border-b border-gray-500 border-dotted">
+                  <a href= "/register" tw="border-b border-gray-500 border-dotted">
                     Sign Up
                   </a>
                 </p>
