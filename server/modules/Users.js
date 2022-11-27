@@ -2,6 +2,16 @@
 
 const db = require('./DB').db;
 
+class user {
+  constructor(Hash, Salt, Id, Role, code){
+    this.Hash=Hash;
+    this.Salt=Salt;
+    this.Id=Id;
+    this.Role=Role;
+    this.code=code;
+  }
+}
+
 exports.getUsers =()=>{
     return new Promise((resolve, reject) => {
         const sql = 'SELECT * FROM Users';
