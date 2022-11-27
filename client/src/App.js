@@ -45,6 +45,7 @@ function App() {
 
   useEffect(() => {   // check login     
     const checkAuth = async () => {
+      console.log("fatto");
       const user = await API.getUserInfo();
       if (user) {
         setAuth({
