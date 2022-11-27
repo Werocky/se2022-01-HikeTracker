@@ -11,7 +11,7 @@ import { useNavigate } from 'react-router-dom';
 import "../style.css"
 import "tailwindcss/lib/css/preflight.css"
 import AnimationRevealPage from "../helpers/AnimationRevealPage"
-import Hero from "../components/hero/FullWidthWithImage"
+import Hero from "../components/hero/TwoColumnWithFeaturesAndTestimonial"
 
 function MainLayout(props) {
 

@@ -2,14 +2,14 @@ import React from "react";
 import styled from "styled-components";
 import tw from "twin.macro";
 import { css } from "styled-components/macro"; //eslint-disable-line
-import HeaderBase, { NavLinks, NavLink, PrimaryLink } from "components/headers/light.js";
-import { SectionHeading } from "components/misc/Headings.js";
-import { SectionDescription } from "components/misc/Typography.js";
-import { PrimaryButton as PrimaryButtonBase } from "components/misc/Buttons.js";
-import { Container, ContentWithVerticalPadding } from "components/misc/Layouts.js";
+import HeaderBase, { NavLinks, NavLink, PrimaryLink } from "../headers/light.js";
+import { SectionHeading } from "../misc/Headings.js";
+import { SectionDescription } from "../misc/Typography.js";
+import { PrimaryButton as PrimaryButtonBase } from "../misc/Buttons.js";
+import { Container, ContentWithVerticalPadding } from "../misc/Layouts.js";
 import { ReactComponent as CheckboxIcon } from "feather-icons/dist/icons/check-circle.svg";
-import { ReactComponent as QuotesLeftIconBase } from "images/quotes-l.svg"
-import { ReactComponent as SvgDecoratorBlob1 } from "images/dot-pattern.svg"
+import { ReactComponent as QuotesLeftIconBase } from "../../images/quotes-l.svg"
+import { ReactComponent as SvgDecoratorBlob1 } from "../../images/dot-pattern.svg"
 
 const Header = tw(HeaderBase)`max-w-none`;
 const Row = tw.div`flex flex-col lg:flex-row justify-between items-center lg:pt-16 max-w-screen-2xl mx-auto sm:px-8`;
@@ -37,34 +37,29 @@ const CustomerCompany = tw.p`mt-1 text-sm text-gray-500`
 
 
 export default ({
-  heading = "Better, Faster and Cheaper Cloud.",
-  description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.",
-  imageSrc = "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=634&q=80",
+  heading = "Find Perfect Hikes anywhere you go.",
+  description = "Inspiration and guidance for wherever your trail may lead. Enjoy the breath taking view of mountains.",
+  imageSrc = "https://images.thenorthface.com/is/image/TheNorthFaceBrand/activities-hiking?",
   imageDecoratorBlob = true,
-  primaryButtonUrl = "https://google.com",
-  primaryButtonText = "Get Started",
+  primaryButtonText ="Search Hikes",
   buttonRounded = true,
-  features = ["Available in 7 Locations", "Premium Internet Backbone", "99.99% Uptime SLA"],
+  features = ["Local guides", "Parking Lots", "Emergency Operations"],
   testimonial = {
-    quote: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-    customerName: "Charlotte Hale",
-    customerCompany: "Delos Inc."
+    quote: "  To walk in nature is to witness a thousand miracles.",
+    customerName: " - MARY DAVIS",
   }
 }) => {
   const buttonRoundedCss = buttonRounded && tw`rounded-full`;
   const navLinks = [
     <NavLinks key={1}>
-      <NavLink href="/#">About</NavLink>
-      <NavLink href="/#">Blog</NavLink>
-      <NavLink href="/#">Pricing</NavLink>
-      <NavLink href="/#">Contact Us</NavLink>
-      <NavLink href="/#">Testimonials</NavLink>
+      <NavLink href="/hikes">Hikes</NavLink>
+      <NavLink href="/huts">Huts</NavLink>
     </NavLinks>,
     <NavLinks key={2}>
-      <NavLink href="/#" tw="lg:ml-12!">
+      <NavLink href="/login" tw="lg:ml-12!">
         Login
       </NavLink>
-      <PrimaryLink css={buttonRoundedCss} href="/#">
+      <PrimaryLink css={buttonRoundedCss} href="/register">
         Sign Up
       </PrimaryLink>
     </NavLinks>
@@ -73,12 +68,11 @@ export default ({
     <>
       <Header links={navLinks} />
       <Container>
-        <ContentWithVerticalPadding>
           <Row>
             <TextColumn>
               <Heading>{heading}</Heading>
               <Description>{description}</Description>
-              <PrimaryButton as="a" href={primaryButtonUrl} css={buttonRoundedCss}>
+              <PrimaryButton as="a" href="/hikes" css={buttonRoundedCss}>
                 {primaryButtonText}
               </PrimaryButton>
               <FeatureList>
@@ -104,7 +98,6 @@ export default ({
               <Offsetbackground />
             </ImageColumn>
           </Row>
-        </ContentWithVerticalPadding>
       </Container>
     </>
   );
