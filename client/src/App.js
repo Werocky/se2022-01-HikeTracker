@@ -66,6 +66,7 @@ function App() {
 
 function AppLayout(props) {
   const auth = useContext(AuthContext);   // contains user information 
+  const [huts, setHuts] = useState([]);
 
   return (
     <Routes>
@@ -90,7 +91,7 @@ function AppLayout(props) {
         <ProfilePage logout={props.logout} />
       } />
       <Route path='/huts' element={
-        <HutsPage logout={props.logout}/>
+        <HutsPage logout={props.logout} huts={huts} setHuts={setHuts}/>
       } />
       <Route path='/addParkingLot' element={
         <ParkingForm />

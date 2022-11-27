@@ -8,8 +8,18 @@ import NavigationBar from "../Navigationbar";
 import SearchHuts from "./SearchHuts";
 
 function HutsPage(props) {
-  const [huts, setHuts] = useState([]);
+
+  const [huts, setHuts] = useState(props.huts);
   const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const loadHuts = async () => {
+      const prov_huts = await API.getHutsFilters();
+      console.log(prov_huts);
+      setHuts(prov_huts);
+    }
+    loadHuts();
+  }, []);
 
   return (
     <>
