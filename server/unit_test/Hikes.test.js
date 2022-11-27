@@ -8,7 +8,7 @@ beforeAll(async() =>{
     await db.createConnection();
     await hikes.deleteHikes();
     await new Promise(process.nextTick);
-   })
+   } )
 afterAll(async()=>{
    await hikes.deleteHikes();
   // await db.populate();
@@ -30,6 +30,16 @@ describe("Get/add Hikes",()=>{
 
     test('Empty hikes db', async()=>{
         await expect(hikes.deleteHikes()).resolves.toEqual('Hikes emptied');
+    })
+
+    test("get last hike", async()=>{
+        await expect(hikes.addHike(0,0,0,0,0,0,0,0,0,0)).resolves.toEqual('New Hike inserted')
+        await expect(hikes.getHikes()).resolves.toEqual([{"Ascent":0,"Description":"0","Difficulty":"0","ExpectedTime":0,"HikeID":"0","Length":0,"End":"0","Start":"0","Title":"0"}]);
+        await expect(hikes.getLastHikeId()).resolves.toEqual(0);
+        await expect(hikes.addHike(10,0,0,0,0,0,0,0,0,0)).resolves.toEqual('New Hike inserted')
+        await expect(hikes.getLastHikeId()).resolves.toEqual(10);
+        await expect(hikes.addHike(5,0,0,0,0,0,0,0,0,0)).resolves.toEqual('New Hike inserted')
+        await expect(hikes.getLastHikeId()).resolves.toEqual(10)
     })
 });
 
@@ -338,3 +348,5 @@ describe("get Hikes by Filter",()=>{
     })
 
 });
+
+

@@ -69,14 +69,12 @@ exports.getFromType = (type) => {
 
 exports.getLastRefPointID = () => {
   return new Promise(async (resolve, reject) =>{
-    const sql = "SELECT MAX(RefPointID) FROM ReferencePoints";
-    db.run(sql, [], function (err, rows) {
+    const sql = "SELECT RefPointID FROM ReferencePoints ORDER BY RefPointID DESC LIMIT 1";
+    db.get(sql,  (err, row)=> {
       if(err)
         reject(err);
       else
-        if(rows === null || rows === undefined)
-          rows = 0;
-        resolve(rows);
+        resolve(row == undefined ? 0: row.RefPointID);
     })
   })
 }

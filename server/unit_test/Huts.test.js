@@ -156,12 +156,70 @@ describe("Hut Filters",()=>{
             expect(h).toHaveLength(0);
             
         })
+    
+        
+
+
+    });
+    describe("When Open",()=>{
+        test("Location is Open expected",async()=>{
+            await expect(Huts.getHutsFilters(null,null,null,'WhenOpen',null,null)).resolves.not.toEqual(null);
+            let h= await Huts.getHutsFilters(null,null,null,'WhenOpen');
+            expect(h).toHaveLength(2);
+
+        })
+        test("open is not expected",async()=>{
+            await expect(Huts.getHutsFilters(null,null,null,'WhenNotOpen')).resolves.toEqual([]);
+            
+        })
+
+    });
+    describe("When Beds",()=>{
+        test("Location is Open expected",async()=>{
+            await expect(Huts.getHutsFilters(null,null,null,null,0,null)).resolves.not.toEqual(null);
+            let h= await Huts.getHutsFilters(null,null,null,null,0);
+            expect(h).toHaveLength(3);
+
+        })
+        test("Name is not expected",async()=>{
+            await expect(Huts.getHutsFilters(null,null,null,null,1)).resolves.toEqual([]);
+            
+        })
+
+    });
+
+    describe("When Beds",()=>{
+        test("Location is Open expected",async()=>{
+            await expect(Huts.getHutsFilters(null,null,null,null,null,1)).resolves.not.toEqual(null);
+            let h= await Huts.getHutsFilters(null,null,null,null,null,1);
+            expect(h).toHaveLength(3);
+
+        })
+        test("Name is not expected",async()=>{
+            await expect(Huts.getHutsFilters(null,null,null,null,null,-1)).resolves.toEqual([]);
+            
+        })
+
     });
     
 
 })
 
+describe("Set Hut description",()=>{
+    test("set",async()=>{
+        await Huts.emptyHuts();
+        await Huts.addHut(0, 'Name', 0, 'City', 'Province', 'Region', 'Country', 'WhenOpen', 0, 0, 'Description');
+        await expect(Huts.setHutDescription("a Description",0)).resolves.toEqual({'message': "Description set"})
+        let h= await Huts.getHuts();
+        h=h[0];
+        expect(h).toHaveProperty('Description');
+        expect(h.Description).toEqual('a Description');
+    
+    })
+   
+    
 
+});
 
 
 

@@ -100,9 +100,9 @@ exports.getHutsFilters = (name = null, locationType = null, location = null, Whe
     }
     if (avgPrice !== null) {
       if (parameters.length === 0)
-        sql += "AvgPrice = ?";
+        sql += "AvgPrice <= ?";
       else
-        sql += " AND AvgPrice = ?";
+        sql += " AND AvgPrice <= ?";
       parameters.push(avgPrice);
     }
 
