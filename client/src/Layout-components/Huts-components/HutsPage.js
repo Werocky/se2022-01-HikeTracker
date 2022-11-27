@@ -9,17 +9,9 @@ import SearchHuts from "./SearchHuts";
 
 function HutsPage(props) {
 
-  const [huts, setHuts] = useState(props.huts);
+  const [huts, setHuts] = useState([]);
   const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    const loadHuts = async () => {
-      const prov_huts = await API.getHutsFilters();
-      console.log(prov_huts);
-      setHuts(prov_huts);
-    }
-    loadHuts();
-  }, []);
+  const [loaded, setLoaded] = useState(false);
 
   return (
     <>
@@ -27,7 +19,7 @@ function HutsPage(props) {
         <Container fluid className={'vh-100'} >
         <p></p>
         <Row>
-          <SearchHuts setHuts={props.setHuts} setLoading={setLoading} />
+          <SearchHuts setHuts={setHuts} setLoading={setLoading} />
         </Row>
         {!loading &&
           <Row>

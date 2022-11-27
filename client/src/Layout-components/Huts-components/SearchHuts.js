@@ -12,7 +12,7 @@ function SearchHuts(props) {
   const [beds, setBeds] = useState(0);
   const [price, setPrice] = useState(0.0);
   const [name, setName] = useState('');
-
+  //const [huts, setHuts] = useState(props.huts);
 
   useEffect(() => {
     const loadLocation = async () => {
