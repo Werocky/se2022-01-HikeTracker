@@ -46,7 +46,7 @@ export default ({
                       <NavLink href="#">Hikes</NavLink>
                       <NavLink href="/huts">Huts</NavLink>
                       <NavLink href="/login">Login</NavLink>
-                      <NavLink href="#">Logout</NavLink>
+                      {/*<NavLink href="#">Logout</NavLink>*/}
                     </NavLinks>
                   ],
                   heading = (
