@@ -1,1 +1,7 @@
-GET http://localhost:3001/verify?Id=giuseppecaruso0990@gmail.com&code=1234 HTTP/1.1
+PUT http://localhost:3001/setHutDescription HTTP/1.1
+Content-type: application/json
+
+{
+    "RefPointID" : 0,
+    "Description" : "Il Rifugio La Riposa si trova in località Riposa, Mompantero di Susa, a 2185 m di altitudine ed è raggiungibile anche in auto.Dispone di 3 camere da 6 posti ed una camerata da 22 posti con letti a castello.Ristorante per gli ospiti con possibilità di pernottamento e in aggiunta servizio mezza pensione o pensione completa.Le tariffe variano da 15 euro per pernottamento a 40/50 euro con mezza pensione o completa."
+}

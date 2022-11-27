@@ -64,6 +64,14 @@ const isLoggedIn = (req, res, next) => {
   return res.status(401).json({ error: 'not authenticated' });
 }
 
+const isLocalGuideLoggedIn = (req, res, next) => {
+  if (req.isAuthenticated() && req.user.Role == 'L')
+    return next();
+
+  return res.status(401).json({ error: 'not authenticated' });
+}
+
+
 /*** Ending setting up passport***/
 
 // init express
@@ -234,7 +242,7 @@ const filtering = async (filters, list_curr) => {
   list_prev.forEach(function (element) { list_curr.push(element) })
 }
 
-//add and modify description
+//add and modify hike description
 app.put('/setDescription', /*isLoggedIn,*/[
   check('Description').notEmpty(),
   check('HikeID').notEmpty(),
@@ -495,6 +503,7 @@ app.post('/hutsFilters', async (req, res) => {
   if (!errors.isEmpty()) {
     return res.status(422).json({ error: 'cannot process request' });
   }
+  console.log(req.body);
   const name = req.body.name;
   const loc = req.body.location;
   const WhenOpen = req.body.WhenOpen
@@ -505,6 +514,7 @@ app.post('/hutsFilters', async (req, res) => {
     res.status(200).json(result);
 
   } catch (err) {
+    console.log(err);
     res.status(503).json({ error: `Error` });
   }
 });
@@ -532,6 +542,26 @@ app.get('/hutsLocations', async (req,res) => {
     res.status(503).json({ error: `Error` });
   }
 })
+
+//add and modify hut description
+app.put('/setHutDescription', isLocalGuideLoggedIn,[
+  check('Description').notEmpty(),
+  check('RefPointID').notEmpty(),
+],
+  async (req, res) => {
+    const errors = validationResult(res);
+    if (!errors.isEmpty()) {
+      return res.status(422).json({ error: 'cannot process request' });
+    }
+    const Description = req.body.Description;
+    const RefPointID = req.body.RefPointID;
+    try {
+      await huts.setHutDescription(Description, RefPointID);
+      res.status(201).end();
+    } catch (err) {
+      res.status(503).json({ error: `Internal Error` });
+    }
+  });
 
 /*** Users APIs ***/
 

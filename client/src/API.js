@@ -347,13 +347,7 @@ async function register(credentials) {
 
 async function verify() {
   const currentLocation = window.location.href;
-  console.log(currentLocation);
   const params = currentLocation.split('?')[1];
-  const val = params.split('&')[0];
-  const Id = val.split('=')[1];
-  const val2 = params.split('&')[1];
-  const code = val2.split('=')[1];
-  console.log(Id, code);
   try {
     const response = await fetch(APIURL + '/verify' + '?' + params, {
       method: 'GET',
@@ -366,6 +360,27 @@ async function verify() {
   } catch (err) {
     throw err;
   }
+}
+
+function setHutDescription(Description, RefPointID) {
+  return new Promise((resolve, reject) => {
+    fetch((APIURL + '/setHutDescription'), {
+      method: 'PUT',
+      credentials: 'include',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ Description: Description, RefPointID: RefPointID }),
+    }).then((response) => {
+      if (response.ok) {
+        resolve(null);
+      } else {
+        response.json()
+          .then((obj) => { reject(obj); })
+          .catch(() => { reject({ error: "Cannot parse server response." }) });
+      }
+    }).catch(() => { reject({ error: "Cannot communicate with the server." }) });
+  });
 }
 
 const API = {
@@ -387,6 +402,7 @@ const API = {
   getHutsFilters,
   getHutsLocations,
   addHike,
-  verify
+  verify,
+  setHutDescription
 };
 export default API;

@@ -68,8 +68,10 @@ exports.getHuts = () => {
 
 exports.getHutsFilters = (name = null, locationType = null, location = null, WhenOpen = null, beds = null, avgPrice = null) => {
   return new Promise(async (resolve, reject) => {
-    let sql = "SELECT * FROM Huts WHERE ";
+    let sql = "SELECT * FROM Huts";
     let parameters = [];
+
+    if(name !== null || locationType !== null || WhenOpen !== null || location !== null || beds !== null || avgPrice !== null ) sql += " WHERE ";
 
     if (name !== null) {
       sql += "Name = ?";
@@ -105,7 +107,7 @@ exports.getHutsFilters = (name = null, locationType = null, location = null, Whe
     }
 
     sql += ";"
-    // console.log(sql);
+    //console.log(sql);
     db.all(sql, parameters, function (err, rows) {
       if (err)
         reject(err);
@@ -186,6 +188,19 @@ exports.getHutCountry = () => {
       else {
         const country = rows.map((r) => (r.Country));
         resolve(country);
+      }
+    })
+  })
+}
+
+exports.setHutDescription = (Description, RefPointID) => {
+  return new Promise((resolve, reject) => {
+    const sql = " UPDATE Huts SET Description=? WHERE RefPointID=?;"
+    db.run(sql, [Description, RefPointID], function (err, rows) {
+      if (err)
+        reject(err);
+      else {
+        resolve({message: "Description set"});
       }
     })
   })
