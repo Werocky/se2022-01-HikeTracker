@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from "react";
-import { Button, Col, Container, Row } from "react-bootstrap";
+import { Button, Form, Col, Container, Row } from "react-bootstrap";
 import { useNavigate, useParams } from "react-router-dom";
 import AuthContext from "../AuthContext";
 import { MapContainer, Marker, Polyline, Popup, TileLayer, useMap } from 'react-leaflet';
@@ -12,6 +12,9 @@ function HikeDetails(props) {
   const [hike, setHike] = useState(undefined);
   const [gpxData, setGpxData] = useState(undefined);  // array of [p.lat, p.lon]
   const [loading, setLoading] = useState(true);
+  const [startSelection, setStartSelection] = useState('');
+  const [endSelection, setEndSelection] = useState('');
+  const [locations, setLocations] = useState('');
 
 
   const navigate = useNavigate();
@@ -26,8 +29,12 @@ function HikeDetails(props) {
         setGpxData(gpxObj);
         console.log(gpxObj[0].lat + "\t" + gpxObj[0].lon + "\n" + gpxObj.at(-1).lat + "\t" + gpxObj.at(-1).lon);
       }
-      setLoading(false);
 
+      //NOT WORKING FOR WHATEVER REASON
+      // const hikeInfo = await API.getHutsAndParks(params.hikeID);
+      // setLocations(hikeInfo);
+      // console.log(hikeInfo);
+      setLoading(false);
     }
     try {
       loadHike();
@@ -35,6 +42,10 @@ function HikeDetails(props) {
       //handling error
     }
   }, [params.hikeID, auth.login])
+
+  function handleSubmit(){
+    //TODO: handle data and submit to the server to store into db
+  }
 
   return (
     <>
@@ -89,6 +100,43 @@ function HikeDetails(props) {
 
             </Row>
           }
+          {!loading && auth.user && auth.user.Role === 'H' && <Form onSubmit={handleSubmit}>
+            <Row>
+              <Col>
+                  <Form.Group className='mb-3' controlId='StartPoint'>
+                  <Form.Label>Hike's start point</Form.Label>
+                  <Form.Control as="select" value={startSelection} aria-label='Start Point' onChange={(event) => {
+                    setStartSelection(event.target.value)
+                  }}>
+                  <option>Select the start point of the hike</option>
+                  {startSelection && locations.map((location) =>{
+                    return <option key={location} value={location}></option>
+                  })}
+                  </Form.Control>
+                  </Form.Group> 
+              </Col>
+            </Row>
+            <Row>
+              <Col>
+                  <Form.Group className='mb-3' controlId='EndPoint'>
+                  <Form.Label>Hike's End point</Form.Label>
+                  <Form.Control as="select" value={endSelection} aria-label='End Point' onChange={(event) => {
+                    setEndSelection(event.target.value)
+                  }}>
+                  <option>Select the end point of the hike</option>
+                  {endSelection && locations.map((location) =>{
+                    return <option key={location} value={location}></option>
+                  })}
+                  </Form.Control>
+                  </Form.Group> 
+              </Col>
+            </Row>
+            <Col>
+              <Button variant="primary" type="submit" >
+                Submit
+              </Button>
+            </Col>
+            </Form>}
           {!auth.login &&
             <Row>
               <Col>You should be logged to see the map</Col>

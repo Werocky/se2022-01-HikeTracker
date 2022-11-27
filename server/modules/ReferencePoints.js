@@ -80,3 +80,17 @@ exports.getLastRefPointID = () => {
     })
   })
 }
+
+exports.getHutsAndParkingLots = () =>{
+  return new Promise(async (resolve, reject) =>{
+    const sql = "SELECT RP.RefPointID, H.Name, PL.Description, RP.Type FROM ReferencePoints RP, ParkingLots PL Huts H WHERE RP.RefPointID = Huts.RefPointID AND PL.ParkingID = RF.HikeID AND Type = 'hut' OR Type = 'parking'";
+    db.all(sql, [], function (err, rows) {
+      if(err)
+        reject(err)
+      else{
+        const points = rows.map((r) => ({ RefPointID: r.RefPointID, Type: r.Type, Description: r.Description, Name: r.Name }));
+        resolve(points);
+      }
+    })
+  })
+}

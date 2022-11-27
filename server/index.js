@@ -293,6 +293,37 @@ function deg2rad(deg) {
 
 //UPDATE START/END POINTS
 
+app.post('/HutsAndParks', [check('HikeID').notEmpty], async (req, res) =>{
+  const errors = validationResult(res);
+  if(!errors.isEmpty()){
+    return res.status(422).json( { error: 'Cannot process request' });
+  }
+
+  const id = req.params.HikeID;
+  try {
+    const HutsAndParks = await hikeRefPoints.getHutsAndParks(id);
+    res.status(200).json(HutsAndParks);
+  } catch (err) {
+    res.status(503).json ({ error: 'Internal error'});
+  }
+})
+
+app.post('/HikeInfo', [check('HikeID').notEmpty], async (req, res) =>{
+  const errors = validationResult(res);
+  if(!errors.isEmpty()){
+    return res.status(422).json( { error: 'Cannot process request' });
+  }
+
+  const id = req.params.HikeID;
+
+  try {
+    const hikeInfo = await hikeRefPoints.getHikeInfo(id);
+    res.status(200).json(hikeInfo);
+  } catch (err) {
+    res.status(503).json ({ error: 'Internal error'})
+  }
+})
+
 app.put('setStartEndPoints',
   [check('Id').notEmpty(),
   check('StartId').notEmpty(),

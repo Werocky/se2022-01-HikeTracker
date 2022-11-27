@@ -35,6 +35,72 @@ async function getHike(HikeID) {
   }
 }
 
+async function getHikeInfo(HikeID){
+  try {
+    const response = await fetch(APIURL + '/HikeInfo', {
+      method: 'POST',
+      credentials: 'include',
+      body: JSON.stringify({
+        "HikeID": HikeID,
+      }),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+    const hikeInfo = await response.json();
+    if(response.ok)
+      return hikeInfo;
+    else
+      throw hikeInfo;
+  } catch (err) {
+    throw err;
+  }
+}
+
+async function getHutsAndParks(HikeID){
+  try {
+    const response = await fetch(APIURL + '/HutsAndParks', {
+      method: 'POST',
+      body: JSON.stringify({
+        "HikeID": HikeID,
+      }),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+    console.log(response)
+    const info = await response.json();
+    if(response.ok)
+      return info;
+    else
+      throw info;
+  } catch (err) {
+    throw err;
+  }
+}
+
+async function setStartEndPoints(HikeId, StartId, EndId, Start, End){
+  try {
+    const response = await fetch(APIURL + '/setStartEndPoints', {
+      method: 'POST',
+      body: JSON.stringify({
+        "Id": HikeId,
+        "StartId": StartId,
+        "EndId": EndId,
+        "Start": Start,
+        "End": End
+      }),
+      headers: {
+        'Content-Type': 'application/json'
+      },
+    });
+    if(!response.ok)
+      throw response;
+  } catch (err) {
+    throw err;
+  }
+}
+
 async function getFilteredHikes(minExpectedTime, maxExpectedTime, minAscent, maxAscent, Province, City, minLength, maxLength, Difficulty) {
   try {
     const response = await fetch(APIURL + '/getFilteredHikes', {
@@ -363,6 +429,9 @@ const API = {
   deleteParkingLot,
   getHutsFilters,
   getHutsLocations,
-  addHike
+  addHike,
+  getHikeInfo,
+  getHutsAndParks,
+  setStartEndPoints
 };
 export default API;

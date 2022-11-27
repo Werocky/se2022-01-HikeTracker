@@ -15,6 +15,21 @@ exports.addHikeRefPoints = (HikeID, RefPointID, IsStart, IsEnd) => {
   });
 };
 
+exports.getHutsAndParks = (RefPointID) =>{
+  return new Promise(async (resolve, reject) =>{
+    const sql = 'SELECT RP.RefPointID, RP.Type, H.Name, PL.Description FROM ReferencePoints RP, ParkingLots PL, Huts H WHERE (RF.RefPointID = H.RefPointID OR RF.RefPointID = PL.ParkingID) AND (RF.Type = "hut" OR RF.Type = "parking")';
+    db.all(sql, [RefPointID], function (err, rows) {
+      if(err)
+        reject(err);
+      else{
+        const info = rows.map((r) => ({ RefPointID: r.RefPointID, Type: r.Type, Name: r.Name, Description: r.Description }));
+        console.log(info)
+        resolve(info);
+      }
+    })
+  })
+}
+
 exports.getHikeInfo = (HikeID) =>{
   return new Promise(async (resolve, reject) =>{
     const sql = 'SELECT * FROM HikeRefPoints HRP, ReferencePoints RP, Hikes H WHERE H.HikeID = HRP.HikeID AND HRP.RefPointID = RP.RefPointID AND H.HikeID = ?';
