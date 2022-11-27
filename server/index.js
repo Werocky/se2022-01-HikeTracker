@@ -64,6 +64,14 @@ const isLoggedIn = (req, res, next) => {
   return res.status(401).json({ error: 'not authenticated' });
 }
 
+const isLocalGuideLoggedIn = (req, res, next) => {
+  if (req.isAuthenticated() && req.user.Role == 'L')
+    return next();
+
+  return res.status(401).json({ error: 'not authenticated' });
+}
+
+
 /*** Ending setting up passport***/
 
 // init express
@@ -495,6 +503,7 @@ app.post('/hutsFilters', async (req, res) => {
   if (!errors.isEmpty()) {
     return res.status(422).json({ error: 'cannot process request' });
   }
+  console.log(req.body);
   const name = req.body.name;
   const loc = req.body.location;
   const WhenOpen = req.body.WhenOpen
@@ -505,6 +514,7 @@ app.post('/hutsFilters', async (req, res) => {
     res.status(200).json(result);
 
   } catch (err) {
+    console.log(err);
     res.status(503).json({ error: `Error` });
   }
 });
@@ -534,7 +544,7 @@ app.get('/hutsLocations', async (req,res) => {
 })
 
 //add and modify hut description
-app.put('/setHutDescription', /*isLoggedIn,*/[
+app.put('/setHutDescription', isLocalGuideLoggedIn,[
   check('Description').notEmpty(),
   check('RefPointID').notEmpty(),
 ],
