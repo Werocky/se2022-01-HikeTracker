@@ -123,7 +123,7 @@ describe("Hut Filters",()=>{
 
     })
     test("No defined params",async()=>{
-        await expect(Huts.getHutsFilters()).rejects.not.toEqual(null);
+        await expect(Huts.getHutsFilters()).resolves.not.toEqual(null);
     })
     describe("Name filter",()=>{
         test("Name is expected",async()=>{

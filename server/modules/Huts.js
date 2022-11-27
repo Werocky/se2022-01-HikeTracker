@@ -107,7 +107,7 @@ exports.getHutsFilters = (name = null, locationType = null, location = null, Whe
     }
 
     sql += ";"
-    //console.log(sql);
+    
     db.all(sql, parameters, function (err, rows) {
       if (err)
         reject(err);
@@ -116,7 +116,6 @@ exports.getHutsFilters = (name = null, locationType = null, location = null, Whe
         rows.forEach(r => {
           let h = new Hut(r.RefPointID, r.Name, r.Elevation, r.City, r.Province, r.Region, r.Country, r.WhenOpen, r.Beds, r.AvgPrice, r.Description)
           huts.push(h);
-         // console.log(h);
        });
         
         resolve(huts);
