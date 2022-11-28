@@ -1,6 +1,7 @@
 import 'bootstrap/dist/css/bootstrap.min.css'
 //import './App.css';
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import { Container, Row, Col, Alert } from 'react-bootstrap';
 import { useContext, useEffect, useState } from 'react';
 import AuthContext from './AuthContext'
 import MainLayout from './Layout-components/MainLayout';
@@ -12,6 +13,8 @@ import HikeDetails from './Layout-components/HikeDetails';
 import ProfilePage from './Layout-components/ProfilePage';
 import HutsPage from './Layout-components/Huts-components/HutsPage';
 import ParkingForm from './Layout-components/ParkingForm';
+import VerifiedMessage from './Layout-components/VerificationPage';
+import HutForm from './Layout-components/AddHut';
 
 import Register from "./pages/Signup";
 import Login from './pages/Login'
@@ -24,30 +27,44 @@ import "tailwindcss/lib/css/preflight.css"
 
 function App() {
 
+  const [message, setMessage] = useState(''); //message error state
   const [auth, setAuth] = useState({  // login information
     login: false,
-    user: { role: '' },
+    user: { Role: '' },
   });
 
-  const login = async (email, password) => {
-    const user = await API.logIn(email, password)
+  function errorHandler(err){
+      {if(err.hasOwnProperty('error'))
+        setMessage(() => err.error.toString());
+        else if (err.hasOwnProperty('message'))
+        setMessage(() => err.message);
+        else
+        setMessage(() => err.toString());}
+  }
+
+  const login = (email, password) => {
+    API.logIn(email, password)
+    .then(user => {
     setAuth({
       login: true,
       user: user,
     });
+  }).catch(err => errorHandler(err));
   };
 
   const logout = async (navigate) => {
     await API.logOut();
     setAuth({
       login: false,
-      user: { role: '' },
+      user: { Role: '' },
     })
     navigate('/');
   };
 
-  const register = async (credentials) => {
-    await API.register(credentials.email, credentials.Role, credentials.Salt, credentials.Hash)
+  const register = (credentials) => {
+    API.register(credentials)
+    .then((res) => {console.log(res);if(res.hasOwnProperty('error')) errorHandler(res); else setMessage('Registration successful! Check email for confirmation and follow the instruction.')})
+    .catch(err => errorHandler(err));
   }
 
   useEffect(() => {   // check login     
@@ -66,7 +83,7 @@ function App() {
   return (
     <BrowserRouter>
       <AuthContext.Provider value={auth}>   {/* this is used to pass user information*/}
-        <AppLayout login={login} logout={logout} register={register} setLogged={setAuth} />
+        <AppLayout login={login} logout={logout} register={register} setLogged={setAuth} message={message} setMessage={setMessage}/>
       </AuthContext.Provider>
     </BrowserRouter>
   );
@@ -74,10 +91,15 @@ function App() {
 
 function AppLayout(props) {
   const auth = useContext(AuthContext);   // contains user information 
-
-
+  const [huts, setHuts] = useState([]);
 
   return (
+    <>
+    <Container>
+        <Row><Col>
+        {props.message ? <Alert variant='danger' onClose={() => props.setMessage('')} dismissible>{props.message}</Alert> : false}
+        </Col></Row>
+      </Container>
     <Routes>
       <Route path='/' element={
         <MainLayout
@@ -88,12 +110,14 @@ function AppLayout(props) {
         <HikeDetails logout={props.logout} />
       } />
 
+
       <Route path='/hikedetail' element={
           <HikeDetail />
       } />   // for test
         <Route path='/register' element={
               <Register/>
         // <RegisterComponent register={props.register} />
+
       } />
       <Route path='/login' element={
           <Login/>
@@ -106,11 +130,13 @@ function AppLayout(props) {
             <Hikes />
       } />
       <Route path='/huts' element={
+
             <Huts />
       } />
 
       <Route path='/profile/:userId' element={
         <ProfilePage logout={props.logout} />
+
       } />
       {/*<Route path='/huts' element={*/}
       {/*  <HutsPage logout={props.logout} />*/}
@@ -118,7 +144,14 @@ function AppLayout(props) {
       <Route path='/addParkingLot' element={
         <ParkingForm />
       } />
+      <Route path='/verify' element={
+        < VerifiedMessage />
+      } />
+       <Route path='/addHut' element={
+        < HutForm />
+      } />
     </Routes>
+    </>
   );
 }
 

@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState} from "react";
 import { Form, Row, Col, Button } from "react-bootstrap";
 import API from "../../API";
 
@@ -6,14 +6,13 @@ function SearchHuts(props) {
 
   const [locationList, setLocationList] = useState(undefined);
   const [loading, setLoading] = useState(true);
-
   const [locType, setLocType] = useState('');
   const [locVal, setLocVal] = useState('');
   const [whenOpen, setWhenOpen] = useState('');
   const [beds, setBeds] = useState(0);
   const [price, setPrice] = useState(0.0);
   const [name, setName] = useState('');
-
+  //const [huts, setHuts] = useState(props.huts);
 
   useEffect(() => {
     const loadLocation = async () => {

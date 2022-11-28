@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from "react";
-import { Button, Col, Container, Row } from "react-bootstrap";
+import { Button, Form, Col, Container, Row } from "react-bootstrap";
 import { useNavigate, useParams } from "react-router-dom";
 import AuthContext from "../AuthContext";
 import { MapContainer, Marker, Polyline, Popup, TileLayer, useMap } from 'react-leaflet';
@@ -12,6 +12,9 @@ function HikeDetails(props) {
   const [hike, setHike] = useState(undefined);
   const [gpxData, setGpxData] = useState(undefined);  // array of [p.lat, p.lon]
   const [loading, setLoading] = useState(true);
+  const [startSelection, setStartSelection] = useState('');
+  const [endSelection, setEndSelection] = useState('');
+  const [locations, setLocations] = useState('');
 
 
   const navigate = useNavigate();
@@ -25,9 +28,12 @@ function HikeDetails(props) {
         const gpxObj = await API.getPointsHike(params.hikeID);
         setGpxData(gpxObj);
         console.log(gpxObj[0].lat + "\t" + gpxObj[0].lon + "\n" + gpxObj.at(-1).lat + "\t" + gpxObj.at(-1).lon);
-      }
-      setLoading(false);
 
+        const hikeInfo = await API.getHutsAndParks(params.hikeID);
+        setLocations(hikeInfo);
+      }
+
+      setLoading(false);
     }
     try {
       loadHike();
@@ -35,6 +41,21 @@ function HikeDetails(props) {
       //handling error
     }
   }, [params.hikeID, auth.login])
+
+  async function handleSubmit(){
+    const hike = params.hikeID;
+    const refStart = startSelection;
+    const refEnd = endSelection;
+    const startName = locations.find((location) => location.RefPointID === refStart);
+    const endName = locations.find((location) => location.RefPointID === refEnd);
+
+    try {
+      await API.setStartEndPoints(hike, refStart, refEnd, startName, endName);
+      window.location.history(0);
+    } catch (err) {
+      throw err;
+    }
+  }
 
   return (
     <>
@@ -89,6 +110,53 @@ function HikeDetails(props) {
 
             </Row>
           }
+          {!loading && auth.user && auth.user.Role === 'L' && <Form onSubmit={handleSubmit}>
+            <Row>
+              <Col>
+                  <Form.Group className='mb-3' controlId='StartPoint'>
+                  <Form.Label>Hike's start point</Form.Label>
+                  <Form.Control as="select" value={startSelection} aria-label='Start Point' onChange={(event) => {
+                    setStartSelection(event.target.value)
+                  }}>
+                  <option>Select the start point of the hike</option>
+                  {locations.map((location) =>{
+                    if(location.Name !== null){
+                      return <option key={location.RefPointID} value={location.Name}>{location.Name}</option>
+                    }
+                    if(location.Description !== null){
+                      return <option key={location.RefPointID} value={location.Description}>{location.Description}</option>
+                    }
+                  })}
+                  </Form.Control>
+                  </Form.Group> 
+              </Col>
+            </Row>
+            <Row>
+              <Col>
+                  <Form.Group className='mb-3' controlId='EndPoint'>
+                  <Form.Label>Hike's End point</Form.Label>
+                  <Form.Control as="select" value={endSelection} aria-label='End Point' onChange={(event) => {
+                    setEndSelection(event.target.value)
+                  }}>
+                  <option>Select the end point of the hike</option>
+                  {locations.map((location) =>{
+                    if(location.Name !== null){
+                      return <option key={location.RefPointID} value={location.Name}>{location.Name}</option>
+                    }
+                    if(location.Description !== null){
+                      return <option key={location.RefPointID} value={location.Description}>{location.Description}</option>
+                    }
+                  })}
+                  </Form.Control>
+                  </Form.Group> 
+              </Col>
+            </Row>
+            <Col>
+              <Button variant="primary" type="submit" >
+                Submit
+              </Button>
+            </Col>
+            </Form>}
           {!auth.login &&
             <Row>
               <Col>You should be logged to see the map</Col>

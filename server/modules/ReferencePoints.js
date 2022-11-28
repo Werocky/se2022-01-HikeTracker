@@ -69,14 +69,26 @@ exports.getFromType = (type) => {
 
 exports.getLastRefPointID = () => {
   return new Promise(async (resolve, reject) =>{
-    const sql = "SELECT MAX(RefPointID) FROM ReferencePoints";
-    db.run(sql, [], function (err, rows) {
+    const sql = "SELECT RefPointID FROM ReferencePoints ORDER BY RefPointID DESC LIMIT 1";
+    db.get(sql,  (err, row)=> {
       if(err)
         reject(err);
       else
-        if(rows === null || rows === undefined)
-          rows = 0;
-        resolve(rows);
+        resolve(row == undefined ? 0: row.RefPointID);
+    })
+  })
+}
+
+exports.getHutsAndParkingLots = () =>{
+  return new Promise(async (resolve, reject) =>{
+    const sql = "SELECT RP.RefPointID, H.Name, PL.Description, RP.Type FROM ReferencePoints RP, ParkingLots PL Huts H WHERE RP.RefPointID = Huts.RefPointID AND PL.ParkingID = RF.HikeID AND Type = 'hut' OR Type = 'parking'";
+    db.all(sql, [], function (err, rows) {
+      if(err)
+        reject(err)
+      else{
+        const points = rows.map((r) => ({ RefPointID: r.RefPointID, Type: r.Type, Description: r.Description, Name: r.Name }));
+        resolve(points);
+      }
     })
   })
 }

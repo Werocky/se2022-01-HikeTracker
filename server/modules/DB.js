@@ -55,7 +55,7 @@ class DatabaseConnection {
 
     static createTableUsers() {
         return new Promise(async (resolve, reject) => {
-            const sql = "CREATE TABLE IF NOT EXISTS Users (Id TEXT PRIMARY KEY UNIQUE NOT NULL, Hash TEXT NOT NULL, Salt TEXT NOT NULL, Role TEXT NOT NULL);";
+            const sql = "CREATE TABLE IF NOT EXISTS Users (Id TEXT PRIMARY KEY UNIQUE NOT NULL, Hash TEXT NOT NULL, Salt TEXT NOT NULL, Role TEXT NOT NULL,code INTEGER, verified, INTEGER);";
             this.db.run(sql, [], function (err) {
                 if (err)
                     reject(err);

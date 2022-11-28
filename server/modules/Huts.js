@@ -68,8 +68,10 @@ exports.getHuts = () => {
 
 exports.getHutsFilters = (name = null, locationType = null, location = null, WhenOpen = null, beds = null, avgPrice = null) => {
   return new Promise(async (resolve, reject) => {
-    let sql = "SELECT * FROM Huts WHERE ";
+    let sql = "SELECT * FROM Huts";
     let parameters = [];
+
+    if(name !== null || locationType !== null || WhenOpen !== null || location !== null || beds !== null || avgPrice !== null ) sql += " WHERE ";
 
     if (name !== null) {
       sql += "Name = ?";
@@ -98,14 +100,14 @@ exports.getHutsFilters = (name = null, locationType = null, location = null, Whe
     }
     if (avgPrice !== null) {
       if (parameters.length === 0)
-        sql += "AvgPrice = ?";
+        sql += "AvgPrice <= ?";
       else
-        sql += " AND AvgPrice = ?";
+        sql += " AND AvgPrice <= ?";
       parameters.push(avgPrice);
     }
 
     sql += ";"
-    // console.log(sql);
+    
     db.all(sql, parameters, function (err, rows) {
       if (err)
         reject(err);
@@ -114,7 +116,6 @@ exports.getHutsFilters = (name = null, locationType = null, location = null, Whe
         rows.forEach(r => {
           let h = new Hut(r.RefPointID, r.Name, r.Elevation, r.City, r.Province, r.Region, r.Country, r.WhenOpen, r.Beds, r.AvgPrice, r.Description)
           huts.push(h);
-         // console.log(h);
        });
         
         resolve(huts);
@@ -186,6 +187,19 @@ exports.getHutCountry = () => {
       else {
         const country = rows.map((r) => (r.Country));
         resolve(country);
+      }
+    })
+  })
+}
+
+exports.setHutDescription = (Description, RefPointID) => {
+  return new Promise((resolve, reject) => {
+    const sql = " UPDATE Huts SET Description=? WHERE RefPointID=?;"
+    db.run(sql, [Description, RefPointID], function (err, rows) {
+      if (err)
+        reject(err);
+      else {
+        resolve({message: "Description set"});
       }
     })
   })

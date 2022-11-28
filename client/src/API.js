@@ -35,6 +35,65 @@ async function getHike(HikeID) {
   }
 }
 
+async function getHikeInfo(HikeID){
+  try {
+    const response = await fetch(APIURL + '/HikeInfo', {
+      method: 'POST',
+      credentials: 'include',
+      body: JSON.stringify({
+        "HikeID": HikeID,
+      }),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+    const hikeInfo = await response.json();
+    if(response.ok)
+      return hikeInfo;
+    else
+      throw hikeInfo;
+  } catch (err) {
+    throw err;
+  }
+}
+
+async function getHutsAndParks(){
+  try {
+    const response = await fetch(APIURL + '/HutsAndParks', {
+      method: 'GET',
+    });
+    const info = await response.json();
+    if(response.ok)
+      return info;
+    else
+      throw info;
+  } catch (err) {
+    throw err;
+  }
+}
+
+async function setStartEndPoints(HikeId, StartId, EndId, Start, End){
+  try {
+    const response = await fetch(APIURL + '/setStartEndPoints', {
+      method: 'POST',
+      body: JSON.stringify({
+        "Id": HikeId,
+        "StartId": StartId,
+        "EndId": EndId,
+        "Start": Start,
+        "End": End
+      }),
+      headers: {
+        'Content-Type': 'application/json'
+      },
+    });
+    if(!response.ok)
+      throw response;
+  } catch (err) {
+    throw err;
+  }
+}
+
 async function getFilteredHikes(minExpectedTime, maxExpectedTime, minAscent, maxAscent, Province, City, minLength, maxLength, Difficulty) {
   try {
     const response = await fetch(APIURL + '/getFilteredHikes', {
@@ -181,7 +240,7 @@ async function createParkingLot(description, free, coord) {
 
 async function updateParkingLot(description, parkingId, free, RefPointID, coord) {
   try {
-    const response = await fetch(APIURL + 'ParkingLots', {
+    const response = await fetch(APIURL + '/ParkingLots', {
       method: 'PUT',
       body: JSON.stringify({
         "Description": description,
@@ -203,7 +262,7 @@ async function updateParkingLot(description, parkingId, free, RefPointID, coord)
 
 async function getParkingLots() {
   try {
-    const response = await fetch(APIURL + 'ParkingLots', {
+    const response = await fetch(APIURL + '/ParkingLots', {
       method: 'GET',
     });
     const result = await response.json();
@@ -218,7 +277,7 @@ async function getParkingLots() {
 
 async function getParkingLot(id) {
   try {
-    const response = await fetch(APIURL + 'ParkingLots', {
+    const response = await fetch(APIURL + '/ParkingLots', {
       method: 'GET',
       body: JSON.stringify({
         "ParkingID": id
@@ -239,7 +298,7 @@ async function getParkingLot(id) {
 
 async function deleteParkingLot(id) {
   try {
-    const response = await fetch(APIURL + 'ParkingLots', {
+    const response = await fetch(APIURL + '/ParkingLots', {
       method: 'DELETE',
       body: JSON.stringify({
         "ParkingID": id
@@ -330,6 +389,7 @@ async function getUserInfo() {
 }
 
 async function register(credentials) {
+  console.log(credentials);
   const response = await fetch((APIURL + '/sessions/new'), {
     method: 'POST',
     body: JSON.stringify({
@@ -342,7 +402,52 @@ async function register(credentials) {
       'Content-Type': 'application/json',
     }
   });
-  return response.ok ? true : false;
+  if (response.ok) {
+    const res = await response.json();
+    return res;
+  } else {
+    const errDetail = {error: 'something went wrong with your registration!'};
+    return errDetail;
+  }
+
+}
+
+async function verify() {
+  const currentLocation = window.location.href;
+  const params = currentLocation.split('?')[1];
+  try {
+    const response = await fetch(APIURL + '/verify' + '?' + params, {
+      method: 'GET',
+    });
+    const result = await response.json();
+    if (response.ok)
+      return result
+    else
+      throw result;
+  } catch (err) {
+    throw err;
+  }
+}
+
+function setHutDescription(Description, RefPointID) {
+  return new Promise((resolve, reject) => {
+    fetch((APIURL + '/setHutDescription'), {
+      method: 'PUT',
+      credentials: 'include',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ Description: Description, RefPointID: RefPointID }),
+    }).then((response) => {
+      if (response.ok) {
+        resolve(null);
+      } else {
+        response.json()
+          .then((obj) => { reject(obj); })
+          .catch(() => { reject({ error: "Cannot parse server response." }) });
+      }
+    }).catch(() => { reject({ error: "Cannot communicate with the server." }) });
+  });
 }
 
 const API = {
@@ -363,6 +468,11 @@ const API = {
   deleteParkingLot,
   getHutsFilters,
   getHutsLocations,
-  addHike
+  addHike,
+  getHikeInfo,
+  getHutsAndParks,
+  setStartEndPoints,
+  verify,
+  setHutDescription
 };
 export default API;

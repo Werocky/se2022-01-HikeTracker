@@ -1,6 +1,7 @@
 import { Button, Table } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import { useContext, useState, useEffect } from "react";
+import Image from "react-bootstrap/Image";
 
 function HikeList(props) {
   const [data, setData] = useState([]);
@@ -36,6 +37,7 @@ function HikeList(props) {
   }, [sortType]);
 
   return (
+    <>
     <Table >
       <thead>
         <tr>
@@ -55,6 +57,7 @@ function HikeList(props) {
         }
       </tbody>
     </Table>
+    </>
   );
 }
 
