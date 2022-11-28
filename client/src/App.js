@@ -18,6 +18,7 @@ import Login from './pages/Login'
 import Hikes from './pages/Hikeslist'
 import Huts from './pages/Hutslist'
 import AddHike from './components/forms/AddHike'
+import HikeDetail from "./pages/HikeDatail";
 import "./style.css"
 import "tailwindcss/lib/css/preflight.css"
 
@@ -86,7 +87,11 @@ function AppLayout(props) {
       <Route path='/:hikeID' element={
         <HikeDetails logout={props.logout} />
       } />
-      <Route path='/register' element={
+
+      <Route path='/hikedetail' element={
+          <HikeDetail />
+      } />   // for test
+        <Route path='/register' element={
               <Register/>
         // <RegisterComponent register={props.register} />
       } />
