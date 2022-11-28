@@ -12,6 +12,8 @@
     "bootstrap": "^5.2.2",
     "bootstrap-icons": "^1.10.2",
     "crypto": "^1.0.1",
+    "feather-icons": "^4.29.0",
+    "framer-motion": "^7.6.12",
     "leaflet": "^1.9.2",
     "nodemon": "^2.0.20",
     "react": "^18.2.0",
@@ -19,8 +21,14 @@
     "react-bootstrap-icons": "^1.10.2",
     "react-dom": "^18.2.0",
     "react-leaflet": "^4.1.0",
+    "react-modal": "^3.16.1",
     "react-router-dom": "^6.4.3",
     "react-scripts": "5.0.1",
+    "react-slick": "^0.29.0",
+    "slick-carousel": "^1.8.1",
+    "styled-components": "^5.3.6",
+    "tailwindcss": "^3.2.4",
+    "twin.macro": "^3.0.0-rc.5",
     "web-vitals": "^2.1.4"
   },
   "scripts": {

@@ -1,13 +1,16 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../Login.css'
 import { Form, Button, Row, Col } from 'react-bootstrap';
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import bcrypt from 'bcryptjs';
 import API from '../API.js';
+import AnimationRevealPage from "../helpers/AnimationRevealPage";
+import logo from "../images/logo.svg";
 
 function RegisterComponent(props) {
   return (
+
     <div className="auth-wrapper">
       <div className="auth-inner">
         <Row>

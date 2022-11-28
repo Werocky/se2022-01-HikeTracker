@@ -1,5 +1,5 @@
 import 'bootstrap/dist/css/bootstrap.min.css'
-import './App.css';
+//import './App.css';
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import { Container, Row, Col, Alert } from 'react-bootstrap';
 import { useContext, useEffect, useState } from 'react';
@@ -9,12 +9,21 @@ import API from './API';
 import { LoginComponent } from './Layout-components/LoginComponent';
 import { RegisterComponent } from './Layout-components/RegisterComponent';
 import HikeDetails from './Layout-components/HikeDetails';
-import AddHike from './Layout-components/AddHike';
+//import AddHike from './Layout-components/AddHike';
 import ProfilePage from './Layout-components/ProfilePage';
 import HutsPage from './Layout-components/Huts-components/HutsPage';
 import ParkingForm from './Layout-components/ParkingForm';
 import VerifiedMessage from './Layout-components/VerificationPage';
 import HutForm from './Layout-components/AddHut';
+
+import Register from "./pages/Signup";
+import Login from './pages/Login'
+import Hikes from './pages/Hikeslist'
+import Huts from './pages/Hutslist'
+import AddHike from './components/forms/AddHike'
+import HikeDetail from "./pages/HikeDatail";
+import "./style.css"
+import "tailwindcss/lib/css/preflight.css"
 
 function App() {
 
@@ -100,21 +109,38 @@ function AppLayout(props) {
       <Route path='/:hikeID' element={
         <HikeDetails logout={props.logout} />
       } />
-      <Route path='/register' element={
-        <RegisterComponent register={props.register}/>
+
+
+      <Route path='/hikedetail' element={
+          <HikeDetail />
+      } />   // for test
+        <Route path='/register' element={
+              <Register/>
+        // <RegisterComponent register={props.register} />
+
       } />
       <Route path='/login' element={
-        <LoginComponent login={props.login} />
+          <Login/>
+        // < LoginComponent  login={props.login} />
       } />
       <Route path='/addHike' element={
         <AddHike />
       } />
-      <Route path='/profile/:userId' element={
-        <ProfilePage logout={props.logout} />
+      <Route path='/hikes' element={
+            <Hikes />
       } />
       <Route path='/huts' element={
-        <HutsPage logout={props.logout} huts={huts} setHuts={setHuts}/>
+
+            <Huts />
       } />
+
+      <Route path='/profile/:userId' element={
+        <ProfilePage logout={props.logout} />
+
+      } />
+      {/*<Route path='/huts' element={*/}
+      {/*  <HutsPage logout={props.logout} />*/}
+      {/*} />*/}
       <Route path='/addParkingLot' element={
         <ParkingForm />
       } />
