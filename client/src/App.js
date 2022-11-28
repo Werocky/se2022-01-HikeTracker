@@ -14,6 +14,7 @@ import ProfilePage from './Layout-components/ProfilePage';
 import HutsPage from './Layout-components/Huts-components/HutsPage';
 import ParkingForm from './Layout-components/ParkingForm';
 import VerifiedMessage from './Layout-components/VerificationPage';
+import HutForm from './Layout-components/AddHut';
 
 function App() {
 
@@ -119,6 +120,9 @@ function AppLayout(props) {
       } />
       <Route path='/verify' element={
         < VerifiedMessage />
+      } />
+       <Route path='/addHut' element={
+        < HutForm />
       } />
     </Routes>
     </>
