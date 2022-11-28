@@ -72,11 +72,13 @@ function HutForm() {
         description:description,
         coord:coord
     }
-    API.addHut(h)
+  /*  API.addHut(h)
       .then( () => {
         console.log("ok");
       })//setDirty(true)})
       .catch( err => setErrorMsg(err));
+      */
+     setErrorMsg("Hut aggiunto");
   }
 }
 
