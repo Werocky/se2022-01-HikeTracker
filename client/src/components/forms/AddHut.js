@@ -37,9 +37,9 @@ const Textarea = styled(Input).attrs({as: "textarea"})`
 const SubmitButton = tw(PrimaryButtonBase)`inline-block mt-8`
 
 export default ({
-                  //subheading = "Add a hike here",
+                  //subheading = "Add a hut here",
                   heading = <>Add a hike here</>,
-                  description = "Add a hike with following parameters and the gpx file.",
+                  description = "Add a hut description here",
                   submitButtonText = "Confirm",
                   formAction = "#",
                   formMethod = "get",
@@ -63,10 +63,11 @@ export default ({
               {description && <Description>{description}</Description>}
 
               <Form action={formAction} method={formMethod}>
-                <Input type="email" name="email" placeholder="Your Email Address" />
-                <Input type="text" name="name" placeholder="Full Name" />
-                <Input type="text" name="subject" placeholder="Subject" />
-                <Textarea name="message" placeholder="Your Message Here" />
+                  <Input type="text" name="title" placeholder="title" />
+                  <Input type="text" name="city" placeholder="city" />
+                  <Input type="text" name="length" placeholder="length" />
+                  <Textarea name="time" placeholder="time" />
+                  ...
                 <SubmitButton type="submit">{submitButtonText}</SubmitButton>
               </Form>
 

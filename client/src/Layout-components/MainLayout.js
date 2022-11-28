@@ -11,7 +11,7 @@ import { useNavigate } from 'react-router-dom';
 import "../style.css"
 import "tailwindcss/lib/css/preflight.css"
 import AnimationRevealPage from "../helpers/AnimationRevealPage"
-import Hero from "../components/hero/TwoColumnWithFeaturesAndTestimonial"
+import Hero from "../components/hero/LandingPage"
 
 function MainLayout(props) {
 
@@ -39,23 +39,7 @@ function MainLayout(props) {
       <AnimationRevealPage>
         <Hero />
       </AnimationRevealPage>
-    // <>
-    //   <NavigationBar  />
-    //     <Container fluid className={'vh-100'}>
-    //     <p></p>
-    //
-    //     {!loading &&
-    //       <Row>
-    //         <Col sm={9}>
-    //           <HikeList hikes={hikes} auth={props.auth} setHikes={setHikes} />
-    //         </Col>
-    //         <Col sm={3}>
-    //           <Sidebar setHikes={setHikes} />
-    //         </Col>
-    //       </Row>
-    //     }
-    //   </Container>
-    // </>
+
   );
 }
 

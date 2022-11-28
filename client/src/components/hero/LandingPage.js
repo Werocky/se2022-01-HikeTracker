@@ -92,7 +92,6 @@ export default ({
                   <QuotesLeftIcon/>
                   <Quote>{testimonial.quote}</Quote>
                   <CustomerName>{testimonial.customerName}</CustomerName>
-                  <CustomerCompany>{testimonial.customerCompany}</CustomerCompany>
                 </Testimonial>
               </ImageContainer>
               <Offsetbackground />

@@ -8,6 +8,7 @@ import Header from "../components/headers/light.js";
 import Footer from "../components/footers/FiveColumnWithInputForm.js";
 import { SectionHeading } from "../components/misc/Headings";
 import { PrimaryButton } from "../components/misc/Buttons";
+import { PrimaryButton as PrimaryButtonBase } from "../components/misc/Buttons.js";
 
 const HeadingRow = tw.div`flex`;
 const Heading = tw(SectionHeading)`text-gray-900`;
@@ -45,7 +46,7 @@ const Description = tw.div``;
 
 const ButtonContainer = tw.div`flex justify-center`;
 const LoadMoreButton = tw(PrimaryButton)`mt-16 mx-auto`;
-
+const PostAction = tw(PrimaryButtonBase)`w-full mt-8`;
 export default ({
                   headingText = "Hikes",
                   posts = [
@@ -102,6 +103,7 @@ export default ({
                         <CreationDate>{post.date}</CreationDate>
                         <Title>{post.title}</Title>
                         {post.featured && post.description && <Description>{post.description}</Description>}
+                          <PostAction>View details</PostAction>
                       </Info>
                     </Post>
                   </PostContainer>

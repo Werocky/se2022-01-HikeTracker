@@ -63,10 +63,11 @@ export default ({
               {description && <Description>{description}</Description>}
 
               <Form action={formAction} method={formMethod}>
-                <Input type="email" name="email" placeholder="Your Email Address" />
-                <Input type="text" name="name" placeholder="Full Name" />
-                <Input type="text" name="subject" placeholder="Subject" />
-                <Textarea name="message" placeholder="Your Message Here" />
+                <Input type="text" name="title" placeholder="title" />
+                <Input type="text" name="city" placeholder="city" />
+                <Input type="text" name="length" placeholder="length" />
+                <Textarea name="time" placeholder="time" />
+                  ...
                 <SubmitButton type="submit">{submitButtonText}</SubmitButton>
               </Form>
 

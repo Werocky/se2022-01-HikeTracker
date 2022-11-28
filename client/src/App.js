@@ -8,17 +8,18 @@ import API from './API';
 import { LoginComponent } from './Layout-components/LoginComponent';
 import { RegisterComponent } from './Layout-components/RegisterComponent';
 import HikeDetails from './Layout-components/HikeDetails';
-import AddHike from './Layout-components/AddHike';
+//import AddHike from './Layout-components/AddHike';
 import ProfilePage from './Layout-components/ProfilePage';
 import HutsPage from './Layout-components/Huts-components/HutsPage';
 import ParkingForm from './Layout-components/ParkingForm';
 
 import Register from "./pages/Signup";
 import Login from './pages/Login'
+import Hikes from './pages/Hikeslist'
+import Huts from './pages/Hutslist'
+import AddHike from './components/forms/AddHike'
 import "./style.css"
 import "tailwindcss/lib/css/preflight.css"
-import AnimationRevealPage from "./helpers/AnimationRevealPage";
-import Hero from "./components/hero/FullWidthWithImage";
 
 function App() {
 
@@ -96,12 +97,19 @@ function AppLayout(props) {
       <Route path='/addHike' element={
         <AddHike />
       } />
+      <Route path='/hikes' element={
+            <Hikes />
+      } />
+      <Route path='/huts' element={
+            <Huts />
+      } />
+
       <Route path='/profile/:userId' element={
         <ProfilePage logout={props.logout} />
       } />
-      <Route path='/huts' element={
-        <HutsPage logout={props.logout} />
-      } />
+      {/*<Route path='/huts' element={*/}
+      {/*  <HutsPage logout={props.logout} />*/}
+      {/*} />*/}
       <Route path='/addParkingLot' element={
         <ParkingForm />
       } />
