@@ -654,7 +654,7 @@ app.post('/saveFile/:hikeID', async (req, res) => {
 
   try {
     const file = req.files.file;
-    const path = __dirname + "/gpx/" + file.name;
+    const path = "./gpx/" + file.name;
     console.log(path);
     const hikeID = req.params.hikeID; // STORE IT IN THE FileNames db with path
     const added = await fileNames.addFile(hikeID,path);
