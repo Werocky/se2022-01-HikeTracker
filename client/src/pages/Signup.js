@@ -40,7 +40,7 @@ const IllustrationImage = styled.div`
 `;
 
 function Login(props){
-  /* Variables for the form */
+  /* VARIABLES FOR THE FORM */
   const logoLinkUrl = "#";
   const illustrationImageSrc = illustration;
   const headingText = "Sign Up For Hike-Tracker";

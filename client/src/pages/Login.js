@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import AnimationRevealPage from "../helpers/AnimationRevealPage.js";
 import { Container as ContainerBase } from "../components/misc/Layouts";
 import tw from "twin.macro";
@@ -6,8 +6,10 @@ import styled from "styled-components";
 import {css} from "styled-components/macro"; //eslint-disable-line
 import illustration from "../images/login-illustration.svg";
 import logo from "../images/logo.svg";
+import API from '../API.js';
 
 import { ReactComponent as LoginIcon } from "feather-icons/dist/icons/log-in.svg";
+import { useNavigate } from "react-router-dom";
 
 const Container = tw(ContainerBase)`min-h-screen bg-primary-900 text-white font-medium flex justify-center -m-8`;
 const Content = tw.div`max-w-screen-xl m-0 sm:mx-20 sm:my-16 bg-white text-gray-900 shadow sm:rounded-lg flex justify-center flex-1`;
@@ -35,17 +37,31 @@ const IllustrationImage = styled.div`
   ${tw`m-12 xl:m-16 w-full max-w-sm bg-contain bg-center bg-no-repeat`}
 `;
 
-export default ({
-                  logoLinkUrl = "#",
-                  illustrationImageSrc = illustration,
-                  headingText = "Sign In To Hike-Tracker",
+function Register(props){
+  /* VARIABLES FOR THE FORM */
+  const logoLinkUrl = "#";
+  const illustrationImageSrc = illustration;
+  const headingText = "Sign In To Hike-Tracker";
+  const submitButtonText = "Sign In";
+  const SubmitButtonIcon = LoginIcon;
+  const forgotPasswordUrl = "#";
+  const signupUrl = "#";
 
-                  submitButtonText = "Sign In",
-                  SubmitButtonIcon = LoginIcon,
-                  forgotPasswordUrl = "#",
-                  signupUrl = "#",
+  /* STATES COLLECTED FROM FORM'S FIELDS */
+  const [email, setEmail] = useState('b@polito.it');
+  const [password, setPassword] = useState('password');
+  /* NAVIGATE TO SWITCH PAGES */
+  const navigate = useNavigate();
 
-                }) => (
+  /*HANDLE THE LOGIN DATA OF THE USER*/
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    const credentials = { email: email, password };
+    await API.logIn(credentials);
+    navigate('/');
+  };
+
+  return (
     <AnimationRevealPage>
       <Container>
         <Content>
@@ -56,9 +72,9 @@ export default ({
             <MainContent>
               <Heading>{headingText}</Heading>
               <FormContainer>
-                <Form>
-                  <Input type="email" placeholder="Email" />
-                  <Input type="password" placeholder="Password" />
+                <Form onSubmit={handleSubmit}>
+                  <Input type="email" placeholder="Email" value={email} onChange={ev => setEmail(ev.target.value)} required={true}/>
+                  <Input type="password" placeholder="Password" value={password} onChange={ev => setPassword(ev.target.value)} required={true} minLength={4} maxLength={16}/>
                   <SubmitButton type="submit">
                     <SubmitButtonIcon className="icon" />
                     <span className="text">{submitButtonText}</span>
@@ -84,4 +100,6 @@ export default ({
         </Content>
       </Container>
     </AnimationRevealPage>
-);
+)}
+
+export default Register;
