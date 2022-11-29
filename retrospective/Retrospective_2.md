@@ -46,15 +46,12 @@ sections:
 | _5-3- DB Reference Points_  |  _3h_  |  _2h 45m_  |
 
 
-### Tasks statistics
 #### 6 - Describe Parking
 | Task | Hours est. | Hours actual |
 |------|------------|--------------|
 | _6-1-add a parking lot [CLIENT side]_  |  _2h_  |  _3h 20m_  |
 | _6-2-save reference point [SERVER side]_  |  _1h_  |  _2h 30m_  |
 
-
-### Tasks statistics
 #### 7 - Search Hut_ 
 | Task | Hours est. | Hours actual |
 |------|------------|--------------|
@@ -62,27 +59,24 @@ sections:
 | _7-2-API get huts searched[SERVER side]_  |  _2h_  |  _2h_  |
 | _7-3-DB huts_  |  _2h_  |  _4h 50m_  |
 
-
-### Tasks statistics
 #### 8 - Link Start/Arrival
 | Task | Hours est. | Hours actual |
 |------|------------|--------------|
 | _8-1-modify start/arrival points [CLIENT side]_  |  _1h_  |  _5h_  |
 | _8-2-API save start/arrival points [SERVER side]_  |  _2h 30m_  |  _4h 15m_  |
 
-
-### Tasks statistics
 #### 9 - Link hut
 | Task | Hours est. | Hours actual |
+|------|------------|--------------|
 | _9-1-link hut to hike [CLIENT side]_| _3h_ | _0h_ |
 | _9-2-API save the link [SERVER side]_| _2h_ | _0h_ |
 | _9-3-Testing API_ | _2h_ | _0h_ |
 | _9-4-Testing DB_ | _2h_ | _0h_ |
 | _9-5-Manual testing_ | _30m_ | _0h_ |
 
-### Tasks statistics
 #### 33 - Define Reference Points
 | Task | Hours est. | Hours actual |
+|------|------------|--------------|
 | _33-1-API to add a REference Point [SERVER side]_ | _1h_ | _0h_ |
 | _33-2-Form to insert a Reference Point [CLIENT side]_ | _2h_ | _0h_ |
 | _33-3-API to add info related to Reference Point [SERVER side]_ | _1h 40m_ | _0h_ |
@@ -110,6 +104,7 @@ sections:
   - (actual) *3.9* -> less stories done than planned one and problems encountered
 - standard deviation:
   - (actual) *3.42*
+  - (estimate) *1.92*
 ##### Table for actual standard deviation
 | Group | Frequency |
 |------|------------|
@@ -119,7 +114,7 @@ sections:
 | _4h_ | _3_ |
 | _5h_ | _2_ |
 | _18h_  | _1_ |
-  - (estimate) *1.92*
+  
 ##### Table for estimate standard deviation
 | Group | Frequency |
 |------|------------|
@@ -129,7 +124,7 @@ sections:
 | _4h-5h_ | _2_ |
 | _12h_ | _1_ |
 - Total task estimation error ratio: 
-  -  $75\divides82 - 1 = -0.08$
+  -  $75/82 - 1 = -0.08$
   > - sum of total hours estimation / sum of total hours spent - 1
 
   
