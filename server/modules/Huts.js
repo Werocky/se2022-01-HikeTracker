@@ -4,7 +4,22 @@ const db = require('./DB').db;
 
 
 class Hut{
-    constructor(RefPointID, Name, Elevation, City, Province, Region, Country, WhenOpen, Beds, AvgPrice, Description){
+    constructor(
+        RefPointID,
+        Name,
+        Elevation, 
+        City, 
+        Province, 
+        Region, 
+        Country, 
+        WhenOpen, 
+        Beds, 
+        AvgPrice, 
+        Description,
+        HutManagerID,
+        Website,
+        Phone){
+      
       this.RefPointID=RefPointID;
       this.Name=Name;
       this.Elevation=Elevation;
@@ -16,14 +31,18 @@ class Hut{
       this.Beds=Beds;
       this.AvgPrice=AvgPrice;
       this.Description=Description;
+      this.HutManagerID=HutManagerID;
+      this.Website=Website
+      this.Phone=Phone
     }
 }
 
-exports.addHut = (RefPointID, Name, Elevation, City, Province, Region, Country, WhenOpen, Beds, AvgPrice, Description) => {
+ function addHut  (Hut)  {
+  
   return new Promise(async (resolve, reject) => {
-    const sql = 'INSERT INTO HUTS(RefPointID, Name, Elevation, City, Province, Region, Country, WhenOpen, Beds, AvgPrice, Description) VALUES(?,?,?,?,?,?,?,?,?,?,?)';
+    const sql = 'INSERT INTO HUTS( Name, Elevation, City,Province,  Region, Country, WhenOpen, Beds, AvgPrice, Description,HutManagerID,Website,Phone) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?)';
     db.run(sql, [
-      RefPointID, Name, Elevation, City, Province, Region, Country, WhenOpen, Beds, AvgPrice, Description
+       Hut.Name, Hut.Elevation, Hut.City,Hut.Province, Hut.Region, Hut.Country, Hut.WhenOpen, Hut.Beds, Hut.AvgPrice, Hut.Description,Hut.HutManagerID,Hut.Website,Hut.Phone
     ], function (err) {
       if (err)
         reject(err);
@@ -32,8 +51,7 @@ exports.addHut = (RefPointID, Name, Elevation, City, Province, Region, Country, 
     });
   });
 };
-
-exports.emptyHuts = () => {
+ function emptyHuts  ()  {
   return new Promise(async (resolve, reject) => {
     db.run("DELETE FROM Huts;", [], function (err) {
       if (err)
@@ -43,8 +61,7 @@ exports.emptyHuts = () => {
     });
   })
 };
-
-exports.getHuts = () => {
+ function getHuts  ()  {
   return new Promise(async (resolve, reject) => {
     const sql = "SELECT * FROM Huts";
     db.all(sql, [], function (err, rows) {
@@ -65,8 +82,7 @@ exports.getHuts = () => {
     })
   })
 }
-
-exports.getHutsFilters = (name = null, locationType = null, location = null, WhenOpen = null, beds = null, avgPrice = null) => {
+ function getHutsFilters  (name = null, locationType = null, location = null, WhenOpen = null, beds = null, avgPrice = null)  {
   return new Promise(async (resolve, reject) => {
     let sql = "SELECT * FROM Huts";
     let parameters = [];
@@ -124,7 +140,7 @@ exports.getHutsFilters = (name = null, locationType = null, location = null, Whe
   })
 }
 
-exports.deleteHut = (id) => {
+ function deleteHut  (id)  {
   return new Promise((resolve, reject) => {
     const sql = "DELETE FROM Huts WHERE RefPointID = ?";
     db.run(sql, [id], function (err) {
@@ -136,7 +152,7 @@ exports.deleteHut = (id) => {
   })
 }
 
-exports.getHutCity = () => {
+ function getHutCity ()  {
   return new Promise((resolve, reject) => {
     const sql = " SELECT DISTINCT City FROM Huts;"
     db.all(sql, [], function (err, rows) {
@@ -150,7 +166,7 @@ exports.getHutCity = () => {
   })
 }
 
-exports.getHutProvince = () => {
+ function getHutProvince  ()  {
   return new Promise((resolve, reject) => {
     const sql = " SELECT DISTINCT Province FROM Huts;"
     db.all(sql, [], function (err, rows) {
@@ -164,7 +180,7 @@ exports.getHutProvince = () => {
   })
 }
 
-exports.getHutRegion = () => {
+ function getHutRegion  ()  {
   return new Promise((resolve, reject) => {
     const sql = " SELECT DISTINCT Region FROM Huts;"
     db.all(sql, [], function (err, rows) {
@@ -178,7 +194,7 @@ exports.getHutRegion = () => {
   })
 }
 
-exports.getHutCountry = () => {
+ function getHutCountry  ()  {
   return new Promise((resolve, reject) => {
     const sql = " SELECT DISTINCT Country FROM Huts;"
     db.all(sql, [], function (err, rows) {
@@ -192,7 +208,7 @@ exports.getHutCountry = () => {
   })
 }
 
-exports.setHutDescription = (Description, RefPointID) => {
+ function setHutDescription  (Description, RefPointID)  {
   return new Promise((resolve, reject) => {
     const sql = " UPDATE Huts SET Description=? WHERE RefPointID=?;"
     db.run(sql, [Description, RefPointID], function (err, rows) {
@@ -203,4 +219,17 @@ exports.setHutDescription = (Description, RefPointID) => {
       }
     })
   })
+}
+module.exports={
+  getHutCity,
+  getHutCountry,
+  getHutProvince,
+  getHutRegion,
+  getHuts,
+  getHutsFilters,
+  setHutDescription,
+  deleteHut,
+  emptyHuts,
+  addHut,
+  Hut
 }

@@ -2,9 +2,9 @@
 
 const db = require('./DB').db;
 
-exports.addHikeRefPoints = (HikeID, RefPointID, IsStart, IsEnd) => {
+function addHikeRefPoints  (HikeID, RefPointID, IsStart, IsEnd)  {
   return new Promise(async (resolve, reject) => {
-    const sql = "INSERT INTO HikeRefPoints(HikeID, RefPointID, IsStart, IsEnd) VALUES (?,?,?,?)";
+    const sql = "INSERT INTO PointsOfHike(HikeID, PointID, IsStart, IsEnd) VALUES (?,?,?,?)";
     db.run(sql, [HikeID, RefPointID, IsStart, IsEnd], function (err) {
       if (err)
         reject(err);
@@ -15,49 +15,66 @@ exports.addHikeRefPoints = (HikeID, RefPointID, IsStart, IsEnd) => {
   });
 };
 
-exports.getHutsAndParks = () =>{
+function getHutsAndParks () {
   return new Promise(async (resolve, reject) =>{
-    const sql = 'SELECT RP.RefPointID, RP.Type, H.Name, PL.Description FROM ReferencePoints RP LEFT JOIN ParkingLots PL ON RP.RefPointID = PL.ParkingID LEFT JOIN Huts H ON RP.RefPointID = H.RefPointID WHERE (RP.Type = ? OR RP.Type = ?)';
+    const sql = 'SELECT RP.RefPointID, RP.Type, H.Name FROM ReferencePoints RP LEFT JOIN ParkingLots PL ON RP.RefPointID = PL.ParkingID LEFT JOIN Huts H ON RP.RefPointID = H.RefPointID WHERE (RP.Type = ? OR RP.Type = ?)';
     db.all(sql, ["hut", "parking"], function (err, rows) {
       if(err)
         reject(err);
       else{
-        const info = rows.map((r) => ({ RefPointID: r.RefPointID, Type: r.Type, Name: r.Name, Description: r.Description }));
+        const info = rows.map((r) => ({ RefPointID: r.RefPointID, Type: r.Type, Name: r.Name, Description: r.description }));
         resolve(info);
       }
     })
   })
 }
 
-exports.getHikeInfo = (HikeID) =>{
+function getHikeInfo (HikeID) {
   return new Promise(async (resolve, reject) =>{
-    const sql = 'SELECT * FROM HikeRefPoints HRP, ReferencePoints RP, Hikes H WHERE H.HikeID = HRP.HikeID AND HRP.RefPointID = RP.RefPointID AND H.HikeID = ?';
+    const sql = 'SELECT * FROM PointsOfHike HRP, ReferencePoints RP, Hikes H WHERE H.HikeID = HRP.HikeID AND HRP.PointID = RP.RefPointID AND H.HikeID = ?';
     db.all(sql, [HikeID], function (err, rows) {
       if(err)
         reject(err);
       else{
-        const hikes = rows.map((r) => ({ HikeID: r.HikeID, RefPointID: r.RefPointID, IsStart: r.IsStart, IsEnd: r.IsEnd, Lat: r.Lat, Lng: r.Lng, Type: r.Type, Title: r.Title, Length: r.Length, ExpectedTime: r.ExpectedTime, Ascent: r.Ascent, Difficulty: r.Difficulty, Start: r.STart, End: r.End, Description: r.Description }));
+        const hikes = rows.map((r) => ({ HikeID: r.HikeID, RefPointID: r.PointID, IsStart: r.IsStart, IsEnd: r.IsEnd, Lat: r.Lat, Lng: r.Lng, Type: r.Type, Title: r.Title, Length: r.Length, ExpectedTime: r.ExpectedTime, Ascent: r.Ascent, Difficulty: r.Difficulty, Start: r.STart, End: r.End, Description: r.Description }));
+        
         resolve(hikes);
+
       }
     })
   })
 }
+function emptyAllPoints  (){
+   this.emptyHikeRefPoint();
+   this.emptyReferencePoints();
+}
 
-exports.emptyHikeRefPoint = () => {
+function emptyReferencePoints(){
   return new Promise(async (resolve, reject) => {
-    db.run("DELETE FROM HikeRefPoints", [], function (err) {
+    db.run("DELETE FROM ReferencePoints", [], function (err) {
       if (err)
         reject(err);
       else
-        resolve('HikeRefPoints emptied');
+        resolve('ReferencePoints emptied');
+    });
+  })
+}
+
+function emptyHikeRefPoint  ()  {
+  return new Promise(async (resolve, reject) => {
+    db.run("DELETE FROM PointsOfHike", [], function (err) {
+      if (err)
+        reject(err);
+      else
+        resolve('ReferencePoints emptied');
     });
   })
 };
 
-exports.setIsStart = (HikeID, isStart, RefPointID) =>{
+function setIsStart  (HikeID, IsStart, RefPointID) {
   return new Promise(async (resolve, reject) =>{
-    const sql = 'UPDATE HikeRefPoints SET isStart = ? WHERE HikeID = ? AND RefPointID = ?';
-    db.run(sql, [isStart, HikeID, RefPointID], function(err) {
+    const sql = 'UPDATE PointsOfHike SET IsStart = ? WHERE HikeID = ? AND PointID = ?';
+    db.run(sql, [IsStart, HikeID, RefPointID], function(err) {
       if(err)
         reject(err);
       else
@@ -66,14 +83,24 @@ exports.setIsStart = (HikeID, isStart, RefPointID) =>{
   })
 }
 
-exports.setIsEnd = (HikeID, isEnd, RefPointID) =>{
+function setIsEnd  (HikeID, IsEnd, RefPointID) {
   return new Promise(async (resolve, reject) =>{
-    const sql = 'UPDATE HikeRefPoints SET isEnd = ? WHERE HikeID = ? AND RefPointID = ?';
-    db.run(sql, [isEnd, HikeID, RefPointID], function(err){
+    const sql = 'UPDATE PointsOfHike SET IsEnd = ? WHERE HikeID = ? AND PointID = ?';
+    db.run(sql, [IsEnd, HikeID, RefPointID], function(err){
       if(err)
         reject(err);
       else
         resolve('Is End setted');
     })
   })
+}
+module.exports={
+  setIsEnd,
+  setIsStart,
+  emptyAllPoints,
+  emptyHikeRefPoint,
+  emptyReferencePoints,
+  addHikeRefPoints,
+  getHutsAndParks,
+  getHikeInfo
 }

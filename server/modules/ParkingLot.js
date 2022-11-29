@@ -1,6 +1,17 @@
 'use strict';
 
 const db = require('./DB').db;
+class ParkingLot{
+    constructor(
+        ParkingLotID,
+        AssociatedGuide,
+        Fee
+    ){
+        this.ParkingLotID=ParkingLotID;
+        this.AssociatedGuide=AssociatedGuide;
+        this.Fee=Fee;
+    }
+}
 
 function createParkingLot(id, description, free){
     return new Promise (async (resolve, reject) =>{

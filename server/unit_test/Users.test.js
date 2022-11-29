@@ -9,7 +9,9 @@ beforeAll(async() =>{
 afterAll(async()=>{
    await Users.emptyUsers();
 } )
-
+const usr = Users.new("1a42b2b340fb544339c01cf46a523f08abdf2f214b43058e163087a4ecd8dfbe",
+"1234","b@polito.it", "h",'code',0,"Name1", "Surname1", 9879879871);
+const usr2= Users.new("hashNoCHecks",'1235','mail@123.com','roleTrial',123,0,"NAME0","surname2",123456789)
 
 describe("Get/add HikeUsers",()=>{
     beforeEach(async() =>{   
@@ -24,8 +26,8 @@ describe("Get/add HikeUsers",()=>{
         await expect(Users.getUsers()).resolves.toEqual([]);
     });
     test('Get all Users',async()=>{
-        await expect(Users.register("1a42b2b340fb544339c01cf46a523f08abdf2f214b43058e163087a4ecd8dfbe",
-        "1234","b@polito.it", "h")).resolves.toEqual('User created correctly');
+
+        await expect(Users.register(usr)).resolves.toEqual('User created correctly');
         await expect(Users.getUsers()).resolves.not.toEqual([ ]);
         let u= await Users.getUsers();
         expect(u).toHaveLength(1);
@@ -37,12 +39,13 @@ describe("Get/add HikeUsers",()=>{
         expect(u[0].Role).toEqual("h")
         expect(u[0]).toHaveProperty('Salt')
         expect(u[0].Salt).toEqual("1234")
-
-    
+        expect(u[0]).toHaveProperty('Name')
+        expect(u[0]).toHaveProperty('Surname')
+        expect(u[0]).toHaveProperty('Phone')
     });
 
     test('register a new user', async()=>{
-        await expect(Users.register("hashNoCHecks",'1235','mail@123.com','roleTrial')).resolves.toEqual('User created correctly');
+        await expect(Users.register(usr2)).resolves.toEqual('User created correctly');
         await expect(Users.getUsers()).resolves.not.toEqual([ ]);
         let u= await Users.getUsers();
         expect(u).toHaveLength(1);
@@ -58,7 +61,7 @@ describe("Get/add HikeUsers",()=>{
         expect(u[0]).toHaveProperty('verified')
     });
     test('set/ check verification', async()=>{
-        await expect(Users.register("hashNoCHecks",'1235','mail@123.com','roleTrial','code')).resolves.toEqual('User created correctly');
+        await expect(Users.register(usr2)).resolves.toEqual('User created correctly');
         await expect(Users.getUsers()).resolves.not.toEqual([ ]);
         let u= await Users.getUsers();
         expect(u).toHaveLength(1);
@@ -71,9 +74,8 @@ describe("Get/add HikeUsers",()=>{
         expect(u[0]).toHaveProperty('Salt')
         expect(u[0].Salt).toEqual("1235")
         expect(u[0]).toHaveProperty('code')
-        expect(u[0].code).toEqual("code")
+        expect(u[0].code).toEqual(123)
         expect(u[0]).toHaveProperty('verified')
-       // expect(u[0].verified).toEqual(0)
 
         await expect(Users.setVerified("mail@123.com")).resolves.toEqual('User verified correctly');
         await expect(Users.getUsers()).resolves.not.toEqual([ ]);
@@ -90,14 +92,14 @@ describe("Get/add HikeUsers",()=>{
         
     });
     test('fail add new user (already existent user)', async()=>{
-        await expect(Users.register("hashNoCHecks",'1235','mail@123.com','roleTrial','333')).resolves.toEqual('User created correctly');
-        await expect(Users.register("hashNoCHecks2",'12352','mail@123.com','roleTrial2','2333')).rejects.not.toEqual(null);
+        await expect(Users.register(Users.new("hashNoCHecks",'1235','mail@123.com','roleTrial','333',0,"Name","Surname",1223456))).resolves.toEqual('User created correctly');
+        await expect(Users.register(Users.new("hashNoCHecks2",'12352','mail@123.com','roleTrial2','2333',0,"Name","Surname",1223456))).rejects.not.toEqual(null);
 
         
     });
 
     test('get specific user',async()=>{
-        await expect(Users.register("hashNoCHecks",'1235','mail@123.com','roleTrial',123)).resolves.toEqual('User created correctly');
+        await expect(Users.register(usr2)).resolves.toEqual('User created correctly');
         await expect(Users.getUserById('mail@123.com')).resolves.not.toEqual([ ]);
         let u= await Users.getUserById('mail@123.com');
        
@@ -110,9 +112,10 @@ describe("Get/add HikeUsers",()=>{
     })
     describe('Check verification code',()=>{
         beforeEach(async ()=>{
-            await Users.register("hashNoCHecks",'1235','mail@123.com','roleTrial',123);
+            await Users.emptyUsers();
+            await Users.register(usr2);
             await Users.setVerificationCode(123,"mail@123.com");
-            await Users.register("hashN2",'12352','mail2@123.com','roleTrial',0);
+            await Users.register(usr);
 
         })
         test('correct code',async()=>{
@@ -124,7 +127,7 @@ describe("Get/add HikeUsers",()=>{
             expect(u.Id).toEqual("mail@123.com")
         })  
         test('wrong code',async()=>{
-            await expect(Users.checkVerificationCode('0',"mail2@123.com")).rejects.toEqual("invalid code")
+            await expect(Users.checkVerificationCode(0,"mail@123.com")).rejects.toEqual("invalid code")
             await expect(Users.checkVerificationCode('111',"mail@123.com")).rejects.toEqual("invalid code")
 
 

@@ -5,46 +5,74 @@ const db = require('./DB').db;
 
 //get hikes
 
-const acceptableFilters = ['HikeID', 'Length', 'ExpectedTime', 'Ascent', 'Difficulty', 'Start', 'End', 'Title', 'Province', 'City'];
+const acceptableFilters = ['HikeID', 'Length', 'ExpectedTime', 'Ascent', 'Difficulty', 'Start', 'End', 'Title', 'Region', 'City'];
+//can be called from APIS to construct a new Hike
 
+class hike{
+  constructor(
+    HikeID,
+    Title,
+    Length,
+    Description,
+    Ascent,
+    Difficulty,
+    ExpectedTime,
+    Country,
+    Region,
+    City,
+    GpxFile,
+    Start,
+    End,
+    AssociatedGuide
+  ){
+    this.HikeID=HikeID;
+    this.Title=Title;
+    this.Length=Length;
+    this.Description=Description;
+    this.Ascent=Ascent;
+    this.Difficulty=Difficulty;
+    this.ExpectedTime=ExpectedTime
+    this.Country=Country
+    this.Region=Region
+    this.City=City
+    this.GpxFile=GpxFile
+    this.Start=Start
+    this.End=End
+    this.AssociatedGuide=AssociatedGuide
 
+  }
+}
 
-exports.getHikes = () => {
-
-  return new Promise((resolve, reject) => {
-    const sql = 'SELECT * FROM Hikes';
-    db.all(sql, [], (err, rows) => {
-      if (err) {
-        //console.log('/rejected');
-        reject(err);
-      }
-      //console.log(rows);
-      const hikes = rows.map((r) => ({ HikeID: r.HikeID, Start: r.Start, End: r.End, Title: r.Title, Length: r.Length, ExpectedTime: r.ExpectedTime, Ascent: r.Ascent, Difficulty: r.Difficulty, Description: r.Description }));
-      resolve(hikes);
+ function getHikes  () {
+    return new Promise((resolve, reject) => {
+      const sql = 'SELECT * FROM Hikes';
+      db.all(sql, [], (err, rows) => {
+        if (err) {
+          reject(err);
+        }
+        resolve(rows);
+      });
     });
-  });
-};
+  };
 
-exports.getHike = (hikeID) => {
+ function getHike  (hikeID)  {
 
   return new Promise((resolve, reject) => {
-    const sql = 'SELECT * FROM Hikes JOIN HikeLocations ON Hikes.HikeID = HikeLocations.HikeID WHERE Hikes.HikeID = ?';
+    const sql = 'SELECT * FROM Hikes WHERE Hikes.HikeID = ?';
 
     db.get(sql, [hikeID], (err, row) => {
       if (err) {
         reject(err);
       }
-      //console.log("Row: "+row);
       if (row) {
-        const hike = { HikeID: row.HikeID, Start: row.Start, End: row.End, Title: row.Title, Length: row.Length, ExpectedTime: row.ExpectedTime, Ascent: row.Ascent, Difficulty: row.Difficulty, Description: row.Description, Province: row.Province, City: row.City };
-        resolve(hike);
+        resolve(row);
       } else reject('undefined row');
 
     });
   });
 };
 
-exports.getLastHikeId = () => {
+ function getLastHikeId  () {
   return new Promise((resolve,reject) => {
     const sql="SELECT HikeID FROM Hikes;";
     db.all(sql,[],(err,rows) => {
@@ -59,7 +87,7 @@ exports.getLastHikeId = () => {
   });
 };
 
-exports.setDescription = (Description, HikeID) => {
+ function setDescription  (Description, HikeID)  {
   return new Promise(async (resolve, reject) => {
     db.run("UPDATE Hikes SET Description = ? WHERE HikeID = ?",
       [Description, HikeID], function (err) {
@@ -71,10 +99,11 @@ exports.setDescription = (Description, HikeID) => {
   });
 }
 
-exports.addHike = (HikeID, Title, Length, ExpectedTime, Ascent, Difficulty, Start, End, Description) => {
+ function addHike (Hike)  {
+
   return new Promise(async (resolve, reject) => {
-    db.run("INSERT INTO Hikes (HikeID,Title, Length, ExpectedTime, Ascent,Difficulty,Start, End, Description) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)",
-      [HikeID, Title, Length, ExpectedTime, Ascent, Difficulty, Start, End, Description], function (err) {
+    db.run("INSERT INTO Hikes (Title, Length, ExpectedTime, Ascent, Difficulty, Start, End, Description, Country, Region, City, GpxFile, AssociatedGuide ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
+      [Hike.Title, Hike.Length, Hike.ExpectedTime, Hike.Ascent, Hike.Difficulty, Hike.Start, Hike.End, Hike.Description, Hike.Country, Hike.Region, Hike.City, Hike.GpxFile, Hike.AssociatedGuide ], function (err) {
         if (err)
           reject(err);
         else
@@ -83,7 +112,7 @@ exports.addHike = (HikeID, Title, Length, ExpectedTime, Ascent, Difficulty, Star
   });
 }
 
-exports.deleteHikes = () => {
+ function deleteHikes ()  {
   return new Promise(async (resolve, reject) => {
     db.run("DELETE FROM Hikes", [], function (err) {
       if (err)
@@ -94,7 +123,7 @@ exports.deleteHikes = () => {
   })
 }
 
-exports.editStartEndPoints = (start, end, id) => {
+ function editStartEndPoints  (start, end, id)  {
   return new Promise(async (resolve, reject) =>{
     const sql = "UPDATE Hikes SET Start = ?, End = ? WHERE HikeID = ?";
     db.run(sql, [start, end, id], function (err){
@@ -108,40 +137,38 @@ exports.editStartEndPoints = (start, end, id) => {
 /*
 It Allows to set a specific filter if MaxValue is not specified or a range if a max value is set
  */
-exports.getHikesByFilter = (filterType, filterMinValue=-8000, MaxValue = null) => {
+ function getHikesByFilter  (filterType, filterMinValue=-8000, MaxValue = null)  {
   return new Promise(
     async (resolve, reject) => {
-      //console.log(filterType, filterMinValue, MaxValue);
+      
       if (acceptableFilters.includes(filterType)) {
         if (MaxValue == null) {
           if (filterType == 'Length' || filterType == 'ExpectedTime' || filterType == 'Ascent') {
             let sql = 'SELECT * FROM Hikes WHERE ' + filterType + '>= ?'
-            //console.log(sql);
+            
             db.all(sql, [filterMinValue], (err, rows) => {
-              //console.log("rows:"+rows);
+              
               if (err) reject(err);
               else {
-                const hikes = rows.map((r) => ({ HikeID: r.HikeID, Start: r.Start, End: r.End, Title: r.Title, Length: r.Length, ExpectedTime: r.ExpectedTime, Ascent: r.Ascent, Difficulty: r.Difficulty, Description: r.Description }));
-                resolve(hikes);
+               
+                resolve(rows);
               }
             });
           } else {
             let sql = '';
-            if (filterType != 'Province' && filterType != 'City') {
+            if (filterType != 'Region' && filterType != 'City') {
               sql = 'SELECT * FROM Hikes WHERE Hikes.' + filterType + ' = ?'
 
             } else {
-              sql = 'SELECT * FROM Hikes JOIN HikeLocations ON Hikes.HikeID = HikeLocations.HikeID WHERE HikeLocations.' + filterType + ' = ?'
+              sql = 'SELECT * FROM Hikes WHERE Hikes.' + filterType + ' = ?'
             }
-            //console.log(sql);
+            
 
             db.all(sql, [filterMinValue], (err, rows) => {
               if (err) reject(err);
               else {
 
-                const hikes = rows.map((r) => ({ HikeID: r.HikeID, Start: r.Start, End: r.End, Title: r.Title, Length: r.Length, ExpectedTime: r.ExpectedTime, Ascent: r.Ascent, Difficulty: r.Difficulty, Description: r.Description }));
-
-                resolve(hikes);
+                resolve(rows);
 
               }
             });
@@ -149,12 +176,11 @@ exports.getHikesByFilter = (filterType, filterMinValue=-8000, MaxValue = null) =
         } else {
           if (filterType == 'Length' || filterType == 'ExpectedTime' || filterType == 'Ascent') {
             let sql = 'SELECT * FROM Hikes WHERE ' + filterType + ' <= ? AND ' + filterType + ' >= ?'
-            //console.log(sql);
+            
             db.all(sql, [MaxValue, filterMinValue], (err, rows) => {
               if (err) reject(err);
               else {
-                const hikes = rows.map((r) => ({ HikeID: r.HikeID, Start: r.Start, End: r.End, Title: r.Title, Length: r.Length, ExpectedTime: r.ExpectedTime, Ascent: r.Ascent, Difficulty: r.Difficulty, Description: r.Description }));
-                resolve(hikes);
+                resolve(rows);
               }
             });
           } else {
@@ -167,3 +193,15 @@ exports.getHikesByFilter = (filterType, filterMinValue=-8000, MaxValue = null) =
   );
 }
 
+module.exports={
+  getHike,
+  getHikes,
+  getHikesByFilter,
+  getLastHikeId,
+  setDescription,
+  addHike,
+  deleteHikes,
+  editStartEndPoints,
+  hike
+
+}

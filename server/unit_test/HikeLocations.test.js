@@ -27,25 +27,33 @@ describe("Get/add HikeLocations",()=>{
     });
     test('Get all HikeLocations',async()=>{
         await expect(HL.populateLocations()).resolves.toEqual('Tables filled');
-        await expect(HL.getHikeLocations()).resolves.toEqual([
-            {
-                     "City": "Cervinia",
-                     "HikeID": "1",
-                     "Province": "Aosta",
-                   },
-        ]);
+        await expect(HL.getHikeLocations()).resolves.not.toEqual([]);
+        let hl= await HL.getHikeLocations()
+        expect(hl).toHaveLength(1)
+        expect(hl[0]).toHaveProperty('City')
+        expect(hl[0]).toHaveProperty('HikeID')
+        expect(hl[0]).toHaveProperty('Country')
+        expect(hl[0]).toHaveProperty('Region')
+        expect(hl[0].City).toEqual("Cervinia")
+        expect(hl[0].HikeID).toEqual(1)
+        expect(hl[0].Region).toEqual("Aosta")
+        expect(hl[0].Country).toEqual(null)
     });
 
     test('Get Hike location By ID', async()=>{
         await expect(HL.populateLocations()).resolves.toEqual('Tables filled');
-        await expect(HL.getHikeLocationsPerID(1)).resolves.toEqual([
-            {
-                     "City": "Cervinia",
-                     "HikeID": "1",
-                     "Province": "Aosta",
-                   },
-        ]);
-    });
+        await expect(HL.getHikeLocationsPerID(1)).resolves.not.toEqual([]);
+        let hl= await HL.getHikeLocationsPerID(1)
+
+        expect(hl).toHaveProperty('City')
+        expect(hl).toHaveProperty('HikeID')
+        expect(hl).toHaveProperty('Country')
+        expect(hl).toHaveProperty('Region')
+        expect(hl.City).toEqual("Cervinia")
+        expect(hl.HikeID).toEqual(1)
+        expect(hl.Region).toEqual("Aosta")
+        expect(hl.Country).toEqual(null)
+    })
 
 });
 

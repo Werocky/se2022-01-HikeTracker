@@ -2,10 +2,10 @@
 
 const db = require('./DB').db;
 
-exports.addReferencePoint = (RefPointID, lat, lng, type) => {
+exports.addReferencePoint = (lat, lng, type) => {
   return new Promise(async (resolve, reject) => {
-    const sql = "INSERT INTO ReferencePoints(RefPointID, Lat, Lng, Type) VALUES (?,?,?,?);";
-    db.run(sql, [RefPointID, lat, lng, type], function (err) {
+    const sql = "INSERT INTO ReferencePoints(Lat, Lng, Type) VALUES (?,?,?);";
+    db.run(sql, [lat, lng, type], function (err) {
       if (err)
         reject(err);
       else {
@@ -14,6 +14,15 @@ exports.addReferencePoint = (RefPointID, lat, lng, type) => {
     });
   });
 };
+exports.getReferencePointIDByCoords=(la,lng)=>{
+  return new Promise(async(resolve,reject)=>{
+    db.get('SELECT RefPointID FROM ReferencePoints WHERE Lat = ? AND Lng = ?',[la,lng],(err,row)=>{
+      if(err)reject('error geting ID: '+err);
+      else resolve(row.RefPointID)
+    })
+  });
+  
+}
 
 exports.updateReferencePoint = (RefPointID, lat, lng, type) =>{
   return new Promise(async (resolve, reject) =>{
@@ -40,7 +49,7 @@ exports.emptyReferencePoint = () => {
 
 exports.getStartingPoints = () => {
   return new Promise(async (resolve, reject) => {
-    const sql = "SELECT HikeID, Lat, Lng FROM HikeRefPoints JOIN ReferencePoints ON HikeRefPoints.RefPointID = ReferencePoints.RefPointID WHERE IsStart=1;";
+    const sql = "SELECT PointsOfHike.HikeID, Lat, Lng FROM PointsOfHike JOIN ReferencePoints ON PointsOfHike.PointID = ReferencePoints.RefPointID WHERE IsStart=1;";
     db.all(sql, [], function (err, rows) {
       if (err)
         reject(err);
@@ -81,7 +90,7 @@ exports.getLastRefPointID = () => {
 
 exports.getHutsAndParkingLots = () =>{
   return new Promise(async (resolve, reject) =>{
-    const sql = "SELECT RP.RefPointID, H.Name, PL.Description, RP.Type FROM ReferencePoints RP, ParkingLots PL Huts H WHERE RP.RefPointID = Huts.RefPointID AND PL.ParkingID = RF.HikeID AND Type = 'hut' OR Type = 'parking'";
+    const sql = "SELECT RP.RefPointID, H.Name, PL.Description, RP.Type FROM ReferencePoints RP, ParkingLots PL Huts H WHERE RP.RefPointID = Huts.RefPointID AND PL.ParkingID = RF.PointID AND (Type = 'hut' OR Type = 'parking')";
     db.all(sql, [], function (err, rows) {
       if(err)
         reject(err)
