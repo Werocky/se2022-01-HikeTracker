@@ -91,7 +91,25 @@ function App() {
 
 function AppLayout(props) {
   const auth = useContext(AuthContext);   // contains user information 
+  
+  const [hikes, setHikes] = useState([]);
+  const [loading, setLoading] = useState(true);
+
   const [huts, setHuts] = useState([]);
+
+  useEffect(() => {
+    const reloadHikes = async () => {
+      const hikes_array = await API.getHikes();
+      console.log(hikes_array);
+      setHikes(hikes_array);
+      setLoading(false);
+    }
+    try {
+      reloadHikes();
+    } catch (err) {
+      // handling error
+    }
+  }, []);
 
   return (
     <>
@@ -127,7 +145,7 @@ function AppLayout(props) {
         <AddHike />
       } />
       <Route path='/hikes' element={
-            <Hikes />
+            <Hikes hikes={hikes} loading={loading} />
       } />
       <Route path='/huts' element={
 

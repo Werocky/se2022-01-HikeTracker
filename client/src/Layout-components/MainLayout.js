@@ -15,24 +15,11 @@ import Hero from "../components/hero/LandingPage"
 
 function MainLayout(props) {
 
-  const [hikes, setHikes] = useState([]); //empty array of hikes
-  const [loading, setLoading] = useState(true);
-
+ 
   const auth = useContext(AuthContext);
   const navigate = useNavigate();
 
-  useEffect(() => {
-    const reloadHikes = async () => {
-      const hikes_array = await API.getHikes();
-      setHikes(hikes_array);
-      setLoading(false);
-    }
-    try {
-      reloadHikes();
-    } catch (err) {
-      // handling error
-    }
-  }, []);
+  
 
   return (
 
