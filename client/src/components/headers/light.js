@@ -58,8 +58,8 @@ export const DesktopNavLinks = tw.nav`
   hidden lg:flex flex-1 justify-between items-center
 `;
 
-function Light(props){
-  let roundedHeaderButton = false; 
+function Light(props) {
+  let roundedHeaderButton = false;
   let logoLink = props.logoLink;
   let links = props.links;
   let className = props.className;
@@ -67,6 +67,7 @@ function Light(props){
 
   const navigate = useNavigate();
   const auth = useContext(AuthContext);
+  console.log(auth);
   /*
    * This header component accepts an optionals "links" prop that specifies the links to render in the navbar.
    * This links props should be an array of "NavLinks" components which is exported from this file.
@@ -85,28 +86,34 @@ function Light(props){
       <NavLink onClick={() => navigate("/")}>About</NavLink>
       <NavLink onClick={() => navigate("/hikes")}>Hikes</NavLink>
       <NavLink onClick={() => navigate("/huts")}>Huts</NavLink>
-      <NavLink onClick={() => navigate("/addHike")}>Add a Hike</NavLink>
-      <NavLink onClick={() => navigate("/#")}>Add a Hut</NavLink>
-      <NavLink onClick={() => navigate("/#")}>Add a Parking lot</NavLink>
+      {auth.user.Role === "L" &&
+        <NavLink onClick={() => navigate("/#")}>Add a Parking lot</NavLink>
+      }
+      {auth.user.Role === "L" &&
+        <NavLink onClick={() => navigate("/addHike")}>Add a Hike</NavLink>
+      }
+      {auth.user.Role === "HM" &&
+        <NavLink onClick={() => navigate("/#")}>Add a Hut</NavLink>
+      }
       {
-      auth.login ?
-      <>
-        <NavLink onClick={() => props.logout(navigate)} tw="lg:ml-12!">
-          LogOut
-        </NavLink>
-        <PrimaryLink css={roundedHeaderButton && tw`rounded-full`} onClick={() => navigate("/profile/" + auth.user.Id)}>
-          Profile
-        </PrimaryLink>
-      </>
-      :
-      <>
-        <NavLink onClick={() => navigate("/login")} tw="lg:ml-12!">
-          Login
-        </NavLink>
-        <PrimaryLink css={roundedHeaderButton && tw`rounded-full`} onClick={ () => navigate("/register")}>
-          Sign Up
-        </PrimaryLink>
-      </>
+        auth.login ?
+          <>
+            <NavLink onClick={() => props.logout(navigate)} tw="lg:ml-12!">
+              LogOut
+            </NavLink>
+            <PrimaryLink css={roundedHeaderButton && tw`rounded-full`} onClick={() => navigate("/profile/" + auth.user.Id)}>
+              Profile
+            </PrimaryLink>
+          </>
+          :
+          <>
+            <NavLink onClick={() => navigate("/login")} tw="lg:ml-12!">
+              Login
+            </NavLink>
+            <PrimaryLink css={roundedHeaderButton && tw`rounded-full`} onClick={() => navigate("/register")}>
+              Sign Up
+            </PrimaryLink>
+          </>
       }
     </NavLinks>
   ];
@@ -115,7 +122,7 @@ function Light(props){
   const collapseBreakpointCss = collapseBreakPointCssMap[collapseBreakpointClass];
 
   const defaultLogoLink = (
-    <LogoLink onClick={ () => navigate("/")}>
+    <LogoLink onClick={() => navigate("/")}>
       <img src={logo} alt="logo" />
       Hike-Tracker
     </LogoLink>

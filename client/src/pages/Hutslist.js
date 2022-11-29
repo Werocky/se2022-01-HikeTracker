@@ -16,8 +16,8 @@ const Posts = tw.div`mt-6 sm:-mr-8 flex flex-wrap`;
 const PostContainer = styled.div`
   ${tw`mt-10 w-full sm:w-1/2 lg:w-1/3 sm:pr-8`}
   ${props =>
-          props.featured &&
-          css`
+        props.featured &&
+        css`
             ${tw`w-full!`}
             ${Post} {
               ${tw`sm:flex-row! h-full sm:pr-4`}
@@ -48,89 +48,72 @@ const ButtonContainer = tw.div`flex justify-center`;
 const LoadMoreButton = tw(PrimaryButton)`mt-16 mx-auto`;
 const PostAction = tw(PrimaryButtonBase)`w-full mt-8`;
 
-function Huts(props){
+function Huts(props) {
     const headingText = "Huts";
-    const posts = [
-        // {
-        //   imageSrc:
-        //     "https://images.unsplash.com/photo-1499678329028-101435549a4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1024&q=80",
-        //   category: "Travel Tips",
-        //   date: "April 21, 2020",
-        //   title: "Safely Travel in Foreign Countries",
-        //   description:
-        //     "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.  Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
-        //   url: "https://timerse.com",
-        //   featured: true
-        // },
-        getPlaceholderPost(),
-        getPlaceholderPost(),
-        getPlaceholderPost(),
-        getPlaceholderPost(),
-        getPlaceholderPost(),
-        getPlaceholderPost(),
-        getPlaceholderPost(),
-        getPlaceholderPost(),
-        getPlaceholderPost(),
-        getPlaceholderPost(),
-        getPlaceholderPost(),
-        getPlaceholderPost(),
-        getPlaceholderPost(),
-        getPlaceholderPost(),
-        getPlaceholderPost(),
-        getPlaceholderPost(),
-        getPlaceholderPost(),
-        getPlaceholderPost()
-    ];
+    const huts = props.huts;
 
-    const [visible, setVisible] = useState(7);
+    const [visible, setVisible] = useState(6);
+
     const onLoadMoreClick = () => {
         setVisible(v => v + 6);
+        if (visible > huts.length) {
+            setVisible(huts.length);
+        }
     };
+
+
     return (
-    <AnimationRevealPage>
-    <Header logout={props.logout}/>
-    <Container>
-        <ContentWithPaddingXl>
-            <HeadingRow>
-                <Heading>{headingText}</Heading>
-            </HeadingRow>
-            <Posts>
-                {posts.slice(0, visible).map((post, index) => (
-                    <PostContainer key={index} featured={post.featured}>
-                        <Post className="group" as="a" href={post.url}>
-                            <Image imageSrc={post.imageSrc} />
-                            <Info>
-                                <Category>{post.category}</Category>
-                                <CreationDate>{post.date}</CreationDate>
-                                <Title>{post.title}</Title>
-                                {post.featured && post.description && <Description>{post.description}</Description>}
-                                <PostAction>View details</PostAction>
-                            </Info>
-                        </Post>
-                    </PostContainer>
-                ))}
-            </Posts>
-            {visible < posts.length && (
-                <ButtonContainer>
-                    <LoadMoreButton onClick={onLoadMoreClick}>Load More</LoadMoreButton>
-                </ButtonContainer>
-            )}
-        </ContentWithPaddingXl>
-    </Container>
-    {/*<Footer />*/}
-    </AnimationRevealPage>
+        <AnimationRevealPage>
+            <Header logout={props.logout} />
+            <Container>
+                <ContentWithPaddingXl>
+                    <HeadingRow>
+                        <Heading>{headingText}</Heading>
+                    </HeadingRow>
+                    {!props.loading &&
+                        <Posts>
+                            {huts.slice(0, visible).map((hut, index) => (
+                                <HutElement key={index} hut={hut} />
+                            ))}
+                        </Posts>
+                    }
+                    {!props.loading && (
+                        <ButtonContainer>
+                            <LoadMoreButton onClick={onLoadMoreClick}>Load More</LoadMoreButton>
+                        </ButtonContainer>
+                    )}
+                </ContentWithPaddingXl>
+            </Container>
+            {/*<Footer />*/}
+        </AnimationRevealPage>
     );
 }
 
-export default Huts;
+function HutElement(props) {
 
-const getPlaceholderPost = () => ({
-    imageSrc:
-        "https://images.unsplash.com/photo-1418854982207-12f710b74003?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1024&q=80",
-    category: "Travel Guide",
-    date: "April 19, 2020",
-    title: "Visit the beautiful Alps in Switzerland",
-    description:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.  Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
-    url: "https://reddit.com"
-});
+    const hut = props.hut;
+    const imageSrc = "https://images.unsplash.com/photo-1418854982207-12f710b74003?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1024&q=80";
+    
+    let loc = hut.City?hut.City+", ":"" ;
+    loc += hut.Province?hut.Province+", ":"";
+    loc += hut.Region?hut.Region+", ":""
+    loc += hut.Country?hut.Country:"";
+
+    return (
+        <PostContainer key={props.index}>
+            <Post className="group" as="a">
+                <Image imageSrc={imageSrc} />
+                <Info>
+                    <Title>{hut.Name}</Title>
+                    <Category>{hut.Elevation} mt</Category>
+                    <CreationDate>date</CreationDate>
+                    <Description>{loc}</Description>
+                    <PostAction>View details</PostAction>
+                </Info>
+            </Post>
+        </PostContainer>
+    )
+}
+
+
+export default Huts;

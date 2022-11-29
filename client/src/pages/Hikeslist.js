@@ -1,4 +1,4 @@
-import React, { useState,useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import AnimationRevealPage from "../helpers/AnimationRevealPage.js";
 import { Container, ContentWithPaddingXl } from "../components/misc/Layouts";
 import tw from "twin.macro";
@@ -59,55 +59,53 @@ function HikeList(props) {
 
   const [visible, setVisible] = useState(6);
 
-  const [sortTypeDesc, setSortTypeDesc] = useState('TitleDesc');
+  const [sortTypeDesc, setSortTypeDesc] = useState('TitleAsc');
 
   useEffect(() => {
     if (sortTypeDesc !== "") {
       const sortArray = type => {
         const types = {
-          TitleDesc: 'Title-Desc',
-          LengthDesc: 'Length-Desc',
-          AscentDesc: 'Ascent-Desc',
-          DifficultyDesc: 'Difficulty-Desc',
-          ExpectedTimeDesc: 'ExpectedTime-Desc',
           TitleAsc: 'Title-Asc',
+          TitleDesc: 'Title-Desc',
           LengthAsc: 'Length-Asc',
+          LengthDesc: 'Length-Desc',
           AscentAsc: 'Ascent-Asc',
+          AscentDesc: 'Ascent-Desc',
           DifficultyAsc: 'Difficulty-Asc',
-          ExpectedTimeAsc: 'ExpectedTime-Asc'
+          DifficultyDesc: 'Difficulty-Desc',
+          ExpectedTimeAsc: 'ExpectedTime-Asc',
+          ExpectedTimeDesc: 'ExpectedTime-Desc',
         };
-         let sortProperty = types[type].split("-")[0];
-         let sorted;
-         if(types[type].split("-")[1]==="Desc")
-         {
-            if (sortProperty === "Title" || sortProperty === "Difficulty")
+        let sortProperty = types[type].split("-")[0];
+        let sorted;
+        if (types[type].split("-")[1] === "Desc") {
+          if (sortProperty === "Title" || sortProperty === "Difficulty")
             sorted = [...props.hikes].sort((a, b) => {
               if (a[sortProperty].trim() > b[sortProperty].trim()) { return -1 }
               if (a[sortProperty].trim() < b[sortProperty].trim())
                 return 1
               return 0
             });
-            else {
-              sorted = [...props.hikes].sort((a, b) => b[sortProperty] - a[sortProperty]);
+          else {
+            sorted = [...props.hikes].sort((a, b) => b[sortProperty] - a[sortProperty]);
           }
-         }
+        }
 
-         else
-         {
+        else {
           if (sortProperty === "Title" || sortProperty === "Difficulty")
-          sorted = [...props.hikes].sort((a, b) => {
-            if (a[sortProperty].trim() > b[sortProperty].trim()) { return 1 }
-            if (a[sortProperty].trim() < b[sortProperty].trim())
-              return -1
-            return 0
-          });
-          else 
-          sorted = [...props.hikes].sort((a, b) => a[sortProperty] - b[sortProperty]);
-         }
-        
-     
-    props.setHikes(sorted);
-  };
+            sorted = [...props.hikes].sort((a, b) => {
+              if (a[sortProperty].trim() > b[sortProperty].trim()) { return 1 }
+              if (a[sortProperty].trim() < b[sortProperty].trim())
+                return -1
+              return 0
+            });
+          else
+            sorted = [...props.hikes].sort((a, b) => a[sortProperty] - b[sortProperty]);
+        }
+
+
+        props.setHikes(sorted);
+      };
       sortArray(sortTypeDesc);
       setSortTypeDesc("");
     }
@@ -130,22 +128,22 @@ function HikeList(props) {
           <HeadingRow>
             <Heading>{headingText}</Heading>
           </HeadingRow>
-            <FormContainer>
-        <Form.Select aria-label="Default select example"  onChange={(event) => {
-             setSortTypeDesc(event.target.value);
+          <FormContainer>
+            <Form.Select aria-label="Default select example" onChange={(event) => {
+              setSortTypeDesc(event.target.value);
             }}>
-          <option value="TitleDesc">Title  (Descendent)</option>
-          <option value="LengthDesc" >Length - km (Descendent)</option>
-          <option value="AscentDesc" >Ascent - m (Descendent)</option>
-          <option value="DifficultyDesc" >Difficulty (Descendent) </option>
-          <option value="ExpectedTimeDesc" >Expected time - h:m (Descendent)</option>
-          <option value="TitleAsc">Title (Ascendent)</option>
-          <option value="LengthAsc" >Length - km (Ascendent)</option>
-          <option value="AscentAsc" >Ascent - m (Ascendent)</option>
-          <option value="DifficultyAsc" >Difficulty (Ascendent)</option>
-          <option value="ExpectedTimeAsc" >Expected time - h:m (Ascendent)</option>
-        </Form.Select>
-            </FormContainer>
+              <option value="TitleAsc">Title (Ascendent)</option>
+              <option value="TitleDesc">Title  (Descendent)</option>
+              <option value="LengthAsc" >Length - km (Ascendent)</option>
+              <option value="LengthDesc" >Length - km (Descendent)</option>
+              <option value="AscentAsc" >Ascent - m (Ascendent)</option>
+              <option value="AscentDesc" >Ascent - m (Descendent)</option>
+              <option value="DifficultyAsc" >Difficulty (Ascendent)</option>
+              <option value="DifficultyDesc" >Difficulty (Descendent) </option>
+              <option value="ExpectedTimeAsc" >Expected time - h:m (Ascendent)</option>
+              <option value="ExpectedTimeDesc" >Expected time - h:m (Descendent)</option>
+            </Form.Select>
+          </FormContainer>
           {!props.loading &&
             <Posts>
               {hikes.slice(0, visible).map((hike, index) => (
@@ -172,14 +170,14 @@ function HikeElement(props) {
   const navigate = useNavigate();
 
   const hike = props.hike;
-  const imageSrc =  "https://images.unsplash.com/photo-1418854982207-12f710b74003?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1024&q=80";
+  const imageSrc = "https://images.unsplash.com/photo-1418854982207-12f710b74003?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1024&q=80";
 
   let hh = Math.floor(hike.ExpectedTime / 60);
   let mm = Math.floor(hike.ExpectedTime % 60);
   let dd = 0;
   let time = "";
-  if(hh > 24) {
-    dd =  Math.floor(hh / 24);
+  if (hh > 24) {
+    dd = Math.floor(hh / 24);
     hh = Math.floor(hh % 24)
     time = dd + " days, " + hh + " hours, " + mm + " minutes";
   } else {
@@ -189,18 +187,18 @@ function HikeElement(props) {
 
 
   return (
-    <PostContainer key={props.index} /*featured={props.featured}*/>
-      <Post className="group" as="a" /*href={post.url}*/>
+    <PostContainer key={props.index} >
+      <Post className="group" as="a" >
         <Image imageSrc={imageSrc} />
         <Info>
           <Category>
             {
-            hike.Difficulty === "T" ? "Tourist (T)"
-            : hike.Difficulty === "H" ? "Hiker (H)"
-            : hike.Difficulty === "PH" ? "Professional Hiker (PH)" : ""
+              hike.Difficulty === "T" ? "Tourist (T)"
+                : hike.Difficulty === "H" ? "Hiker (H)"
+                  : hike.Difficulty === "PH" ? "Professional Hiker (PH)" : ""
 
             }
-            </Category>
+          </Category>
 
           <CreationDate>dd/mm/yyyy</CreationDate>
           <Title>{hike.Title}</Title>
@@ -209,8 +207,8 @@ function HikeElement(props) {
           <Description> <span tw="text-primary-500">Ascent:</span> {hike.Ascent} mt</Description>
           <Description> <span tw="text-primary-500">Expected Time:</span> {time}</Description>
           <Description>City/Province/Region/Country</Description>
-            
-          <PostAction onClick={()=>{navigate('/'+hike.HikeID)}}>View details</PostAction>
+
+          <PostAction onClick={() => { navigate('/' + hike.HikeID) }}>View details</PostAction>
         </Info>
 
       </Post>

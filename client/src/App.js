@@ -93,19 +93,25 @@ function AppLayout(props) {
   const auth = useContext(AuthContext);   // contains user information 
   
   const [hikes, setHikes] = useState([]);
+  const [huts, setHuts] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  const [huts, setHuts] = useState([]);
 
   useEffect(() => {
     const reloadHikes = async () => {
       const hikes_array = await API.getHikes();
       console.log(hikes_array);
       setHikes(hikes_array);
-      setLoading(false);
+    }
+    const reloadHuts = async () => {
+      const huts_array = await API.getHutsFilters();
+      console.log(huts_array);
+      setHuts(huts_array);
     }
     try {
       reloadHikes();
+      reloadHuts();
+      setLoading(false);
     } catch (err) {
       // handling error
     }
@@ -149,7 +155,7 @@ function AppLayout(props) {
       } />
       <Route path='/huts' element={
 
-            <Huts logout={props.logout} />
+            <Huts huts={huts} loading={loading} setHuts={setHuts} logout={props.logout} />
       } />
 
       <Route path='/profile/:userId' element={
