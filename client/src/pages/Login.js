@@ -6,7 +6,6 @@ import styled from "styled-components";
 import {css} from "styled-components/macro"; //eslint-disable-line
 import illustration from "../images/login-illustration.svg";
 import logo from "../images/logo.svg";
-import API from '../API.js';
 
 import { ReactComponent as LoginIcon } from "feather-icons/dist/icons/log-in.svg";
 import { useNavigate } from "react-router-dom";
@@ -57,7 +56,7 @@ function Register(props){
   const handleSubmit = async (event) => {
     event.preventDefault();
     const credentials = { email: email, password };
-    await API.logIn(credentials);
+    await props.login(credentials);
     navigate('/');
   };
 

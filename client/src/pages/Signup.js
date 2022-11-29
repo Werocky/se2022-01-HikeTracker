@@ -7,7 +7,6 @@ import { css } from "styled-components/macro"; //eslint-disable-line
 import illustration from "../images/signup-illustration.svg";
 import logo from "../images/logo.svg";
 import bcrypt from 'bcryptjs';
-import API from '../API.js';
 
 import { ReactComponent as SignUpIcon } from "feather-icons/dist/icons/user-plus.svg";
 import { useNavigate } from "react-router-dom";
@@ -67,7 +66,7 @@ function Login(props){
     bcrypt.genSalt(10, function(err, salt) {
       bcrypt.hash(password, salt, async function(err, hashedPassword) {
         const credentials = { Id: email, Role: role, Salt: salt, Hash: hashedPassword };
-        API.register(credentials);
+        props.register(credentials);
         navigate('/'/*+ user.id*/);//TODO
       });
     });

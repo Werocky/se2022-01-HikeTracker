@@ -133,12 +133,12 @@ function AppLayout(props) {
           <HikeDetail />
       } />   {/* for test*/}
         <Route path='/register' element={
-              <Register/>
+              <Register logout={props.register}/>
         // <RegisterComponent register={props.register} />
 
       } />
       <Route path='/login' element={
-          <Login/>
+          <Login login={props.login}/>
         // < LoginComponent  login={props.login} />
       } />
       <Route path='/addHike' element={
