@@ -34,15 +34,15 @@ const PostContainer = styled.div`
       }
     `}
 `;
-const Post = tw.div`cursor-pointer flex flex-col bg-gray-100 rounded-lg`;
+const Post = tw.div` flex flex-col bg-gray-100 rounded-lg`;
 const Image = styled.div`
   ${props => css`background-image: url("${props.imageSrc}");`}
-  ${tw`h-64 w-full bg-cover bg-center rounded-t-lg`}
+  ${tw`h-48 w-full bg-cover bg-center rounded-t-lg`}
 `;
 const Info = tw.div`p-8 border-2 border-t-0 rounded-lg rounded-t-none`;
-const Category = tw.div`uppercase text-primary-500 text-xs font-bold tracking-widest leading-loose after:content after:block after:border-b-2 after:border-primary-500 after:w-8`;
+const Category = tw.div`text-primary-500 text-xs font-bold tracking-widest leading-loose after:content after:block after:border-b-2 after:border-primary-500 after:w-8`;
 const CreationDate = tw.div`mt-4 uppercase text-gray-600 italic font-semibold text-xs`;
-const Title = tw.div`mt-1 font-black text-2xl text-gray-900 group-hover:text-primary-500 transition duration-300`;
+const Title = tw.div`mt-1 font-black text-xl text-gray-900 group-hover:text-primary-500 transition duration-300 truncate `;
 const Description = tw.div``;
 
 const ButtonContainer = tw.div`flex justify-center`;
@@ -198,12 +198,11 @@ function HikeElement(props) {
             </Category>
 
           <CreationDate>dd/mm/yyyy</CreationDate>
-
           <Title>{hike.Title}</Title>
 
-          <Description>Length: {hike.Length} km</Description>
-          <Description>Ascent: {hike.Ascent} mt</Description>
-          <Description>Expected Time: {time}</Description>
+          <Description> <span tw="text-primary-500">Length:</span> {hike.Length} km</Description>
+          <Description> <span tw="text-primary-500">Ascent:</span> {hike.Ascent} mt</Description>
+          <Description> <span tw="text-primary-500">Expected Time:</span> {time}</Description>
           <Description>City/Province/Region/Country</Description>
             
           <PostAction>View details</PostAction>
