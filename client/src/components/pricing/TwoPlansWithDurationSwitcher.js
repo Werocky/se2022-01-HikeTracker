@@ -68,13 +68,13 @@ const DecoratorBlob2 = styled(SvgDecoratorBlob2)`
   ${tw`pointer-events-none -z-20 absolute right-0 top-0 h-64 w-64 opacity-25 transform translate-x-2/3 translate-y-1/2 fill-current text-teal-300`}
 `;
 
-export default ({
-  subheading = "Pricing",
-  heading = "Flexible Plans.",
-  description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-  plans = null,
-  primaryButtonText = "Buy Now",
-  planDurations = [
+function TwoPlansWithDurationSwitcher(props){
+  const subheading = "Pricing";
+  const heading = "Flexible Plans.";
+  const description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.";
+  let plans = props.plans;
+  const primaryButtonText = "Buy Now";
+  const planDurations = [
     {
       text: "Month",
       switcherText: "Monthly",
@@ -83,8 +83,8 @@ export default ({
       text: "Year",
       switcherText: "Yearly",
     }
-  ]
-}) => {
+  ];
+
   const defaultPlans = [
     {
       name: "Free Plan",
@@ -148,4 +148,6 @@ export default ({
       <DecoratorBlob2 />
     </Container>
   );
-};
+}
+
+export default TwoPlansWithDurationSwitcher;

@@ -36,45 +36,47 @@ const Textarea = styled(Input).attrs({as: "textarea"})`
 
 const SubmitButton = tw(PrimaryButtonBase)`inline-block mt-8`
 
-export default ({
-                  //subheading = "Add a hike here",
-                  heading = <>Add a hike here</>,
-                  description = "Add a hike with following parameters and the gpx file.",
-                  submitButtonText = "Confirm",
-                  formAction = "#",
-                  formMethod = "get",
-                  textOnLeft = true,
-                }) => {
-  // The textOnLeft boolean prop can be used to display either the text on left or right side of the image.
+function TwoColContactUsWithIllustrationFullForm(props){
+  //subheading = "Add a hike here",
+  const heading = <>Add a hike here</>;
+  const description = "Add a hike with following parameters and the gpx file.";
+  const submitButtonText = "Confirm";
+  const formAction = "#";
+  const formMethod = "get";
+  const textOnLeft = true;
+
+// The textOnLeft boolean prop can be used to display either the text on left or right side of the image.
 
   return (
-      <AnimationRevealPage>
-          <Header />
-      <Container>
-        <TwoColumn>
-          <ImageColumn>
-              {/*put the picture or map here*/}
-            <Image imageSrc={EmailIllustrationSrc} />
-          </ImageColumn>
-          <TextColumn textOnLeft={textOnLeft}>
-            <TextContent>
-              {/*{subheading && <Subheading>{subheading}</Subheading>}*/}
-              <Heading>{heading}</Heading>
-              {description && <Description>{description}</Description>}
-
-              <Form action={formAction} method={formMethod}>
-                <Input type="email" name="email" placeholder="Your Email Address" />
-                <Input type="text" name="name" placeholder="Full Name" />
-                <Input type="text" name="subject" placeholder="Subject" />
-                <Textarea name="message" placeholder="Your Message Here" />
-                <SubmitButton type="submit">{submitButtonText}</SubmitButton>
-              </Form>
-
-
-            </TextContent>
-          </TextColumn>
-        </TwoColumn>
-      </Container>
-      </AnimationRevealPage>
+    <AnimationRevealPage>
+    <Header logout={props.logout}/>
+    <Container>
+    <TwoColumn>
+    <ImageColumn>
+    {/*put the picture or map here*/}
+    <Image imageSrc={EmailIllustrationSrc} />
+    </ImageColumn>
+    <TextColumn textOnLeft={textOnLeft}>
+    <TextContent>
+    {/*{subheading && <Subheading>{subheading}</Subheading>}*/}
+    <Heading>{heading}</Heading>
+    {description && <Description>{description}</Description>}
+    
+    <Form action={formAction} method={formMethod}>
+    <Input type="email" name="email" placeholder="Your Email Address" />
+    <Input type="text" name="name" placeholder="Full Name" />
+    <Input type="text" name="subject" placeholder="Subject" />
+    <Textarea name="message" placeholder="Your Message Here" />
+    <SubmitButton type="submit">{submitButtonText}</SubmitButton>
+    </Form>
+    
+    
+    </TextContent>
+    </TextColumn>
+    </TwoColumn>
+    </Container>
+    </AnimationRevealPage>
   );
-};
+}
+
+export default TwoColContactUsWithIllustrationFullForm;

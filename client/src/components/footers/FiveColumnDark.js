@@ -7,6 +7,7 @@ import LogoImage from "images/logo-light.svg";
 import { ReactComponent as FacebookIcon } from "images/facebook-icon.svg";
 import { ReactComponent as TwitterIcon } from "images/twitter-icon.svg";
 import { ReactComponent as YoutubeIcon } from "images/youtube-icon.svg";
+import { useNavigate } from "react-router-dom";
 
 const Container = tw.div`relative bg-gray-900 text-gray-100 -mx-8 -mb-8 px-8`;
 const Content = tw.div`max-w-screen-xl mx-auto pt-16 pb-8`
@@ -40,7 +41,11 @@ const CopyrightNotice = tw.div``
 const CompanyInfo = tw.div``
 
 const Divider = tw.div`my-8 border-b-2 border-gray-800`
-export default () => {
+
+function FiveColumnDark(props){
+
+  const navigate = useNavigate();
+
   return (
     <Container>
       <Content>
@@ -56,13 +61,13 @@ export default () => {
               California 40234
             </CompanyAddress>
             <SocialLinksContainer>
-              <SocialLink href="https://facebook.com">
+              <SocialLink onClick={ () => navigate("https://facebook.com")}>
                 <FacebookIcon />
               </SocialLink>
-              <SocialLink href="https://twitter.com">
+              <SocialLink onClick={ () => navigate("https://twitter.com")}>
                 <TwitterIcon />
               </SocialLink>
-              <SocialLink href="https://youtube.com">
+              <SocialLink onClick={ () => navigate("https://youtube.com")}>
                 <YoutubeIcon />
               </SocialLink>
             </SocialLinksContainer>
@@ -71,16 +76,16 @@ export default () => {
             <ColumnHeading>Quick Links</ColumnHeading>
             <LinkList>
               <LinkListItem>
-                <Link href="#">Blog</Link>
+                <Link onClick={ () => navigate("#")}>Blog</Link>
               </LinkListItem>
               <LinkListItem>
-                <Link href="#">FAQs</Link>
+                <Link onClick={ () => navigate("#")}>FAQs</Link>
               </LinkListItem>
               <LinkListItem>
-                <Link href="#">Support</Link>
+                <Link onClick={ () => navigate("#")}>Support</Link>
               </LinkListItem>
               <LinkListItem>
-                <Link href="#">About Us</Link>
+                <Link onClick={ () => navigate("#")}>About Us</Link>
               </LinkListItem>
             </LinkList>
           </Column>
@@ -88,16 +93,16 @@ export default () => {
             <ColumnHeading>Product</ColumnHeading>
             <LinkList>
               <LinkListItem>
-                <Link href="#">Log In</Link>
+                <Link onClick={ () => navigate("#")}>Log In</Link>
               </LinkListItem>
               <LinkListItem>
-                <Link href="#">Personal</Link>
+                <Link onClick={ () => navigate("#")}>Personal</Link>
               </LinkListItem>
               <LinkListItem>
-                <Link href="#">Business</Link>
+                <Link onClick={ () => navigate("#")}>Business</Link>
               </LinkListItem>
               <LinkListItem>
-                <Link href="#">Team</Link>
+                <Link onClick={ () => navigate("#")}>Team</Link>
               </LinkListItem>
             </LinkList>
           </Column>
@@ -105,16 +110,16 @@ export default () => {
             <ColumnHeading>Legal</ColumnHeading>
             <LinkList>
               <LinkListItem>
-                <Link href="#">GDPR</Link>
+                <Link onClick={ () => navigate("#")}>GDPR</Link>
               </LinkListItem>
               <LinkListItem>
-                <Link href="#">Privacy Policy</Link>
+                <Link onClick={ () => navigate("#")}>Privacy Policy</Link>
               </LinkListItem>
               <LinkListItem>
-                <Link href="#">Terms of Service</Link>
+                <Link onClick={ () => navigate("#")}>Terms of Service</Link>
               </LinkListItem>
               <LinkListItem>
-                <Link href="#">Disclaimer</Link>
+                <Link onClick={ () => navigate("#")}>Disclaimer</Link>
               </LinkListItem>
             </LinkList>
           </Column>
@@ -125,13 +130,13 @@ export default () => {
                 +1 (234) (567)-8901
               </LinkListItem>
               <LinkListItem>
-                <Link href="mailto:support@servana.com">support@servana.com</Link>
+                <Link onClick={ () => navigate("mailto:support@servana.com")}>support@servana.com</Link>
               </LinkListItem>
               <LinkListItem>
-                <Link href="#">Sales</Link>
+                <Link onClick={ () => navigate("#")}>Sales</Link>
               </LinkListItem>
               <LinkListItem>
-                <Link href="#">Report Abuse</Link>
+                <Link onClick={ () => navigate("#")}>Report Abuse</Link>
               </LinkListItem>
             </LinkList>
           </Column>
@@ -144,4 +149,6 @@ export default () => {
       </Content>
     </Container>
   );
-};
+}
+
+export default FiveColumnDark;

@@ -8,6 +8,7 @@ import TeamIllustrationSrc from "images/team-illustration-2.svg";
 import { ReactComponent as SvgDotPattern } from "images/dot-pattern.svg";
 import { ReactComponent as BriefcaseIcon } from "feather-icons/dist/icons/briefcase.svg";
 import { ReactComponent as MoneyIcon } from "feather-icons/dist/icons/dollar-sign.svg";
+import { useNavigate } from "react-router-dom";
 
 const Container = tw.div`relative`;
 const TwoColumn = tw.div`flex flex-col md:flex-row justify-between max-w-screen-xl mx-auto py-20 md:py-24 items-center`;
@@ -59,28 +60,28 @@ const PrimaryButton = styled(PrimaryButtonBase)(props => [
   props.buttonRounded && tw`rounded-full`
 ]);
 
-export default ({
-  subheading = "Our Expertise",
-  heading = (
+function TwoColWithHorizontalFeaturesAndButton(props){
+  const subheading = "Our Expertise";
+  const heading = (
     <>
       Designed & Developed by <span tw="text-primary-500">Professionals.</span>
     </>
-  ),
-  description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
-  primaryButtonText = "Learn More",
-  primaryButtonUrl = "https://timerse.com",
-  imageSrc = TeamIllustrationSrc,
-  buttonRounded = true,
-  imageRounded = true,
-  imageBorder = false,
-  imageShadow = false,
-  showDecoratorBlob = false,
-  textOnLeft = true,
-  features = null,
-  iconRoundedFull = true,
-  iconFilled = true,
-  iconContainerCss = null
-}) => {
+  );
+  const description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.";
+  const primaryButtonText = "Learn More";
+  const primaryButtonUrl = "https://timerse.com";
+  const imageSrc = TeamIllustrationSrc;
+  const buttonRounded = true;
+  const imageRounded = true;
+  const imageBorder = false;
+  const imageShadow = false;
+  const showDecoratorBlob = false;
+  const textOnLeft = true;
+  let features = props.features;
+  const iconRoundedFull = true;
+  const iconFilled = true;
+  let iconContainerCss = props.iconContainerCSS;
+
   // The textOnLeft boolean prop can be used to display either the text on left or right side of the image.
 
   /*
@@ -103,6 +104,8 @@ export default ({
   ];
 
   if (!features) features = defaultFeatures;
+
+  const navigate = useNavigate();
 
   return (
     <Container>
@@ -134,7 +137,7 @@ export default ({
               ))}
             </Features>
 
-            <PrimaryButton buttonRounded={buttonRounded} as="a" href={primaryButtonUrl}>
+            <PrimaryButton buttonRounded={buttonRounded} as="a" onClick={ () => navigate(primaryButtonUrl)}>
               {primaryButtonText}
             </PrimaryButton>
           </TextContent>
@@ -142,4 +145,6 @@ export default ({
       </TwoColumn>
     </Container>
   );
-};
+}
+
+export default TwoColWithHorizontalFeaturesAndButton;

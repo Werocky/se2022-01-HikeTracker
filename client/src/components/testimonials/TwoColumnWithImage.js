@@ -69,12 +69,12 @@ const DecoratorBlob2 = tw(
   SvgDecoratorBlob2
 )`absolute w-32 bottom-0 right-0 -z-10 text-pink-500 opacity-15 transform translate-x-2/3 translate-y-8`;
 
-export default () => {
-  /*
+function TwoColumnWithImage(props){
+   /*
    * You can modify the testimonials shown by modifying the array below
    * You can add or remove objects from the array as you need.
    */
-  const testimonials = [
+   const testimonials = [
     {
       imageSrc:
         "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=3.25&w=512&h=512&q=80",
@@ -100,6 +100,7 @@ export default () => {
       customerTitle: "Event Manager, Brite"
     }
   ];
+  
   return (
     <Container>
       <Content>
@@ -134,4 +135,6 @@ export default () => {
       <DecoratorBlob2 />
     </Container>
   );
-};
+}
+
+export default TwoColumnWithImage;

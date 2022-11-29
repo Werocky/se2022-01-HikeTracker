@@ -27,7 +27,8 @@ const Statistic = tw.div`text-lg sm:text-2xl lg:text-3xl w-1/2 mt-4 lg:mt-10 tex
 const Value = tw.div`font-bold text-primary-500`
 const Key = tw.div`font-medium text-gray-700`
 
-export default ({textOnLeft = false}) => {
+function TwoColSingleFeatureWithStats(props){
+  const textOnLeft = false
   // The textOnLeft boolean prop can be used to display either the text on left or right side of the image.
   //Change the statistics variable as you like, add or delete objects
   const statistics = [
@@ -71,5 +72,7 @@ export default ({textOnLeft = false}) => {
         </TextColumn>
       </TwoColumn>
     </Container>
-  );
-};
+  );  
+}
+
+export default TwoColSingleFeatureWithStats;

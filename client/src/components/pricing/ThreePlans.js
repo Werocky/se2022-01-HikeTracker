@@ -82,13 +82,13 @@ const DecoratorBlob = styled(SvgDecoratorBlob)`
 `;
 
 
-export default ({
-  subheading = "Pricing",
-  heading = "Flexible Plans.",
-  description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-  plans = null,
-  primaryButtonText = "Buy Now"
-}) => {
+function ThreePlans(props){
+  const subheading = "Pricing";
+  const heading = "Flexible Plans.";
+  const description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.";
+  let plans = props.plans;
+  const primaryButtonText = "Buy Now";
+
   const defaultPlans = [
     {
       name: "Personal",
@@ -166,4 +166,6 @@ export default ({
       </ContentWithPaddingXl>
     </Container>
   );
-};
+}
+
+export default ThreePlans;

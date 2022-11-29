@@ -7,6 +7,7 @@ import LogoImage from "../../images/logo.svg";
 import { ReactComponent as FacebookIcon } from "../../images/facebook-icon.svg";
 import { ReactComponent as TwitterIcon } from "../../images/twitter-icon.svg";
 import { ReactComponent as YoutubeIcon } from "../../images/youtube-icon.svg";
+import { Navigate, useNavigate } from "react-router-dom";
 
 const Container = tw.div`relative bg-gray-200 -mx-8 -mb-8 px-8`;
 const FiveColumns = tw.div`max-w-screen-xl mx-auto py-16 lg:py-20 flex flex-wrap justify-between`;
@@ -34,7 +35,8 @@ const SocialLink = styled.a`
   }
 `;
 
-export default () => {
+function SimpleFiveColumn(props){
+  const navigate = useNavigate();
   return (
     <Container>
       <FiveColumns>
@@ -47,13 +49,13 @@ export default () => {
             Treact is an Internet Technology company providing design resources such as website templates and themes.
           </CompanyDescription>
           <SocialLinksContainer>
-            <SocialLink href="https://facebook.com">
+            <SocialLink onClick={ () => navigate("https://facebook.com")}>
               <FacebookIcon />
             </SocialLink>
-            <SocialLink href="https://twitter.com">
+            <SocialLink onClick={ () => navigate("https://twitter.com")}>
               <TwitterIcon />
             </SocialLink>
-            <SocialLink href="https://youtube.com">
+            <SocialLink onClick={ () => navigate("https://youtube.com")}>
               <YoutubeIcon />
             </SocialLink>
           </SocialLinksContainer>
@@ -62,16 +64,16 @@ export default () => {
           <ColumnHeading>Quick Links</ColumnHeading>
           <LinkList>
             <LinkListItem>
-              <Link href="#">Blog</Link>
+              <Link onClick={ () => navigate("#")}>Blog</Link>
             </LinkListItem>
             <LinkListItem>
-              <Link href="#">FAQs</Link>
+              <Link onClick={ () => navigate("#")}>FAQs</Link>
             </LinkListItem>
             <LinkListItem>
-              <Link href="#">Support</Link>
+              <Link onClick={ () => navigate("#")}>Support</Link>
             </LinkListItem>
             <LinkListItem>
-              <Link href="#">About Us</Link>
+              <Link onClick={ () => navigate("#")}>About Us</Link>
             </LinkListItem>
           </LinkList>
         </Column>
@@ -79,16 +81,16 @@ export default () => {
           <ColumnHeading>Product</ColumnHeading>
           <LinkList>
             <LinkListItem>
-              <Link href="#">Log In</Link>
+              <Link onClick={ () => navigate("#")}>Log In</Link>
             </LinkListItem>
             <LinkListItem>
-              <Link href="#">Personal</Link>
+              <Link onClick={ () => navigate("#")}>Personal</Link>
             </LinkListItem>
             <LinkListItem>
-              <Link href="#">Business</Link>
+              <Link onClick={ () => navigate("#")}>Business</Link>
             </LinkListItem>
             <LinkListItem>
-              <Link href="#">Team</Link>
+              <Link onClick={ () => navigate("#")}>Team</Link>
             </LinkListItem>
           </LinkList>
         </Column>
@@ -96,20 +98,22 @@ export default () => {
           <ColumnHeading>Legal</ColumnHeading>
           <LinkList>
             <LinkListItem>
-              <Link href="#">GDPR</Link>
+              <Link onClick={ () => navigate("#")}>GDPR</Link>
             </LinkListItem>
             <LinkListItem>
-              <Link href="#">Privacy Policy</Link>
+              <Link onClick={ () => navigate("#")}>Privacy Policy</Link>
             </LinkListItem>
             <LinkListItem>
-              <Link href="#">Terms of Service</Link>
+              <Link onClick={ () => navigate("#")}>Terms of Service</Link>
             </LinkListItem>
             <LinkListItem>
-              <Link href="#">Disclaimer</Link>
+              <Link onClick={ () => navigate("#")}>Disclaimer</Link>
             </LinkListItem>
           </LinkList>
         </Column>
       </FiveColumns>
     </Container>
   );
-};
+}
+
+export default SimpleFiveColumn;

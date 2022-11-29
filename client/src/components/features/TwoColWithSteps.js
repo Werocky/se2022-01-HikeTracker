@@ -39,22 +39,22 @@ const StepText = tw.div`mt-3 md:mt-0 md:ml-6`;
 const StepHeading = tw.h6`leading-none text-xl font-semibold`;
 const StepDescription = tw.p`mt-3 max-w-xs leading-loose text-sm text-gray-600 font-medium`;
 
-export default ({
-  subheading = "Our Expertise",
-  heading = (
+function TwoColWithSteps(props){
+  const subheading = "Our Expertise";
+  const heading = (
     <>
       Designed & Developed by <span tw="text-primary-500">Professionals.</span>
     </>
-  ),
-  imageSrc = TeamIllustrationSrc,
-  imageRounded = true,
-  imageBorder = false,
-  imageShadow = false,
-  imageDecoratorBlob = false,
-  textOnLeft = true,
-  steps = null,
-  decoratorBlobCss = null,
-}) => {
+  );
+  const imageSrc = TeamIllustrationSrc;
+  const imageRounded = true;
+  const imageBorder = false;
+  const imageShadow = false;
+  const imageDecoratorBlob = false;
+  const textOnLeft = true;
+  let steps = props.steps;
+  let decoratorBlobCss = props.decoratorBlobCss;
+
   // The textOnLeft boolean prop can be used to display either the text on left or right side of the image.
 
   const defaultSteps = [
@@ -101,4 +101,6 @@ export default ({
       </TwoColumn>
     </Container>
   );
-};
+}
+
+export default TwoColWithSteps;

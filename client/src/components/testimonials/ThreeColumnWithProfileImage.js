@@ -22,10 +22,10 @@ const DecoratorBlob2 = styled(SvgDecoratorBlob2)`
   ${tw`pointer-events-none -z-20 absolute right-0 bottom-0 h-64 w-64 opacity-15 transform translate-x-2/3 text-yellow-500`}
 `;
 
-export default ({
-  subheading = "Testimonials",
-  heading = "Customer's Review",
-  testimonials = [
+function ThreeColumnWithProfileImage(props){
+  const subheading = "Testimonials";
+  const heading = "Customer's Review";
+  const testimonials = [
     {
       imageSrc:
         "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=3.25&w=512&h=512&q=80",
@@ -47,8 +47,8 @@ export default ({
         "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia.",
       customerName: "Steven Marcetti"
     }
-  ]
-}) => {
+  ];
+
   return (
     <Container>
       <ContentWithPaddingXl>
@@ -71,4 +71,6 @@ export default ({
       <DecoratorBlob2 />
     </Container>
   );
-};
+}
+
+export default ThreeColumnWithProfileImage;

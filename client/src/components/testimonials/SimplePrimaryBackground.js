@@ -47,11 +47,11 @@ const ControlButton = styled.button`
   }
 `;
 
-export default ({
-  subheading = "",
-  heading = "Testimonials",
-  description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-  testimonials = [
+function SimplePrimaryBackground(props){
+  const subheading = "";
+  const heading = "Testimonials";
+  const description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.";
+  const testimonials = [
     {
       customerName: "David Hanson",
       customerProfile: "CEO, Koalify",
@@ -76,8 +76,8 @@ export default ({
       quote:
         "It has been 8 months since we have switched to servana and it has nothing but an amazing experience. The cost is affordable, support is great, uptime is as described."
     }
-  ]
-}) => {
+  ];
+
   const [sliderRef, setSliderRef] = useState(null)
 
   return (
@@ -122,4 +122,6 @@ export default ({
       </ContentWithPaddingXl>
     </PrimaryBackgroundContainer>
   );
-};
+}
+
+export default SimplePrimaryBackground;

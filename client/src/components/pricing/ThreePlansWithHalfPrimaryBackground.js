@@ -7,6 +7,7 @@ import { SectionDescription } from "components/misc/Typography.js";
 import { PrimaryButton as PrimaryButtonBase } from "components/misc/Buttons.js";
 import { Container as ContainerBase, ContentWithPaddingXl as ContentBase } from "components/misc/Layouts.js";
 import { ReactComponent as CheckboxIcon } from "images/checkbox-circle.svg";
+import { useNavigate } from "react-router-dom";
 
 const Container = tw(ContainerBase)`bg-primary-900 text-gray-100 -mx-8 px-8`;
 const ContentWithPaddingXl = tw(
@@ -68,13 +69,13 @@ const ActionButton = styled(PrimaryButtonBase)`
 
 const WhiteBackgroundOverlay = tw.div`absolute inset-x-0 bottom-0 h-1/6 lg:h-1/3 bg-white z-0`;
 
-export default ({
-  subheading = "",
-  heading = "Affordable Pricing",
-  description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-  plans = null,
-  primaryButtonText = "Create Server"
-}) => {
+function ThreePlansWithHalfPrimaryBackground(props){
+  const subheading = "";
+  const heading = "Affordable Pricing";
+  const description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.";
+  let plans = props.plans;
+  const primaryButtonText = "Create Server";
+
   const defaultPlans = [
     {
       name: "Personal",
@@ -122,6 +123,8 @@ export default ({
 
   if (!plans) plans = defaultPlans;
 
+  const navigate = useNavigate();
+
   return (
     <Container>
       <ContentWithPaddingXl>
@@ -156,7 +159,7 @@ export default ({
                 ))}
               </PlanFeatures>
               <PlanAction>
-                <ActionButton as="a" href={plan.url}>
+                <ActionButton as="a" onClick={ () => navigate(plan.url)}>
                   {primaryButtonText}
                 </ActionButton>
               </PlanAction>
@@ -167,4 +170,6 @@ export default ({
       <WhiteBackgroundOverlay />
     </Container>
   );
-};
+}
+
+export default ThreePlansWithHalfPrimaryBackground;

@@ -6,6 +6,7 @@ import { SectionHeading, Subheading as SubheadingBase } from "components/misc/He
 import { PrimaryButton as PrimaryButtonBase } from "components/misc/Buttons.js";
 import StatsIllustrationSrc from "images/stats-illustration.svg";
 import { ReactComponent as SvgDotPattern } from "images/dot-pattern.svg";
+import { useNavigate } from "react-router-dom";
 
 const Container = tw.div`relative`;
 const TwoColumn = tw.div`flex flex-col md:flex-row justify-between max-w-screen-xl mx-auto py-20 md:py-24`;
@@ -39,25 +40,25 @@ const DecoratorBlob = styled(SvgDotPattern)(props => [
   tw`w-20 h-20 absolute right-0 bottom-0 transform translate-x-1/2 translate-y-1/2 fill-current text-primary-500 -z-10`
 ]);
 
-export default ({
-  subheading = "Our Track Record",
-  heading = (
+function TwoColSingleFeatureWithStats2(props){
+  const subheading = "Our Track Record";
+  const heading = (
     <>
       We have been doing this <wbr /> since <span tw="text-primary-500">1999.</span>
     </>
-  ),
-  description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
-  primaryButtonText = "Learn More",
-  primaryButtonUrl = "https://timerse.com",
-  imageSrc = StatsIllustrationSrc,
-  imageCss = null,
-  imageContainerCss = null,
-  imageDecoratorBlob = false,
-  imageDecoratorBlobCss = null,
-  imageInsideDiv = true,
-  statistics = null,
-  textOnLeft = false
-}) => {
+  );
+  const description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.";
+  const primaryButtonText = "Learn More";
+  const primaryButtonUrl = "https://timerse.com";
+  const imageSrc = StatsIllustrationSrc;
+  let imageCss = props.imageCss;
+  let imageContainerCss = props.imageContainerCss;
+  const imageDecoratorBlob = false;
+  let imageDecoratorBlobCss = props.imageDecoratorBlobCss;
+  const imageInsideDiv = true;
+  let statistics = props.statistics;
+  const textOnLeft = false;
+
   // The textOnLeft boolean prop can be used to display either the text on left or right side of the image.
   //Change the statistics variable as you like, add or delete objects
   const defaultStatistics = [
@@ -76,6 +77,8 @@ export default ({
   ];
 
   if (!statistics) statistics = defaultStatistics;
+
+  const navigate = useNavigate();
 
   return (
     <Container>
@@ -97,7 +100,7 @@ export default ({
                 </Statistic>
               ))}
             </Statistics>
-            <PrimaryButton as="a" href={primaryButtonUrl}>
+            <PrimaryButton as="a" onClick={ () => navigate(primaryButtonUrl)}>
               {primaryButtonText}
             </PrimaryButton>
           </TextContent>
@@ -105,4 +108,6 @@ export default ({
       </TwoColumn>
     </Container>
   );
-};
+}
+
+export default TwoColSingleFeatureWithStats2;
