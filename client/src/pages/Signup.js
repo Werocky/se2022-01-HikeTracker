@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import AnimationRevealPage from "../helpers/AnimationRevealPage.js";
 import { Container as ContainerBase } from "../components/misc/Layouts";
 import tw from "twin.macro";
@@ -6,8 +6,11 @@ import styled from "styled-components";
 import { css } from "styled-components/macro"; //eslint-disable-line
 import illustration from "../images/signup-illustration.svg";
 import logo from "../images/logo.svg";
+import bcrypt from 'bcryptjs';
+import API from '../API.js';
 
 import { ReactComponent as SignUpIcon } from "feather-icons/dist/icons/user-plus.svg";
+import { useNavigate } from "react-router-dom";
 
 const Container = tw(ContainerBase)`min-h-screen bg-primary-900 text-white font-medium flex justify-center -m-8`;
 const Content = tw.div`max-w-screen-xl m-0 sm:mx-20 sm:my-16 bg-white text-gray-900 shadow sm:rounded-lg flex justify-center flex-1`;
@@ -36,61 +39,97 @@ const IllustrationImage = styled.div`
   ${tw`m-12 xl:m-16 w-full max-w-lg bg-contain bg-center bg-no-repeat`}
 `;
 
-export default ({
-                  logoLinkUrl = "#",
-                  illustrationImageSrc = illustration,
-                  headingText = "Sign Up For Hike-Tracker",
-                  submitButtonText = "Sign Up",
-                  SubmitButtonIcon = SignUpIcon,
-                  tosUrl = "#",
-                  privacyPolicyUrl = "#",
-                  signInUrl = "#"
-                }) => (
-    <AnimationRevealPage>
-      <Container>
-        <Content>
-          <MainContainer>
-            <LogoLink href={logoLinkUrl}>
-              <LogoImage src={logo} />
-            </LogoLink>
-            <MainContent>
-              <Heading>{headingText}</Heading>
-              <FormContainer>
-                <Form>
-                  <Input type="email" placeholder="Email" />
-                  {/*change to choose a role*/}
-                  <Input type="email" placeholder="Choose a role(need to change)" />
-                  <Input type="password" placeholder="Password" />
-                  <Input type="password" placeholder="Confirm Password" />
-                  <SubmitButton type="submit">
-                    <SubmitButtonIcon className="icon" />
-                    <span className="text">{submitButtonText}</span>
-                  </SubmitButton>
-                  <p tw="mt-6 text-xs text-gray-600 text-center">
-                    I agree to abide by Hike-Tracker's{" "}
-                    <a href={tosUrl} tw="border-b border-gray-500 border-dotted">
-                      Terms of Service
-                    </a>{" "}
-                    and its{" "}
-                    <a href={privacyPolicyUrl} tw="border-b border-gray-500 border-dotted">
-                      Privacy Policy
-                    </a>
-                  </p>
+function Login(props){
+  /* Variables for the form */
+  const logoLinkUrl = "#";
+  const illustrationImageSrc = illustration;
+  const headingText = "Sign Up For Hike-Tracker";
+  const submitButtonText = "Sign Up";
+  const SubmitButtonIcon = SignUpIcon;
+  const tosUrl = "#";
+  const privacyPolicyUrl = "#";
+  const signInUrl = "#";
 
-                  <p tw="mt-8 text-sm text-gray-600 text-center">
-                    Already have an account?{" "}
-                    <a href="/login" tw="border-b border-gray-500 border-dotted">
-                      Sign In
-                    </a>
-                  </p>
-                </Form>
-              </FormContainer>
-            </MainContent>
-          </MainContainer>
-          <IllustrationContainer>
-            <IllustrationImage imageSrc={illustrationImageSrc} />
-          </IllustrationContainer>
-        </Content>
-      </Container>
+  /* STATES COLLECTED FROM FORM'S FIELDS */
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
+  const [role, setRole] = useState('');
+  /* NAVIGATE TO SWITCH PAGES */
+  const navigate = useNavigate();
+
+  /* CHECK IF PASSWORDS ARE MATCHING, IF SO, ENCRYPT PASSWORD AND SUBMIT DATA TO SERVER*/
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    if (confirmPassword !== password) {
+      return; //TODO: display error in case passwords are not matching
+    }
+    bcrypt.genSalt(10, function(err, salt) {
+      bcrypt.hash(password, salt, async function(err, hashedPassword) {
+        const credentials = { Id: email, Role: role, Salt: salt, Hash: hashedPassword };
+        API.register(credentials);
+        navigate('/'/*+ user.id*/);//TODO
+      });
+    });
+  }
+
+  return (<>
+    <AnimationRevealPage>
+    <Container>
+    <Content>
+    <MainContainer>
+    <LogoLink href={logoLinkUrl}>
+    <LogoImage src={logo} />
+    </LogoLink>
+    <MainContent>
+    <Heading>{headingText}</Heading>
+    <FormContainer>
+
+    <Form onSubmit={handleSubmit}>
+      <Input type="email" placeholder="Email" value={email} onChange={ev => setEmail(ev.target.value)} required={true}/>
+      {/*change to choose a role*/}
+      <Input type="role" defaultValue={'DEFAULT'} as="select" aria-label="select" onChange={ev => setRole(ev.target.value)} required={true} >
+        <option value='DEFAULT' hidden>Select the type of user you are</option>
+        <option value="H">Hiker</option>
+        <option value="L">Local Guide</option>
+        <option value="O">Other to be defined</option>
+      </Input>
+      <Input type="password" placeholder="Password" value={password} onChange={ev => setPassword(ev.target.value)} required={true} minLength={4} maxLength={16}/>
+      <Input type="password" placeholder="Confirm Password" value={confirmPassword} onChange={ev => setConfirmPassword(ev.target.value)} required={true} minLength={4} maxLength={16}/>
+      <SubmitButton type="submit">
+        <SubmitButtonIcon className="icon" />
+        <span className="text">{submitButtonText}</span>
+      </SubmitButton>
+      <p tw="mt-6 text-xs text-gray-600 text-center">
+        I agree to abide by Hike-Tracker's{" "}
+        <a href={tosUrl} tw="border-b border-gray-500 border-dotted">
+          Terms of Service
+        </a>{" "}
+        and its{" "}
+        <a href={privacyPolicyUrl} tw="border-b border-gray-500 border-dotted">
+          Privacy Policy
+        </a>
+      </p>
+
+      <p tw="mt-8 text-sm text-gray-600 text-center">
+        Already have an account?{" "}
+        <a href="/login" tw="border-b border-gray-500 border-dotted">
+          Sign In
+        </a>
+      </p>
+    </Form>
+    
+    </FormContainer>
+    </MainContent>
+    </MainContainer>
+    <IllustrationContainer>
+    <IllustrationImage imageSrc={illustrationImageSrc} />
+    </IllustrationContainer>
+    </Content>
+    </Container>
     </AnimationRevealPage>
-);
+    </>
+  );
+}
+
+export default Login;

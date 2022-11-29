@@ -34,12 +34,12 @@ function App() {
   });
 
   function errorHandler(err){
-      {if(err.hasOwnProperty('error'))
+      if(err.hasOwnProperty('error'))
         setMessage(() => err.error.toString());
         else if (err.hasOwnProperty('message'))
         setMessage(() => err.message);
         else
-        setMessage(() => err.toString());}
+        setMessage(() => err.toString());
   }
 
   const login = (email, password) => {
@@ -131,7 +131,7 @@ function AppLayout(props) {
 
       <Route path='/hikedetail' element={
           <HikeDetail />
-      } />   // for test
+      } />   {/* for test*/}
         <Route path='/register' element={
               <Register/>
         // <RegisterComponent register={props.register} />
