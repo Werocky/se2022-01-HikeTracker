@@ -14,6 +14,7 @@ import { ReactComponent as CloseIcon } from "feather-icons/dist/icons/x.svg";
 import { ReactComponent as SvgDecoratorBlob1 } from "../../images/svg-decorator-blob-1.svg";
 import { ReactComponent as SvgDecoratorBlob2 } from "../../images/dot-pattern.svg";
 import DesignIllustration from "../../images/design-illustration.svg";
+import { useNavigate } from "react-router-dom";
 
 const Container = tw.div`relative`;
 const TwoColumn = tw.div`flex flex-col lg:flex-row md:items-center max-w-screen-xl mx-auto py-20 md:py-24`;
@@ -58,20 +59,22 @@ const StyledModal = styled(ReactModalAdapter)`
 `;
 const CloseModalButton = tw.button`absolute top-0 right-0 mt-8 mr-8 hocus:text-primary-500`;
 
-export default ({
-  heading = "Modern React Templates, Just For You",
- description="Our templates are easy to setup, understand and customize. Fully modular components with a variety of pages and components.",
-  primaryButtonText="Get Started",
-  primaryButtonUrl="#",
-  watchVideoButtonText="Watch Video",
-  watchVideoYoutubeUrl="https://www.youtube.com/embed/_GuOjXYl5ew",
-  imageSrc=DesignIllustration,
-  imageCss=null,
-  imageDecoratorBlob = false,
-}) => {
+function TwoColumnWithVideo(props){
+  const heading = "Modern React Templates, Just For You";
+  const description="Our templates are easy to setup, understand and customize. Fully modular components with a variety of pages and components.";
+  const primaryButtonText="Get Started";
+  const primaryButtonUrl="#";
+  const watchVideoButtonText="Watch Video";
+  const watchVideoYoutubeUrl="https://www.youtube.com/embed/_GuOjXYl5ew";
+  const imageSrc=DesignIllustration;
+  let imageCss=props.imageCss;
+  const imageDecoratorBlob = false;
+
   const [modalIsOpen, setModalIsOpen] = useState(false);
 
   const toggleModal = () => setModalIsOpen(!modalIsOpen);
+
+  const navigate = useNavigate();
 
   return (
     <>
@@ -82,7 +85,7 @@ export default ({
             <Heading>{heading}</Heading>
             <Paragraph>{description}</Paragraph>
             <Actions>
-              <PrimaryButton as="a" href={primaryButtonUrl}>{primaryButtonText}</PrimaryButton>
+              <PrimaryButton as="a" onClick={ () => navigate(primaryButtonUrl)}>{primaryButtonText}</PrimaryButton>
               <WatchVideoButton onClick={toggleModal}>
                 <span className="playIconContainer">
                   <PlayIcon className="playIcon" />
@@ -120,4 +123,6 @@ export default ({
       </Container>
     </>
   );
-};
+}
+
+export default TwoColumnWithVideo;

@@ -16,11 +16,11 @@ const Stat = tw.div`flex flex-col text-center p-4 tracking-wide`
 const StatKey = tw.div`text-xl font-medium`
 const StatValue = tw.div`text-4xl sm:text-3xl md:text-4xl lg:text-5xl font-black`
 
-export default ({
-  subheading = "",
-  heading = "Over 9000 Projects Completed",
-  description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-  stats = [
+function ThreeColCenteredStatsPrimaryBackground(props){
+  const subheading = "";
+  const heading = "Over 9000 Projects Completed";
+  const description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.";
+  const stats = [
     {
       key: "Clients",
       value: "2500+",
@@ -33,8 +33,8 @@ export default ({
       key: "Employees",
       value: "150+",
     },
-  ]
-}) => {
+  ];
+
   return (
     <Container>
       <ContentWithPaddingXl>
@@ -54,4 +54,6 @@ export default ({
       </ContentWithPaddingXl>
     </Container>
   );
-};
+}
+
+export default ThreeColCenteredStatsPrimaryBackground;

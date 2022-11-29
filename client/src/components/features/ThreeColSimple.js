@@ -10,6 +10,7 @@ import SupportIconImage from "images/support-icon.svg";
 import ShieldIconImage from "images/shield-icon.svg";
 import CustomizeIconImage from "images/customize-icon.svg";
 import { ReactComponent as SvgDecoratorBlob3 } from "images/svg-decorator-blob-3.svg";
+import { useNavigate } from "react-router-dom";
 
 const Heading = tw(SectionHeading)``;
 const Subheading = tw(SubheadingBase)`text-center mb-3`;
@@ -50,8 +51,8 @@ const DecoratorBlob = styled(SvgDecoratorBlob3)`
   ${tw`pointer-events-none absolute right-0 bottom-0 w-64 opacity-25 transform translate-x-32 translate-y-40`}
 `;
 
-export default ({
-  cards = [
+function ThreeColSimple(props){
+  const cards = [
     {
       imageSrc: ShieldIconImage,
       title: "Secure",
@@ -70,14 +71,14 @@ export default ({
       description: "Lorem ipsum donor amet siti ceali placeholder text",
       url: "https://reddit.com"
     }
-  ],
-  linkText = "Learn More",
-  heading = "",
-  subheading = "",
-  description = "",
-  imageContainerCss = null,
-  imageCss = null
-}) => {
+  ];
+  const linkText = "Learn More";
+  const heading = "";
+  const subheading = "";
+  const description = "";
+  let imageContainerCss = props.imageContainerCss;
+  let imageCss = props.imageCss;
+
   /*
    * This componets accepts a prop - `cards` which is an array of object denoting the cards. Each object in the cards array can have the following keys (Change it according to your need, you can also add more objects to have more cards in this feature component):
    *  1) imageSrc - the image shown at the top of the card
@@ -85,6 +86,8 @@ export default ({
    *  3) description - the description of the card
    *  4) url - the url that the card should goto on click
    */
+
+  const navigate = useNavigate();
   return (
     <Container>
       <ContentWithPaddingXl>
@@ -94,7 +97,7 @@ export default ({
         <ThreeColumnContainer>
           {cards.map((card, i) => (
             <Column key={i}>
-              <Card href={card.url}>
+              <Card onClick={ () => navigate(card.url)}>
                 <span className="imageContainer" css={imageContainerCss}>
                   <img src={card.imageSrc} alt="" css={imageCss} />
                 </span>
@@ -114,4 +117,6 @@ export default ({
       <DecoratorBlob />
     </Container>
   );
-};
+}
+
+export default ThreeColSimple;

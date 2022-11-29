@@ -6,6 +6,7 @@ import logo from "../../images/logo.svg";
 import { ReactComponent as FacebookIcon } from "../../images/facebook-icon.svg";
 import { ReactComponent as TwitterIcon } from "../../images/twitter-icon.svg";
 import { ReactComponent as YoutubeIcon } from "../../images/youtube-icon.svg";
+import { useNavigate } from "react-router-dom";
 
 
 const Container = tw(ContainerBase)`bg-gray-900 text-gray-100 -mx-8 -mb-8`
@@ -29,7 +30,9 @@ const SocialLink = styled.a`
 `;
 
 const CopyrightText = tw.p`text-center mt-10 font-medium tracking-wide text-sm text-gray-600`
-export default () => {
+
+function MiniCenteredFooter(props){
+  const navigate = useNavigate();
   return (
     <Container>
       <Content>
@@ -39,20 +42,20 @@ export default () => {
             <LogoText>Treact</LogoText>
           </LogoContainer>
           <LinksContainer>
-            <Link href="#">Home</Link>
-            <Link href="#">About</Link>
-            <Link href="#">Contact Us</Link>
-            <Link href="#">Blog</Link>
-            <Link href="#">Reviews</Link>
+            <Link onClick={ () => navigate("#")}>Home</Link>
+            <Link onClick={ () => navigate("#")}>About</Link>
+            <Link onClick={ () => navigate("#")}>Contact Us</Link>
+            <Link onClick={ () => navigate("#")}>Blog</Link>
+            <Link onClick={ () => navigate("#")}>Reviews</Link>
           </LinksContainer>
           <SocialLinksContainer>
-            <SocialLink href="https://facebook.com">
+            <SocialLink onClick={ () => navigate("https://facebook.com")}>
               <FacebookIcon />
             </SocialLink>
-            <SocialLink href="https://twitter.com">
+            <SocialLink onClick={ () => navigate("https://twitter.com")}>
               <TwitterIcon />
             </SocialLink>
-            <SocialLink href="https://youtube.com">
+            <SocialLink onClick={ () => navigate("https://youtube.com")}>
               <YoutubeIcon />
             </SocialLink>
           </SocialLinksContainer>
@@ -63,4 +66,6 @@ export default () => {
       </Content>
     </Container>
   );
-};
+}
+
+export default MiniCenteredFooter;

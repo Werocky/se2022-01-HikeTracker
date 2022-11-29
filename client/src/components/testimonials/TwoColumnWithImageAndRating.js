@@ -68,16 +68,16 @@ const ControlButton = styled.button`
   }
 `;
 
-export default ({
-  imageSrc = loveIllustrationImageSrc,
-  imageRounded = true,
-  imageBorder = false,
-  imageShadow = false,
-  subheading = "Testimonials",
-  heading = "Our Clients Love Us.",
-  description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua enim ad minim veniam.",
-  textOnLeft = false,
-  testimonials = [
+function TwoColumnWithImageAndRating(props){
+  const imageSrc = loveIllustrationImageSrc;
+  const imageRounded = true;
+  const imageBorder = false;
+  const imageShadow = false;
+  const subheading = "Testimonials";
+  const heading = "Our Clients Love Us.";
+  const description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua enim ad minim veniam.";
+  const textOnLeft = false;
+  const testimonials = [
     {
       stars: 5,
       profileImageSrc:
@@ -98,8 +98,8 @@ export default ({
       customerName: "Adam Cuppy",
       customerTitle: "Founder, EventsNYC"
     }
-  ]
-}) => {
+  ];
+
   const [sliderRef, setSliderRef] = useState(null);
 
   return (
@@ -149,4 +149,6 @@ export default ({
       </ContentWithPaddingXl>
     </Container>
   );
-};
+}
+
+export default TwoColumnWithImageAndRating;

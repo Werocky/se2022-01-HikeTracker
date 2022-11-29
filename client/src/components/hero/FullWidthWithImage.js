@@ -3,6 +3,7 @@ import tw from "twin.macro";
 import styled from "styled-components";
 import { css } from "styled-components/macro"; //eslint-disable-line
 import Header, { LogoLink, NavLinks, NavLink as NavLinkBase } from "../headers/light.js";
+import { useNavigate } from "react-router-dom";
 
 const StyledHeader = styled(Header)`
   ${tw`justify-between`}
@@ -40,49 +41,52 @@ const Actions = styled.div`
   }
 `;
 
-export default ({
-                  navLinks = [
-                    <NavLinks key={1}>
-                      <NavLink href="#">Hikes</NavLink>
-                      <NavLink href="/huts">Huts</NavLink>
-                      <NavLink href="/login">Login</NavLink>
-                      {/*<NavLink href="#">Logout</NavLink>*/}
-                    </NavLinks>
-                  ],
-                  heading = (
-                      <>
-                        Find Perfect Hikes
-                        <wbr />
-                        <br />
-                        <span tw="text-primary-500">anywhere you go.</span>
-                      </>
-                  ),
-                  description = "Inspiration and guidance for wherever your trail may lead. Enjoy the breath taking view of mountains.",
-                  primaryActionUrl = "#",
-                  primaryActionText = "Sign Up",
-                  secondaryActionUrl = "#",
-                  secondaryActionText = "Search Hikes"
-                }) => {
+function FullWidthWithImage(props){
+  const navigate = useNavigate();
+  const navLinks = [
+    <NavLinks key={1}>
+      <NavLink onClick={ () => navigate("#")}>Hikes</NavLink>
+      <NavLink onClick={ () => navigate("/huts")}>Huts</NavLink>
+      <NavLink onClick={ () => navigate("/login")}>Login</NavLink>
+      {/*<NavLink href="#">Logout</NavLink>*/}
+    </NavLinks>
+  ];
+  const heading = (
+      <>
+        Find Perfect Hikes
+        <wbr />
+        <br />
+        <span tw="text-primary-500">anywhere you go.</span>
+      </>
+  )
+  const description = "Inspiration and guidance for wherever your trail may lead. Enjoy the breath taking view of mountains.";
+  const primaryActionUrl = "#";
+  const primaryActionText = "Sign Up";
+  const secondaryActionUrl = "#";
+  const secondaryActionText = "Search Hikes";
+
   return (
-      <Container>
-        <TwoColumn>
-          <LeftColumn>
-            <StyledHeader links={navLinks} collapseBreakpointClass="sm" />
-            <Content>
-              <Heading>{heading}</Heading>
-              <Paragraph>{description}</Paragraph>
-              <Actions>
-                <a href= "/register" className="action primaryAction">
-                  {primaryActionText}
-                </a>
-                <a href={secondaryActionUrl} className="action secondaryAction">
-                  {secondaryActionText}
-                </a>
-              </Actions>
-            </Content>
-          </LeftColumn>
-          <RightColumn></RightColumn>
-        </TwoColumn>
-      </Container>
+    <Container>
+    <TwoColumn>
+    <LeftColumn>
+    <StyledHeader links={navLinks} collapseBreakpointClass="sm" />
+    <Content>
+    <Heading>{heading}</Heading>
+    <Paragraph>{description}</Paragraph>
+    <Actions>
+    <div onClick={() => navigate("/register")} className="action primaryAction">
+      {primaryActionText}
+    </div>
+    <div onClick={ () => navigate(secondaryActionUrl)} className="action secondaryAction">
+      {secondaryActionText}
+    </div>
+    </Actions>
+    </Content>
+    </LeftColumn>
+    <RightColumn></RightColumn>
+    </TwoColumn>
+    </Container>
   );
-};
+}
+
+export default FullWidthWithImage;

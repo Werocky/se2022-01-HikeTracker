@@ -52,12 +52,12 @@ const Card = styled.div`
   }
 `;
 
-export default ({
-  cards = null,
-  heading = "Amazing Features",
-  subheading = "",
-  description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
-}) => {
+function ThreeColWithSideImageWithPrimaryBackground(props){
+  let cards = props.cards;
+  const heading = "Amazing Features";
+  const subheading = "";
+  const description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.";
+
   /*
    * This componets has an array of object denoting the cards defined below. Each object in the cards array can have the key (Change it according to your need, you can also add more objects to have more cards in this feature component) or you can directly pass this using the cards prop:
    *  1) imageSrc - the image shown at the top of the card
@@ -106,4 +106,6 @@ export default ({
       </ThreeColumnContainer>
     </Container>
   );
-};
+}
+
+export default ThreeColWithSideImageWithPrimaryBackground;

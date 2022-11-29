@@ -8,6 +8,7 @@ import { ReactComponent as FacebookIcon } from "images/facebook-icon.svg";
 import { ReactComponent as TwitterIcon } from "images/twitter-icon.svg";
 import { ReactComponent as YoutubeIcon } from "images/youtube-icon.svg";
 import { ReactComponent as SvgDecoratorBlob1 } from "images/svg-decorator-blob-9.svg";
+import { useNavigate } from "react-router-dom";
 
 const Container = tw.div`relative bg-primary-500 text-gray-100 -mb-8 -mx-8 px-8 py-20 lg:py-24`;
 const Content = tw.div`max-w-screen-xl mx-auto relative z-10`;
@@ -47,7 +48,8 @@ const DecoratorBlob2 = tw(
   SvgDecoratorBlob1
 )`absolute bottom-0 right-0 w-80 h-80 transform  translate-x-32 translate-y-48 text-primary-700 opacity-50`;
 
-export default () => {
+function FiveColumnWithBackground(props){
+  const navigate = useNavigate();
   return (
     <Container>
       <Content>
@@ -56,16 +58,16 @@ export default () => {
             <ColumnHeading>Main</ColumnHeading>
             <LinkList>
               <LinkListItem>
-                <Link href="#">Blog</Link>
+                <Link onClick={ () => navigate("#")}>Blog</Link>
               </LinkListItem>
               <LinkListItem>
-                <Link href="#">FAQs</Link>
+                <Link onClick={ () => navigate("#")}>FAQs</Link>
               </LinkListItem>
               <LinkListItem>
-                <Link href="#">Support</Link>
+                <Link onClick={ () => navigate("#")}>Support</Link>
               </LinkListItem>
               <LinkListItem>
-                <Link href="#">About Us</Link>
+                <Link onClick={ () => navigate("#")}>About Us</Link>
               </LinkListItem>
             </LinkList>
           </Column>
@@ -73,16 +75,16 @@ export default () => {
             <ColumnHeading>Product</ColumnHeading>
             <LinkList>
               <LinkListItem>
-                <Link href="#">Log In</Link>
+                <Link onClick={ () => navigate("#")}>Log In</Link>
               </LinkListItem>
               <LinkListItem>
-                <Link href="#">Personal</Link>
+                <Link onClick={ () => navigate("#")}>Personal</Link>
               </LinkListItem>
               <LinkListItem>
-                <Link href="#">Business</Link>
+                <Link onClick={ () => navigate("#")}>Business</Link>
               </LinkListItem>
               <LinkListItem>
-                <Link href="#">Team</Link>
+                <Link onClick={ () => navigate("#")}>Team</Link>
               </LinkListItem>
             </LinkList>
           </Column>
@@ -90,16 +92,16 @@ export default () => {
             <ColumnHeading>Press</ColumnHeading>
             <LinkList>
               <LinkListItem>
-                <Link href="#">Logos</Link>
+                <Link onClick={ () => navigate("#")}>Logos</Link>
               </LinkListItem>
               <LinkListItem>
-                <Link href="#">Events</Link>
+                <Link onClick={ () => navigate("#")}>Events</Link>
               </LinkListItem>
               <LinkListItem>
-                <Link href="#">Stories</Link>
+                <Link onClick={ () => navigate("#")}>Stories</Link>
               </LinkListItem>
               <LinkListItem>
-                <Link href="#">Office</Link>
+                <Link onClick={ () => navigate("#")}>Office</Link>
               </LinkListItem>
             </LinkList>
           </Column>
@@ -107,16 +109,16 @@ export default () => {
             <ColumnHeading>Team</ColumnHeading>
             <LinkList>
               <LinkListItem>
-                <Link href="#">Career</Link>
+                <Link onClick={ () => navigate("#")}>Career</Link>
               </LinkListItem>
               <LinkListItem>
-                <Link href="#">Founders</Link>
+                <Link onClick={ () => navigate("#")}>Founders</Link>
               </LinkListItem>
               <LinkListItem>
-                <Link href="#">Culture</Link>
+                <Link onClick={ () => navigate("#")}>Culture</Link>
               </LinkListItem>
               <LinkListItem>
-                <Link href="#">Onboarding</Link>
+                <Link onClick={ () => navigate("#")}>Onboarding</Link>
               </LinkListItem>
             </LinkList>
           </Column>
@@ -124,16 +126,16 @@ export default () => {
             <ColumnHeading>Legal</ColumnHeading>
             <LinkList>
               <LinkListItem>
-                <Link href="#">GDPR</Link>
+                <Link onClick={ () => navigate("#")}>GDPR</Link>
               </LinkListItem>
               <LinkListItem>
-                <Link href="#">Privacy Policy</Link>
+                <Link onClick={ () => navigate("#")}>Privacy Policy</Link>
               </LinkListItem>
               <LinkListItem>
-                <Link href="#">Terms of Service</Link>
+                <Link onClick={ () => navigate("#")}>Terms of Service</Link>
               </LinkListItem>
               <LinkListItem>
-                <Link href="#">Disclaimer</Link>
+                <Link onClick={ () => navigate("#")}>Disclaimer</Link>
               </LinkListItem>
             </LinkList>
           </Column>
@@ -146,13 +148,13 @@ export default () => {
           </LogoContainer>
           <CopywrightNotice>&copy; 2018 Treact Inc. All Rights Reserved.</CopywrightNotice>
           <SocialLinksContainer>
-            <SocialLink href="https://facebook.com">
+            <SocialLink onClick={ () => navigate("https://facebook.com")}>
               <FacebookIcon />
             </SocialLink>
-            <SocialLink href="https://twitter.com">
+            <SocialLink onClick={ () => navigate("https://twitter.com")}>
               <TwitterIcon />
             </SocialLink>
-            <SocialLink href="https://youtube.com">
+            <SocialLink onClick={ () => navigate("https://youtube.com")}>
               <YoutubeIcon />
             </SocialLink>
           </SocialLinksContainer>
@@ -164,4 +166,6 @@ export default () => {
       </DecoratorBlobContainer>
     </Container>
   );
-};
+}
+
+export default FiveColumnWithBackground;

@@ -7,6 +7,7 @@ import { PrimaryButton as PrimaryButtonBase } from "components/misc/Buttons.js";
 import { ReactComponent as BriefcaseIcon } from "feather-icons/dist/icons/briefcase.svg";
 import { ReactComponent as MoneyIcon } from "feather-icons/dist/icons/dollar-sign.svg";
 import TeamIllustrationSrc from "images/team-illustration-2.svg";
+import { useNavigate } from "react-router-dom";
 
 const Container = tw.div`relative`;
 const TwoColumn = tw.div`flex flex-col md:flex-row justify-between max-w-screen-xl mx-auto py-20 md:py-24`;
@@ -45,19 +46,19 @@ const FeatureDescription = tw.div`mt-1 text-sm`;
 
 const PrimaryButton = tw(PrimaryButtonBase)`mt-8 md:mt-10 text-sm inline-block mx-auto md:mx-0`;
 
-export default ({
-  subheading = "Our Expertise",
-  heading = (
+function TwoColWithTwoFeaturesAndButtons(props){
+  const subheading = "Our Expertise";
+  const heading = (
     <>
       We have the most <span tw="text-primary-500">professional</span> marketing team.
     </>
-  ),
-  description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
-  primaryButtonText = "See Our Portfolio",
-  primaryButtonUrl = "https://timerse.com",
-  features = null,
-  textOnLeft = true
-}) => {
+  );
+  const description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.";
+  const primaryButtonText = "See Our Portfolio";
+  const primaryButtonUrl = "https://timerse.com";
+  let features = props.features;
+  const textOnLeft = true;
+
   // The textOnLeft boolean prop can be used to display either the text on left or right side of the image.
 
   /*
@@ -78,6 +79,8 @@ export default ({
   ];
 
   if (!features) features = defaultFeatures;
+
+  const navigate = useNavigate();
 
   return (
     <Container>
@@ -101,7 +104,7 @@ export default ({
                 </Feature>
               ))}
             </Features>
-            <PrimaryButton as="a" href={primaryButtonUrl}>
+            <PrimaryButton as="a" onClick={ () => navigate(primaryButtonUrl)}>
               {primaryButtonText}
             </PrimaryButton>
           </TextContent>
@@ -109,4 +112,6 @@ export default ({
       </TwoColumn>
     </Container>
   );
-};
+}
+
+export default TwoColWithTwoFeaturesAndButtons;
