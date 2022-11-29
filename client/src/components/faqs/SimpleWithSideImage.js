@@ -37,15 +37,15 @@ const QuestionToggleIcon = styled.span`
 `;
 const Answer = motion(tw.dd`pointer-events-none text-sm sm:text-base leading-relaxed`);
 
-export default ({
-  subheading = "",
-  heading = "Questions",
-  description = "Here are some frequently asked questions about our hotels from our loving customers. Should you have any other questions, feel free to reach out via the contact form below.",
-  imageSrc = "https://images.unsplash.com/photo-1579427421635-a0015b804b2e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1024&q=80",
-  imageContain = false,
-  imageShadow = true,
-  faqs = null
-}) => {
+function SimpleWithSideImage(props){
+  const subheading = "";
+  const heading = "Questions";
+  const description = "Here are some frequently asked questions about our hotels from our loving customers. Should you have any other questions, feel free to reach out via the contact form below.";
+  const imageSrc = "https://images.unsplash.com/photo-1579427421635-a0015b804b2e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1024&q=80";
+  const imageContain = false;
+  const imageShadow = true;
+  let faqs = props.faqs;
+
   /*
    * You can modify FAQs either by modifying the below defaultFaqs array or by passing a custom array of FAQs using
    * the faqs prop
@@ -129,4 +129,6 @@ export default ({
       </Content>
     </Container>
   );
-};
+}
+
+export default SimpleWithSideImage;

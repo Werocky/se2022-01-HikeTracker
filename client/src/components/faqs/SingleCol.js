@@ -36,13 +36,11 @@ const DecoratorBlob2 = styled(SvgDecoratorBlob2)`
   ${tw`pointer-events-none -z-20 absolute left-0 bottom-0 h-64 w-64 opacity-15 transform -translate-x-2/3 text-primary-500`}
 `;
 
-
-
-export default ({
-  subheading = "FAQS",
-  heading = "You have Questions ?",
-  description = "And we have got answers to all of them. Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-  faqs = [
+function SingleCol(props){
+  const subheading = "FAQS";
+  const heading = "You have Questions ?";
+  const description = "And we have got answers to all of them. Lorem ipsum dolor sit amet, consectetur adipiscing elit.";
+  const faqs = [
     {
       question: "Is lunch provided free of cost ?",
       answer:
@@ -63,8 +61,8 @@ export default ({
       answer:
         "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
     }
-  ]
-}) => {
+  ];
+
   const [activeQuestionIndex, setActiveQuestionIndex] = useState(null);
 
   const toggleQuestion = questionIndex => {
@@ -124,4 +122,6 @@ export default ({
       <DecoratorBlob2 />
     </Container>
   );
-};
+}
+
+export default SingleCol;

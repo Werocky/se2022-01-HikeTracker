@@ -55,7 +55,7 @@ const CardMetaFeature = styled.div`
 `;
 const CardAction = tw(PrimaryButtonBase)`w-full mt-8`;
 
-export default () => {
+function TwoTrendingPreviewCardsWithImage(props){
   const cards = [
     {
       imageSrc:
@@ -78,6 +78,7 @@ export default () => {
       locationText: "Australia"
     }
   ];
+  
   return (
     <Container>
       <Content>
@@ -126,4 +127,6 @@ export default () => {
       </Content>
     </Container>
   );
-};
+}
+
+export default TwoTrendingPreviewCardsWithImage;

@@ -56,18 +56,19 @@ const CardMetaFeature = styled.div`
 `;
 const CardAction = tw(PrimaryButtonBase)`w-full mt-6`;
 
-export default ({
-  subheading = "Our Portfolio",
-  headingHtmlComponent = (
+function PortfolioTwoCardsWithImage(props){
+  
+  const subheading = "Our Portfolio";
+  const headingHtmlComponent = (
     <>
       We've done some <span tw="text-primary-500">amazing projects.</span>
     </>
-  ),
-  description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua enim ad minim veniam.",
-  linkText = "View all Projects",
-  cardLinkText = "Read Case Study",
-  textOnLeft = false
-}) => {
+  );
+  const description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua enim ad minim veniam.";
+  const linkText = "View all Projects";
+  const cardLinkText = "Read Case Study";
+  const textOnLeft = false;
+
   const cards = [
     {
       imageSrc:
@@ -88,6 +89,7 @@ export default ({
       locationText: "Palo Alto"
     }
   ];
+  
   return (
     <Container>
       <Content>
@@ -129,4 +131,6 @@ export default ({
       </Content>
     </Container>
   );
-};
+}
+
+export default PortfolioTwoCardsWithImage;

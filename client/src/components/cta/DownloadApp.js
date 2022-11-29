@@ -8,6 +8,7 @@ import { ContentWithPaddingXl, Container as ContainerBase } from "components/mis
 import { SectionHeading, Subheading as SubheadingBase } from "components/misc/Headings.js";
 import appleIconImageSrc from "images/apple-icon.png";
 import googlePlayIconImageSrc from "images/google-play-icon.png"
+import { useNavigate } from "react-router-dom";
 
 const Container = tw(ContainerBase)`bg-gray-900 -mx-8`
 const Content = tw(ContentWithPaddingXl)``
@@ -34,18 +35,21 @@ const ImageContainer = tw(ColumnContainer)`mt-16 lg:mt-0 lg:ml-16 flex justify-e
 const DecoratorBlobContainer = tw.div`absolute inset-0 overflow-hidden rounded-lg`
 const DecoratorBlob1 = tw(SvgDecoratorBlob1)`absolute bottom-0 left-0 w-80 h-80 transform -translate-x-20 translate-y-32 text-gray-800 opacity-50`
 const DecoratorBlob2 = tw(SvgDecoratorBlob1)`absolute top-0 right-0 w-80 h-80 transform  translate-x-20 -translate-y-64 text-gray-800 opacity-50`
-export default ({
-  subheading = "Download App",
-  text = "Developers all over the world are happily using Treact.",
-  link1Text = "App Store",
-  link1Url = "http://apple.com",
-  link1IconSrc = appleIconImageSrc,
-  link2Text = "Google Play",
-  link2Url = "http://play.google.com",
-  link2IconSrc = googlePlayIconImageSrc,
-  pushDownFooter = false,
-  imageSrc = mockupImageSrc,
-}) => {
+
+function DownloadApp(props){
+  const subheading = "Download App";
+  const text = "Developers all over the world are happily using Treact.";
+  const link1Text = "App Store";
+  const link1Url = "http://apple.com";
+  const link1IconSrc = appleIconImageSrc;
+  const link2Text = "Google Play";
+  const link2Url = "http://play.google.com";
+  const link2IconSrc = googlePlayIconImageSrc;
+  const pushDownFooter = false;
+  const imageSrc = mockupImageSrc;
+
+  const navigate = useNavigate();
+
   return (
     <Container css={pushDownFooter && tw`mb-20 lg:mb-24`}>
       <Content>
@@ -54,11 +58,11 @@ export default ({
             {subheading && <Subheading>{subheading}</Subheading>}
             <Text>{text}</Text>
             <LinksContainer>
-              <Link href={link1Url}>
+              <Link onClick={ () => navigate(link1Url)}>
                 <img src={link1IconSrc} alt=""/>
                 <span>{link1Text}</span>
               </Link>
-              <Link href={link2Url}>
+              <Link onClick={ () => navigate(link2Url)}>
                 <img src={link2IconSrc} alt=""/>
                 <span>{link2Text}</span>
               </Link>
@@ -75,4 +79,6 @@ export default ({
       </Content>
     </Container>
   );
-};
+}
+
+export default DownloadApp;

@@ -6,6 +6,7 @@ import { css } from "styled-components/macro";
 import { SectionHeading, Subheading as SubheadingBase } from "components/misc/Headings";
 import { SectionDescription } from "components/misc/Typography";
 import { ReactComponent as SvgDotPatternIcon } from "images/dot-pattern.svg";
+import { useNavigate } from "react-router-dom";
 
 const HeadingContainer = tw.div`text-center`;
 const Subheading = tw(SubheadingBase)`mb-4`;
@@ -59,11 +60,11 @@ const PostContainer = styled.div`
 const DecoratorBlob1 = tw(SvgDotPatternIcon)`absolute bottom-0 left-0 w-32 h-32 mb-3 ml-3 transform -translate-x-1/2 translate-y-1/2 fill-current text-gray-500 opacity-50`
 const DecoratorBlob2 = tw(SvgDotPatternIcon)`absolute top-0 right-0 w-32 h-32 mt-16 mr-6 transform translate-x-1/2 -translate-y-1/2 fill-current text-gray-500 opacity-50`
 
-export default ({
-  subheading = "",
-  heading = "We love writing.",
-  description = "",
-  posts = [
+function GridWithFeaturedPost(props){
+  let subheading = "";
+  let heading = "We love writing.";
+  let description = "";
+  const posts = [
     {
       postImageSrc:
         "https://images.unsplash.com/photo-1563784462041-5f97ac9523dd?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1024&q=80",
@@ -106,7 +107,9 @@ export default ({
       url: "https://timerse.com"
     }
   ]
-}) => {
+
+  const navigate = useNavigate();
+  
   return (
     <Container>
       <ContentWithPaddingXl>
@@ -118,7 +121,7 @@ export default ({
         <Posts>
           {posts.map((post, index) => (
             <PostContainer featured={post.featured} key={index}>
-              <Post className="group" href={post.url}>
+              <Post className="group" onClick={ () => navigate(post.url)}>
                 <PostImage imageSrc={post.postImageSrc} />
                 <PostText>
                   <PostTitle>{post.title}</PostTitle>
@@ -140,4 +143,6 @@ export default ({
       </ContentWithPaddingXl>
     </Container>
   );
-};
+}
+
+export default GridWithFeaturedPost;

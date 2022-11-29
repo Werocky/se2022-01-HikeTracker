@@ -27,11 +27,11 @@ const QuestionToggleIcon = styled(motion.span)`
 `;
 const Answer = tw(motion.div)`hidden text-sm font-normal mt-4 text-gray-300`;
 
-export default ({
-  subheading = "",
-  heading = "Frequently Asked Questions",
-  description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-  faqs = [
+function TwoColumnPrimaryBackground(props){
+  const subheading = "";
+  const heading = "Frequently Asked Questions";
+  const description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.";
+  const faqs = [
     {
       question: "Is lunch provided free of cost ?",
       answer:
@@ -62,8 +62,8 @@ export default ({
       answer:
         "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
     }
-  ]
-}) => {
+  ];
+
   const faqCol1 = [];
   const faqCol2 = [];
   const [activeQuestionIndex, setActiveQuestionIndex] = useState(null);
@@ -109,6 +109,7 @@ export default ({
 
     return null;
   });
+  
   return (
     <PrimaryBackgroundContainer>
       <ContentWithPaddingXl>
@@ -124,4 +125,6 @@ export default ({
       </ContentWithPaddingXl>
     </PrimaryBackgroundContainer>
   );
-};
+}
+
+export default TwoColumnPrimaryBackground;

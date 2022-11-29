@@ -9,6 +9,7 @@ import { PrimaryButton as PrimaryButtonBase } from "components/misc/Buttons.js";
 import { ReactComponent as StarIcon } from "images/star-icon.svg";
 import { ReactComponent as SvgDecoratorBlob1 } from "images/svg-decorator-blob-5.svg";
 import { ReactComponent as SvgDecoratorBlob2 } from "images/svg-decorator-blob-7.svg";
+import { useNavigate } from "react-router-dom";
 
 const HeaderRow = tw.div`flex justify-between items-center flex-col xl:flex-row`;
 const Header = tw(SectionHeading)``;
@@ -58,9 +59,9 @@ const DecoratorBlob2 = styled(SvgDecoratorBlob2)`
   ${tw`pointer-events-none -z-20 absolute left-0 bottom-0 h-80 w-80 opacity-15 transform -translate-x-2/3 text-primary-500`}
 `;
 
-export default ({
-  heading = "Checkout the Menu",
-  tabs = {
+function TabCardGrid(props){
+  const heading = "Checkout the Menu";
+  const tabs = {
     Starters: [
       {
         imageSrc:
@@ -146,8 +147,7 @@ export default ({
     Main: getRandomCards(),
     Soup: getRandomCards(),
     Desserts: getRandomCards()
-  }
-}) => {
+  };
   /*
    * To customize the tabs, pass in data using the `tabs` prop. It should be an object which contains the name of the tab
    * as the key and value of the key will be its content (as an array of objects).
@@ -155,6 +155,8 @@ export default ({
    */
   const tabsKeys = Object.keys(tabs);
   const [activeTab, setActiveTab] = useState(tabsKeys[0]);
+
+  const navigate = useNavigate();
 
   return (
     <Container>
@@ -191,7 +193,7 @@ export default ({
           >
             {tabs[tabKey].map((card, index) => (
               <CardContainer key={index}>
-                <Card className="group" href={card.url} initial="rest" whileHover="hover" animate="rest">
+                <Card className="group" onClick={ () => navigate(card.url)} initial="rest" whileHover="hover" animate="rest">
                   <CardImageContainer imageSrc={card.imageSrc}>
                     <CardRatingContainer>
                       <CardRating>
@@ -231,7 +233,9 @@ export default ({
       <DecoratorBlob2 />
     </Container>
   );
-};
+}
+
+export default TabCardGrid;
 
 /* This function is only there for demo purposes. It populates placeholder cards */
 const getRandomCards = () => {

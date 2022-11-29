@@ -8,6 +8,7 @@ import {SectionDescription} from "components/misc/Typography";
 import { ReactComponent as TwitterIcon} from "images/twitter-icon.svg";
 import { ReactComponent as LinkedinIcon} from "images/linkedin-icon.svg";
 import { ReactComponent as GithubIcon } from "images/github-icon.svg";
+import { useNavigate } from "react-router-dom";
 
 const HeadingContainer = tw.div``
 const Heading = tw(SectionHeading)``
@@ -40,11 +41,12 @@ const CardLinks = styled.div`
   }
 `
 
-export default ({
-  heading = "Meet These Fine Folks.",
-  subheading = "Our Team",
-  description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-  cards = [
+function ProfileThreeColGrid(props){
+  
+  const heading = "Meet These Fine Folks.";
+  const subheading = "Our Team";
+  const description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.";
+  const cards = [
     {
       imageSrc: "https://images.unsplash.com/photo-1531427186611-ecfd6d936c79?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&fit=facearea&facepad=2.95&w=512&h=512&q=80",
       position: "Founder",
@@ -159,8 +161,10 @@ export default ({
         },
       ],
     },
-  ]
-}) => {
+  ];
+
+  const navigate = useNavigate();
+
   return (
     <Container>
       <ContentWithPaddingXl>
@@ -178,9 +182,9 @@ export default ({
                 <span className="name">{card.name}</span>
                 <CardLinks>
                   {card.links.map((link, linkIndex) => (
-                    <a key={linkIndex} className="link" href={link.url}>
+                    <button key={linkIndex} className="link" onClick={ () => navigate(link.url)}>
                       <link.icon className="icon" />
-                    </a>
+                    </button>
                   ))}
                 </CardLinks>
               </CardContent>
@@ -190,4 +194,6 @@ export default ({
       </ContentWithPaddingXl>
     </Container>
   );
-};
+}
+
+export default ProfileThreeColGrid;

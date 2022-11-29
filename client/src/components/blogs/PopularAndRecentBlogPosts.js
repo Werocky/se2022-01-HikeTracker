@@ -5,6 +5,7 @@ import { motion } from "framer-motion";
 import { css } from "styled-components/macro"; //eslint-disable-line
 import { SectionHeading } from "components/misc/Headings.js";
 import { Container, ContentWithPaddingXl } from "components/misc/Layouts.js";
+import { useNavigate } from "react-router-dom";
 
 const Row = tw.div`flex flex-col lg:flex-row -mb-10`;
 const Heading = tw(SectionHeading)`text-left lg:text-4xl xl:text-5xl`;
@@ -44,7 +45,8 @@ const RecentPostsContainer = styled.div`
 `;
 const PostTextContainer = tw.div``
 
-export default () => {
+function PopularAndRecentBlogPosts(props){
+  
   // This setting is for animating the post background image on hover
   const postBackgroundSizeAnimation = {
     rest: {
@@ -121,6 +123,8 @@ export default () => {
     },
   ]
 
+  const navigate = useNavigate();
+  
   return (
     <Container>
       <ContentWithPaddingXl>
@@ -129,7 +133,7 @@ export default () => {
             <Heading>Popular Posts</Heading>
             <PostsContainer>
               {popularPosts.map((post, index) => (
-                <Post key={index} href={post.url} className="group" initial="rest" whileHover="hover" animate="rest">
+                <Post key={index} onClick={ () => navigate(post.url)} className="group" initial="rest" whileHover="hover" animate="rest">
                   <Image
                     transition={{ duration: 0.3 }}
                     variants={postBackgroundSizeAnimation}
@@ -152,7 +156,7 @@ export default () => {
             <Heading>Recent Posts</Heading>
             <PostsContainer>
               {recentPosts.map((post, index) => (
-              <Post key={index} href={post.url} className="group">
+              <Post key={index} onClick={ () => navigate(post.url)} className="group">
                 <PostTextContainer>
                   <Title>{post.title}</Title>
                   <AuthorName>{post.authorName}</AuthorName>
@@ -166,4 +170,6 @@ export default () => {
       </ContentWithPaddingXl>
     </Container>
   );
-};
+}
+
+export default PopularAndRecentBlogPosts;
