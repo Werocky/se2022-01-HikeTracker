@@ -9,6 +9,7 @@ import useAnimatedNavToggler from "../../helpers/useAnimatedNavToggler.js";
 import logo from "../../images/logo.svg";
 import { ReactComponent as MenuIcon } from "feather-icons/dist/icons/menu.svg";
 import { ReactComponent as CloseIcon } from "feather-icons/dist/icons/x.svg";
+import { useNavigate } from "react-router-dom";
 
 const Header = tw.header`
   flex justify-between items-center
@@ -20,7 +21,7 @@ export const NavLinks = tw.div`inline-block`;
 /* hocus: stands for "on hover or focus"
  * hocus:bg-primary-700 will apply the bg-primary-700 class on hover or focus
  */
-export const NavLink = tw.a`
+export const NavLink = tw.button`
   text-lg my-2 lg:text-sm lg:mx-6 lg:my-0
   font-semibold tracking-wide transition duration-300
   pb-1 border-b-2 border-transparent hover:border-primary-500 hocus:text-primary-500
@@ -56,7 +57,14 @@ export const DesktopNavLinks = tw.nav`
   hidden lg:flex flex-1 justify-between items-center
 `;
 
-export default ({ roundedHeaderButton = false, logoLink, links, className, collapseBreakpointClass = "lg" }) => {
+function Light(props){
+  let roundedHeaderButton = false; 
+  let logoLink;
+  let links;
+  let className;
+  let collapseBreakpointClass = "lg";
+
+  const navigate = useNavigate();
   /*
    * This header component accepts an optionals "links" prop that specifies the links to render in the navbar.
    * This links props should be an array of "NavLinks" components which is exported from this file.
@@ -72,16 +80,16 @@ export default ({ roundedHeaderButton = false, logoLink, links, className, colla
    */
   const defaultLinks = [
     <NavLinks key={1}>
-      <NavLink href="/">About</NavLink>
-      <NavLink href="/hikes">Hikes</NavLink>
-      <NavLink href="/huts">Huts</NavLink>
-      <NavLink href="/addHike">Add a Hike</NavLink>
-      <NavLink href="/#">Add a Hut</NavLink>
-      <NavLink href="/#">Add a Parking lot</NavLink>
-      <NavLink href="/login" tw="lg:ml-12!">
+      <NavLink onClick={() => navigate("/")}>About</NavLink>
+      <NavLink onClick={() => navigate("/hikes")}>Hikes</NavLink>
+      <NavLink onClick={() => navigate("/huts")}>Huts</NavLink>
+      <NavLink onClick={() => navigate("/addHike")}>Add a Hike</NavLink>
+      <NavLink onClick={() => navigate("/#")}>Add a Hut</NavLink>
+      <NavLink onClick={() => navigate("/#")}>Add a Parking lot</NavLink>
+      <NavLink onClick={() => navigate("/login")} tw="lg:ml-12!">
         Login
       </NavLink>
-      <PrimaryLink css={roundedHeaderButton && tw`rounded-full`}href="/register">Sign Up</PrimaryLink>
+      <PrimaryLink css={roundedHeaderButton && tw`rounded-full`} onClick={ () => navigate("/register")}>Sign Up</PrimaryLink>
     </NavLinks>
   ];
 
@@ -89,7 +97,7 @@ export default ({ roundedHeaderButton = false, logoLink, links, className, colla
   const collapseBreakpointCss = collapseBreakPointCssMap[collapseBreakpointClass];
 
   const defaultLogoLink = (
-    <LogoLink href="/">
+    <LogoLink onClick={ () => navigate("/")}>
       <img src={logo} alt="logo" />
       Hike-Tracker
     </LogoLink>
@@ -114,9 +122,10 @@ export default ({ roundedHeaderButton = false, logoLink, links, className, colla
           {showNavLinks ? <CloseIcon tw="w-6 h-6" /> : <MenuIcon tw="w-6 h-6" />}
         </NavToggle>
       </MobileNavLinksContainer>
-    </Header>
-  );
-};
+    </Header>)
+}
+
+export default Light;
 
 /* The below code is for generating dynamic break points for navbar.
  * Using this you can specify if you want to switch
