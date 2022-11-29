@@ -49,6 +49,8 @@ const ButtonContainer = tw.div`flex justify-center`;
 const LoadMoreButton = tw(PrimaryButton)`mt-16 mx-auto`;
 const PostAction = tw(PrimaryButtonBase)`w-full mt-8`;
 
+const FormContainer = tw.div`w-full flex-1 mt-8 mx-auto max-w-3xl `;
+
 function HikeList(props) {
 
   const headingText = "Hikes";
@@ -127,11 +129,11 @@ function HikeList(props) {
           <HeadingRow>
             <Heading>{headingText}</Heading>
           </HeadingRow>
-         
-    <Form.Select aria-label="Default select example"  onChange={(event) => {
+            <FormContainer>
+        <Form.Select aria-label="Default select example"  onChange={(event) => {
              setSortTypeDesc(event.target.value);
             }}>
-          <option value="TitleDesc">Title (Descendent)</option>
+          <option value="TitleDesc">Title  (Descendent)</option>
           <option value="LengthDesc" >Length - km (Descendent)</option>
           <option value="AscentDesc" >Ascent - m (Descendent)</option>
           <option value="DifficultyDesc" >Difficulty (Descendent) </option>
@@ -141,8 +143,8 @@ function HikeList(props) {
           <option value="AscentAsc" >Ascent - m (Ascendent)</option>
           <option value="DifficultyAsc" >Difficulty (Ascendent)</option>
           <option value="ExpectedTimeAsc" >Expected time - h:m (Ascendent)</option>
-          </Form.Select>
-
+        </Form.Select>
+            </FormContainer>
           {!props.loading &&
             <Posts>
               {hikes.slice(0, visible).map((hike, index) => (
