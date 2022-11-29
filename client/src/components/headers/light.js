@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import { motion } from "framer-motion";
 import tw from "twin.macro";
 import styled from "styled-components";
@@ -10,6 +10,7 @@ import logo from "../../images/logo.svg";
 import { ReactComponent as MenuIcon } from "feather-icons/dist/icons/menu.svg";
 import { ReactComponent as CloseIcon } from "feather-icons/dist/icons/x.svg";
 import { useNavigate } from "react-router-dom";
+import AuthContext from "../../AuthContext.js";
 
 const Header = tw.header`
   flex justify-between items-center
@@ -59,12 +60,13 @@ export const DesktopNavLinks = tw.nav`
 
 function Light(props){
   let roundedHeaderButton = false; 
-  let logoLink;
-  let links;
-  let className;
+  let logoLink = props.logoLink;
+  let links = props.links;
+  let className = props.className;
   let collapseBreakpointClass = "lg";
 
   const navigate = useNavigate();
+  const auth = useContext(AuthContext);
   /*
    * This header component accepts an optionals "links" prop that specifies the links to render in the navbar.
    * This links props should be an array of "NavLinks" components which is exported from this file.
@@ -86,10 +88,26 @@ function Light(props){
       <NavLink onClick={() => navigate("/addHike")}>Add a Hike</NavLink>
       <NavLink onClick={() => navigate("/#")}>Add a Hut</NavLink>
       <NavLink onClick={() => navigate("/#")}>Add a Parking lot</NavLink>
-      <NavLink onClick={() => navigate("/login")} tw="lg:ml-12!">
-        Login
-      </NavLink>
-      <PrimaryLink css={roundedHeaderButton && tw`rounded-full`} onClick={ () => navigate("/register")}>Sign Up</PrimaryLink>
+      {
+      auth.login ?
+      <>
+        <NavLink onClick={() => props.logout(navigate)} tw="lg:ml-12!">
+          LogOut
+        </NavLink>
+        <PrimaryLink css={roundedHeaderButton && tw`rounded-full`} onClick={() => navigate("/profile/" + auth.user.Id)}>
+          Profile
+        </PrimaryLink>
+      </>
+      :
+      <>
+        <NavLink onClick={() => navigate("/login")} tw="lg:ml-12!">
+          Login
+        </NavLink>
+        <PrimaryLink css={roundedHeaderButton && tw`rounded-full`} onClick={ () => navigate("/register")}>
+          Sign Up
+        </PrimaryLink>
+      </>
+      }
     </NavLinks>
   ];
 

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import styled from "styled-components";
 import tw from "twin.macro";
 import { css } from "styled-components/macro"; //eslint-disable-line
@@ -10,6 +10,8 @@ import { Container, ContentWithVerticalPadding } from "../misc/Layouts.js";
 import { ReactComponent as CheckboxIcon } from "feather-icons/dist/icons/check-circle.svg";
 import { ReactComponent as QuotesLeftIconBase } from "../../images/quotes-l.svg"
 import { ReactComponent as SvgDecoratorBlob1 } from "../../images/dot-pattern.svg"
+import { useNavigate } from "react-router-dom";
+import AuthContext from "../../AuthContext.js";
 
 const Header = tw(HeaderBase)`max-w-none`;
 const Row = tw.div`flex flex-col lg:flex-row justify-between items-center lg:pt-16 max-w-screen-2xl mx-auto sm:px-8`;
@@ -35,33 +37,48 @@ const Quote = tw.blockquote``
 const CustomerName = tw.p`mt-4 font-bold`
 const CustomerCompany = tw.p`mt-1 text-sm text-gray-500`
 
-
-export default ({
-  heading = "Find Perfect Hikes anywhere you go.",
-  description = "Inspiration and guidance for wherever your trail may lead. Enjoy the breath taking view of mountains.",
-  imageSrc = "https://images.thenorthface.com/is/image/TheNorthFaceBrand/activities-hiking?",
-  imageDecoratorBlob = true,
-  primaryButtonText ="Search Hikes",
-  buttonRounded = true,
-  features = ["Local guides", "Parking Lots", "Emergency Operations"],
-  testimonial = {
+function LandingPage(props){
+  let heading = "Find Perfect Hikes anywhere you go.";
+  let description = "Inspiration and guidance for wherever your trail may lead. Enjoy the breath taking view of mountains.";
+  let imageSrc = "https://images.thenorthface.com/is/image/TheNorthFaceBrand/activities-hiking?";
+  let imageDecoratorBlob = true;
+  let primaryButtonText ="Search Hikes";
+  let buttonRounded = true;
+  let features = ["Local guides", "Parking Lots", "Emergency Operations"];
+  let testimonial = {
     quote: "  To walk in nature is to witness a thousand miracles.",
     customerName: " - MARY DAVIS",
   }
-}) => {
+
+  const navigate = useNavigate();
+  const auth = useContext(AuthContext);
+
   const buttonRoundedCss = buttonRounded && tw`rounded-full`;
   const navLinks = [
     <NavLinks key={1}>
-      <NavLink href="/hikes">Hikes</NavLink>
-      <NavLink href="/huts">Huts</NavLink>
+      <NavLink onClick={ () => navigate("/hikes")}>Hikes</NavLink>
+      <NavLink onClick={ () => navigate("/huts")}>Huts</NavLink>
     </NavLinks>,
     <NavLinks key={2}>
-      <NavLink href="/login" tw="lg:ml-12!">
-        Login
-      </NavLink>
-      <PrimaryLink css={buttonRoundedCss} href="/register">
-        Sign Up
-      </PrimaryLink>
+      {auth.login ?
+      <>
+        <NavLink onClick={() => props.logout(navigate)} tw="lg:ml-12!">
+          LogOut
+        </NavLink>
+        <PrimaryLink css={buttonRoundedCss} onClick={() => navigate("/profile/" + auth.user.Id)}>
+          Profile
+        </PrimaryLink>
+      </>
+      :
+      <>
+        <NavLink onClick={ () => navigate("/login")} tw="lg:ml-12!">
+          Login
+        </NavLink>
+        <PrimaryLink css={buttonRoundedCss} onClick={ () => navigate("/register")}>
+          Sign Up
+        </PrimaryLink>
+      </>
+      }
     </NavLinks>
   ];
   return (
@@ -72,7 +89,7 @@ export default ({
             <TextColumn>
               <Heading>{heading}</Heading>
               <Description>{description}</Description>
-              <PrimaryButton as="a" href="/hikes" css={buttonRoundedCss}>
+              <PrimaryButton as="a" onClick={ () => navigate("/hikes")} css={buttonRoundedCss}>
                 {primaryButtonText}
               </PrimaryButton>
               <FeatureList>
@@ -101,3 +118,5 @@ export default ({
     </>
   );
 };
+
+export default LandingPage;

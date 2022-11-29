@@ -24,7 +24,7 @@ function MainLayout(props) {
   return (
 
       <AnimationRevealPage>
-        <Hero />
+        <Hero logout={props.logout}/>
       </AnimationRevealPage>
 
   );

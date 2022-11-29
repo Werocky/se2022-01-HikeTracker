@@ -123,7 +123,7 @@ function HikeList(props) {
 
   return (
     <AnimationRevealPage>
-      <Header />
+      <Header logout={props.logout} />
       <Container>
         <ContentWithPaddingXl>
           <HeadingRow>

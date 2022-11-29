@@ -142,14 +142,14 @@ function AppLayout(props) {
         // < LoginComponent  login={props.login} />
       } />
       <Route path='/addHike' element={
-        <AddHike />
+        <AddHike logout={props.logout}/>
       } />
       <Route path='/hikes' element={
-            <Hikes hikes={hikes} loading={loading} setHikes={setHikes} />
+            <Hikes hikes={hikes} loading={loading} setHikes={setHikes} logout={props.logout}/>
       } />
       <Route path='/huts' element={
 
-            <Huts />
+            <Huts logout={props.logout} />
       } />
 
       <Route path='/profile/:userId' element={

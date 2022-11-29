@@ -36,46 +36,46 @@ const Textarea = styled(Input).attrs({as: "textarea"})`
 
 const SubmitButton = tw(PrimaryButtonBase)`inline-block mt-8`
 
-export default ({
-                  //subheading = "Add a hike here",
-                  heading = <>Add a hike here</>,
-                  description = "Add a hike with following parameters and the gpx file.",
-                  submitButtonText = "Confirm",
-                  formAction = "#",
-                  formMethod = "get",
-                  textOnLeft = true,
-                }) => {
+function AddHike(props){
+  //subheading = "Add a hike here",
+  const heading = <>Add a hike here</>;
+  const description = "Add a hike with following parameters and the gpx file.";
+  const submitButtonText = "Confirm";
+  const formAction = "#";
+  const formMethod = "get";
+  const textOnLeft = true;
   // The textOnLeft boolean prop can be used to display either the text on left or right side of the image.
 
   return (
-      <AnimationRevealPage>
-          <Header />
-      <Container>
-        <TwoColumn>
-          <ImageColumn>
-              {/*put the picture or map here*/}
-            <Image imageSrc={EmailIllustrationSrc} />
-          </ImageColumn>
-          <TextColumn textOnLeft={textOnLeft}>
-            <TextContent>
-              {/*{subheading && <Subheading>{subheading}</Subheading>}*/}
-              <Heading>{heading}</Heading>
-              {description && <Description>{description}</Description>}
+    <AnimationRevealPage>
+    <Header logout={props.logout} />
+    <Container>
+    <TwoColumn>
+    <ImageColumn>
+    {/*put the picture or map here*/}
+    <Image imageSrc={EmailIllustrationSrc} />
+    </ImageColumn>
+    <TextColumn textOnLeft={textOnLeft}>
+    <TextContent>
+    {/*{subheading && <Subheading>{subheading}</Subheading>}*/}
+    <Heading>{heading}</Heading>
+    {description && <Description>{description}</Description>}
 
-              <Form action={formAction} method={formMethod}>
-                <Input type="text" name="title" placeholder="title" />
-                <Input type="text" name="city" placeholder="city" />
-                <Input type="text" name="length" placeholder="length" />
-                <Textarea name="time" placeholder="time" />
-                  ...
-                <SubmitButton type="submit">{submitButtonText}</SubmitButton>
-              </Form>
+    <Form action={formAction} method={formMethod}>
+      <Input type="text" name="title" placeholder="title" />
+      <Input type="text" name="city" placeholder="city" />
+      <Input type="text" name="length" placeholder="length" />
+      <Textarea name="time" placeholder="time" />
+        ...
+      <SubmitButton type="submit">{submitButtonText}</SubmitButton>
+    </Form>
 
-
-            </TextContent>
-          </TextColumn>
-        </TwoColumn>
-      </Container>
-      </AnimationRevealPage>
+    </TextContent>
+    </TextColumn>
+    </TwoColumn>
+    </Container>
+    </AnimationRevealPage>
   );
 };
+
+export default AddHike;
