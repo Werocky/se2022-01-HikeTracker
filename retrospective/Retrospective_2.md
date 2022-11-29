@@ -1,9 +1,6 @@
 RETROSPECTIVE (Team 1)
 =====================================
 
-The retrospective should include _at least_ the following
-sections:
-
 - [process measures](#process-measures)
 - [quality measures](#quality-measures)
 - [general assessment](#assessment)
