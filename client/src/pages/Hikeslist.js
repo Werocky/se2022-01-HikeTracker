@@ -10,6 +10,7 @@ import { SectionHeading } from "../components/misc/Headings";
 import { PrimaryButton } from "../components/misc/Buttons";
 import { PrimaryButton as PrimaryButtonBase } from "../components/misc/Buttons.js";
 import Form from 'react-bootstrap/Form';
+import { useNavigate } from "react-router-dom";
 
 const HeadingRow = tw.div`flex`;
 const Heading = tw(SectionHeading)`text-gray-900`;
@@ -168,6 +169,8 @@ function HikeList(props) {
 
 function HikeElement(props) {
 
+  const navigate = useNavigate();
+
   const hike = props.hike;
   const imageSrc =  "https://images.unsplash.com/photo-1418854982207-12f710b74003?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1024&q=80";
 
@@ -207,7 +210,7 @@ function HikeElement(props) {
           <Description> <span tw="text-primary-500">Expected Time:</span> {time}</Description>
           <Description>City/Province/Region/Country</Description>
             
-          <PostAction>View details</PostAction>
+          <PostAction onClick={()=>{navigate('/'+hike.HikeID)}}>View details</PostAction>
         </Info>
 
       </Post>
