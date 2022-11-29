@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import AnimationRevealPage from "../helpers/AnimationRevealPage.js";
 import { Container, ContentWithPaddingXl } from "../components/misc/Layouts";
 import tw from "twin.macro";
@@ -9,6 +9,7 @@ import Footer from "../components/footers/FiveColumnWithInputForm.js";
 import { SectionHeading } from "../components/misc/Headings";
 import { PrimaryButton } from "../components/misc/Buttons";
 import { PrimaryButton as PrimaryButtonBase } from "../components/misc/Buttons.js";
+import Form from 'react-bootstrap/Form';
 
 const HeadingRow = tw.div`flex`;
 const Heading = tw(SectionHeading)`text-gray-900`;
@@ -55,6 +56,61 @@ function HikeList(props) {
 
   const [visible, setVisible] = useState(6);
 
+  const [sortTypeDesc, setSortTypeDesc] = useState('TitleDesc');
+
+  useEffect(() => {
+    if (sortTypeDesc !== "") {
+      const sortArray = type => {
+        const types = {
+          TitleDesc: 'Title-Desc',
+          LengthDesc: 'Length-Desc',
+          AscentDesc: 'Ascent-Desc',
+          DifficultyDesc: 'Difficulty-Desc',
+          ExpectedTimeDesc: 'ExpectedTime-Desc',
+          TitleAsc: 'Title-Asc',
+          LengthAsc: 'Length-Asc',
+          AscentAsc: 'Ascent-Asc',
+          DifficultyAsc: 'Difficulty-Asc',
+          ExpectedTimeAsc: 'ExpectedTime-Asc'
+        };
+         let sortProperty = types[type].split("-")[0];
+         let sorted;
+         if(types[type].split("-")[1]==="Desc")
+         {
+            if (sortProperty === "Title" || sortProperty === "Difficulty")
+            sorted = [...props.hikes].sort((a, b) => {
+              if (a[sortProperty].trim() > b[sortProperty].trim()) { return -1 }
+              if (a[sortProperty].trim() < b[sortProperty].trim())
+                return 1
+              return 0
+            });
+            else {
+              sorted = [...props.hikes].sort((a, b) => b[sortProperty] - a[sortProperty]);
+          }
+         }
+
+         else
+         {
+          if (sortProperty === "Title" || sortProperty === "Difficulty")
+          sorted = [...props.hikes].sort((a, b) => {
+            if (a[sortProperty].trim() > b[sortProperty].trim()) { return 1 }
+            if (a[sortProperty].trim() < b[sortProperty].trim())
+              return -1
+            return 0
+          });
+          else 
+          sorted = [...props.hikes].sort((a, b) => a[sortProperty] - b[sortProperty]);
+         }
+        
+     
+    props.setHikes(sorted);
+  };
+      sortArray(sortTypeDesc);
+      setSortTypeDesc("");
+    }
+  }, [sortTypeDesc]);
+
+
   const onLoadMoreClick = () => {
     setVisible(v => v + 6);
     if (visible > hikes.length) {
@@ -71,6 +127,22 @@ function HikeList(props) {
           <HeadingRow>
             <Heading>{headingText}</Heading>
           </HeadingRow>
+         
+    <Form.Select aria-label="Default select example"  onChange={(event) => {
+             setSortTypeDesc(event.target.value);
+            }}>
+          <option value="TitleDesc">Title (Descendent)</option>
+          <option value="LengthDesc" >Length - km (Descendent)</option>
+          <option value="AscentDesc" >Ascent - m (Descendent)</option>
+          <option value="DifficultyDesc" >Difficulty (Descendent) </option>
+          <option value="ExpectedTimeDesc" >Expected time - h:m (Descendent)</option>
+          <option value="TitleAsc">Title (Ascendent)</option>
+          <option value="LengthAsc" >Length - km (Ascendent)</option>
+          <option value="AscentAsc" >Ascent - m (Ascendent)</option>
+          <option value="DifficultyAsc" >Difficulty (Ascendent)</option>
+          <option value="ExpectedTimeAsc" >Expected time - h:m (Ascendent)</option>
+          </Form.Select>
+
           {!props.loading &&
             <Posts>
               {hikes.slice(0, visible).map((hike, index) => (

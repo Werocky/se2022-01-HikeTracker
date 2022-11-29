@@ -145,7 +145,7 @@ function AppLayout(props) {
         <AddHike />
       } />
       <Route path='/hikes' element={
-            <Hikes hikes={hikes} loading={loading} />
+            <Hikes hikes={hikes} loading={loading} setHikes={setHikes} />
       } />
       <Route path='/huts' element={
 
