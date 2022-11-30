@@ -1,10 +1,53 @@
 import { useContext, useEffect, useState } from "react";
-import { Button, Form, Col, Container, Row } from "react-bootstrap";
+import { Button, Form, Col, Row } from "react-bootstrap";
 import { useNavigate, useParams } from "react-router-dom";
 import AuthContext from "../AuthContext";
 import { MapContainer, Marker, Polyline, Popup, TileLayer, useMap } from 'react-leaflet';
 import API from '../API';
 import NavigationBar from "./Navigationbar";
+import tw from "twin.macro";
+import styled from "styled-components";
+import { SectionHeading, Subheading as SubheadingBase } from "../components/misc/Headings.js";
+import { PrimaryButton as PrimaryButtonBase } from "../components/misc/Buttons.js";
+import StatsIllustrationSrc from "../images/stats-illustration.svg";
+import { ReactComponent as SvgDotPattern } from "../images/dot-pattern.svg";
+import AnimationRevealPage from "../helpers/AnimationRevealPage";
+import Header from "../components/headers/light.js";
+
+
+const Container = tw.div`relative`;
+const TwoColumn = tw.div`flex flex-col md:flex-row justify-between max-w-screen-xl mx-auto py-20 md:py-24`;
+const Column = tw.div`w-full max-w-md mx-auto md:max-w-none md:mx-0`;
+const ImageMapColumn = tw(Column)`md:w-5/12 flex-shrink-0 h-80 md:h-auto relative`;
+const TextColumn = styled(Column)(props => [
+  tw`md:w-7/12 mt-16 md:mt-0`,
+  props.textOnLeft ? tw`md:mr-12 lg:mr-16 md:order-first` : tw`md:ml-12 lg:ml-16 md:order-last`
+]);
+
+const Image = styled.div(props => [
+  `background-image: url("${props.imageSrc}");`,
+  tw`rounded bg-contain bg-no-repeat bg-center h-full`
+]);
+const TextContent = tw.div`lg:py-8 text-center md:text-left`;
+
+const Subheading = tw(SubheadingBase)`text-center md:text-left`;
+const Heading = tw(
+  SectionHeading
+)`mt-4 font-black text-left text-3xl sm:text-4xl lg:text-5xl text-center md:text-left leading-tight`;
+const Description = tw.p`mt-4 text-center md:text-left text-sm md:text-base lg:text-lg font-medium leading-relaxed text-secondary-100`;
+
+const Statistics = tw.div`flex flex-col items-center sm:block text-center md:text-left mt-4`;
+const Statistic = tw.div`text-left sm:inline-block sm:mr-12 last:mr-0 mt-4`;
+const Value = tw.div`font-bold text-lg sm:text-xl lg:text-2xl text-secondary-500 tracking-wide`;
+const Key = tw.div`font-medium text-primary-700`;
+
+const PrimaryButton = tw(PrimaryButtonBase)`mt-8 md:mt-10 text-sm inline-block mx-auto md:mx-0`;
+
+const DecoratorBlob = styled(SvgDotPattern)(props => [
+  tw`w-20 h-20 absolute right-0 bottom-0 transform translate-x-1/2 translate-y-1/2 fill-current text-primary-500 -z-10`
+]);
+
+
 
 function HikeDetails(props) {
   const auth = useContext(AuthContext);
@@ -14,7 +57,6 @@ function HikeDetails(props) {
   const [loading, setLoading] = useState(true);
   const [startSelection, setStartSelection] = useState('');
   const [endSelection, setEndSelection] = useState('');
-  const [locations, setLocations] = useState('');
 
 
   const navigate = useNavigate();
@@ -28,9 +70,6 @@ function HikeDetails(props) {
         const gpxObj = await API.getPointsHike(params.hikeID);
         setGpxData(gpxObj);
         console.log(gpxObj[0].lat + "\t" + gpxObj[0].lon + "\n" + gpxObj.at(-1).lat + "\t" + gpxObj.at(-1).lon);
-
-        const hikeInfo = await API.getHutsAndParks(params.hikeID);
-        setLocations(hikeInfo);
       }
 
       setLoading(false);
@@ -42,55 +81,59 @@ function HikeDetails(props) {
     }
   }, [params.hikeID, auth.login])
 
-  async function handleSubmit(){
-    const hike = params.hikeID;
-    const refStart = startSelection;
-    const refEnd = endSelection;
-    const startName = locations.find((location) => location.RefPointID === refStart);
-    const endName = locations.find((location) => location.RefPointID === refEnd);
 
-    try {
-      await API.setStartEndPoints(hike, refStart, refEnd, startName, endName);
-      window.location.history(0);
-    } catch (err) {
-      throw err;
+  const subheading = "Learn more";
+  const heading = (
+    <>
+      hike title
+    </>
+  );
+  const description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.";
+  //primaryButtonText = "Learn More",
+  //primaryButtonUrl = "https://timerse.com",
+  const imageSrc = StatsIllustrationSrc;
+  const imageCss = null;
+  const imageContainerCss = null;
+  const imageDecoratorBlob = false;
+  const imageDecoratorBlobCss = null;
+  const imageInsideDiv = false;
+  let statistics = null;
+  const textOnLeft = false;
+
+  // The textOnLeft boolean prop can be used to display either the text on left or right side of the image.
+  //Change the statistics variable as you like, add or delete objects
+  const defaultStatistics = [
+    {
+      key: "length",
+      value: "228"
+    },
+    {
+      key: "height",
+      value: "389"
+    },
+    {
+      key: "difficulty",
+      value: "10"
     }
-  }
+  ];
+
+  if (!statistics) statistics = defaultStatistics;
+
 
   return (
-    <>
-      <NavigationBar logout={props.logout} />
-        <Container fluid className={'vh-100'}>
-        {!loading && <>
-          <Row>
-            <Col>Title: {hike.Title}</Col>
-            <Col>Length: {hike.Length} km</Col>
-            <Col>Expected Time: {
-              Math.floor(hike.ExpectedTime / 60) < 10 ?
-                "0" + Math.floor(hike.ExpectedTime / 60) : Math.floor(hike.ExpectedTime / 60)}:{
-                Math.floor(hike.ExpectedTime % 60) < 10 ?
-                  "0" + Math.floor(hike.ExpectedTime % 60) : Math.floor(hike.ExpectedTime % 60)}</Col>
-            <Col>Ascent: {hike.Ascent} m</Col>
-            <Col>Difficulty: {hike.Difficulty}</Col>
-          </Row>
-          <Row>
-            <Col>City: {hike.City}</Col>
-            <Col>Province: {hike.Province}</Col>
-            <Col>Start: {hike.Start}</Col>
-            <Col>End: {hike.End}</Col>
-            <Col></Col>
-          </Row>
-          <Row>
-            <Col>Description: {hike.Description}</Col>
-            
-          </Row>
-          <p></p>
-          <hr />
-          <p></p>
-          {auth.login &&
-            <Row>
-              <Col xs={1}></Col>
-              <Col>
+    <AnimationRevealPage>
+      <Header logout={props.logout} />
+      {!loading &&
+        <Container>
+          <TwoColumn>
+            {!auth.login &&
+              <ImageMapColumn css={imageContainerCss}>
+                You should be logged to see the map
+                <Image imageSrc={imageSrc} css={imageCss} />
+              </ImageMapColumn>
+            }
+            {auth.login &&
+              <ImageMapColumn css={imageContainerCss}>
                 <MapContainer
                   center={[gpxData[Math.ceil(gpxData.length / 2)].lat, gpxData[Math.ceil(gpxData.length / 2)].lon]}
                   bounds={[gpxData[0], gpxData.at(-1),]}
@@ -104,69 +147,73 @@ function HikeDetails(props) {
                   <EndPoint position={gpxData.at(-1)} />
                   <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
                 </MapContainer>
+              </ImageMapColumn>
+            }
+            <TextColumn textOnLeft={textOnLeft}>
+              <TextContent>
+                <Subheading>
+                  Difficulty:
+                  {
+                    hike.Difficulty === "T" ? " Tourist (T)"
+                      : hike.Difficulty === "H" ? " Hiker (H)"
+                        : hike.Difficulty === "PH" ? " Professional Hiker (PH)" : ""
+                  }
+                </Subheading>
+                <Heading>{hike.Title}</Heading>
+                <Subheading>
+                  Start: {hike.Start}
+                </Subheading>
+                <Subheading>
+                  End: {hike.End}
+                </Subheading>
+                <Statistics>
+                  <Statistic>
+                    <Value>{hike.Length} km</Value>
+                    <Key>Length</Key>
+                  </Statistic>
 
-              </Col>
-              <Col xs={1}></Col>
+                  <Statistic>
+                    <Value>{hike.Ascent} mt</Value>
+                    <Key>Ascent</Key>
+                  </Statistic>
 
-            </Row>
-          }
-          {!loading && auth.user && auth.user.Role === 'L' && <Form onSubmit={handleSubmit}>
-            <Row>
-              <Col>
-                  <Form.Group className='mb-3' controlId='StartPoint'>
-                  <Form.Label>Hike's start point</Form.Label>
-                  <Form.Control as="select" value={startSelection} aria-label='Start Point' onChange={(event) => {
-                    setStartSelection(event.target.value)
-                  }}>
-                  <option>Select the start point of the hike</option>
-                  {locations.map((location) =>{
-                    if(location.Name !== null){
-                      return <option key={location.RefPointID} value={location.Name}>{location.Name}</option>
-                    }
-                    if(location.Description !== null){
-                      return <option key={location.RefPointID} value={location.Description}>{location.Description}</option>
-                    }
-                  })}
-                  </Form.Control>
-                  </Form.Group> 
-              </Col>
-            </Row>
-            <Row>
-              <Col>
-                  <Form.Group className='mb-3' controlId='EndPoint'>
-                  <Form.Label>Hike's End point</Form.Label>
-                  <Form.Control as="select" value={endSelection} aria-label='End Point' onChange={(event) => {
-                    setEndSelection(event.target.value)
-                  }}>
-                  <option>Select the end point of the hike</option>
-                  {locations.map((location) =>{
-                    if(location.Name !== null){
-                      return <option key={location.RefPointID} value={location.Name}>{location.Name}</option>
-                    }
-                    if(location.Description !== null){
-                      return <option key={location.RefPointID} value={location.Description}>{location.Description}</option>
-                    }
-                  })}
-                  </Form.Control>
-                  </Form.Group> 
-              </Col>
-            </Row>
-            <Col>
-              <Button variant="primary" type="submit" >
-                Submit
-              </Button>
-            </Col>
-            </Form>}
-          {!auth.login &&
-            <Row>
-              <Col>You should be logged to see the map</Col>
-            </Row>}
+                  <Statistic>
+                    <Value>{exp_time(hike.ExpectedTime)}</Value>
+                    <Key>Expected Time</Key>
+                  </Statistic>
 
-        </>}
-      </Container>
 
-    </>
+                </Statistics>
+                {/*<PrimaryButton as="a" href={primaryButtonUrl}>*/}
+                {/*  {primaryButtonText}*/}
+                {/*</PrimaryButton>*/}
+                <Description>{hike.Description}</Description>
+              </TextContent>
+            </TextColumn>
+          </TwoColumn>
+        </Container>
+      }
+    </AnimationRevealPage>
   );
+
+}
+
+
+function exp_time(time) {
+  let hh = Math.floor(time / 60);
+  let mm = Math.floor(time % 60);
+  let dd = 0;
+  let res = "";
+  if (hh > 24) {
+    dd = Math.floor(hh / 24);
+    hh = Math.floor(hh % 24)
+    res = dd + " d " + hh + " h " + mm + " m";
+  } else if (hh < 1) {
+    res = mm + " m";
+  } else {
+    res = hh + " h " + mm + " m";
+  }
+  return res
 }
 
 function StartPoint(props) {

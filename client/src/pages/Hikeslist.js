@@ -196,7 +196,6 @@ function HikeElement(props) {
               hike.Difficulty === "T" ? "Tourist (T)"
                 : hike.Difficulty === "H" ? "Hiker (H)"
                   : hike.Difficulty === "PH" ? "Professional Hiker (PH)" : ""
-
             }
           </Category>
 
