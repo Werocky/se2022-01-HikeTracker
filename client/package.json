@@ -14,6 +14,8 @@
     "crypto": "^1.0.1",
     "feather-icons": "^4.29.0",
     "framer-motion": "^7.6.12",
+    "fs": "^0.0.1-security",
+    "gpxparser": "^3.0.8",
     "leaflet": "^1.9.2",
     "nodemon": "^2.0.20",
     "react": "^18.2.0",
