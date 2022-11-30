@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import tw from "twin.macro";
 import styled from "styled-components";
 import { css } from "styled-components/macro"; //eslint-disable-line
@@ -7,7 +7,7 @@ import { PrimaryButton as PrimaryButtonBase } from "../misc/Buttons.js";
 import EmailIllustrationSrc from "../../images/email-illustration.svg";
 import AnimationRevealPage from "../../helpers/AnimationRevealPage.js";
 import Header from "../headers/light.js";
-import {Alert, Button, FloatingLabel, Row} from "react-bootstrap";
+import { Alert, Button, FloatingLabel, Row } from "react-bootstrap";
 
 const Container = tw.div`relative`;
 const TwoColumn = tw.div`flex flex-col md:flex-row justify-between max-w-screen-xl mx-auto py-20 md:py-24`;
@@ -30,13 +30,17 @@ const Description = tw.p`mt-4 text-center md:text-left text-sm md:text-base lg:t
 
 const Form = tw.form`mt-8 md:mt-10 text-sm flex flex-col max-w-sm mx-auto md:mx-0`
 const Input = tw.input`mt-6 first:mt-0 border-b-2 py-3 focus:outline-none font-medium transition duration-300 hocus:border-primary-500`
-const Textarea = styled(Input).attrs({as: "textarea"})`
+const Textarea = styled(Input).attrs({ as: "textarea" })`
   ${tw`h-24`}
 `
 
 const SubmitButton = tw(PrimaryButtonBase)`inline-block mt-8`
 
-function AddHike(props){
+function AddHike(props) {
+
+  const [file, setFile] = useState(undefined);
+  const [fileOk, setFileOk] = useState(false);
+
   //subheading = "Add a hike here",
   const heading = <>Add a hike here</>;
   const description = "Add a hike with following parameters and the gpx file.";
@@ -46,34 +50,54 @@ function AddHike(props){
   const textOnLeft = true;
   // The textOnLeft boolean prop can be used to display either the text on left or right side of the image.
 
+
+  const handleSubmitFile = async (event) => {
+    event.preventDefault();
+    /**
+     * PARSE THE FILE
+     */
+    setFileOk(true); // if nothing went wrong
+    console.log("HET");
+
+  }
+
   return (
     <AnimationRevealPage>
-    <Header logout={props.logout} />
-    <Container>
-    <TwoColumn>
-    <ImageColumn>
-    {/*put the picture or map here*/}
-    <Image imageSrc={EmailIllustrationSrc} />
-    </ImageColumn>
-    <TextColumn textOnLeft={textOnLeft}>
-    <TextContent>
-    {/*{subheading && <Subheading>{subheading}</Subheading>}*/}
-    <Heading>{heading}</Heading>
-    {description && <Description>{description}</Description>}
+      <Header logout={props.logout} />
+      <Container>
+        <TwoColumn>
+          <ImageColumn>
+            {/*put the picture or map here*/}
+            <Image imageSrc={EmailIllustrationSrc} />
+          </ImageColumn>
+          <TextColumn textOnLeft={textOnLeft}>
+            <TextContent>
+              {/*{subheading && <Subheading>{subheading}</Subheading>}*/}
+              <Heading>{heading}</Heading>
+              {description && <Description>{description}</Description>}
 
-    <Form action={formAction} method={formMethod}>
-      <Input type="text" name="title" placeholder="title" />
-      <Input type="text" name="city" placeholder="city" />
-      <Input type="text" name="length" placeholder="length" />
-      <Textarea name="time" placeholder="time" />
-        ...
-      <SubmitButton type="submit">{submitButtonText}</SubmitButton>
-    </Form>
-
-    </TextContent>
-    </TextColumn>
-    </TwoColumn>
-    </Container>
+              {!fileOk &&
+                <Form onSubmit={handleSubmitFile}>
+                  <div>Insert GPX file</div>
+                  
+                  // PROBLEMS HERE
+                  <Input type="file" value={file} onChange={(e) => {  setFile(e.target.files[0]) }} required />
+                  
+                  <SubmitButton type="submit">{submitButtonText}</SubmitButton>
+                </Form>
+              }
+              {fileOk &&
+                <Form>
+                  <Input type="text" name="title" placeholder="title" />
+                  <Input type="text" name="city" placeholder="city" />
+                  <Input type="text" name="length" placeholder="length" />
+                  <Textarea name="time" placeholder="time" />
+                </Form>
+              }
+            </TextContent>
+          </TextColumn>
+        </TwoColumn>
+      </Container>
     </AnimationRevealPage>
   );
 };
