@@ -127,35 +127,77 @@ RETROSPECTIVE (Team 1)
   
 ## QUALITY MEASURES 
 
-- Unit Testing:
-  - Total hours estimated
-  - Total hours spent
-  - Nr of automated unit test cases 
-  - Coverage (if available)
-- E2E testing:
-  - Total hours estimated
-  - Total hours spent
-- Code review 
+- Unit Testing & code review:
   - Total hours estimated 
-  - Total hours spent
-  
+      - 10h30m
+  - Total hours spent 
+      - 10h40m
+  - Nr of automated unit test cases:
+ 
+      - $67$ total cases $- 19$ existing old cases $=$
+      
+       $48$ new test cases
 
+      _*it was decided to start using smaller tests
+       to close up on issues faster_ 
+
+### Horizontal tasks
+| Task | Hours est. | Hours actual | Nr tests |
+|------|------------|--------------|---|
+| _collect DATA (¬50 Hike tracks)_  |  _1h 30m_  |  _1h_  | _0_ |
+| _DB_StartUpSystem_  |  _30m_  |  _1h_  | _0_ |
+| _fix bugs demo 1_  |  _2h30m_  |  _3h_  | _0_ |
+
+
+|  File                | % Stmts | % Branch | % Funcs | % Lines | Uncovered Line #s
+--------------------|---------|----------|---------|---------|--------------------------------------------
+All files           |    94.2 |    64.28 |   96.05 |   94.61 |                  
+ DB.js              |   98.97 |       50 |     100 |   99.08 | 35,48,61,75,88,101,114,126
+ FileNames.js       |   90.24 |       60 |     100 |   90.24 | 18,33,64,75      
+ HikeLocations.js   |   87.17 |       50 |     100 |   86.48 | 12,26,40,52,64   
+ HikeRefPoints.js   |   71.73 |    41.66 |      80 |   72.72 | 10,19-26,37,50,62,74
+ Hikes.js           |   86.81 |    72.72 |     100 |   88.88 | 19,35,41,52,67,79,90,102,161
+ Huts.js            |   90.32 |    76.92 |     100 |   89.91 | 40,52,84,91,98,105,132,144,158,172,186,200
+ ReferencePoints.js |   74.54 |    43.75 |   83.33 |      75 | 10,23,34,46,60,75,83-90
+ Users.js           |   87.14 |       65 |     100 |   88.23 | 22-23,40-41,77,89,103,115
+
+- E2E testing:
+  - Total hours estimated 
+    - 4h
+  - Total hours spent
+    - 4h10m
+
+
+  
+*Note: some function were implemented but not tested
 
 ## ASSESSMENT
 
 - What caused your errors in estimation (if any)?  
   - Creating the collection of 50 hikes took longer than expected, searching and inserting consistent data for all of them required a bigger effort than the estimated. The same thing can be said about the creation of the collection of hikes with all the related information.  
-Also solve the issues and the bugs we discovered, was more time-demanding than what we estimated.
-Some stories have a large time spent since we worked together and this caused a double increase of them.
+  - Also solve the issues and the bugs we discovered, was more time-demanding than what we estimated.
+  - Some stories have a large time spent since we worked together and this caused a double increase of them.
 
 - What lessons did you learn (both positive and negative) in this sprint?
+  - large or ambiguous tasks (like the horizontal ones we used), slug the pace and make progress hard to track and communication chaotic.
+  - use of shortcuts on immediate implementation make for fast implementation but have severe repercusions on the whole project if not handled correctly.
+  - subdividing and specializing although it gives us less flexibility, did allow team members to focus on specific fields and have a better flow of their own work
+  
  
 - Which improvement goals set in the previous retrospective were you able to achieve? 
+ - we improved on speed communication about overall progress and problems that arise.*
   
-- Which ones you were not able to achieve? Why?  
+  *overall although better we do believe it can still be improved
+
+- Which ones you were not able to achieve? Why?
+  - Subdivision of tasks, for the most part we would say that the biggest problem was the large tasks and the lack of technical detail on their descriptions.
+
 
 - Improvement goals for the next sprint and how to achieve them (technical tasks, team coordination, etc.)
+  - Improve the subdivision of stories into smaller tasks more technically specific. To help organize and improve tracking of time.
+  - Improve documentation to comunicate the set up of the project to the rest of the team.
 
 > Propose one or two
 
 - One thing you are proud of as a Team!!
+  - we managed to fill our static database with relevant and varied data.
