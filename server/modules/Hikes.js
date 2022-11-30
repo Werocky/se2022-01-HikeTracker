@@ -12,7 +12,7 @@ const acceptableFilters = ['HikeID', 'Length', 'ExpectedTime', 'Ascent', 'Diffic
 exports.getHikes = () => {
 
   return new Promise((resolve, reject) => {
-    const sql = 'SELECT * FROM Hikes';
+    const sql = 'SELECT * FROM Hikes order by title';
     db.all(sql, [], (err, rows) => {
       if (err) {
         //console.log('/rejected');
