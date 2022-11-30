@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import tw from "twin.macro";
 import styled from "styled-components";
 import { css } from "styled-components/macro"; //eslint-disable-line
@@ -62,11 +62,13 @@ function AddHike(props) {
     setFile(f);
    
     setFileOk(true); // if nothing went wrong
-    console.log("HET");
-    console.log(f);
+  //  console.log("HET");
+    //console.log(f);
   }
 
-  
+  useEffect(()=>{
+  console.log(file);
+}, [file])
 
   return (
     <AnimationRevealPage>
