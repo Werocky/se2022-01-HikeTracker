@@ -38,7 +38,7 @@ const SubmitButton = tw(PrimaryButtonBase)`inline-block mt-8`
 
 function AddHike(props) {
 
-  const [file, setFile] = useState(undefined);
+  const [file, setFile] = useState();
   const [fileOk, setFileOk] = useState(false);
 
   //subheading = "Add a hike here",
@@ -48,6 +48,7 @@ function AddHike(props) {
   const formAction = "#";
   const formMethod = "get";
   const textOnLeft = true;
+  let f;
   // The textOnLeft boolean prop can be used to display either the text on left or right side of the image.
 
 
@@ -56,10 +57,16 @@ function AddHike(props) {
     /**
      * PARSE THE FILE
      */
+    setFile(event.target[0].files[0]);
+    f=event.target[0].files[0];
+    setFile(f);
+   
     setFileOk(true); // if nothing went wrong
     console.log("HET");
-
+    console.log(f);
   }
+
+  
 
   return (
     <AnimationRevealPage>
@@ -75,13 +82,14 @@ function AddHike(props) {
               {/*{subheading && <Subheading>{subheading}</Subheading>}*/}
               <Heading>{heading}</Heading>
               {description && <Description>{description}</Description>}
-
+            
               {!fileOk &&
-                <Form onSubmit={handleSubmitFile}>
+                <Form onSubmit={handleSubmitFile} >
                   <div>Insert GPX file</div>
                   
                   // PROBLEMS HERE
-                  <Input type="file" value={file} onChange={(e) => {  setFile(e.target.files[0]) }} required />
+                  
+                  <Input type="file" required />
                   
                   <SubmitButton type="submit">{submitButtonText}</SubmitButton>
                 </Form>
