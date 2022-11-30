@@ -33,23 +33,23 @@ function App() {
     user: { Role: '' },
   });
 
-  function errorHandler(err){
-      if(err.hasOwnProperty('error'))
-        setMessage(() => err.error.toString());
-        else if (err.hasOwnProperty('message'))
-        setMessage(() => err.message);
-        else
-        setMessage(() => err.toString());
+  function errorHandler(err) {
+    if (err.hasOwnProperty('error'))
+      setMessage(() => err.error.toString());
+    else if (err.hasOwnProperty('message'))
+      setMessage(() => err.message);
+    else
+      setMessage(() => err.toString());
   }
 
   const login = (email, password) => {
     API.logIn(email, password)
-    .then(user => {
-    setAuth({
-      login: true,
-      user: user,
-    });
-  }).catch(err => errorHandler(err));
+      .then(user => {
+        setAuth({
+          login: true,
+          user: user,
+        });
+      }).catch(err => errorHandler(err));
   };
 
   const logout = async (navigate) => {
@@ -63,8 +63,8 @@ function App() {
 
   const register = (credentials) => {
     API.register(credentials)
-    .then((res) => {console.log(res);if(res.hasOwnProperty('error')) errorHandler(res); else setMessage('Registration successful! Check email for confirmation and follow the instruction.')})
-    .catch(err => errorHandler(err));
+      .then((res) => { console.log(res); if (res.hasOwnProperty('error')) errorHandler(res); else setMessage('Registration successful! Check email for confirmation and follow the instruction.') })
+      .catch(err => errorHandler(err));
   }
 
   useEffect(() => {   // check login     
@@ -83,7 +83,7 @@ function App() {
   return (
     <BrowserRouter>
       <AuthContext.Provider value={auth}>   {/* this is used to pass user information*/}
-        <AppLayout login={login} logout={logout} register={register} setLogged={setAuth} message={message} setMessage={setMessage}/>
+        <AppLayout login={login} logout={logout} register={register} setLogged={setAuth} message={message} setMessage={setMessage} />
       </AuthContext.Provider>
     </BrowserRouter>
   );
@@ -91,7 +91,7 @@ function App() {
 
 function AppLayout(props) {
   const auth = useContext(AuthContext);   // contains user information 
-  
+
   const [hikes, setHikes] = useState([]);
   const [huts, setHuts] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -119,62 +119,59 @@ function AppLayout(props) {
 
   return (
     <>
-    <Container>
+      <Container>
         <Row><Col>
-        {props.message ? <Alert variant='danger' onClose={() => props.setMessage('')} dismissible>{props.message}</Alert> : false}
+          {props.message ? <Alert variant='danger' onClose={() => props.setMessage('')} dismissible>{props.message}</Alert> : false}
         </Col></Row>
       </Container>
-    <Routes>
-      <Route path='/' element={
-        <MainLayout
-          logout={props.logout}
-        />
-      } />
-      <Route path='/:hikeID' element={
-        <HikeDetails logout={props.logout} />
-      } />
+      <Routes>
+        <Route path='/' element={
+          <MainLayout
+            logout={props.logout}
+          />
+        } />
+        <Route path='/:hikeID' element={
+          <HikeDetails logout={props.logout} />
+        } />
 
 
-      <Route path='/hikedetail' element={
-          <HikeDetail />
-      } />   {/* for test*/}
         <Route path='/register' element={
-              <Register logout={props.register}/>
-        // <RegisterComponent register={props.register} />
+          <Register logout={props.register} />
+          // <RegisterComponent register={props.register} />
 
-      } />
-      <Route path='/login' element={
-          <Login login={props.login}/>
-        // < LoginComponent  login={props.login} />
-      } />
-      <Route path='/addHike' element={
-        <AddHike logout={props.logout}/>
-      } />
-      <Route path='/hikes' element={
-            <Hikes hikes={hikes} loading={loading} setHikes={setHikes} logout={props.logout}/>
-      } />
-      <Route path='/huts' element={
+        } />
+        <Route path='/login' element={
+          <Login login={props.login} />
+          // < LoginComponent  login={props.login} />
+        } />
+        <Route path='/addHike' element={
+          <AddHike logout={props.logout} />
+        } />
+        <Route path='/hikes' element={
+          <Hikes hikes={hikes} loading={loading} setHikes={setHikes} logout={props.logout} />
+        } />
+        <Route path='/huts' element={
 
-            <Huts huts={huts} loading={loading} setHuts={setHuts} logout={props.logout} />
-      } />
+          <Huts huts={huts} loading={loading} setHuts={setHuts} logout={props.logout} />
+        } />
 
-      <Route path='/profile/:userId' element={
-        <ProfilePage logout={props.logout} />
+        <Route path='/profile/:userId' element={
+          <ProfilePage logout={props.logout} />
 
-      } />
-      {/*<Route path='/huts' element={*/}
-      {/*  <HutsPage logout={props.logout} />*/}
-      {/*} />*/}
-      <Route path='/addParkingLot' element={
-        <ParkingForm />
-      } />
-      <Route path='/verify' element={
-        < VerifiedMessage />
-      } />
-       <Route path='/addHut' element={
-        < HutForm />
-      } />
-    </Routes>
+        } />
+        {/*<Route path='/huts' element={*/}
+        {/*  <HutsPage logout={props.logout} />*/}
+        {/*} />*/}
+        <Route path='/addParkingLot' element={
+          <ParkingForm />
+        } />
+        <Route path='/verify' element={
+          < VerifiedMessage />
+        } />
+        <Route path='/addHut' element={
+          < HutForm />
+        } />
+      </Routes>
     </>
   );
 }
