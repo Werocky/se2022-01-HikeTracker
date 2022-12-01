@@ -20,7 +20,7 @@ function getFileName  (HikeID)  {
           reject(err);
         }
         let GpxFile = row.GpxFile;
-        console.log(GpxFile)
+      
         resolve(GpxFile);
       });
     });
@@ -32,15 +32,15 @@ function getFileName  (HikeID)  {
       const sql = 'SELECT * FROM Hikes';
       db.all(sql, [], (err, rows) => {
         if (err) {
-          //console.log('/rejected');
+         
           reject(err);
         }
-        //console.log(rows);
+        
         let hikes=[];
         rows.forEach(r => {
           hikes.push(new File(r.HikeID,r.GpxFile));
         });
-        //const hikes = rows.map((r) => ({ HikeID: r.HikeID, GpxFile: r.GpxFile}));
+      
         resolve(hikes);
       });
     });

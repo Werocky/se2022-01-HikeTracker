@@ -1,4 +1,4 @@
-const helper = require('./populate.js');
+const helper = require('../modules/populate.js');
 
 helper.populateScript().then(()=>{
     console.log('Populated')

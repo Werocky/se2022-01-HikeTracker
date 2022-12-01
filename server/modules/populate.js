@@ -4,5 +4,8 @@ module.exports= {
     populateScript: async()=>{
         await db.createConnection();
         await db.populate();
-    },    
+    }, 
+    dropTablesScript:async()=>{
+        await db.dropTables();
+    },   
 }

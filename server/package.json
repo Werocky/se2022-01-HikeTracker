@@ -28,6 +28,7 @@
     "cover": "jest --coverage --runInBand",
     "apiTest": "mocha",
     "start": "node index.js",
-    "populate": "node ./modules/populateRun.js"
+    "populate": "node ./Scripts/populateRun.js",
+    "dropTables": "node ./Scripts/dropTables.js"
   }
 }
