@@ -262,10 +262,18 @@ app.post('/addHike', async (req,res) => {
   }
 try {
   const hike = req.body.hike;
-  console.log(hike);
+  const points = req.body.points;
+  /*console.log(hike);
+  console.log(points)*/
   const hikeId = await hikes.getLastHikeId()+1;
-  await hikes.addHike(hikeId,hike.Title,hike.Length,hike.ExpectedTime,hike.Ascent,hike.Difficulty,hike.Start,hike.End,hike.Description);
-  await locations.addLocation(hikeId, hike.Province, hike.City);
+  console.log(hikeId);
+  /**
+   * ---------------------------------------------
+   * Add in: Hikes, PointsOfHikes, ReferencePoints
+   * ---------------------------------------------
+   */
+  /*await hikes.addHike(hikeId,hike.Title,hike.Length,hike.ExpectedTime,hike.Ascent,hike.Difficulty,hike.Start,hike.End,hike.Description);
+  await locations.addLocation(hikeId, hike.Province, hike.City);*/
   res.status(201).json({hikeId: hikeId});
 } catch (err) {
   res.status(503).json({error: 'Internal error'});

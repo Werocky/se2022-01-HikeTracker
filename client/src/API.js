@@ -143,13 +143,14 @@ function setDescription(Description, HikeID) {
   });
 }
 
-async function addHike(hike) {
+async function addHike(hike, points) {
   try {
     const response = await fetch((APIURL + '/addHike'), {
       method: 'POST',
       credentials: 'include',
       body: JSON.stringify({
         "hike": hike,
+        "points": points,
       }),
       headers: {
         'Content-Type': 'application/json',

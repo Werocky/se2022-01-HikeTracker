@@ -1,9 +1,11 @@
-import { useState } from "react";
+import { useState,useEffect } from "react";
 import { Alert, Button, Col, Form, Row ,Container} from "react-bootstrap";
 import { MapContainer, TileLayer, Marker, Popup, useMapEvents } from 'react-leaflet';
 import API from '../API';
 
 function HutForm() {
+
+
 
    const [errorMsg,setErrorMsg]=useState("");
    const [name,setName]=useState("");
@@ -17,8 +19,21 @@ function HutForm() {
    const [description,setDescription]=useState("");
    const [avgPrice,setAvgPrice]=useState();
    const [coord,setCoord]=useState(null);
+
   // Need to reset the filter params with useEffect
 
+
+  useEffect(()=>{
+    if(coord!=null){
+        getInfo(coord.lat, coord.lng)
+  .then(informations => {
+    setRegion(informations?.address?.state? informations.address.state : '');
+    setProvince(informations?.address?.county? informations.address.county : '');
+    setCountry(informations?.address?.country? informations.address.country : '');
+    setCity(informations?.address?.village? informations.address.village: informations.address.town);
+  })
+    }
+}, [coord])
   const handleSubmit = async (event) => {
 
     event.preventDefault();
@@ -81,6 +96,21 @@ function HutForm() {
      setErrorMsg("Hut aggiunto");
   }
 }
+  async function getInfo(lat, lon) {
+  let response = await fetch((`https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=${lat}&lon=${lon}&addressdetails=1`), {
+    method: 'GET'
+  });
+  if (response.ok) {
+    console.log(response)
+    const informations = await response.json();
+    console.log(informations);
+    // setInformation(informations);
+    return informations;
+  } else {
+    const errDetail = await response.json();
+    throw errDetail.message;
+  }
+}
 
   const ClickPick = () => {
     useMapEvents({
@@ -95,7 +125,7 @@ function HutForm() {
           {coord !== null &&
             <Marker position={{ lat: coord.lat, lng: coord.lng }}>
               <Popup>
-                You selected this point <br /> Click on another place to change it.
+              <p>This is your point, select another if you want</p> 
               </Popup>
             </Marker>
           }
