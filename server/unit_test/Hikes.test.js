@@ -51,8 +51,8 @@ describe("Get/add Hikes",()=>{
 
     test("get last hike", async()=>{
         await expect(hikes.deleteHikes()).resolves.toEqual('Hikes emptied');
-        let h1=new hike(null,'10','0','0','0','0','0','0','0','0','01.gpx','0','0','0')
-        let h2=new hike(null, '11','0','0','0','0','0','0','0','0','02.gpx','0','0','0')
+        let h1=new hike(null,'10','0','0','0','0','0','0','0','0','0','01.gpx','0','0','0')
+        let h2=new hike(null, '11','0','0','0','0','0','0','0','0','0','02.gpx','0','0','0')
         await expect(hikes.addHike(h0)).resolves.toEqual('New Hike inserted')
         await expect(hikes.getHikes()).resolves.not.toEqual([]);
         await expect(hikes.getLastHikeId()).resolves.toEqual(1);
@@ -68,9 +68,9 @@ describe("get Hikes by Filter",()=>{
     beforeEach(
             async ()=>{
                 await hikes.deleteHikes();
-                let h1=new hike(null, 'title1','12.5', null,'180','begginer','500','Bolita','LaPAZ','laPax','0.gpx','0.00','1.2','1');
-                let h2=new hike(null, 'title2','5'   ,'dessdc' , '60' , 'Professional' ,'180','Country1','LaPAZ','laPax','20.gpx','0.1'   ,'1.454' ,'1')
-                let h3=new hike(null, 'title3','7.0','desc','90' ,'undertermined','232.56','contry2','LaPAZ','laPax','30.gpx','1.55','67','0')
+                let h1=new hike(null, 'title1','12.5', null,'180','begginer','500','Bolita',null,'LaPAZ','laPax','0.gpx','0.00','1.2','1');
+                let h2=new hike(null, 'title2','5'   ,'dessdc' , '60' , 'Professional' ,'180','Country1',null,'LaPAZ','laPax','20.gpx','0.1'   ,'1.454' ,'1')
+                let h3=new hike(null, 'title3','7.0','desc','90' ,'undertermined','232.56','contry2',null,'LaPAZ','laPax','30.gpx','1.55','67','0')
                 await hikes.addHike(h1);
                 await hikes.addHike(h2);
                 await hikes.addHike(h3);

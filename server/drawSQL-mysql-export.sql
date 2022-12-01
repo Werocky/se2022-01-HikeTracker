@@ -10,7 +10,7 @@ CREATE TABLE IF NOT EXISTS `Users`(
     `Phone` INTEGER NULL
 );
 CREATE TABLE IF NOT EXISTS `LocalGuides`(
-    `id` INTEGER PRIMARY KEY
+    `id` TEXT PRIMARY KEY
     `user` TEXT,
     FOREIGN KEY(`user`) REFERENCES `Users`(`Id`)
 
@@ -23,12 +23,12 @@ CREATE TABLE IF NOT EXISTS `ReferencePoints`(
     `Type` TEXT
 );
 CREATE TABLE IF NOT EXISTS `HutWorkers`(
-    `id` INTEGER NOT NULL PRIMARY KEY
+    `id` TEXT NOT NULL PRIMARY KEY
     `user` TEXT,
     FOREIGN KEY(`user`) REFERENCES `Users`(`Id`)
 );
 CREATE TABLE IF NOT EXISTS `Hiker`(
-    `id` INTEGER PRIMARY KEY NOT NULL
+    `id` TEXT PRIMARY KEY NOT NULL
     `user` TEXT,
     FOREIGN KEY(`user`) REFERENCES `Users`(`Id`)
 );
@@ -44,9 +44,9 @@ CREATE TABLE IF NOT EXISTS `Hikes`(
     `Province` TEXT,
     `City` TEXT,
     `GpxFile` TEXT UNIQUE,
-    `Start` INTEGER,
-    `End` INTEGER,
-    `AssociatedGuide` INTEGER,
+    `Start` FLOAT,
+    `End` FLOAT,
+    `AssociatedGuide` TEXT,
     `Length` FLOAT,
     `Picture` VARCHAR(255),
     FOREIGN KEY(`AssociatedGuide`) REFERENCES `LocalGuides`(`id`)
@@ -54,7 +54,7 @@ CREATE TABLE IF NOT EXISTS `Hikes`(
 CREATE TABLE IF NOT EXISTS `Huts`(
     `RefPointID` INTEGER NOT NULL PRIMARY KEY,
     `Name` TEXT,
-    `HutManagerID` INTEGER,
+    `HutManagerID` TEXT,
     `Website` TEXT NULL,
     `Phone` INTEGER NULL,
     `AvgPrice` DOUBLE(8, 2) NULL,
@@ -70,7 +70,7 @@ CREATE TABLE IF NOT EXISTS `Huts`(
 );
 CREATE TABLE IF NOT EXISTS `ParkingLots`(
     `ParkingID` INTEGER NOT NULL PRIMARY KEY,
-    `AssociatedGuide` INTEGER,
+    `AssociatedGuide` TEXT,
     `Fee` DOUBLE(8, 2) NULL,
     FOREIGN KEY(`AssociatedGuide`) REFERENCES `LocalGuides`(`id`)
 );
