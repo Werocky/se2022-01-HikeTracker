@@ -10,7 +10,7 @@ RETROSPECTIVE (Team 1)
 ### Macro statistics
 
 - 6 of stories committed vs. 3 done 
-- Total of 17 points committed vs. 11 points done 
+- Total of 17 points committed vs. 8 points done 
 - Total of 73h 05m planned  vs. 80h 25m spent (as a team)
 
 **Notes**: the total time estimated includes the 6 stories and also _horizontal tasks_ we have create to solve bugs and issue emerged from the Demo 1. Some of them took longer than expected such as create the collection of 50 hikes.
