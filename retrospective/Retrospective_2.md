@@ -11,7 +11,7 @@ RETROSPECTIVE (Team 1)
 
 - 6 of stories committed vs. 4 done 
 - Total of 17 points committed vs. 11 points done 
-- Total of 75h 25m planned  vs. 82h 45m spent (as a team)
+- Total of 73h 05m planned  vs. 80h 25m spent (as a team)
 
 **Notes**: the total time estimated includes the 6 stories and also _horizontal tasks_ we have create to solve bugs and issue emerged from the Demo 1. Some of them took longer than expected such as create the collection of 50 hikes.
 
@@ -88,8 +88,6 @@ RETROSPECTIVE (Team 1)
 | _Fix bug of story #2_  |  _2h_  |  _2h_  |
 | _Mail Registration functionality_  |  _4h_  |  _4h_  |
 | _Error Handling_  |  _3h_  |  _1h 30m_  |
-| _Error Handling_  |  _3h_  |  _1h 30m_  |
-| _DB Restructure_  |  _2h_  |  _50m_  |
 | _DB Restructure_  |  _2h_  |  _50m_  |
 | _Database redesign_  |  _1h 30_  |  _1h_  |
 | _layout for sprint2_  |  _12h_  |  _18h_  |
@@ -97,8 +95,8 @@ RETROSPECTIVE (Team 1)
 
 
 - Hours per task average: 
-  - (estimate) *2.5* 
-  - (actual) *3.9* -> less stories done than planned one and problems encountered
+  - (estimate) *2.6* 
+  - (actual) *4.2* -> less stories done than planned one and problems encountered
 - standard deviation:
   - (actual) *3.42*
   - (estimate) *1.92*
@@ -121,7 +119,7 @@ RETROSPECTIVE (Team 1)
 | _4h-5h_ | _2_ |
 | _12h_ | _1_ |
 - Total task estimation error ratio: 
-  -  $75/82 - 1 = -0.08$
+  -  $73/80 - 1 = -0.087$
   > - sum of total hours estimation / sum of total hours spent - 1
 
   
