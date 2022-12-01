@@ -5,7 +5,7 @@ beforeAll(async() =>{
     await db.createConnection();
     await Huts.emptyHuts();
    })
-   const hut = new Hut(0, 'Name', 0, 'City', 'Province', 'Region', 'Country', 'WhenOpen', 0, 0, 'Description',1,'http://www.fakesite.it',123456789);
+   const hut = new Hut(0, 'Name', 0, 'City', 'Province', 'Region', 'Country', 'WhenOpen', 0, 0, 'Description',1,'https://www.fakesite.it',123456789);
 
 afterAll(async()=>{
     await Huts.emptyHuts();
@@ -72,7 +72,7 @@ describe("getting/deleting huts",()=>{
         beforeEach(async()=>{
             await Huts.emptyHuts();
             for (let i = 0; i < 3; i++) {
-                let h =await new Hut(i, 'Name'+i, 0, 'City'+(i%2), 'Province'+(i%2), 'Region'+(i%2), 'Country'+(i%2), 'WhenOpen'+(i%2), 0, 0, 'Description',1,'http://www.fakesite.it',123456789)
+                let h =await new Hut(i, 'Name'+i, 0, 'City'+(i%2), 'Province'+(i%2), 'Region'+(i%2), 'Country'+(i%2), 'WhenOpen'+(i%2), 0, 0, 'Description',1,'https://www.fakesite.it',123456789)
                 await Huts.addHut(h)
             }
            
@@ -118,7 +118,7 @@ describe("Hut Filters",()=>{
     beforeEach(async()=>{
         await Huts.emptyHuts();
         for (let i = 0; i < 3; i++) {
-            let h =await new Hut(i, 'Name'+i, 0, 'City'+(i%2), 'Province'+(i%2), 'Region'+(i%2), 'Country'+(i%2), 'WhenOpen'+(i%2), 0, 0, 'Description',1,'http://www.fakesite.it',123456789)
+            let h =await new Hut(i, 'Name'+i, 0, 'City'+(i%2), 'Province'+(i%2), 'Region'+(i%2), 'Country'+(i%2), 'WhenOpen'+(i%2), 0, 0, 'Description',1,'https://www.fakesite.it',123456789)
             await Huts.addHut(h)
         }
        
