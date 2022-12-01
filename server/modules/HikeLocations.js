@@ -5,13 +5,13 @@ const db = require('./DB').db;
 exports.getHikeLocations = () => {
 
     return new Promise((resolve, reject) => {
-      const sql = 'SELECT * FROM HikeLocations';
+      const sql = 'SELECT * FROM Hikes';
       db.all(sql, [], (err, rows) => {
 
         if (err) {
           reject(err);
         }
-        const hikes = rows.map((r) => ({ HikeID: r.HikeID,Province : r.Province, City: r.City}));
+        const hikes = rows.map((r) => ({ HikeID: r.HikeID,Country : r.Country,Region:r.Region, City: r.City}));
         resolve(hikes);
       });
     });
@@ -19,35 +19,51 @@ exports.getHikeLocations = () => {
 
 exports.getHikeLocationsPerID = (HikeID) => {
   return new Promise((resolve, reject) => {
-    const sql = 'SELECT * FROM HikeLocations WHERE HikeID = ?';
-    db.all(sql, [HikeID], (err, rows) => {
+    const sql = 'SELECT * FROM Hikes WHERE HikeID = ?';
+    db.get(sql, [HikeID], (err, r) => {
 
       if (err) {
         reject(err);
       }
-      const hikes = rows.map((r) => ({ HikeID: r.HikeID,Province : r.Province, City: r.City}));
-      resolve(hikes);
+  
+      resolve({HikeID: r.HikeID, Country : r.Country, City: r.City, Region: r.Region});
     });
   });
 };
 
-/*Just for testing*/
-exports.populateLocations= ()=>{ // NOT NECESSARY
-  return new Promise(async (resolve, reject) => {
-    const sql = "INSERT INTO HikeLocations(HikeID, Province, City) VALUES ('1', 'Aosta', 'Cervinia');";
+exports.addLocation= (hikeID,Country,Region,City)=>{/*
+  Modifies the location Of a Hike
+*/
+ return new Promise(async (resolve, reject) => {
+    if(Country==null && Region==null && City==null)reject('no new location');
+    let flag=0;
+    let args=[]
+    let sql = "UPDATE Hikes SET "
+    if(Country!=null){
+      flag++;
+      args.push(Country)
+      sql= sql + "Country = '"+Country+"'"
+    }if(  City!=null  ){
+      if(flag>0){
+        flag++;
+        sql=sql+', '
+      } 
+      sql= sql + "City = '"+City+"'"
+      args.push(City)
+    }if(  Region!=null  ){
+      if(flag>0){
+        sql=sql+', '
+      } 
+      args.push(Region)
+      sql= sql + "Region = '"+Region+"'";
+    }
+      
+    
+    sql= sql +  " WHERE HikeID = "+hikeID;
+    
+    args.push(hikeID)
+    
     db.run(sql, [], function (err) {
-        if (err)
-            reject(err);
-        else {
-            resolve('Tables filled');
-        }
-    });
-  });
-}
-exports.addLocation= (hikeID,Province,City)=>{
-  return new Promise(async (resolve, reject) => {
-    const sql = "INSERT INTO HikeLocations(HikeID, Province, City) VALUES (?,?,?);";
-    db.run(sql, [hikeID,Province,City], function (err) {
         if (err)
             reject(err);
         else {
@@ -59,11 +75,26 @@ exports.addLocation= (hikeID,Province,City)=>{
 
 exports.emptyLocations=()=>{
   return new Promise(async (resolve, reject) => {
-    db.run("DELETE FROM HikeLocations", [], function (err) {
+    db.run("DELETE FROM Hikes", [], function (err) {
         if (err)
             reject(err);
         else
-            resolve('HikeLocations emptied');
+            resolve('Hikes emptied');
     });
   })
 }
+
+exports.populateLocations= ()=>{ 
+  return new Promise(async (resolve, reject) => {
+  const sql = "INSERT INTO Hikes(HikeID, Region, City) VALUES ('1', 'Aosta', 'Cervinia');";
+      db.run(sql, [], function (err) {
+          if (err)
+              reject(err);
+          else {
+              resolve('Tables filled');
+          }
+        })
+  })
+}// NOT NECESSARY
+  
+    

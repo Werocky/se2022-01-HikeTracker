@@ -43,7 +43,7 @@ describe("Get/Set new Files",()=>{
             let f=await Files.getFiles();
             expect(f).toHaveLength(1);
             expect(f[0]).toHaveProperty('HikeID');
-            expect(f[0].HikeID).toEqual("0");
+            expect(f[0].HikeID).toEqual(0);
             expect(f[0]).toHaveProperty('FileName');
             expect(f[0].FileName).toEqual("fakePath.gpx");
         
