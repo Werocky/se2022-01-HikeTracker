@@ -10,6 +10,8 @@ import Header from "../headers/light.js";
 import { Alert, Button, FloatingLabel, Row } from "react-bootstrap";
 import { MapContainer, Marker, Polyline, Popup, TileLayer, useMapEvents } from "react-leaflet";
 import AuthContext from "../../AuthContext.js";
+import API from "../../API.js";
+import { useNavigate } from "react-router-dom";
 
 const Container = tw.div`relative`;
 const TwoColumn = tw.div`flex flex-col md:flex-row justify-between max-w-screen-xl mx-auto py-20 md:py-24`;
@@ -41,7 +43,7 @@ const SubmitButton = tw(PrimaryButtonBase)`inline-block mt-8`
 function AddHike(props) {
 
   const auth = useContext(AuthContext);   // contains user information 
-
+  const navigate = useNavigate();
 
   const [file, setFile] = useState();
   const [fileOk, setFileOk] = useState(false);
@@ -73,6 +75,11 @@ function AddHike(props) {
   const textOnLeft = true;
   // The textOnLeft boolean prop can be used to display either the text on left or right side of the image.
 
+  useEffect(() => {
+    if (!auth.login || auth.userRole !== 'L') {
+      navigate('/');
+    }
+  }, [])
 
   useEffect(() => {
     if (fileString) {
@@ -143,7 +150,7 @@ function AddHike(props) {
       GuideID: auth.user.Id,
       Length: dataFromGpx.Length,
     }
-    //console.log(hike);
+    console.log(hike);
     const refP = {
       start: {
         description: startDescr,
@@ -158,6 +165,7 @@ function AddHike(props) {
       otherPoints: refPointArray,
     }
     console.log(refP);
+    const res = await API.addHike(hike, refP);
   }
 
   const handleSubmitRefPoint = async (event) => {

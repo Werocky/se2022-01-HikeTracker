@@ -1,6 +1,6 @@
 import 'bootstrap/dist/css/bootstrap.min.css'
 //import './App.css';
-import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
 import { Container, Row, Col, Alert } from 'react-bootstrap';
 import { useContext, useEffect, useState } from 'react';
 import AuthContext from './AuthContext'
@@ -171,6 +171,9 @@ function AppLayout(props) {
         <Route path='/addHut' element={
           < HutForm />
         } />
+
+        <Route path='*' element={<Navigate to='/' replace />} />
+
       </Routes>
     </>
   );
