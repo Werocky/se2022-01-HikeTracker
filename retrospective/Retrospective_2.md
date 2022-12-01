@@ -9,7 +9,7 @@ RETROSPECTIVE (Team 1)
 
 ### Macro statistics
 
-- 6 of stories committed vs. 4 done 
+- 6 of stories committed vs. 3 done 
 - Total of 17 points committed vs. 11 points done 
 - Total of 73h 05m planned  vs. 80h 25m spent (as a team)
 
