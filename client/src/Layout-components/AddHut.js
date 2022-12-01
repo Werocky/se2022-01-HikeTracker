@@ -125,7 +125,7 @@ function HutForm() {
           {coord !== null &&
             <Marker position={{ lat: coord.lat, lng: coord.lng }}>
               <Popup>
-              <p>This is yout point, select another if you want</p> 
+              <p>This is your point, select another if you want</p> 
               </Popup>
             </Marker>
           }

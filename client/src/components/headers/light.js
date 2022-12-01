@@ -67,7 +67,7 @@ function Light(props) {
 
   const navigate = useNavigate();
   const auth = useContext(AuthContext);
-  console.log(auth);
+  //console.log(auth);
   /*
    * This header component accepts an optionals "links" prop that specifies the links to render in the navbar.
    * This links props should be an array of "NavLinks" components which is exported from this file.

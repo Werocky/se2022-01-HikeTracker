@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import tw from "twin.macro";
 import styled from "styled-components";
 import { css } from "styled-components/macro"; //eslint-disable-line
@@ -9,6 +9,7 @@ import AnimationRevealPage from "../../helpers/AnimationRevealPage.js";
 import Header from "../headers/light.js";
 import { Alert, Button, FloatingLabel, Row } from "react-bootstrap";
 import { MapContainer, Marker, Polyline, Popup, TileLayer, useMapEvents } from "react-leaflet";
+import AuthContext from "../../AuthContext.js";
 
 const Container = tw.div`relative`;
 const TwoColumn = tw.div`flex flex-col md:flex-row justify-between max-w-screen-xl mx-auto py-20 md:py-24`;
@@ -39,6 +40,9 @@ const SubmitButton = tw(PrimaryButtonBase)`inline-block mt-8`
 
 function AddHike(props) {
 
+  const auth = useContext(AuthContext);   // contains user information 
+
+
   const [file, setFile] = useState();
   const [fileOk, setFileOk] = useState(false);
   const [fileString, setFileString] = useState("");
@@ -52,11 +56,14 @@ function AddHike(props) {
   const [difficulty, setDifficulty] = useState("");
   const [startDescr, setStartDescr] = useState("");
   const [endDescr, setEndDescr] = useState("");
+  const [description, setDescription] = useState("");
   const [startType, setStartType] = useState("");
   const [endType, setEndType] = useState("");
   const [coord, setCoord] = useState(null);
   const [coordChange, setCoordChange] = useState(false);
   const [refPointArray, setRefPointArray] = useState([]);
+  const [refPType, setRefPType] = useState("");
+  const [refPDesc, setRefPDesc] = useState("");
 
 
   const [heading, setHeading] = useState("Add a new hike here");
@@ -120,27 +127,57 @@ function AddHike(props) {
 
   const handleSubmitForm = async (event) => {
     event.preventDefault();
-    /**
-     * MISSING:
-     * calling API to store all the data in the server
-     * 
-     * must save: hike, refPoint, gpx
-     */
+    const hike = {
+      Title: dataFromGpx.Title,
+      Description: description,
+      Ascent: dataFromGpx.Ascent,
+      Difficulty: difficulty,
+      ExpectedTime: expectedTime,
+      Country: country,
+      Province: province,
+      Region: region,
+      City: city ? city : province,
+      File: file,
+      Start: startDescr,
+      End: endDescr,
+      GuideID: auth.user.Id,
+      Length: dataFromGpx.Length,
+    }
+    //console.log(hike);
+    const refP = {
+      start: {
+        description: startDescr,
+        position: gpxPoints[0],
+        Type: startType,
+      },
+      end: {
+        description: endDescr,
+        position: gpxPoints.at(-1),
+        Type: endType,
+      },
+      otherPoints: refPointArray,
+    }
+    console.log(refP);
   }
 
   const handleSubmitRefPoint = async (event) => {
     event.preventDefault();
-    setRefPointArray(old => [...old, coord]);
+    const refPObj = {
+      position: coord,
+      description: refPDesc,
+      type: refPType,
+    }
+    setRefPointArray(old => [...old, refPObj]);
     setCoordChange(false);
   }
 
-  const CoordForm = (props) => {
+  const PointForm = (props) => {
     return (
-      <Form onSubmit={handleSubmitRefPoint}>
-        <Input type="text" name="lat" defaultValue={props.coord.lat} disabled />
-        <Input type="text" name="lng" defaultValue={props.coord.lng} disabled />
-        <SubmitButton type="submit">Add this Reference Point</SubmitButton>
-      </Form>
+      <>
+        <Input type="text" name="lat" defaultValue={props.coord.lat} readOnly />
+        <Input type="text" name="lng" defaultValue={props.coord.lng} readOnly />
+      </>
+
     )
   }
 
@@ -174,7 +211,12 @@ function AddHike(props) {
               </MapContainer>
 
               {coordChange &&
-                <CoordForm coord={coord} />
+                <Form onSubmit={handleSubmitRefPoint}>
+                  <PointForm coord={coord} />
+                  <Input type="text" name="descr" placeholder="Point description" value={refPDesc} onChange={ev => setRefPDesc(ev.target.value)} required />
+                  <Input type="text" name="startType" placeholder="Point type" value={refPType} onChange={ev => setRefPType(ev.target.value)} />
+                  <SubmitButton type="submit">Add this Reference Point</SubmitButton>
+                </Form>
               }
 
             </ImageMapColumn>
@@ -193,10 +235,10 @@ function AddHike(props) {
                 </Form>
               }
               {fileOk &&
-                <Form on Submit={handleSubmitForm}>
+                <Form onSubmit={handleSubmitForm}>
                   <Input type="text" name="title" defaultValue={dataFromGpx.Title} />
-                  <Input type="number" step="0.01" name="length" defaultValue={dataFromGpx.Length} disabled />
-                  <Input type="number" name="ascent" defaultValue={dataFromGpx.Ascent} disabled />
+                  <Input type="number" step="0.01" name="length" defaultValue={dataFromGpx.Length} readOnly />
+                  <Input type="number" name="ascent" defaultValue={dataFromGpx.Ascent} readOnly />
                   <Input type="text" name="time" placeholder="dd:hh:mm" value={expectedTime} onChange={ev => setExpectedTime(ev.target.value)} required />
                   <Input as="select" value={difficulty} onChange={ev => setDifficulty(ev.target.value)} required >
                     <option hidden>Difficulty</option>
@@ -208,7 +250,7 @@ function AddHike(props) {
                   <Input type="text" name="startType" placeholder="Start type" value={startType} onChange={ev => setStartType(ev.target.value)} />
                   <Input type="text" name="end" placeholder="End description" value={endDescr} onChange={ev => setEndDescr(ev.target.value)} required />
                   <Input type="text" name="endType" placeholder="End type" value={endType} onChange={ev => setEndType(ev.target.value)} />
-                  <Textarea name="description" placeholder="Description" />
+                  <Textarea name="description" placeholder="Description" value={description} onChange={ev => setDescription(ev.target.value)} />
                   <SubmitButton type="submit">{submitButtonText}</SubmitButton>
                 </Form>
               }
@@ -225,9 +267,9 @@ async function getInfo(lat, lon) {
     method: 'GET'
   });
   if (response.ok) {
-    console.log(response)
+    //console.log(response)
     const informations = await response.json();
-    console.log(informations);
+    //console.log(informations);
     // setInformation(informations);
     return informations;
   } else {
