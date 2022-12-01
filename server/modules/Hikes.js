@@ -19,6 +19,7 @@ class hike{
     ExpectedTime,
     Country,
     Region,
+    Province,
     City,
     GpxFile,
     Start,
@@ -34,6 +35,7 @@ class hike{
     this.ExpectedTime=ExpectedTime
     this.Country=Country
     this.Region=Region
+    this.Province=Province
     this.City=City
     this.GpxFile=GpxFile
     this.Start=Start
@@ -102,8 +104,8 @@ class hike{
  function addHike (Hike)  {
 
   return new Promise(async (resolve, reject) => {
-    db.run("INSERT INTO Hikes (Title, Length, ExpectedTime, Ascent, Difficulty, Start, End, Description, Country, Region, City, GpxFile, AssociatedGuide ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
-      [Hike.Title, Hike.Length, Hike.ExpectedTime, Hike.Ascent, Hike.Difficulty, Hike.Start, Hike.End, Hike.Description, Hike.Country, Hike.Region, Hike.City, Hike.GpxFile, Hike.AssociatedGuide ], function (err) {
+    db.run("INSERT INTO Hikes (Title, Length, ExpectedTime, Ascent, Difficulty, Start, End, Description, Country, Region, Province, City, GpxFile, AssociatedGuide ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
+      [Hike.Title, Hike.Length, Hike.ExpectedTime, Hike.Ascent, Hike.Difficulty, Hike.Start, Hike.End, Hike.Description, Hike.Country, Hike.Region, Hike.Province, Hike.City, Hike.GpxFile, Hike.AssociatedGuide ], function (err) {
         if (err)
           reject(err);
         else

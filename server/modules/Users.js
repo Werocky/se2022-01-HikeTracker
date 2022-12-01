@@ -73,10 +73,16 @@ exports.getUserById =(Id)=>{
 exports.populateUsers =async()=>{
    let  usr1= new User("$2a$10$l6NqsLb7oo8V2slf47ZCBebX4GcgnvGRv3aK288phYdTAJpOO5DMS","$2a$10$l6NqsLb7oo8V2slf47ZCBe","c@polito.it","H",1234,0,"Name1","Surname1",123456789)
     await this.register(usr1);
+    // add it also in Hiker
     usr1= new User("$2a$10$zOKLnejjPVAlIU/yTG3AauiazkEuYbWy1aMpvqw81i5MfH8TqSGZe","$2a$10$zOKLnejjPVAlIU/yTG3Aau","d@polito.it","L",1234,0,"Name2","Surname2",123456789)
     await this.register(usr1);
+    // add it also in LocalGuides
     usr1= new User("$2a$10$NzNYFhDhoLWt3873hJC6hO8aLoXcMb0HpO2b6O2iG5hdVsa4xJpwu","$2a$10$NzNYFhDhoLWt3873hJC6hO","b@polito.it","H",1234,0,"Name3","Surname3",123456789)
     await this.register(usr1);
+    // add it also in Hiker
+    usr1= new User("$2a$10$NzNYFhDhoLWt3873hJC6hO8aLoXcMb0HpO2b6O2iG5hdVsa4xJpwu","$2a$10$NzNYFhDhoLWt3873hJC6hO","a@polito.it","HW",1234,0,"Name3","Surname3",123456789)
+    await this.register(usr1);
+    // add it also in HutWorkers
     return new Promise((resolve,rejects)=>{
         resolve('Tables filled');
     });

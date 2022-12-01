@@ -67,6 +67,7 @@ class DatabaseConnection {
         let file="rocciamelone.gpx";
         let Country ='Italy'
         let Region='Piemonte';
+        let Province='Torino';
         let city ='Val di Susa';
         let title="Sentiero per il ROCCIAMELONE | 3538 m slm";
         let length=9;
@@ -85,7 +86,7 @@ class DatabaseConnection {
         let end="Rocciamelone | 3538 m";
         
         
-        await this.wrapperPopulate(HikeID,file,Country, Region,city,title,length,expTime,Ascent,Description,Difficulty,start,end,AssociatedGuide)
+        await this.wrapperPopulate(HikeID,file,Country, Region, Province, city,title,length,expTime,Ascent,Description,Difficulty,start,end,AssociatedGuide)
         await this.wrapperPopulateRefP(HikeID, refPoint++, "45.177786","7.083372","hut",1,0); // start
         await this.wrapperPopulateRefP(HikeID, refPoint++, "45.203531","7.07734","",0,1); // end
 
@@ -93,6 +94,7 @@ class DatabaseConnection {
          HikeID='1';
          file="Monte Ferra.gpx"
          Region='Piemonte';
+         Province='Cuneo';
          city ='Valle Varaita';
          title="Sentiero per il MONTE FERRA | 3094 m slm";
          length=13;
@@ -106,8 +108,8 @@ class DatabaseConnection {
          start="Rifugio Melezè – Località Bellino (CN) | 1812 m slm circa";
          end="Monte Ferra | 3094 m slm circa";
         
-         await this.wrapperPopulate(HikeID,file,Country, Region,city,title,length,expTime,Ascent,Description,Difficulty,start,end,AssociatedGuide)
-         await this.wrapperPopulateRefP(HikeID, refPoint++, "44.57425086759031","6.982689192518592","hut",1,0); // start
+        await this.wrapperPopulate(HikeID,file,Country, Region, Province, city,title,length,expTime,Ascent,Description,Difficulty,start,end,AssociatedGuide)
+        await this.wrapperPopulateRefP(HikeID, refPoint++, "44.57425086759031","6.982689192518592","hut",1,0); // start
          await this.wrapperPopulateRefP(HikeID, refPoint++, "44.574263943359256","6.982647031545639","",0,1); // end
  
         
@@ -116,7 +118,8 @@ class DatabaseConnection {
          file="2017-01-25_14059413_Sperenberger Gipsbrüche.gpx"
          Country='Germany';
          Region=''
-         city ='Berlin';
+         Province='Berlin';
+         city ='Mellensee';
          title="Sperenberger Gipsbrüche";
          length=3.2;
          expTime=169;
@@ -126,7 +129,7 @@ class DatabaseConnection {
          start="Chausseestraße";
          end="Zossener Allee";
         
-         await this.wrapperPopulate(HikeID,file,Country, Region,city,title,length,expTime,Ascent,Description,Difficulty,start,end,AssociatedGuide)
+         await this.wrapperPopulate(HikeID,file,Country, Region, Province, city,title,length,expTime,Ascent,Description,Difficulty,start,end,AssociatedGuide)
          await this.wrapperPopulateRefP(HikeID,refPoint++, "52.167248","13.371998","",1,0); // start
          await this.wrapperPopulateRefP(HikeID, refPoint++, "52.145784","13.364947","",0,1); // end
  
@@ -135,6 +138,7 @@ class DatabaseConnection {
          file="Chaberton.gpx"
          Country='Italy'
          Region='Piemonte';
+         Province='Torino';
          city ='Val di Susa';
          title="Sentiero per il MONTE CHABERTON | 3130 m slm";
          length=15;
@@ -151,7 +155,7 @@ class DatabaseConnection {
          start="Village du Soleil, Monginevro (TO) | 1850 m slm circa";
          end="Monte Chaberton | 3120 m slm circa";
         
-         await this.wrapperPopulate(HikeID,file,Country, Region,city,title,length,expTime,Ascent,Description,Difficulty,start,end,AssociatedGuide)
+         await this.wrapperPopulate(HikeID,file,Country, Region, Province, city,title,length,expTime,Ascent,Description,Difficulty,start,end,AssociatedGuide)
          await this.wrapperPopulateRefP(HikeID, refPoint++, "44.93603","6.7386800000000004","parking",1,0); // start
          await this.wrapperPopulateRefP(HikeID, refPoint++, "44.96452393010259","6.7513105273246765","",0,1); // end
  
@@ -161,6 +165,7 @@ class DatabaseConnection {
          file="Colle Braida - Colle Bione - Anello.gpx"
          Region='Piemonte';
          city ='Val di Susa';
+         Province='Torino';
          title="Anello per il COLLE BIONE dal COLLE BRAIDA | 1430 m slm";
          length=13;
          expTime=240;
@@ -170,7 +175,7 @@ class DatabaseConnection {
          start="Colle Braida – Valgioie (TO) | 1000 m slm circa";
          end="Colle Bione | 1430 m slm circa";
         
-         await this.wrapperPopulate(HikeID,file,Country, Region,city,title,length,expTime,Ascent,Description,Difficulty,start,end,AssociatedGuide)
+         await this.wrapperPopulate(HikeID,file,Country, Region, Province, city,title,length,expTime,Ascent,Description,Difficulty,start,end,AssociatedGuide)
          await this.wrapperPopulateRefP(HikeID, refPoint++, "45.082985027","7.333754722","parking",1,0); // start
          await this.wrapperPopulateRefP(HikeID, refPoint++, "45.083030952","7.333762354","parking",0,1); // end
  
@@ -178,6 +183,7 @@ class DatabaseConnection {
          HikeID='5';
          title="Sentiero per il RIFUGIO TOESCA da CORTAVETTO | 1710 m";
          Region='Piemonte';
+         Province='Torino';
          city ='Val di Susa'; 
          Ascent=470;
          start="Colle Braida – Valgioie (TO) | 1000 m slm circa";
@@ -202,7 +208,7 @@ class DatabaseConnection {
             "A quota circa 1650, dopo aver guadato facilmente un rio secondario, il sentiero compie alcuni tornanti e inizia a salire con più decisione nel fitto bosco, finchè dopo pochi minuti a quota 1710m compare davanti a noi la sagoma del rifugio Toesca."
 
          
-         await this.wrapperPopulate(HikeID,file,Country, Region,city,title,length,expTime,Ascent,Description,Difficulty,start,end,AssociatedGuide)
+         await this.wrapperPopulate(HikeID,file,Country, Region, Province, city,title,length,expTime,Ascent,Description,Difficulty,start,end,AssociatedGuide)
          await this.wrapperPopulateRefP(HikeID, refPoint++, "45.102780737","7.165559804","parking",1,0); // start
          await this.wrapperPopulateRefP(HikeID, refPoint++, "45.08200127","7.14036342","",0,1); // end
 
@@ -210,6 +216,7 @@ class DatabaseConnection {
          HikeID='6';
          title="Sentiero per il LAC DE SAVINE | 2450 m slm";
          Region='Piemonte';
+         Province='Torino';
          city ='Val di Susa'; 
          Ascent=280;
          start="Lacs Perrin, Col du Petit Mont-Cenis (FR) / 2180 m circa";
@@ -230,7 +237,7 @@ class DatabaseConnection {
             +"Dal fondo di questo altopiano incassato, è possibile, in circa 2 ore raggiungere, rispettivamente, il Rifugio Vaccarone (IT)2747m, Il Ghiacciaio dell’Agnello, il Giusalet, la Punta Tricuspide ed il Rifugio Avanzà(IT)2578m."
             +"Percorso di ritorno, in 1,45-2 ore, uguale a quello di andata ."
                     
-         await this.wrapperPopulate(HikeID,file,Country, Region,city,title,length,expTime,Ascent,Description,Difficulty,start,end,AssociatedGuide)
+         await this.wrapperPopulate(HikeID,file,Country, Region, Province, city,title,length,expTime,Ascent,Description,Difficulty,start,end,AssociatedGuide)
          await this.wrapperPopulateRefP(HikeID, refPoint++, "45.21117802558636","6.865775956735616","parking",1,0); // start
          await this.wrapperPopulateRefP(HikeID, refPoint++, "45.17285154374665","6.914370013504627","",0,1); // end
 
@@ -238,7 +245,8 @@ class DatabaseConnection {
          HikeID='7';
          title="Ciaspolata al PLAN DES FONTAINETTES (LAGO DEL MONCENISIO)";
          Region='Piemonte';
-         city ='Val Cenischia'; 
+         city ='Val Cenischia';
+         Province='Torino'; 
          Ascent=370;
          start="Scale del Moncenisio (FR) / 1730 m circa";
          end="Plan des Fontainettes – Lago del Moncenisio / 2100 m circa";
@@ -252,7 +260,7 @@ class DatabaseConnection {
             +"Infine, percorrere in falsopiano la suddetta per altri  1,5 Km circa fino al Plan des Fontainettes, dove esplorare gli interessanti manufatti presenti, far foto e ristorarsi in posizione eccezionalmente pittoresca."
             +"Percorso di ritorno, uguale a quello di andata, con variante per poter accorciare discendendo dalla Route Nationale, direttamente verso il villaggio Gran Coix ed evitando il passaggio sulla diga."
  
-        await this.wrapperPopulate(HikeID,file,Country, Region,city,title,length,expTime,Ascent,Description,Difficulty,start,end,AssociatedGuide)
+        await this.wrapperPopulate(HikeID,file,Country, Region, Province, city,title,length,expTime,Ascent,Description,Difficulty,start,end,AssociatedGuide)
         await this.wrapperPopulateRefP(HikeID, refPoint++, "45.21426193643276","6.955986331560386","parking",1,0); // start
         await this.wrapperPopulateRefP(HikeID, refPoint++, "45.24035738760735","6.951468657871905","parking",0,1); // end
 
@@ -261,6 +269,7 @@ class DatabaseConnection {
         title="Sentiero per il CANALE DI MARIA BONA | 1350 m slm";
         Region='Piemonte';
         city ='Val di Susa'; 
+        Province='Torino';
         Ascent=200;
         start="Pian d’le Ruine, Giaglione (TO) / 1060 m circa";
         end="Canale di Maria Bona / 1350 m circa";
@@ -278,14 +287,15 @@ class DatabaseConnection {
             +"Il luogo di gita, incassato nello stretto vallone, e’ dimora di molte specie animali e non e’ raro assistere, in base alla stagione,alle evoluzioni di corvidi e grandi rapaci, inoltre, il greto del torrente Clarea e’ riferimento di abbeveraggio di numerosi ungulati di montagna."
             +"Percorso di ritorno, in 1 ora circa, uguale a quello di andata."
        
-            await this.wrapperPopulate(HikeID,file,Country, Region,city,title,length,expTime,Ascent,Description,Difficulty,start,end,AssociatedGuide)
+            await this.wrapperPopulate(HikeID,file,Country, Region, Province, city,title,length,expTime,Ascent,Description,Difficulty,start,end,AssociatedGuide)
         await this.wrapperPopulateRefP(HikeID, refPoint++, "45.13911717299068","6.988669510628613","",1,0); // start
         await this.wrapperPopulateRefP(HikeID, refPoint++, "45.155868912540512","45.155868912540512","",0,1); // end
     
        HikeID='9';
        title="Sentiero per il RIFUGIO I RE MAGI | 1770 m slm";
        Region='Piemonte';
-       city ='CIASPOLATE'; 
+       Province='Torino';
+       city ='Bardonecchia'; 
        Ascent=345;
        start="Pian del Colle – Bardonecchia (TO) / 1430 m circa";
        end="Rifugio I Re Magi – Grange di Valle Stretta (FR) / 1770 m circa"
@@ -302,14 +312,15 @@ class DatabaseConnection {
             +"Troverai tanti cartelli e segnavia bianco-rossi lungo il percorso."    
             +"In un paio d’ore raggiungerai Grange di Valle Stretta, costeggiando il rio, fino a raggiungere la fine del Sentiero per il Rifugio I Re Magi."    
             +"Purtroppo noi abbiamo trovato il rifugio chiuso, non so se perché era un giorno infrasettimanale oppure a causa dell’emergenza sanitaria."
-      await this.wrapperPopulate(HikeID,file,Country, Region,city,title,length,expTime,Ascent,Description,Difficulty,start,end,AssociatedGuide)
+      await this.wrapperPopulate(HikeID,file,Country, Region, Province, city,title,length,expTime,Ascent,Description,Difficulty,start,end,AssociatedGuide)
       await this.wrapperPopulateRefP(HikeID, refPoint++, "45.051291","6.674392","parking",1,0); // start
         await this.wrapperPopulateRefP(HikeID, refPoint++, "45.07032","6.622359","hut",0,1); // end
        
       HikeID='10';
       title="Sentiero per CIMA BOSSOLA da INVERSO | 1510 m slm";
       Region='Piemonte';
-      city ='CIASPOLATE'; 
+      city ='Inverso';
+      Province='Torino'; 
       Ascent=435;
       start="Inverso – Vico Canavese (TO) / 1074 m circa";
       end="Cima Bossola / 1510 m circa"
@@ -337,7 +348,7 @@ class DatabaseConnection {
       
       +"Puoi decidere se proseguire un pezzo fino al Colletto Bossola."
       
-      await this.wrapperPopulate(HikeID,file,Country, Region,city,title,length,expTime,Ascent,Description,Difficulty,start,end,AssociatedGuide)
+      await this.wrapperPopulate(HikeID,file,Country, Region, Province, city,title,length,expTime,Ascent,Description,Difficulty,start,end,AssociatedGuide)
       await this.wrapperPopulateRefP(HikeID, refPoint++, "45.488135","7.734884","parking",1,0); // start
         await this.wrapperPopulateRefP(HikeID, refPoint++, "45.483543","7.71953","",0,1); // end
         
@@ -345,7 +356,8 @@ class DatabaseConnection {
       HikeID='11';
       title="Sentiero per il RIFUGIO MEIRA GARNERI da SAMPEYRE";
       Region='Piemonte';
-      city ='CIASPOLATE'; 
+      city ='Sampeyre';
+      Province='Cuneo'; 
       Ascent=850;
       start="Sampeyre (CN) / 1000 m circa";
       end="Rifugio Meira Garneri / 1850 m circa"
@@ -369,14 +381,15 @@ class DatabaseConnection {
 
         +"Essendo molto larga e sempre costeggiata da vegetazione non si da fastidio agli sciatori, ed è facile trovare una traccia precedentemente battuta da seguire."
 
-      await this.wrapperPopulate(HikeID,file,Country, Region,city,title,length,expTime,Ascent,Description,Difficulty,start,end,AssociatedGuide)
+      await this.wrapperPopulate(HikeID,file,Country, Region, Province, city,title,length,expTime,Ascent,Description,Difficulty,start,end,AssociatedGuide)
       await this.wrapperPopulateRefP(HikeID, refPoint++, "44.57619898952544","7.180788516998291","parking",1,0); // start
         await this.wrapperPopulateRefP(HikeID, refPoint++, "44.55683704465628","7.155619841068983","hut",0,1); // end
         
       HikeID='12';
       title="Sentiero per il RIFUGIO FONTANA MURA | 1726 m slm";
       Region='Piemonte';
-      city ='CIASPOLATE'; 
+      city ='Pian Neiretto';
+      Province='Torino'; 
       Ascent=766;
       start="Pian Neiretto (TO) / 1027 m circa";
       end="Rifugio Fontana Mura / 1726 m circa"
@@ -401,14 +414,15 @@ class DatabaseConnection {
         "Ci troviamo proprio sotto il Colle della Roussa e da qui si può godere di uno splendido panorama sulla sottostante Val Sangone."+
         "Il ritorno si svolge sul medesimo tracciato di andata, evitando le varie deviazioni se già effettuate in precedenza."
 
-      await this.wrapperPopulate(HikeID,file,Country, Region,city,title,length,expTime,Ascent,Description,Difficulty,start,end,AssociatedGuide)
+      await this.wrapperPopulate(HikeID,file,Country, Region, Province, city,title,length,expTime,Ascent,Description,Difficulty,start,end,AssociatedGuide)
       await this.wrapperPopulateRefP(HikeID, refPoint++, "45.030912","7.229195","parking",1,0); // start
         await this.wrapperPopulateRefP(HikeID, refPoint++, "45.0307","7.229943","hut",0,1); // end
         
       HikeID='13';
       title="Sentiero per il RIFUGIO SELLERIES – 2023 m";
       Region='Piemonte';
-      city ='CIASPOLATE'; 
+      city ='Fenestrelle';
+      Province='Torino'; 
       Ascent=476;
       start="Pracatinat – Fenestrelle (TO) / 1700 m circa";
       end="Rifugio Selleries / 2023 m circa"
@@ -430,14 +444,15 @@ class DatabaseConnection {
       
       "D’altra parte la salita a piedi d’estate da Pra Catinat può perdere parte del suo fascino proprio per il traffico veicolare, a tratti eccessivo specie nel weekend. Il ritorno è previsto sullo stesso percorso dell’andata."
       
-      await this.wrapperPopulate(HikeID,file,Country, Region,city,title,length,expTime,Ascent,Description,Difficulty,start,end,AssociatedGuide)
+      await this.wrapperPopulate(HikeID,file,Country, Region, Province, city,title,length,expTime,Ascent,Description,Difficulty,start,end,AssociatedGuide)
       await this.wrapperPopulateRefP(HikeID, refPoint++, "45.03657284192741","7.0737862307578325","parking",1,0); // start
         await this.wrapperPopulateRefP(HikeID, refPoint++, "45.047753965482116","7.120104543864727","hut",0,1); // end
         
       HikeID='14';
       title="Sentiero per il LAGO DI MALCIAUSSIA | 1800 m slm";
       Region='Piemonte';
-      city ='CIASPOLATE'; 
+      city ='Usseglio';
+      Province='Torino'; 
       Ascent=500;
       start="Margone – Usseglio (TO) / 1400 m circa";
       end="Lago di Malciaussia / 1810 m circa"
@@ -478,7 +493,7 @@ class DatabaseConnection {
       "Il lago è anche un ottimo punto di partenza per altri sentieri più impegnativi."
       
 
-      await this.wrapperPopulate(HikeID,file,Country, Region,city,title,length,expTime,Ascent,Description,Difficulty,start,end,AssociatedGuide)
+      await this.wrapperPopulate(HikeID,file,Country, Region, Province, city,title,length,expTime,Ascent,Description,Difficulty,start,end,AssociatedGuide)
       await this.wrapperPopulateRefP(HikeID, refPoint++, "45.219954","7.188861","parking",1,0); // start
         await this.wrapperPopulateRefP(HikeID, refPoint++, "45.206823","7.144343","",0,1); // end
 
@@ -486,7 +501,8 @@ class DatabaseConnection {
       HikeID='15';
       title="Sentiero per il RIFUGIO WILLY JERVIS | 1732 m slm";
       Region='Piemonte';
-      city ='CIASPOLATE'; 
+      city ='Villanova';
+      Province='Torino'; 
       Ascent=507;
       start="Villanova – Bobbio Pellice (TO) / 1225 m circa";
       end="Rifugio Willy Jervis / 1732 m circa"
@@ -510,7 +526,7 @@ class DatabaseConnection {
       
       +"Verso Ovest le creste che rappresentano il confine francese con il colle della Croce; verso est, il sentiero per il rifugio Barant, (a ca. 1.45h) e Rifugio Barbara Lowrie (a ca. 3 h)"
 
-      await this.wrapperPopulate(HikeID,file,Country, Region,city,title,length,expTime,Ascent,Description,Difficulty,start,end,AssociatedGuide)
+      await this.wrapperPopulate(HikeID,file,Country, Region, Province, city,title,length,expTime,Ascent,Description,Difficulty,start,end,AssociatedGuide)
       await this.wrapperPopulateRefP(HikeID, refPoint++, "44.799133","7.055148","parking",1,0); // start
         await this.wrapperPopulateRefP(HikeID, refPoint++, "44.773504","7.039264","hut",0,1); // end
 
@@ -518,7 +534,8 @@ class DatabaseConnection {
       HikeID='16';
       title="Sentiero per il RIFUGIO CAPANNA MAUTINO | 2100 m slm";
       Region='Piemonte';
-      city ='CIASPOLATE'; 
+      city ='Cesana';
+      Province='Torino'; 
       Ascent=700;
       start="Bousson – Cesana (TO) / 1400 m circa";
       end="Rifugio Capanna Mautino / 2100 m circa"
@@ -544,7 +561,7 @@ class DatabaseConnection {
       
       "Nel periodo estivo, ti consiglio di percorrere il sentiero parallelo che taglia sui pendii per evitare la strada carrozzabile 🙂"
       
-      await this.wrapperPopulate(HikeID,file,Country, Region,city,title,length,expTime,Ascent,Description,Difficulty,start,end,AssociatedGuide)
+      await this.wrapperPopulate(HikeID,file,Country, Region, Province, city,title,length,expTime,Ascent,Description,Difficulty,start,end,AssociatedGuide)
       await this.wrapperPopulateRefP(HikeID, refPoint++, "44.930862","6.820079","parking",1,0); // start
         await this.wrapperPopulateRefP(HikeID, refPoint++, "44.902731","6.789709","hut",0,1); // end
 
@@ -552,7 +569,8 @@ class DatabaseConnection {
       HikeID='17';
       title="Sentiero per il POGGIO TRE CROCI | 2115 m slm";
       Region='Piemonte';
-      city ='CIASPOLATE'; 
+      city ='Bardonecchia';
+      Province='Torino'; 
       Ascent=803;
       start="Bardonecchia (TO) / 1326 mslm circa";
       end="Poggio Tre Croci / 2115 mslm circa"
@@ -582,7 +600,7 @@ class DatabaseConnection {
         
         "Il sentiero per il ritorno si svolge sul medesimo di andata anche se sono presenti diversi tratti dove poter “tagliare” alcuni tornanti."
       
-      await this.wrapperPopulate(HikeID,file,Country, Region,city,title,length,expTime,Ascent,Description,Difficulty,start,end,AssociatedGuide)
+      await this.wrapperPopulate(HikeID,file,Country, Region, Province, city,title,length,expTime,Ascent,Description,Difficulty,start,end,AssociatedGuide)
       await this.wrapperPopulateRefP(HikeID, refPoint++, "45.079073","6.695705","parking",1,0); // start
         await this.wrapperPopulateRefP(HikeID, refPoint++, "45.079097","6.695723","parking",0,1); // end
 
@@ -590,7 +608,8 @@ class DatabaseConnection {
       HikeID='18';
       title="Sentiero per CIMA DEL BOSCO | 2376 m slm";
       Region='Piemonte';
-      city ='CIASPOLATE'; 
+      city ='Sauze di Cesana';
+      Province='Torino'; 
       Ascent=826;
       start="Sauze di Cesana (TO) / 1550 mslm circa";
       end="Cima del Bosco / 2376 mslm circa"
@@ -623,7 +642,7 @@ class DatabaseConnection {
      "La discesa si effettua sullo stesso facile tracciato di salita."
 
     
-      await this.wrapperPopulate(HikeID,file,Country, Region,city,title,length,expTime,Ascent,Description,Difficulty,start,end,AssociatedGuide)
+      await this.wrapperPopulate(HikeID,file,Country, Region, Province, city,title,length,expTime,Ascent,Description,Difficulty,start,end,AssociatedGuide)
       await this.wrapperPopulateRefP(HikeID, refPoint++, "44.937484078109264373779296875","6.86268364079296588897705078125","parking",1,0); // start
       await this.wrapperPopulateRefP(HikeID, refPoint++, "44.9376612715423107147216796875","6.8631246127188205718994140625","parking",0,1); // end
 
@@ -631,7 +650,8 @@ class DatabaseConnection {
       HikeID='19';
       title="Sentiero per BRICCAS da BRICH | 2430 m slm";
       Region='Piemonte';
-      city ='CIASPOLATE'; 
+      city ='Ostana';
+      Province='Cuneo'; 
       Ascent=950;
       start="Brich (CN) / 1460 mslm circa";
       end="Briccas / 2430 mslm circa"
@@ -653,7 +673,7 @@ class DatabaseConnection {
       
       "Arrivati in cima al pendio percorriamo i pochi metri che ci separano dalla croce di vetta su di una cresta molto panoramica."
     
-      await this.wrapperPopulate(HikeID,file,Country, Region,city,title,length,expTime,Ascent,Description,Difficulty,start,end,AssociatedGuide)
+      await this.wrapperPopulate(HikeID,file,Country, Region, Province, city,title,length,expTime,Ascent,Description,Difficulty,start,end,AssociatedGuide)
       await this.wrapperPopulateRefP(HikeID, refPoint++, "44.708426780998707","7.159385243430734","parking",1,0); // start
       await this.wrapperPopulateRefP(HikeID, refPoint++, "44.708156045526266","7.158207753673196","parking",0,1); // end
 
@@ -662,7 +682,8 @@ class DatabaseConnection {
       HikeID='20';
       title="Sentiero per l’ALPE ATTIA | 1740 m slm";
       Region='Piemonte';
-      city ='Valli di Lanzo'; 
+      city ='Valli di Lanzo';
+      Province='Torino'; 
       Ascent=607;
       start="Pian del Tetto – Ala di Stura (TO) | 1133 m slm circa";
       end="Alpe Attia | 1740 m slm circa"
@@ -681,7 +702,7 @@ class DatabaseConnection {
       "Qui potrai rilassarti qualche minuto, prima di imboccare il sentiero dietro la fontana e proseguire ancora una volta nel boschetto di faggi. In quest’ultimo tratto la salita si fa più dura, ma il percorso è molto ombreggiato ed il silenzio della natura ti accompagna regalandoti anche la possibilità di avvistare qualche daino. "+
       
       "Ad un certo punto il bosco sparisce e di fronte a te si aprirà lo spettacolo dell’Alpe Attia. Passeggia sulla piana e raggiungi i caseggiati in pietra, dove troverai un’altra fontana e la possibilità di rilassarti sognando di raggiungere le cime intorno."
-      await this.wrapperPopulate(HikeID,file,Country, Region,city,title,length,expTime,Ascent,Description,Difficulty,start,end,AssociatedGuide)
+      await this.wrapperPopulate(HikeID,file,Country, Region, Province, city,title,length,expTime,Ascent,Description,Difficulty,start,end,AssociatedGuide)
       await this.wrapperPopulateRefP(HikeID, refPoint++, "45.316959","7.304834","parking",1,0); // start
       await this.wrapperPopulateRefP(HikeID, refPoint++, "45.331211","7.298011","",0,1); // end
 
@@ -690,6 +711,7 @@ class DatabaseConnection {
       title="Circuito Wulaia via Puerto Navarino";
       Country='CHILE';
       Region='Magallanes'
+      Province='';
       city ='Puerto Navarino'; 
       Ascent=1515;
       start=null
@@ -716,7 +738,7 @@ class DatabaseConnection {
       "- under 'Cabo de Hornos, Walaia – Ruta Patrimonial Nº16' you can find in the WWW a good description (68 pages) of the track from the 'Ministerio de Bienes Nacionale'. But note: all named GPS-coordinates are wrong. Even with transformation from datum PSAD56 or SA69 to WSG84. The named datum 'P. South America 69' is not existing."
       
       
-      await this.wrapperPopulate(HikeID,file,Country, Region,city,title,length,expTime,Ascent,Description,Difficulty,start,end,AssociatedGuide)
+      await this.wrapperPopulate(HikeID,file,Country, Region, Province, city,title,length,expTime,Ascent,Description,Difficulty,start,end,AssociatedGuide)
       await this.wrapperPopulateRefP(HikeID, refPoint++, "-54.925734","-68.323590","",1,0); // start
       await this.wrapperPopulateRefP(HikeID, refPoint++, "-55.047550","-68.148442","",0,1); // end
 
@@ -725,6 +747,7 @@ class DatabaseConnection {
       title="Salkantay via Llaqtapata (self-guided)";
       Region='Cusco'
       Country='PERU';
+      Province='';
       city ='Soray'; 
       Ascent=3657;
       start="Abra Salkantay"
@@ -739,7 +762,7 @@ class DatabaseConnection {
       
       "Details coming soon."
       
-      await this.wrapperPopulate(HikeID,file,Country, Region,city,title,length,expTime,Ascent,Description,Difficulty,start,end,AssociatedGuide)
+      await this.wrapperPopulate(HikeID,file,Country, Region, Province, city,title,length,expTime,Ascent,Description,Difficulty,start,end,AssociatedGuide)
       await this.wrapperPopulateRefP(HikeID, refPoint++, "-13.386589","-72.573909","hut",1,0); // start
       await this.wrapperPopulateRefP(HikeID, refPoint++, "-13.153162","-72.522880","",0,1); // end
 
@@ -748,6 +771,7 @@ class DatabaseConnection {
       title="Toubkal Circuit";
       Country='MOROCCO';
       Region='Marrakesh-Safi'
+      Province='';
       city ='Imelil'; 
       Ascent=7967;
       start="Imlil"
@@ -770,7 +794,7 @@ class DatabaseConnection {
       "3) Up the Tisgui and down to the azib before the gorge. Night under te stars in the sleeping bag;"+
       "4) Crossing of Tizi Likemt and back to Imlil."
 
-      await this.wrapperPopulate(HikeID,file,Country, Region,city,title,length,expTime,Ascent,Description,Difficulty,start,end,AssociatedGuide)
+      await this.wrapperPopulate(HikeID,file,Country, Region, Province, city,title,length,expTime,Ascent,Description,Difficulty,start,end,AssociatedGuide)
       await this.wrapperPopulateRefP(HikeID, refPoint++, "31.135638","-7.919335","parking",1,0); // start
       await this.wrapperPopulateRefP(HikeID, refPoint++, "31.135613","-7.919305","parking",0,1); // end
 
@@ -780,6 +804,7 @@ class DatabaseConnection {
       Region='Northern Territory'
       Country='AUSTRALIA';
       city ='Glen Helen'; 
+      Province='';
       Ascent=2660;
       start="ORMISTON GORGE"
       end="COUNTS POINT"
@@ -800,7 +825,7 @@ class DatabaseConnection {
       
       "We started at Ormiston Gorge and finished at Serpentine Chalet Dam (arriving around midday). With an extra day it could converted to a circuit returning to Ormiston Gorge via the Larapinta Trail."
       
-      await this.wrapperPopulate(HikeID,file,Country, Region,city,title,length,expTime,Ascent,Description,Difficulty,start,end,AssociatedGuide)
+      await this.wrapperPopulate(HikeID,file,Country, Region, Province, city,title,length,expTime,Ascent,Description,Difficulty,start,end,AssociatedGuide)
       await this.wrapperPopulateRefP(HikeID, refPoint++, "-23.632482","132.727095","parking",1,0); // start
       await this.wrapperPopulateRefP(HikeID, refPoint++, "-23.736232","132.910421","",0,1); // end
 
@@ -809,6 +834,7 @@ class DatabaseConnection {
       title="Uyuni (3 days tour)";
       Country='BOLIVIA';
       Region="Potosi"
+      Province='';
       city ='Uyuni'; 
       Ascent=3652;
       start="Cementerio de Trenes"
@@ -850,7 +876,7 @@ class DatabaseConnection {
       
 
 
-      await this.wrapperPopulate(HikeID,file,Country, Region,city,title,length,expTime,Ascent,Description,Difficulty,start,end,AssociatedGuide)
+      await this.wrapperPopulate(HikeID,file,Country, Region, Province, city,title,length,expTime,Ascent,Description,Difficulty,start,end,AssociatedGuide)
       await this.wrapperPopulateRefP(HikeID, refPoint++, "-20.463319","-66.823034","parking",1,0); // start
       await this.wrapperPopulateRefP(HikeID, refPoint++, "-22.910191","-68.198311","parking",0,1); // end
 
@@ -858,6 +884,7 @@ class DatabaseConnection {
       HikeID='26';
       title="Nevado Sajama, 6542";
       Region='Oruro';
+      Province='';
       city ='Estancia Junchusuma'; 
       Ascent=2240;
       start="path to Aychuta"
@@ -875,7 +902,7 @@ class DatabaseConnection {
       "The view from the top, contrarily to what one can expect, is not so exciting, because the Sajama is just too high and isolated!"
 
 
-      await this.wrapperPopulate(HikeID,file,Country, Region,city,title,length,expTime,Ascent,Description,Difficulty,start,end,AssociatedGuide)
+      await this.wrapperPopulate(HikeID,file,Country, Region, Province, city,title,length,expTime,Ascent,Description,Difficulty,start,end,AssociatedGuide)
       await this.wrapperPopulateRefP(HikeID, refPoint++, "-18.110549","-68.966962","parking",1,0); // start
       await this.wrapperPopulateRefP(HikeID, refPoint++, "-18.108194","-68.882919","",0,1); // end
 
@@ -884,6 +911,7 @@ class DatabaseConnection {
       title="Samaipata Bosque de los Helechos Gigantes";
       Region='Samaipata';
       city =' Samaipata'; 
+      Province='';
       Ascent=1428;
       start="Samaipata"
       end="Helechos Gigantes"
@@ -893,7 +921,7 @@ class DatabaseConnection {
       file="samaipata-bosque-de-los-helechos-gigantes.gpx"    
       Description="It was very easy but I couldn't find the waterfall. So I couldn't make circle in the Parque Nacional."
 
-      await this.wrapperPopulate(HikeID,file,Country, Region,city,title,length,expTime,Ascent,Description,Difficulty,start,end,AssociatedGuide)
+      await this.wrapperPopulate(HikeID,file,Country, Region, Province, city,title,length,expTime,Ascent,Description,Difficulty,start,end,AssociatedGuide)
       await this.wrapperPopulateRefP(HikeID, refPoint++, "-18.178785","-63.873352","parking",1,0); // start
       await this.wrapperPopulateRefP(HikeID, refPoint++, "-18.178865","-63.873278","parking",0,1); // end
 
@@ -902,6 +930,7 @@ class DatabaseConnection {
       title="El Choro Trek, In 3 days from La Cumbre (4885m) to Chairo (1350m)";
       Region='La Paz';
       city ='  Rinconada'; 
+      Province='La Paz';
       Ascent=1809;
       start="Chairo"
       end="Villa Fatima"
@@ -927,7 +956,7 @@ class DatabaseConnection {
       "- http://www.trekkingchile.com/Images/choro-trail-map.jpg"+
       "- http://www.turismoboliviaperu.com/imgs/mapa-choro.gif"+
       "- http://coroico-info.com/webs/incatrail/sitebuilder/images/mappage-572x557.jpg"
-      await this.wrapperPopulate(HikeID,file,Country, Region,city,title,length,expTime,Ascent,Description,Difficulty,start,end,AssociatedGuide)
+      await this.wrapperPopulate(HikeID,file,Country, Region, Province, city,title,length,expTime,Ascent,Description,Difficulty,start,end,AssociatedGuide)
       await this.wrapperPopulateRefP(HikeID, refPoint++, "-16.338158","-68.040294","",1,0); // start
       await this.wrapperPopulateRefP(HikeID, refPoint++, "-16.203923","-67.837319","parking",0,1); // end
 
@@ -936,6 +965,7 @@ class DatabaseConnection {
       title="Parinacota";
       Region='Oruro';
       city ='Estancia Milluri'; 
+      Province='';
       Ascent=2196;
       start="Pueblo Sajama"
       end="Crater rim, NW"
@@ -962,15 +992,16 @@ class DatabaseConnection {
       "- http://www.turismoboliviaperu.com/imgs/mapa-choro.gif"+
       "- http://coroico-info.com/webs/incatrail/sitebuilder/images/mappage-572x557.jpg"
             
-    await this.wrapperPopulate(HikeID,file,Country, Region,city,title,length,expTime,Ascent,Description,Difficulty,start,end,AssociatedGuide)
+    await this.wrapperPopulate(HikeID,file,Country, Region, Province, city,title,length,expTime,Ascent,Description,Difficulty,start,end,AssociatedGuide)
     await this.wrapperPopulateRefP(HikeID, refPoint++, "-18.136138","-68.975651","parking",1,0); // start
       await this.wrapperPopulateRefP(HikeID, refPoint++, "-18.160969","-69.140142","",0,1); // end
 
 
     HikeID='30';
     title="Trek Breuil-Cervinia - lago di Cignana - Valtournenche";
-    Region='Aosta';
-    Country='Italy'
+    Region='Valle d\'Aosta';
+    Country='Italy';
+    Province='Aosta';
     city ="Cervinia"; 
     Ascent=834;
     start="Cervinia Town"
@@ -983,7 +1014,7 @@ class DatabaseConnection {
     "Arriving at the lake, we went to visit the church and then continue the path towards the Barmasse refuge crossing the dam. From the latter, following path 1 we went down to Valtournenche."+
     "Not so difficult but it's a long path, worth it for the evocative landscape and the route itself.";
           
-  await this.wrapperPopulate(HikeID,file,Country, Region,city,title,length,expTime,Ascent,Description,Difficulty,start,end,AssociatedGuide)
+  await this.wrapperPopulate(HikeID,file,Country, Region, Province, city,title,length,expTime,Ascent,Description,Difficulty,start,end,AssociatedGuide)
   await this.wrapperPopulateRefP(HikeID, refPoint++, "45.933929","7.630021","parking",1,0); // start
       await this.wrapperPopulateRefP(HikeID, refPoint++, "45.877608","7.623348","parking",0,1); // end
 
@@ -991,7 +1022,8 @@ class DatabaseConnection {
   HikeID='31';
   title="Huayna Potosi - From Base Camp to Summit";
   Country='BOLIVIA';
-  Region='La Paz'
+  Region='La Paz';
+  Province='La Paz';
   city ='Milluni'; 
   Ascent=1350;
   start="CampArgent"
@@ -1006,7 +1038,7 @@ class DatabaseConnection {
   "For a full report see '20 days in the Cordillera Real - Trekking and Montanhism'"+
   "https://www.facebook.com/lucasbaruzzi/media_set?set=a.10207861573721238&type=3&pnref=story"
         
-await this.wrapperPopulate(HikeID,file,Country, Region,city,title,length,expTime,Ascent,Description,Difficulty,start,end,AssociatedGuide)
+await this.wrapperPopulate(HikeID,file,Country, Region, Province, city,title,length,expTime,Ascent,Description,Difficulty,start,end,AssociatedGuide)
 await this.wrapperPopulateRefP(HikeID, refPoint++, "-16.287185","-68.130311","hut",1,0); // start
       await this.wrapperPopulateRefP(HikeID, refPoint++, "-16.274170","-68.139751","hut",0,1); // end
 
@@ -1014,6 +1046,7 @@ await this.wrapperPopulateRefP(HikeID, refPoint++, "-16.287185","-68.130311","hu
 HikeID='32';
 title="Laguna Glacial de Sorata (Illampu y Janq'u Uma)";
 city ='Tusca Jahuira'; 
+Province='';
 Ascent=1035;
 start="Laguna Chillata"
 end="The Glacier Lake"
@@ -1024,7 +1057,7 @@ file="laguna-glacial-de-sorata-illampu-y-janqu-uma.gpx"
 Description="Sorata's Glacier Lake is located at more than 5000 meters in elevation. You best way to start the hike is to take a taxi as far up towards Laguna Chillata as you can (80-100 bolivianos). From there, the Glacier Lake is still pretty far away (1000 meters higher) and so it's best to camp at Laguna Chillata and not do the entire hike in a single day. From Laguna Chillata, it takes 4-6 hours to hike up the Glacier Lake. Te get back to Sorata, it's best to talk to the locals on your way down and see if you can hire a driver."+
 
 "La Laguna Glacial de Sorata de encuentra a más que 5000 metros de altura. Se recomiende tomar taxi hasta lo más cerca posible a laguna Chillata (80-100 bolivianos). De ese punto la Laguna Glacial esta todavía lejos con una subida de 1000 metros, así que se recomiende acampar por la Laguna Chillata y no hacer la caminata en un solo día. Desde la Laguna Chillata se puede subir a la Laguna Glacial en 4-6 horas. Para volver a Sorata, se debe preguntar a los comunarios de los pueblos si se puede contratar transporte."
-await this.wrapperPopulate(HikeID,file,Country, Region,city,title,length,expTime,Ascent,Description,Difficulty,start,end,AssociatedGuide)
+await this.wrapperPopulate(HikeID,file,Country, Region, Province, city,title,length,expTime,Ascent,Description,Difficulty,start,end,AssociatedGuide)
 await this.wrapperPopulateRefP(HikeID, refPoint++, "-15.800923","-68.598910","",1,0); // start
       await this.wrapperPopulateRefP(HikeID, refPoint++, "-15.828727","-68.564683","",0,1); // end
 
@@ -1032,7 +1065,8 @@ await this.wrapperPopulateRefP(HikeID, refPoint++, "-15.800923","-68.598910","",
 HikeID='33';
 title="Parco burcina";
 Country="Italy"
-Region='Biella';
+Region='Piemonte';
+Province='Biella';
 city ='Pollone'; 
 Ascent=280;
 start="Area Parcheggio Comunale"
@@ -1050,14 +1084,15 @@ Description= "RISERVA NATURALE SPECIALE PARCO BURCINA 'FELICE PIACENZA'"+
 "This is a very busy place, especially on weekends and during flowering or foliage periods, but it is worth a visit for an easy walk."
 
 
-await this.wrapperPopulate(HikeID,file,Country, Region,city,title,length,expTime,Ascent,Description,Difficulty,start,end,AssociatedGuide)
+await this.wrapperPopulate(HikeID,file,Country, Region, Province, city,title,length,expTime,Ascent,Description,Difficulty,start,end,AssociatedGuide)
 await this.wrapperPopulateRefP(HikeID, refPoint++, "45.585815","8.006584","parking",1,0); // start
       await this.wrapperPopulateRefP(HikeID, refPoint++, "45.589508","8.013503","",0,1); // end
 
 
 HikeID='34';
 title="Monte Mucrone via Normale";
-Region='Biella';
+Region='Piemonte';
+Province='Biella';
 city ='Oropa'; 
 Ascent=1059;
 start="Parcheggio Piazzale di Oropa"
@@ -1078,13 +1113,14 @@ Description="Starting from the Oropa car park next to the cable car, take the pa
 "The same path can be followed for the way back."+
 "This is not a very long trail but the trail is in poor condition with little maintenance so extreme care must be taken. The effort is certainly rewarded by the view once at the top."
 
-await this.wrapperPopulate(HikeID,file,Country, Region,city,title,length,expTime,Ascent,Description,Difficulty,start,end,AssociatedGuide)
+await this.wrapperPopulate(HikeID,file,Country, Region, Province, city,title,length,expTime,Ascent,Description,Difficulty,start,end,AssociatedGuide)
 await this.wrapperPopulateRefP(HikeID, refPoint++, "45.628837","7.97223","parking",1,0); // start
       await this.wrapperPopulateRefP(HikeID, refPoint++, "45.62042","7.944596","",0,1); // end
 
 HikeID='35';
 title="Hike to Rifugio Duca degli Abruzzi";
-Region='Aosta';
+Region='Valle d\'Aosta';
+Province='Aosta';
 city ='Cervinia'; 
 Ascent=794;
 start="Cervinia. Parking lot near Golf"
@@ -1104,13 +1140,14 @@ Description="Once in Cervinia, go as far as the roundabout, turn left and you wi
 "Simple excursion, without particular difficulties, of moderate length suitable for good legs and breath"+
 "It is advisable, paying attention to the last rocky stretch, to continue for half an hour to touch the Carrel cross, which has marked the history of mountaineering, following the route which then becomes mountaineering, leading to Colle del Leone and the refuge dedicated to J.A. Carrel, support point for the Italian ascent route to Monte Cervino."
 
-await this.wrapperPopulate(HikeID,file,Country, Region,city,title,length,expTime,Ascent,Description,Difficulty,start,end,AssociatedGuide)
+await this.wrapperPopulate(HikeID,file,Country, Region, Province, city,title,length,expTime,Ascent,Description,Difficulty,start,end,AssociatedGuide)
 await this.wrapperPopulateRefP(HikeID, refPoint++, "45.93651","7.62672","parking",1,0); // start
       await this.wrapperPopulateRefP(HikeID, refPoint++, "45.95914","7.64406","hut",0,1); // end
 
       HikeID='36';
       title="Sentiero per il BIVACCO GIAS NUOVO | 1893 m slm";
-      Region='Torino';
+      Region='Piemonte';
+      Province='Torino';
       city ='Forno Alpi Graie'; 
       Ascent=674;
       start="Forno Alpi Graie (Torino) | 1219 m slm circa"
@@ -1121,13 +1158,14 @@ await this.wrapperPopulateRefP(HikeID, refPoint++, "45.93651","7.62672","parking
       file="bivacco gias nuovo.gpx"    
       Description="Il sentiero si presenta come una larga carreggiata sterrata che prende subito quota, trasformandosi in un sentiero circondato da pietroni e bassa vegetazione. Lungo le pareti laterali è possibile vedere pareti attrezzate per l’arrampicata, mentre su qualche grosso masso sono affisse targhette che riportano famose frasi di alpinisti."
       
-      await this.wrapperPopulate(HikeID,file,Country, Region,city,title,length,expTime,Ascent,Description,Difficulty,start,end,AssociatedGuide)
+      await this.wrapperPopulate(HikeID,file,Country, Region, Province, city,title,length,expTime,Ascent,Description,Difficulty,start,end,AssociatedGuide)
       await this.wrapperPopulateRefP(HikeID, refPoint++, "45.36415, 7.22306","parking",1,0); // start
             await this.wrapperPopulateRefP(HikeID, refPoint++, "45.33987", "7.18348","hut",0,1); // end
       
     HikeID='37';
     title="Sentiero per il BIVACCO BRUNO MOLINO | 2280 m slm";
-    Region='Torino';
+    Region='Piemonte';
+    Province='Torino';
     city ='Molette'; 
     Ascent=888;
     start="Molette – Balme (Torino) | 1392 m slm circa"
@@ -1144,13 +1182,14 @@ await this.wrapperPopulateRefP(HikeID, refPoint++, "45.93651","7.62672","parking
     
     +"Consigliamo il sentiero che sale a sinistra poiché più intuitivo a livello di segnaletica, puoi tenere l’altro pezzo di sentiero per creare un anello per il ritorno. "
     
-    await this.wrapperPopulate(HikeID,file,Country, Region,city,title,length,expTime,Ascent,Description,Difficulty,start,end,AssociatedGuide)
+    await this.wrapperPopulate(HikeID,file,Country, Region, Province, city,title,length,expTime,Ascent,Description,Difficulty,start,end,AssociatedGuide)
     await this.wrapperPopulateRefP(HikeID, refPoint++,"45.30900", "7.24348","parking",1,0); // start
             await this.wrapperPopulateRefP(HikeID, refPoint++, "45.32672", "7.23196","",0,1); // end
 
     HikeID='38';
     title=" Sentiero per il BIVACCO BERARDO | 2700 m slm";
-    Region='Cuneo';
+    Region='Piemonte';
+    Province='Cuneo';
     city ='Pontechianale'; 
     Ascent=1100 ;
     start="Rifugio Alevè – Fraz. Castello, Pontechianale (CN) | 1600 m slm circa"
@@ -1174,14 +1213,15 @@ await this.wrapperPopulateRefP(HikeID, refPoint++, "45.93651","7.62672","parking
     +"Passiamo dai 2000 m (bivio sentiero Ezio Nicoli) ai 2710 del Bivacco Berardo in 2km circa."
     
     +"Il sentiero non presenta grandi difficoltà se non nella sua ripidità specialmente nel tratto finale dove il fondo risulta un po’ scivoloso e polveroso."
-    await this.wrapperPopulate(HikeID,file,Country, Region,city,title,length,expTime,Ascent,Description,Difficulty,start,end,AssociatedGuide)
+    await this.wrapperPopulate(HikeID,file,Country, Region, Province, city,title,length,expTime,Ascent,Description,Difficulty,start,end,AssociatedGuide)
     await this.wrapperPopulateRefP(HikeID,refPoint++, "44.61340", "7.05332" ,"hut",1,0); // start
             await this.wrapperPopulateRefP(HikeID, refPoint++, "44.65110", "7.07395","hut",0,1); // end
 
 
         HikeID='39';
         title=" Monte Fertazza e Ristoro Belvedere: escursione ad anello da Pescul";
-        Region='Belluno';
+        Region='Veneto';
+        Province='Belluno';
         city ='Selva di Cadore'; 
         Ascent=700 ;
         start=" Pescul (Val Fiorentina Seggiovie) 1433 m"
@@ -1191,13 +1231,14 @@ await this.wrapperPopulateRefP(HikeID, refPoint++, "45.93651","7.62672","parking
         expTime=240; 
         file="Monte-fertazza.gpx"    
         Description="Dall’ammaliante Val Fiorentina, uno dei monti sicuramente più conosciuti e frequentati di questa fascia alpina è quello del Monte Fertazza, sia d’inverno, per la presenza delle diverse piste sciistiche, che d’estate, dove le relative seggiovie, per un certo lasso di tempo, le rimettono in funzione per giungere con facilità presso i rispettivi ristoranti Fertazza e Belvedere. Tuttavia, il Monte Fertazza può soddisfare anche chi desidera svolgere una camminata mediamente impegnativa, affrontando un sentiero relativamente facile che ci porta, anch’esso, a raggiungere la punta più alta del codesto monte, ovvero la Cima dei Viai, che ci permette, per di più, di raggiungere l’apice panoramico dell’intera uscita. Infatti, questa escursione, seppur risulti relativamente facile, sin dall’inizio della camminata è caratterizzata da un susseguirsi di sorprendenti vedute paesaggistiche che si affacciano, sostanzialmente, sulla suggestiva Val Fiorentina, nonché sugli innumerevoli monti sovrastanti che contraddistinguono una considerevole fascia delle fantastiche Dolomiti; la cima, invece, è una veduta a 360° “esplosivamente” meravigliosa, praticamente inaspettata per chi la raggiunge per la prima volta, che ci permette di ammirare, di fatto con un estensione ancora più notevole, degli ulteriori massicci Dolomitici, molti di questi tra i più conosciuti."
-        await this.wrapperPopulate(HikeID,file,Country, Region,city,title,length,expTime,Ascent,Description,Difficulty,start,end,AssociatedGuide)
+        await this.wrapperPopulate(HikeID,file,Country, Region, Province, city,title,length,expTime,Ascent,Description,Difficulty,start,end,AssociatedGuide)
         await this.wrapperPopulateRefP(HikeID,refPoint++, "46.43647", "12.07019" ,"",1,0); // start
                 await this.wrapperPopulateRefP(HikeID, refPoint++, "46.42411", "12.04409","",0,1); // end
 
         HikeID='40';
         title="Rifugio Casera Bosconero da Lago di Pontesei";
-        Region='Belluno';
+        Region='Veneto';
+        Province='Belluno';
         city ='Forno di Zoldo'; 
         Ascent=800 ;
         start=" Pescul (Val Fiorentina Seggiovie) 1433 m"
@@ -1210,7 +1251,7 @@ await this.wrapperPopulateRefP(HikeID, refPoint++, "45.93651","7.62672","parking
         +" imboccando il sentiero 490 che porta l’indicazione del Pian e della Casera del Mugon, oppure effettuiamo una variante un po’ più lunga e difficile attraverso il sentiero che porta a Le Calades, ma svoltiamo, al relativo bivio, verso Pontesei, attraversando, quindi, un ghiaione e, ricongiungendoci, appunto, con il segnavia 490."
         +" A propria discrezione, la deviazione attraverso il “Sentiero Lago delle Streghe” per ricongiungerci, nuovamente, con il sentiero 490 e ritornare, quindi, a Pontesei."
 
-        await this.wrapperPopulate(HikeID,file,Country, Region,city,title,length,expTime,Ascent,Description,Difficulty,start,end,AssociatedGuide)
+        await this.wrapperPopulate(HikeID,file,Country, Region, Province, city,title,length,expTime,Ascent,Description,Difficulty,start,end,AssociatedGuide)
         await this.wrapperPopulateRefP(HikeID,refPoint++,"46.33957", "12.22392" ,"parking",1,0); // start
         await this.wrapperPopulateRefP(HikeID, refPoint++, "46.33835", "12.25160","hut",0,1); // end
 
@@ -1218,6 +1259,7 @@ await this.wrapperPopulateRefP(HikeID, refPoint++, "45.93651","7.62672","parking
         title="Lobuche - Everest Base Camp - Gorak Shep";
         Country='Nepal';
         Region="Region 1"
+        Province='';
         city =' Lobujya'; 
         Ascent=791;
         start="Lobuche"
@@ -1228,12 +1270,13 @@ await this.wrapperPopulateRefP(HikeID, refPoint++, "45.93651","7.62672","parking
         file="lobuche-everest-base-camp-gorak-shep.gpx"    
         Description='I guess that this is one of the most recorded tracks, I post it only for the sake of photo documentation.'
         +'Maybe in the long stretch inside the base camp there was some trespassing component. Namely, arriving in snow and mist I did not notice that at a certain point there was written "access for climbers only". However, due to the same weather conditions, everybody were well sealed inside their own tents, so I experienced no problem throughout my long visit.'
-        await this.wrapperPopulate(HikeID,file,Country, Region,city,title,length,expTime,Ascent,Description,Difficulty,start,end,AssociatedGuide)
+        await this.wrapperPopulate(HikeID,file,Country, Region, Province, city,title,length,expTime,Ascent,Description,Difficulty,start,end,AssociatedGuide)
 
         HikeID='42';
         title="LANGTANG CIRCUIT: circular route from Syabrubesi by Tserko Ri, Ganja La 5.183 and Goisankund NEPAL";
         Country='Nepal'
         Region="Central Region"
+        Province='';
         city ='Shyaphru'; 
         Ascent=9711;
         start="Ama Yangri pass"
@@ -1345,13 +1388,14 @@ await this.wrapperPopulateRefP(HikeID, refPoint++, "45.93651","7.62672","parking
 +"Another way to make the circuit would be leaving from Timbu, south Tarkeghyang (3-4hrs walk). From this population may begin around both clockwise (Timbu-Melanchigaon-Goisankund-Thula Syabru Lama Hotel-Langtang Ganja Kyangin Gompa-the-Tarkeghyang-Timbu) or inverse."
 +""+
 +"The advantage of this option is saving hours bus as Timbu is closer to Kathmandu than Syabrubesi. Conversely, if we do the circuit clockwise (logical acclimating to take the Ganja La acclimated correctly) we charged many days everything needed for the four days of camping (gas, food, matress...)"       
-        await this.wrapperPopulate(HikeID,file,Country, Region,city,title,length,expTime,Ascent,Description,Difficulty,start,end,AssociatedGuide)
+        await this.wrapperPopulate(HikeID,file,Country, Region, Province, city,title,length,expTime,Ascent,Description,Difficulty,start,end,AssociatedGuide)
 
        
         HikeID='43';
         title="Monte Mitsutoge Yama(Kawaguchiko)";
         Country='Japan';
         Region="Yamanashi"
+        Province='';
         city ='Funatsu'; 
         Ascent=1136;
         start=""
@@ -1361,12 +1405,13 @@ await this.wrapperPopulateRefP(HikeID, refPoint++, "45.93651","7.62672","parking
         expTime=413; 
         file="monte-mitsutoge-yamakawaguchiko.gpx"    
         Description="We decided to make this climb because on this date Mount Fuji had too much snow at the top, and the conditions were not right for our equipment and our training. The Fujisan views are amazing. It climbs from the town of Kawaguchiko, in the area near Mount Fuji. You haven't got so much technical difficulty and it's not so long, about 20 km. When you reach the first viewpoint there is a poster than say to go the top and come back is about 6 hours; my wife and me aren't professional climbers and we did summit in an hour and a half. On the way you can find animals such as monkeys, one attacked us and it was a difficult time, at the end without losing sight of the monkey and walking up while lambasted us get out of the area, in the end nothing happened more beyond the scare. We had a beautiful cloudless day. AMAZING! The descent we take the way to the Five Pagoda Tower, one of the most typical views of this area before returning by train to the hotel in Kawaguchiko. If you don't climb the majestic Fuji do not miss this climb and views."
-        await this.wrapperPopulate(HikeID,file,Country, Region,city,title,length,expTime,Ascent,Description,Difficulty,start,end,AssociatedGuide)
+        await this.wrapperPopulate(HikeID,file,Country, Region, Province, city,title,length,expTime,Ascent,Description,Difficulty,start,end,AssociatedGuide)
        
         HikeID='44';
         title="Takatsuka-yama 高柄山 (Shiotsu Stn. - Uenohara Stn.)";
         Region='Japan';
         city ='Arakura(Yamanashi)'; 
+        Province='';
         Ascent=1002;
         start=""
         end=""
@@ -1375,7 +1420,7 @@ await this.wrapperPopulateRefP(HikeID, refPoint++, "45.93651","7.62672","parking
         expTime=176; 
         file="takatsuka-yama-gao-bing-shan-shiotsu-stn-uebohara-stn-.gpx"    
         Description="Quite easy and well signed trail, just the very last part at the gate was a bit confusing; nothing very special on this trail but a nice trek if you don’t want to travel that long from Tokyo (just 1.5 hrs); easy access directly from the train stn., no need to take a bus"
-        await this.wrapperPopulate(HikeID,file,Country, Region,city,title,length,expTime,Ascent,Description,Difficulty,start,end,AssociatedGuide)
+        await this.wrapperPopulate(HikeID,file,Country, Region, Province, city,title,length,expTime,Ascent,Description,Difficulty,start,end,AssociatedGuide)
 
 ///////////////////////////////////////////////////
         HikeID='45';
@@ -1383,6 +1428,7 @@ await this.wrapperPopulateRefP(HikeID, refPoint++, "45.93651","7.62672","parking
        Country='Portugal';
         Region="Faro"
         city ='Canhestros'; 
+        Province='Faro';
         Ascent=166;
         start=""
         end=""
@@ -1394,12 +1440,13 @@ await this.wrapperPopulateRefP(HikeID, refPoint++, "45.93651","7.62672","parking
         "Great combination of a good walk with stunning views and archaeology. Mostly on obvious tracks, limited roadways, easy for the most part but with some steep inclines. So I've rated the walk moderate. Latter part a bit tricky as one necropolis seems to be in someone's back yard/garden! Just pick your way through a few houses to get back on track. Also the descent is off the road down a dirt trackway."+
         "I followed the Wikilocs route by mikeledzep."+
         "Many thanks Mike        "
-        await this.wrapperPopulate(HikeID,file,Country, Region,city,title,length,expTime,Ascent,Description,Difficulty,start,end,AssociatedGuide)
+        await this.wrapperPopulate(HikeID,file,Country, Region, Province, city,title,length,expTime,Ascent,Description,Difficulty,start,end,AssociatedGuide)
 
         HikeID='46';
         title="Carrauntoohil";
         Country='Ireland';
         Region="Munster"
+        Province='';
         city ='Knocknafreaghaun'; 
         Ascent=869;
         start=""
@@ -1426,11 +1473,11 @@ await this.wrapperPopulateRefP(HikeID, refPoint++, "45.93651","7.62672","parking
 
 "RUTAS CERCANAS:"+
 "- Torc Mountain  "
-        await this.wrapperPopulate(HikeID,file,Country, Region,city,title,length,expTime,Ascent,Description,Difficulty,start,end,AssociatedGuide)
+        await this.wrapperPopulate(HikeID,file,Country, Region, Province, city,title,length,expTime,Ascent,Description,Difficulty,start,end,AssociatedGuide)
 
         HikeID='47';
         title="Carrauntouhill via the Devil's ladder";
-     
+        Province='';
         city ='Knocknafreaghaun'; 
         Ascent=931;
         start=""
@@ -1472,11 +1519,12 @@ await this.wrapperPopulateRefP(HikeID, refPoint++, "45.93651","7.62672","parking
 "Ascent time: 04:00"+
 
 "Descent time: 04:08"
-        await this.wrapperPopulate(HikeID,file,Country, Region,city,title,length,expTime,Ascent,Description,Difficulty,start,end,AssociatedGuide)
+        await this.wrapperPopulate(HikeID,file,Country, Region, Province, city,title,length,expTime,Ascent,Description,Difficulty,start,end,AssociatedGuide)
 
         HikeID='48';
         title="Garden of the Sleeping Giant";
         Country='Fiji';
+        Province='';
         Region="Western"
         city ='Natalau'; 
         Ascent=8;
@@ -1487,11 +1535,11 @@ await this.wrapperPopulateRefP(HikeID, refPoint++, "45.93651","7.62672","parking
         expTime=22; 
         file="garden-of-the-sleeping-giant.gpx"    
         Description="Recorded 1/4 of the trail from the lookout to the entrance. Easy trails and boardwalk. Spent 90 minutes in the garden."
-        await this.wrapperPopulate(HikeID,file,Country, Region,city,title,length,expTime,Ascent,Description,Difficulty,start,end,AssociatedGuide)
+        await this.wrapperPopulate(HikeID,file,Country, Region, Province, city,title,length,expTime,Ascent,Description,Difficulty,start,end,AssociatedGuide)
 
         HikeID='49';
         title="Veisaru red cross";
-
+        Province='';
         city =' Veisaru Settlement'; 
         Ascent=36;
         start=""
@@ -1506,12 +1554,13 @@ await this.wrapperPopulateRefP(HikeID, refPoint++, "45.93651","7.62672","parking
 "Penisoni Tirau 33yrs labourer"+
 "3. Saimoni Buli 34 yrs labourer"+
 "4. Samu Boa 32yrs labourer"
-        await this.wrapperPopulate(HikeID,file,Country, Region,city,title,length,expTime,Ascent,Description,Difficulty,start,end,AssociatedGuide)
+        await this.wrapperPopulate(HikeID,file,Country, Region, Province, city,title,length,expTime,Ascent,Description,Difficulty,start,end,AssociatedGuide)
 
         HikeID='50';
         title="Gjeravica or Đeravica (Prokletije)";
         Country='Kosovo';
         Region="Gjakova"
+        Province='';
         city ='Belleja'; 
         Ascent=952;
         start=""
@@ -1525,7 +1574,7 @@ await this.wrapperPopulateRefP(HikeID, refPoint++, "45.93651","7.62672","parking
         "Đeravica or Gjeravica is second highest top on Prokletije (Accursed Mountain) after Maja Jezerce and it is considered as highest top in Kosovo."+
         "There are 2 start points to reach the top from Kosovo, one is from Dečane and another from Junik off road to Gropa Erenikut where you can find accomodation."+
         "Trail is moderate with 2 sections wich are bit exposed, one bellow Gjeravica Lake and another bellow the top. Rest of the trail is moderate and well marked."
-        await this.wrapperPopulate(HikeID,file,Country, Region,city,title,length,expTime,Ascent,Description,Difficulty,start,end,AssociatedGuide)
+        await this.wrapperPopulate(HikeID,file,Country, Region, Province, city,title,length,expTime,Ascent,Description,Difficulty,start,end,AssociatedGuide)
 
 
         await this.populateHuts();
@@ -1533,13 +1582,13 @@ await this.wrapperPopulateRefP(HikeID, refPoint++, "45.93651","7.62672","parking
 }
     
 
-    static  wrapperPopulate = (HikeID,file,Country, Region,city,title,length,expTime,Ascent,Description,Difficulty,start,end,AssociatedGuide=0)=>{
+    static  wrapperPopulate = (HikeID,file,Country, Region, Province, city,title,length,expTime,Ascent,Description,Difficulty,start,end,AssociatedGuide=0)=>{
       return new Promise(async(resolve,reject)=>{
         let path="./gpx/"+file;
         const hikes =require("./Hikes");
         const {hike} =require("./Hikes");
         console.log("Populating Hike#"+(HikeID)+" "+title);
-        let h=new hike(null,title,length,Description,Ascent,Difficulty,expTime,Country,Region,city,path,start,end,AssociatedGuide)
+        let h=new hike(null,title,length,Description,Ascent,Difficulty,expTime,Country,Region,Province, city,path,start,end,AssociatedGuide)
         await hikes.addHike(h);
         resolve("Hike#"+(HikeID)+" "+title+" Inserted")
       })  

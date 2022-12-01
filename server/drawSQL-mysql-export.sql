@@ -11,6 +11,9 @@ CREATE TABLE IF NOT EXISTS `Users`(
 );
 CREATE TABLE IF NOT EXISTS `LocalGuides`(
     `id` INTEGER PRIMARY KEY
+    `user` TEXT,
+    FOREIGN KEY(`user`) REFERENCES `Users`(`Id`)
+
 );
 CREATE TABLE IF NOT EXISTS `ReferencePoints`(
     `RefPointID` INTEGER PRIMARY KEY,
@@ -21,9 +24,13 @@ CREATE TABLE IF NOT EXISTS `ReferencePoints`(
 );
 CREATE TABLE IF NOT EXISTS `HutWorkers`(
     `id` INTEGER NOT NULL PRIMARY KEY
+    `user` TEXT,
+    FOREIGN KEY(`user`) REFERENCES `Users`(`Id`)
 );
 CREATE TABLE IF NOT EXISTS `Hiker`(
     `id` INTEGER PRIMARY KEY NOT NULL
+    `user` TEXT,
+    FOREIGN KEY(`user`) REFERENCES `Users`(`Id`)
 );
 CREATE TABLE IF NOT EXISTS `Hikes`(
     `HikeID` INTEGER PRIMARY KEY,
@@ -34,6 +41,7 @@ CREATE TABLE IF NOT EXISTS `Hikes`(
     `ExpectedTime` TIME,
     `Country` TEXT,
     `Region` TEXT,
+    `Province` TEXT,
     `City` TEXT,
     `GpxFile` TEXT UNIQUE,
     `Start` INTEGER,
