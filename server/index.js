@@ -405,25 +405,21 @@ app.post('/getNearHikes', async (req, res) => {
 
 //POST
 //Create parking lot
-app.post('/ParkingLots',
-  [check('Description').notEmpty(),
-  check('free').notEmpty(),
-  check('lat'),
-  check('lng')], async (req, res) => {
+app.post('/ParkingLots',[],
+  [check('ParkingLot').notEmpty()], async (req, res) => {
   
     const errors = validationResult(res);
     if (!errors.isEmpty()) {
       return res.status(422).json({ error: 'cannot process request' });
     }
-    const description = req.body.Description;
-    const id = await getLastParkingID()+1;
-    const free = req.body.free;
-    const refPoint = await referencePoints.getLastRefPointID()+1;
-    const lat = req.body.lat;
-    const lng = req.body.lng;
+    console.log(req.user);
+    const ParkingLot = {...req.body.ParkingLot, AssociatedGuide: req.user.email};
+    const Description = ParkingLot.Description;
+    const lat = ParkingLot.Coord.lat;
+    const lng = ParkingLot.Coord.lng;
     try {
-      await createParkingLot(id, description, free);
-      await addReferencePoint(refPoint, lat, lng, 'parking')
+      const res = await createParkingLot(ParkingLot);
+      await referencePoints.addReferencePointWithDescription(Description, lat, lng, 'parking')
       res.status(201).end();
     } catch (err) {
       res.status(503).json({error: 'Internal error'});
@@ -581,7 +577,7 @@ app.put('/setHutDescription', isLoggedIn,[
     }
   });
 
-  app.post('/addHut',[],
+  app.post('/addHut',[isLoggedIn],
   check("Hut").notEmpty(),
    async (req, res) => {
     const errors = validationResult(req);
@@ -593,7 +589,7 @@ app.put('/setHutDescription', isLoggedIn,[
     const Hut = {...req.body.Hut, HutManagerID: req.body.Hut.Email};
     try {
       const result = await huts.addHut(Hut);
-      await referencePoints.addReferencePoint(Hut.Coord.lat, Hut.Coord.lng, "hut");
+      await referencePoints.addReferencePointWithDescription(Hut.Description, Hut.Coord.lat, Hut.Coord.lng, "hut");
       res.status(200).json(result);
   
     } catch (err) {

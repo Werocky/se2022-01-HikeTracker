@@ -1,21 +1,11 @@
-POST http://localhost:3001/addHut HTTP/1.1
+POST http://localhost:3001/ParkingLots HTTP/1.1
 Content-type: application/json
 
 {
-	"Hut": {
-		"Name": "2185",
-		"Elevation": 0.0,
-		"City": "city",
-		"Province": "province",
-		"Region": "region",
-		"Country": "country",
-		"WhenOpen": "whenOpen",
-		"Beds": 1,
-		"AvgPrice": 0.0,
-		"Description": "description",
-		"Email": "email",
-		"Phone": 1234,
-		"Website": "website",
+	"ParkingLot": {
+		"Description": "Description",
+		"Free": "1",
+		"NumAuto": 1,
 		"Coord": {"lat":0.0, "lng":0.0}
 	}
 }

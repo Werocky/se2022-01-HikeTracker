@@ -36,12 +36,12 @@ function ParkingForm() {
       setMsg('');
       let p={
         Description:description,
-        Gratis:gratis,
+        Free:gratis,
         Coord:coord,
         NumAuto:numAuto
 
       }
-     // API.createParkingLot(p).then(setMsg("Parking Lot added"));
+      API.createParkingLot(p).then(setMsg("Parking Lot added")).catch(err => err);
   
     }
    

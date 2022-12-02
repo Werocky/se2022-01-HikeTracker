@@ -5,18 +5,18 @@ class ParkingLot{
     constructor(
         ParkingLotID,
         AssociatedGuide,
-        Fee
+        Free
     ){
         this.ParkingLotID=ParkingLotID;
         this.AssociatedGuide=AssociatedGuide;
-        this.Fee=Fee;
+        this.Free=Free;
     }
 }
 
-function createParkingLot(id, description, free){
+function createParkingLot(ParkingLot){
     return new Promise (async (resolve, reject) =>{
-        const sql = 'INSERT INTO ParkingLots(ParkingID, Description, Free) VALUES(?, ?, ?)';
-        db.run(sql, [id, description, free], function (err){
+        const sql = 'INSERT INTO ParkingLots(AssociatedGuide, Free, NumAuto) VALUES(?, ?, ?)';
+        db.run(sql, [ParkingLot.AssociatedGuide, ParkingLot.Free, ParkingLot.NumAuto], function (err){
             if(err)
                 reject(err);
             else

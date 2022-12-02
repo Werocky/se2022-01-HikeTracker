@@ -233,21 +233,24 @@ async function getNearHikes(radius, lat, lng) {
 
 /*** PARKING LOT FUNCTIONS ***/
 
-async function createParkingLot(description, free, coord) {
+async function createParkingLot(ParkingLot) {
   try {
-    const response = await fetch(APIURL + '/ParkingLots', {
+    const response = await fetch((APIURL + '/ParkingLots'), {
       method: 'POST',
+      credentials: 'include',
       body: JSON.stringify({
-        "Description": description,
-        "free": free,
-        "lat": coord.lat,
-        "lng": coord.lng,
+        "ParkingLot": ParkingLot
       }),
       headers: {
         'Content-Type': 'application/json',
       },
     });
-    return response.ok ? true : false;
+    const value = await response.json();
+    if (response.ok) {
+      return value;
+    } else {
+      throw value;
+    }
   } catch (err) {
     throw err;
   }
