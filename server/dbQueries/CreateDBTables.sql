@@ -53,7 +53,7 @@ CREATE TABLE IF NOT EXISTS `Hikes`(
 );
 CREATE TABLE IF NOT EXISTS `Huts`(
     `RefPointID` INTEGER NOT NULL PRIMARY KEY,
-    `Name` TEXT,
+    `Name` TEXT UNIQUE,
     `HutManagerID` TEXT,
     `Website` TEXT NULL,
     `Phone` INTEGER NULL,
@@ -71,6 +71,7 @@ CREATE TABLE IF NOT EXISTS `Huts`(
 CREATE TABLE IF NOT EXISTS `ParkingLots`(
     `ParkingID` INTEGER NOT NULL PRIMARY KEY,
     `AssociatedGuide` TEXT,
+    `NumAuto` INTEGER,
     `Fee` DOUBLE(8, 2) NULL,
     FOREIGN KEY(`AssociatedGuide`) REFERENCES `LocalGuides`(`id`)
 );
