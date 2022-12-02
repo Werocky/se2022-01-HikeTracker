@@ -90,27 +90,27 @@ function HutForm() {
   else
   {
     let h={
-        name:name,
-        elevation:elevation,
-        city:city,
-        province:province,
-        region:region,
-        country:country,
-        whenOpen:whenOpen,
-        beds:beds,
-        avgPrice:avgPrice,
-        description:description,
-        email:email,
-        phone:phone,
-        website:website,
-        coord:coord
+        Name:name,
+        Elevation:elevation,
+        City:city,
+        Province:province,
+        Region:region,
+        Country:country,
+        WhenOpen:whenOpen,
+        Beds:beds,
+        AvgPrice:avgPrice,
+        Description:description,
+        Email:email,
+        Phone:phone,
+        Website:website,
+        Coord:coord
     }
-  /*  API.addHut(h)
+    API.addHut(h)
       .then( () => {
         console.log("ok");
       })//setDirty(true)})
       .catch( err => setErrorMsg(err));
-      */
+      
      setErrorMsg("Hut aggiunto");
   }
 }

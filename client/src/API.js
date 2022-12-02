@@ -465,6 +465,29 @@ function setHutDescription(Description, RefPointID) {
   });
 }
 
+async function addHut(Hut) {
+  try {
+    const response = await fetch((APIURL + '/hutCreate'), {
+      method: 'POST',
+      credentials: 'include',
+      body: JSON.stringify({
+        "Hut": Hut
+      }),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+    const value = await response.json();
+    if (response.ok) {
+      return value;
+    } else {
+      throw value;
+    }
+  } catch (err) {
+    throw err;
+  }
+}
+
 const API = {
   getHikes,
   logIn,
@@ -488,6 +511,7 @@ const API = {
   getHutsAndParks,
   setStartEndPoints,
   verify,
-  setHutDescription
+  setHutDescription,
+  addHut
 };
 export default API;

@@ -494,21 +494,6 @@ app.post('/ParkingLots',
     }
 });
 
-//verification path
-app.get('/verify', /*isLoggedIn,*/[],
-  async (req, res) => {
-    const errors = validationResult(res);
-    if (!errors.isEmpty()) {
-      return res.status(422).json({ error: 'cannot process request' });
-    }
-    try {
-      await users.checkVerificationCode(req.query.code, req.query.Id);
-      await users.setVerified(req.query.Id);
-      res.status(201).json({message: 'Correctly verified'});
-    } catch (err) {
-      res.status(503).json({ error: `Internal Error` });
-    }
-  });
 
 //DELETE
 //delete parking lot
@@ -596,6 +581,26 @@ app.put('/setHutDescription', isLoggedIn,[
     }
   });
 
+  app.post('/addHut',[isLoggedIn],
+  check("Hut").notEmpty(),
+   async (req, res) => {
+    const errors = validationResult(req);
+    console.log(errors);
+    if (!errors.isEmpty()) {
+      return res.status(422).json({ error: 'cannot process request' });
+    }
+    console.log(req.body);
+    const Hut = {...req.body.Hut, HutManagerID: req.body.Hut.Email};
+    try {
+      const result = await huts.addHut(Hut);
+      res.status(200).json(result);
+  
+    } catch (err) {
+      console.log(err);
+      res.status(503).json({ error: `Error ` });
+    }
+  });
+
 /*** Users APIs ***/
 
 // POST /sessions 
@@ -654,6 +659,22 @@ app.post('/sessions/new', [
     return res.status(500).json(err);
   }
 })
+
+//verification path
+app.get('/verify', /*isLoggedIn,*/[],
+  async (req, res) => {
+    const errors = validationResult(res);
+    if (!errors.isEmpty()) {
+      return res.status(422).json({ error: 'cannot process request' });
+    }
+    try {
+      await users.checkVerificationCode(req.query.code, req.query.Id);
+      await users.setVerified(req.query.Id);
+      res.status(201).json({message: 'Correctly verified'});
+    } catch (err) {
+      res.status(503).json({ error: `Internal Error` });
+    }
+  });
 
 // POST /saveFile
 // store a new gpx file
