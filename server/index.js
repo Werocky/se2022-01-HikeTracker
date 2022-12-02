@@ -581,7 +581,7 @@ app.put('/setHutDescription', isLoggedIn,[
     }
   });
 
-  app.post('/addHut',[isLoggedIn],
+  app.post('/addHut',[],
   check("Hut").notEmpty(),
    async (req, res) => {
     const errors = validationResult(req);
@@ -593,6 +593,7 @@ app.put('/setHutDescription', isLoggedIn,[
     const Hut = {...req.body.Hut, HutManagerID: req.body.Hut.Email};
     try {
       const result = await huts.addHut(Hut);
+      await referencePoints.addReferencePoint(Hut.Coord.lat, Hut.Coord.lng, "hut");
       res.status(200).json(result);
   
     } catch (err) {

@@ -488,6 +488,29 @@ async function addHut(Hut) {
   }
 }
 
+async function createParkingLot(ParkingLot) {
+  try {
+    const response = await fetch((APIURL + '/createParkingLot'), {
+      method: 'POST',
+      credentials: 'include',
+      body: JSON.stringify({
+        "ParkingLot": ParkingLot
+      }),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+    const value = await response.json();
+    if (response.ok) {
+      return value;
+    } else {
+      throw value;
+    }
+  } catch (err) {
+    throw err;
+  }
+}
+
 const API = {
   getHikes,
   logIn,

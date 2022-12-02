@@ -16,6 +16,6 @@ Content-type: application/json
 		"Email": "email",
 		"Phone": 1234,
 		"Website": "website",
-		"Coord": "coord"
+		"Coord": {"lat":0.0, "lng":0.0}
 	}
 }

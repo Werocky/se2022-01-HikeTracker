@@ -35,13 +35,13 @@ function ParkingForm() {
     else {
       setMsg('');
       let p={
-        description:description,
-        gratis:gratis,
-        coord:coord,
-        numAuto:numAuto
+        Description:description,
+        Gratis:gratis,
+        Coord:coord,
+        NumAuto:numAuto
 
       }
-     // API.createParkingLot(description,gratis,coord).then(setMsg("ciao"));
+     // API.createParkingLot(p).then(setMsg("Parking Lot added"));
   
     }
    
