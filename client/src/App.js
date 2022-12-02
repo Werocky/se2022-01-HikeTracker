@@ -11,6 +11,7 @@ import { RegisterComponent } from './Layout-components/RegisterComponent';
 import HikeDetails from './Layout-components/HikeDetails';
 //import AddHike from './Layout-components/AddHike';
 import ProfilePage from './Layout-components/ProfilePage';
+import Profile from './pages/Profile'
 import HutsPage from './Layout-components/Huts-components/HutsPage';
 import ParkingForm from './Layout-components/ParkingForm';
 import VerifiedMessage from './Layout-components/VerificationPage';
@@ -156,7 +157,7 @@ function AppLayout(props) {
         } />
 
         <Route path='/profile/:userId' element={
-          <ProfilePage logout={props.logout} />
+          <Profile logout={props.logout} />
 
         } />
         {/*<Route path='/huts' element={*/}
