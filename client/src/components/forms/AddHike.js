@@ -76,7 +76,7 @@ function AddHike(props) {
   // The textOnLeft boolean prop can be used to display either the text on left or right side of the image.
 
   useEffect(() => {
-    if (!auth.login || auth.userRole !== 'L') {
+    if (!auth.login || auth.user.Role !== 'L') {
       navigate('/');
     }
   }, [])
@@ -124,7 +124,7 @@ function AddHike(props) {
 
   const handleSubmitFile = async (event) => {
     event.preventDefault();
-    setFile(event.target[0].files[0]);
+    //setFile(event.target[0].files[0]);
     const reader = new FileReader();
     reader.onload = (event) => {
       setFileString(reader.result);
@@ -134,21 +134,22 @@ function AddHike(props) {
 
   const handleSubmitForm = async (event) => {
     event.preventDefault();
+    const s = expectedTime.trim().split(":");
     const hike = {
       Title: dataFromGpx.Title,
       Description: description,
-      Ascent: dataFromGpx.Ascent,
+      Ascent: parseInt(dataFromGpx.Ascent),
       Difficulty: difficulty,
-      ExpectedTime: expectedTime,
+      ExpectedTime: (parseInt(s[0]) * 24 + parseInt(s[1])) * 60 + parseInt(s[2]),
       Country: country,
       Province: province,
       Region: region,
       City: city ? city : province,
-      File: file,
+      GpxFile: "./gpx/"+file.name,
       Start: startDescr,
       End: endDescr,
-      GuideID: auth.user.Id,
-      Length: dataFromGpx.Length,
+      AssociatedGuide: 0 /* auth.user.Id*/,
+      Length: parseFloat(dataFromGpx.Length / 1000),
     }
     console.log(hike);
     const refP = {
@@ -165,7 +166,7 @@ function AddHike(props) {
       otherPoints: refPointArray,
     }
     console.log(refP);
-    const res = await API.addHike(hike, refP);
+    const res = await API.addHike(hike, file, refP, auth.user.Id);
   }
 
   const handleSubmitRefPoint = async (event) => {
@@ -237,7 +238,7 @@ function AddHike(props) {
               {!fileOk &&
                 <Form onSubmit={handleSubmitFile} >
 
-                  <Input type="file" required />
+                  <Input type="file" required onChange={event => setFile(event.target.files[0])} />
 
                   <SubmitButton type="submit">{submitButtonText}</SubmitButton>
                 </Form>

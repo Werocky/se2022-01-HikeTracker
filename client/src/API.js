@@ -1,3 +1,5 @@
+import axios from "axios";
+
 const APIURL = 'http://localhost:3001'
 
 /* LOADING DATA FROM SERVER */
@@ -6,15 +8,15 @@ async function getHikes() {
   const hikes = await response.json();
   if (response.ok) {
     return hikes.map((r) => ({
-      HikeID: r.HikeID, 
-      Start: r.Start, 
-      End: r.End, 
-      Title: r.Title, 
+      HikeID: r.HikeID,
+      Start: r.Start,
+      End: r.End,
+      Title: r.Title,
       Length: r.Length,
-      ExpectedTime: r.ExpectedTime, 
-      Ascent: r.Ascent, 
-      Difficulty: r.Difficulty, 
-      Description: r.Description, 
+      ExpectedTime: r.ExpectedTime,
+      Ascent: r.Ascent,
+      Difficulty: r.Difficulty,
+      Description: r.Description,
       Country: r.Country,
       Province: r.Province,
       Region: r.Region,
@@ -49,7 +51,7 @@ async function getHike(HikeID) {
   }
 }
 
-async function getHikeInfo(HikeID){
+async function getHikeInfo(HikeID) {
   try {
     const response = await fetch(APIURL + '/HikeInfo', {
       method: 'POST',
@@ -62,7 +64,7 @@ async function getHikeInfo(HikeID){
       },
     });
     const hikeInfo = await response.json();
-    if(response.ok)
+    if (response.ok)
       return hikeInfo;
     else
       throw hikeInfo;
@@ -71,13 +73,13 @@ async function getHikeInfo(HikeID){
   }
 }
 
-async function getHutsAndParks(){
+async function getHutsAndParks() {
   try {
     const response = await fetch(APIURL + '/HutsAndParks', {
       method: 'GET',
     });
     const info = await response.json();
-    if(response.ok)
+    if (response.ok)
       return info;
     else
       throw info;
@@ -86,7 +88,7 @@ async function getHutsAndParks(){
   }
 }
 
-async function setStartEndPoints(HikeId, StartId, EndId, Start, End){
+async function setStartEndPoints(HikeId, StartId, EndId, Start, End) {
   try {
     const response = await fetch(APIURL + '/setStartEndPoints', {
       method: 'POST',
@@ -101,7 +103,7 @@ async function setStartEndPoints(HikeId, StartId, EndId, Start, End){
         'Content-Type': 'application/json'
       },
     });
-    if(!response.ok)
+    if (!response.ok)
       throw response;
   } catch (err) {
     throw err;
@@ -157,24 +159,38 @@ function setDescription(Description, HikeID) {
   });
 }
 
-async function addHike(hike, points) {
+async function addHike(hike, file, points, guideId) {
   try {
-    const response = await fetch((APIURL + '/addHike'), {
-      method: 'POST',
-      credentials: 'include',
-      body: JSON.stringify({
-        "hike": hike,
-        "points": points,
-      }),
-      headers: {
-        'Content-Type': 'application/json',
-      },
+
+    const data = new FormData();
+    data.append("file", file);
+    
+    const response1 = await axios({
+      method: "post",
+      url: "http://localhost:3001/saveFile",
+      data: data,
+      headers: { "Content-Type": "multipart/form-data" },
     });
-    const hikeId = await response.json();
-    if (response.ok) {
-      return hikeId;
-    } else {
-      throw hikeId;
+    if (response1.statusText==="OK") {
+      const response2 = await fetch((APIURL + '/addHike'), {
+        method: 'POST',
+        credentials: 'include',
+        body: JSON.stringify({
+          "hike": hike,
+          "points": points,
+          "guideId": guideId,
+        }),
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+      const hikeId = await response2.json();
+      if (response2.ok) {
+        return hikeId;
+      } else {
+        throw hikeId;
+      }
+
     }
   } catch (err) {
     throw err;
@@ -421,7 +437,7 @@ async function register(credentials) {
     const res = await response.json();
     return res;
   } else {
-    const errDetail = {error: 'something went wrong with your registration!'};
+    const errDetail = { error: 'something went wrong with your registration!' };
     return errDetail;
   }
 

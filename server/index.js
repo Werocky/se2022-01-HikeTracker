@@ -255,29 +255,60 @@ app.put('/setDescription', /*isLoggedIn,*/[
   });
 
 // add a new Hike
-app.post('/addHike', async (req,res) => {
+app.post('/addHike', async (req, res) => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
     return res.status(422).json({ error: 'cannot process request' });
   }
-try {
-  const hike = req.body.hike;
-  const points = req.body.points;
-  /*console.log(hike);
-  console.log(points)*/
-  const hikeId = await hikes.getLastHikeId()+1;
-  console.log(hikeId);
-  /**
-   * ---------------------------------------------
-   * Add in: Hikes, PointsOfHikes, ReferencePoints
-   * ---------------------------------------------
-   */
-  /*await hikes.addHike(hikeId,hike.Title,hike.Length,hike.ExpectedTime,hike.Ascent,hike.Difficulty,hike.Start,hike.End,hike.Description);
-  await locations.addLocation(hikeId, hike.Province, hike.City);*/
-  res.status(201).json({hikeId: hikeId});
-} catch (err) {
-  res.status(503).json({error: 'Internal error'});
-}
+  try {
+    const hike = req.body.hike;
+    const points = req.body.points;
+    const Id = req.body.guideId;
+
+    const hikeId = await hikes.getLastHikeId() + 1;
+
+    // add hike
+    await hikes.addHike(hike);
+    console.log("Hike added");
+
+    // add start point
+    const start = points.start;
+    console.log(start);
+    await addReferencePoint(start.position.lat, start.position.lon, start.Type);
+    const startId = await referencePoints.getLastRefPointID();
+    console.log("Start Point added");
+
+    // add ending point
+    const end = points.end;
+    await addReferencePoint(end.position.lat, end.position.lon, end.Type);
+    const endId = await referencePoints.getLastRefPointID();
+    console.log("End Point added");
+
+    // add other points
+    let pIdVec = [];
+    for (let p of points.otherPoints) {
+      await addReferencePoint(p.position.lat, p.position.lng, p.type);
+      const pId = await referencePoints.getLastRefPointID();
+      pIdVec.push(pId);
+      console.log("Point added");
+
+    }
+
+    // add reference point connected to hike
+    //start
+    await hikeRefPoints.addHikeRefPoints(hikeId, startId, 1, 0);
+    await hikeRefPoints.addHikeRefPoints(hikeId, endId, 0, 1);
+    for (let p in pIdVec) {
+      await hikeRefPoints.addHikeRefPoints(hikeId, p, 0, 0);
+    }
+
+    res.status(201).json({ hikeId: hikeId });
+  } catch (err) {
+    console.log(err);
+    res.status(503).json({ error: 'Internal error' });
+  }
+  console.log("All hike point added");
+
 
 })
 
@@ -307,11 +338,11 @@ app.put('setStartEndPoints',
   check('StartId').notEmpty(),
   check('EndId').notEmpty(),
   check('Start').notEmpty(),
-  check('End').notEmpty()], async (req, res) =>{
+  check('End').notEmpty()], async (req, res) => {
 
     const errors = validationResult(res);
-    if(!errors.isEmpty()) {
-      return res.status(422).json( { error: 'Cannot process request' });
+    if (!errors.isEmpty()) {
+      return res.status(422).json({ error: 'Cannot process request' });
     }
 
     const startId = req.params.StartId;
@@ -326,29 +357,29 @@ app.put('setStartEndPoints',
       await hikeRefPoints.setIsStart(id, 1, startId);
       res.status(201).end();
     } catch (err) {
-      res.stauts(503).json( { error: 'Internal error' });
+      res.stauts(503).json({ error: 'Internal error' });
     }
-})
+  })
 
-app.get('/HutsAndParks', async (req, res) =>{
+app.get('/HutsAndParks', async (req, res) => {
   const errors = validationResult(res);
-  if(!errors.isEmpty()){
-    return res.status(422).json( { error: 'Cannot process request' });
+  if (!errors.isEmpty()) {
+    return res.status(422).json({ error: 'Cannot process request' });
   }
   try {
     const HutsAndParks = await hikeRefPoints.getHutsAndParks();
-    console.log('HutsAndParks:'+ HutsAndParks);
+    console.log('HutsAndParks:' + HutsAndParks);
     res.status(200).json(HutsAndParks);
   } catch (err) {
     console.warn(err);
-    res.status(503).json ({ error: 'Internal error'});
+    res.status(503).json({ error: 'Internal error' });
   }
 })
 
-app.post('/HikeInfo', [check('HikeID').notEmpty], async (req, res) =>{
+app.post('/HikeInfo', [check('HikeID').notEmpty], async (req, res) => {
   const errors = validationResult(res);
-  if(!errors.isEmpty()){
-    return res.status(422).json( { error: 'Cannot process request' });
+  if (!errors.isEmpty()) {
+    return res.status(422).json({ error: 'Cannot process request' });
   }
 
   const id = req.params.HikeID;
@@ -357,7 +388,7 @@ app.post('/HikeInfo', [check('HikeID').notEmpty], async (req, res) =>{
     const hikeInfo = await hikeRefPoints.getHikeInfo(id);
     res.status(200).json(hikeInfo);
   } catch (err) {
-    res.status(503).json ({ error: 'Internal error'})
+    res.status(503).json({ error: 'Internal error' })
   }
 })
 
@@ -410,15 +441,15 @@ app.post('/ParkingLots',
   check('free').notEmpty(),
   check('lat'),
   check('lng')], async (req, res) => {
-  
+
     const errors = validationResult(res);
     if (!errors.isEmpty()) {
       return res.status(422).json({ error: 'cannot process request' });
     }
     const description = req.body.Description;
-    const id = await getLastParkingID()+1;
+    const id = await getLastParkingID() + 1;
     const free = req.body.free;
-    const refPoint = await referencePoints.getLastRefPointID()+1;
+    const refPoint = await referencePoints.getLastRefPointID() + 1;
     const lat = req.body.lat;
     const lng = req.body.lng;
     try {
@@ -426,9 +457,9 @@ app.post('/ParkingLots',
       await addReferencePoint(refPoint, lat, lng, 'parking')
       res.status(201).end();
     } catch (err) {
-      res.status(503).json({error: 'Internal error'});
+      res.status(503).json({ error: 'Internal error' });
     }
-});
+  });
 
 //PUT
 //Update parking lot
@@ -436,10 +467,10 @@ app.put('/ParkingLots',
   [check('Description').notEmpty(),
   check('ParkingId').notEmpty(),
   check('free').notEmpty(),
-  check('RefPointID'), 
+  check('RefPointID'),
   check('lat'),
   check('lng')], async (req, res) => {
-  
+
     const errors = validationResult(res);
     if (!errors.isEmpty()) {
       return res.status(422).json({ error: 'cannot process request' });
@@ -455,31 +486,31 @@ app.put('/ParkingLots',
       await updateReferencePoint(refPoint, lat, lng, 'parking');
       res.status(201).end();
     } catch (err) {
-      res.status(503).json({error: 'Internal error'});
+      res.status(503).json({ error: 'Internal error' });
     }
-});
+  });
 
 //GET
 //Return all parking lots
 app.get('/ParkingLots', async (req, res) => {
-  
-    const errors = validationResult(res);
-    if (!errors.isEmpty()) {
-      return res.status(422).json({ error: 'cannot process request' });
-    }
 
-    try {
-      const parkingLots = await getParkingLots();
-      res.status(201).json(parkingLots);
-    } catch (err) {
-      res.status(503).json({error: 'Internal error'});
-    }
+  const errors = validationResult(res);
+  if (!errors.isEmpty()) {
+    return res.status(422).json({ error: 'cannot process request' });
+  }
+
+  try {
+    const parkingLots = await getParkingLots();
+    res.status(201).json(parkingLots);
+  } catch (err) {
+    res.status(503).json({ error: 'Internal error' });
+  }
 });
 
 //Return parking lot identified by id
 app.post('/ParkingLots',
   [check('ParkingId').notEmpty()], async (req, res) => {
-  
+
     const errors = validationResult(res);
     if (!errors.isEmpty()) {
       return res.status(422).json({ error: 'cannot process request' });
@@ -490,9 +521,9 @@ app.post('/ParkingLots',
       const parkingLot = await getParkingLot(id);
       res.status(201).json(parkingLot);
     } catch (err) {
-      res.status(503).json({error: 'Internal error'});
+      res.status(503).json({ error: 'Internal error' });
     }
-});
+  });
 
 //verification path
 app.get('/verify', /*isLoggedIn,*/[],
@@ -504,7 +535,7 @@ app.get('/verify', /*isLoggedIn,*/[],
     try {
       await users.checkVerificationCode(req.query.code, req.query.Id);
       await users.setVerified(req.query.Id);
-      res.status(201).json({message: 'Correctly verified'});
+      res.status(201).json({ message: 'Correctly verified' });
     } catch (err) {
       res.status(503).json({ error: `Internal Error` });
     }
@@ -514,7 +545,7 @@ app.get('/verify', /*isLoggedIn,*/[],
 //delete parking lot
 app.post('/ParkingLots',
   [check('ParkingId').notEmpty()], async (req, res) => {
-  
+
     const errors = validationResult(res);
     if (!errors.isEmpty()) {
       return res.status(422).json({ error: 'cannot process request' });
@@ -524,9 +555,9 @@ app.post('/ParkingLots',
       await deleteParkingLot(id);
       res.status(201).end();
     } catch (err) {
-      res.status(503).json({error: 'Internal error'});
+      res.status(503).json({ error: 'Internal error' });
     }
-});
+  });
 
 /*** Huts ***/
 // GET filtered
@@ -542,7 +573,7 @@ app.post('/hutsFilters', async (req, res) => {
   const beds = req.body.beds
   const avgPrice = req.body.avgPrice;
   try {
-    const result = await huts.getHutsFilters(name,loc?loc.locationType:null,loc?loc.location:null,WhenOpen,beds,avgPrice);
+    const result = await huts.getHutsFilters(name, loc ? loc.locationType : null, loc ? loc.location : null, WhenOpen, beds, avgPrice);
     res.status(200).json(result);
 
   } catch (err) {
@@ -552,7 +583,7 @@ app.post('/hutsFilters', async (req, res) => {
 });
 
 //GET locations
-app.get('/hutsLocations', async (req,res) => {
+app.get('/hutsLocations', async (req, res) => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
     return res.status(422).json({ error: 'cannot process request' });
@@ -563,12 +594,12 @@ app.get('/hutsLocations', async (req,res) => {
     const region = await huts.getHutRegion();
     const country = await huts.getHutCountry();
     let location = {
-      City: city.filter((el)=> el!=false),
-      Province: province.filter((el)=> el!=false),
-      Region: region.filter((el)=> el!=false),
-      Country: country.filter((el)=> el!=false)
+      City: city.filter((el) => el != false),
+      Province: province.filter((el) => el != false),
+      Region: region.filter((el) => el != false),
+      Country: country.filter((el) => el != false)
     };
-    
+
     res.status(200).json(location);
   } catch (err) {
     res.status(503).json({ error: `Error` });
@@ -576,12 +607,12 @@ app.get('/hutsLocations', async (req,res) => {
 })
 
 //add and modify hut description
-app.put('/setHutDescription', isLoggedIn,[
+app.put('/setHutDescription', isLoggedIn, [
   check('Description').notEmpty(),
   check('RefPointID').notEmpty(),
 ],
   async (req, res) => {
-    if(req.user.Role !== 'L') return res.status(401).json({error: 'Unauthorized'});
+    if (req.user.Role !== 'L') return res.status(401).json({ error: 'Unauthorized' });
     const errors = validationResult(res);
     if (!errors.isEmpty()) {
       return res.status(422).json({ error: 'cannot process request' });
@@ -641,7 +672,7 @@ app.post('/sessions/new', [
 ], async (req, res) => {
   try {
     const isRegistered = await users.getUserById(req.body.Id);
-    if(isRegistered !== 'ok') return res.status(400).json({error: 'User registered yet'}); //if the user is registered, nothing happens
+    if (isRegistered !== 'ok') return res.status(400).json({ error: 'User registered yet' }); //if the user is registered, nothing happens
     const Hash = req.body.Hash;
     const Salt = req.body.Salt;
     const Id = req.body.Id;
@@ -657,7 +688,7 @@ app.post('/sessions/new', [
 
 // POST /saveFile
 // store a new gpx file
-app.post('/saveFile/:hikeID', async (req, res) => {
+app.post('/saveFile', async (req, res) => {
   if (!req.files) {
     return res.status(400).send("No files were uploaded.");
   }
@@ -665,9 +696,9 @@ app.post('/saveFile/:hikeID', async (req, res) => {
   try {
     const file = req.files.file;
     const path = "./gpx/" + file.name;
-    console.log(path);
-    const hikeID = req.params.hikeID; // STORE IT IN THE FileNames db with path
-    const added = await fileNames.addFile(hikeID,path);
+    //console.log(path);
+    //const hikeID = req.params.hikeID;
+    //const added = await fileNames.addFile(hikeID,path);
     file.mv(path, (err) => {
       if (err) {
         return res.status(500).send(err);

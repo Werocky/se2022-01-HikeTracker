@@ -205,7 +205,9 @@ function HikeElement(props) {
           <Description> <span tw="text-primary-500">Length:</span> {hike.Length} km</Description>
           <Description> <span tw="text-primary-500">Ascent:</span> {hike.Ascent} mt</Description>
           <Description> <span tw="text-primary-500">Expected Time:</span> {time}</Description>
-          <Description>City/Province/Region/Country</Description>
+          <Description>
+            {hike.City?hike.City:""}{hike.Province?" | "+hike.Province:""}{hike.Region?" | "+hike.Region:""}{hike.Country?" | "+hike.Country:""}
+            </Description>
 
           <PostAction onClick={() => { navigate('/' + hike.HikeID) }}>View details</PostAction>
         </Info>
