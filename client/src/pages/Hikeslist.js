@@ -31,7 +31,7 @@ const PostContainer = styled.div`
         ${tw`sm:-mr-4 sm:pl-8 sm:flex-1 sm:rounded-none sm:rounded-r-lg sm:border-t-2 sm:border-l-0`}
       }
       ${Description} {
-        ${tw`text-sm mt-3 leading-loose text-gray-600 font-medium`}
+        ${tw`text-sm mt-3 leading-loose text-gray-600 font-medium `}
       }
     `}
 `;
@@ -44,7 +44,7 @@ const Info = tw.div`p-8 border-2 border-t-0 rounded-lg rounded-t-none`;
 const Category = tw.div`text-primary-500 text-xs font-bold tracking-widest leading-loose after:content after:block after:border-b-2 after:border-primary-500 after:w-8`;
 const CreationDate = tw.div`mt-4 uppercase text-gray-600 italic font-semibold text-xs`;
 const Title = tw.div`mt-1 font-black text-xl text-gray-900 group-hover:text-primary-500 transition duration-300 truncate `;
-const Description = tw.div``;
+const Description = tw.div`truncate `;
 
 const ButtonContainer = tw.div`flex justify-center`;
 const LoadMoreButton = tw(PrimaryButton)`mt-16 mx-auto`;

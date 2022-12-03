@@ -42,8 +42,8 @@ const Image = styled.div`
 const Info = tw.div`p-8 border-2 border-t-0 rounded-lg rounded-t-none`;
 const Category = tw.div`uppercase text-primary-500 text-xs font-bold tracking-widest leading-loose after:content after:block after:border-b-2 after:border-primary-500 after:w-8`;
 const CreationDate = tw.div`mt-4 uppercase text-gray-600 italic font-semibold text-xs`;
-const Title = tw.div`mt-1 font-black text-2xl text-gray-900 group-hover:text-primary-500 transition duration-300`;
-const Description = tw.div``;
+const Title = tw.div`mt-1 font-black text-2xl text-gray-900 group-hover:text-primary-500 transition duration-300 truncate `;
+const Description = tw.div`truncate `;
 
 const ButtonContainer = tw.div`flex justify-center`;
 const LoadMoreButton = tw(PrimaryButton)`mt-16 mx-auto`;

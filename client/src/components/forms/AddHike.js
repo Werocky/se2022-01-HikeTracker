@@ -50,6 +50,7 @@ function AddHike(props) {
   const [fileString, setFileString] = useState("");
   const [dataFromGpx, setDataFromGpx] = useState(undefined);
   const [gpxPoints, setGpxPoints] = useState(undefined);
+  const [title, setTitle] = useState("");
   const [city, setCity] = useState("");
   const [province, setProvince] = useState("");
   const [region, setRegion] = useState("");
@@ -136,7 +137,7 @@ function AddHike(props) {
     event.preventDefault();
     const s = expectedTime.trim().split(":");
     const hike = {
-      Title: dataFromGpx.Title,
+      Title: title ? title : dataFromGpx.Title,
       Description: description,
       Ascent: parseInt(dataFromGpx.Ascent),
       Difficulty: difficulty,
@@ -145,11 +146,11 @@ function AddHike(props) {
       Province: province,
       Region: region,
       City: city ? city : province,
-      GpxFile: "./gpx/"+file.name,
+      GpxFile: "./gpx/" + file.name,
       Start: startDescr,
       End: endDescr,
       AssociatedGuide: 0 /* auth.user.Id*/,
-      Length: parseFloat(dataFromGpx.Length / 1000),
+      Length: parseFloat(dataFromGpx.Length / 1000).toFixed(2),
     }
     console.log(hike);
     const refP = {
@@ -166,7 +167,12 @@ function AddHike(props) {
       otherPoints: refPointArray,
     }
     console.log(refP);
-    const res = await API.addHike(hike, file, refP, auth.user.Id);
+    try {
+      const res = await API.addHike(hike, file, refP, auth.user.Id);
+      console.log(res);
+    } catch (err) {
+      console.log(err);
+    }
   }
 
   const handleSubmitRefPoint = async (event) => {
@@ -203,31 +209,35 @@ function AddHike(props) {
           }
           {fileOk &&
             <ImageMapColumn>
+              <TextContent>
+                <Heading>Map</Heading>
+                <Description>Click on the map and insert the type, to add new Reference Point</Description>
 
-              <MapContainer
-                center={[gpxPoints[Math.ceil(gpxPoints.length / 2)].lat, gpxPoints[Math.ceil(gpxPoints.length / 2)].lon]}
-                bounds={[gpxPoints[0], gpxPoints.at(-1),]}
-                scrollWheelZoom
-                style={{ height: 500 + "px", width: "100%", }}>
-                <ClickPickNearest points={gpxPoints} coord={coord} setCoord={setCoord} />
-                <Polyline
-                  pathOptions={{ fillColor: 'red', color: 'blue' }}
-                  positions={gpxPoints}
-                />
-                <StartPoint position={gpxPoints[0]} />
-                <EndPoint position={gpxPoints.at(-1)} />
-                <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
-              </MapContainer>
+                <MapContainer
+                  center={[gpxPoints[Math.ceil(gpxPoints.length / 2)].lat, gpxPoints[Math.ceil(gpxPoints.length / 2)].lon]}
+                  bounds={[gpxPoints[0], gpxPoints.at(-1),]}
+                  scrollWheelZoom
+                  style={{ height: 500 + "px", width: "100%", }}>
+                  <ClickPickNearest points={gpxPoints} coord={coord} setCoord={setCoord} />
+                  <Polyline
+                    pathOptions={{ fillColor: 'red', color: 'blue' }}
+                    positions={gpxPoints}
+                  />
+                  <StartPoint position={gpxPoints[0]} />
+                  <EndPoint position={gpxPoints.at(-1)} />
+                  <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
+                </MapContainer>
 
-              {coordChange &&
-                <Form onSubmit={handleSubmitRefPoint}>
-                  <PointForm coord={coord} />
-                  <Input type="text" name="descr" placeholder="Point description" value={refPDesc} onChange={ev => setRefPDesc(ev.target.value)} required />
-                  <Input type="text" name="startType" placeholder="Point type" value={refPType} onChange={ev => setRefPType(ev.target.value)} />
-                  <SubmitButton type="submit">Add this Reference Point</SubmitButton>
-                </Form>
-              }
+                {coordChange &&
+                  <Form onSubmit={handleSubmitRefPoint}>
+                    <PointForm coord={coord} />
+                    <Input type="text" name="descr" placeholder="Point description" value={refPDesc} onChange={ev => setRefPDesc(ev.target.value)} required />
+                    <Input type="text" name="startType" placeholder="Point type" value={refPType} onChange={ev => setRefPType(ev.target.value)} />
+                    <SubmitButton type="submit">Add this Reference Point</SubmitButton>
+                  </Form>
+                }
 
+              </TextContent>
             </ImageMapColumn>
           }
           <TextColumn textOnLeft={textOnLeft}>
@@ -245,7 +255,7 @@ function AddHike(props) {
               }
               {fileOk &&
                 <Form onSubmit={handleSubmitForm}>
-                  <Input type="text" name="title" defaultValue={dataFromGpx.Title} />
+                  <Input type="text" name="title" defaultValue={dataFromGpx.Title} onChange={ev => setTitle(ev.target.value)} />
                   <Input type="number" step="0.01" name="length" defaultValue={dataFromGpx.Length} readOnly />
                   <Input type="number" name="ascent" defaultValue={dataFromGpx.Ascent} readOnly />
                   <Input type="text" name="time" placeholder="dd:hh:mm" value={expectedTime} onChange={ev => setExpectedTime(ev.target.value)} required />
