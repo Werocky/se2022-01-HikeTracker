@@ -9,6 +9,7 @@ import Footer from "../components/footers/FiveColumnWithInputForm.js";
 import { SectionHeading } from "../components/misc/Headings";
 import { PrimaryButton } from "../components/misc/Buttons";
 import { PrimaryButton as PrimaryButtonBase } from "../components/misc/Buttons.js";
+import { useNavigate } from "react-router-dom";
 
 const HeadingRow = tw.div`flex`;
 const Heading = tw(SectionHeading)`text-gray-900`;
@@ -94,6 +95,8 @@ function HutElement(props) {
     const hut = props.hut;
     const imageSrc = "https://images.unsplash.com/photo-1418854982207-12f710b74003?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1024&q=80";
     
+    const navigate = useNavigate();
+
     let loc = hut.City?hut.City+", ":"" ;
     loc += hut.Province?hut.Province+", ":"";
     loc += hut.Region?hut.Region+", ":""
@@ -108,7 +111,7 @@ function HutElement(props) {
                     <Category>{hut.Elevation} mt</Category>
                     <CreationDate>date</CreationDate>
                     <Description>{loc}</Description>
-                    <PostAction>View details</PostAction>
+                    <PostAction onClick={ () => navigate('/huts/' + hut.RefPointID)}>View details</PostAction>
                 </Info>
             </Post>
         </PostContainer>

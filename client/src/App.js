@@ -25,6 +25,7 @@ import AddHike from './components/forms/AddHike'
 
 import "./style.css"
 import "tailwindcss/lib/css/preflight.css"
+import HutDetails from './Layout-components/HutDetails';
 
 function App() {
 
@@ -133,6 +134,9 @@ function AppLayout(props) {
         } />
         <Route path='/:hikeID' element={
           <HikeDetails logout={props.logout} />
+        } />
+        <Route path='/huts/:hutID' element={
+          <HutDetails />
         } />
 
 
