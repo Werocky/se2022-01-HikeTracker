@@ -152,6 +152,42 @@ class Hut{
   })
 }
 
+ function getHut(id){
+  return new Promise( (resolve, reject) => {
+    const sql = "SELECT * FROM Huts WHERE RefPointID = ?;";
+    db.all(sql, [id], function (err, rows) {
+      if(err)
+        reject(err);
+      else{
+        const huts = [];
+        rows.forEach(r => {
+          let h = new Hut(id, r.Name, r.Elevation, r.City, r.Province, r.Region, r.Country, r.WhenOpen, r.Beds, r.AvgPrice, r.Description);
+          huts.push(h);
+        })
+        resolve(huts[0]);
+      }
+    })
+  })
+ }
+
+ function getHutCoordinates(id){
+  return new Promise ( (resolve, reject) =>{
+    const sql = "SELECT Lat, Lng FROM ReferencePoints WHERE RefPointID = ?;";
+    db.all(sql, [id], function (err, rows) {
+      if(err)
+        reject(err)
+      else{
+        const coords = [];
+        rows.forEach( r => {
+          let h = {Lat: r.Lat, Lng: r.Lng}
+          coords.push(h);
+        })
+        resolve(coords[0]);
+      }
+    })
+  })
+ }
+
  function getHutCity ()  {
   return new Promise((resolve, reject) => {
     const sql = " SELECT DISTINCT City FROM Huts;"
@@ -231,5 +267,7 @@ module.exports={
   deleteHut,
   emptyHuts,
   addHut,
-  Hut
+  Hut,
+  getHut,
+  getHutCoordinates
 }

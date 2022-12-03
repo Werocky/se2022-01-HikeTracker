@@ -507,6 +507,52 @@ async function addHut(Hut) {
   }
 }
 
+async function getHut(Hut) {
+  try {
+    const response = await fetch((APIURL + '/getHut'), {
+      method: 'POST',
+      credentials: 'include',
+      body: JSON.stringify({
+        "Hut": Hut,
+      }),
+      headers: {
+        'Content-Type': 'application/json',
+      }
+    });
+    const value = await response.json();
+    if (response.ok) {
+      return value;
+    } else {
+      throw value;
+    }
+  } catch (err) {
+    throw err;
+  }
+}
+
+async function getHutCoords(Hut) {
+  try {
+    const response = await fetch((APIURL + '/getHutCoords'), {
+      method: 'POST',
+      credentials: 'include',
+      body: JSON.stringify({
+        "Hut": Hut
+      }),
+      headers: {
+        'Content-Type': 'application/json',
+      }
+    });
+    const value = await response.json();
+    if (response.ok) {
+      return value;
+    } else {
+      throw value;
+    }
+  } catch (err) {
+    throw err;
+  }
+}
+
 const API = {
   getHikes,
   logIn,
@@ -531,6 +577,8 @@ const API = {
   setStartEndPoints,
   verify,
   setHutDescription,
-  addHut
+  addHut,
+  getHut,
+  getHutCoords
 };
 export default API;

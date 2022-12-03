@@ -587,6 +587,37 @@ app.get('/hutsLocations', async (req, res) => {
   }
 })
 
+//GET hut information
+
+app.post('/getHut', async (req, res) =>{
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    return res.status(422).json({ error: 'cannot process request' });
+  }
+
+  try {
+    console.log(req.body.Hut)
+    const hutInfo = await huts.getHut(req.body.Hut);
+    res.status(200).json(hutInfo);
+  } catch (err) {
+    res.status(503).json( {error: 'Error' });
+  }
+})
+
+app.post('/getHutCoords', async (req, res) =>{
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    return res.status(422).json({ error: 'cannot process request' });
+  }
+
+  try {
+    const hutCoords = await huts.getHutCoordinates(req.body.Hut);
+    res.status(200).json(hutCoords);
+  } catch (err) {
+    res.status(503).json( {error: 'Error' });
+  }
+})
+
 //add and modify hut description
 app.put('/setHutDescription', isLoggedIn, [
   check('Description').notEmpty(),
