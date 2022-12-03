@@ -14,6 +14,8 @@ import API from "../../API.js";
 import { useNavigate } from "react-router-dom";
 
 const Container = tw.div`relative`;
+const Content = tw.div`max-w-screen-xl mx-auto py-20 lg:py-24`;
+
 const TwoColumn = tw.div`flex flex-col md:flex-row justify-between max-w-screen-xl mx-auto py-20 md:py-24`;
 const Column = tw.div`w-full max-w-md mx-auto md:max-w-none md:mx-0`;
 const ImageMapColumn = tw(Column)`md:w-5/12 flex-shrink-0 h-80 md:h-auto`;
@@ -28,19 +30,35 @@ const Image = styled.div(props => [
 ]);
 const TextContent = tw.div`lg:py-8 text-center md:text-left`;
 
-const Subheading = tw(SubheadingBase)`text-center md:text-left`;
-const Heading = tw(SectionHeading)`mt-4 font-black text-left text-3xl sm:text-4xl lg:text-5xl text-center md:text-left leading-tight`;
-const Description = tw.p`mt-4 text-center md:text-left text-sm md:text-base lg:text-lg font-medium leading-relaxed text-secondary-100`
+const Heading = tw(SectionHeading)`font-black text-left text-3xl sm:text-4xl lg:text-5xl text-center md:text-left leading-tight`;
+const Description = tw.p`mt-4 text-center md:text-left text-sm md:text-base lg:text-lg font-medium leading-relaxed `
 
 const Form = tw.form`mt-8 md:mt-10 text-sm flex flex-col max-w-sm mx-auto md:mx-0`
 const Input = tw.input`mt-6 first:mt-0 border-b-2 py-3 focus:outline-none font-medium transition duration-300 hocus:border-primary-500`
-const Textarea = styled(Input).attrs({ as: "textarea" })`
-  ${tw`h-24`}
-`
+const FormContainer = styled.div`
+  ${tw`p-10 sm:p-12 md:p-16 bg-primary-500 text-gray-100 rounded-lg relative`}
+  form {
+    ${tw`mt-4`}
+  }
+  h2 {
+    ${tw`text-3xl sm:text-4xl font-bold`}
+  }
+  input,textarea {
+    ${tw`w-full bg-transparent text-gray-100 text-base font-medium tracking-wide border-b-2 py-2 text-gray-100 hocus:border-pink-400 focus:outline-none transition duration-200`};
 
-const SubmitButton = tw(PrimaryButtonBase)`inline-block mt-8`
+    ::placeholder {
+      ${tw`text-gray-500`}
+    }
+  }
+`;
+const InputContainer = tw.div`relative py-5 mt-6`;
+const Label = tw.label`absolute top-0 left-0 tracking-wide font-semibold text-base`;
+const Textarea = tw.textarea`h-24 sm:h-full resize-none`;
+const SubmitButton = tw.button`w-full  mt-6 py-3 bg-gray-100 text-primary-500 rounded-full font-bold tracking-wide shadow-lg uppercase text-sm transition duration-300 transform focus:outline-none focus:shadow-outline hover:bg-gray-300 hover:text-primary-700 hocus:-translate-y-px hocus:shadow-xl`;
+const SubmitButtonLarge = tw.button` w-full xl:w-32 mt-6 py-3 bg-gray-100 text-primary-500 rounded-full font-bold tracking-wide shadow-lg uppercase text-3xl transition duration-300 transform focus:outline-none focus:shadow-outline hover:bg-gray-300 hover:text-primary-700 hocus:-translate-y-px hocus:shadow-xl`;
 
-function AddHike(props) {
+
+function AddHikeForm(props) {
 
   const auth = useContext(AuthContext);   // contains user information 
   const navigate = useNavigate();
@@ -110,7 +128,7 @@ function AddHike(props) {
 
       setHeading("New Hike");
       setSubHeading("Check, modify and add parameters")
-      setSubmitButtonText("Save");
+      setSubmitButtonText("Save All");
       setFileOk(true); // if nothing went wrong
     }
 
@@ -199,7 +217,9 @@ function AddHike(props) {
   return (
     <AnimationRevealPage>
       <Header logout={props.logout} />
-      <Container>
+        <Container>
+          <Content>
+            <FormContainer>
         <TwoColumn>
           {!fileOk &&
             <ImageMapColumn>
@@ -255,27 +275,59 @@ function AddHike(props) {
               }
               {fileOk &&
                 <Form onSubmit={handleSubmitForm}>
-                  <Input type="text" name="title" defaultValue={dataFromGpx.Title} onChange={ev => setTitle(ev.target.value)} />
-                  <Input type="number" step="0.01" name="length" defaultValue={dataFromGpx.Length} readOnly />
-                  <Input type="number" name="ascent" defaultValue={dataFromGpx.Ascent} readOnly />
-                  <Input type="text" name="time" placeholder="dd:hh:mm" value={expectedTime} onChange={ev => setExpectedTime(ev.target.value)} required />
-                  <Input as="select" value={difficulty} onChange={ev => setDifficulty(ev.target.value)} required >
-                    <option hidden>Difficulty</option>
-                    <option value="T">Tourist (T)</option>
-                    <option value="H">Hiker (H)</option>
-                    <option value="PH">Professional Hiker (PH)</option>
-                  </Input>
-                  <Input type="text" name="start" placeholder="Start description" value={startDescr} onChange={ev => setStartDescr(ev.target.value)} required />
-                  <Input type="text" name="startType" placeholder="Start type" value={startType} onChange={ev => setStartType(ev.target.value)} />
-                  <Input type="text" name="end" placeholder="End description" value={endDescr} onChange={ev => setEndDescr(ev.target.value)} required />
-                  <Input type="text" name="endType" placeholder="End type" value={endType} onChange={ev => setEndType(ev.target.value)} />
-                  <Textarea name="description" placeholder="Description" value={description} onChange={ev => setDescription(ev.target.value)} />
-                  <SubmitButton type="submit">{submitButtonText}</SubmitButton>
+                  <InputContainer>
+                    <Label htmlFor="title-input">Title</Label>
+                    <Input id="title-input" type="text" name="title" defaultValue={dataFromGpx.Title} onChange={ev => setTitle(ev.target.value)} />
+                  </InputContainer>
+                  <InputContainer>
+                    <Label htmlFor="length-input">Length</Label>
+                    <Input id="length-input" type="number" step="0.01" name="length" defaultValue={dataFromGpx.Length} readOnly />
+                  </InputContainer>
+                  <InputContainer>
+                    <Label htmlFor="ascent-input">Ascent</Label>
+                    <Input id="ascent-input" type="number" name="ascent" defaultValue={dataFromGpx.Ascent} readOnly />
+                  </InputContainer>
+                  <InputContainer>
+                    <Label htmlFor="time-input">Time</Label>
+                    <Input id="time-input" type="text" name="time" placeholder="dd:hh:mm" value={expectedTime} onChange={ev => setExpectedTime(ev.target.value)} required />
+                  </InputContainer>
+                  <InputContainer>
+                    <Label htmlFor="difficulty-input">Difficulty</Label>
+                    <Input id="difficulty-input" as="select" value={difficulty} onChange={ev => setDifficulty(ev.target.value)} required >
+                      <option hidden>Difficulty</option>
+                      <option value="T">Tourist (T)</option>
+                      <option value="H">Hiker (H)</option>
+                      <option value="PH">Professional Hiker (PH)</option>
+                    </Input>
+                  </InputContainer>
+                  <InputContainer>
+                    <Label htmlFor="start-input">Start</Label>
+                    <Input id="start-input" type="text" name="start" placeholder="Start description" value={startDescr} onChange={ev => setStartDescr(ev.target.value)} required />
+                  </InputContainer>
+                  <InputContainer>
+                  <Label htmlFor="startType-input">StartType</Label>
+                    <Input id="startType-input" type="text" name="startType" placeholder="Start type" value={startType} onChange={ev => setStartType(ev.target.value)} />
+                  </InputContainer>
+                  <InputContainer>
+                    <Label htmlFor="end-input">End</Label>
+                    <Input id="end-input" type="text" name="end" placeholder="End description" value={endDescr} onChange={ev => setEndDescr(ev.target.value)} required />
+                  </InputContainer>
+                  <InputContainer>
+                    <Label htmlFor="endType-input">EndType</Label>
+                    <Input id="endType-input" type="text" name="endType" placeholder="End type" value={endType} onChange={ev => setEndType(ev.target.value)} />
+                  </InputContainer>
+                  <InputContainer>
+                    <Label htmlFor="description-input">Description</Label>
+                    <Textarea  id="description-input"  name="description" placeholder="Description..." value={description} onChange={ev => setDescription(ev.target.value)} />
+                  </InputContainer>
+                  <SubmitButtonLarge type="submit">{submitButtonText}</SubmitButtonLarge>
                 </Form>
               }
             </TextContent>
           </TextColumn>
         </TwoColumn>
+            </FormContainer>
+          </Content>
       </Container>
     </AnimationRevealPage>
   );
@@ -371,4 +423,4 @@ function deg2rad(deg) {
   return deg * (Math.PI / 180)
 }
 
-export default AddHike;
+export default AddHikeForm;
