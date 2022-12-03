@@ -5,6 +5,7 @@ const db = require('./DB').db;
 exports.addReferencePoint = (lat, lng, type) => {
   return new Promise(async (resolve, reject) => {
     const sql = "INSERT INTO ReferencePoints(Lat, Lng, Type) VALUES (?,?,?);";
+    console.log(lat, lng, type);
     db.run(sql, [lat, lng, type], function (err) {
       if (err)
         reject(err);
@@ -14,6 +15,21 @@ exports.addReferencePoint = (lat, lng, type) => {
     });
   });
 };
+
+exports.addReferencePointWithDescription = (description, lat, lng, type) => {
+  return new Promise(async (resolve, reject) => {
+    const sql = "INSERT INTO ReferencePoints(Description, Lat, Lng, Type) VALUES (?, ? ,? ,? );";
+    console.log(lat, lng, type);
+    db.run(sql, [description, lat, lng, type], function (err) {
+      if (err)
+        reject(err);
+      else {
+        resolve("New RefPoint added");
+      }
+    });
+  });
+};
+
 exports.getReferencePointIDByCoords=(la,lng)=>{
   return new Promise(async(resolve,reject)=>{
     db.get('SELECT RefPointID FROM ReferencePoints WHERE Lat = ? AND Lng = ?',[la,lng],(err,row)=>{

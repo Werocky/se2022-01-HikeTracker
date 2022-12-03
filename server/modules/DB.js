@@ -1625,7 +1625,7 @@ await this.wrapperPopulateRefP(HikeID, refPoint++, "45.93651","7.62672","parking
   static wrpAddHut= async (id,name,elevation,City,Province,Region,Country,WhenOpen,Beds, avgPrice, description,website=null,phone=null)=>{
       const huts = require("./Huts");
       const{Hut}=require("./Huts");
-      let hut = new Hut(name,
+      let hut = new Hut(0,name,
           elevation, 
           City, 
           Province, 
@@ -1638,7 +1638,8 @@ await this.wrapperPopulateRefP(HikeID, refPoint++, "45.93651","7.62672","parking
           0,
           website,
           phone)
-      
+
+      console.log(hut);
       await huts.addHut(hut);
   }
   static populateHuts = async () => {

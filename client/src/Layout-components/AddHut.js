@@ -3,9 +3,13 @@ import { Alert, Button, Col, Form, Row ,Container} from "react-bootstrap";
 import { MapContainer, TileLayer, Marker, Popup, useMapEvents } from 'react-leaflet';
 import API from '../API';
 
+
+
+
+
 function HutForm() {
 
-
+  
 
    const [errorMsg,setErrorMsg]=useState("");
    const [name,setName]=useState("");
@@ -19,10 +23,13 @@ function HutForm() {
    const [description,setDescription]=useState("");
    const [avgPrice,setAvgPrice]=useState();
    const [coord,setCoord]=useState(null);
+   const [phone,setPhone]=useState();
+   const [website,setWebsite]=useState('');
+   const [email,setEmail]=useState();
 
   // Need to reset the filter params with useEffect
 
-
+  
   useEffect(()=>{
     if(coord!=null){
         getInfo(coord.lat, coord.lng)
@@ -68,6 +75,14 @@ function HutForm() {
     else  if( !description || description.trim().length===0){
         setErrorMsg("insert a description");
     }
+    else if(!email || email.trim().length==0)
+    {
+      setErrorMsg("insert mail");
+    }
+    else if(!phone || phone.trim().length==0)
+    {
+      setErrorMsg("insert phone number");
+    }
     else if (coord === null) {
         setErrorMsg("You did not selected any point!");
         
@@ -75,24 +90,27 @@ function HutForm() {
   else
   {
     let h={
-        name:name,
-        elevation:elevation,
-        city:city,
-        province:province,
-        region:region,
-        country:country,
-        whenOpen:whenOpen,
-        beds:beds,
-        avgPrice:avgPrice,
-        description:description,
-        coord:coord
+        Name:name,
+        Elevation:elevation,
+        City:city,
+        Province:province,
+        Region:region,
+        Country:country,
+        WhenOpen:whenOpen,
+        Beds:beds,
+        AvgPrice:avgPrice,
+        Description:description,
+        Email:email,
+        Phone:phone,
+        Website:website,
+        Coord:coord
     }
-  /*  API.addHut(h)
+    API.addHut(h)
       .then( () => {
         console.log("ok");
       })//setDirty(true)})
       .catch( err => setErrorMsg(err));
-      */
+      
      setErrorMsg("Hut aggiunto");
   }
 }
@@ -191,6 +209,22 @@ function HutForm() {
                 <Form.Control type='text' value={description} onChange={ev => setDescription(ev.target.value)}>
                 </Form.Control>
               </Form.Group>
+              <Form.Group>
+              <Form.Label>Email</Form.Label>
+                <Form.Control type='mail' value={email} onChange={ev => setEmail(ev.target.value)}>
+                </Form.Control>
+              </Form.Group>
+              <Form.Group>
+              <Form.Label>phone</Form.Label>
+                <Form.Control type='text' value={phone} onChange={ev => setPhone(ev.target.value)}>
+                </Form.Control>
+              </Form.Group>
+              <Form.Group>
+              <Form.Label>Website(optional)</Form.Label>
+                <Form.Control type='text' value={website} onChange={ev => setWebsite(ev.target.value)}>
+                </Form.Control>
+              </Form.Group>
+             
               <Form.Group>
             <MapContainer center={{ lat: 45.063128, lng: 7.661272 }} zoom={8} scrollWheelZoom style={{ height: 250 + "px", width: "100%", }}>
                 <ClickPick />

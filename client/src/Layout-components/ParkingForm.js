@@ -10,6 +10,7 @@ function ParkingForm() {
     const [coord, setCoord] = useState(null);
     const [radius, setRadius] = useState(undefined);
     const [msg, setMsg] = useState('');
+    const [numAuto,setNumAuto]=useState(0);
     const [gratis,setGratis]=useState("");
 
   // Need to reset the filter params with useEffect
@@ -27,9 +28,20 @@ function ParkingForm() {
     } else if (radius === undefined) {
       setMsg("You did not select a distance!");
     } 
+    else if(numAuto===0)
+    {
+      setMsg("select a number of auto");
+    }
     else {
       setMsg('');
-      API.createParkingLot(description,gratis,coord).then(setMsg("ciao"));
+      let p={
+        Description:description,
+        Free:gratis,
+        Coord:coord,
+        NumAuto:numAuto
+
+      }
+      API.createParkingLot(p).then(setMsg("Parking Lot added")).catch(err => err);
   
     }
    
@@ -68,10 +80,15 @@ function ParkingForm() {
 
       <Form onSubmit={handleSubmit}>
       <Form.Group className="mb-3" controlId="formParking">
-          <Form.Label>Geographical filter</Form.Label>
+          <Form.Label>Description</Form.Label>
           <Form.Control type="text" value={description} placeholder="Insert description"
             onChange={(event) => {
               setDescription(event.target.value);
+            }} />
+             <Form.Label>Capacity (cars) </Form.Label>
+          <Form.Control type="text" value={numAuto} placeholder="Insert capacity"
+            onChange={(event) => {
+              setNumAuto(event.target.value);
             }} />
          <Form.Label>Select if gratis or not</Form.Label>
          <div>
