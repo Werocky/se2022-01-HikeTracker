@@ -25,6 +25,7 @@ import AddHike from './components/forms/AddHike'
 
 import "./style.css"
 import "tailwindcss/lib/css/preflight.css"
+import AddHut from './components/forms/AddHut';
 
 function App() {
 
@@ -171,6 +172,9 @@ function AppLayout(props) {
         } />
         <Route path='/addHut' element={
           < HutForm />
+        } />
+         <Route path='/addH' element={
+          < AddHut />
         } />
 
         <Route path='*' element={<Navigate to='/' replace />} />
