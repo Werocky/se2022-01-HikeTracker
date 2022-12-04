@@ -17,32 +17,43 @@ import API from "../../API.js";
 import { useNavigate } from "react-router-dom";
 
 const Container = tw.div`relative`;
+const Content = tw.div`max-w-screen-xl mx-auto py-20 lg:py-24`;
+
 const TwoColumn = tw.div`flex flex-col md:flex-row justify-between max-w-screen-xl mx-auto py-20 md:py-24`;
 const Column = tw.div`w-full max-w-md mx-auto md:max-w-none md:mx-0`;
-const ImageColumn = tw(Column)`md:w-5/12 flex-shrink-0 h-80 md:h-auto`;
 const TextColumn = styled(Column)(props => [
-  tw`md:w-7/12 mt-16 md:mt-0`,
+  tw`md:w-7/12 mt-16 md:mt-0 `,
   props.textOnLeft ? tw`md:mr-12 lg:mr-16 md:order-first` : tw`md:ml-12 lg:ml-16 md:order-last`
 ]);
 
-const Image = styled.div(props => [
-  `background-image: url("${props.imageSrc}");`,
-  tw`rounded bg-contain bg-no-repeat bg-center h-full`,
-]);
-const TextContent = tw.div`lg:py-8 text-center md:text-left`;
 
-const Subheading = tw(SubheadingBase)`text-center md:text-left`;
-const Heading = tw(SectionHeading)`mt-4 font-black text-left text-3xl sm:text-4xl lg:text-5xl text-center md:text-left leading-tight`;
-const Description = tw.p`mt-4 text-center md:text-left text-sm md:text-base lg:text-lg font-medium leading-relaxed text-secondary-100`
-const ImageMapColumn = tw(Column)`md:w-5/12 flex-shrink-0 h-80 md:h-auto`;
+const TextContent = tw.div`lg:py-8 text-center md:text-left`;
+const Heading = tw(SectionHeading)`mt-4  font-black text-left text-3xl sm:text-4xl lg:text-5xl text-center md:text-left leading-tight`;
+const Description = tw.p`mt-4 mb-12 text-center md:text-left text-sm md:text-base lg:text-lg font-medium leading-relaxed text-gray-300`
+const ImageMapColumn = tw(Column)`md:w-5/12 flex-shrink-0 md:h-auto mr-12`;
 const Form = tw.form`mt-8 md:mt-10 text-sm flex flex-col max-w-sm mx-auto md:mx-0`
 const Input = tw.input`mt-6 first:mt-0 border-b-2 py-3 focus:outline-none font-medium transition duration-300 hocus:border-primary-500`
-const Textarea = styled(Input).attrs({as: "textarea"})`
-  ${tw`h-24`}
-`
+const InputOption = tw.input`mt-6 first:mt-0 border-b-2 py-3 focus:outline-none font-medium transition duration-300 hocus:border-gray-300 text-gray-700 `;
+const FormContainer = styled.div`
+  ${tw`p-10 sm:p-12 md:p-16 bg-primary-500 text-gray-100 rounded-lg relative`}
+  form {
+    ${tw`mt-4`}
+  }
+  h2 {
+    ${tw`text-3xl sm:text-4xl font-bold`}
+  }
+  input,textarea {
+    ${tw`w-full bg-transparent text-gray-100 text-base font-medium tracking-wide border-b-2 py-2 text-gray-100 hocus:border-pink-400 focus:outline-none transition duration-200`};
 
-const SubmitButton = tw(PrimaryButtonBase)`inline-block mt-8`
-const B=tw(PrimaryButtonBase)`inline-block mt-8`
+    ::placeholder {
+      ${tw`text-gray-400`}
+    }
+  }
+`;
+const InputContainer = tw.div`relative py-5 mt-6`;
+const Label = tw.label`absolute top-0 left-0 tracking-wide font-semibold text-base`;
+const Textarea = tw.textarea`mt-6 h-24 sm:h-full resize-none`;
+const SubmitButton = tw.button`w-full  mt-6 py-3 bg-gray-100 text-primary-500 rounded-full font-bold tracking-wide shadow-lg uppercase text-sm transition duration-300 transform focus:outline-none focus:shadow-outline hover:bg-gray-300 hover:text-primary-700 hocus:-translate-y-px hocus:shadow-xl`;
 
 function AddParkingLot(props){
   const auth = useContext(AuthContext);   // contains user information 
@@ -60,9 +71,7 @@ function AddParkingLot(props){
   const submitButtonText = "Confirm";
   const formAction = "#";
   const formMethod = "get";
-  const textOnLeft = true;
-
-// The textOnLeft boolean prop can be used to display either the text on left or right side of the image.
+  const textOnLeft = false;
 
     const [descr,setDescr]=useState("");
     const [coord, setCoord] = useState(null);
@@ -121,14 +130,19 @@ const ClickPick = () => {
     <AnimationRevealPage>
     <Header logout={props.logout}/>
     <Container>
+        <Content>
+          <FormContainer>
     <TwoColumn>
             <ImageMapColumn>
               <TextContent>
                 <Heading>Map</Heading>
-                <Description>Click on the map and insert the type, to add new Reference Point</Description>
+                <Description>Click on the map to add new Parking Lot</Description>
 
                 <MapContainer
-                  center={{ lat: 45.063128, lng: 7.661272 }} zoom={8} scrollWheelZoom style={{ height: 420 + "px", width: "100%", }}>
+                  center={{ lat: 45.063128, lng: 7.661272 }}
+                  zoom={8}
+                  scrollWheelZoom
+                  style={{ height: 420 + "px", width: "100%", }}>
                   <ClickPick />
                   <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
                 </MapContainer>
@@ -136,23 +150,31 @@ const ClickPick = () => {
             </ImageMapColumn>
     <TextColumn textOnLeft={textOnLeft}>
     <TextContent>
-    {/*{subheading && <Subheading>{subheading}</Subheading>}*/}
     <Heading>{heading}</Heading>
     {description && <Description>{description}</Description>}
   <Form onSubmit={submitForm}>
-  <Textarea name="description" placeholder="Description" value={descr} onChange={ev => setDescr(ev.target.value)}  required={true}/>
- 
-  <Input type="number" step="1" name="capacity" value={numAuto} min={0} placeholder="insert capacity in terms of auto" onChange={ev=>setNumAuto(ev.target.value)}  required={true} />
-  <Input type="gratis" defaultValue={'DEFAULT'} as="select" aria-label="select" onChange={ev => setGratis(ev.target.value)} required={true} >
+
+    <InputContainer>
+      <Label htmlFor="capacity-input">Capacity</Label>
+      <Input id="capacity" type="number" step="1" name="capacity" value={numAuto} min={0} placeholder="insert capacity in terms of auto" onChange={ev=>setNumAuto(ev.target.value)}  required={true} />
+    </InputContainer>
+      <InputOption type="gratis" defaultValue={'DEFAULT'} as="select" aria-label="select" onChange={ev => setGratis(ev.target.value)} required={true} >
         <option value='DEFAULT' hidden>Select if it's gratis or not</option>
         <option value='1'>Gratis</option>
         <option value='0'>for a fee</option>
-      </Input>
+      </InputOption>
+    <InputContainer>
+      <Label htmlFor="description-input">Description</Label>
+      <Textarea id="description-input" name="description" placeholder="Description" value={descr} onChange={ev => setDescr(ev.target.value)}  required={true}/>
+    </InputContainer>
+
   <SubmitButton type="submit">Confirm</SubmitButton>
 </Form>
     </TextContent>
     </TextColumn>
     </TwoColumn>
+          </FormContainer>
+        </Content>
     </Container>
     </AnimationRevealPage>
   );

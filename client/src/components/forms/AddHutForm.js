@@ -251,7 +251,7 @@ const ClickPick = () => {
             <ImageMapColumn>
               <TextContent>
                 <Heading>Map</Heading>
-                <Description>Click on the map and insert the type, to add new Reference Point</Description>
+                <Description>Click on the map to add new Hut Point</Description>
 
                 <MapContainer
                   center={{ lat: 45.063128, lng: 7.661272 }}
