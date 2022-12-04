@@ -93,7 +93,7 @@ function Light(props) {
         <NavLink onClick={() => navigate("/addHike")}>Add a Hike</NavLink>
       }
       {auth.user.Role === "HW" &&
-        <NavLink onClick={() => navigate("/#")}>Add a Hut</NavLink>
+        <NavLink onClick={() => navigate("/addHut")}>Add a Hut</NavLink>
       }
       {
         auth.login ?

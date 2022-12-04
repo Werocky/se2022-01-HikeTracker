@@ -1,5 +1,5 @@
 import React from "react";
-import { useState,useEffect } from "react";
+import { useState,useEffect,useContext } from "react";
 import tw from "twin.macro";
 import styled from "styled-components";
 import { css } from "styled-components/macro"; //eslint-disable-line
@@ -12,7 +12,9 @@ import {Alert, Button, FloatingLabel, FormLabel, Row} from "react-bootstrap";
 import { MapContainer, TileLayer, Marker, Popup, useMapEvents } from 'react-leaflet';
 import PhoneInput from 'react-phone-number-input'
 import 'react-phone-number-input/style.css'
+import AuthContext from "../../AuthContext.js";
 import API from "../../API.js";
+import { useNavigate } from "react-router-dom";
 
 const Container = tw.div`relative`;
 const TwoColumn = tw.div`flex flex-col md:flex-row justify-between max-w-screen-xl mx-auto py-20 md:py-24`;
@@ -43,6 +45,15 @@ const SubmitButton = tw(PrimaryButtonBase)`inline-block mt-8`
 const B=tw(PrimaryButtonBase)`inline-block mt-8`
 
 function AddHutForm(props){
+  const auth = useContext(AuthContext);   // contains user information 
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (!auth.login || auth.user.Role !== 'HW') {
+      navigate('/');
+    }
+  }, [])
+
   //subheading = "Add a hut here",
   const heading = <>Add a hut here</>;
   const description = "Add geographical info and name of the hut here";

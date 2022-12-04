@@ -174,10 +174,7 @@ function AppLayout(props) {
         <Route path='/verify' element={
           < VerifiedMessage />
         } />
-        <Route path='/addHut' element={
-          < HutForm />
-        } />
-         <Route path='/addH' element={
+         <Route path='/addHut' element={
           < AddHutForm huts = {huts} setHuts={setHuts}/>
         } />
 
