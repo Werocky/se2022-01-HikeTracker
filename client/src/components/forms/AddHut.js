@@ -12,6 +12,7 @@ import {Alert, Button, FloatingLabel, FormLabel, Row} from "react-bootstrap";
 import { MapContainer, TileLayer, Marker, Popup, useMapEvents } from 'react-leaflet';
 import PhoneInput from 'react-phone-number-input'
 import 'react-phone-number-input/style.css'
+import API from "../../API.js";
 
 const Container = tw.div`relative`;
 const TwoColumn = tw.div`flex flex-col md:flex-row justify-between max-w-screen-xl mx-auto py-20 md:py-24`;
@@ -61,9 +62,9 @@ const [country,setCountry]=useState("");
 const [geoOk,setGeoOk]=useState(false);
 const [coord,setCoord]=useState(null);
 const [errorMsg,setErrorMsg]=useState("");
-const [phone,setPhone]=useState();
+const [phone,setPhone]=useState("");
 const [website,setWebsite]=useState('');
-const [email,setEmail]=useState();
+const [email,setEmail]=useState("");
 const [whenOpen,setWhenOpen]=useState("");
 const [beds,setBeds]=useState();
 const [descr,setDescr]=useState("");
@@ -127,24 +128,46 @@ const submitForm = async (event) => {
   if( !name || name.trim().length===""){
       setErrorMsg("insert a name");
   }
-  else  if( !elevation){
-      setErrorMsg("insert an elevation");
+  else  if( !beds){
+      setErrorMsg("insert beds number");
   }
-  else if( !city || city.trim().length===""){
-      setErrorMsg("insert a city");
+  else if( !phone || phone.trim().length===""){
+      setErrorMsg("insert a phone number");
   }
-  else if( !province || province.trim().length===""){
-      setErrorMsg("insert a province");
+  else if( !email || email.trim().length===""){
+      setErrorMsg("insert an email");
   }
-  else if( !region || region.trim().length===""){
-      setErrorMsg("insert a region");
+  else if( !whenOpen || whenOpen.trim().length===""){
+      setErrorMsg("select when it's open");
   }
-  else if( !country || country.trim().length===""){
-      setErrorMsg("insert a coutry");
+  else if( !avgPrice){
+      setErrorMsg("select the averagePrice");
   }
   else 
   {
-    setGeoOk(true);
+    let h={
+      Name:name,
+      Elevation:elevation,
+      City:city,
+      Province:province,
+      Region:region,
+      Country:country,
+      WhenOpen:whenOpen,
+      Beds:beds,
+      AvgPrice:avgPrice,
+      Description:descr,
+      Email:email,
+      Phone:phone,
+      Website:website,
+      Coord:coord
+  }
+  API.addHut(h)
+    .then( () => {
+      console.log("ok");
+    })//setDirty(true)})
+    .catch( err => setErrorMsg(err));
+    
+   setErrorMsg("Hut aggiunto");
   }
 }
 
@@ -174,10 +197,24 @@ const ClickPick = () => {
     <Container>
     <TwoColumn>
     {
-      geoOk &&   <ImageColumn>
-      {/*put the picture or map here*/}
-      <Image imageSrc={EmailIllustrationSrc} />
-      </ImageColumn>
+      geoOk &&      <TextContent>
+      {/*{subheading && <Subheading>{subheading}</Subheading>}*/}
+      <Heading>Recap</Heading>
+      {description && <Description>recap of your hut</Description>}
+      <label>Name:{name}</label><br/>
+      <label>Elevation:{elevation} mt</label><br/>
+      <label>City:{city}  &nbsp;</label>
+      <label>Province:{province}  </label><br/>
+      <label>Region:{region} &nbsp; </label>
+      <label>Country:{country}</label><br/>
+      { descr.trim().length!=0 && <><label>description:{descr}</label><br/></>}
+      { phone.length!=0 && <><label>phone:{phone}</label><br/></>}
+      {whenOpen!="" && <><label>When open:{whenOpen}</label><br/></>}
+      {avgPrice!=undefined && <><label>Average price:{avgPrice}</label><br/></>}
+      {beds!=undefined && <><label>number of beds:{beds}</label><br/></>}
+      {email.trim().length!=0 && <><label>email:{email}</label><br/></>}
+      {website.trim().length!=0 && <><label>website:{website}</label></>}
+      </TextContent>
     }
   
     {!geoOk &&
