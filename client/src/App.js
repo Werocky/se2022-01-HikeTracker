@@ -21,6 +21,7 @@ import Register from "./pages/Signup";
 import Login from './pages/Login'
 import Hikes from './pages/Hikeslist'
 import Huts from './pages/Hutslist'
+import AddParkingLot from './components/forms/AddParkingLot';
 import AddHikeForm from './components/forms/AddHikeForm'
 
 import "./style.css"
@@ -169,7 +170,7 @@ function AppLayout(props) {
         {/*  <HutsPage logout={props.logout} />*/}
         {/*} />*/}
         <Route path='/addParkingLot' element={
-          <ParkingForm />
+          <AddParkingLot />
         } />
         <Route path='/verify' element={
           < VerifiedMessage />

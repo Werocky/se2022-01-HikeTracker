@@ -219,7 +219,7 @@ const ClickPick = () => {
       <label>Region:{region} &nbsp; </label>
       <label>Country:{country}</label><br/>
       { descr.trim().length!=0 && <><label>description:{descr}</label><br/></>}
-      { phone.length!=0 && <><label>phone:{phone}</label><br/></>}
+      { phone!=undefined && <><label>phone:{phone}</label><br/></>}
       {whenOpen!="" && <><label>When open:{whenOpen}</label><br/></>}
       {avgPrice!=undefined && <><label>Average price:{avgPrice}</label><br/></>}
       {beds!=undefined && <><label>number of beds:{beds}</label><br/></>}
@@ -279,7 +279,7 @@ const ClickPick = () => {
   <Input type="email"name="email" value={email}  placeholder="insert email of the hut" onChange={ev=>setEmail(ev.target.value)}  required={true} />
   <Input type="text"name="webSite" value={website}  placeholder="insert website of the hut (optional)" onChange={ev=>setWebsite(ev.target.value)}  required={false} />
   <B onClick={()=>setGeoOk(false)}>Back</B>
-  <SubmitButton type="submit">Next</SubmitButton>
+  <SubmitButton type="submit">Confirm</SubmitButton>
 </Form>
  }
 
