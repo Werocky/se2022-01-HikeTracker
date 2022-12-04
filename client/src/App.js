@@ -176,7 +176,7 @@ function AppLayout(props) {
           < VerifiedMessage />
         } />
          <Route path='/addHut' element={
-          < AddHutForm />
+          < AddHutForm huts = {huts} setHuts={setHuts}/>
         } />
 
         <Route path='*' element={<Navigate to='/' replace />} />

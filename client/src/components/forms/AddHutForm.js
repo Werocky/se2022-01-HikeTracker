@@ -174,7 +174,7 @@ const submitForm = async (event) => {
   }
   API.addHut(h)
     .then( () => {
-      console.log("ok");
+      props.setHuts({...props.huts, h});
     })//setDirty(true)})
     .catch( err => setErrorMsg(err));
     
