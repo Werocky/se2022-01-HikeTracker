@@ -86,6 +86,7 @@ function AddHikeForm(props) {
   const [refPType, setRefPType] = useState("");
   const [refPDesc, setRefPDesc] = useState("");
 
+  const [msgErr, setMsgErr] = useState("");
 
   const [heading, setHeading] = useState("Add a new hike here");
   const [subheading, setSubHeading] = useState("Select the gpx file.");
@@ -143,6 +144,11 @@ function AddHikeForm(props) {
 
   const handleSubmitFile = async (event) => {
     event.preventDefault();
+    if (file.name.split(".").at(-1) !== "gpx") {
+      setMsgErr("The file must be a GPX!");
+      return;
+    }
+    setMsgErr("");
     //setFile(event.target[0].files[0]);
     const reader = new FileReader();
     reader.onload = (event) => {
@@ -269,7 +275,9 @@ function AddHikeForm(props) {
                 <Form onSubmit={handleSubmitFile} >
 
                   <Input type="file" required onChange={event => setFile(event.target.files[0])} />
-
+                  {msgErr &&
+                    <Alert>{msgErr}</Alert>
+                  }
                   <SubmitButton type="submit">{submitButtonText}</SubmitButton>
                 </Form>
               }
