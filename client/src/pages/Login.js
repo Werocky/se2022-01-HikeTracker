@@ -57,7 +57,7 @@ function Register(props){
     event.preventDefault();
     const credentials = { email: email, password };
     await props.login(credentials);
-    navigate('/');
+    navigate('/hikes');
   };
 
   return (
