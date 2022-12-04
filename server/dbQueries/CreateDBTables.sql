@@ -72,7 +72,7 @@ CREATE TABLE IF NOT EXISTS `ParkingLots`(
     `ParkingID` INTEGER NOT NULL PRIMARY KEY,
     `AssociatedGuide` TEXT,
     `NumAuto` INTEGER,
-    `Fee` DOUBLE(8, 2) NULL,
+    `Free` INTEGER,
     FOREIGN KEY(`AssociatedGuide`) REFERENCES `LocalGuides`(`id`)
 );
 CREATE TABLE IF NOT EXISTS `pictures`(

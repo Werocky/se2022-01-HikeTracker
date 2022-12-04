@@ -5,7 +5,7 @@ const db = require('./DB').db;
 exports.addReferencePoint = (lat, lng, type) => {
   return new Promise(async (resolve, reject) => {
     const sql = "INSERT INTO ReferencePoints(Lat, Lng, Type) VALUES (?,?,?);";
-    console.log(lat, lng, type);
+   
     db.run(sql, [lat, lng, type], function (err) {
       if (err)
         reject(err);
