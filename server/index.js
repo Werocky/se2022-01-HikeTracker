@@ -639,7 +639,7 @@ app.put('/setHutDescription', isLoggedIn, [
     }
   });
 
-  app.post('/addHut',[isLoggedIn],
+  app.post('/hutCreate' , 
   check("Hut").notEmpty(),
    async (req, res) => {
     const errors = validationResult(req);

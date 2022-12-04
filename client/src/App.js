@@ -178,7 +178,7 @@ function AppLayout(props) {
           < HutForm />
         } />
          <Route path='/addH' element={
-          < AddHutForm />
+          < AddHutForm huts = {huts} setHuts={setHuts}/>
         } />
 
         <Route path='*' element={<Navigate to='/' replace />} />
