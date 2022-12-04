@@ -42,7 +42,7 @@ const Textarea = styled(Input).attrs({as: "textarea"})`
 const SubmitButton = tw(PrimaryButtonBase)`inline-block mt-8`
 const B=tw(PrimaryButtonBase)`inline-block mt-8`
 
-function AddHut(props){
+function AddHutForm(props){
   //subheading = "Add a hut here",
   const heading = <>Add a hut here</>;
   const description = "Add geographical info and name of the hut here";
@@ -280,4 +280,4 @@ const ClickPick = () => {
   );
 }
 
-export default AddHut;
+export default AddHutForm;
