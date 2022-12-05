@@ -248,7 +248,7 @@ app.put('/setDescription', /*isLoggedIn,*/[
     const HikeID = req.body.HikeID;
     try {
       await hikes.setDescription(Description, HikeID);
-      res.status(201).end();
+      res.status(201).json({ message: 'Description set' });
     } catch (err) {
       res.status(503).json({ error: `Internal Error` });
     }
@@ -490,8 +490,9 @@ app.post('/ParkingLots', [],
     try {
       await createParkingLot(ParkingLot);
       await referencePoints.addReferencePointWithDescription(Description, lat, lng, 'parking')
-      res.status(201).end();
+      res.status(201).json({ message: 'Parking Lot added' });
     } catch (err) {
+      console.log(err);
       res.status(503).json({ error: 'Internal error' });
     }
   });
@@ -691,8 +692,8 @@ app.post('/hutCreate',
     try {
       const result = await huts.addHut(Hut);
       await referencePoints.addReferencePointWithDescription(Hut.Description, Hut.Coord.lat, Hut.Coord.lng, "hut");
-      res.status(200).json(result);
-
+      res.status(200).json({ message: 'Hut added' });
+  
     } catch (err) {
       console.log(err);
       res.status(503).json({ error: `Error ` });
