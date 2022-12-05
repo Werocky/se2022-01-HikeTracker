@@ -153,7 +153,10 @@ function HutDetails(props) {
                   </Statistic>
 
                   <Statistic>
-                    <Value>{hut.WhenOpen}</Value>
+                    <Value>{hut.WhenOpen === 'W' ? 'Winter Only' :
+                    hut.WhenOpen === 'SW' ? 'Summer and Winter' :
+                    hut.WhenOpen === 'S' ? 'Summer only' :
+                    hut.WhenOpen === 'Y' ? 'All year' : 'Permanently closed'}</Value>
                     <Key>Opening session</Key>
                   </Statistic>
 
