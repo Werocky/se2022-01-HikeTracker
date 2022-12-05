@@ -85,7 +85,7 @@ const Description = tw.div`truncate `;
 const ButtonContainer = tw.div`flex justify-center`;
 const LoadMoreButton = tw(PrimaryButton)`mt-16 mx-auto`;
 const PostAction = tw(PrimaryButtonBase)`w-full mt-8`;
-const ShowButton = tw()`mt-4 inline-block w-56 tracking-wide text-center py-5`;
+const ShowButton = tw(PrimaryButtonBase)`mt-4 inline-block w-56 tracking-wide text-center py-5`;
 
 
 function Huts(props) {
