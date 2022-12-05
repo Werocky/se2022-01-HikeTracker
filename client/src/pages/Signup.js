@@ -78,7 +78,7 @@ function Login(props){
     <Content>
     <MainContainer>
     <LogoLink href={logoLinkUrl}>
-    <LogoImage src={logo} onClick={navigate('/')} />
+    <LogoImage src={logo} />
     </LogoLink>
     <MainContent>
     <Heading>{headingText}</Heading>
