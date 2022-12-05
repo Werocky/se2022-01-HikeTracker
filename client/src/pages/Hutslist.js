@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import AnimationRevealPage from "../helpers/AnimationRevealPage.js";
-import { Container, ContentWithPaddingXl } from "../components/misc/Layouts";
+import {  ContentWithPaddingXl } from "../components/misc/Layouts";
 import tw from "twin.macro";
 import styled from "styled-components";
 import { css } from "styled-components/macro";
@@ -14,6 +14,7 @@ import API from "../API";
 
 const HeadingRow = tw.div`flex`;
 const Heading = tw(SectionHeading)`text-gray-900`;
+const Heading2= tw(SectionHeading)`text-gray-100`;
 const Posts = tw.div`mt-6 sm:-mr-8 flex flex-wrap`;
 const PostContainer = styled.div`
   ${tw`mt-10 w-full sm:w-1/2 lg:w-1/3 sm:pr-8`}
@@ -37,10 +38,14 @@ const PostContainer = styled.div`
 `;
 
 const TextContent = tw.div`lg:py-8 text-center md:text-left`;
+const Container = tw.div`relative`;
+const Content = tw.div`max-w-screen-xl mx-auto py-20 lg:py-24`;
 
 const Form = tw.form`mt-8 md:mt-10 text-sm flex flex-col max-w-sm mx-auto md:mx-0`
-const Input = tw.input`mt-6 first:mt-0 border-b-2 py-3 focus:outline-none font-medium transition duration-300 hocus:border-primary-500`
-const InputOption = tw.input`mt-6 first:mt-0 border-b-2 py-3 focus:outline-none font-medium transition duration-300 hocus:border-gray-300 text-gray-700 `
+const Input = tw.input`mt-2 first:mt-0 border-b-2 py-3 focus:outline-none font-medium transition duration-300 hocus:border-primary-500`
+const InputOption = tw.input`mt-2 first:mt-0 border-b-2 py-3 focus:outline-none font-medium transition duration-300 hocus:border-gray-300 text-gray-700 `
+const Instruction = tw.p` text-center md:text-left text-sm md:text-base lg:text-lg  leading-relaxed  font-semibold text-base`
+const Label = tw.label`absolute top-0 left-0 tracking-wide font-semibold text-base`;
 
 const FormContainer = styled.div`
   ${tw`p-10 sm:p-12 md:p-16 bg-primary-500 text-gray-100 rounded-lg relative`}
@@ -54,23 +59,22 @@ const FormContainer = styled.div`
     ${tw`w-full bg-transparent text-gray-100 text-base font-medium tracking-wide border-b-2 py-2 text-gray-100 hocus:border-pink-400 focus:outline-none transition duration-200`};
 
     ::placeholder {
-      ${tw`text-gray-500`}
+      ${tw`text-gray-100`}
     }
   }
 `;
 const InputContainer = tw.div`relative py-5 mt-6`;
-const Label = tw.label`absolute top-0 left-0 tracking-wide font-semibold text-base`;
 
-const Textarea = tw.textarea`h-24 sm:h-full resize-none`;
-const SubmitButton = tw.button`w-full  mt-6 py-3 bg-gray-100 text-primary-500 rounded-full font-bold tracking-wide shadow-lg uppercase text-sm transition duration-300 transform focus:outline-none focus:shadow-outline hover:bg-gray-300 hover:text-primary-700 hocus:-translate-y-px hocus:shadow-xl`;
-const SubmitButtonLarge = tw.button` w-full 2xl:w-32 mt-6 py-3 bg-gray-100 text-primary-500 rounded-full font-bold tracking-wide shadow-lg uppercase text-3xl transition duration-300 transform focus:outline-none focus:shadow-outline hover:bg-gray-300 hover:text-primary-700 hocus:-translate-y-px hocus:shadow-xl`;
-
-
+const SubmitButton = tw.button`w-full sm:w-32 mt-6 py-3 bg-gray-100 text-primary-500 rounded-full font-bold tracking-wide shadow-lg uppercase text-sm transition duration-300 transform focus:outline-none focus:shadow-outline hover:bg-gray-300 hover:text-primary-700 hocus:-translate-y-px hocus:shadow-xl`;
+const ThreeColumn = tw.div`mt-6 flex flex-col sm:flex-row justify-between`;
+const TwoColumn = tw.div`flex flex-col sm:flex-row justify-between`;
+const Column = tw.div`sm:w-3/12 flex flex-col`;
+const Column2 = tw.div`sm:w-1/2 flex flex-col `;
 
 const Post = tw.div`cursor-pointer flex flex-col bg-gray-100 rounded-lg`;
 const Image = styled.div`
   ${props => css`background-image: url("${props.imageSrc}");`}
-  ${tw`h-64 w-full bg-cover bg-center rounded-t-lg`}
+  ${tw`h-48 w-full bg-cover bg-center rounded-t-lg`}
 `;
 const Info = tw.div`p-8 border-2 border-t-0 rounded-lg rounded-t-none`;
 const Category = tw.div`uppercase text-primary-500 text-xs font-bold tracking-widest leading-loose after:content after:block after:border-b-2 after:border-primary-500 after:w-8`;
@@ -161,20 +165,37 @@ function Huts(props) {
     function Filters(props){
         return(
             <>
-            {!loading && <FormContainer>
-            <TextContent>
-            <Heading>{heading}</Heading>
-    
-            <Form onSubmit={handleSubmit}>
+            {!loading &&
+                <Container>
+                    <Content>
+                        <FormContainer>
+                            {/*<Heading2>{heading}</Heading2>*/}
+                            <div tw="mx-auto max-w-4xl">
+                             <form onSubmit={handleSubmit}>
                 {/* SELECTS THE TYPE OF FILTER (CITY, PROVINCE, ETC) */}
-                <InputOption  as="select" value={filterType} onChange={ev => setFilterType(ev.target.value)} >
-                    <option hidden>Filter type</option>
-                    <option value="City">City</option>
-                    <option value="Province">Province</option>
-                    <option value="Region">Region</option>
-                    <option value="Country">Country</option>
-                </InputOption>
+                <ThreeColumn>
+                    <Column>
+                        <Instruction>
+                            Filter Type
+                        </Instruction>
+                        <InputOption  as="select" value={filterType} onChange={ev => setFilterType(ev.target.value)} >
+                            <option hidden>Filter type</option>
+                            <option value="City">City</option>
+                            <option value="Province">Province</option>
+                            <option value="Region">Region</option>
+                            <option value="Country">Country</option>
+                        </InputOption>
 
+                        <InputContainer>
+                            <Label htmlFor="number-input">Number of beds</Label>
+                            <Input id="number-input" type="number" name="beds" placeholder="Insert the number of beds" value={beds} onChange={ev => setBeds(ev.target.value)} />
+                        </InputContainer>
+
+                    </Column>
+                    <Column>
+                        <Instruction>
+                            Type Region
+                        </Instruction>
                 { /* SELECTS THE VALUE BASED ON THE FILTER SELECTED (SHOWS ALL CITIES IN DB IF CITY FILTER IS SELECTED, PROVINCES IF PROVINCE IS SELECTED AND SO ON) */}
                 <InputOption  as="select" value={filterValue} onChange={ev => setFilterValue(ev.target.value)} >
                     <option hidden>Select {filterType}</option>
@@ -202,36 +223,50 @@ function Huts(props) {
                     : <></>
                   }
                 </InputOption>
+                        <InputContainer>
+                            <Label htmlFor="price-input">Average price</Label>
+                            <Input id="price-input" type="number" name="avgPrice" placeholder="Insert the average price" value={price} onChange={ev => setPrice(ev.target.value)} />
+                        </InputContainer>
+                    </Column>
 
-                <InputOption  as="select" value={whenOpen} onChange={ev => setWhenOpen(ev.target.value)} >
-                    <option hidden>Select the opening period</option>
-                    <option value="S">Summer</option>
-                    <option value="SW">Summer and Winter</option>
-                    <option value="W">Winter</option>
-                    <option value="Y">All year</option>
-                    <option value="C">closed</option>
-                </InputOption>
-    
-                <InputContainer>
-                <Label htmlFor="start-input">Number of beds</Label>
-                <Input id="start-input" type="number" name="beds" placeholder="Insert the number of beds" value={beds} onChange={ev => setBeds(ev.target.value)} />
-                </InputContainer>
+                    <Column>
+                        <Instruction>
+                            Opening Session
+                        </Instruction>
+                        <InputOption  as="select" value={whenOpen} onChange={ev => setWhenOpen(ev.target.value)} >
+                            <option hidden>Select the opening period</option>
+                            <option value="S">Summer</option>
+                            <option value="SW">Summer and Winter</option>
+                            <option value="W">Winter</option>
+                           <option value="Y">All year</option>
+                           <option value="C">closed</option>
+                        </InputOption>
+                        <InputContainer>
+                            <Label htmlFor="name-input">Hut's Name</Label>
+                            <Input id="name-input" type="text" name="hutName" placeholder="name" value={name} onChange={ev => setName(ev.target.value)} />
+                        </InputContainer>
 
-                <InputContainer>
-                <Label htmlFor="startType-input">Average price</Label>
-                <Input id="startType-input" type="number" name="avgPrice" placeholder="Insert the average price" value={price} onChange={ev => setPrice(ev.target.value)} />
-                </InputContainer>
+                    </Column>
+               </ThreeColumn>
+                                 <TwoColumn>
+                                     <Column2>
+                                         <ButtonContainer>
+                                             <SubmitButton type="reset" onClick={handleReset}>{resetButtonText}</SubmitButton>
+                                         </ButtonContainer>
+                                     </Column2>
+                                     <Column2>
+                                         <ButtonContainer>
+                                             <SubmitButton type="submit">{submitButtonText}</SubmitButton>
+                                         </ButtonContainer>
+                                     </Column2>
+                                 </TwoColumn>
+                             </form>
+                            </div>
 
-                <InputContainer>
-                <Label htmlFor="end-input">Hut's Name</Label>
-                <Input id="end-input" type="text" name="hutName" placeholder="Insert Hut's name" value={name} onChange={ev => setName(ev.target.value)} />
-                </InputContainer>
-
-                <SubmitButtonLarge type="submit">{submitButtonText}</SubmitButtonLarge>
-                <SubmitButton type="reset" onClick={handleReset}>{resetButtonText}</SubmitButton>
-            </Form>
-        </TextContent>
-        </FormContainer>}
+        </FormContainer>
+                    </Content>
+                </Container>
+            }
         </>)
     }
 
@@ -243,8 +278,9 @@ function Huts(props) {
                 <ContentWithPaddingXl>
                     <HeadingRow>
                         <Heading>{headingText}</Heading>
-                        <Filters/>
+
                     </HeadingRow>
+                    <Filters/>
                     {!props.loading &&
                         <Posts>
                             {huts.slice(0, visible).map((hut, index) => (
