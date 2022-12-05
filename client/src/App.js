@@ -152,14 +152,14 @@ function AppLayout(props) {
           // < LoginComponent  login={props.login} />
         } />
         <Route path='/addHike' element={
-          <AddHikeForm logout={props.logout} />
+          <AddHikeForm logout={props.logout} /> //set message
         } />
         <Route path='/hikes' element={
           <Hikes hikes={hikes} loading={loading} setHikes={setHikes} logout={props.logout} />
         } />
         <Route path='/huts' element={
 
-          <Huts huts={huts} loading={loading} setHuts={setHuts} logout={props.logout} />
+          <Huts huts={huts} loading={loading} setHuts={setHuts} logout={props.logout} /> 
         } />
 
         <Route path='/profile/:userId' element={
@@ -170,13 +170,13 @@ function AppLayout(props) {
         {/*  <HutsPage logout={props.logout} />*/}
         {/*} />*/}
         <Route path='/addParkingLot' element={
-          <AddParkingLot />
+          <AddParkingLot /> //set message
         } />
         <Route path='/verify' element={
           < VerifiedMessage />
         } />
          <Route path='/addHut' element={
-          < AddHutForm huts = {huts} setHuts={setHuts}/>
+          < AddHutForm huts = {huts} setHuts={setHuts} message={props.message} errorHandler={props.errorHandler}/> //set message
         } />
 
         <Route path='*' element={<Navigate to='/' replace />} />
