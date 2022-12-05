@@ -87,13 +87,13 @@ function Light(props) {
       <NavLink onClick={() => navigate("/hikes")}>Hikes</NavLink>
       <NavLink onClick={() => navigate("/huts")}>Huts</NavLink>
       {auth.user.Role === "L" &&
-        <NavLink onClick={() => navigate("/#")}>Add a Parking lot</NavLink>
+        <NavLink onClick={() => navigate("/addParkingLot")}>Add a Parking lot</NavLink>
       }
       {auth.user.Role === "L" &&
         <NavLink onClick={() => navigate("/addHike")}>Add a Hike</NavLink>
       }
       {auth.user.Role === "HW" &&
-        <NavLink onClick={() => navigate("/#")}>Add a Hut</NavLink>
+        <NavLink onClick={() => navigate("/addHut")}>Add a Hut</NavLink>
       }
       {
         auth.login ?

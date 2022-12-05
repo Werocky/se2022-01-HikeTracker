@@ -9,7 +9,7 @@ import API from './API';
 import { LoginComponent } from './Layout-components/LoginComponent';
 import { RegisterComponent } from './Layout-components/RegisterComponent';
 import HikeDetails from './Layout-components/HikeDetails';
-//import AddHike from './Layout-components/AddHike';
+//import AddHikeForm from './Layout-components/AddHikeForm';
 import ProfilePage from './Layout-components/ProfilePage';
 import Profile from './pages/Profile'
 import HutsPage from './Layout-components/Huts-components/HutsPage';
@@ -21,10 +21,12 @@ import Register from "./pages/Signup";
 import Login from './pages/Login'
 import Hikes from './pages/Hikeslist'
 import Huts from './pages/Hutslist'
-import AddHike from './components/forms/AddHike'
+import AddParkingLot from './components/forms/AddParkingLot';
+import AddHikeForm from './components/forms/AddHikeForm'
 
 import "./style.css"
 import "tailwindcss/lib/css/preflight.css"
+import AddHutForm from './components/forms/AddHutForm';
 import HutDetails from './Layout-components/HutDetails';
 
 function App() {
@@ -150,7 +152,7 @@ function AppLayout(props) {
           // < LoginComponent  login={props.login} />
         } />
         <Route path='/addHike' element={
-          <AddHike logout={props.logout} />
+          <AddHikeForm logout={props.logout} />
         } />
         <Route path='/hikes' element={
           <Hikes hikes={hikes} loading={loading} setHikes={setHikes} logout={props.logout} />
@@ -168,13 +170,13 @@ function AppLayout(props) {
         {/*  <HutsPage logout={props.logout} />*/}
         {/*} />*/}
         <Route path='/addParkingLot' element={
-          <ParkingForm />
+          <AddParkingLot />
         } />
         <Route path='/verify' element={
           < VerifiedMessage />
         } />
-        <Route path='/addHut' element={
-          < HutForm />
+         <Route path='/addHut' element={
+          < AddHutForm huts = {huts} setHuts={setHuts}/>
         } />
 
         <Route path='*' element={<Navigate to='/' replace />} />

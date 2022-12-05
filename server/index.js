@@ -443,16 +443,17 @@ app.post('/ParkingLots',[],
     if (!errors.isEmpty()) {
       return res.status(422).json({ error: 'cannot process request' });
     }
-    console.log(req.user);
-    const ParkingLot = {...req.body.ParkingLot, AssociatedGuide: req.user.email};
+    console.log(req.body);
+    const ParkingLot = {...req.body.ParkingLot, AssociatedGuide: req.user.Id};
     const Description = ParkingLot.Description;
     const lat = ParkingLot.Coord.lat;
     const lng = ParkingLot.Coord.lng;
     try {
-      const res = await createParkingLot(ParkingLot);
+      await createParkingLot(ParkingLot);
       await referencePoints.addReferencePointWithDescription(Description, lat, lng, 'parking')
       res.status(201).end();
     } catch (err) {
+      console.log(err);
       res.status(503).json({ error: 'Internal error' });
     }
   });
@@ -639,7 +640,7 @@ app.put('/setHutDescription', isLoggedIn, [
     }
   });
 
-  app.post('/addHut',[isLoggedIn],
+  app.post('/hutCreate' , 
   check("Hut").notEmpty(),
    async (req, res) => {
     const errors = validationResult(req);

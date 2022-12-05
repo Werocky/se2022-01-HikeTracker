@@ -29,6 +29,7 @@
     "apiTest": "mocha",
     "start": "node index.js",
     "populate": "node ./Scripts/populateRun.js",
-    "dropTables": "node ./Scripts/dropTables.js"
+    "dropTables": "node ./Scripts/dropTables.js",
+    "createTables": "node ./Scripts/createTables.js"
   }
 }

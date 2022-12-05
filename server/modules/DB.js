@@ -1,4 +1,5 @@
 'use strict';
+const { table } = require('console');
 const {readFileSync, promises: fsPromises} = require('fs');
 
 const sqlite = require('sqlite3');
@@ -18,13 +19,15 @@ class DatabaseConnection {
       return new Promise(async (resolve, reject) => {
           for (let i = 0; i < Query.length; i++) {
               const Queue = Query[i];
-              let tableName= Queue.split(' ');
-              tableName=tableName[tableName.length-1];
-              console.log("Table '#_"+ i +"_"+tableName+ "_ dropped.");
                   this.db.run(Queue, [], function (err) {
                   if (err)
                       {
                           reject(err);
+                      }else{
+                        let tableName= Queue.split(' ');
+                        tableName=tableName[tableName.length-1];
+                        console.log("Table '#_"+ i +"_"+tableName+ "_ dropped.");
+          
                       }
                       
               });
@@ -37,6 +40,8 @@ class DatabaseConnection {
 
         let Query = readFileSync('./dbQueries/CreateDBTables.sql', 'utf-8');
         Query=Query.split(';');
+        
+
         return new Promise(async (resolve, reject) => {
             for (let i = 0; i < Query.length; i++) {
                 const Queue = Query[i];
@@ -44,6 +49,11 @@ class DatabaseConnection {
                     if (err)
                         {
                             reject(err);
+                        }else{
+                          let tableName= Queue.split(' ');
+                          tableName=tableName[5];
+                          tableName=tableName.split('(')[0];
+                          console.log("Table '#_"+ i +"_"+tableName+ "_ Created.");
                         }
                         
                 });
@@ -1639,7 +1649,7 @@ await this.wrapperPopulateRefP(HikeID, refPoint++, "45.93651","7.62672","parking
           website,
           phone)
 
-      console.log(hut);
+
       await huts.addHut(hut);
   }
   static populateHuts = async () => {

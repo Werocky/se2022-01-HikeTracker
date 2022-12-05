@@ -7,5 +7,8 @@ module.exports= {
     }, 
     dropTablesScript:async()=>{
         await db.dropTables();
+    }, 
+    createConnection:async()=>{
+        await db.createConnection();
     },   
 }
