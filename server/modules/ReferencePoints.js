@@ -92,6 +92,21 @@ exports.getFromType = (type) => {
   })
 }
 
+exports.getAllRefPoints = () => {
+  return new Promise(async (resolve, reject) => {
+    const sql="SELECT * FROM ReferencePoints;";
+    db.all(sql, [],function (err,rows) {
+      if(err)
+      reject(err);
+      else {
+        const points = rows.map((r)=> ({RefPointID: r.RefPointID, description: r.description, Lat:r.Lat, Lng: r.Lng, Type:r.Type}));
+        // console.log(hutPoints);
+        resolve(points);
+      }
+    })
+  })
+}
+
 exports.getLastRefPointID = () => {
   return new Promise(async (resolve, reject) =>{
     const sql = "SELECT RefPointID FROM ReferencePoints ORDER BY RefPointID DESC LIMIT 1";

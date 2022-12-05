@@ -10,7 +10,7 @@ import { SectionHeading } from "../components/misc/Headings";
 import { PrimaryButton } from "../components/misc/Buttons";
 import { PrimaryButton as PrimaryButtonBase } from "../components/misc/Buttons.js";
 import { useNavigate } from "react-router-dom";
-import API from "../API.js";
+import API from "../API";
 
 const HeadingRow = tw.div`flex`;
 const Heading = tw(SectionHeading)`text-gray-900`;
@@ -92,6 +92,7 @@ function Huts(props) {
     const [submitButtonText, setSubmitButtonText] = useState('Submit');
     const [resetButtonText, setResetButtonText] = useState('Reset');
     const [loading, setLoading] = useState(true);
+    const [dirty, setDirty] = useState(true);
 
     //LOCATIONS AND FILTER'S DATA
     const [locations, setLocations] = useState(undefined);
@@ -119,6 +120,17 @@ function Huts(props) {
           //handling err
         }
       }, []);
+      
+    useEffect(() => {   // check login     
+        const reloadHuts = async () => {
+            const list = await API.getHutsFilters();
+            props.setHuts(list);
+        };
+        if(dirty){
+            reloadHuts();
+            setDirty(false);
+        }
+      }, [props.huts]);
 
     const onLoadMoreClick = () => {
         setVisible(v => v + 6);
