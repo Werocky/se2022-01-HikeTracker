@@ -8,7 +8,7 @@ import { PrimaryButton as PrimaryButtonBase } from "../misc/Buttons.js";
 import EmailIllustrationSrc from "../../images/email-illustration.svg";
 import AnimationRevealPage from "../../helpers/AnimationRevealPage.js";
 import Header from "../headers/light.js";
-import {Alert, Button, FloatingLabel, FormLabel, Row} from "react-bootstrap";
+import {Alert, Button, FloatingLabel, FormLabel, Row, Col} from "react-bootstrap";
 import { MapContainer, TileLayer, Marker, Popup, useMapEvents } from 'react-leaflet';
 import PhoneInput from 'react-phone-number-input'
 import 'react-phone-number-input/style.css'
@@ -90,6 +90,7 @@ const [country,setCountry]=useState("");
 const [geoOk,setGeoOk]=useState(false);
 const [coord,setCoord]=useState(null);
 const [errorMsg,setErrorMsg]=useState("");
+const [msgState,setmsgState]=useState("danger");
 const [phone,setPhone]=useState("");
 const [website,setWebsite]=useState('');
 const [email,setEmail]=useState("");
@@ -190,12 +191,15 @@ const submitForm = async (event) => {
       Coord:coord
   }
   API.addHut(h)
-    .then( () => {
-      props.setHuts({...props.huts, h});
+    .then( (res) => {
+      //props.setHuts({...props.huts, h});
+      setErrorMsg(res.message);
+      setmsgState('primary');
     })//setDirty(true)})
-    .catch( err => setErrorMsg(err));
+    .catch( err => setErrorMsg(err.error));
     
-   setErrorMsg("Hut aggiunto");
+   //setErrorMsg("Hut aggiunto");//static values
+   //setmsgState('primary');
   }
 }
 
@@ -221,6 +225,11 @@ const ClickPick = () => {
   }
   return (
     <AnimationRevealPage>
+      <Container>
+        <Row><Col>
+          {errorMsg ? <Alert variant={msgState} onClose={() => {setErrorMsg(''); setmsgState('danger');}} dismissible>{errorMsg}</Alert> : false}
+        </Col></Row>
+      </Container>
       <Header logout={props.logout}/>
       <Container>
         <Content>

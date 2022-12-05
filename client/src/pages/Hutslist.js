@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import AnimationRevealPage from "../helpers/AnimationRevealPage.js";
 import { Container, ContentWithPaddingXl } from "../components/misc/Layouts";
 import tw from "twin.macro";
@@ -10,6 +10,7 @@ import { SectionHeading } from "../components/misc/Headings";
 import { PrimaryButton } from "../components/misc/Buttons";
 import { PrimaryButton as PrimaryButtonBase } from "../components/misc/Buttons.js";
 import { useNavigate } from "react-router-dom";
+import API from "../API";
 
 const HeadingRow = tw.div`flex`;
 const Heading = tw(SectionHeading)`text-gray-900`;
@@ -51,9 +52,20 @@ const PostAction = tw(PrimaryButtonBase)`w-full mt-8`;
 
 function Huts(props) {
     const headingText = "Huts";
-    const huts = props.huts;
-
+    let huts = props.huts;
     const [visible, setVisible] = useState(6);
+    const [dirty, setDirty] = useState(true);
+
+    useEffect(() => {   // check login     
+        const reloadHuts = async () => {
+            const list = await API.getHutsFilters();
+            props.setHuts(list);
+        };
+        if(dirty){
+            reloadHuts();
+            setDirty(false);
+        }
+      }, [props.huts]);
 
     const onLoadMoreClick = () => {
         setVisible(v => v + 6);
@@ -61,6 +73,7 @@ function Huts(props) {
             setVisible(huts.length);
         }
     };
+
 
 
     return (
