@@ -156,11 +156,11 @@ const ClickPick = () => {
 
     <InputContainer>
       <Label htmlFor="capacity-input">Capacity</Label>
-      <Input id="capacity" type="number" step="1" name="capacity" value={numAuto} min={0} placeholder="insert capacity in terms of auto" onChange={ev=>setNumAuto(ev.target.value)}  required={true} />
+      <Input id="capacity" type="number" step="1" name="capacity" value={numAuto} min={0} placeholder="insert the amount of cars that can fit" onChange={ev=>setNumAuto(ev.target.value)}  required={true} />
     </InputContainer>
       <InputOption type="gratis" defaultValue={'DEFAULT'} as="select" aria-label="select" onChange={ev => setGratis(ev.target.value)} required={true} >
-        <option value='DEFAULT' hidden>Select if it's gratis or not</option>
-        <option value='1'>Gratis</option>
+        <option value='DEFAULT' hidden>Select if it's free or not</option>
+        <option value='1'>Free</option>
         <option value='0'>for a fee</option>
       </InputOption>
     <InputContainer>

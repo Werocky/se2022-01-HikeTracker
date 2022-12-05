@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import AnimationRevealPage from "../helpers/AnimationRevealPage.js";
 import { Container, ContentWithPaddingXl } from "../components/misc/Layouts";
 import tw from "twin.macro";
@@ -10,6 +10,7 @@ import { SectionHeading } from "../components/misc/Headings";
 import { PrimaryButton } from "../components/misc/Buttons";
 import { PrimaryButton as PrimaryButtonBase } from "../components/misc/Buttons.js";
 import { useNavigate } from "react-router-dom";
+import API from "../API.js";
 
 const HeadingRow = tw.div`flex`;
 const Heading = tw(SectionHeading)`text-gray-900`;
@@ -34,6 +35,38 @@ const PostContainer = styled.div`
             }
           `}
 `;
+
+const TextContent = tw.div`lg:py-8 text-center md:text-left`;
+
+const Form = tw.form`mt-8 md:mt-10 text-sm flex flex-col max-w-sm mx-auto md:mx-0`
+const Input = tw.input`mt-6 first:mt-0 border-b-2 py-3 focus:outline-none font-medium transition duration-300 hocus:border-primary-500`
+const InputOption = tw.input`mt-6 first:mt-0 border-b-2 py-3 focus:outline-none font-medium transition duration-300 hocus:border-gray-300 text-gray-700 `
+
+const FormContainer = styled.div`
+  ${tw`p-10 sm:p-12 md:p-16 bg-primary-500 text-gray-100 rounded-lg relative`}
+  form {
+    ${tw`mt-4`}
+  }
+  h2 {
+    ${tw`text-3xl sm:text-4xl font-bold`}
+  }
+  input,textarea {
+    ${tw`w-full bg-transparent text-gray-100 text-base font-medium tracking-wide border-b-2 py-2 text-gray-100 hocus:border-pink-400 focus:outline-none transition duration-200`};
+
+    ::placeholder {
+      ${tw`text-gray-500`}
+    }
+  }
+`;
+const InputContainer = tw.div`relative py-5 mt-6`;
+const Label = tw.label`absolute top-0 left-0 tracking-wide font-semibold text-base`;
+
+const Textarea = tw.textarea`h-24 sm:h-full resize-none`;
+const SubmitButton = tw.button`w-full  mt-6 py-3 bg-gray-100 text-primary-500 rounded-full font-bold tracking-wide shadow-lg uppercase text-sm transition duration-300 transform focus:outline-none focus:shadow-outline hover:bg-gray-300 hover:text-primary-700 hocus:-translate-y-px hocus:shadow-xl`;
+const SubmitButtonLarge = tw.button` w-full 2xl:w-32 mt-6 py-3 bg-gray-100 text-primary-500 rounded-full font-bold tracking-wide shadow-lg uppercase text-3xl transition duration-300 transform focus:outline-none focus:shadow-outline hover:bg-gray-300 hover:text-primary-700 hocus:-translate-y-px hocus:shadow-xl`;
+
+
+
 const Post = tw.div`cursor-pointer flex flex-col bg-gray-100 rounded-lg`;
 const Image = styled.div`
   ${props => css`background-image: url("${props.imageSrc}");`}
@@ -49,11 +82,43 @@ const ButtonContainer = tw.div`flex justify-center`;
 const LoadMoreButton = tw(PrimaryButton)`mt-16 mx-auto`;
 const PostAction = tw(PrimaryButtonBase)`w-full mt-8`;
 
+
 function Huts(props) {
     const headingText = "Huts";
-    const huts = props.huts;
-
+    
+    //FORM VARIABLES
     const [visible, setVisible] = useState(6);
+    const [heading, setHeading] = useState("Hut's filters");
+    const [submitButtonText, setSubmitButtonText] = useState('Submit');
+    const [resetButtonText, setResetButtonText] = useState('Reset');
+    const [loading, setLoading] = useState(true);
+
+    //LOCATIONS AND FILTER'S DATA
+    const [locations, setLocations] = useState(undefined);
+    const [filterType, setFilterType] = useState('');
+    const [filterValue, setFilterValue] = useState('');
+
+    //FILTERS FOR HUTS
+    const [whenOpen, setWhenOpen] = useState('');
+    const [beds, setBeds] = useState(0);
+    const [price, setPrice] = useState(0.0);
+    const [name, setName] = useState('')
+
+    const [huts, setHuts] = useState(props.huts);
+
+    useEffect(() => {
+        const loadLocation = async () => {
+          const locationObj = await API.getHutsLocations();
+          //console.log(locationObj);
+          setLocations(locationObj);
+          setLoading(false);
+        }
+        try {
+          loadLocation();
+        } catch (err) {
+          //handling err
+        }
+      }, []);
 
     const onLoadMoreClick = () => {
         setVisible(v => v + 6);
@@ -61,6 +126,102 @@ function Huts(props) {
             setVisible(huts.length);
         }
     };
+
+    const handleSubmit = async (event) => {
+        event.preventDefault();
+        const loc = filterValue ? { locationType: filterType, location: filterValue } : null;
+        const huts = await API.getHutsFilters(name ? name : null, loc, whenOpen ? whenOpen : null, beds ? beds : null, price ? price : null);
+        console.log(huts);
+        setHuts(huts);
+        setLoading(false);
+      }
+    
+      const handleReset = (event) => {
+        props.setLoading(true);
+        setFilterType('');
+        setFilterValue('');
+        setWhenOpen('');
+        setBeds(0);
+        setPrice(0.0);
+        setName('');
+      }
+    
+    function Filters(props){
+        return(
+            <>
+            {!loading && <FormContainer>
+            <TextContent>
+            <Heading>{heading}</Heading>
+    
+            <Form onSubmit={handleSubmit}>
+                {/* SELECTS THE TYPE OF FILTER (CITY, PROVINCE, ETC) */}
+                <InputOption  as="select" value={filterType} onChange={ev => setFilterType(ev.target.value)} >
+                    <option hidden>Filter type</option>
+                    <option value="City">City</option>
+                    <option value="Province">Province</option>
+                    <option value="Region">Region</option>
+                    <option value="Country">Country</option>
+                </InputOption>
+
+                { /* SELECTS THE VALUE BASED ON THE FILTER SELECTED (SHOWS ALL CITIES IN DB IF CITY FILTER IS SELECTED, PROVINCES IF PROVINCE IS SELECTED AND SO ON) */}
+                <InputOption  as="select" value={filterValue} onChange={ev => setFilterValue(ev.target.value)} >
+                    <option hidden>Select {filterType}</option>
+                    {
+                    filterType === 'City' ?
+                        locations.City.map((el) => {
+                            console.log(el)
+                            return <option key={el} value={el}>{el}</option>
+                        })
+                    : 
+                    filterType === 'Province' ?
+                        locations.Province.map((el) => {
+                          return <option key={el} value={el}>{el}</option>
+                        })
+                    : 
+                    filterType === 'Region' ?
+                        locations.Region.map((el) => {
+                            return <option key={el} value={el}>{el}</option>
+                        })
+                    :
+                    filterType === 'Country' ?
+                        locations.Country.map((el) => {
+                            return <option key={el} value={el}>{el}</option>
+                        })
+                    : <></>
+                  }
+                </InputOption>
+
+                <InputOption  as="select" value={whenOpen} onChange={ev => setWhenOpen(ev.target.value)} >
+                    <option hidden>Select the opening period</option>
+                    <option value="S">Summer</option>
+                    <option value="SW">Summer and Winter</option>
+                    <option value="W">Winter</option>
+                    <option value="Y">All year</option>
+                    <option value="C">closed</option>
+                </InputOption>
+    
+                <InputContainer>
+                <Label htmlFor="start-input">Number of beds</Label>
+                <Input id="start-input" type="number" name="beds" placeholder="Insert the number of beds" value={beds} onChange={ev => setBeds(ev.target.value)} />
+                </InputContainer>
+
+                <InputContainer>
+                <Label htmlFor="startType-input">Average price</Label>
+                <Input id="startType-input" type="number" name="avgPrice" placeholder="Insert the average price" value={price} onChange={ev => setPrice(ev.target.value)} />
+                </InputContainer>
+
+                <InputContainer>
+                <Label htmlFor="end-input">Hut's Name</Label>
+                <Input id="end-input" type="text" name="hutName" placeholder="Insert Hut's name" value={name} onChange={ev => setName(ev.target.value)} />
+                </InputContainer>
+
+                <SubmitButtonLarge type="submit">{submitButtonText}</SubmitButtonLarge>
+                <SubmitButton type="reset" onClick={handleReset}>{resetButtonText}</SubmitButton>
+            </Form>
+        </TextContent>
+        </FormContainer>}
+        </>)
+    }
 
 
     return (
@@ -70,6 +231,7 @@ function Huts(props) {
                 <ContentWithPaddingXl>
                     <HeadingRow>
                         <Heading>{headingText}</Heading>
+                        <Filters/>
                     </HeadingRow>
                     {!props.loading &&
                         <Posts>

@@ -28,6 +28,8 @@ import "./style.css"
 import "tailwindcss/lib/css/preflight.css"
 import AddHutForm from './components/forms/AddHutForm';
 import HutDetails from './Layout-components/HutDetails';
+import Sidebar from './Layout-components/Sidebar';
+import SearchHuts from './Layout-components/Huts-components/SearchHuts';
 
 function App() {
 
@@ -140,7 +142,6 @@ function AppLayout(props) {
         <Route path='/huts/:hutID' element={
           <HutDetails />
         } />
-
 
         <Route path='/register' element={
           <Register logout={props.register} />
