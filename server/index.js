@@ -453,6 +453,7 @@ app.post('/ParkingLots',[],
       await referencePoints.addReferencePointWithDescription(Description, lat, lng, 'parking')
       res.status(201).end();
     } catch (err) {
+      console.log(err);
       res.status(503).json({ error: 'Internal error' });
     }
   });

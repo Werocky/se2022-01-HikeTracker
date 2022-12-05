@@ -15,8 +15,8 @@ class ParkingLot{
 
 function createParkingLot(ParkingLot){
     return new Promise (async (resolve, reject) =>{
-        const sql = 'INSERT INTO ParkingLots(AssociatedGuide, Fee) VALUES(?, ?)'; //, NumAuto param needed, adjust DataBase
-        db.run(sql, [ParkingLot.AssociatedGuide, ParkingLot.Free/*, ParkingLot.NumAuto*/], function (err){
+        const sql = 'INSERT INTO ParkingLots(AssociatedGuide, Free, NumAuto) VALUES(?, ?, ?)';
+        db.run(sql, [ParkingLot.AssociatedGuide, ParkingLot.Free, ParkingLot.NumAuto], function (err){
             if(err)
                 reject(err);
             else
