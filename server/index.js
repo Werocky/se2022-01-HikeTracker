@@ -271,35 +271,74 @@ app.post('/addHike', async (req, res) => {
     await hikes.addHike(hike);
     console.log("Hike added");
 
-    // add start point
+
+    //get all ref point already saved
+    const refPoints = await referencePoints.getAllRefPoints();
+    let pointAlreadyPresent = undefined;
+
+
+    // add start point/*
+    let startId = -1;
     const start = points.start;
-    console.log(start);
-    await addReferencePoint(start.position.lat, start.position.lon, start.Type);
-    const startId = await referencePoints.getLastRefPointID();
-    console.log("Start Point added");
+    function distanceStart(p) {
+      const dist = distance(p.Lat, p.Lng, start.position.lat, start.position.lon);
+      return dist < 0.1;
+    }
+    pointAlreadyPresent = refPoints.find(distanceStart);
+    if (pointAlreadyPresent) {
+      console.log("Starting point already present")
+      startId = pointAlreadyPresent.RefPointID;
+    } else {
+      await addReferencePoint(start.position.lat, start.position.lon, start.Type);
+      startId = await referencePoints.getLastRefPointID();
+      console.log("Start Point added");
+    }
+
 
     // add ending point
+    let endId = -1;
     const end = points.end;
-    await addReferencePoint(end.position.lat, end.position.lon, end.Type);
-    const endId = await referencePoints.getLastRefPointID();
-    console.log("End Point added");
+    function distanceEnd(p) {
+      const dist = distance(p.Lat, p.Lng, end.position.lat, end.position.lon);
+      return dist < 0.1;
+    }
+    pointAlreadyPresent = refPoints.find(distanceEnd);
+    if (pointAlreadyPresent) {
+      console.log("Ending point already present")
+      endId = pointAlreadyPresent.RefPointID;
+    } else {
+      await addReferencePoint(end.position.lat, end.position.lon, end.Type);
+      endId = await referencePoints.getLastRefPointID();
+      console.log("End Point added");
+    }
+
 
     // add other points
     let pIdVec = [];
-    for (let p of points.otherPoints) {
-      await addReferencePoint(p.position.lat, p.position.lng, p.type);
-      const pId = await referencePoints.getLastRefPointID();
-      pIdVec.push(pId);
-      console.log("Point added");
-
+    for (let iPoint of points.otherPoints) {
+      let rpID = -1;
+      function distancePoint(p) {
+        const dist = distance(p.Lat, p.Lng, iPoint.position.lat, iPoint.position.lon);
+        return dist < 0.1;
+      }
+      pointAlreadyPresent = refPoints.find(distancePoint);
+      if (pointAlreadyPresent) {
+        console.log("Reference point already present")
+        rpID = pointAlreadyPresent.RefPointID;
+      } else {
+        await addReferencePoint(iPoint.position.lat, iPoint.position.lng, iPoint.Type);
+        rpID = await referencePoints.getLastRefPointID();
+        console.log("Reference Point added");
+      }
+      pIdVec.push(rpID);
     }
 
-    // add reference point connected to hike
-    //start
+    // add all reference points connected to hike
     await hikeRefPoints.addHikeRefPoints(hikeId, startId, 1, 0);
     await hikeRefPoints.addHikeRefPoints(hikeId, endId, 0, 1);
     for (let p in pIdVec) {
-      await hikeRefPoints.addHikeRefPoints(hikeId, p, 0, 0);
+      console.log("\t"+pIdVec[p])
+      await hikeRefPoints.addHikeRefPoints(hikeId, pIdVec[p], 0, 0);
     }
 
     res.status(201).json({ hikeId: hikeId });
@@ -307,9 +346,9 @@ app.post('/addHike', async (req, res) => {
     console.log(err);
     res.status(503).json({ error: 'Internal error' });
   }
-  console.log("All hike point added");
 
-
+  console.log("All hike points added");
+  
 })
 
 /*** Geographical filter ***/
@@ -436,15 +475,15 @@ app.post('/getNearHikes', async (req, res) => {
 
 //POST
 //Create parking lot
-app.post('/ParkingLots',[],
+app.post('/ParkingLots', [],
   [check('ParkingLot').notEmpty()], async (req, res) => {
-  
+
     const errors = validationResult(res);
     if (!errors.isEmpty()) {
       return res.status(422).json({ error: 'cannot process request' });
     }
     console.log(req.body);
-    const ParkingLot = {...req.body.ParkingLot, AssociatedGuide: req.user.Id};
+    const ParkingLot = { ...req.body.ParkingLot, AssociatedGuide: req.user.Id };
     const Description = ParkingLot.Description;
     const lat = ParkingLot.Coord.lat;
     const lng = ParkingLot.Coord.lng;
@@ -589,7 +628,7 @@ app.get('/hutsLocations', async (req, res) => {
 
 //GET hut information
 
-app.post('/getHut', async (req, res) =>{
+app.post('/getHut', async (req, res) => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
     return res.status(422).json({ error: 'cannot process request' });
@@ -600,11 +639,11 @@ app.post('/getHut', async (req, res) =>{
     const hutInfo = await huts.getHut(req.body.Hut);
     res.status(200).json(hutInfo);
   } catch (err) {
-    res.status(503).json( {error: 'Error' });
+    res.status(503).json({ error: 'Error' });
   }
 })
 
-app.post('/getHutCoords', async (req, res) =>{
+app.post('/getHutCoords', async (req, res) => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
     return res.status(422).json({ error: 'cannot process request' });
@@ -614,7 +653,7 @@ app.post('/getHutCoords', async (req, res) =>{
     const hutCoords = await huts.getHutCoordinates(req.body.Hut);
     res.status(200).json(hutCoords);
   } catch (err) {
-    res.status(503).json( {error: 'Error' });
+    res.status(503).json({ error: 'Error' });
   }
 })
 
@@ -639,21 +678,21 @@ app.put('/setHutDescription', isLoggedIn, [
     }
   });
 
-  app.post('/hutCreate' , 
+app.post('/hutCreate',
   check("Hut").notEmpty(),
-   async (req, res) => {
+  async (req, res) => {
     const errors = validationResult(req);
     console.log(errors);
     if (!errors.isEmpty()) {
       return res.status(422).json({ error: 'cannot process request' });
     }
     console.log(req.body);
-    const Hut = {...req.body.Hut, HutManagerID: req.body.Hut.Email};
+    const Hut = { ...req.body.Hut, HutManagerID: req.body.Hut.Email };
     try {
       const result = await huts.addHut(Hut);
       await referencePoints.addReferencePointWithDescription(Hut.Description, Hut.Coord.lat, Hut.Coord.lng, "hut");
       res.status(200).json(result);
-  
+
     } catch (err) {
       console.log(err);
       res.status(503).json({ error: `Error ` });
@@ -729,7 +768,7 @@ app.get('/verify', /*isLoggedIn,*/[],
     try {
       await users.checkVerificationCode(req.query.code, req.query.Id);
       await users.setVerified(req.query.Id);
-      res.status(201).json({message: 'Correctly verified'});
+      res.status(201).json({ message: 'Correctly verified' });
     } catch (err) {
       res.status(503).json({ error: `Internal Error` });
     }

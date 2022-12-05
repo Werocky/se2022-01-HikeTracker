@@ -58,7 +58,7 @@ const Label = tw.label`absolute top-0 left-0 tracking-wide font-semibold text-ba
 
 const Textarea = tw.textarea`h-24 sm:h-full resize-none`;
 const SubmitButton = tw.button`w-full  mt-6 py-3 bg-gray-100 text-primary-500 rounded-full font-bold tracking-wide shadow-lg uppercase text-sm transition duration-300 transform focus:outline-none focus:shadow-outline hover:bg-gray-300 hover:text-primary-700 hocus:-translate-y-px hocus:shadow-xl`;
-const SubmitButtonLarge = tw.button` w-full 2xl:w-32 mt-6 py-3 bg-gray-100 text-primary-500 rounded-full font-bold tracking-wide shadow-lg uppercase text-3xl transition duration-300 transform focus:outline-none focus:shadow-outline hover:bg-gray-300 hover:text-primary-700 hocus:-translate-y-px hocus:shadow-xl`;
+const SubmitButtonLarge = tw.button` w-full mt-6 py-3 bg-gray-100 text-primary-500 rounded-full font-bold tracking-wide shadow-lg uppercase text-3xl transition duration-300 transform focus:outline-none focus:shadow-outline hover:bg-gray-300 hover:text-primary-700 hocus:-translate-y-px hocus:shadow-xl`;
 
 
 function AddHikeForm(props) {
@@ -232,126 +232,129 @@ function AddHikeForm(props) {
   return (
     <AnimationRevealPage>
       <Header logout={props.logout} />
-        <Container>
-          <Content>
-            <FormContainer>
-        <TwoColumn>
-          {!fileOk &&
-            <ImageMapColumn>
-              {/*put the picture or map here*/}
-              <Image imageSrc={EmailIllustrationSrc} />
-            </ImageMapColumn>
-          }
-          {fileOk &&
-            <ImageMapColumn>
-              <TextContent>
-                <Heading>Map</Heading>
-                <Description>To add new Reference Point, click on the map and insert the type.</Description>
-
-                <MapContainer
-                  center={[gpxPoints[Math.ceil(gpxPoints.length / 2)].lat, gpxPoints[Math.ceil(gpxPoints.length / 2)].lon]}
-                  bounds={[gpxPoints[0], gpxPoints.at(-1),]}
-                  scrollWheelZoom
-                  style={{ height: 500 + "px", width: "100%", }}>
-                  <ClickPickNearest points={gpxPoints} coord={coord} setCoord={setCoord} />
-                  <Polyline
-                    pathOptions={{ fillColor: 'red', color: 'blue' }}
-                    positions={gpxPoints}
-                  />
-                  <StartPoint position={gpxPoints[0]} />
-                  <EndPoint position={gpxPoints.at(-1)} />
-                  <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
-                </MapContainer>
-
-                {coordChange &&
-                  <Form onSubmit={handleSubmitRefPoint}>
-                    <InputContainer>
-                      <PointForm coord={coord} />
-                    </InputContainer>
-                    <InputContainer>
-                      <Label htmlFor="Point description-input">Point Description</Label>
-                      <Input id="Point description-input" type="text" name="descr" placeholder="Point description" value={refPDesc} onChange={ev => setRefPDesc(ev.target.value)} required />
-                    </InputContainer>
-                    <InputContainer>
-                      <Label htmlFor="Point type-input">Point Type</Label>
-                      <Input id= "Point type" type="text" name="startType" placeholder="Point type" value={refPType} onChange={ev => setRefPType(ev.target.value)} />
-                    </InputContainer>
-                    <SubmitButton type="submit">Add this Reference Point</SubmitButton>
-                  </Form>
-                }
-
-              </TextContent>
-            </ImageMapColumn>
-          }
-          <TextColumn textOnLeft={textOnLeft}>
-            <TextContent>
-              <Heading>{heading}</Heading>
-              <Description>{subheading}</Description>
-
+      <Container>
+        <Content>
+          <FormContainer>
+            <TwoColumn>
               {!fileOk &&
-                <Form onSubmit={handleSubmitFile} >
-
-                  <Input type="file" required onChange={event => setFile(event.target.files[0])} />
-                  {msgErr &&
-                    <Alert>{msgErr}</Alert>
-                  }
-                  <SubmitButton type="submit">{submitButtonText}</SubmitButton>
-                </Form>
+                <ImageMapColumn>
+                  {/*put the picture or map here*/}
+                  <Image imageSrc={EmailIllustrationSrc} />
+                </ImageMapColumn>
               }
               {fileOk &&
-                <Form onSubmit={handleSubmitForm}>
-                  <InputContainer>
-                    <Label htmlFor="title-input">Title</Label>
-                    <Input id="title-input" type="text" name="title" defaultValue={dataFromGpx.Title} onChange={ev => setTitle(ev.target.value)} />
-                  </InputContainer>
-                  <InputContainer>
-                    <Label htmlFor="length-input">Length</Label>
-                    <Input id="length-input" type="number" step="0.01" name="length" defaultValue={dataFromGpx.Length} readOnly />
-                  </InputContainer>
-                  <InputContainer>
-                    <Label htmlFor="ascent-input">Ascent</Label>
-                    <Input id="ascent-input" type="number" name="ascent" defaultValue={dataFromGpx.Ascent} readOnly />
-                  </InputContainer>
-                  <InputContainer>
-                    <Label htmlFor="time-input">Time</Label>
-                    <Input id="time-input" type="text" name="time" placeholder="dd:hh:mm" value={expectedTime} onChange={ev => setExpectedTime(ev.target.value)} required />
-                  </InputContainer>
+                <ImageMapColumn>
+                  <TextContent>
+                    <Heading>Map</Heading>
+                    <Description>To add new Reference Point, click on the map and insert the type.</Description>
 
-                    <InputOption  as="select" value={difficulty} onChange={ev => setDifficulty(ev.target.value)} required >
-                      <option hidden>Difficulty</option>
-                      <option value="T">Tourist (T)</option>
-                      <option value="H">Hiker (H)</option>
-                      <option value="PH">Professional Hiker (PH)</option>
-                    </InputOption>
+                    <MapContainer
+                      center={[gpxPoints[Math.ceil(gpxPoints.length / 2)].lat, gpxPoints[Math.ceil(gpxPoints.length / 2)].lon]}
+                      bounds={[gpxPoints[0], gpxPoints.at(-1),]}
+                      scrollWheelZoom
+                      style={{ height: 500 + "px", width: "100%", }}>
+                      <ClickPickNearest points={gpxPoints} coord={coord} setCoord={setCoord} />
+                      <Polyline
+                        pathOptions={{ fillColor: 'red', color: 'blue' }}
+                        positions={gpxPoints}
+                      />
+                      <StartPoint position={gpxPoints[0]} />
+                      <EndPoint position={gpxPoints.at(-1)} />
+                      <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
+                    </MapContainer>
 
-                  <InputContainer>
-                    <Label htmlFor="start-input">Start</Label>
-                    <Input id="start-input" type="text" name="start" placeholder="Start description" value={startDescr} onChange={ev => setStartDescr(ev.target.value)} required />
-                  </InputContainer>
-                  <InputContainer>
-                  <Label htmlFor="startType-input">StartType</Label>
-                    <Input id="startType-input" type="text" name="startType" placeholder="Start type" value={startType} onChange={ev => setStartType(ev.target.value)} />
-                  </InputContainer>
-                  <InputContainer>
-                    <Label htmlFor="end-input">End</Label>
-                    <Input id="end-input" type="text" name="end" placeholder="End description" value={endDescr} onChange={ev => setEndDescr(ev.target.value)} required />
-                  </InputContainer>
-                  <InputContainer>
-                    <Label htmlFor="endType-input">EndType</Label>
-                    <Input id="endType-input" type="text" name="endType" placeholder="End type" value={endType} onChange={ev => setEndType(ev.target.value)} />
-                  </InputContainer>
-                  <InputContainer>
-                    <Label htmlFor="description-input">Description</Label>
-                    <Textarea  id="description-input"  name="description" placeholder="Description..." value={description} onChange={ev => setDescription(ev.target.value)} />
-                  </InputContainer>
-                  <SubmitButtonLarge type="submit">{submitButtonText}</SubmitButtonLarge>
-                </Form>
+                    {coordChange &&
+                      <Form onSubmit={handleSubmitRefPoint}>
+                        <InputContainer>
+                          <PointForm coord={coord} />
+                        </InputContainer>
+                        <InputContainer>
+                          <Label htmlFor="Point description-input">Point Description</Label>
+                          <Input id="Point description-input" type="text" name="descr" placeholder="Point description" value={refPDesc} onChange={ev => setRefPDesc(ev.target.value)} required />
+                        </InputContainer>
+                        <InputContainer>
+                          <Label htmlFor="Point type-input">Point Type</Label>
+                          <Input id="Point type" type="text" name="startType" placeholder="Point type" value={refPType} onChange={ev => setRefPType(ev.target.value)} />
+                        </InputContainer>
+                        <SubmitButton type="submit">Add this Reference Point</SubmitButton>
+                      </Form>
+                    }
+
+                  </TextContent>
+                </ImageMapColumn>
               }
-            </TextContent>
-          </TextColumn>
-        </TwoColumn>
-            </FormContainer>
-          </Content>
+              <TextColumn textOnLeft={textOnLeft}>
+                <TextContent>
+                  <Heading>{heading}</Heading>
+                  <Description>{subheading}</Description>
+
+                  {!fileOk &&
+                    <Form onSubmit={handleSubmitFile} >
+
+                      <Input type="file" required onChange={event => setFile(event.target.files[0])} />
+                      {msgErr &&
+                        <Alert>{msgErr}</Alert>
+                      }
+                      <SubmitButton type="submit">{submitButtonText}</SubmitButton>
+                    </Form>
+                  }
+                  {fileOk &&
+                    <Form onSubmit={handleSubmitForm}>
+                      <InputContainer>
+                        <Label htmlFor="title-input">Title</Label>
+                        <Input id="title-input" type="text" name="title" defaultValue={dataFromGpx.Title} onChange={ev => setTitle(ev.target.value)} />
+                      </InputContainer>
+                      <InputContainer>
+                        <Label htmlFor="length-input">Length</Label>
+                        <Input id="length-input" type="number" step="0.01" name="length" defaultValue={dataFromGpx.Length} readOnly />
+                      </InputContainer>
+                      <InputContainer>
+                        <Label htmlFor="ascent-input">Ascent</Label>
+                        <Input id="ascent-input" type="number" name="ascent" defaultValue={dataFromGpx.Ascent} readOnly />
+                      </InputContainer>
+                      <InputContainer>
+                        <Label htmlFor="time-input">Time</Label>
+                        <Input id="time-input" type="text" name="time" placeholder="dd:hh:mm" value={expectedTime} onChange={ev => setExpectedTime(ev.target.value)} required />
+                      </InputContainer>
+
+                      <InputContainer>
+                        <Label htmlFor="time-input">Difficulty</Label>
+                        <InputOption as="select" value={difficulty} onChange={ev => setDifficulty(ev.target.value)} required >
+                          <option hidden>Difficulty</option>
+                          <option value="T">Tourist (T)</option>
+                          <option value="H">Hiker (H)</option>
+                          <option value="PH">Professional Hiker (PH)</option>
+                        </InputOption>
+                      </InputContainer>
+
+                      <InputContainer>
+                        <Label htmlFor="start-input">Start</Label>
+                        <Input id="start-input" type="text" name="start" placeholder="Start description" value={startDescr} onChange={ev => setStartDescr(ev.target.value)} required />
+                      </InputContainer>
+                      <InputContainer>
+                        <Label htmlFor="startType-input">StartType</Label>
+                        <Input id="startType-input" type="text" name="startType" placeholder="Start type" value={startType} onChange={ev => setStartType(ev.target.value)} />
+                      </InputContainer>
+                      <InputContainer>
+                        <Label htmlFor="end-input">End</Label>
+                        <Input id="end-input" type="text" name="end" placeholder="End description" value={endDescr} onChange={ev => setEndDescr(ev.target.value)} required />
+                      </InputContainer>
+                      <InputContainer>
+                        <Label htmlFor="endType-input">EndType</Label>
+                        <Input id="endType-input" type="text" name="endType" placeholder="End type" value={endType} onChange={ev => setEndType(ev.target.value)} />
+                      </InputContainer>
+                      <InputContainer>
+                        <Label htmlFor="description-input">Description</Label>
+                        <Textarea id="description-input" name="description" placeholder="Description..." value={description} onChange={ev => setDescription(ev.target.value)} />
+                      </InputContainer>
+                      <SubmitButtonLarge type="submit">{submitButtonText}</SubmitButtonLarge>
+                    </Form>
+                  }
+                </TextContent>
+              </TextColumn>
+            </TwoColumn>
+          </FormContainer>
+        </Content>
       </Container>
     </AnimationRevealPage>
   );
