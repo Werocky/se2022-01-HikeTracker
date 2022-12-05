@@ -12,8 +12,8 @@ import { PrimaryButton as PrimaryButtonBase } from "../components/misc/Buttons.j
 import { useNavigate } from "react-router-dom";
 import API from "../API";
 
-const HeadingRow = tw.div`flex`;
-const Heading = tw(SectionHeading)`text-gray-900`;
+const HeadingRow = tw.div`flex justify-center `;
+const Heading = tw(SectionHeading)`text-gray-800`;
 const Heading2= tw(SectionHeading)`text-gray-100`;
 const Posts = tw.div`mt-6 sm:-mr-8 flex flex-wrap`;
 const PostContainer = styled.div`
@@ -85,6 +85,7 @@ const Description = tw.div`truncate `;
 const ButtonContainer = tw.div`flex justify-center`;
 const LoadMoreButton = tw(PrimaryButton)`mt-16 mx-auto`;
 const PostAction = tw(PrimaryButtonBase)`w-full mt-8`;
+const ShowButton = tw()`mt-4 inline-block w-56 tracking-wide text-center py-5`;
 
 
 function Huts(props) {
@@ -110,6 +111,9 @@ function Huts(props) {
     const [name, setName] = useState('')
 
     const [huts, setHuts] = useState(props.huts);
+    const [show, setShow] = useState(false);
+
+
 
     useEffect(() => {
         const loadLocation = async () => {
@@ -280,7 +284,12 @@ function Huts(props) {
                         <Heading>{headingText}</Heading>
 
                     </HeadingRow>
+                    <div>
+                        <ShowButton  onClick={() => setShow(!show)}>{show ? 'Close The Filter' : 'Select The Filter'}</ShowButton>
+                        {show && <div>
                     <Filters/>
+                            </div>}
+                    </div>
                     {!props.loading &&
                         <Posts>
                             {huts.slice(0, visible).map((hut, index) => (
