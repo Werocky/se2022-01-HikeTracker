@@ -102,7 +102,10 @@ const submitForm = async (event) => {
       NumAuto:numAuto
 
     }
-    API.createParkingLot(p).then(setMsg("Parking Lot added")).catch(err => err);
+    API.createParkingLot(p).then(()=>
+    {setMsg("Parking Lot added");
+      navigate("/hikes");
+  }).catch(err => err);
 }
 }
 
