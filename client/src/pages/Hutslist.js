@@ -95,7 +95,6 @@ function Huts(props) {
     const [visible, setVisible] = useState(6);
     const [heading, setHeading] = useState("Hut's filters");
     const [loading, setLoading] = useState(true);
-    const [dirty, setDirty] = useState(true);
 
     //LOCATIONS AND FILTER'S DATA
     const [defaultHuts, setDefaultHuts] = useState(props.huts);
@@ -118,14 +117,7 @@ function Huts(props) {
     }, []);
 
     useEffect(() => {   // check login     
-        const reloadHuts = async () => {
-            const list = await API.getHutsFilters();
-            props.setHuts(list);
-        };
-        if (dirty) {
-            reloadHuts();
-            setDirty(false);
-        }
+        setHuts(props.huts);
     }, [props.huts]);
 
     const onLoadMoreClick = () => {
