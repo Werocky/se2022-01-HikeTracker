@@ -85,17 +85,16 @@ function Register(props){
 
     <Form onSubmit={handleSubmit}>
       <Input type="email" placeholder="Email" value={email} onChange={ev => setEmail(ev.target.value)} required={true}/>
-      {/*change to choose a role*/}
+      <Input type="password" placeholder="Password" value={password} onChange={ev => setPassword(ev.target.value)} required={true} minLength={4} maxLength={16}/>
       <Input type="role" defaultValue={'DEFAULT'} as="select" aria-label="select" onChange={ev => setRole(ev.target.value)} required={true} >
         <option value='DEFAULT' hidden>Select the type of user you are</option>
         <option value="H">Hiker</option>
         <option value="L">Local Guide</option>
         <option value="O">Other to be defined</option>
       </Input>
-      <Input type="password" placeholder="Password" value={password} onChange={ev => setPassword(ev.target.value)} required={true} minLength={4} maxLength={16}/>
       <Input type="name" placeholder="Name" value={name} onChange={ev => setName(ev.target.value)} required={true} minLength={1} maxLength={20}/>
       <Input type="surname" placeholder="Surname" value={surname} onChange={ev => setSurname(ev.target.value)} required={true} minLength={1} maxLength={20}/>
-      <Input type="phone" placeholder="Phone" value={phone} onChange={ev => setPhone(ev.target.value)} required={true} minLength={10} maxLength={13}/>
+      <Input type="phone" placeholder="Phone Number" value={phone} onChange={ev => setPhone(ev.target.value)} required={true} minLength={10} maxLength={13}/>
       <SubmitButton type="submit">
         <SubmitButtonIcon className="icon" />
         <span className="text">{submitButtonText}</span>
