@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import AnimationRevealPage from "../helpers/AnimationRevealPage.js";
-import {  ContentWithPaddingXl } from "../components/misc/Layouts";
+import { ContentWithPaddingXl } from "../components/misc/Layouts";
 import tw from "twin.macro";
 import styled from "styled-components";
 import { css } from "styled-components/macro";
@@ -14,7 +14,7 @@ import API from "../API";
 
 const HeadingRow = tw.div`flex justify-center `;
 const Heading = tw(SectionHeading)`text-gray-800`;
-const Heading2= tw(SectionHeading)`text-gray-100`;
+const Heading2 = tw(SectionHeading)`text-gray-100`;
 const Posts = tw.div`mt-6 sm:-mr-8 flex flex-wrap`;
 const PostContainer = styled.div`
   ${tw`mt-10 w-full sm:w-1/2 lg:w-1/3 sm:pr-8`}
@@ -90,25 +90,17 @@ const ShowButton = tw(PrimaryButtonBase)`mt-4 inline-block w-56 tracking-wide te
 
 function Huts(props) {
     const headingText = "Huts";
-    
+
     //FORM VARIABLES
     const [visible, setVisible] = useState(6);
     const [heading, setHeading] = useState("Hut's filters");
-    const [submitButtonText, setSubmitButtonText] = useState('Submit');
-    const [resetButtonText, setResetButtonText] = useState('Reset');
     const [loading, setLoading] = useState(true);
     const [dirty, setDirty] = useState(true);
 
     //LOCATIONS AND FILTER'S DATA
     const [locations, setLocations] = useState(undefined);
-    const [filterType, setFilterType] = useState('');
-    const [filterValue, setFilterValue] = useState('');
+    
 
-    //FILTERS FOR HUTS
-    const [whenOpen, setWhenOpen] = useState('');
-    const [beds, setBeds] = useState(0);
-    const [price, setPrice] = useState(0.0);
-    const [name, setName] = useState('')
 
     const [huts, setHuts] = useState(props.huts);
     const [show, setShow] = useState(false);
@@ -117,28 +109,28 @@ function Huts(props) {
 
     useEffect(() => {
         const loadLocation = async () => {
-          const locationObj = await API.getHutsLocations();
-          //console.log(locationObj);
-          setLocations(locationObj);
-          setLoading(false);
+            const locationObj = await API.getHutsLocations();
+            //console.log(locationObj);
+            setLocations(locationObj);
+            setLoading(false);
         }
         try {
-          loadLocation();
+            loadLocation();
         } catch (err) {
-          //handling err
+            //handling err
         }
-      }, []);
-      
+    }, []);
+
     useEffect(() => {   // check login     
         const reloadHuts = async () => {
             const list = await API.getHutsFilters();
             props.setHuts(list);
         };
-        if(dirty){
+        if (dirty) {
             reloadHuts();
             setDirty(false);
         }
-      }, [props.huts]);
+    }, [props.huts]);
 
     const onLoadMoreClick = () => {
         setVisible(v => v + 6);
@@ -146,133 +138,6 @@ function Huts(props) {
             setVisible(huts.length);
         }
     };
-
-    const handleSubmit = async (event) => {
-        event.preventDefault();
-        const loc = filterValue ? { locationType: filterType, location: filterValue } : null;
-        const huts = await API.getHutsFilters(name ? name : null, loc, whenOpen ? whenOpen : null, beds ? beds : null, price ? price : null);
-        console.log(huts);
-        setHuts(huts);
-        setLoading(false);
-      }
-    
-      const handleReset = (event) => {
-        props.setLoading(true);
-        setFilterType('');
-        setFilterValue('');
-        setWhenOpen('');
-        setBeds(0);
-        setPrice(0.0);
-        setName('');
-      }
-    
-    function Filters(props){
-        return(
-            <>
-            {!loading &&
-                <Container>
-                    <Content>
-                        <FormContainer>
-                            {/*<Heading2>{heading}</Heading2>*/}
-                            <div tw="mx-auto max-w-4xl">
-                             <form onSubmit={handleSubmit}>
-                {/* SELECTS THE TYPE OF FILTER (CITY, PROVINCE, ETC) */}
-                <ThreeColumn>
-                    <Column>
-                        <Instruction>
-                            Filter Type
-                        </Instruction>
-                        <InputOption  as="select" value={filterType} onChange={ev => setFilterType(ev.target.value)} >
-                            <option hidden>Filter type</option>
-                            <option value="City">City</option>
-                            <option value="Province">Province</option>
-                            <option value="Region">Region</option>
-                            <option value="Country">Country</option>
-                        </InputOption>
-
-                        <InputContainer>
-                            <Label htmlFor="number-input">Number of beds</Label>
-                            <Input id="number-input" type="number" name="beds" placeholder="Insert the number of beds" value={beds} onChange={ev => setBeds(ev.target.value)} />
-                        </InputContainer>
-
-                    </Column>
-                    <Column>
-                        <Instruction>
-                            Type Region
-                        </Instruction>
-                { /* SELECTS THE VALUE BASED ON THE FILTER SELECTED (SHOWS ALL CITIES IN DB IF CITY FILTER IS SELECTED, PROVINCES IF PROVINCE IS SELECTED AND SO ON) */}
-                <InputOption  as="select" value={filterValue} onChange={ev => setFilterValue(ev.target.value)} >
-                    <option hidden>Select {filterType}</option>
-                    {
-                    filterType === 'City' ?
-                        locations.City.map((el) => {
-                            console.log(el)
-                            return <option key={el} value={el}>{el}</option>
-                        })
-                    : 
-                    filterType === 'Province' ?
-                        locations.Province.map((el) => {
-                          return <option key={el} value={el}>{el}</option>
-                        })
-                    : 
-                    filterType === 'Region' ?
-                        locations.Region.map((el) => {
-                            return <option key={el} value={el}>{el}</option>
-                        })
-                    :
-                    filterType === 'Country' ?
-                        locations.Country.map((el) => {
-                            return <option key={el} value={el}>{el}</option>
-                        })
-                    : <></>
-                  }
-                </InputOption>
-                        <InputContainer>
-                            <Label htmlFor="price-input">Average price</Label>
-                            <Input id="price-input" type="number" name="avgPrice" placeholder="Insert the average price" value={price} onChange={ev => setPrice(ev.target.value)} />
-                        </InputContainer>
-                    </Column>
-
-                    <Column>
-                        <Instruction>
-                            Opening Session
-                        </Instruction>
-                        <InputOption  as="select" value={whenOpen} onChange={ev => setWhenOpen(ev.target.value)} >
-                            <option hidden>Select the opening period</option>
-                            <option value="S">Summer</option>
-                            <option value="SW">Summer and Winter</option>
-                            <option value="W">Winter</option>
-                           <option value="Y">All year</option>
-                           <option value="C">closed</option>
-                        </InputOption>
-                        <InputContainer>
-                            <Label htmlFor="name-input">Hut's Name</Label>
-                            <Input id="name-input" type="text" name="hutName" placeholder="name" value={name} onChange={ev => setName(ev.target.value)} />
-                        </InputContainer>
-
-                    </Column>
-               </ThreeColumn>
-                                 <TwoColumn>
-                                     <Column2>
-                                         <ButtonContainer>
-                                             <SubmitButton type="reset" onClick={handleReset}>{resetButtonText}</SubmitButton>
-                                         </ButtonContainer>
-                                     </Column2>
-                                     <Column2>
-                                         <ButtonContainer>
-                                             <SubmitButton type="submit">{submitButtonText}</SubmitButton>
-                                         </ButtonContainer>
-                                     </Column2>
-                                 </TwoColumn>
-                             </form>
-                            </div>
-
-        </FormContainer>
-                    </Content>
-                </Container>
-            }
-        </>)
-    }
 
 
     return (
@@ -285,10 +150,16 @@ function Huts(props) {
 
                     </HeadingRow>
                     <div>
-                        <ShowButton  onClick={() => setShow(!show)}>{show ? 'Close The Filter' : 'Select The Filter'}</ShowButton>
+                        <ShowButton onClick={() => setShow(!show)}>{show ? 'Close The Filter' : 'Select The Filter'}</ShowButton>
                         {show && <div>
-                    <Filters/>
-                            </div>}
+                            <Filters
+                                locations={locations}
+                                setHuts={setHuts}
+                                setLoading={setLoading}
+                                loading={loading}
+                                
+                                />
+                        </div>}
                     </div>
                     {!props.loading &&
                         <Posts>
@@ -309,17 +180,169 @@ function Huts(props) {
     );
 }
 
+
+
+function Filters(props) {
+
+    const [submitButtonText, setSubmitButtonText] = useState('Submit');
+    const [resetButtonText, setResetButtonText] = useState('Reset');
+    
+
+
+    //FILTERS LOCATION
+    const [filterType, setFilterType] = useState('');
+    const [filterValue, setFilterValue] = useState('');
+    
+
+    //FILTERS FOR HUTS
+    const [whenOpen, setWhenOpen] = useState('');
+    const [beds, setBeds] = useState(0);
+    const [price, setPrice] = useState(0.0);
+    const [name, setName] = useState('')
+
+    const handleSubmit = async (event) => {
+        event.preventDefault();
+        const loc = filterValue ? { locationType: filterType, location: filterValue } : null;
+        const huts = await API.getHutsFilters(name ? name : null, loc, whenOpen ? whenOpen : null, beds ? beds : null, price ? price : null);
+        console.log(huts);
+        props.setHuts(huts);
+        props.setLoading(false);
+    }
+
+    const handleReset = (event) => {
+        // props.setLoading(true); ??
+        setFilterType('');
+        setFilterValue('');
+        setWhenOpen('');
+        setBeds(0);
+        setPrice(0.0);
+        setName('');
+    }
+
+    return (
+        <>
+            {!props.loading &&
+                <Container>
+                    <Content>
+                        <FormContainer>
+                            {/*<Heading2>{heading}</Heading2>*/}
+                            <div tw="mx-auto max-w-4xl">
+                                <form onSubmit={handleSubmit}>
+                                    {/* SELECTS THE TYPE OF FILTER (CITY, PROVINCE, ETC) */}
+                                    <ThreeColumn>
+                                        <Column>
+                                            <Instruction>
+                                                Location Type
+                                            </Instruction>
+                                            <InputOption as="select" value={filterType} onChange={ev => setFilterType(ev.target.value)} >
+                                                <option hidden>Location</option>
+                                                <option value="City">City</option>
+                                                <option value="Province">Province</option>
+                                                <option value="Region">Region</option>
+                                                <option value="Country">Country</option>
+                                            </InputOption>
+
+                                            <InputContainer>
+                                                <Label htmlFor="number-input">Number of beds</Label>
+                                                <Input id="number-input" type="number" name="beds" placeholder="Insert the number of beds" value={beds} onChange={ev => setBeds(ev.target.value)} />
+                                            </InputContainer>
+
+                                        </Column>
+                                        <Column>
+                                            <Instruction>
+                                                {filterType === 'City' ? 'City'
+                                                    : filterType === 'Province' ? 'Province'
+                                                        : filterType === 'Region' ? 'Region'
+                                                            : filterType === 'Country' ? 'Country'
+                                                                : "-------"}
+                                            </Instruction>
+                                            { /* SELECTS THE VALUE BASED ON THE FILTER SELECTED (SHOWS ALL CITIES IN DB IF CITY FILTER IS SELECTED, PROVINCES IF PROVINCE IS SELECTED AND SO ON) */}
+                                            <InputOption as="select" value={filterValue} onChange={ev => setFilterValue(ev.target.value)} >
+                                                <option hidden>Select {filterType ? filterType : "location first"}</option>
+                                                {
+                                                    filterType === 'City' ?
+                                                        props.locations.City.map((el) => {
+                                                            console.log(el)
+                                                            return <option key={el} value={el}>{el}</option>
+                                                        })
+                                                        :
+                                                        filterType === 'Province' ?
+                                                            props.locations.Province.map((el) => {
+                                                                return <option key={el} value={el}>{el}</option>
+                                                            })
+                                                            :
+                                                            filterType === 'Region' ?
+                                                                props.locations.Region.map((el) => {
+                                                                    return <option key={el} value={el}>{el}</option>
+                                                                })
+                                                                :
+                                                                filterType === 'Country' ?
+                                                                    props.locations.Country.map((el) => {
+                                                                        return <option key={el} value={el}>{el}</option>
+                                                                    })
+                                                                    : <></>
+                                                }
+                                            </InputOption>
+                                            <InputContainer>
+                                                <Label htmlFor="price-input">Average price</Label>
+                                                <Input id="price-input" type="number" name="avgPrice" placeholder="Insert the average price" value={price} onChange={ev => setPrice(ev.target.value)} />
+                                            </InputContainer>
+                                        </Column>
+
+                                        <Column>
+                                            <Instruction>
+                                                Opening Session
+                                            </Instruction>
+                                            <InputOption as="select" value={whenOpen} onChange={ev => setWhenOpen(ev.target.value)} >
+                                                <option hidden>Select the opening period</option>
+                                                <option value="S">Summer</option>
+                                                <option value="SW">Summer and Winter</option>
+                                                <option value="W">Winter</option>
+                                                <option value="Y">All year</option>
+                                                <option value="C">closed</option>
+                                            </InputOption>
+                                            <InputContainer>
+                                                <Label htmlFor="name-input">Hut's Name</Label>
+                                                <Input id="name-input" type="text" name="hutName" placeholder="name" value={name} onChange={ev => setName(ev.target.value)} />
+                                            </InputContainer>
+
+                                        </Column>
+                                    </ThreeColumn>
+                                    <TwoColumn>
+                                        <Column2>
+                                            <ButtonContainer>
+                                                <SubmitButton type="reset" onClick={handleReset}>{resetButtonText}</SubmitButton>
+                                            </ButtonContainer>
+                                        </Column2>
+                                        <Column2>
+                                            <ButtonContainer>
+                                                <SubmitButton type="submit">{submitButtonText}</SubmitButton>
+                                            </ButtonContainer>
+                                        </Column2>
+                                    </TwoColumn>
+                                </form>
+                            </div>
+
+                        </FormContainer>
+                    </Content>
+                </Container>
+            }
+        </>)
+}
+
+
+
 function HutElement(props) {
 
     const hut = props.hut;
     const imageSrc = "https://images.unsplash.com/photo-1418854982207-12f710b74003?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1024&q=80";
-    
+
     const navigate = useNavigate();
 
-    let loc = hut.City?hut.City+", ":"" ;
-    loc += hut.Province?hut.Province+", ":"";
-    loc += hut.Region?hut.Region+", ":""
-    loc += hut.Country?hut.Country:"";
+    let loc = hut.City ? hut.City + ", " : "";
+    loc += hut.Province ? hut.Province + ", " : "";
+    loc += hut.Region ? hut.Region + ", " : ""
+    loc += hut.Country ? hut.Country : "";
 
     return (
         <PostContainer key={props.index}>
@@ -330,7 +353,7 @@ function HutElement(props) {
                     <Category>{hut.Elevation} mt</Category>
                     <CreationDate>date</CreationDate>
                     <Description>{loc}</Description>
-                    <PostAction onClick={ () => navigate('/huts/' + hut.RefPointID)}>View details</PostAction>
+                    <PostAction onClick={() => navigate('/huts/' + hut.RefPointID)}>View details</PostAction>
                 </Info>
             </Post>
         </PostContainer>
