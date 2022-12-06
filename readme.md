@@ -4,10 +4,10 @@ To correctly use the app using docker you must clone the entire repository, once
 ```docker-compose build && docker-compose up```  
 It will automatically build the docker images and containers from the project, expose the ports and start the containers.
 ## User's credentials
-- username: `a@polito.it` password: `password` type: `hiker`
-- username: `b@polito.it` password: `password` type: `hiker`
-- username: `c@polito.it` password: `password` type: `hiker`
-- username: `d@polito.it` password: `password` type: `local guide`
+- username: `a@polito.it` password: `password` type: `Hut Manager`
+- username: `b@polito.it` password: `password` type: `Hiker`
+- username: `c@polito.it` password: `password` type: `Hiker`
+- username: `d@polito.it` password: `password` type: `Local Guide`
 
 ## DB structure
 ### Users
