@@ -129,25 +129,6 @@ function HikeList(props) {
           <HeadingRow>
             <Heading>{headingText}</Heading>
           </HeadingRow>
-          { /* OLD FILTER COMPONENT */}
-          { /* ------------------------------------------------------- */}
-          {/* <FormContainer>
-            <Form.Select aria-label="Default select example" onChange={(event) => {
-              setSortTypeDesc(event.target.value);
-            }}>
-              <option value="TitleAsc">Title (Ascendent)</option>
-              <option value="TitleDesc">Title  (Descendent)</option>
-              <option value="LengthAsc" >Length - km (Ascendent)</option>
-              <option value="LengthDesc" >Length - km (Descendent)</option>
-              <option value="AscentAsc" >Ascent - m (Ascendent)</option>
-              <option value="AscentDesc" >Ascent - m (Descendent)</option>
-              <option value="DifficultyAsc" >Difficulty (Ascendent)</option>
-              <option value="DifficultyDesc" >Difficulty (Descendent) </option>
-              <option value="ExpectedTimeAsc" >Expected time - h:m (Ascendent)</option>
-              <option value="ExpectedTimeDesc" >Expected time - h:m (Descendent)</option>
-            </Form.Select>
-          </FormContainer> */}
-          { /* ------------------------------------------------------- */}
           <div>
             <ShowButton onClick={() => setShow(!show)}>{show ? 'Close The Filter' : 'Select The Filter'}</ShowButton>
             {show && <div>

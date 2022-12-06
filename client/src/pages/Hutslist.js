@@ -12,7 +12,7 @@ import { PrimaryButton as PrimaryButtonBase } from "../components/misc/Buttons.j
 import { useNavigate } from "react-router-dom";
 import API from "../API";
 
-const HeadingRow = tw.div`flex justify-center `;
+const HeadingRow = tw.div`flex`;
 const Heading = tw(SectionHeading)`text-gray-800`;
 const Heading2 = tw(SectionHeading)`text-gray-100`;
 const Posts = tw.div`mt-6 sm:-mr-8 flex flex-wrap`;
@@ -135,7 +135,6 @@ function Huts(props) {
                 <ContentWithPaddingXl>
                     <HeadingRow>
                         <Heading>{headingText}</Heading>
-
                     </HeadingRow>
                     <div>
                         <ShowButton onClick={() => setShow(!show)}>{show ? 'Close The Filter' : 'Select The Filter'}</ShowButton>
