@@ -266,7 +266,7 @@ function Filters(props) {
             else
               sorted = [...data].sort((a, b) => a[sortProperty] - b[sortProperty]);
           }
-
+          console.log(sorted)
           props.setHikes(sorted);
         };
       sortArray(props.sortTypeDesc);
@@ -454,7 +454,7 @@ function HikeElement(props) {
     <PostContainer key={props.index} >
       <Post className="group" as="a" >
         <Info>
-        <Image imageSrc={hike.image} />
+        <Image imageSrc={hike.image === undefined ? hike.Picture : hike.image} />
           <Category>
             {
               hike.Difficulty === "T" ? "Tourist (T)"
