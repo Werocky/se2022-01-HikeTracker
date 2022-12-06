@@ -8,7 +8,7 @@ import { PrimaryButton as PrimaryButtonBase } from "../misc/Buttons.js";
 import EmailIllustrationSrc from "../../images/email-illustration.svg";
 import AnimationRevealPage from "../../helpers/AnimationRevealPage.js";
 import Header from "../headers/light.js";
-import {Alert, Button, FloatingLabel, FormLabel, Row} from "react-bootstrap";
+import {Alert, Button, FloatingLabel, FormLabel, Row, Col} from "react-bootstrap";
 import { MapContainer, TileLayer, Marker, Popup, useMapEvents } from 'react-leaflet';
 import PhoneInput from 'react-phone-number-input'
 import 'react-phone-number-input/style.css'
@@ -78,7 +78,8 @@ function AddParkingLot(props){
     const [msg, setMsg] = useState('');
     const [numAuto,setNumAuto]=useState();
     const [gratis,setGratis]=useState("");
-
+    const [errorMsg,setErrorMsg]=useState("");
+    const [msgState,setmsgState]=useState("danger");
 
 const submitForm = async (event) => {
   event.preventDefault();
@@ -104,8 +105,10 @@ const submitForm = async (event) => {
     }
     API.createParkingLot(p).then(()=>
     {setMsg("Parking Lot added");
-      navigate("/hikes");
-  }).catch(err => err);
+    props.setMessage("Parking Lot added");
+    props.setMsgType('primary');
+      //navigate("/hikes");
+  }).catch(err => props.errorHandler(err));
 }
 }
 
@@ -132,6 +135,11 @@ const ClickPick = () => {
   return (
     <AnimationRevealPage>
     <Header logout={props.logout}/>
+    <Container>
+        <Row><Col>
+          {errorMsg ? <Alert variant={msgState} onClose={() => {setErrorMsg(''); setmsgState('danger');}} dismissible>{errorMsg}</Alert> : false}
+        </Col></Row>
+      </Container>
     <Container>
         <Content>
           <FormContainer>

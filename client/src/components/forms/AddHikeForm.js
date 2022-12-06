@@ -7,7 +7,7 @@ import { PrimaryButton as PrimaryButtonBase } from "../misc/Buttons.js";
 import EmailIllustrationSrc from "../../images/email-illustration.svg";
 import AnimationRevealPage from "../../helpers/AnimationRevealPage.js";
 import Header from "../headers/light.js";
-import { Alert, Button, FloatingLabel, Row } from "react-bootstrap";
+import { Alert, Button, FloatingLabel, Row, Col } from "react-bootstrap";
 import { MapContainer, Marker, Polyline, Popup, TileLayer, useMapEvents } from "react-leaflet";
 import AuthContext from "../../AuthContext.js";
 import API from "../../API.js";
@@ -88,7 +88,8 @@ function AddHikeForm(props) {
   const [refPointArray, setRefPointArray] = useState([]);
   const [refPType, setRefPType] = useState("");
   const [refPDesc, setRefPDesc] = useState("");
-
+  const [errorMsg,setErrorMsg]=useState("");
+  const [msgState,setmsgState]=useState("danger");
   const [msgErr, setMsgErr] = useState("");
 
   const [heading, setHeading] = useState("Add a new hike here");
@@ -196,9 +197,10 @@ function AddHikeForm(props) {
     console.log(refP);
     try {
       const res = await API.addHike(hike, file, refP, auth.user.Id);
-      console.log(res);
+      setmsgState('primary');
+      setMsgErr('Hike Added!');
     } catch (err) {
-      console.log(err);
+      props.errorHandler(err);
     }
   }
 
@@ -231,6 +233,11 @@ function AddHikeForm(props) {
 
   return (
     <AnimationRevealPage>
+            <Container>
+        <Row><Col>
+          {errorMsg ? <Alert variant={msgState} onClose={() => {setErrorMsg(''); setmsgState('danger');}} dismissible>{errorMsg}</Alert> : false}
+        </Col></Row>
+      </Container>
       <Header logout={props.logout} />
       <Container>
         <Content>

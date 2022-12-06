@@ -297,7 +297,7 @@ app.post('/addHike', async (req, res) => {
 
     // add hike
     await hikes.addHike(hike);
-    console.log("Hike added");
+    
 
 
     //get all ref point already saved

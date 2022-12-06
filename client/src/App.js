@@ -42,11 +42,11 @@ function App() {
 
   function errorHandler(err) {
     if (err.hasOwnProperty('error'))
-      setMessage(() => err.error.toString());
+      {setMessage(() => err.error.toString()); setMsgType('danger');}
     else if (err.hasOwnProperty('message'))
-      setMessage(() => err.message);
+      {setMessage(() => err.message); setMsgType('danger');}
     else
-      setMessage(() => err.toString());
+      {setMessage(() => err.toString()); setMsgType('danger');}
   }
 
   const login = (email, password) => {
@@ -90,7 +90,7 @@ function App() {
   return (
     <BrowserRouter>
       <AuthContext.Provider value={auth}>   {/* this is used to pass user information*/}
-        <AppLayout login={login} logout={logout} register={register} setLogged={setAuth} message={message} setMessage={setMessage} msgType={msgType} setMsgType={setMsgType}/>
+        <AppLayout login={login} logout={logout} register={register} setLogged={setAuth} message={message} setMessage={setMessage} msgType={msgType} setMsgType={setMsgType} errorHandler={errorHandler}/>
       </AuthContext.Provider>
     </BrowserRouter>
   );
@@ -159,7 +159,7 @@ function AppLayout(props) {
           // < LoginComponent  login={props.login} />
         } />
         <Route path='/addHike' element={
-          <AddHikeForm logout={props.logout} /> //set message
+          <AddHikeForm logout={props.logout} message={props.message} errorHandler={props.errorHandler} /> 
         } />
         <Route path='/hikes' element={
           <Hikes hikes={hikes} loading={loading} setHikes={setHikes} logout={props.logout} />
@@ -177,13 +177,13 @@ function AppLayout(props) {
         {/*  <HutsPage logout={props.logout} />*/}
         {/*} />*/}
         <Route path='/addParkingLot' element={
-          <AddParkingLot logout={props.logout} /> //set message
+          <AddParkingLot logout={props.logout} message={props.message} errorHandler={props.errorHandler} setMessage={props.setMessage} setMsgType={props.setMsgType}/> 
         } />
         <Route path='/verify' element={
           < VerifiedMessage />
         } />
          <Route path='/addHut' element={
-          < AddHutForm huts = {huts} setHuts={setHuts} message={props.message} errorHandler={props.errorHandler} logout={props.logout} /> //set message
+          < AddHutForm huts = {huts} setHuts={setHuts} message={props.message} errorHandler={props.errorHandler} logout={props.logout} /> 
         } />
 
         <Route path='*' element={<Navigate to='/' replace />} />
