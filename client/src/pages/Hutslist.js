@@ -85,7 +85,7 @@ const Description = tw.div`truncate `;
 const ButtonContainer = tw.div`flex justify-center`;
 const LoadMoreButton = tw(PrimaryButton)`mt-16 mx-auto`;
 const PostAction = tw(PrimaryButtonBase)`w-full mt-8`;
-const ShowButton = tw()`mt-4 inline-block w-56 tracking-wide text-center py-5`;
+const ShowButton = tw(PrimaryButton)`mt-4 inline-block w-56 tracking-wide text-center py-5`;
 
 
 function Huts(props) {
@@ -98,11 +98,10 @@ function Huts(props) {
     const [dirty, setDirty] = useState(true);
 
     //LOCATIONS AND FILTER'S DATA
+    const [defaultHuts, setDefaultHuts] = useState(props.huts);
     const [locations, setLocations] = useState(undefined);
     const [huts, setHuts] = useState(props.huts);
     const [show, setShow] = useState(false);
-
-
 
     useEffect(() => {
         const loadLocation = async () => {
@@ -154,7 +153,7 @@ function Huts(props) {
                                 setHuts={setHuts}
                                 setLoading={setLoading}
                                 loading={loading}
-                                
+                                defaultHuts={defaultHuts}
                                 />
                         </div>}
                     </div>
@@ -177,24 +176,19 @@ function Huts(props) {
     );
 }
 
-
-
 function Filters(props) {
 
     const [submitButtonText, setSubmitButtonText] = useState('Submit');
     const [resetButtonText, setResetButtonText] = useState('Reset');
-    
-
 
     //FILTERS LOCATION
     const [filterType, setFilterType] = useState('');
     const [filterValue, setFilterValue] = useState('');
-    
 
     //FILTERS FOR HUTS
     const [whenOpen, setWhenOpen] = useState('');
-    const [beds, setBeds] = useState(0);
-    const [price, setPrice] = useState(0.0);
+    const [beds, setBeds] = useState(undefined);
+    const [price, setPrice] = useState(undefined);
     const [name, setName] = useState('')
 
     const handleSubmit = async (event) => {
@@ -207,13 +201,13 @@ function Filters(props) {
     }
 
     const handleReset = (event) => {
-        // props.setLoading(true); ??
         setFilterType('');
         setFilterValue('');
         setWhenOpen('');
         setBeds(undefined);
         setPrice(undefined);
         setName('');
+        props.setHuts(props.defaultHuts);
     }
 
     return (
@@ -251,7 +245,7 @@ function Filters(props) {
                                                     : filterType === 'Province' ? 'Province'
                                                         : filterType === 'Region' ? 'Region'
                                                             : filterType === 'Country' ? 'Country'
-                                                                : "-------"}
+                                                                : "Select location first"}
                                             </Instruction>
                                             { /* SELECTS THE VALUE BASED ON THE FILTER SELECTED (SHOWS ALL CITIES IN DB IF CITY FILTER IS SELECTED, PROVINCES IF PROVINCE IS SELECTED AND SO ON) */}
                                             <InputOption as="select" value={filterValue} onChange={ev => setFilterValue(ev.target.value)} >
@@ -300,7 +294,7 @@ function Filters(props) {
                                             </InputOption>
                                             <InputContainer>
                                                 <Label htmlFor="name-input">Hut's Name</Label>
-                                                <Input id="name-input" type="text" name="hutName" placeholder="name" value={name} onChange={ev => setName(ev.target.value)} />
+                                                <Input id="name-input" type="text" name="hutName" placeholder="Name" value={name} onChange={ev => setName(ev.target.value)} />
                                             </InputContainer>
 
                                         </Column>

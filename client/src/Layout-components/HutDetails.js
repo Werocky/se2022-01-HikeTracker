@@ -121,6 +121,12 @@ function HutDetails(props) {
       {!loading &&
         <Container>
           <TwoColumn>
+          {!auth.login &&
+              <ImageMapColumn css={imageContainerCss}>
+                You should be logged to see the map
+                <Image imageSrc={imageSrc} css={imageCss} />
+              </ImageMapColumn>
+            }
             {auth.login &&
               <ImageMapColumn css={imageContainerCss}>
                 <MapContainer

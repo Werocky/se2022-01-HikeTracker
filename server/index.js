@@ -129,6 +129,30 @@ app.get('/getHikes', (req, res) => {
     .catch(() => res.status(500).end());
 });
 
+//GET HIKE LOCATIONS
+app.get('/hikesLocations', async (req, res) => {
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    return res.status(422).json({ error: 'cannot process request' });
+  }
+  try {
+    const city = await hikes.getHikeCity();
+    const province = await hikes.getHikeProvince();
+    const region = await hikes.getHikeRegion();
+    const country = await hikes.getHikeCountry();
+    let location = {
+      City: city.filter((el) => el != false),
+      Province: province.filter((el) => el != false),
+      Region: region.filter((el) => el != false),
+      Country: country.filter((el) => el != false)
+    };
+
+    res.status(200).json(location);
+  } catch (err) {
+    res.status(503).json({ error: `Error` });
+  }
+})
+
 //get hike, given HikeID
 app.post('/getHikeByID', async (req, res) => {
   const errors = validationResult(req);
@@ -156,7 +180,7 @@ app.post('/getFilteredHikes', async (req, res) => {
 
   let filters = req.body;
   let list = [];
-  console.log(filters);
+  //console.log(filters);
   if (checkFiltersPresence(filters) === false) {
     list = await hikes.getHikes();
   }
@@ -183,12 +207,13 @@ const checkFiltersPresence = (filters) => {
   let flag = false;
   const name = Object.getOwnPropertyNames(filters);
   for (let i = 0; i < name.length; i++) {
+    flag = false;
     if (name[i] === 'ExpectedTime' || name[i] === 'Ascent' || name[i] === 'Length') {
       if (filters[name[i]][0] !== null)
-        flag = true;
+      flag = true;
     }
-    else if (name[i] === 'Province' || name[i] === 'City' || name[i] === 'Difficulty') {
-      if (filters[name[i]] !== '' && typeof filters[name[i]] !== 'undefined')
+    else if (name[i] === 'filterType' || name[i] === 'Difficulty') {
+      if (filters[name[i]][0] !== '' && typeof filters[name[i]][0] !== 'undefined' && filters[name[i]][0] !== null && filters[name[i]][1] !== null)
         flag = true;
     }
   }
@@ -211,16 +236,19 @@ const filtering = async (filters, list_curr) => {
   let flag = false;
   let j = 0;
   const list_filters = Object.getOwnPropertyNames(filters);
+  // console.log(list_filters)
   for (var i = 0; i < list_filters.length; i++) {
     flag = checkFiltersPresent(filters[list_filters[i]], list_filters[i]);
     //console.log(filters[list_filters[i]], list_filters[i], flag);  
     if (flag == true) {
-      if (list_filters[i] !== 'Province' && list_filters[i] !== 'City' && list_filters[i] !== 'Difficulty')
+      if(list_filters[i] === 'Difficulty')
+        list_prev = await hikes.getHikesByFilter(list_filters[i], filters[list_filters[i]]);
+      else if (list_filters[i] !== 'filterType')
         list_prev = await hikes.getHikesByFilter(list_filters[i], ...filters[list_filters[i]])
           .then(l => l);
       else
-        list_prev = await hikes.getHikesByFilter(list_filters[i], filters[list_filters[i]])
-          .then(l => l);
+        list_prev = await hikes.getHikesByFilter(filters[list_filters[i]][0], filters[list_filters[i]][1])
+        .then(l => l);
       if (j === 0) {
         prov_list = [...list_prev];
         j = 1;

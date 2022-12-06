@@ -51,6 +51,22 @@ async function getHike(HikeID) {
   }
 }
 
+//GET HIKES LOCATIONS
+async function getHikesLocations() {
+  try {
+    const response = await fetch(APIURL + '/hikesLocations', {
+      method: 'GET',
+    });
+    const result = await response.json();
+    if (response.ok)
+      return result
+    else
+      throw result;
+  } catch (err) {
+    throw err;
+  }
+}
+
 async function getHikeInfo(HikeID) {
   try {
     const response = await fetch(APIURL + '/HikeInfo', {
@@ -110,7 +126,7 @@ async function setStartEndPoints(HikeId, StartId, EndId, Start, End) {
   }
 }
 
-async function getFilteredHikes(minExpectedTime, maxExpectedTime, minAscent, maxAscent, Province, City, minLength, maxLength, Difficulty) {
+async function getFilteredHikes(minExpectedTime, maxExpectedTime, minAscent, maxAscent, filterType, filterValue, minLength, maxLength, Difficulty) {
   try {
     const response = await fetch(APIURL + '/getFilteredHikes', {
       method: 'POST',
@@ -118,8 +134,8 @@ async function getFilteredHikes(minExpectedTime, maxExpectedTime, minAscent, max
         "Length": [minLength, maxLength],
         "ExpectedTime": [minExpectedTime, maxExpectedTime],
         "Ascent": [minAscent, maxAscent],
-        "Province": Province,
-        "City": City,
+        "filterType": [filterType, filterValue],
+        // "filterValue": filterValue,
         "Difficulty": Difficulty
       }),
       headers: {
@@ -579,6 +595,7 @@ const API = {
   setHutDescription,
   addHut,
   getHut,
-  getHutCoords
+  getHutCoords,
+  getHikesLocations
 };
 export default API;

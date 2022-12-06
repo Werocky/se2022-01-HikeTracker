@@ -143,6 +143,11 @@ function AppLayout(props) {
           <HutDetails />
         } />
 
+        { /* TODO: REMOVE AFTER TESTING */}
+        <Route path='/test' element={
+          <Sidebar></Sidebar>
+        }></Route>
+
         <Route path='/register' element={
           <Register logout={props.register} />
           // <RegisterComponent register={props.register} />

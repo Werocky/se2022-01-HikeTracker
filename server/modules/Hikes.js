@@ -5,7 +5,7 @@ const db = require('./DB').db;
 
 //get hikes
 
-const acceptableFilters = ['HikeID', 'Length', 'ExpectedTime', 'Ascent', 'Difficulty', 'Start', 'End', 'Title', 'Region', 'City'];
+const acceptableFilters = ['HikeID', 'Length', 'ExpectedTime', 'Ascent', 'Difficulty', 'Start', 'End', 'Title', 'Region', 'City', 'Province', 'Country'];
 //can be called from APIS to construct a new Hike
 
 class hike{
@@ -158,7 +158,7 @@ It Allows to set a specific filter if MaxValue is not specified or a range if a 
             });
           } else {
             let sql = '';
-            if (filterType != 'Region' && filterType != 'City') {
+            if (filterType != 'Region' && filterType != 'City' && filterType != 'Province' && filterType != 'Country' ) {
               sql = 'SELECT * FROM Hikes WHERE Hikes.' + filterType + ' = ?'
 
             } else {
@@ -195,6 +195,62 @@ It Allows to set a specific filter if MaxValue is not specified or a range if a 
   );
 }
 
+function getHikeCity ()  {
+  return new Promise((resolve, reject) => {
+    const sql = " SELECT DISTINCT City FROM Hikes;"
+    db.all(sql, [], function (err, rows) {
+      if (err)
+        reject(err);
+      else {
+        const city = rows.map((r) => (r.City));
+        resolve(city);
+      }
+    })
+  })
+}
+
+ function getHikeProvince  ()  {
+  return new Promise((resolve, reject) => {
+    const sql = " SELECT DISTINCT Province FROM Hikes;"
+    db.all(sql, [], function (err, rows) {
+      if (err)
+        reject(err);
+      else {
+        const province = rows.map((r) => (r.Province));
+        resolve(province);
+      }
+    })
+  })
+}
+
+ function getHikeRegion  ()  {
+  return new Promise((resolve, reject) => {
+    const sql = " SELECT DISTINCT Region FROM Hikes;"
+    db.all(sql, [], function (err, rows) {
+      if (err)
+        reject(err);
+      else {
+        const region = rows.map((r) => (r.Region));
+        resolve(region);
+      }
+    })
+  })
+}
+
+ function getHikeCountry  ()  {
+  return new Promise((resolve, reject) => {
+    const sql = " SELECT DISTINCT Country FROM Hikes;"
+    db.all(sql, [], function (err, rows) {
+      if (err)
+        reject(err);
+      else {
+        const country = rows.map((r) => (r.Country));
+        resolve(country);
+      }
+    })
+  })
+}
+
 module.exports={
   getHike,
   getHikes,
@@ -204,6 +260,9 @@ module.exports={
   addHike,
   deleteHikes,
   editStartEndPoints,
-  hike
-
+  hike,
+  getHikeCity,
+  getHikeCountry,
+  getHikeProvince,
+  getHikeRegion
 }
