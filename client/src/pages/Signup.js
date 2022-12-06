@@ -38,7 +38,7 @@ const IllustrationImage = styled.div`
   ${tw`m-12 xl:m-16 w-full max-w-lg bg-contain bg-center bg-no-repeat`}
 `;
 
-function Login(props){
+function Register(props){
   /* VARIABLES FOR THE FORM */
   const logoLinkUrl = "#";
   const illustrationImageSrc = illustration;
@@ -131,4 +131,4 @@ function Login(props){
   );
 }
 
-export default Login;
+export default Register;

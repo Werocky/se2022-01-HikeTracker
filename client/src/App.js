@@ -149,7 +149,7 @@ function AppLayout(props) {
         }></Route>
 
         <Route path='/register' element={
-          <Register logout={props.register} />
+          <Register register={props.register} />
           // <RegisterComponent register={props.register} />
 
         } />
