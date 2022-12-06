@@ -19,7 +19,7 @@ let gpxParser = require('gpxparser');
 var fs = require('fs');
 const fileUpload = require("express-fileupload");
 const { builtinModules } = require('module');
-const { createParkingLot, updateParkingLot, getParkingLots, getParkingLot, deleteParkingLot, getLastParkingID } = require('./modules/ParkingLot.js');
+const { createParkingLot, updateParkingLot, getParkingLots, getParkingLot, deleteParkingLot, getLastParkingID, ParkingLot } = require('./modules/ParkingLot.js');
 const { addReferencePoint, updateReferencePoint } = require('./modules/ReferencePoints.js');
 const huts = require('./modules/Huts');
 const mail = require('./modules/mail');
@@ -483,13 +483,31 @@ app.post('/ParkingLots', [],
       return res.status(422).json({ error: 'cannot process request' });
     }
     console.log(req.body);
-    const ParkingLot = { ...req.body.ParkingLot, AssociatedGuide: req.user.Id };
-    const Description = ParkingLot.Description;
-    const lat = ParkingLot.Coord.lat;
-    const lng = ParkingLot.Coord.lng;
+    const parkingLot = { ...req.body.ParkingLot, AssociatedGuide: req.user.Id };
+    console.log(parkingLot);
     try {
-      await createParkingLot(ParkingLot);
-      await referencePoints.addReferencePointWithDescription(Description, lat, lng, 'parking')
+
+      //get all ref point already saved
+      const refPoints = await referencePoints.getAllRefPoints();
+      let pointAlreadyPresent = undefined;
+      let rpID = -1;
+
+      function distance500mt(p) {
+        const dist = distance(p.Lat, p.Lng, parkingLot.Coord.lat, parkingLot.Coord.lng);
+        return dist < 0.5 && p.Type === 'parking';
+      }
+      pointAlreadyPresent = refPoints.find(distance500mt);
+      if (pointAlreadyPresent) {
+        console.log("Reference Point already present");
+        rpID = pointAlreadyPresent.RefPointID;
+      } else {
+        await addReferencePoint(parkingLot.Coord.lat, parkingLot.Coord.lng, "parking");
+        rpID = await referencePoints.getLastRefPointID();
+        console.log("Ref Point ParkingLot added");
+      }
+      const parkingLotObj = new ParkingLot(rpID, parkingLot.AssociatedGuide, parkingLot.Free,parkingLot.NumAuto);
+      console.log(parkingLotObj);
+      await createParkingLot(parkingLotObj);
       res.status(201).json({ message: 'Parking Lot added' });
     } catch (err) {
       console.log(err);
@@ -698,9 +716,6 @@ app.post('/hutCreate',
       let rpID = -1;
 
       function distance500mt(p) {
-        console.log("\n\n")
-        console.log(p)
-
         const dist = distance(p.Lat, p.Lng, hut.Coord.lat, hut.Coord.lng);
         return dist < 0.5 && p.Type === 'hut';
       }
