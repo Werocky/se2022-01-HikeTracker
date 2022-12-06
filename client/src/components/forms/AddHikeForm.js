@@ -54,11 +54,12 @@ const FormContainer = styled.div`
   }
 `;
 const InputContainer = tw.div`relative py-5 mt-6`;
-const Label = tw.label`absolute top-0 left-0 tracking-wide font-semibold text-base`;
+const Label = tw.label`absolute top-0 left-0 tracking-wide font-medium text-lg`;
 
 const Textarea = tw.textarea`h-24 sm:h-full resize-none`;
 const SubmitButton = tw.button`w-full  mt-6 py-3 bg-gray-100 text-primary-500 rounded-full font-bold tracking-wide shadow-lg uppercase text-sm transition duration-300 transform focus:outline-none focus:shadow-outline hover:bg-gray-300 hover:text-primary-700 hocus:-translate-y-px hocus:shadow-xl`;
 const SubmitButtonLarge = tw.button` w-full mt-6 py-3 bg-gray-100 text-primary-500 rounded-full font-bold tracking-wide shadow-lg uppercase text-3xl transition duration-300 transform focus:outline-none focus:shadow-outline hover:bg-gray-300 hover:text-primary-700 hocus:-translate-y-px hocus:shadow-xl`;
+const Instruction = tw.p`text-center md:text-left text-base md:text-base lg:text-lg  leading-relaxed  font-semibold text-base`
 
 
 function AddHikeForm(props) {
@@ -324,15 +325,15 @@ function AddHikeForm(props) {
                         <Input id="time-input" type="text" name="time" placeholder="dd:hh:mm" value={expectedTime} onChange={ev => setExpectedTime(ev.target.value)} required />
                       </InputContainer>
 
-                      <InputContainer>
-                        <Label htmlFor="time-input">Difficulty</Label>
+
+                      <Instruction>Difficulty</Instruction>
                         <InputOption as="select" value={difficulty} onChange={ev => setDifficulty(ev.target.value)} required >
                           <option hidden>Difficulty</option>
                           <option value="T">Tourist (T)</option>
                           <option value="H">Hiker (H)</option>
                           <option value="PH">Professional Hiker (PH)</option>
                         </InputOption>
-                      </InputContainer>
+
 
                       <InputContainer>
                         <Label htmlFor="start-input">Start</Label>

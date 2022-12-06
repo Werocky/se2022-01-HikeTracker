@@ -12,8 +12,8 @@ import { PrimaryButton as PrimaryButtonBase } from "../components/misc/Buttons.j
 import { useNavigate } from "react-router-dom";
 import API from "../API";
 
-const HeadingRow = tw.div`flex`;
-const Heading = tw(SectionHeading)`text-gray-900`;
+const HeadingRow = tw.div`flex  justify-center`;
+const Heading = tw(SectionHeading)`text-gray-700  font-medium  `;
 const Posts = tw.div`mt-6 sm:-mr-8 flex flex-wrap`;
 const PostContainer = styled.div`
   ${tw`mt-10 w-full sm:w-1/2 lg:w-1/3 sm:pr-8`}
@@ -25,7 +25,7 @@ const PostContainer = styled.div`
         ${tw`sm:flex-row! h-full sm:pr-4`}
       }
       ${Image} {
-        ${tw`sm:h-96 sm:min-h-full sm:w-1/2 lg:w-2/3 sm:rounded-t-none sm:rounded-l-lg`}
+        ${tw`sm:h-96 sm:min-h-full sm:w-1/2 lg:w-2/3 sm:rounded-none sm:rounded-l-lg`}
       }
       ${Info} {
         ${tw`sm:-mr-4 sm:pl-8 sm:flex-1 sm:rounded-none sm:rounded-r-lg sm:border-t-2 sm:border-l-0`}
@@ -38,12 +38,12 @@ const PostContainer = styled.div`
 const Post = tw.div` flex flex-col bg-gray-100 rounded-lg`;
 const Image = styled.div`
   ${props => css`background-image: url("${props.imageSrc}");`}
-  ${tw`h-48 w-full bg-cover bg-center rounded-t-lg`}
+  ${tw`h-48 w-full bg-cover bg-center rounded-lg`}
 `;
-const Info = tw.div`p-8 border-2 border-t-0 rounded-lg rounded-t-none`;
+const Info = tw.div`p-8 border-2 rounded-lg`;
 const Category = tw.div`text-primary-500 text-xs font-bold tracking-widest leading-loose after:content after:block after:border-b-2 after:border-primary-500 after:w-8`;
 const CreationDate = tw.div`mt-4 uppercase text-gray-600 italic font-semibold text-xs`;
-const Title = tw.div`mt-1 font-black text-xl text-gray-900 group-hover:text-primary-500 transition duration-300 truncate `;
+const Title = tw.div`mt-1 font-extrabold text-xl text-gray-900 group-hover:text-primary-500 transition duration-300 truncate `;
 const Description = tw.div`truncate `;
 
 const ButtonContainer = tw.div`flex justify-center`;
@@ -56,12 +56,12 @@ const Content = tw.div`max-w-screen-xl mx-auto py-20 lg:py-24`;
 
 const Form = tw.form`mt-8 md:mt-10 text-sm flex flex-col max-w-sm mx-auto md:mx-0`
 const Input = tw.input`mt-2 first:mt-0 border-b-2 py-3 focus:outline-none font-medium transition duration-300 hocus:border-primary-500`
-const InputOption = tw.input`mt-2 first:mt-0 border-b-2 py-3 focus:outline-none font-medium transition duration-300 hocus:border-gray-300 text-gray-700 `
-const Instruction = tw.p` text-center md:text-left text-sm md:text-base lg:text-lg  leading-relaxed  font-semibold text-base`
+const InputOption = tw.input`mt-2 first:mt-0 border-b-2 py-3 focus:outline-none text-sm font-medium transition duration-300 hocus:border-gray-300 text-gray-700 `
+const Instruction = tw.p` text-center md:text-left text-sm md:text-base lg:text-base  leading-relaxed  font-semibold text-base`
 const Label = tw.label`absolute top-0 left-0 tracking-wide font-semibold text-base`;
 
 const FormContainer = styled.div`
-  ${tw`p-10 sm:p-12 md:p-16 bg-primary-500 text-gray-100 rounded-lg relative`}
+  ${tw`p-5 sm:p-12 md:p-16 bg-primary-500 text-gray-100 rounded-lg relative`}
   form {
     ${tw`mt-4`}
   }
@@ -278,7 +278,6 @@ function Filters(props) {
               <Container>
                   <Content>
                       <FormContainer>
-                          {/*<Heading2>{heading}</Heading2>*/}
                           <div tw="mx-auto max-w-4xl">
                               <form onSubmit={handleSubmit}>
                                   {/* SELECTS THE TYPE OF FILTER (CITY, PROVINCE, ETC) */}
@@ -358,31 +357,31 @@ function Filters(props) {
                                       </Column>
                                       <Column>
                                           <InputContainer>
-                                              <Label htmlFor="price-input">Lenght filter(min)[in KM]</Label>
-                                              <Input id="price-input" type="number" name="minLenghtFilter" placeholder="Insert the minimum distance (in km)" value={minDist} onChange={ev => setMinDist(ev.target.value)} />
+                                              <Label htmlFor="price-input"> Min Lenght [KM]</Label>
+                                              <Input id="price-input" type="number" name="minLenghtFilter" placeholder="min" value={minDist} onChange={ev => setMinDist(ev.target.value)} />
                                           </InputContainer>
                                           <InputContainer>
-                                              <Label htmlFor="price-input">Ascent filter(min)[in M]</Label>
-                                              <Input id="price-input" type="number" name="minAscentFilter" placeholder="Insert the minimum ascent (in m)" value={minAscent} onChange={ev => setMinAscent(ev.target.value)} />
+                                              <Label htmlFor="price-input">Min Ascent [M]</Label>
+                                              <Input id="price-input" type="number" name="minAscentFilter" placeholder="min" value={minAscent} onChange={ev => setMinAscent(ev.target.value)} />
                                           </InputContainer>
                                           <InputContainer>
-                                              <Label htmlFor="price-input">Expected Time(min)[in Mins]</Label>
-                                              <Input id="price-input" type="number" name="minExpTime" placeholder="Insert the minimum expected time (in mins)" value={minExTime} onChange={ev => setMinExTime(ev.target.value)} />
+                                              <Label htmlFor="price-input">Min Expected Time[Mins]</Label>
+                                              <Input id="price-input" type="number" name="minExpTime" placeholder="min" value={minExTime} onChange={ev => setMinExTime(ev.target.value)} />
                                           </InputContainer>
                                       </Column>
 
                                       <Column>
                                       <InputContainer>
-                                              <Label htmlFor="price-input">Lenght filter(max)[in KM]</Label>
-                                              <Input id="price-input" type="number" name="maxLenghtFilter" placeholder="Insert the maximum distance (in km)" value={maxDist} onChange={ev => setMaxDist(ev.target.value)} />
+                                              <Label htmlFor="price-input">Max Lenght [KM]</Label>
+                                              <Input id="price-input" type="number" name="maxLenghtFilter" placeholder="max" value={maxDist} onChange={ev => setMaxDist(ev.target.value)} />
                                           </InputContainer>
                                           <InputContainer>
-                                              <Label htmlFor="price-input">Ascent filter(max)[in M]</Label>
-                                              <Input id="price-input" type="number" name="maxAscentFilter" placeholder="Insert the maximum ascent (in m)" value={maxAscent} onChange={ev => setMaxAscent(ev.target.value)} />
+                                              <Label htmlFor="price-input">Max Ascent [M]</Label>
+                                              <Input id="price-input" type="number" name="maxAscentFilter" placeholder="max" value={maxAscent} onChange={ev => setMaxAscent(ev.target.value)} />
                                           </InputContainer>
                                           <InputContainer>
-                                              <Label htmlFor="price-input">Expected Time(max)[in Mins]</Label>
-                                              <Input id="price-input" type="number" name="maxExpTime" placeholder="Insert the maximum expected time (in mins)" value={maxExTime} onChange={ev => setMaxExTime(ev.target.value)} />
+                                              <Label htmlFor="price-input">Max Expected Time [Mins]</Label>
+                                              <Input id="price-input" type="number" name="maxExpTime" placeholder="max" value={maxExTime} onChange={ev => setMaxExTime(ev.target.value)} />
                                           </InputContainer>
                                       </Column>
 
@@ -434,8 +433,9 @@ function HikeElement(props) {
   return (
     <PostContainer key={props.index} >
       <Post className="group" as="a" >
-        <Image imageSrc={hike.image === undefined ? hike.Picture : hike.image} />
         <Info>
+        <Image imageSrc={hike.image === undefined ? hike.Picture : hike.image} />
+
           <Category>
             {
               hike.Difficulty === "T" ? "Tourist (T)"

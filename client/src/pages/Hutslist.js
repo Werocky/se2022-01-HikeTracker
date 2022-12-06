@@ -12,8 +12,8 @@ import { PrimaryButton as PrimaryButtonBase } from "../components/misc/Buttons.j
 import { useNavigate } from "react-router-dom";
 import API from "../API";
 
-const HeadingRow = tw.div`flex`;
-const Heading = tw(SectionHeading)`text-gray-800`;
+const HeadingRow = tw.div`flex  justify-center`;
+const Heading = tw(SectionHeading)`text-gray-700  font-medium `;
 const Heading2 = tw(SectionHeading)`text-gray-100`;
 const Posts = tw.div`mt-6 sm:-mr-8 flex flex-wrap`;
 const PostContainer = styled.div`
@@ -43,8 +43,8 @@ const Content = tw.div`max-w-screen-xl mx-auto py-20 lg:py-24`;
 
 const Form = tw.form`mt-8 md:mt-10 text-sm flex flex-col max-w-sm mx-auto md:mx-0`
 const Input = tw.input`mt-2 first:mt-0 border-b-2 py-3 focus:outline-none font-medium transition duration-300 hocus:border-primary-500`
-const InputOption = tw.input`mt-2 first:mt-0 border-b-2 py-3 focus:outline-none font-medium transition duration-300 hocus:border-gray-300 text-gray-700 `
-const Instruction = tw.p` text-center md:text-left text-sm md:text-base lg:text-lg  leading-relaxed  font-semibold text-base`
+const InputOption = tw.input`mt-2 first:mt-0 border-b-2 py-3 focus:outline-none text-sm font-medium transition duration-300 hocus:border-gray-300 text-gray-700 `
+const Instruction = tw.p` text-center md:text-left text-sm md:text-base lg:text-base  leading-relaxed  font-semibold text-base`
 const Label = tw.label`absolute top-0 left-0 tracking-wide font-semibold text-base`;
 
 const FormContainer = styled.div`
@@ -79,7 +79,7 @@ const Image = styled.div`
 const Info = tw.div`p-8 border-2 border-t-0 rounded-lg rounded-t-none`;
 const Category = tw.div`uppercase text-primary-500 text-xs font-bold tracking-widest leading-loose after:content after:block after:border-b-2 after:border-primary-500 after:w-8`;
 const CreationDate = tw.div`mt-4 uppercase text-gray-600 italic font-semibold text-xs`;
-const Title = tw.div`mt-1 font-black text-2xl text-gray-900 group-hover:text-primary-500 transition duration-300 truncate `;
+const Title = tw.div`mt-1 font-extrabold text-2xl text-gray-900 group-hover:text-primary-500 transition duration-300 truncate `;
 const Description = tw.div`truncate `;
 
 const ButtonContainer = tw.div`flex justify-center`;
@@ -226,7 +226,7 @@ function Filters(props) {
 
                                             <InputContainer>
                                                 <Label htmlFor="number-input">Number of beds</Label>
-                                                <Input id="number-input" type="number" name="beds" placeholder="Insert the number of beds" value={beds} onChange={ev => setBeds(ev.target.value)} />
+                                                <Input id="number-input" type="number" name="beds" placeholder="number" value={beds} onChange={ev => setBeds(ev.target.value)} />
                                             </InputContainer>
 
                                         </Column>
@@ -267,7 +267,7 @@ function Filters(props) {
                                             </InputOption>
                                             <InputContainer>
                                                 <Label htmlFor="price-input">Average price</Label>
-                                                <Input id="price-input" type="number" name="avgPrice" placeholder="Insert the average price" value={price} onChange={ev => setPrice(ev.target.value)} />
+                                                <Input id="price-input" type="number" name="avgPrice" placeholder="price" value={price} onChange={ev => setPrice(ev.target.value)} />
                                             </InputContainer>
                                         </Column>
 
@@ -276,7 +276,7 @@ function Filters(props) {
                                                 Opening Session
                                             </Instruction>
                                             <InputOption as="select" value={whenOpen} onChange={ev => setWhenOpen(ev.target.value)} >
-                                                <option hidden>Select the opening period</option>
+                                                <option hidden>Period</option>
                                                 <option value="S">Summer</option>
                                                 <option value="SW">Summer and Winter</option>
                                                 <option value="W">Winter</option>
@@ -285,7 +285,7 @@ function Filters(props) {
                                             </InputOption>
                                             <InputContainer>
                                                 <Label htmlFor="name-input">Hut's Name</Label>
-                                                <Input id="name-input" type="text" name="hutName" placeholder="Name" value={name} onChange={ev => setName(ev.target.value)} />
+                                                <Input id="name-input" type="text" name="hutName" placeholder="name" value={name} onChange={ev => setName(ev.target.value)} />
                                             </InputContainer>
 
                                         </Column>
