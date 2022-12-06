@@ -3,20 +3,22 @@
 const db = require('./DB').db;
 class ParkingLot{
     constructor(
-        ParkingLotID,
+        ParkingID,
         AssociatedGuide,
-        Free
+        Free,
+        NumAuto
     ){
-        this.ParkingLotID=ParkingLotID;
+        this.ParkingID=ParkingID;
         this.AssociatedGuide=AssociatedGuide;
         this.Free=Free;
+        this.NumAuto=NumAuto;
     }
 }
 
 function createParkingLot(ParkingLot){
     return new Promise (async (resolve, reject) =>{
-        const sql = 'INSERT INTO ParkingLots(AssociatedGuide, Free, NumAuto) VALUES(?, ?, ?)';
-        db.run(sql, [ParkingLot.AssociatedGuide, ParkingLot.Free, ParkingLot.NumAuto], function (err){
+        const sql = 'INSERT INTO ParkingLots(ParkingID, AssociatedGuide, Free, NumAuto) VALUES(?, ?, ?, ?)';
+        db.run(sql, [ParkingLot.ParkingID, ParkingLot.AssociatedGuide, ParkingLot.Free, ParkingLot.NumAuto], function (err){
             if(err)
                 reject(err);
             else
@@ -101,4 +103,4 @@ function getLastParkingID(){
     })
 }
 
-module.exports = {createParkingLot, updateParkingLot, getParkingLots, getParkingLot, deleteParkingLot, emptyParkingLot, getLastParkingID};
+module.exports = {ParkingLot, createParkingLot, updateParkingLot, getParkingLots, getParkingLot, deleteParkingLot, emptyParkingLot, getLastParkingID};
