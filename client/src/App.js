@@ -171,13 +171,13 @@ function AppLayout(props) {
         {/*  <HutsPage logout={props.logout} />*/}
         {/*} />*/}
         <Route path='/addParkingLot' element={
-          <AddParkingLot /> //set message
+          <AddParkingLot logout={props.logout} /> //set message
         } />
         <Route path='/verify' element={
           < VerifiedMessage />
         } />
          <Route path='/addHut' element={
-          < AddHutForm huts = {huts} setHuts={setHuts} message={props.message} errorHandler={props.errorHandler}/> //set message
+          < AddHutForm huts = {huts} setHuts={setHuts} message={props.message} errorHandler={props.errorHandler} logout={props.logout} /> //set message
         } />
 
         <Route path='*' element={<Navigate to='/' replace />} />
