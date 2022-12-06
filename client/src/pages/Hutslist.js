@@ -85,7 +85,7 @@ const Description = tw.div`truncate `;
 const ButtonContainer = tw.div`flex justify-center`;
 const LoadMoreButton = tw(PrimaryButton)`mt-16 mx-auto`;
 const PostAction = tw(PrimaryButtonBase)`w-full mt-8`;
-const ShowButton = tw()`mt-4 inline-block w-56 tracking-wide text-center py-5`;
+const ShowButton = tw(PrimaryButton)`mt-4 inline-block w-56 tracking-wide text-center py-5`;
 
 
 function Huts(props) {
@@ -106,10 +106,11 @@ function Huts(props) {
 
     //FILTERS FOR HUTS
     const [whenOpen, setWhenOpen] = useState('');
-    const [beds, setBeds] = useState(0);
-    const [price, setPrice] = useState(0.0);
+    const [beds, setBeds] = useState(undefined);
+    const [price, setPrice] = useState(undefined);
     const [name, setName] = useState('')
 
+    const [defaultHuts, setDefaultHuts] = useState(props.huts);
     const [huts, setHuts] = useState(props.huts);
     const [show, setShow] = useState(false);
 
@@ -157,13 +158,15 @@ function Huts(props) {
       }
     
       const handleReset = (event) => {
-        props.setLoading(true);
+        setLoading(true);
         setFilterType('');
         setFilterValue('');
         setWhenOpen('');
-        setBeds(0);
-        setPrice(0.0);
+        setBeds(undefined);
+        setPrice(undefined);
         setName('');
+        setHuts(defaultHuts);
+        setLoading(false);
       }
     
     function Filters(props){
@@ -198,7 +201,7 @@ function Huts(props) {
                     </Column>
                     <Column>
                         <Instruction>
-                            Type Region
+                            {filterType} Value
                         </Instruction>
                 { /* SELECTS THE VALUE BASED ON THE FILTER SELECTED (SHOWS ALL CITIES IN DB IF CITY FILTER IS SELECTED, PROVINCES IF PROVINCE IS SELECTED AND SO ON) */}
                 <InputOption  as="select" value={filterValue} onChange={ev => setFilterValue(ev.target.value)} >
@@ -247,7 +250,7 @@ function Huts(props) {
                         </InputOption>
                         <InputContainer>
                             <Label htmlFor="name-input">Hut's Name</Label>
-                            <Input id="name-input" type="text" name="hutName" placeholder="name" value={name} onChange={ev => setName(ev.target.value)} />
+                            <Input id="name-input" type="text" name="hutName" placeholder="Name" value={name} onChange={ev => setName(ev.target.value)} />
                         </InputContainer>
 
                     </Column>
