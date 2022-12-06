@@ -113,57 +113,6 @@ function HikeList(props) {
     updateData();
   }, [props.hikes]);
 
-  // useEffect(() => {
-  //   if (sortTypeDesc !== "") {
-  //     const sortArray = type => {
-  //       const types = {
-  //         TitleAsc: 'Title-Asc',
-  //         TitleDesc: 'Title-Desc',
-  //         LengthAsc: 'Length-Asc',
-  //         LengthDesc: 'Length-Desc',
-  //         AscentAsc: 'Ascent-Asc',
-  //         AscentDesc: 'Ascent-Desc',
-  //         DifficultyAsc: 'Difficulty-Asc',
-  //         DifficultyDesc: 'Difficulty-Desc',
-  //         ExpectedTimeAsc: 'ExpectedTime-Asc',
-  //         ExpectedTimeDesc: 'ExpectedTime-Desc',
-  //       };
-  //       let sortProperty = types[type].split("-")[0];
-  //       let sorted;
-  //       if (types[type].split("-")[1] === "Desc") {
-  //         if (sortProperty === "Title" || sortProperty === "Difficulty")
-  //           sorted = [...props.hikes].sort((a, b) => {
-  //             if (a[sortProperty].trim() > b[sortProperty].trim()) { return -1 }
-  //             if (a[sortProperty].trim() < b[sortProperty].trim())
-  //               return 1
-  //             return 0
-  //           });
-  //         else {
-  //           sorted = [...props.hikes].sort((a, b) => b[sortProperty] - a[sortProperty]);
-  //         }
-  //       }
-
-  //       else {
-  //         if (sortProperty === "Title" || sortProperty === "Difficulty")
-  //           sorted = [...props.hikes].sort((a, b) => {
-  //             if (a[sortProperty].trim() > b[sortProperty].trim()) { return 1 }
-  //             if (a[sortProperty].trim() < b[sortProperty].trim())
-  //               return -1
-  //             return 0
-  //           });
-  //         else
-  //           sorted = [...props.hikes].sort((a, b) => a[sortProperty] - b[sortProperty]);
-  //       }
-
-
-  //       props.setHikes(sorted);
-  //     };
-  //     sortArray(sortTypeDesc);
-  //     // setSortTypeDesc("");
-  //   }
-  // }, [sortTypeDesc]);
-
-
   const onLoadMoreClick = () => {
     setVisible(v => v + 6);
     if (visible > hikes.length) {
