@@ -555,7 +555,7 @@ class DatabaseConnection {
       +"La conca del Pra, idilliaca in estate e incantevole in inverno, è ulteriore partenza per stupende escursioni: salendo verso sud, al fondo della conca ci troveremo al cospetto del Monviso."
       
       +"Verso Ovest le creste che rappresentano il confine francese con il colle della Croce; verso est, il sentiero per il rifugio Barant, (a ca. 1.45h) e Rifugio Barbara Lowrie (a ca. 3 h)"
-      image="hikeImages/mCOPERTINA-SENTIERI.jpg";
+      image="hikeImages/COPERTINA-SENTIERI.jpg";
       await this.wrapperPopulate(HikeID,file,Country, Region, Province, city,title,length,expTime,Ascent,Description,Difficulty,start,end,AssociatedGuide,image)
       await this.wrapperPopulateRefP(HikeID, refPoint++, "44.799133","7.055148","parking",1,0); // start
         await this.wrapperPopulateRefP(HikeID, refPoint++, "44.773504","7.039264","hut",0,1); // end
@@ -855,7 +855,7 @@ class DatabaseConnection {
       "- one of our party, a wild hairy beast called Garn still wanders the Chewings Ranges looking for lost Bush walkers to eat."+
       
       "We started at Ormiston Gorge and finished at Serpentine Chalet Dam (arriving around midday). With an extra day it could converted to a circuit returning to Ormiston Gorge via the Larapinta Trail."
-      image="hikeImages/IMG_7541";
+      image="hikeImages/IMG_7541.jpg";
       await this.wrapperPopulate(HikeID,file,Country, Region, Province, city,title,length,expTime,Ascent,Description,Difficulty,start,end,AssociatedGuide,image)
       await this.wrapperPopulateRefP(HikeID, refPoint++, "-23.632482","132.727095","parking",1,0); // start
       await this.wrapperPopulateRefP(HikeID, refPoint++, "-23.736232","132.910421","",0,1); // end
@@ -1225,7 +1225,7 @@ await this.wrapperPopulateRefP(HikeID, refPoint++, "45.93651","7.62672","parking
             await this.wrapperPopulateRefP(HikeID, refPoint++, "45.32672", "7.23196","",0,1); // end
 
     HikeID='38';
-    title=" Sentiero per il BIVACCO BERARDO | 2700 m slm";
+    title="Sentiero per il BIVACCO BERARDO | 2700 m slm";
     Region='Piemonte';
     Province='Cuneo';
     city ='Pontechianale'; 
@@ -1258,7 +1258,7 @@ await this.wrapperPopulateRefP(HikeID, refPoint++, "45.93651","7.62672","parking
 
 
         HikeID='39';
-        title=" Monte Fertazza e Ristoro Belvedere: escursione ad anello da Pescul";
+        title="Monte Fertazza e Ristoro Belvedere: escursione ad anello da Pescul";
         Region='Veneto';
         Province='Belluno';
         city ='Selva di Cadore'; 
@@ -1611,7 +1611,7 @@ image="hikeImages/29461789Master.jpg";
         await this.wrapperPopulate(HikeID,file,Country, Region, Province, city,title,length,expTime,Ascent,Description,Difficulty,start,end,AssociatedGuide,image)
 
         HikeID='50';
-        title="Gjeravica or Đeravica (Prokletije)";
+        title="   Gjeravica or Đeravica (Prokletije)";
         Country='Kosovo';
         Region="Gjakova"
         Province='';
@@ -1643,7 +1643,7 @@ image="hikeImages/29461789Master.jpg";
       const hikes =require("./Hikes");
       const {hike} =require("./Hikes");
       console.log("Populating Hike#"+(HikeID)+" "+title);
-      let h=new hike(null,title,length,Description,Ascent,Difficulty,expTime,Country,Region,Province, city,path,start,end,AssociatedGuide,image)
+      let h=new hike(null,title.trim(),length,Description,Ascent,Difficulty,expTime,Country,Region,Province, city,path,start,end,AssociatedGuide,image)
       await hikes.addHike(h);
       resolve("Hike#"+(HikeID)+" "+title+" Inserted")
     })  
