@@ -337,7 +337,7 @@ app.post('/addHike', async (req, res) => {
     await hikeRefPoints.addHikeRefPoints(hikeId, startId, 1, 0);
     await hikeRefPoints.addHikeRefPoints(hikeId, endId, 0, 1);
     for (let p in pIdVec) {
-      console.log("\t"+pIdVec[p])
+      console.log("\t" + pIdVec[p])
       await hikeRefPoints.addHikeRefPoints(hikeId, pIdVec[p], 0, 0);
     }
 
@@ -348,7 +348,7 @@ app.post('/addHike', async (req, res) => {
   }
 
   console.log("All hike points added");
-  
+
 })
 
 /*** Geographical filter ***/
@@ -688,12 +688,35 @@ app.post('/hutCreate',
       return res.status(422).json({ error: 'cannot process request' });
     }
     console.log(req.body);
-    const Hut = { ...req.body.Hut, HutManagerID: req.body.Hut.Email };
+    const hut = { ...req.body.Hut, HutManagerID: req.body.Hut.Email };
+    console.log(hut);
     try {
-      const result = await huts.addHut(Hut);
-      await referencePoints.addReferencePointWithDescription(Hut.Description, Hut.Coord.lat, Hut.Coord.lng, "hut");
+
+      //get all ref point already saved
+      const refPoints = await referencePoints.getAllRefPoints();
+      let pointAlreadyPresent = undefined;
+      let rpID = -1;
+
+      function distance500mt(p) {
+        console.log("\n\n")
+        console.log(p)
+
+        const dist = distance(p.Lat, p.Lng, hut.Coord.lat, hut.Coord.lng);
+        return dist < 0.5 && p.Type === 'hut';
+      }
+      pointAlreadyPresent = refPoints.find(distance500mt);
+      if (pointAlreadyPresent) {
+        console.log("Reference Point already present");
+        rpID = pointAlreadyPresent.RefPointID;
+      } else {
+        await addReferencePoint(hut.Coord.lat, hut.Coord.lng, "hut");
+        rpID = await referencePoints.getLastRefPointID();
+        console.log("Ref Point Hut added");
+      }
+      const hutObj = new huts.Hut(rpID, hut.Name, hut.Elevation, hut.City, hut.Province, hut.Region, hut.Country, hut.WhenOpen, hut.Beds, hut.AvgPrice, hut.Description, hut.HutManagerID, hut.Website, hut.Phone);
+      const result = await huts.addHut(hutObj);
       res.status(200).json({ message: 'Hut added' });
-  
+
     } catch (err) {
       console.log(err);
       res.status(503).json({ error: `Error ` });
