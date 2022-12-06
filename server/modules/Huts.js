@@ -40,9 +40,9 @@ class Hut{
  function addHut  (Hut)  {
   
   return new Promise(async (resolve, reject) => {
-    const sql = 'INSERT INTO HUTS( Name, Elevation, City,Province,  Region, Country, WhenOpen, Beds, AvgPrice, Description,HutManagerID,Website,Phone) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?)';
+    const sql = 'INSERT INTO HUTS( RefPointID, Name, Elevation, City,Province,  Region, Country, WhenOpen, Beds, AvgPrice, Description,HutManagerID,Website,Phone) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?)';
     db.run(sql, [
-       Hut.Name, Hut.Elevation, Hut.City,Hut.Province, Hut.Region, Hut.Country, Hut.WhenOpen, Hut.Beds, Hut.AvgPrice, Hut.Description,Hut.HutManagerID,Hut.Website,Hut.Phone
+       Hut.RefPointID, Hut.Name, Hut.Elevation, Hut.City,Hut.Province, Hut.Region, Hut.Country, Hut.WhenOpen, Hut.Beds, Hut.AvgPrice, Hut.Description,Hut.HutManagerID,Hut.Website,Hut.Phone
     ], function (err) {
       if (err)
         reject(err);

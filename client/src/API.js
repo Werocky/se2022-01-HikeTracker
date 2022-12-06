@@ -21,6 +21,7 @@ async function getHikes() {
       Province: r.Province,
       Region: r.Region,
       City: r.City,
+      image:r.Picture
     }))
   } else {
     throw hikes; //which will contain an error if it is the case

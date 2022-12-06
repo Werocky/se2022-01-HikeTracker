@@ -504,8 +504,8 @@ function HikeElement(props) {
   return (
     <PostContainer key={props.index} >
       <Post className="group" as="a" >
-        <Image imageSrc={imageSrc} />
         <Info>
+        <Image imageSrc={hike.image} />
           <Category>
             {
               hike.Difficulty === "T" ? "Tourist (T)"
