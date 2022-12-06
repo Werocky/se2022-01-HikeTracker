@@ -34,6 +34,7 @@ import SearchHuts from './Layout-components/Huts-components/SearchHuts';
 function App() {
 
   const [message, setMessage] = useState(''); //message error state
+  const [msgType, setMsgType] = useState('danger'); //change color of the message
   const [auth, setAuth] = useState({  // login information
     login: false,
     user: { Role: '' },
@@ -69,7 +70,7 @@ function App() {
 
   const register = (credentials) => {
     API.register(credentials)
-      .then((res) => { console.log(res); if (res.hasOwnProperty('error')) errorHandler(res); else setMessage('Registration successful! Check email for confirmation and follow the instruction.') })
+      .then((res) => { console.log(res); if (res.hasOwnProperty('error')) errorHandler(res); else {setMessage('Registration successful! Check email for confirmation and follow the instruction.'); setMsgType('primary');} })
       .catch(err => errorHandler(err));
   }
 
@@ -89,7 +90,7 @@ function App() {
   return (
     <BrowserRouter>
       <AuthContext.Provider value={auth}>   {/* this is used to pass user information*/}
-        <AppLayout login={login} logout={logout} register={register} setLogged={setAuth} message={message} setMessage={setMessage} />
+        <AppLayout login={login} logout={logout} register={register} setLogged={setAuth} message={message} setMessage={setMessage} msgType={msgType} setMsgType={setMsgType}/>
       </AuthContext.Provider>
     </BrowserRouter>
   );
@@ -127,7 +128,7 @@ function AppLayout(props) {
     <>
       <Container>
         <Row><Col>
-          {props.message ? <Alert variant='danger' onClose={() => props.setMessage('')} dismissible>{props.message}</Alert> : false}
+          {props.message ? <Alert variant={props.msgType} onClose={() => props.setMessage('')} dismissible>{props.message}</Alert> : false}
         </Col></Row>
       </Container>
       <Routes>

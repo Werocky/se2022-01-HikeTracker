@@ -447,7 +447,10 @@ async function register(credentials) {
       'Hash': credentials.Hash,
       'Salt': credentials.Salt,
       'Id': credentials.Id,
-      'Role': credentials.Role
+      'Role': credentials.Role,
+      'Name': credentials.Name,
+      'Surname': credentials.Surname,
+      'Phone': credentials.Phone
     }),
     headers: {
       'Content-Type': 'application/json',

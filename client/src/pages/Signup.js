@@ -51,8 +51,10 @@ function Register(props){
 
   /* STATES COLLECTED FROM FORM'S FIELDS */
   const [email, setEmail] = useState('');
+  const [name, setName] = useState('');
+  const [surname, setSurname] = useState('');
+  const [phone, setPhone] = useState('');
   const [password, setPassword] = useState('');
-  const [confirmPassword, setConfirmPassword] = useState('');
   const [role, setRole] = useState('');
   /* NAVIGATE TO SWITCH PAGES */
   const navigate = useNavigate();
@@ -60,12 +62,9 @@ function Register(props){
   /* CHECK IF PASSWORDS ARE MATCHING, IF SO, ENCRYPT PASSWORD AND SUBMIT DATA TO SERVER*/
   const handleSubmit = async (event) => {
     event.preventDefault();
-    if (confirmPassword !== password) {
-      return; //TODO: display error in case passwords are not matching
-    }
     bcrypt.genSalt(10, function(err, salt) {
       bcrypt.hash(password, salt, async function(err, hashedPassword) {
-        const credentials = { Id: email, Role: role, Salt: salt, Hash: hashedPassword };
+        const credentials = { Id: email, Role: role, Salt: salt, Hash: hashedPassword, Name: name, Surname: surname, Phone: phone };
         props.register(credentials);
         navigate('/'/*+ user.id*/);//TODO
       });
@@ -94,7 +93,9 @@ function Register(props){
         <option value="O">Other to be defined</option>
       </Input>
       <Input type="password" placeholder="Password" value={password} onChange={ev => setPassword(ev.target.value)} required={true} minLength={4} maxLength={16}/>
-      <Input type="password" placeholder="Confirm Password" value={confirmPassword} onChange={ev => setConfirmPassword(ev.target.value)} required={true} minLength={4} maxLength={16}/>
+      <Input type="name" placeholder="Name" value={name} onChange={ev => setName(ev.target.value)} required={true} minLength={1} maxLength={20}/>
+      <Input type="surname" placeholder="Surname" value={surname} onChange={ev => setSurname(ev.target.value)} required={true} minLength={1} maxLength={20}/>
+      <Input type="phone" placeholder="Phone" value={phone} onChange={ev => setPhone(ev.target.value)} required={true} minLength={10} maxLength={13}/>
       <SubmitButton type="submit">
         <SubmitButtonIcon className="icon" />
         <span className="text">{submitButtonText}</span>

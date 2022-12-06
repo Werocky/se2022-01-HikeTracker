@@ -816,8 +816,12 @@ app.post('/sessions/new', [
     const Salt = req.body.Salt;
     const Id = req.body.Id;
     const Role = req.body.Role;
+    const Name = req.body.Name;
+    const Surname = req.body.Surname;
+    const Phone = req.body.Phone;
     const verificationCode = 1234; //static value, logic needed
-    const result = await users.register(Hash, Salt, Id, Role, verificationCode, 0);
+    const user = {Hash: Hash, Salt: Salt, Id: Id, Role: Role, code: verificationCode, Name: Name, Surname: Surname, Phone: Phone};
+    const result = await users.register(user);
     mail.sendConfirmationMail(req.body.Id, verificationCode);
     return res.status(200).json(result);
   } catch (err) {
