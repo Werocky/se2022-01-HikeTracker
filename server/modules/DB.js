@@ -112,9 +112,9 @@ class DatabaseConnection {
         let Difficulty="PH";
         let start="Rifugio La Riposa – Mompantero (TO) | 2185 m";
         let end="Rocciamelone | 3538 m";
+        let image="hikeImages/sentiero-per-il-rocciamelone.jpg";
         
-        
-        await this.wrapperPopulate(HikeID,file,Country, Region, Province, city,title,length,expTime,Ascent,Description,Difficulty,start,end,AssociatedGuide)
+        await this.wrapperPopulate(HikeID,file,Country, Region, Province, city,title,length,expTime,Ascent,Description,Difficulty,start,end,AssociatedGuide,image)
         await this.wrapperPopulateRefP(HikeID, refPoint++, "45.177786","7.083372","hut",1,0); // start
         await this.wrapperPopulateRefP(HikeID, refPoint++, "45.203531","7.07734","",0,1); // end
 
@@ -135,8 +135,8 @@ class DatabaseConnection {
          Difficulty="PH";
          start="Rifugio Melezè – Località Bellino (CN) | 1812 m slm circa";
          end="Monte Ferra | 3094 m slm circa";
-        
-        await this.wrapperPopulate(HikeID,file,Country, Region, Province, city,title,length,expTime,Ascent,Description,Difficulty,start,end,AssociatedGuide)
+         image="hikeImages/sentiero-per-il-monte-ferra.jpg";
+        await this.wrapperPopulate(HikeID,file,Country, Region, Province, city,title,length,expTime,Ascent,Description,Difficulty,start,end,AssociatedGuide,image)
         await this.wrapperPopulateRefP(HikeID, refPoint++, "44.57425086759031","6.982689192518592","hut",1,0); // start
          await this.wrapperPopulateRefP(HikeID, refPoint++, "44.574263943359256","6.982647031545639","",0,1); // end
  
@@ -156,8 +156,8 @@ class DatabaseConnection {
          Difficulty="H";
          start="Chausseestraße";
          end="Zossener Allee";
-        
-         await this.wrapperPopulate(HikeID,file,Country, Region, Province, city,title,length,expTime,Ascent,Description,Difficulty,start,end,AssociatedGuide)
+         image="hikeImages/default.jpg";
+         await this.wrapperPopulate(HikeID,file,Country, Region, Province, city,title,length,expTime,Ascent,Description,Difficulty,start,end,AssociatedGuide,image)
          await this.wrapperPopulateRefP(HikeID,refPoint++, "52.167248","13.371998","",1,0); // start
          await this.wrapperPopulateRefP(HikeID, refPoint++, "52.145784","13.364947","",0,1); // end
  
@@ -182,8 +182,8 @@ class DatabaseConnection {
          Difficulty="H";
          start="Village du Soleil, Monginevro (TO) | 1850 m slm circa";
          end="Monte Chaberton | 3120 m slm circa";
-        
-         await this.wrapperPopulate(HikeID,file,Country, Region, Province, city,title,length,expTime,Ascent,Description,Difficulty,start,end,AssociatedGuide)
+         image="hikeImages/default.jpg";
+         await this.wrapperPopulate(HikeID,file,Country, Region, Province, city,title,length,expTime,Ascent,Description,Difficulty,start,end,AssociatedGuide,image)
          await this.wrapperPopulateRefP(HikeID, refPoint++, "44.93603","6.7386800000000004","parking",1,0); // start
          await this.wrapperPopulateRefP(HikeID, refPoint++, "44.96452393010259","6.7513105273246765","",0,1); // end
  
@@ -202,8 +202,8 @@ class DatabaseConnection {
          Difficulty="H";
          start="Colle Braida – Valgioie (TO) | 1000 m slm circa";
          end="Colle Bione | 1430 m slm circa";
-        
-         await this.wrapperPopulate(HikeID,file,Country, Region, Province, city,title,length,expTime,Ascent,Description,Difficulty,start,end,AssociatedGuide)
+         image="hikeImages/anello-per-il-colle-bione.jpg";
+         await this.wrapperPopulate(HikeID,file,Country, Region, Province, city,title,length,expTime,Ascent,Description,Difficulty,start,end,AssociatedGuide,image)
          await this.wrapperPopulateRefP(HikeID, refPoint++, "45.082985027","7.333754722","parking",1,0); // start
          await this.wrapperPopulateRefP(HikeID, refPoint++, "45.083030952","7.333762354","parking",0,1); // end
  
@@ -234,9 +234,9 @@ class DatabaseConnection {
             "Qui un altro segnavia ci indica che il sentiero prosegue a sinistra della malga."+
             "Proseguendo per prati si tralascia il bivio per il Colle Aciano sulla sinistra e si continua a salire con pendenza variabile tra prati e boschi di conifere."+
             "A quota circa 1650, dopo aver guadato facilmente un rio secondario, il sentiero compie alcuni tornanti e inizia a salire con più decisione nel fitto bosco, finchè dopo pochi minuti a quota 1710m compare davanti a noi la sagoma del rifugio Toesca."
-
+            image="hikeImages//sentiero-per-il-rifugio-toesca.jpg";
          
-         await this.wrapperPopulate(HikeID,file,Country, Region, Province, city,title,length,expTime,Ascent,Description,Difficulty,start,end,AssociatedGuide)
+         await this.wrapperPopulate(HikeID,file,Country, Region, Province, city,title,length,expTime,Ascent,Description,Difficulty,start,end,AssociatedGuide,image)
          await this.wrapperPopulateRefP(HikeID, refPoint++, "45.102780737","7.165559804","parking",1,0); // start
          await this.wrapperPopulateRefP(HikeID, refPoint++, "45.08200127","7.14036342","",0,1); // end
 
@@ -264,8 +264,8 @@ class DatabaseConnection {
             +"A riprova, subito dopo il margine estremo sud del Lago, aggirando la palude esistente, si puo’ seguire una traccia di sentiero che, adiacente al crinale sud dell’Aiguille de Savine, ove conforma il citato Colle Savine-Coche, scende verso il sottostante ripiano diventando, a tratti, evidente mulattiera selciata costruita in loco dai genieri  dell’antica Roma."
             +"Dal fondo di questo altopiano incassato, è possibile, in circa 2 ore raggiungere, rispettivamente, il Rifugio Vaccarone (IT)2747m, Il Ghiacciaio dell’Agnello, il Giusalet, la Punta Tricuspide ed il Rifugio Avanzà(IT)2578m."
             +"Percorso di ritorno, in 1,45-2 ore, uguale a quello di andata ."
-                    
-         await this.wrapperPopulate(HikeID,file,Country, Region, Province, city,title,length,expTime,Ascent,Description,Difficulty,start,end,AssociatedGuide)
+            image="hikeImages/sentiero-per-il-lac-de-savine.jpg";             
+         await this.wrapperPopulate(HikeID,file,Country, Region, Province, city,title,length,expTime,Ascent,Description,Difficulty,start,end,AssociatedGuide,image)
          await this.wrapperPopulateRefP(HikeID, refPoint++, "45.21117802558636","6.865775956735616","parking",1,0); // start
          await this.wrapperPopulateRefP(HikeID, refPoint++, "45.17285154374665","6.914370013504627","",0,1); // end
 
@@ -287,8 +287,8 @@ class DatabaseConnection {
             +"Giunti al termine opposto della diga, deviare a sx per risalire la china in tre diagonali e pervenire alla Route Nationale D1006 il cui livello invernale, in base alle precipitazioni, potrebbe essere sopraelevato anche di 2-3 m, obbligando al transito nel centro e non nei bordi."
             +"Infine, percorrere in falsopiano la suddetta per altri  1,5 Km circa fino al Plan des Fontainettes, dove esplorare gli interessanti manufatti presenti, far foto e ristorarsi in posizione eccezionalmente pittoresca."
             +"Percorso di ritorno, uguale a quello di andata, con variante per poter accorciare discendendo dalla Route Nationale, direttamente verso il villaggio Gran Coix ed evitando il passaggio sulla diga."
- 
-        await this.wrapperPopulate(HikeID,file,Country, Region, Province, city,title,length,expTime,Ascent,Description,Difficulty,start,end,AssociatedGuide)
+            image="hikeImages/sentiero-per-il-plan-des-fontainettes.jpg";
+        await this.wrapperPopulate(HikeID,file,Country, Region, Province, city,title,length,expTime,Ascent,Description,Difficulty,start,end,AssociatedGuide,image)
         await this.wrapperPopulateRefP(HikeID, refPoint++, "45.21426193643276","6.955986331560386","parking",1,0); // start
         await this.wrapperPopulateRefP(HikeID, refPoint++, "45.24035738760735","6.951468657871905","parking",0,1); // end
 
@@ -303,6 +303,7 @@ class DatabaseConnection {
         end="Canale di Maria Bona / 1350 m circa";
         length=4.5;
         Difficulty="H";
+        image="hikeImages/sentiero-per-il-canale-di-maria-bona.jpg";
         expTime=105; 
         file="CANALE_di_MARIA_BONA__e_fondo_Val_Clarea.gpx"    
         Description="Sempre al lato Dx della strada provinciale, reperire l’evidente inizio sentiero, il Sentiero Balcone (S.B)n.820B che, transitando tra baite e case in rovina si snoda sinuoso alternativamente fra ombrose boscaglie di acacie e le verticali pareti granitiche della Gran Rotsa (rinomata e agevole palestra di roccia), fiancheggiando sempre il gorgogliante Canale di Maria Bona."
@@ -315,7 +316,7 @@ class DatabaseConnection {
             +"Il luogo di gita, incassato nello stretto vallone, e’ dimora di molte specie animali e non e’ raro assistere, in base alla stagione,alle evoluzioni di corvidi e grandi rapaci, inoltre, il greto del torrente Clarea e’ riferimento di abbeveraggio di numerosi ungulati di montagna."
             +"Percorso di ritorno, in 1 ora circa, uguale a quello di andata."
        
-            await this.wrapperPopulate(HikeID,file,Country, Region, Province, city,title,length,expTime,Ascent,Description,Difficulty,start,end,AssociatedGuide)
+            await this.wrapperPopulate(HikeID,file,Country, Region, Province, city,title,length,expTime,Ascent,Description,Difficulty,start,end,AssociatedGuide,image)
         await this.wrapperPopulateRefP(HikeID, refPoint++, "45.13911717299068","6.988669510628613","",1,0); // start
         await this.wrapperPopulateRefP(HikeID, refPoint++, "45.155868912540512","45.155868912540512","",0,1); // end
     
@@ -330,7 +331,8 @@ class DatabaseConnection {
        length=11;
        Difficulty="T";
        expTime=135; 
-       file="rifugio re magi.gpx"    
+       file="rifugio re magi.gpx" 
+       image="hikeImages/sentiero-per-il-rifugio-i-re-magi.jpg";   
        Description="Lascia l’auto in uno dei comodi e ampi parcheggi subito dopo il camping Pian del Colle."
             +"A quel punto torna indietro per un tratto e imbocca il sentiero che trovi appena prima il camping. Troverai dei cartelli indicanti Grange Valle Stretta (anche detta Vallèe Etroite)."    
             +"Passerai tra gli alberi fino a costeggiare un piccolo lago artificiale, e nelle vicinanze troverai una biforcazione."    
@@ -340,7 +342,7 @@ class DatabaseConnection {
             +"Troverai tanti cartelli e segnavia bianco-rossi lungo il percorso."    
             +"In un paio d’ore raggiungerai Grange di Valle Stretta, costeggiando il rio, fino a raggiungere la fine del Sentiero per il Rifugio I Re Magi."    
             +"Purtroppo noi abbiamo trovato il rifugio chiuso, non so se perché era un giorno infrasettimanale oppure a causa dell’emergenza sanitaria."
-      await this.wrapperPopulate(HikeID,file,Country, Region, Province, city,title,length,expTime,Ascent,Description,Difficulty,start,end,AssociatedGuide)
+      await this.wrapperPopulate(HikeID,file,Country, Region, Province, city,title,length,expTime,Ascent,Description,Difficulty,start,end,AssociatedGuide,image)
       await this.wrapperPopulateRefP(HikeID, refPoint++, "45.051291","6.674392","parking",1,0); // start
         await this.wrapperPopulateRefP(HikeID, refPoint++, "45.07032","6.622359","hut",0,1); // end
        
@@ -375,8 +377,8 @@ class DatabaseConnection {
       +"A questo punto manca l’ultimo spunto in salita, per poi raggiungere la suggestiva croce incorniciata dalle montagne circostanti, che segna la fine del sentiero per Cima Bossola."
       
       +"Puoi decidere se proseguire un pezzo fino al Colletto Bossola."
-      
-      await this.wrapperPopulate(HikeID,file,Country, Region, Province, city,title,length,expTime,Ascent,Description,Difficulty,start,end,AssociatedGuide)
+      image="hikeImages/sentiero-per-cima-bossola.jpg";
+      await this.wrapperPopulate(HikeID,file,Country, Region, Province, city,title,length,expTime,Ascent,Description,Difficulty,start,end,AssociatedGuide,image)
       await this.wrapperPopulateRefP(HikeID, refPoint++, "45.488135","7.734884","parking",1,0); // start
         await this.wrapperPopulateRefP(HikeID, refPoint++, "45.483543","7.71953","",0,1); // end
         
@@ -408,8 +410,8 @@ class DatabaseConnection {
         +"In alternativa al sentiero nel bosco sopra descritto è possibile raggiungere il Rifugio Meira Garneri salendo direttamente la ripida pista da sci."
 
         +"Essendo molto larga e sempre costeggiata da vegetazione non si da fastidio agli sciatori, ed è facile trovare una traccia precedentemente battuta da seguire."
-
-      await this.wrapperPopulate(HikeID,file,Country, Region, Province, city,title,length,expTime,Ascent,Description,Difficulty,start,end,AssociatedGuide)
+        image="hikeImages/sentiero-per-il-rifugio-meira-garneri.jpg";
+      await this.wrapperPopulate(HikeID,file,Country, Region, Province, city,title,length,expTime,Ascent,Description,Difficulty,start,end,AssociatedGuide,image)
       await this.wrapperPopulateRefP(HikeID, refPoint++, "44.57619898952544","7.180788516998291","parking",1,0); // start
         await this.wrapperPopulateRefP(HikeID, refPoint++, "44.55683704465628","7.155619841068983","hut",0,1); // end
         
@@ -441,8 +443,8 @@ class DatabaseConnection {
         "Ritornando sui propri passi si riprende la strada e in poco tempo si raggiunge la fine del Sentiero per il Rifugio Fontana Mura."+
         "Ci troviamo proprio sotto il Colle della Roussa e da qui si può godere di uno splendido panorama sulla sottostante Val Sangone."+
         "Il ritorno si svolge sul medesimo tracciato di andata, evitando le varie deviazioni se già effettuate in precedenza."
-
-      await this.wrapperPopulate(HikeID,file,Country, Region, Province, city,title,length,expTime,Ascent,Description,Difficulty,start,end,AssociatedGuide)
+        image="hikeImages/sentiero-per-il-rifugio-fontana-mura.jpg";
+      await this.wrapperPopulate(HikeID,file,Country, Region, Province, city,title,length,expTime,Ascent,Description,Difficulty,start,end,AssociatedGuide,image)
       await this.wrapperPopulateRefP(HikeID, refPoint++, "45.030912","7.229195","parking",1,0); // start
         await this.wrapperPopulateRefP(HikeID, refPoint++, "45.0307","7.229943","hut",0,1); // end
         
@@ -471,8 +473,8 @@ class DatabaseConnection {
       "Il rifugio è punto di arrivo in inverno, ma d’estate può essere punto di partenza, in quanto è possibile arrivarci in auto, e proseguire per altri itinerari nel Parco dell’Orsiera."+
       
       "D’altra parte la salita a piedi d’estate da Pra Catinat può perdere parte del suo fascino proprio per il traffico veicolare, a tratti eccessivo specie nel weekend. Il ritorno è previsto sullo stesso percorso dell’andata."
-      
-      await this.wrapperPopulate(HikeID,file,Country, Region, Province, city,title,length,expTime,Ascent,Description,Difficulty,start,end,AssociatedGuide)
+      image="hikeImages/sentiero-per-il-rifugio-selleries.jpg";
+      await this.wrapperPopulate(HikeID,file,Country, Region, Province, city,title,length,expTime,Ascent,Description,Difficulty,start,end,AssociatedGuide,image)
       await this.wrapperPopulateRefP(HikeID, refPoint++, "45.03657284192741","7.0737862307578325","parking",1,0); // start
         await this.wrapperPopulateRefP(HikeID, refPoint++, "45.047753965482116","7.120104543864727","hut",0,1); // end
         
@@ -520,8 +522,8 @@ class DatabaseConnection {
       
       "Il lago è anche un ottimo punto di partenza per altri sentieri più impegnativi."
       
-
-      await this.wrapperPopulate(HikeID,file,Country, Region, Province, city,title,length,expTime,Ascent,Description,Difficulty,start,end,AssociatedGuide)
+      image="hikeImages//sentiero-per-il-lago-di-malciaussia.jpg";
+      await this.wrapperPopulate(HikeID,file,Country, Region, Province, city,title,length,expTime,Ascent,Description,Difficulty,start,end,AssociatedGuide,image)
       await this.wrapperPopulateRefP(HikeID, refPoint++, "45.219954","7.188861","parking",1,0); // start
         await this.wrapperPopulateRefP(HikeID, refPoint++, "45.206823","7.144343","",0,1); // end
 
@@ -553,8 +555,8 @@ class DatabaseConnection {
       +"La conca del Pra, idilliaca in estate e incantevole in inverno, è ulteriore partenza per stupende escursioni: salendo verso sud, al fondo della conca ci troveremo al cospetto del Monviso."
       
       +"Verso Ovest le creste che rappresentano il confine francese con il colle della Croce; verso est, il sentiero per il rifugio Barant, (a ca. 1.45h) e Rifugio Barbara Lowrie (a ca. 3 h)"
-
-      await this.wrapperPopulate(HikeID,file,Country, Region, Province, city,title,length,expTime,Ascent,Description,Difficulty,start,end,AssociatedGuide)
+      image="hikeImages/mCOPERTINA-SENTIERI.jpg";
+      await this.wrapperPopulate(HikeID,file,Country, Region, Province, city,title,length,expTime,Ascent,Description,Difficulty,start,end,AssociatedGuide,image)
       await this.wrapperPopulateRefP(HikeID, refPoint++, "44.799133","7.055148","parking",1,0); // start
         await this.wrapperPopulateRefP(HikeID, refPoint++, "44.773504","7.039264","hut",0,1); // end
 
@@ -588,8 +590,8 @@ class DatabaseConnection {
       "A quel punto, in un’altra ventina di minuti sarai arrivato al Rifugio Capanna Mautino, ai piedi del Col Saurel, e potrai gustarti la tua polenta fumante."+
       
       "Nel periodo estivo, ti consiglio di percorrere il sentiero parallelo che taglia sui pendii per evitare la strada carrozzabile 🙂"
-      
-      await this.wrapperPopulate(HikeID,file,Country, Region, Province, city,title,length,expTime,Ascent,Description,Difficulty,start,end,AssociatedGuide)
+      image="hikeImages/sentiero-per-il-rifugio-capanna-mautino.jpg";
+      await this.wrapperPopulate(HikeID,file,Country, Region, Province, city,title,length,expTime,Ascent,Description,Difficulty,start,end,AssociatedGuide,image)
       await this.wrapperPopulateRefP(HikeID, refPoint++, "44.930862","6.820079","parking",1,0); // start
         await this.wrapperPopulateRefP(HikeID, refPoint++, "44.902731","6.789709","hut",0,1); // end
 
@@ -627,8 +629,8 @@ class DatabaseConnection {
         "Spostandosi di qualche metro dalla strada si giunge alla nostra meta, dove ad accoglierci sono presenti le Tre Croci che danno il nome a questo posto."+
         
         "Il sentiero per il ritorno si svolge sul medesimo di andata anche se sono presenti diversi tratti dove poter “tagliare” alcuni tornanti."
-      
-      await this.wrapperPopulate(HikeID,file,Country, Region, Province, city,title,length,expTime,Ascent,Description,Difficulty,start,end,AssociatedGuide)
+        image="hikeImages/sentiero-per-il-poggio-tre-croci.jpg";
+      await this.wrapperPopulate(HikeID,file,Country, Region, Province, city,title,length,expTime,Ascent,Description,Difficulty,start,end,AssociatedGuide,image)
       await this.wrapperPopulateRefP(HikeID, refPoint++, "45.079073","6.695705","parking",1,0); // start
         await this.wrapperPopulateRefP(HikeID, refPoint++, "45.079097","6.695723","parking",0,1); // end
 
@@ -668,9 +670,9 @@ class DatabaseConnection {
       "È possibile trovare rifugio nella piccola e graziosa cappella di Cima del Bosco, che costituisce un bivacco a tutti gli effetti ed è normalmente aperto e provvisto di tavolo per un eventuale pranzo."+
       
      "La discesa si effettua sullo stesso facile tracciato di salita."
-
+     image="hikeImages/sentiero-per-cima-del-bosco.jpg";
     
-      await this.wrapperPopulate(HikeID,file,Country, Region, Province, city,title,length,expTime,Ascent,Description,Difficulty,start,end,AssociatedGuide)
+      await this.wrapperPopulate(HikeID,file,Country, Region, Province, city,title,length,expTime,Ascent,Description,Difficulty,start,end,AssociatedGuide,image)
       await this.wrapperPopulateRefP(HikeID, refPoint++, "44.937484078109264373779296875","6.86268364079296588897705078125","parking",1,0); // start
       await this.wrapperPopulateRefP(HikeID, refPoint++, "44.9376612715423107147216796875","6.8631246127188205718994140625","parking",0,1); // end
 
@@ -700,8 +702,8 @@ class DatabaseConnection {
       "La linea da seguire è molto libera ma possiamo prendere come riferimento alcuni massi che troviamo circa a metà del percorso o seguire altre tracce lasciate in precedenza, essendo questo un sentiero molto frequentato."+
       
       "Arrivati in cima al pendio percorriamo i pochi metri che ci separano dalla croce di vetta su di una cresta molto panoramica."
-    
-      await this.wrapperPopulate(HikeID,file,Country, Region, Province, city,title,length,expTime,Ascent,Description,Difficulty,start,end,AssociatedGuide)
+      image="hikeImages/sentiero-per-briccas.jpg";
+      await this.wrapperPopulate(HikeID,file,Country, Region, Province, city,title,length,expTime,Ascent,Description,Difficulty,start,end,AssociatedGuide,image)
       await this.wrapperPopulateRefP(HikeID, refPoint++, "44.708426780998707","7.159385243430734","parking",1,0); // start
       await this.wrapperPopulateRefP(HikeID, refPoint++, "44.708156045526266","7.158207753673196","parking",0,1); // end
 
@@ -730,7 +732,8 @@ class DatabaseConnection {
       "Qui potrai rilassarti qualche minuto, prima di imboccare il sentiero dietro la fontana e proseguire ancora una volta nel boschetto di faggi. In quest’ultimo tratto la salita si fa più dura, ma il percorso è molto ombreggiato ed il silenzio della natura ti accompagna regalandoti anche la possibilità di avvistare qualche daino. "+
       
       "Ad un certo punto il bosco sparisce e di fronte a te si aprirà lo spettacolo dell’Alpe Attia. Passeggia sulla piana e raggiungi i caseggiati in pietra, dove troverai un’altra fontana e la possibilità di rilassarti sognando di raggiungere le cime intorno."
-      await this.wrapperPopulate(HikeID,file,Country, Region, Province, city,title,length,expTime,Ascent,Description,Difficulty,start,end,AssociatedGuide)
+      image="hikeImages/sentiero-per-lalpe-attia.jpg";
+      await this.wrapperPopulate(HikeID,file,Country, Region, Province, city,title,length,expTime,Ascent,Description,Difficulty,start,end,AssociatedGuide,image)
       await this.wrapperPopulateRefP(HikeID, refPoint++, "45.316959","7.304834","parking",1,0); // start
       await this.wrapperPopulateRefP(HikeID, refPoint++, "45.331211","7.298011","",0,1); // end
 
@@ -765,8 +768,8 @@ class DatabaseConnection {
       "- be aware of the risk that in case of trouble nobody will or can help you in this remote area"+
       "- under 'Cabo de Hornos, Walaia – Ruta Patrimonial Nº16' you can find in the WWW a good description (68 pages) of the track from the 'Ministerio de Bienes Nacionale'. But note: all named GPS-coordinates are wrong. Even with transformation from datum PSAD56 or SA69 to WSG84. The named datum 'P. South America 69' is not existing."
       
-      
-      await this.wrapperPopulate(HikeID,file,Country, Region, Province, city,title,length,expTime,Ascent,Description,Difficulty,start,end,AssociatedGuide)
+      image="hikeImages/default.jpg";
+      await this.wrapperPopulate(HikeID,file,Country, Region, Province, city,title,length,expTime,Ascent,Description,Difficulty,start,end,AssociatedGuide,image)
       await this.wrapperPopulateRefP(HikeID, refPoint++, "-54.925734","-68.323590","",1,0); // start
       await this.wrapperPopulateRefP(HikeID, refPoint++, "-55.047550","-68.148442","",0,1); // end
 
@@ -789,8 +792,8 @@ class DatabaseConnection {
       "Days: 6 days / 5 nights (Machu Picchu visit included)."+
       
       "Details coming soon."
-      
-      await this.wrapperPopulate(HikeID,file,Country, Region, Province, city,title,length,expTime,Ascent,Description,Difficulty,start,end,AssociatedGuide)
+      image="hikeImages/default.jpg";
+      await this.wrapperPopulate(HikeID,file,Country, Region, Province, city,title,length,expTime,Ascent,Description,Difficulty,start,end,AssociatedGuide,image)
       await this.wrapperPopulateRefP(HikeID, refPoint++, "-13.386589","-72.573909","hut",1,0); // start
       await this.wrapperPopulateRefP(HikeID, refPoint++, "-13.153162","-72.522880","",0,1); // end
 
@@ -821,8 +824,8 @@ class DatabaseConnection {
       "2) Crossing of Tizi-n-Ouamoums, and then down to Amsouzert. Night at the known gite d'etape run by Omar;"+
       "3) Up the Tisgui and down to the azib before the gorge. Night under te stars in the sleeping bag;"+
       "4) Crossing of Tizi Likemt and back to Imlil."
-
-      await this.wrapperPopulate(HikeID,file,Country, Region, Province, city,title,length,expTime,Ascent,Description,Difficulty,start,end,AssociatedGuide)
+      image="hikeImages/default.jpg";
+      await this.wrapperPopulate(HikeID,file,Country, Region, Province, city,title,length,expTime,Ascent,Description,Difficulty,start,end,AssociatedGuide,image)
       await this.wrapperPopulateRefP(HikeID, refPoint++, "31.135638","-7.919335","parking",1,0); // start
       await this.wrapperPopulateRefP(HikeID, refPoint++, "31.135613","-7.919305","parking",0,1); // end
 
@@ -852,8 +855,8 @@ class DatabaseConnection {
       "- one of our party, a wild hairy beast called Garn still wanders the Chewings Ranges looking for lost Bush walkers to eat."+
       
       "We started at Ormiston Gorge and finished at Serpentine Chalet Dam (arriving around midday). With an extra day it could converted to a circuit returning to Ormiston Gorge via the Larapinta Trail."
-      
-      await this.wrapperPopulate(HikeID,file,Country, Region, Province, city,title,length,expTime,Ascent,Description,Difficulty,start,end,AssociatedGuide)
+      image="hikeImages/IMG_7541";
+      await this.wrapperPopulate(HikeID,file,Country, Region, Province, city,title,length,expTime,Ascent,Description,Difficulty,start,end,AssociatedGuide,image)
       await this.wrapperPopulateRefP(HikeID, refPoint++, "-23.632482","132.727095","parking",1,0); // start
       await this.wrapperPopulateRefP(HikeID, refPoint++, "-23.736232","132.910421","",0,1); // end
 
@@ -903,8 +906,8 @@ class DatabaseConnection {
       "You will make some stops but the time is limited but the place is huge, so you will have to take pictures from the car a lot, make sure the car can open the windows. The Lexus version of the car have windows in the 3rd row of seat (the normal Toyota version has fixed glass, cannot open)"
       
 
-
-      await this.wrapperPopulate(HikeID,file,Country, Region, Province, city,title,length,expTime,Ascent,Description,Difficulty,start,end,AssociatedGuide)
+      image="hikeImages/default.jpg";
+      await this.wrapperPopulate(HikeID,file,Country, Region, Province, city,title,length,expTime,Ascent,Description,Difficulty,start,end,AssociatedGuide,image)
       await this.wrapperPopulateRefP(HikeID, refPoint++, "-20.463319","-66.823034","parking",1,0); // start
       await this.wrapperPopulateRefP(HikeID, refPoint++, "-22.910191","-68.198311","parking",0,1); // end
 
@@ -929,8 +932,8 @@ class DatabaseConnection {
       "On the flat and very wide top once was played also a football match, as a test for performance at altitude."+
       "The view from the top, contrarily to what one can expect, is not so exciting, because the Sajama is just too high and isolated!"
 
-
-      await this.wrapperPopulate(HikeID,file,Country, Region, Province, city,title,length,expTime,Ascent,Description,Difficulty,start,end,AssociatedGuide)
+      image="hikeImages/Sajama_National_Park.jpg";
+      await this.wrapperPopulate(HikeID,file,Country, Region, Province, city,title,length,expTime,Ascent,Description,Difficulty,start,end,AssociatedGuide,image)
       await this.wrapperPopulateRefP(HikeID, refPoint++, "-18.110549","-68.966962","parking",1,0); // start
       await this.wrapperPopulateRefP(HikeID, refPoint++, "-18.108194","-68.882919","",0,1); // end
 
@@ -948,8 +951,8 @@ class DatabaseConnection {
       expTime=1620; 
       file="samaipata-bosque-de-los-helechos-gigantes.gpx"    
       Description="It was very easy but I couldn't find the waterfall. So I couldn't make circle in the Parque Nacional."
-
-      await this.wrapperPopulate(HikeID,file,Country, Region, Province, city,title,length,expTime,Ascent,Description,Difficulty,start,end,AssociatedGuide)
+      image="hikeImages/default.jpg";
+      await this.wrapperPopulate(HikeID,file,Country, Region, Province, city,title,length,expTime,Ascent,Description,Difficulty,start,end,AssociatedGuide,image)
       await this.wrapperPopulateRefP(HikeID, refPoint++, "-18.178785","-63.873352","parking",1,0); // start
       await this.wrapperPopulateRefP(HikeID, refPoint++, "-18.178865","-63.873278","parking",0,1); // end
 
@@ -984,7 +987,9 @@ class DatabaseConnection {
       "- http://www.trekkingchile.com/Images/choro-trail-map.jpg"+
       "- http://www.turismoboliviaperu.com/imgs/mapa-choro.gif"+
       "- http://coroico-info.com/webs/incatrail/sitebuilder/images/mappage-572x557.jpg"
-      await this.wrapperPopulate(HikeID,file,Country, Region, Province, city,title,length,expTime,Ascent,Description,Difficulty,start,end,AssociatedGuide)
+      image="hikeImages/default.jpg";
+
+      await this.wrapperPopulate(HikeID,file,Country, Region, Province, city,title,length,expTime,Ascent,Description,Difficulty,start,end,AssociatedGuide,image)
       await this.wrapperPopulateRefP(HikeID, refPoint++, "-16.338158","-68.040294","",1,0); // start
       await this.wrapperPopulateRefP(HikeID, refPoint++, "-16.203923","-67.837319","parking",0,1); // end
 
@@ -1019,8 +1024,9 @@ class DatabaseConnection {
       "- http://www.trekkingchile.com/Images/choro-trail-map.jpg"+
       "- http://www.turismoboliviaperu.com/imgs/mapa-choro.gif"+
       "- http://coroico-info.com/webs/incatrail/sitebuilder/images/mappage-572x557.jpg"
-            
-    await this.wrapperPopulate(HikeID,file,Country, Region, Province, city,title,length,expTime,Ascent,Description,Difficulty,start,end,AssociatedGuide)
+      image="hikeImages/default.jpg";
+ 
+    await this.wrapperPopulate(HikeID,file,Country, Region, Province, city,title,length,expTime,Ascent,Description,Difficulty,start,end,AssociatedGuide,image)
     await this.wrapperPopulateRefP(HikeID, refPoint++, "-18.136138","-68.975651","parking",1,0); // start
       await this.wrapperPopulateRefP(HikeID, refPoint++, "-18.160969","-69.140142","",0,1); // end
 
@@ -1041,8 +1047,9 @@ class DatabaseConnection {
     Description="Departure from Cervinia, following the path towards the Lago Blu, we take the path 107 after a few meters of the state road where there is then the indication for the lake of Cignana (about 2 hours)."+
     "Arriving at the lake, we went to visit the church and then continue the path towards the Barmasse refuge crossing the dam. From the latter, following path 1 we went down to Valtournenche."+
     "Not so difficult but it's a long path, worth it for the evocative landscape and the route itself.";
-          
-  await this.wrapperPopulate(HikeID,file,Country, Region, Province, city,title,length,expTime,Ascent,Description,Difficulty,start,end,AssociatedGuide)
+    image="hikeImages/default.jpg";
+    
+  await this.wrapperPopulate(HikeID,file,Country, Region, Province, city,title,length,expTime,Ascent,Description,Difficulty,start,end,AssociatedGuide,image)
   await this.wrapperPopulateRefP(HikeID, refPoint++, "45.933929","7.630021","parking",1,0); // start
       await this.wrapperPopulateRefP(HikeID, refPoint++, "45.877608","7.623348","parking",0,1); // end
 
@@ -1065,8 +1072,8 @@ class DatabaseConnection {
   "Day 2: Refugio Anselme Baud/Casa de Guias - Summit - La Paz"+
   "For a full report see '20 days in the Cordillera Real - Trekking and Montanhism'"+
   "https://www.facebook.com/lucasbaruzzi/media_set?set=a.10207861573721238&type=3&pnref=story"
-        
-await this.wrapperPopulate(HikeID,file,Country, Region, Province, city,title,length,expTime,Ascent,Description,Difficulty,start,end,AssociatedGuide)
+  image="hikeImages/default.jpg";
+await this.wrapperPopulate(HikeID,file,Country, Region, Province, city,title,length,expTime,Ascent,Description,Difficulty,start,end,AssociatedGuide,image)
 await this.wrapperPopulateRefP(HikeID, refPoint++, "-16.287185","-68.130311","hut",1,0); // start
       await this.wrapperPopulateRefP(HikeID, refPoint++, "-16.274170","-68.139751","hut",0,1); // end
 
@@ -1085,7 +1092,8 @@ file="laguna-glacial-de-sorata-illampu-y-janqu-uma.gpx"
 Description="Sorata's Glacier Lake is located at more than 5000 meters in elevation. You best way to start the hike is to take a taxi as far up towards Laguna Chillata as you can (80-100 bolivianos). From there, the Glacier Lake is still pretty far away (1000 meters higher) and so it's best to camp at Laguna Chillata and not do the entire hike in a single day. From Laguna Chillata, it takes 4-6 hours to hike up the Glacier Lake. Te get back to Sorata, it's best to talk to the locals on your way down and see if you can hire a driver."+
 
 "La Laguna Glacial de Sorata de encuentra a más que 5000 metros de altura. Se recomiende tomar taxi hasta lo más cerca posible a laguna Chillata (80-100 bolivianos). De ese punto la Laguna Glacial esta todavía lejos con una subida de 1000 metros, así que se recomiende acampar por la Laguna Chillata y no hacer la caminata en un solo día. Desde la Laguna Chillata se puede subir a la Laguna Glacial en 4-6 horas. Para volver a Sorata, se debe preguntar a los comunarios de los pueblos si se puede contratar transporte."
-await this.wrapperPopulate(HikeID,file,Country, Region, Province, city,title,length,expTime,Ascent,Description,Difficulty,start,end,AssociatedGuide)
+image="hikeImages/default.jpg";
+await this.wrapperPopulate(HikeID,file,Country, Region, Province, city,title,length,expTime,Ascent,Description,Difficulty,start,end,AssociatedGuide,image)
 await this.wrapperPopulateRefP(HikeID, refPoint++, "-15.800923","-68.598910","",1,0); // start
       await this.wrapperPopulateRefP(HikeID, refPoint++, "-15.828727","-68.564683","",0,1); // end
 
@@ -1111,8 +1119,9 @@ Description= "RISERVA NATURALE SPECIALE PARCO BURCINA 'FELICE PIACENZA'"+
 "It is also possible to reach the peaks by choosing one of the many paths that branch off from the main route, lengthening or shortening the journey"+
 "This is a very busy place, especially on weekends and during flowering or foliage periods, but it is worth a visit for an easy walk."
 
+image="hikeImages/default.jpg";
 
-await this.wrapperPopulate(HikeID,file,Country, Region, Province, city,title,length,expTime,Ascent,Description,Difficulty,start,end,AssociatedGuide)
+await this.wrapperPopulate(HikeID,file,Country, Region, Province, city,title,length,expTime,Ascent,Description,Difficulty,start,end,AssociatedGuide,image)
 await this.wrapperPopulateRefP(HikeID, refPoint++, "45.585815","8.006584","parking",1,0); // start
       await this.wrapperPopulateRefP(HikeID, refPoint++, "45.589508","8.013503","",0,1); // end
 
@@ -1140,8 +1149,8 @@ Description="Starting from the Oropa car park next to the cable car, take the pa
 "On the other side, however, you can see the peaks of the Aosta valley such as Cervino and Monte Rosa."
 "The same path can be followed for the way back."+
 "This is not a very long trail but the trail is in poor condition with little maintenance so extreme care must be taken. The effort is certainly rewarded by the view once at the top."
-
-await this.wrapperPopulate(HikeID,file,Country, Region, Province, city,title,length,expTime,Ascent,Description,Difficulty,start,end,AssociatedGuide)
+image="hikeImages/MONTEMUCRONE.jpg";
+await this.wrapperPopulate(HikeID,file,Country, Region, Province, city,title,length,expTime,Ascent,Description,Difficulty,start,end,AssociatedGuide,image)
 await this.wrapperPopulateRefP(HikeID, refPoint++, "45.628837","7.97223","parking",1,0); // start
       await this.wrapperPopulateRefP(HikeID, refPoint++, "45.62042","7.944596","",0,1); // end
 
@@ -1167,8 +1176,8 @@ Description="Once in Cervinia, go as far as the roundabout, turn left and you wi
 "From here you can enjoy a complete and stupendous view over a good part of Valtournenche. To the left the Furggen, then the sequence of the Piccolo Cervino, the crest of the Breithorn, the Plateau Rosà, the Gobba di Rollin, up to Cime Bianche and below the Lago del Goliet."+
 "Simple excursion, without particular difficulties, of moderate length suitable for good legs and breath"+
 "It is advisable, paying attention to the last rocky stretch, to continue for half an hour to touch the Carrel cross, which has marked the history of mountaineering, following the route which then becomes mountaineering, leading to Colle del Leone and the refuge dedicated to J.A. Carrel, support point for the Italian ascent route to Monte Cervino."
-
-await this.wrapperPopulate(HikeID,file,Country, Region, Province, city,title,length,expTime,Ascent,Description,Difficulty,start,end,AssociatedGuide)
+image="hikeImages/sentiero-per-il-bivacco-gias-nuovo.jpg";
+await this.wrapperPopulate(HikeID,file,Country, Region, Province, city,title,length,expTime,Ascent,Description,Difficulty,start,end,AssociatedGuide,image)
 await this.wrapperPopulateRefP(HikeID, refPoint++, "45.93651","7.62672","parking",1,0); // start
       await this.wrapperPopulateRefP(HikeID, refPoint++, "45.95914","7.64406","hut",0,1); // end
 
@@ -1185,8 +1194,9 @@ await this.wrapperPopulateRefP(HikeID, refPoint++, "45.93651","7.62672","parking
       expTime=150; 
       file="bivacco gias nuovo.gpx"    
       Description="Il sentiero si presenta come una larga carreggiata sterrata che prende subito quota, trasformandosi in un sentiero circondato da pietroni e bassa vegetazione. Lungo le pareti laterali è possibile vedere pareti attrezzate per l’arrampicata, mentre su qualche grosso masso sono affisse targhette che riportano famose frasi di alpinisti."
+      image="hikeImages/sentiero-per-il-bivacco-gias-nuovo.jpg";
       
-      await this.wrapperPopulate(HikeID,file,Country, Region, Province, city,title,length,expTime,Ascent,Description,Difficulty,start,end,AssociatedGuide)
+      await this.wrapperPopulate(HikeID,file,Country, Region, Province, city,title,length,expTime,Ascent,Description,Difficulty,start,end,AssociatedGuide,image)
       await this.wrapperPopulateRefP(HikeID, refPoint++, "45.36415, 7.22306","parking",1,0); // start
             await this.wrapperPopulateRefP(HikeID, refPoint++, "45.33987", "7.18348","hut",0,1); // end
       
@@ -1209,8 +1219,8 @@ await this.wrapperPopulateRefP(HikeID, refPoint++, "45.93651","7.62672","parking
     +"A questo punto puoi scegliere se tenerti sul sentiero che sale a sinistra fino al bivacco (segnalato da cartelli GTA Bivacco Molino), o se percorrere il sentiero balcone lungo la strada sterrata che per circa 500 metri ti regalerà una fantastica vista sul Monte Rosso d’Ala, portandoti ad un’alpe nella quale potresti trovare mucche al pascolo (segnalato con cartelli GTA Bivacco Molino/Lago Vasuero)."
     
     +"Consigliamo il sentiero che sale a sinistra poiché più intuitivo a livello di segnaletica, puoi tenere l’altro pezzo di sentiero per creare un anello per il ritorno. "
-    
-    await this.wrapperPopulate(HikeID,file,Country, Region, Province, city,title,length,expTime,Ascent,Description,Difficulty,start,end,AssociatedGuide)
+    image="hikeImages/sentiero-per-il-bivacco-molino.jpg";
+    await this.wrapperPopulate(HikeID,file,Country, Region, Province, city,title,length,expTime,Ascent,Description,Difficulty,start,end,AssociatedGuide,image)
     await this.wrapperPopulateRefP(HikeID, refPoint++,"45.30900", "7.24348","parking",1,0); // start
             await this.wrapperPopulateRefP(HikeID, refPoint++, "45.32672", "7.23196","",0,1); // end
 
@@ -1241,7 +1251,8 @@ await this.wrapperPopulateRefP(HikeID, refPoint++, "45.93651","7.62672","parking
     +"Passiamo dai 2000 m (bivio sentiero Ezio Nicoli) ai 2710 del Bivacco Berardo in 2km circa."
     
     +"Il sentiero non presenta grandi difficoltà se non nella sua ripidità specialmente nel tratto finale dove il fondo risulta un po’ scivoloso e polveroso."
-    await this.wrapperPopulate(HikeID,file,Country, Region, Province, city,title,length,expTime,Ascent,Description,Difficulty,start,end,AssociatedGuide)
+    image="hikeImages/sentiero-per-il-bivacco-berardo.jpg";
+    await this.wrapperPopulate(HikeID,file,Country, Region, Province, city,title,length,expTime,Ascent,Description,Difficulty,start,end,AssociatedGuide,image)
     await this.wrapperPopulateRefP(HikeID,refPoint++, "44.61340", "7.05332" ,"hut",1,0); // start
             await this.wrapperPopulateRefP(HikeID, refPoint++, "44.65110", "7.07395","hut",0,1); // end
 
@@ -1259,7 +1270,9 @@ await this.wrapperPopulateRefP(HikeID, refPoint++, "45.93651","7.62672","parking
         expTime=240; 
         file="Monte-fertazza.gpx"    
         Description="Dall’ammaliante Val Fiorentina, uno dei monti sicuramente più conosciuti e frequentati di questa fascia alpina è quello del Monte Fertazza, sia d’inverno, per la presenza delle diverse piste sciistiche, che d’estate, dove le relative seggiovie, per un certo lasso di tempo, le rimettono in funzione per giungere con facilità presso i rispettivi ristoranti Fertazza e Belvedere. Tuttavia, il Monte Fertazza può soddisfare anche chi desidera svolgere una camminata mediamente impegnativa, affrontando un sentiero relativamente facile che ci porta, anch’esso, a raggiungere la punta più alta del codesto monte, ovvero la Cima dei Viai, che ci permette, per di più, di raggiungere l’apice panoramico dell’intera uscita. Infatti, questa escursione, seppur risulti relativamente facile, sin dall’inizio della camminata è caratterizzata da un susseguirsi di sorprendenti vedute paesaggistiche che si affacciano, sostanzialmente, sulla suggestiva Val Fiorentina, nonché sugli innumerevoli monti sovrastanti che contraddistinguono una considerevole fascia delle fantastiche Dolomiti; la cima, invece, è una veduta a 360° “esplosivamente” meravigliosa, praticamente inaspettata per chi la raggiunge per la prima volta, che ci permette di ammirare, di fatto con un estensione ancora più notevole, degli ulteriori massicci Dolomitici, molti di questi tra i più conosciuti."
-        await this.wrapperPopulate(HikeID,file,Country, Region, Province, city,title,length,expTime,Ascent,Description,Difficulty,start,end,AssociatedGuide)
+        image="hikeImages/FTZ-09-dolomiti-ampezzane.jpg";
+
+        await this.wrapperPopulate(HikeID,file,Country, Region, Province, city,title,length,expTime,Ascent,Description,Difficulty,start,end,AssociatedGuide,image)
         await this.wrapperPopulateRefP(HikeID,refPoint++, "46.43647", "12.07019" ,"",1,0); // start
                 await this.wrapperPopulateRefP(HikeID, refPoint++, "46.42411", "12.04409","",0,1); // end
 
@@ -1278,8 +1291,9 @@ await this.wrapperPopulateRefP(HikeID, refPoint++, "45.93651","7.62672","parking
         Description="Dal Lago di Pontesei, seguiamo le indicazioni per il Rifugio Bosconero imboccando il sentiero 485 che sale moderatamente sino alla Casera dei Zot; da qui, con maggiore pendenza sino ad arrivare alla Casera Bosconero. Effettuiamo, quindi, il ritorno ad anello ritornando brevemente indietro all’ultimo bivio,"
         +" imboccando il sentiero 490 che porta l’indicazione del Pian e della Casera del Mugon, oppure effettuiamo una variante un po’ più lunga e difficile attraverso il sentiero che porta a Le Calades, ma svoltiamo, al relativo bivio, verso Pontesei, attraversando, quindi, un ghiaione e, ricongiungendoci, appunto, con il segnavia 490."
         +" A propria discrezione, la deviazione attraverso il “Sentiero Lago delle Streghe” per ricongiungerci, nuovamente, con il sentiero 490 e ritornare, quindi, a Pontesei."
+        image="hikeImages/Rifugio-Casera-Bosconero-Lago-Pontesei-Val-di-Zoldo-Foto-22.jpg";
 
-        await this.wrapperPopulate(HikeID,file,Country, Region, Province, city,title,length,expTime,Ascent,Description,Difficulty,start,end,AssociatedGuide)
+        await this.wrapperPopulate(HikeID,file,Country, Region, Province, city,title,length,expTime,Ascent,Description,Difficulty,start,end,AssociatedGuide,image)
         await this.wrapperPopulateRefP(HikeID,refPoint++,"46.33957", "12.22392" ,"parking",1,0); // start
         await this.wrapperPopulateRefP(HikeID, refPoint++, "46.33835", "12.25160","hut",0,1); // end
 
@@ -1298,7 +1312,8 @@ await this.wrapperPopulateRefP(HikeID, refPoint++, "45.93651","7.62672","parking
         file="lobuche-everest-base-camp-gorak-shep.gpx"    
         Description='I guess that this is one of the most recorded tracks, I post it only for the sake of photo documentation.'
         +'Maybe in the long stretch inside the base camp there was some trespassing component. Namely, arriving in snow and mist I did not notice that at a certain point there was written "access for climbers only". However, due to the same weather conditions, everybody were well sealed inside their own tents, so I experienced no problem throughout my long visit.'
-        await this.wrapperPopulate(HikeID,file,Country, Region, Province, city,title,length,expTime,Ascent,Description,Difficulty,start,end,AssociatedGuide)
+        image="hikeImages/Lobuche-to-Gorak-Shep-980x735.jpeg";
+        await this.wrapperPopulate(HikeID,file,Country, Region, Province, city,title,length,expTime,Ascent,Description,Difficulty,start,end,AssociatedGuide,image)
 
         HikeID='42';
         title="LANGTANG CIRCUIT: circular route from Syabrubesi by Tserko Ri, Ganja La 5.183 and Goisankund NEPAL";
@@ -1416,7 +1431,8 @@ await this.wrapperPopulateRefP(HikeID, refPoint++, "45.93651","7.62672","parking
 +"Another way to make the circuit would be leaving from Timbu, south Tarkeghyang (3-4hrs walk). From this population may begin around both clockwise (Timbu-Melanchigaon-Goisankund-Thula Syabru Lama Hotel-Langtang Ganja Kyangin Gompa-the-Tarkeghyang-Timbu) or inverse."
 +""+
 +"The advantage of this option is saving hours bus as Timbu is closer to Kathmandu than Syabrubesi. Conversely, if we do the circuit clockwise (logical acclimating to take the Ganja La acclimated correctly) we charged many days everything needed for the four days of camping (gas, food, matress...)"       
-        await this.wrapperPopulate(HikeID,file,Country, Region, Province, city,title,length,expTime,Ascent,Description,Difficulty,start,end,AssociatedGuide)
+image="hikeImages/default.jpg";       
+await this.wrapperPopulate(HikeID,file,Country, Region, Province, city,title,length,expTime,Ascent,Description,Difficulty,start,end,AssociatedGuide,image)
 
        
         HikeID='43';
@@ -1433,7 +1449,9 @@ await this.wrapperPopulateRefP(HikeID, refPoint++, "45.93651","7.62672","parking
         expTime=413; 
         file="monte-mitsutoge-yamakawaguchiko.gpx"    
         Description="We decided to make this climb because on this date Mount Fuji had too much snow at the top, and the conditions were not right for our equipment and our training. The Fujisan views are amazing. It climbs from the town of Kawaguchiko, in the area near Mount Fuji. You haven't got so much technical difficulty and it's not so long, about 20 km. When you reach the first viewpoint there is a poster than say to go the top and come back is about 6 hours; my wife and me aren't professional climbers and we did summit in an hour and a half. On the way you can find animals such as monkeys, one attacked us and it was a difficult time, at the end without losing sight of the monkey and walking up while lambasted us get out of the area, in the end nothing happened more beyond the scare. We had a beautiful cloudless day. AMAZING! The descent we take the way to the Five Pagoda Tower, one of the most typical views of this area before returning by train to the hotel in Kawaguchiko. If you don't climb the majestic Fuji do not miss this climb and views."
-        await this.wrapperPopulate(HikeID,file,Country, Region, Province, city,title,length,expTime,Ascent,Description,Difficulty,start,end,AssociatedGuide)
+      
+        image="hikeImages/panoramic_view_from_mitsutoge.jpg";
+        await this.wrapperPopulate(HikeID,file,Country, Region, Province, city,title,length,expTime,Ascent,Description,Difficulty,start,end,AssociatedGuide,image)
        
         HikeID='44';
         title="Takatsuka-yama 高柄山 (Shiotsu Stn. - Uenohara Stn.)";
@@ -1448,7 +1466,8 @@ await this.wrapperPopulateRefP(HikeID, refPoint++, "45.93651","7.62672","parking
         expTime=176; 
         file="takatsuka-yama-gao-bing-shan-shiotsu-stn-uebohara-stn-.gpx"    
         Description="Quite easy and well signed trail, just the very last part at the gate was a bit confusing; nothing very special on this trail but a nice trek if you don’t want to travel that long from Tokyo (just 1.5 hrs); easy access directly from the train stn., no need to take a bus"
-        await this.wrapperPopulate(HikeID,file,Country, Region, Province, city,title,length,expTime,Ascent,Description,Difficulty,start,end,AssociatedGuide)
+        image="hikeImages/69984708Master.jpg";
+        await this.wrapperPopulate(HikeID,file,Country, Region, Province, city,title,length,expTime,Ascent,Description,Difficulty,start,end,AssociatedGuide,image)
 
 ///////////////////////////////////////////////////
         HikeID='45';
@@ -1467,8 +1486,9 @@ await this.wrapperPopulateRefP(HikeID, refPoint++, "45.93651","7.62672","parking
         Description=
         "Great combination of a good walk with stunning views and archaeology. Mostly on obvious tracks, limited roadways, easy for the most part but with some steep inclines. So I've rated the walk moderate. Latter part a bit tricky as one necropolis seems to be in someone's back yard/garden! Just pick your way through a few houses to get back on track. Also the descent is off the road down a dirt trackway."+
         "I followed the Wikilocs route by mikeledzep."+
-        "Many thanks Mike        "
-        await this.wrapperPopulate(HikeID,file,Country, Region, Province, city,title,length,expTime,Ascent,Description,Difficulty,start,end,AssociatedGuide)
+        "Many thanks Mike "
+        image="hikeImages/default.jpg";   
+        await this.wrapperPopulate(HikeID,file,Country, Region, Province, city,title,length,expTime,Ascent,Description,Difficulty,start,end,AssociatedGuide,image)
 
         HikeID='46';
         title="Carrauntoohil";
@@ -1501,7 +1521,9 @@ await this.wrapperPopulateRefP(HikeID, refPoint++, "45.93651","7.62672","parking
 
 "RUTAS CERCANAS:"+
 "- Torc Mountain  "
-        await this.wrapperPopulate(HikeID,file,Country, Region, Province, city,title,length,expTime,Ascent,Description,Difficulty,start,end,AssociatedGuide)
+image="hikeImages/Carrauntoohil_2016.jpg";
+
+        await this.wrapperPopulate(HikeID,file,Country, Region, Province, city,title,length,expTime,Ascent,Description,Difficulty,start,end,AssociatedGuide,image)
 
         HikeID='47';
         title="Carrauntouhill via the Devil's ladder";
@@ -1547,7 +1569,8 @@ await this.wrapperPopulateRefP(HikeID, refPoint++, "45.93651","7.62672","parking
 "Ascent time: 04:00"+
 
 "Descent time: 04:08"
-        await this.wrapperPopulate(HikeID,file,Country, Region, Province, city,title,length,expTime,Ascent,Description,Difficulty,start,end,AssociatedGuide)
+image="hikeImages/Carrauntoohil-Mountain-Kerry.jpg";
+        await this.wrapperPopulate(HikeID,file,Country, Region, Province, city,title,length,expTime,Ascent,Description,Difficulty,start,end,AssociatedGuide,image)
 
         HikeID='48';
         title="Garden of the Sleeping Giant";
@@ -1563,7 +1586,9 @@ await this.wrapperPopulateRefP(HikeID, refPoint++, "45.93651","7.62672","parking
         expTime=22; 
         file="garden-of-the-sleeping-giant.gpx"    
         Description="Recorded 1/4 of the trail from the lookout to the entrance. Easy trails and boardwalk. Spent 90 minutes in the garden."
-        await this.wrapperPopulate(HikeID,file,Country, Region, Province, city,title,length,expTime,Ascent,Description,Difficulty,start,end,AssociatedGuide)
+        image="hikeImages/Garden-of-the-sleeping-giant.jpg";
+
+        await this.wrapperPopulate(HikeID,file,Country, Region, Province, city,title,length,expTime,Ascent,Description,Difficulty,start,end,AssociatedGuide,image)
 
         HikeID='49';
         title="Veisaru red cross";
@@ -1582,7 +1607,8 @@ await this.wrapperPopulateRefP(HikeID, refPoint++, "45.93651","7.62672","parking
 "Penisoni Tirau 33yrs labourer"+
 "3. Saimoni Buli 34 yrs labourer"+
 "4. Samu Boa 32yrs labourer"
-        await this.wrapperPopulate(HikeID,file,Country, Region, Province, city,title,length,expTime,Ascent,Description,Difficulty,start,end,AssociatedGuide)
+image="hikeImages/29461789Master.jpg";
+        await this.wrapperPopulate(HikeID,file,Country, Region, Province, city,title,length,expTime,Ascent,Description,Difficulty,start,end,AssociatedGuide,image)
 
         HikeID='50';
         title="Gjeravica or Đeravica (Prokletije)";
@@ -1602,20 +1628,22 @@ await this.wrapperPopulateRefP(HikeID, refPoint++, "45.93651","7.62672","parking
         "Đeravica or Gjeravica is second highest top on Prokletije (Accursed Mountain) after Maja Jezerce and it is considered as highest top in Kosovo."+
         "There are 2 start points to reach the top from Kosovo, one is from Dečane and another from Junik off road to Gropa Erenikut where you can find accomodation."+
         "Trail is moderate with 2 sections wich are bit exposed, one bellow Gjeravica Lake and another bellow the top. Rest of the trail is moderate and well marked."
-        await this.wrapperPopulate(HikeID,file,Country, Region, Province, city,title,length,expTime,Ascent,Description,Difficulty,start,end,AssociatedGuide)
+        image="hikeImages/55203323Master.jpg";
+
+        await this.wrapperPopulate(HikeID,file,Country, Region, Province, city,title,length,expTime,Ascent,Description,Difficulty,start,end,AssociatedGuide,image)
 
 
         await this.populateHuts();
         
   }
     
-  static  wrapperPopulate = (HikeID,file,Country, Region, Province, city,title,length,expTime,Ascent,Description,Difficulty,start,end,AssociatedGuide=0)=>{
+  static  wrapperPopulate = (HikeID,file,Country, Region, Province, city,title,length,expTime,Ascent,Description,Difficulty,start,end,AssociatedGuide=0,image)=>{
     return new Promise(async(resolve,reject)=>{
       let path="./gpx/"+file;
       const hikes =require("./Hikes");
       const {hike} =require("./Hikes");
       console.log("Populating Hike#"+(HikeID)+" "+title);
-      let h=new hike(null,title,length,Description,Ascent,Difficulty,expTime,Country,Region,Province, city,path,start,end,AssociatedGuide)
+      let h=new hike(null,title,length,Description,Ascent,Difficulty,expTime,Country,Region,Province, city,path,start,end,AssociatedGuide,image)
       await hikes.addHike(h);
       resolve("Hike#"+(HikeID)+" "+title+" Inserted")
     })  
