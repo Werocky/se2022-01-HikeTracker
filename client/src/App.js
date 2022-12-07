@@ -141,13 +141,8 @@ function AppLayout(props) {
           <HikeDetails logout={props.logout} />
         } />
         <Route path='/huts/:hutID' element={
-          <HutDetails />
+          <HutDetails logout={props.logout} />
         } />
-
-        { /* TODO: REMOVE AFTER TESTING */}
-        <Route path='/test' element={
-          <Sidebar></Sidebar>
-        }></Route>
 
         <Route path='/register' element={
           <Register register={props.register} />
