@@ -16,6 +16,7 @@ class Hut{
         Beds, 
         AvgPrice, 
         Description,
+        Picture,
         HutManagerID,
         Website,
         Phone){
@@ -31,6 +32,7 @@ class Hut{
       this.Beds=Beds;
       this.AvgPrice=AvgPrice;
       this.Description=Description;
+      this.Picture=Picture
       this.HutManagerID=HutManagerID;
       this.Website=Website
       this.Phone=Phone
@@ -40,9 +42,9 @@ class Hut{
  function addHut  (Hut)  {
   
   return new Promise(async (resolve, reject) => {
-    const sql = 'INSERT INTO HUTS( RefPointID, Name, Elevation, City,Province,  Region, Country, WhenOpen, Beds, AvgPrice, Description,HutManagerID,Website,Phone) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?)';
+    const sql = 'INSERT INTO HUTS( RefPointID, Name, Elevation, City,Province,  Region, Country, WhenOpen, Beds, AvgPrice, Description,HutManagerID,Website,Phone,Picture) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)';
     db.run(sql, [
-       Hut.RefPointID, Hut.Name, Hut.Elevation, Hut.City,Hut.Province, Hut.Region, Hut.Country, Hut.WhenOpen, Hut.Beds, Hut.AvgPrice, Hut.Description,Hut.HutManagerID,Hut.Website,Hut.Phone
+       Hut.RefPointID, Hut.Name, Hut.Elevation, Hut.City,Hut.Province, Hut.Region, Hut.Country, Hut.WhenOpen, Hut.Beds, Hut.AvgPrice, Hut.Description,Hut.HutManagerID,Hut.Website,Hut.Phone,Hut.Picture
     ], function (err) {
       if (err)
         reject(err);
@@ -130,7 +132,7 @@ class Hut{
       else {
         const huts=[]
         rows.forEach(r => {
-          let h = new Hut(r.RefPointID, r.Name, r.Elevation, r.City, r.Province, r.Region, r.Country, r.WhenOpen, r.Beds, r.AvgPrice, r.Description)
+          let h = new Hut(r.RefPointID, r.Name, r.Elevation, r.City, r.Province, r.Region, r.Country, r.WhenOpen, r.Beds, r.AvgPrice, r.Description,r.Picture)
           huts.push(h);
        });
         

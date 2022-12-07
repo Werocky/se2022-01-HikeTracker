@@ -329,7 +329,7 @@ function HutElement(props) {
     return (
         <PostContainer key={props.index}>
             <Post className="group" as="a">
-                <Image imageSrc={imageSrc} />
+                <Image imageSrc={hut.Picture} />
                 <Info>
                     <Title>{hut.Name}</Title>
                     <Category>{hut.Elevation} mt</Category>

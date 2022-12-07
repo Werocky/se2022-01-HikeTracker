@@ -434,7 +434,7 @@ function HikeElement(props) {
     <PostContainer key={props.index} >
       <Post className="group" as="a" >
         <Info>
-        <Image imageSrc={hike.image === undefined ? hike.Picture : hike.image} />
+        <Image imageSrc={hike.Picture} />
 
           <Category>
             {

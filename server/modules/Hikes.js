@@ -25,7 +25,7 @@ class hike{
     Start,
     End,
     AssociatedGuide,
-    image
+    Picture
   ){
     this.HikeID=HikeID;
     this.Title=Title;
@@ -42,7 +42,7 @@ class hike{
     this.Start=Start
     this.End=End
     this.AssociatedGuide=AssociatedGuide
-    this.image=image
+    this.Picture=Picture
 
   }
 }
@@ -106,8 +106,8 @@ class hike{
  function addHike (Hike)  {
 
   return new Promise(async (resolve, reject) => {
-    db.run("INSERT INTO Hikes (Title, Length, ExpectedTime, Ascent, Difficulty, Start, End, Description, Country, Region, Province, City, GpxFile, AssociatedGuide,picture ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?)",
-      [Hike.Title, Hike.Length, Hike.ExpectedTime, Hike.Ascent, Hike.Difficulty, Hike.Start, Hike.End, Hike.Description, Hike.Country, Hike.Region, Hike.Province, Hike.City, Hike.GpxFile, Hike.AssociatedGuide,Hike.image ], function (err) {
+    db.run("INSERT INTO Hikes (Title, Length, ExpectedTime, Ascent, Difficulty, Start, End, Description, Country, Region, Province, City, GpxFile, AssociatedGuide,Picture ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?)",
+      [Hike.Title, Hike.Length, Hike.ExpectedTime, Hike.Ascent, Hike.Difficulty, Hike.Start, Hike.End, Hike.Description, Hike.Country, Hike.Region, Hike.Province, Hike.City, Hike.GpxFile, Hike.AssociatedGuide,Hike.Picture ], function (err) {
         if (err)
           reject(err);
         else

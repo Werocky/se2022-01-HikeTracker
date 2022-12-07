@@ -1660,7 +1660,7 @@ image="hikeImages/29461789Master.jpg";
       await HikeRefPoints.addHikeRefPoints(HikeID, newRefPointID, IsStart, IsEnd);
   }
 
-  static wrpAddHut= async (id,name,elevation,City,Province,Region,Country,WhenOpen,Beds, avgPrice, description,website=null,phone=null)=>{
+  static wrpAddHut= async (id,name,elevation,City,Province,Region,Country,WhenOpen,Beds, avgPrice, description,picture,website=null,phone=null)=>{
       const huts = require("./Huts");
       const{Hut}=require("./Huts");
       let hut = new Hut(id,name,
@@ -1673,6 +1673,7 @@ image="hikeImages/29461789Master.jpg";
           Beds, 
           avgPrice, 
           description,
+          picture,
           0,
           website,
           phone)
@@ -1687,7 +1688,7 @@ image="hikeImages/29461789Master.jpg";
       description = "Il Rifugio La Riposa si trova in località Riposa, Mompantero di Susa, a 2185 m di altitudine ed è raggiungibile anche in auto."+
       "Dispone di 3 camere da 6 posti ed una camerata da 22 posti con letti a castello."+"Ristorante per gli ospiti con possibilità di pernottamento e in aggiunta servizio mezza pensione o pensione completa."+
       "Le tariffe variano da 15 euro per pernottamento a 40/50 euro con mezza pensione o completa.";
-      await this.wrpAddHut('0', 'Rifugio La riposa', 2185, "Mompantero, Susa", "Torino", "Piemonte", "Italy", "S", 28, 40,description );
+      await this.wrpAddHut('0', 'Rifugio La riposa', 2185, "Mompantero, Susa", "Torino", "Piemonte", "Italy", "S", 28, 40,description,"hutImages/Rifugio-La-Riposa.jpg" );
       
       description= "Il Rifugio Melezè si trova a Bellino a 1812 metri d’altitudine, vicino a Borgata Sant'Anna."+
       "L'edificio era una caserma militare ed è stato ristrutturato interamente in legno e pietra."+
@@ -1695,7 +1696,7 @@ image="hikeImages/29461789Master.jpg";
       "E' possibile inoltre pranzare all'esterno."+
       "Al piano superiore, si trovano le 7 camere in legno, per un totale di 50 posti letto."+
       "La struttura è dotata di servizi igienici esterni ed interni al piano terra; al piano superiore, vi sono i bagni per le camere con docce ed acqua calda.";
-      await this.wrpAddHut('2',"Rifugio Meleze'",1812, "Bellino", "Cuneo", "Piemonte", "Italy", "Y", 50, 40, description);
+      await this.wrpAddHut('2',"Rifugio Meleze'",1812, "Bellino", "Cuneo", "Piemonte", "Italy", "Y", 50, 40, description,'hutImages/DSC_0171.jpeg');
       
       description= "Situato tra le montagne della Valle Stretta, questo rifugio rustico dista 8 km dal monte Thabor nel massiccio dei Cerces"+
         "Inoltre è a 32 km dalla stazione ferroviaria di Brianzoni e 39 km dal comprensorio sciistico Serre Chevalier."+
@@ -1703,31 +1704,31 @@ image="hikeImages/29461789Master.jpg";
       "Le camere private invece, possono ospitare da 2 a 4 persone."+
       "La struttura comprende un ristorante sobrio che serve piatti semplici della cucina regionale e un bar con caminetto."+
       "Dispone inoltre di due aree lounge, terrazza, deposito biciclette e locale per l'asciugatura degli sci. Offre anche la colazione.";
-      await this.wrpAddHut('19',"Rifugio I Re Magi",1769,"Névache","","Provenza-Alpi-Costa Azzurra","France", "SW", 35, 52,description);
+      await this.wrpAddHut('19',"Rifugio I Re Magi",1769,"Névache","","Provenza-Alpi-Costa Azzurra","France", "SW", 35, 52,description,'hutImages/banner_remagi_02.jpg');
       
       description= "Una vecchia baita nell’incantevole Vallone di S. Anna di Sampeyre, a quota 1850 mt, ristrutturata con cura per creare un ambiente accogliente"+
       "Pensato per il piacere di una vacanza o una semplice sosta, in cui riscoprire se stessi e l'amore per le cose semplici, per vivere un momento \"d'altri tempi\", senza rinunciare alle comodità odierne."+
       "Gli ospiti che scelgono di soggiornare presso Rifugio Meira Garneri possono usufruire di tutti i servizi messi a disposizione dalle strutture del Torinetto: l’ampio parco verde attrezzato con piscina e solarium, giochi bimbi, giochi bocce, la palestra, la sala per lo squash, il Rifugio in quota e trasporto con gatto delle nevi e motoslitte.";
-      await this.wrpAddHut('23',"Rifugio Meira Garnieri",1810,"Sampeyre","Cuneo","Piemonte","Italy", "Y",23,60, description);
+      await this.wrpAddHut('23',"Rifugio Meira Garnieri",1810,"Sampeyre","Cuneo","Piemonte","Italy", "Y",23,60, description,'hutImages/rifugio-meira-garneri.jpg');
       
       description= "Si trova all’interno del parco naturale Orsiera-Rocciavrè, ai piedi del Colle della Roussa"+
       "Ed è inoltre un’ottima base per salire sopra i 2000 m (Colle della Roussa) e scoprire gli affascinanti sentieri tra le vette del Parco  con i suoi spettacolari laghi, Rouen (2391 m), Sottano e Soprano (2200 m c.a)."+
       "E’ raggiungibile solo a piedi e in mountain bike."+
       "Un luogo familiare, una cucina come una volta, con gli ingredienti migliori tutto l’anno anche d’inverno, per un pranzo o una cena o una bella chiaccherata davanti ad una fetta delle nostre torte.";
-      await this.wrpAddHut('25',"Rifugio Fontana Mura",1726,"Coazze", "Torino", "Piemonte", "Italy","SW",11,60,description);
+      await this.wrpAddHut('25',"Rifugio Fontana Mura",1726,"Coazze", "Torino", "Piemonte", "Italy","SW",11,60,description,"hutImages/317924475_483027523703142_7759452976752506397_n.jpg");
       
       description= "Il rifugio Selleries è un rifugio situato in val Chisone, nel cuore del Parco Regionale Orsiera."+
       "Il rifugio è aperto tutto l’anno e, nei mesi estivi, é raggiungibile in macchina su strada sterrata."+
       "Dispone di 12 stanze dislocate su 2 piani, alcune matrimoniali ed altre con letti a castello. In 2 stanze sono presenti i servizi in camera, mentre per le altre ci sono bagni e docce ai piani."+
       "Dispone di un ampio salone ristorante con 80 posti."+
       "È dotato di tutte le infrastrutture necessarie per l’accoglienza di portatori di handicap, compreso un ascensore per raggiungere dalla sala ristorante i piani superiori.";
-      await this.wrpAddHut('27',"Rifugio Selleries",2023,"Roure","Torino","Piemonte","Italy","Y",70,44,description);
+      await this.wrpAddHut('27',"Rifugio Selleries",2023,"Roure","Torino","Piemonte","Italy","Y",70,44,description,'hutImages/thumbs_dsc_0047.jpg');
       
       description= "Di proprietà del CAI. Inaugurato nel 1950 e così chiamato in memoria dell’accademico del CAI e partigiano ucciso dai nazifascisti nel 1944."+ 
       "(Willy Jervis, 43 anni, ingegnere meccanico membro del partito d'azione, è stato fucilato a Villar Pellice, la notte fra il 4 e 5 agosto 1944.)"+
       "Si trova all'astremo inferiore del grande e pittoresco Piano del Prà, ricoperto da pascoli, interrotti nella parte superiore da boschetti di larici."+
       "Il Rifugio Jervis, aperto tutto l'anno, dispone di 90 posti letto con servizi e docce ai piani. La struttura si è arricchito nel 2015 di una dèpendance ricavata dalla ristrutturazione della casermetta ex-militare.";
-      await this.wrpAddHut('31',"Rifugio Jervis Cruello",1732,"Bobbio Pellice","Torino","Piemonte","Italy","Y",90,50,description);
+      await this.wrpAddHut('31',"Rifugio Jervis Cruello",1732,"Bobbio Pellice","Torino","Piemonte","Italy","Y",90,50,description,'hutImages/100_4264.jpg');
       
       description= "Rifugio di proprietà dello Ski Club Torino, si trova in Alta Val di Susa, sui Monti della Luna, nei pressi del Lago Nero."+
       "Grazie alla sua posizione è raggiungibile tutto l’anno, meta ideale per comode escursioni in estate e in inverno, a piedi, in mountain bike, con le ciaspole o gli sci, godendo di un grandioso panorama verso i monti del Delfinato e del Queyras."+
@@ -1736,24 +1737,24 @@ image="hikeImages/29461789Master.jpg";
       "Il piano terra del rifugio è adibito a bar e ristorante."
       "Al piano superiore è possibile pernottare con trattamento di mezza pensione."+
       "Il rifugio dispone di circa 25 posti letto in sobrie ed accoglienti camere da due a otto posti. I servizi sono in comune al pianterreno e dotati acqua corrente calda, la doccia calda è a pagamento (2,00 €).";
-      await this.wrpAddHut('33',"Rifugio Capanna Mautino",2110,"Cesana Torinese", "Torino","Piemonte","Italy","SW",25,45,description);
+      await this.wrpAddHut('33',"Rifugio Capanna Mautino",2110,"Cesana Torinese", "Torino","Piemonte","Italy","SW",25,45,description,'hutImages/il-rifugio.jpg');
       
       description= "Gorgeous views surround this location. Look through your dome at the night stars. Flushing toilet with running water for sinks. The lodges have a raised bed and electricity/lights available."+
       "Great first night accommodation for yours 5 days Salkantay trek!"+
       "You can have dinner, breakfast and take out lunch. The food is very good, plentiful and can be vegetarian.";
-      await this.wrpAddHut('44', "Salkantay Hostel - Soraypampa",3920,"Mollepata", "","","Perù","Y",undefined,20,description);
+      await this.wrpAddHut('44', "Salkantay Hostel - Soraypampa",3920,"Mollepata", "","","Perù","Y",undefined,20,description,'hutImages/default.jpg');
       
       description= "Hut for training and acclimatization before the ascent of Huayna Potosi."+
       "Snacks and water or soft drinks can be bought here."+
       "Generally if your guide has arranged for a cook he will normally prepare you a small soup or meal."+
       "Obviously hotter inside than sleeping in a tent and there are basic toilet facilities too.";
-      await this.wrpAddHut('62', "Refugio Casa Blanca",4789,"Milluni","La Paz","","Bolivia","Y",undefined,undefined,description);
+      await this.wrpAddHut('62', "Refugio Casa Blanca",4789,"Milluni","La Paz","","Bolivia","Y",undefined,undefined,description,'hutImages/default.jpg');
       
       description= "Hut used as foothold for the second day of ascent. You can start from here in the morning an and climb from here to the top of Huayna Potosí."+
       "The place is comfy, all wooden, there is water (from the glacial) and bathroom. Suitable for large groups (maybe 20 at maximum capacity). Depending of season will be Bs. 70 - 50 per night."+
       "There is a kitchen with gas stove, crockery and a dining room. No food service unless requested several days in advance."+
       "No electricity.";
-      await this.wrpAddHut('63',"Refugio Anselme Baud",5272,"Milluni","La Paz","","Bolivia","Y",40,undefined,description);
+      await this.wrpAddHut('63',"Refugio Anselme Baud",5272,"Milluni","La Paz","","Bolivia","Y",40,undefined,description,'hutImages/default.jpg');
       
       description= "Il rifugio si trova sul dosso montagnoso dell’Oriondé, nell’alta Valtournenche, proprio ai piedi del Cervino."+
       "Non è una struttura invernale e per questo il rifugio è aperto solo nel periodo estivo."+
@@ -1763,32 +1764,32 @@ image="hikeImages/29461789Master.jpg";
       "Il Rifugio Oriondé offre una cucina tipica regionale."+
       "Qui è possibile gustare affettati misti valdostani come lardo, mocetta, salsicce e boudin, polenta concia, crespelle , zuppa , minestrone, spezzatino di manzo, salsiccia in umido, cervo, capriolo, e per finire il nostro meraviglioso carrello di dolci fatti in casa con panna fresca, il tutto innaffiato da ottimo vino regionale ed italiano."+
       "Cene tipiche a lume di candela, con servizio di navetta incluso, possono essere organizzate su richiesta.";
-      await this.wrpAddHut('71',"Rifugio Duca degli Abruzzi (Oriondè)",2802,"Breuil Cervinia","Aosta","Valle d'Aosta","Italy","S",22,80,description);
+      await this.wrpAddHut('71',"Rifugio Duca degli Abruzzi (Oriondè)",2802,"Breuil Cervinia","Aosta","Valle d'Aosta","Italy","S",22,80,description,"hutImages/02_rifugio.jpg");
       
       description= "Bivacco gestito dal CAI della sezione di Lanzo Torinese."+
       "Struttura nuovissima, realizzata completamente in legno con una forma triangolare, in cui vi è anche la corrente elettrica grazie ad un piccolo pannello solare."+
       "Accessibile tutto l'anno, al suo interno si trovano 8/10 posti letto."+
       "Ottimo punto d'appogio per partire per altre escursioni scavallando in Val d’Ala attraverso il Passo dell’Ometto (ai piedi dell’Uja di Mondrone) o proseguire in direzione del Rifugio Eugenio Ferreri."+
       "Non sono presenti altri servizi per cui è consigliato organizzarsi prima della partenza ed essere informati sulle condizioni meteo.";
-      await this.wrpAddHut('73', "Bivacco Gias Nuovo",1893,"Forno Alpi Graie","Torino","Piemonte","Italy","Y",10,0,description);
+      await this.wrpAddHut('73', "Bivacco Gias Nuovo",1893,"Forno Alpi Graie","Torino","Piemonte","Italy","Y",10,0,description,"hutImages/e5a83a7ecd853a3363498d71a1613623_L.jpg");
       
       description= "Il rifugio Alevè è un rifugio escursionistico situato nel comune di Pontechianale, nella Valle Varaita. Inaugurato nel 2008, dispone di 50 posti letto."+
       "Offre una biblioteca, una terrazza prendisole, un bar e dista 2.8 km dal Colle dell'Agnello."+
       "I bagni dispongono di un bidet e di una doccia. Inoltre è presente la connessione Wi-Fi."+
       "Nei dintorni del rifugio è possible svolgere diverse attività a seconda della stagione.";
-      await this.wrpAddHut('76',"Rifugio Alevè",1580,"Pontechianale","Cuneo","Piemonte","Italy","Y",50,85,description);
+      await this.wrpAddHut('76',"Rifugio Alevè",1580,"Pontechianale","Cuneo","Piemonte","Italy","Y",50,85,description,"hutImages/aleve.jpg");
       
       description= "dedicato ai fratelli Carlo e Renzo Berardo, alpinisti, saviglianesi, morti tragicamente in una scalata sull'Uia di S.Lucia il 5 giugno 1958."+
       "Piccola struttura a strapiombo sul crinale della montagna, dalla quale vedere romantici tramonti e frizzanti albe."+
       "Gestito da CAI sezione di Savigliano, al suo interno si trovano una decina di posti letto."+
       "Non è presente elettricità; per avere acqua è possbile salire al laghetto soprastane, raggiungibile in 15 minuti di camminata."+
       "Aperto ed accessibile tutto l'anno.";
-      await this.wrpAddHut('77',"Bivacco Fratelli Berardo",2710,"Pontechianale","Cuneo","Piemonte","Italy","Y",9,0,description);
+      await this.wrpAddHut('77',"Bivacco Fratelli Berardo",2710,"Pontechianale","Cuneo","Piemonte","Italy","Y",9,0,description,"hutImages/bivacco_fratelli_berardo_rita.jpg");
       
       description= "Magicamente circondato dai Monti Sforniói, Sasso di Bosconero, Sasso di Toanèla, Rocchetta Alta e Bassa, il Rifugio Casera Bosconero è punto di riferimento per bellissime escursioni."+
       "(punto tappa dell’Alta Via Dolomiti n. 3 e dell’Anello Zoldano) e per ascensioni su roccia, classiche e moderne"+
       "Offre servizio di ristoro, pernottamento e dal 2006 una sala didattica disponibile all’utilizzo previa prenotazione.";
-      await this.wrpAddHut('81',"Rifugio Casera Bosconero",1457,"Forno di Zoldo","Belluno","Veneto","Italy","S",24,50,description);
+      await this.wrpAddHut('81',"Rifugio Casera Bosconero",1457,"Forno di Zoldo","Belluno","Veneto","Italy","S",24,50,description,"hutImages/scheda-rifugio-Casera-Bosconero.jpg");
   }
 
 

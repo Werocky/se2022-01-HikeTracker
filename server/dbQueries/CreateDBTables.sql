@@ -66,6 +66,7 @@ CREATE TABLE IF NOT EXISTS `Huts`(
     `Region` TEXT NULL,
     `City` TEXT NULL,
     `Description` TEXT,
+    'Picture' VARCHAR(255),
     FOREIGN KEY(`HutManagerID`) REFERENCES `HutWorkers`(`id`)
 );
 CREATE TABLE IF NOT EXISTS `ParkingLots`(
