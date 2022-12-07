@@ -145,9 +145,13 @@ function HikeList(props) {
           </div>
           {!loading &&
             <Posts>
-              {hikes.slice(0, visible).map((hike, index) => (
+              {hikes.length > 0 ?
+              hikes.slice(0, visible).map((hike, index) => (
                 <HikeElement key={index} hike={hike} />
-              ))}
+              ))
+              :
+              <Heading>No hikes satisfy the filter's parameters</Heading>
+              }
 
             </Posts>
           }
