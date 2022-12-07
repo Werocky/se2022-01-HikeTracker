@@ -180,6 +180,7 @@ function AddHikeForm(props) {
       End: endDescr,
       AssociatedGuide: 0 /* auth.user.Id*/,
       Length: parseFloat(dataFromGpx.Length / 1000).toFixed(2),
+      Picture:"hikeImages/default.jpg"
     }
     console.log(hike);
     const refP = {
