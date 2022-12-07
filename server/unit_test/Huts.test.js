@@ -5,7 +5,7 @@ beforeAll(async() =>{
     await db.createConnection();
     await Huts.emptyHuts();
    })
-   const hut = new Hut(0, 'Name', 0, 'City', 'Province', 'Region', 'Country', 'WhenOpen', 0, 0, 'Description',1,'https://www.fakesite.it',123456789);
+   const hut = new Hut(1, 'Name', 0, 'City', 'Province', 'Region', 'Country', 'WhenOpen', 0, 0, 'Description',1,'https://www.fakesite.it',123456789);
 
 afterAll(async()=>{
     await Huts.emptyHuts();
@@ -211,9 +211,12 @@ describe("Set Hut description",()=>{
     test("set",async()=>{
         await Huts.emptyHuts();
         await Huts.addHut(hut);
-        await expect(Huts.setHutDescription("a Description",1)).resolves.toEqual({'message': "Description set"})
         let h= await Huts.getHuts();
         h=h[0];
+        expect(h).toHaveProperty('Description');
+        expect(h.Description).toEqual('Description');
+        await expect(Huts.setHutDescription("a Description",1)).resolves.toEqual({'message': "Description set"})
+        h= await Huts.getHut(1);
         expect(h).toHaveProperty('Description');
         expect(h.Description).toEqual('a Description');
     
