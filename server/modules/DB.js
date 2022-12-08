@@ -36,6 +36,9 @@ class DatabaseConnection {
     });
   }
     //example:
+    static close=async()=>{
+      this.db.close();
+    }
   static readCreateFile=async()=>{
 
     let Query = readFileSync('./dbQueries/CreateDBTables.sql', 'utf-8');

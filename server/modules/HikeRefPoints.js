@@ -44,7 +44,7 @@ function getHikeInfo (HikeID) {
     })
   })
 }
-function emptyAllPoints  (){
+function emptyAllPoints(){
    this.emptyHikeRefPoint();
    this.emptyReferencePoints();
 }
