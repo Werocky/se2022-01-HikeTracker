@@ -1,4 +1,4 @@
-'use strict';
+  'use strict';
 
 const db = require('./DB').db;
 
@@ -266,6 +266,7 @@ function addHutToHike(HikeID,RefPointID,IsStart=0,IsEnd=0){
   });
 } 
 module.exports={
+  acceptableFilters,
   addHutToHike,
   getHike,
   getHikes,

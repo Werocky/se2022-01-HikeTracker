@@ -25,6 +25,16 @@ const huts = require('./modules/Huts');
 const mail = require('./modules/mail');
 
 
+const PointsOfHike= require('./routes/PointsOfHike');
+
+// init express
+const app = new express();
+const port = 3001;
+
+app.use('/api/LinktoHike?', PointsOfHike);
+
+
+
 /*** Set up Passport ***/
 //configurating function to verify login and password
 passport.use(new LocalStrategy({
@@ -66,9 +76,7 @@ const isLoggedIn = (req, res, next) => {
 
 /*** Ending setting up passport***/
 
-// init express
-const app = new express();
-const port = 3001;
+
 
 //init middlewares
 app.use(morgan('dev'));
