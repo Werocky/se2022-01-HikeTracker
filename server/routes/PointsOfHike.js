@@ -22,7 +22,7 @@ async(req,res)=>{
         
        //check hike exists
        let h=await Hikes.getHikesByFilter('HikeID',req.params.HikeID);
-       console.log(h);
+       
        if(h.Length==[])return res.status(402).send('Hike Not Found');
         //check hut exists
         h=await Huts.getHut(req.params.RefPointID);
@@ -35,7 +35,7 @@ async(req,res)=>{
     
     }catch(err){
         console.error(err);
-        res.status(500).send(err);
+        res.status(503).send(err);
     }
 
 });
