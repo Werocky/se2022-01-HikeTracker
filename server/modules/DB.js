@@ -36,32 +36,31 @@ class DatabaseConnection {
       });
     }
     //example:
-    static readCreateFile=async()=>{
+  static readCreateFile=async()=>{
 
-        let Query = readFileSync('./dbQueries/CreateDBTables.sql', 'utf-8');
-        Query=Query.split(';');
-        
+    let Query = readFileSync('./dbQueries/CreateDBTables.sql', 'utf-8');
+    Query=Query.split(';');
+  
+    return new Promise(async (resolve, reject) => {
+      this.db.parallelize(()=>{
+        for (let i = 0; i < Query.length; i++) {
+          const Queue = Query[i];
+          this.db.run(Queue, [], function (err) {
+            if (err){
+                reject(err);
+            }else{
+              let tableName= Queue.split(' ');
+              tableName=tableName[5];
+              tableName=tableName.split('(')[0];
+              console.log("Table '#_"+ i +"_"+tableName+ "_ Created.");
+            }  
+          });
+        }
+      });
+      resolve('db created');
+    });
 
-        return new Promise(async (resolve, reject) => {
-            for (let i = 0; i < Query.length; i++) {
-                const Queue = Query[i];
-                    this.db.run(Queue, [], function (err) {
-                    if (err)
-                        {
-                            reject(err);
-                        }else{
-                          let tableName= Queue.split(' ');
-                          tableName=tableName[5];
-                          tableName=tableName.split('(')[0];
-                          console.log("Table '#_"+ i +"_"+tableName+ "_ Created.");
-                        }
-                        
-                });
-            }
-            resolve('db created');
-        });
-
-    }
+  } 
 
   static cleanUp=async()=>{
       

@@ -148,6 +148,12 @@ describe("Hut Filters",()=>{
             expect(h).toHaveLength(1);
 
         })
+        test("Location is expecteda and location type is expected + 1",async()=>{
+            await expect(Huts.getHutsFilters('Name1',locationType='City',location='City1')).resolves.not.toEqual(null);
+            let h= await Huts.getHutsFilters('Name1',locationType='City',location='City1');
+            expect(h).toHaveLength(1);
+
+        })
         test("Name is not expected",async()=>{
             await expect(Huts.getHutsFilters(null,location='NameNotIn')).rejects.not.toEqual(null);
             
@@ -170,6 +176,12 @@ describe("Hut Filters",()=>{
             expect(h).toHaveLength(2);
 
         })
+        test("Location is Open expected +1",async()=>{
+            await expect(Huts.getHutsFilters('Name0',null,null,'WhenOpen0',null,null)).resolves.not.toEqual(null);
+            let h= await Huts.getHutsFilters('Name0',null,null,'WhenOpen0');
+            expect(h).toHaveLength(1);
+
+        })
         test("open is not expected",async()=>{
             await expect(Huts.getHutsFilters(null,null,null,'WhenNotOpen')).resolves.toEqual([]);
             
@@ -177,10 +189,16 @@ describe("Hut Filters",()=>{
 
     });
     describe("When Beds",()=>{
-        test("Location is Open expected",async()=>{
+        test("Location is by number of beds expected",async()=>{
             await expect(Huts.getHutsFilters(null,null,null,null,0,null)).resolves.not.toEqual(null);
             let h= await Huts.getHutsFilters(null,null,null,null,0);
             expect(h).toHaveLength(3);
+
+        })
+        test("Location is by number of beds expected +1",async()=>{
+            await expect(Huts.getHutsFilters('Name0',null,null,null,0,null)).resolves.not.toEqual(null);
+            let h= await Huts.getHutsFilters('Name0',null,null,null,0);
+            expect(h).toHaveLength(1);
 
         })
         test("Name is not expected",async()=>{
@@ -197,6 +215,12 @@ describe("Hut Filters",()=>{
             expect(h).toHaveLength(3);
 
         })
+        test("Location AvgPrice expected + 1",async()=>{
+            await expect(Huts.getHutsFilters("Name0",null,null,null,null,1)).resolves.not.toEqual(null);
+            let h= await Huts.getHutsFilters("Name0",null,null,null,null,1);
+            expect(h).toHaveLength(1);
+
+        })
         test("tooLow abgPrice is not expected",async()=>{
             await expect(Huts.getHutsFilters(null,null,null,null,null,-1)).resolves.toEqual([]);
             
@@ -205,6 +229,20 @@ describe("Hut Filters",()=>{
     });
     
 
+})
+describe("Get hut Coordinates",()=>{
+    test("external call",async()=>{
+        const rp= require('../modules/ReferencePoints');
+        await rp.emptyReferencePoint();
+        await rp.addReferencePoint(1,1,"hut");
+
+        await expect(Huts.getHutCoordinates(1)).resolves.not.toEqual([]);
+        let coords= await Huts.getHutCoordinates(1);
+        expect(coords).toHaveProperty('Lat');
+        expect(coords.Lat).toEqual(1);
+        expect(coords).toHaveProperty('Lng');
+        expect(coords.Lng).toEqual(1);
+    })
 })
 
 describe("Set Hut description",()=>{

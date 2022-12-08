@@ -40,7 +40,6 @@ class Hut{
 }
 
  function addHut  (Hut)  {
-  
   return new Promise(async (resolve, reject) => {
     const sql = 'INSERT INTO HUTS( RefPointID, Name, Elevation, City,Province,  Region, Country, WhenOpen, Beds, AvgPrice, Description,HutManagerID,Website,Phone,Picture) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)';
     db.run(sql, [

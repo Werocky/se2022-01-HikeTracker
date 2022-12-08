@@ -54,6 +54,21 @@ describe("Get/add HikeLocations",()=>{
         expect(hl.Region).toEqual("Aosta")
         expect(hl.Country).toEqual(null)
     })
+    describe("add new location",()=>{
+        beforeEach(async() =>{   
+            await HL.emptyLocations();
+           } 
+        )
+
+        it("add correctly a location",async()=>{
+            await expect(HL.addLocation(1,'city','region')).resolves.toEqual('New location added');
+        });
+        it("missing new location",async ()=>{
+            await expect(HL.addLocation(1)).rejects.toEqual('no new location');
+
+        })
+
+    })
 
 });
 

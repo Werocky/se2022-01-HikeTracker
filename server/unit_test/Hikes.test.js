@@ -74,9 +74,9 @@ describe("get Hikes by Filter",()=>{
                 await hikes.addHike(h1);
                 await hikes.addHike(h2);
                 await hikes.addHike(h3);
-                await locations.addLocation(1,'Baviera',null,'Monaco');
-                await locations.addLocation(2,'Bolivia','Baviera','La paz');
-                await locations.addLocation(0,'Italy','Piemonte','Torino');
+                await locations.addLocation(1,'Baviera',null,null,'Monaco');
+                await locations.addLocation(2,'Bolivia',null,'Baviera','La paz');
+                await locations.addLocation(0,'Italy',null,'Piemonte','Torino');
                 
             }
         );
@@ -252,4 +252,53 @@ describe("get Hikes by Filter",()=>{
 
 });
 
+describe("get Hike Locations",()=>{
+    beforeEach(
+        async ()=>{
+            await hikes.deleteHikes();
+            let h1=new hike(null, 'title1','12.5', null,'180','begginer','500','Bolita',null,'LaPAZ','laPax','0.gpx','0.00','1.2','1');
+            let h2=new hike(null, 'title2','5'   ,'dessdc' , '60' , 'Professional' ,'180','Country1',null,'LaPAZ','laPax','20.gpx','0.1'   ,'1.454' ,'1')
+            let h3=new hike(null, 'title3','7.0','desc','90' ,'undertermined','232.56','contry2',null,'LaPAZ','laPax','30.gpx','1.55','67','0')
+            await hikes.addHike(h1);
+            await hikes.addHike(h2);
+            await hikes.addHike(h3);
+            await locations.addLocation(1,'Baviera',null,null,'Monaco');
+            await locations.addLocation(2,'Bolivia','Province1','Baviera','La paz');
+            await locations.addLocation(3,'Italy',null,'Piemonte','Torino');
+            
+        }
+    );
+    afterEach(
+        async()=>{
+            await hikes.deleteHikes();
+            await locations.emptyLocations();
+        }
+
+    )
+
+    it("get Cities",async()=>{
+        await expect(hikes.getHikeCity()).resolves.not.toEqual([]);
+        let t= await hikes.getHikeCity();
+        expect(t).toHaveLength(3);
+
+    })
+    it("get Provinces",async()=>{
+        await expect(hikes.getHikeProvince()).resolves.not.toEqual([]);
+        let t= await hikes.getHikeProvince();
+        expect(t).toHaveLength(2);
+        
+    })
+    it("get Regions",async()=>{
+        await expect(hikes.getHikeRegion()).resolves.not.toEqual([]);
+        let t= await hikes.getHikeRegion();
+        expect(t).toHaveLength(3);
+        
+    })
+    it("get Countries",async()=>{
+        await expect(hikes.getHikeCountry()).resolves.not.toEqual([]);
+        let t= await hikes.getHikeCountry();
+        expect(t).toHaveLength(3);
+        
+    })
+})
 

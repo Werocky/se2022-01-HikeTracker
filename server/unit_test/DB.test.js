@@ -2,18 +2,21 @@ const db = require("../modules/DB");
 const hikesLoc =require("../modules/HikeLocations");
 const hikes =require("../modules/Hikes");
 const Files= require("../modules/FileNames");
+const { readCreateFile } = require("../modules/DB");
 const totalEntries= 4;
 
 beforeAll(async()=>{
     await db.createConnection();
+    await db.readCreateFile();
     await db.populate();
 }, db.timeout)
+
+beforeEach(async()=>{
+    await db.readCreateFile();
+})
 afterAll(async()=>{
     await db.cleanUp();
-    await new Promise(process.nextTick);
-    
- },db.timeout )
-
+})
 describe("Get/add HikeLocations",()=>{
   
     test('Populate DB Hikes',async()=>{
@@ -41,6 +44,12 @@ describe("Get/add HikeLocations",()=>{
         // expect(HL).toHaveLength(totalEntries);
       
     });
+
+    test("DropTables",async()=>{
+        await expect(db.dropTables()).resolves.toEqual('db Droped');
+        await readCreateFile();
+    
+    })
    
 
 });

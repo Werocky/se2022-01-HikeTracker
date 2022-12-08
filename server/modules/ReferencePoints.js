@@ -19,7 +19,6 @@ exports.addReferencePoint = (lat, lng, type) => {
 exports.addReferencePointWithDescription = (description, lat, lng, type) => {
   return new Promise(async (resolve, reject) => {
     const sql = "INSERT INTO ReferencePoints(Description, Lat, Lng, Type) VALUES (?, ? ,? ,? );";
-    console.log(lat, lng, type);
     db.run(sql, [description, lat, lng, type], function (err) {
       if (err)
         reject(err);
@@ -121,12 +120,22 @@ exports.getLastRefPointID = () => {
 
 exports.getHutsAndParkingLots = () =>{
   return new Promise(async (resolve, reject) =>{
-    const sql = "SELECT RP.RefPointID, H.Name, PL.Description, RP.Type FROM ReferencePoints RP, ParkingLots PL Huts H WHERE RP.RefPointID = Huts.RefPointID AND PL.ParkingID = RF.PointID AND (Type = 'hut' OR Type = 'parking')";
+    const sql = "SELECT DISTINCT RP.RefPointID, RP.description, RP.Type FROM ReferencePoints RP, ParkingLots PL, Huts H WHERE (RP.RefPointID = H.RefPointID AND Type = 'hut') OR (PL.ParkingID = RP.RefPointID AND Type = 'parking')";
     db.all(sql, [], function (err, rows) {
       if(err)
         reject(err)
-      else{
-        const points = rows.map((r) => ({ RefPointID: r.RefPointID, Type: r.Type, Description: r.Description, Name: r.Name }));
+      else{ 
+        let points=[];
+        rows.forEach(r => {
+          
+            points.push({
+              RefPointID: r.RefPointID,
+              Type: r.Type,
+              description: r.description,
+            })
+  
+
+        });
         resolve(points);
       }
     })

@@ -31,11 +31,11 @@ exports.getHikeLocationsPerID = (HikeID) => {
   });
 };
 
-exports.addLocation= (hikeID,Country,Region,City)=>{/*
+exports.addLocation= (hikeID,Country=null,Province=null,Region=null,City=null)=>{/*
   Modifies the location Of a Hike
 */
  return new Promise(async (resolve, reject) => {
-    if(Country==null && Region==null && City==null)reject('no new location');
+    if(Country==null && Region==null && City==null && Province==null)reject('no new location');
     let flag=0;
     let args=[]
     let sql = "UPDATE Hikes SET "
@@ -56,6 +56,12 @@ exports.addLocation= (hikeID,Country,Region,City)=>{/*
       } 
       args.push(Region)
       sql= sql + "Region = '"+Region+"'";
+    }if(  Province!=null  ){
+      if(flag>0){
+        sql=sql+', '
+      } 
+      args.push(Province)
+      sql= sql + "Province = '"+Province+"'";
     }
       
     
