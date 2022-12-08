@@ -149,7 +149,7 @@ app.get('/hikesLocations', async (req, res) => {
 
     res.status(200).json(location);
   } catch (err) {
-    res.status(503).json({ error: `Error` });
+    res.status(503).json({ error: `Error, was not possible to process your request` });
   }
 })
 
@@ -166,7 +166,7 @@ app.post('/getHikeByID', async (req, res) => {
     let hike = await hikes.getHike(HikeID);
     res.status(200).json(hike);
   } catch (err) {
-    res.status(503).json({ error: `Error` });
+    res.status(503).json({ error: `Error, was not possible to process your request` });
   }
 });
 
@@ -190,7 +190,7 @@ app.post('/getFilteredHikes', async (req, res) => {
   try {
     res.status(200).json(list);
   } catch (err) {
-    res.status(503).json({ error: `Error` });
+    res.status(503).json({ error: `Error, was not possible to process your request` });
   }
 });
 
@@ -278,7 +278,7 @@ app.put('/setDescription', /*isLoggedIn,*/[
       await hikes.setDescription(Description, HikeID);
       res.status(201).json({ message: 'Description set' });
     } catch (err) {
-      res.status(503).json({ error: `Internal Error` });
+      res.status(503).json({ error: `Error, was not possible to process your request` });
     }
   });
 
@@ -372,7 +372,7 @@ app.post('/addHike', async (req, res) => {
     res.status(201).json({ hikeId: hikeId });
   } catch (err) {
     console.log(err);
-    res.status(503).json({ error: 'Internal error' });
+    res.status(503).json({ error: 'Error, was not possible to process your request' });
   }
 
   console.log("All hike points added");
