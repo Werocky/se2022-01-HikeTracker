@@ -15,8 +15,10 @@ beforeEach(async()=>{
     await db.readCreateFile();
 })
 afterAll(async()=>{
+    await db.createConnection();
+    await db.readCreateFile();
     await db.cleanUp();
-})
+},db.timeout)
 describe("Get/add HikeLocations",()=>{
   
     test('Populate DB Hikes',async()=>{

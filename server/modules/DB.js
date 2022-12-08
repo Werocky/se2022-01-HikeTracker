@@ -13,28 +13,28 @@ class DatabaseConnection {
        await this.readCreateFile();
 
     }
-    static dropTables=async()=>{
-      let Query = readFileSync('./dbQueries/DropTables.sql', 'utf-8');
-      Query=Query.split(';');
-      return new Promise(async (resolve, reject) => {
-          for (let i = 0; i < Query.length; i++) {
-              const Queue = Query[i];
-                  this.db.run(Queue, [], function (err) {
-                  if (err)
-                      {
-                          reject(err);
-                      }else{
-                        let tableName= Queue.split(' ');
-                        tableName=tableName[tableName.length-1];
-                        console.log("Table '#_"+ i +"_"+tableName+ "_ dropped.");
-          
-                      }
-                      
-              });
-          }
-          resolve('db Droped');
-      });
-    }
+  static dropTables=async()=>{
+    let Query = readFileSync('./dbQueries/DropTables.sql', 'utf-8');
+    Query=Query.split(';');
+    return new Promise(async (resolve, reject) => {
+        for (let i = 0; i < Query.length; i++) {
+            const Queue = Query[i];
+                this.db.run(Queue, [], function (err) {
+                if (err)
+                    {
+                        reject(err);
+                    }else{
+                      let tableName= Queue.split(' ');
+                      tableName=tableName[tableName.length-1];
+                      console.log("Table '#_"+ i +"_"+tableName+ "_ dropped.");
+        
+                    }
+                    
+            });
+        }
+        resolve('db Droped');
+    });
+  }
     //example:
   static readCreateFile=async()=>{
 
