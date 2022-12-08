@@ -1,5 +1,5 @@
 'use strict';
-const { table } = require('console');
+
 const {readFileSync, promises: fsPromises} = require('fs');
 
 const sqlite = require('sqlite3');
@@ -26,7 +26,7 @@ class DatabaseConnection {
                     }else{
                       let tableName= Queue.split(' ');
                       tableName=tableName[tableName.length-1];
-                      console.log("Table '#_"+ i +"_"+tableName+ "_ dropped.");
+                      //console.log("Table '#_"+ i +"_"+tableName+ "_ dropped.");
         
                     }
                     
@@ -55,7 +55,7 @@ class DatabaseConnection {
               let tableName= Queue.split(' ');
               tableName=tableName[5];
               tableName=tableName.split('(')[0];
-              console.log("Table '#_"+ i +"_"+tableName+ "_ Created.");
+              //console.log("Table '#_"+ i +"_"+tableName+ "_ Created.");
             }  
           });
         }
@@ -1644,7 +1644,7 @@ image="hikeImages/29461789Master.jpg";
       let path="./gpx/"+file;
       const hikes =require("./Hikes");
       const {hike} =require("./Hikes");
-      console.log("Populating Hike#"+(HikeID)+" "+title);
+      //console.log("Populating Hike#"+(HikeID)+" "+title);
       let h=new hike(null,title.trim(),length,Description,Ascent,Difficulty,expTime,Country,Region,Province, city,path,start,end,AssociatedGuide,image)
       await hikes.addHike(h);
       resolve("Hike#"+(HikeID)+" "+title+" Inserted")
