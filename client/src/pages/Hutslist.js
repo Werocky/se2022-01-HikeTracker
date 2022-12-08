@@ -150,9 +150,13 @@ function Huts(props) {
                     </div>
                     {!props.loading &&
                         <Posts>
-                            {huts.slice(0, visible).map((hut, index) => (
+                            {huts.length > 0 ?
+                            huts.slice(0, visible).map((hut, index) => (
                                 <HutElement key={index} hut={hut} />
-                            ))}
+                            ))
+                            :
+                            <Heading>No huts satisfy the filter's parameters</Heading>
+                            }
                         </Posts>
                     }
                     {!props.loading && (
