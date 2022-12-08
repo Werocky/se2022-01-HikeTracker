@@ -253,7 +253,20 @@ function getHikeCity ()  {
   })
 }
 
+function addHutToHike(HikeID,RefPointID,IsStart=0,IsEnd=0){
+  const referencePoints= require("./HikeRefPoints").addHikeRefPoints;
+  return new Promise(async(resolve, reject)=>{
+      try{
+          let returnmsg =await  referencePoints(HikeID,RefPointID,IsStart,IsEnd);
+          resolve(returnmsg);    
+      }catch(err){
+          reject(err);
+      }
+
+  });
+} 
 module.exports={
+  addHutToHike,
   getHike,
   getHikes,
   getHikesByFilter,
