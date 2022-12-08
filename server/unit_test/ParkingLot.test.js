@@ -67,5 +67,4 @@ describe("ParkingLot Tests",()=>{
        await expect(PL.getLastParkingID()).resolves.toEqual(1);
     })
     
-
 });

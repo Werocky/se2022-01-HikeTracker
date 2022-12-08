@@ -17,6 +17,18 @@ afterAll(async()=>{
 },db.timeout )
 
 
+beforeEach(async() =>{   
+        
+    await refPts.emptyReferencePoint();
+    await HikeRefPoints.emptyHikeRefPoint();
+    await h.deleteHikes()
+   },db.timeout  
+)
+afterEach(async()=>{
+    await refPts.emptyReferencePoint();
+    await HikeRefPoints.emptyHikeRefPoint(); 
+    await h.deleteHikes()
+},db.timeout )
 
 describe("get/Add reference points",()=>{
     beforeEach(async() =>{   
@@ -161,4 +173,30 @@ describe("get/Add reference points",()=>{
 it("Parks and Huts",async()=>{
     await expect(HikeRefPoints.emptyAllPoints());
     await expect(HikeRefPoints.getHutsAndParks()).resolves.toEqual([]);
+})
+
+test("add  parking lot to a Hike",async()=>{
+    const PL=  require("../modules/ParkingLot").connectParkingToHike;
+    await expect(HikeRefPoints.getHikeInfo(1)).resolves.toEqual([]);
+
+    await expect(PL(1,1)).resolves.toEqual("New HikeRefPoint added");
+    
+
+    //for getting points of a hike is neccessay to have a hike and a Hike and a RP
+    const H=  require("../modules/Hikes").addHike;
+    const {hike}= require("../modules/Hikes");
+    const P=  require("../modules/ReferencePoints").addReferencePoint;
+    let h1= new hike(1,'title',1,null,1,'p',1,null,null,null,null,"Fakenull.gpx",0,0,0,null);
+    await H(h1);
+    await P(0,0,"parking");
+    await expect(HikeRefPoints.getHikeInfo(1)).resolves.not.toEqual([]);
+
+    let hrp =await HikeRefPoints.getHikeInfo(1);
+   
+    expect(hrp).toHaveLength(1);
+    expect(hrp[0]).toHaveProperty('HikeID');
+    expect(hrp[0]).toHaveProperty('RefPointID');
+    expect(hrp[0].HikeID).toEqual(1);
+    expect(hrp[0].RefPointID).toEqual(1);
+
 })
