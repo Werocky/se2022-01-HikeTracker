@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from "react";
-import { Button, Form, Col, Row, ButtonGroup } from "react-bootstrap";
+import { Button, Form, Col, Row, ButtonGroup, Alert } from "react-bootstrap";
 import { useNavigate, useParams } from "react-router-dom";
 import AuthContext from "../AuthContext";
 import { MapContainer, Marker, Polyline, Popup, TileLayer, useMap } from 'react-leaflet';
@@ -16,7 +16,6 @@ import Header from "../components/headers/light.js";
 import Dropdown from 'react-bootstrap/Dropdown';
 import DropdownButton from 'react-bootstrap/DropdownButton';
 import DropdownItem from "react-bootstrap/esm/DropdownItem";
-import { Alert } from "@material-tailwind/react";
 
 const Container = tw.div`relative`;
 const TwoColumn = tw.div`flex flex-col md:flex-row justify-between max-w-screen-xl mx-auto py-20 md:py-24`;
@@ -62,12 +61,12 @@ function HutDetails(props) {
   const [selectedHike, setSelectedHike] = useState({});
   const navigate = useNavigate();
   const [errorMsg, setErrorMsg] = useState("");
-  const [msgColor, setMsgColor] = useState("red");
+  const [msgColor, setMsgColor] = useState("danger");
 
   const handleLinkHike = async (event) => {
     event.preventDefault();
     console.log(params);
-    await API.linkHutToHike(params.hutID, selectedHike.HikeID).then((val) => {setErrorMsg(val); setMsgColor('blue');}).catch(err => {console.log(err); props.errorHandler(err)});
+    await API.linkHutToHike(params.hutID, selectedHike.HikeID).then((val) => {props.errorHandler(val); setMsgColor('primary');}).catch(err => {console.log(err);});
   }
 
   const handleSelection = (ev, el) => {
@@ -133,7 +132,6 @@ function HutDetails(props) {
   return (
     <AnimationRevealPage>
       <Header logout={props.logout} />
-      {errorMsg ? <Alert color={msgColor} onClose={() => setErrorMsg('')} dismissible>{errorMsg}</Alert> : false}
       {!loading &&
         <Container>
           <TwoColumn>

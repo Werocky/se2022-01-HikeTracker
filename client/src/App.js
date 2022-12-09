@@ -44,7 +44,7 @@ function App() {
     if (err.hasOwnProperty('error'))
       {setMessage(() => err.error.toString()); setMsgType('danger');}
     else if (err.hasOwnProperty('message'))
-      {setMessage(() => err.message); setMsgType('danger');}
+      {setMessage(() => err.message); setMsgType('primary');}
     else
       {setMessage(() => err.toString()); setMsgType('danger');}
   }

@@ -7,7 +7,11 @@ function addHikeRefPoints  (HikeID, RefPointID, IsStart, IsEnd)  {
     const sql = "INSERT INTO PointsOfHike(HikeID, PointID, IsStart, IsEnd) VALUES (?,?,?,?)";
     db.run(sql, [HikeID, RefPointID, IsStart, IsEnd], function (err) {
       if (err)
-        reject(err);
+        { if(err.errno == 19)
+          reject("Linked yet");
+          else
+          reject(err);
+        }
       else {
         resolve("New HikeRefPoint added");
       }

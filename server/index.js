@@ -664,13 +664,11 @@ async(req,res)=>{
   console.log(req.params.RefPointID, req.params.HikeID);
   try{
       const errors= validationResult(req);
-      console.log(errors);
       if(!errors.isEmpty())
       return res.status(422).json({error : 'Error! Bad request'});
       
      //check hike exists
      let h=await hikes.getHikesByFilter('HikeID',req.params.HikeID);
-     
      if(h.Length==[])return res.status(402).json({error : 'Error! Hike not found'});
       //check hut exists
       h=await huts.getHut(req.params.RefPointID);
@@ -680,8 +678,8 @@ async(req,res)=>{
      if(h!='New HikeRefPoint added')return res.status(504).json({error : 'Error! Could not link Hut and Hike'});
      res.status(200).json({message: 'added'});
   }catch(err){
-      console.error(err);
-      res.status(503).json({error : err.Error});
+      //console.error(err);
+      res.status(503).json(err);
   }
 
 });
