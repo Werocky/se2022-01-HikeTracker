@@ -7,18 +7,25 @@ const Huts =require('../modules/Huts')
 
 const { check, validationResult, body } = require('express-validator'); // validation middleware
 const { response } = require('express');
+const cors = require('cors');
 router.use(express.json());
-
+const corsOptions = {
+    origin: 'http://localhost:3000',
+    credentials: true,
+  };
+router.use(cors(corsOptions))
+  
 
 router.post('/:RefPointID/Hike/:HikeID',[
     check('HikeID').isInt({gt:0}),
     check('RefPointID').isInt({gt:0})
 ],
 async(req,res)=>{
+    console.log(req.params);
     try{
         const errors= validationResult(req);
         if(!errors.isEmpty())
-        return response.status(422).json({errors: errors.array()});
+        return response.status(422).json({error : 'Error! Bad request'});
         
        //check hike exists
        let h=await Hikes.getHikesByFilter('HikeID',req.params.HikeID);

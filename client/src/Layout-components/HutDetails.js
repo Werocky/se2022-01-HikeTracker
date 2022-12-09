@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from "react";
-import { Button, Form, Col, Row } from "react-bootstrap";
+import { Button, Form, Col, Row, ButtonGroup } from "react-bootstrap";
 import { useNavigate, useParams } from "react-router-dom";
 import AuthContext from "../AuthContext";
 import { MapContainer, Marker, Polyline, Popup, TileLayer, useMap } from 'react-leaflet';
@@ -13,7 +13,10 @@ import StatsIllustrationSrc from "../images/stats-illustration.svg";
 import { ReactComponent as SvgDotPattern } from "../images/dot-pattern.svg";
 import AnimationRevealPage from "../helpers/AnimationRevealPage";
 import Header from "../components/headers/light.js";
-
+import Dropdown from 'react-bootstrap/Dropdown';
+import DropdownButton from 'react-bootstrap/DropdownButton';
+import DropdownItem from "react-bootstrap/esm/DropdownItem";
+import { Alert } from "@material-tailwind/react";
 
 const Container = tw.div`relative`;
 const TwoColumn = tw.div`flex flex-col md:flex-row justify-between max-w-screen-xl mx-auto py-20 md:py-24`;
@@ -52,12 +55,24 @@ const DecoratorBlob = styled(SvgDotPattern)(props => [
 function HutDetails(props) {
   const auth = useContext(AuthContext);
   const params = useParams();
-  const [hut, setHut] = useState(undefined);
+  const [hut, setHut] = useState({});
   const [coords, setCoords] = useState(undefined);
   const [loading, setLoading] = useState(true);
-
-
+  const [hikesList, setHikesList] = useState(props.hikes);
+  const [selectedHike, setSelectedHike] = useState({});
   const navigate = useNavigate();
+  const [errorMsg, setErrorMsg] = useState("");
+  const [msgColor, setMsgColor] = useState("red");
+
+  const handleLinkHike = async (event) => {
+    event.preventDefault();
+    console.log(params);
+    await API.linkHutToHike(params.hutID, selectedHike.HikeID).then((val) => {setErrorMsg("ciao"); setMsgColor('blue');}).catch(err => props.errorHandler(err));
+  }
+
+  const handleSelection = (ev, el) => {
+    setSelectedHike(el);
+  }
 
   useEffect(() => {
     const loadHut = async () => {
@@ -118,6 +133,7 @@ function HutDetails(props) {
   return (
     <AnimationRevealPage>
       <Header logout={props.logout} />
+      {errorMsg ? <Alert color={msgColor} onClose={() => setErrorMsg('')} dismissible>{errorMsg}</Alert> : false}
       {!loading &&
         <Container>
           <TwoColumn>
@@ -179,6 +195,20 @@ function HutDetails(props) {
                 </Statistics>
 
                 <Description>{hut.Description}</Description>
+                  { 
+                    <Dropdown as={ButtonGroup}>
+                    <Button onClick={handleLinkHike} className="light__NavLink-sc-7yke5y-2 light__PrimaryLink-sc-7yke5y-5 light___StyledPrimaryLink-sc-7yke5y-7 hvlBUp htliCt" variant="success">Link to this Hut</Button>
+
+                    <Dropdown.Toggle split className="light__NavLink-sc-7yke5y-2 light__PrimaryLink-sc-7yke5y-5 light___StyledPrimaryLink-sc-7yke5y-7 hvlBUp htliCt" variant="success" id="dropdown-split-basic" />
+                    
+                    <Dropdown.Menu>
+                      {props.hikes.map((el) => {
+                           return <Dropdown.Item onClick={(ev) => handleSelection(ev, el)} key={el.Title}>{el.Title}</Dropdown.Item>
+                      })
+                      }
+                    </Dropdown.Menu>
+                  </Dropdown>
+                  }
               </TextContent>
             </TextColumn>
           </TwoColumn>

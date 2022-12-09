@@ -141,7 +141,7 @@ function AppLayout(props) {
           <HikeDetails logout={props.logout} />
         } />
         <Route path='/huts/:hutID' element={
-          <HutDetails logout={props.logout} />
+          <HutDetails logout={props.logout} hikes={hikes} errorHandler={props.errorHandler}/>
         } />
 
         <Route path='/register' element={

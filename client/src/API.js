@@ -573,6 +573,27 @@ async function getHutCoords(Hut) {
   }
 }
 
+async function linkHutToHike(RefPointID, HikeID) {
+  try {
+    console.log(RefPointID, HikeID);
+    const response = await fetch((APIURL + `/api/LinktoHike/:RefPointID/Hike/:HikeID`), {
+      method: 'POST',
+      credentials: 'include',
+      headers: {
+        'Content-Type': 'application/json',
+      }
+    });
+    const value = await response.json();
+    if (response.ok) {
+      return value;
+    } else {
+      throw value;
+    }
+  } catch (err) {
+    throw err;
+  }
+}
+
 const API = {
   getHikes,
   logIn,
@@ -600,6 +621,7 @@ const API = {
   addHut,
   getHut,
   getHutCoords,
-  getHikesLocations
+  getHikesLocations,
+  linkHutToHike
 };
 export default API;
