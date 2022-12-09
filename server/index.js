@@ -656,12 +656,12 @@ app.post('/hutsFilters', async (req, res) => {
   }
 });
 //link hut to an hike
-app.post('/api/LinktoHike/:RefPointID/Hike/:HikeID',[
+app.post('/api/LinktoHike?/:RefPointID/Hike/:HikeID',[
   check('HikeID').notEmpty(),
   check('RefPointID').notEmpty()
 ],
 async(req,res)=>{
-  console.log(req.params);
+  console.log(req.params.RefPointID, req.params.HikeID);
   try{
       const errors= validationResult(req);
       console.log(errors);
@@ -671,18 +671,17 @@ async(req,res)=>{
      //check hike exists
      let h=await hikes.getHikesByFilter('HikeID',req.params.HikeID);
      
-     if(h.Length==[])return res.status(402).send({error : 'Error! Hike not found'});
+     if(h.Length==[])return res.status(402).json({error : 'Error! Hike not found'});
       //check hut exists
       h=await huts.getHut(req.params.RefPointID);
-      if(h==[])return res.status(401).send({error : 'Error! Hut not'});
+      if(h==[])return res.status(401).json({error : 'Error! Hut not'});
       //add hutToHike
      h= await hikes.addHutToHike(req.params.HikeID,req.params.RefPointID);
-     if(h!='New HikeRefPoint added')return res.status(504).send({error : 'Error! Could not link Hut and Hike'});
-     res.status(200).end({message: 'added'});
-  
+     if(h!='New HikeRefPoint added')return res.status(504).json({error : 'Error! Could not link Hut and Hike'});
+     res.status(200).json({message: 'added'});
   }catch(err){
       console.error(err);
-      res.status(503).json(err);
+      res.status(503).json({error : err.Error});
   }
 
 });

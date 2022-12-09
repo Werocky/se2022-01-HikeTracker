@@ -67,7 +67,7 @@ function HutDetails(props) {
   const handleLinkHike = async (event) => {
     event.preventDefault();
     console.log(params);
-    await API.linkHutToHike(params.hutID, selectedHike.HikeID).then((val) => {setErrorMsg("ciao"); setMsgColor('blue');}).catch(err => props.errorHandler(err));
+    await API.linkHutToHike(params.hutID, selectedHike.HikeID).then((val) => {setErrorMsg(val); setMsgColor('blue');}).catch(err => {console.log(err); props.errorHandler(err)});
   }
 
   const handleSelection = (ev, el) => {

@@ -576,7 +576,7 @@ async function getHutCoords(Hut) {
 async function linkHutToHike(RefPointID, HikeID) {
   try {
     console.log(RefPointID, HikeID);
-    const response = await fetch((APIURL + `/api/LinktoHike/:RefPointID/Hike/:HikeID`), {
+    const response = await fetch((APIURL + `/api/LinktoHike/${RefPointID}/Hike/${HikeID}`), {
       method: 'POST',
       credentials: 'include',
       headers: {
