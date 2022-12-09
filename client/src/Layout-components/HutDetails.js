@@ -57,16 +57,14 @@ function HutDetails(props) {
   const [hut, setHut] = useState({});
   const [coords, setCoords] = useState(undefined);
   const [loading, setLoading] = useState(true);
-  const [hikesList, setHikesList] = useState(props.hikes);
   const [selectedHike, setSelectedHike] = useState({});
   const navigate = useNavigate();
-  const [errorMsg, setErrorMsg] = useState("");
-  const [msgColor, setMsgColor] = useState("danger");
+
 
   const handleLinkHike = async (event) => {
     event.preventDefault();
     console.log(params);
-    await API.linkHutToHike(params.hutID, selectedHike.HikeID).then((val) => {props.errorHandler(val); setMsgColor('primary');}).catch(err => {console.log(err);});
+    await API.linkHutToHike(params.hutID, selectedHike.HikeID).then((val) => {props.errorHandler(val);}).catch(err => {props.errorHandler(err)});
   }
 
   const handleSelection = (ev, el) => {
