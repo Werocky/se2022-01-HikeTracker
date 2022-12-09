@@ -2,27 +2,49 @@
 
 const express = require('express');
 const morgan = require('morgan'); // logging middleware
-const { check, validationResult } = require('express-validator'); // validation middleware
 const cors = require('cors');
 const passport = require('passport'); // auth middleware
 const LocalStrategy = require('passport-local').Strategy; // username and password for login
 const session = require('express-session'); // enable sessions
-const hikes = require('./modules/Hikes.js');
+const fileUpload = require("express-fileupload");
+const mail = require('./modules/mail');
+const users = require('./modules/Users');
+const { check, validationResult } = require('express-validator'); // validation middleware
 const authN = require('./modules/authN.js');
+
+// init express
+const app = new express();
+const port = 3001;
+
+//this can be commented out and replaced by the commented routes bellow
+/*const hikes = require('./modules/Hikes.js');
 const hikeRefPoints = require('./modules/HikeRefPoints');
 const referencePoints = require('./modules/ReferencePoints');
 const locations = require('./modules/HikeLocations.js')
 const { db } = require('./modules/DB.js');
-const users = require('./modules/Users');
 const fileNames = require('./modules/FileNames.js');
 let gpxParser = require('gpxparser');
 var fs = require('fs');
-const fileUpload = require("express-fileupload");
 const { builtinModules } = require('module');
 const { createParkingLot, updateParkingLot, getParkingLots, getParkingLot, deleteParkingLot, getLastParkingID } = require('./modules/ParkingLot.js');
 const { addReferencePoint, updateReferencePoint } = require('./modules/ReferencePoints.js');
-const huts = require('./modules/Huts');
-const mail = require('./modules/mail');
+const huts = require('./modules/Huts');*/
+
+
+
+const fileNames = require('./routes/fileNames');
+const hikes = require('./routes/Hikes');
+// const HikeReferencePoints = require('./routes/HikeReferencePoints');
+const parkingLots = require('./routes/ParkingLot');
+const huts= require('./routes/Huts');
+
+app.use(['/getPointsHike'],fileNames);
+//todo fix problems PUT POST
+app.use(['/getHikes',/*'/getHikeByID','/getFilteredHikes',*/'/setDescription'],hikes);
+app.use(['/addHike','setStartEndPoints','/HutsAndParks','/HikeInfo','/getNearHikes'],HikeReferencePoints);
+app.use(['/ParkingLots'],parkingLots);//todo fix/diferentiate calls
+//todo fix Put and POST conflicts Authentication problems
+app.use(['/hutsLocations'/*,'/setHutDescription','/getHut','/getHutCoords','/hutCreate','/hutFilters'*/],huts);
 
 
 /*** Set up Passport ***/
@@ -66,9 +88,7 @@ const isLoggedIn = (req, res, next) => {
 
 /*** Ending setting up passport***/
 
-// init express
-const app = new express();
-const port = 3001;
+
 
 //init middlewares
 app.use(morgan('dev'));
@@ -96,27 +116,6 @@ app.use(
     preserveExtension: true,
   })
 );
-
-//get hikes gpx
-app.post('/getPointsHike', (req, res) => {
-  const errors = validationResult(req);
-  if (!errors.isEmpty()) {
-    return res.status(422).json({ error: 'cannot process request' });
-  }
-  const HikeID = req.body.HikeID;
-  var gpx = new gpxParser(); //Create gpxParser Object
-  fileNames.getFileName(HikeID)
-    .then(filename => {
-      fs.readFile(filename, function (err, data) {
-        if (err) throw err;
-        gpx.parse(data); //parse gpx file from string data
-        const points = gpx.tracks[0].points;
-        res.status(200).json(points);
-      });
-    })
-    .catch(() => res.status(500).end());
-});
-
 
 //get hikes full list
 app.get('/getHikes', (req, res) => {
@@ -432,114 +431,6 @@ app.post('/getNearHikes', async (req, res) => {
   }
 });
 
-/*** PARKING LOT APIs ***/
-
-//POST
-//Create parking lot
-app.post('/ParkingLots',[],
-  [check('ParkingLot').notEmpty()], async (req, res) => {
-  
-    const errors = validationResult(res);
-    if (!errors.isEmpty()) {
-      return res.status(422).json({ error: 'cannot process request' });
-    }
-    console.log(req.body);
-    const ParkingLot = {...req.body.ParkingLot, AssociatedGuide: req.user.Id};
-    const Description = ParkingLot.Description;
-    const lat = ParkingLot.Coord.lat;
-    const lng = ParkingLot.Coord.lng;
-    try {
-      await createParkingLot(ParkingLot);
-      await referencePoints.addReferencePointWithDescription(Description, lat, lng, 'parking')
-      res.status(201).end();
-    } catch (err) {
-      res.status(503).json({ error: 'Internal error' });
-    }
-  });
-
-//PUT
-//Update parking lot
-app.put('/ParkingLots',
-  [check('Description').notEmpty(),
-  check('ParkingId').notEmpty(),
-  check('free').notEmpty(),
-  check('RefPointID'),
-  check('lat'),
-  check('lng')], async (req, res) => {
-
-    const errors = validationResult(res);
-    if (!errors.isEmpty()) {
-      return res.status(422).json({ error: 'cannot process request' });
-    }
-    const description = req.body.Description;
-    const id = req.body.ParkingId;
-    const free = req.body.free;
-    const refPoint = req.body.RefPointID;
-    const lat = req.body.lat;
-    const lng = req.body.lng;
-    try {
-      await updateParkingLot(id, description, free);
-      await updateReferencePoint(refPoint, lat, lng, 'parking');
-      res.status(201).end();
-    } catch (err) {
-      res.status(503).json({ error: 'Internal error' });
-    }
-  });
-
-//GET
-//Return all parking lots
-app.get('/ParkingLots', async (req, res) => {
-
-  const errors = validationResult(res);
-  if (!errors.isEmpty()) {
-    return res.status(422).json({ error: 'cannot process request' });
-  }
-
-  try {
-    const parkingLots = await getParkingLots();
-    res.status(201).json(parkingLots);
-  } catch (err) {
-    res.status(503).json({ error: 'Internal error' });
-  }
-});
-
-//Return parking lot identified by id
-app.post('/ParkingLots',
-  [check('ParkingId').notEmpty()], async (req, res) => {
-
-    const errors = validationResult(res);
-    if (!errors.isEmpty()) {
-      return res.status(422).json({ error: 'cannot process request' });
-    }
-
-    const id = req.body.ParkingId;
-    try {
-      const parkingLot = await getParkingLot(id);
-      res.status(201).json(parkingLot);
-    } catch (err) {
-      res.status(503).json({ error: 'Internal error' });
-    }
-  });
-
-
-//DELETE
-//delete parking lot
-app.post('/ParkingLots',
-  [check('ParkingId').notEmpty()], async (req, res) => {
-
-    const errors = validationResult(res);
-    if (!errors.isEmpty()) {
-      return res.status(422).json({ error: 'cannot process request' });
-    }
-    const id = req.body.ParkingId;
-    try {
-      await deleteParkingLot(id);
-      res.status(201).end();
-    } catch (err) {
-      res.status(503).json({ error: 'Internal error' });
-    }
-  });
-
 /*** Huts ***/
 // GET filtered
 app.post('/hutsFilters', async (req, res) => {
@@ -562,30 +453,6 @@ app.post('/hutsFilters', async (req, res) => {
     res.status(503).json({ error: `Error` });
   }
 });
-
-//GET locations
-app.get('/hutsLocations', async (req, res) => {
-  const errors = validationResult(req);
-  if (!errors.isEmpty()) {
-    return res.status(422).json({ error: 'cannot process request' });
-  }
-  try {
-    const city = await huts.getHutCity();
-    const province = await huts.getHutProvince();
-    const region = await huts.getHutRegion();
-    const country = await huts.getHutCountry();
-    let location = {
-      City: city.filter((el) => el != false),
-      Province: province.filter((el) => el != false),
-      Region: region.filter((el) => el != false),
-      Country: country.filter((el) => el != false)
-    };
-
-    res.status(200).json(location);
-  } catch (err) {
-    res.status(503).json({ error: `Error` });
-  }
-})
 
 //GET hut information
 

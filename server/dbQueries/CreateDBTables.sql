@@ -10,10 +10,9 @@ CREATE TABLE IF NOT EXISTS `Users`(
     `Phone` INTEGER NULL
 );
 CREATE TABLE IF NOT EXISTS `LocalGuides`(
-    `id` TEXT PRIMARY KEY
+    `id` TEXT PRIMARY KEY,
     `user` TEXT,
     FOREIGN KEY(`user`) REFERENCES `Users`(`Id`)
-
 );
 CREATE TABLE IF NOT EXISTS `ReferencePoints`(
     `RefPointID` INTEGER PRIMARY KEY,
@@ -23,12 +22,12 @@ CREATE TABLE IF NOT EXISTS `ReferencePoints`(
     `Type` TEXT
 );
 CREATE TABLE IF NOT EXISTS `HutWorkers`(
-    `id` TEXT NOT NULL PRIMARY KEY
+    `id` TEXT NOT NULL PRIMARY KEY,
     `user` TEXT,
     FOREIGN KEY(`user`) REFERENCES `Users`(`Id`)
 );
 CREATE TABLE IF NOT EXISTS `Hiker`(
-    `id` TEXT PRIMARY KEY NOT NULL
+    `id` TEXT PRIMARY KEY NOT NULL,
     `user` TEXT,
     FOREIGN KEY(`user`) REFERENCES `Users`(`Id`)
 );
