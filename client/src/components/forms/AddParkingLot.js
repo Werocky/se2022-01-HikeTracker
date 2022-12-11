@@ -107,6 +107,7 @@ const submitForm = async (event) => {
     {setMsg("Parking Lot added");
     props.setMessage("Parking Lot added");
     props.setMsgType('primary');
+    navigate("/");
       //navigate("/hikes");
   }).catch(err => props.errorHandler(err));
 }
