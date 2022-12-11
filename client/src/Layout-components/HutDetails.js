@@ -63,7 +63,6 @@ function HutDetails(props) {
 
   const handleLinkHike = async (event) => {
     event.preventDefault();
-    console.log(params);
     await API.linkHutToHike(params.hutID, selectedHike.HikeID).then((val) => {props.errorHandler(val);}).catch(err => {props.errorHandler(err)});
   }
 
@@ -75,7 +74,6 @@ function HutDetails(props) {
     const loadHut = async () => {
       const hutObj = await API.getHut(params.hutID);
       const coord = await API.getHutCoords(params.hutID);
-      //console.log(hikeObj);
       setHut(hutObj);
       setCoords(coord);
 

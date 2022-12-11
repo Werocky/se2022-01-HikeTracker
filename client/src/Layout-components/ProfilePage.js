@@ -9,8 +9,6 @@ function ProfilePage(props) {
   const navigate = useNavigate();
 
 
-  console.log(auth.user);
-
   return (
     <Container fluid className={'vh-100'}>
       <Row>

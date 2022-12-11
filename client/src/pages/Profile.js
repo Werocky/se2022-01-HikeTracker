@@ -46,8 +46,6 @@ const DecoratorBlob = styled(SvgDotPattern)(props => [
 function Profile(props) {
     const auth = useContext(AuthContext);
     const params = useParams();
-
-
     const navigate = useNavigate();
 
     const imageSrc = StatsIllustrationSrc;
@@ -58,12 +56,13 @@ function Profile(props) {
     const imageInsideDiv = true;
     const textOnLeft = false;
 
+    let role = auth.user.Role == 'H' ? 'Hiker' : (auth.user.Role == 'L' ? 'Local guide' : 'Hut Manager');
 
     return (
         <AnimationRevealPage>
         <Header logout={props.logout} />
         <Container>
-            <Heading> Hello, Customer </Heading>
+            <Heading> Hello, {role} </Heading>
             <TwoColumn css={!imageInsideDiv && tw`md:items-center`}>
                 <ImageColumn css={imageContainerCss}>
                     {imageInsideDiv ? <Image imageSrc={imageSrc} css={imageCss} /> : <img src={imageSrc} css={imageCss} alt="" />}
@@ -71,12 +70,8 @@ function Profile(props) {
                 </ImageColumn>
                 <TextColumn textOnLeft={textOnLeft}>
                     <TextContent>
-                        <Subheading>Name: name</Subheading>
-                        <Subheading>Name: name</Subheading>
-                        <Subheading>Name: name</Subheading>
-                        <Subheading>Name: name</Subheading>
-
-
+                        <Subheading>Name: {params.userId}</Subheading>
+                        <Subheading>Role: {role}</Subheading>
                     </TextContent>
                 </TextColumn>
             </TwoColumn>

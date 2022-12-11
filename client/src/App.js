@@ -70,7 +70,7 @@ function App() {
 
   const register = (credentials) => {
     API.register(credentials)
-      .then((res) => { console.log(res); if (res.hasOwnProperty('error')) errorHandler(res); else {setMessage('Registration successful! Check email for confirmation and follow the instruction.'); setMsgType('primary');} })
+      .then((res) => {if (res.hasOwnProperty('error')) errorHandler(res); else {setMessage('Registration successful! Check email for confirmation and follow the instruction.'); setMsgType('primary');} })
       .catch(err => errorHandler(err));
   }
 
@@ -107,12 +107,10 @@ function AppLayout(props) {
   useEffect(() => {
     const reloadHikes = async () => {
       const hikes_array = await API.getHikes();
-      console.log(hikes_array);
       setHikes(hikes_array);
     }
     const reloadHuts = async () => {
       const huts_array = await API.getHutsFilters();
-      console.log(huts_array);
       setHuts(huts_array);
     }
     try {
