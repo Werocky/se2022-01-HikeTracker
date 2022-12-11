@@ -57,13 +57,16 @@ function HutDetails(props) {
   const [hut, setHut] = useState({});
   const [coords, setCoords] = useState(undefined);
   const [loading, setLoading] = useState(true);
-  const [selectedHike, setSelectedHike] = useState({});
+  const [selectedHike, setSelectedHike] = useState({HikeID: undefined});
   const navigate = useNavigate();
-
+  //const [hikes, setHikes] = useState();
 
   const handleLinkHike = async (event) => {
     event.preventDefault();
+    if(typeof selectedHike.HikeID !== "undefined")
     await API.linkHutToHike(params.hutID, selectedHike.HikeID).then((val) => {props.errorHandler(val);}).catch(err => {props.errorHandler(err)});
+    else 
+    props.errorHandler({error: "You must select an hike to link"});
   }
 
   const handleSelection = (ev, el) => {
@@ -196,8 +199,9 @@ function HutDetails(props) {
                     <Dropdown.Toggle split className="light__NavLink-sc-7yke5y-2 light__PrimaryLink-sc-7yke5y-5 light___StyledPrimaryLink-sc-7yke5y-7 hvlBUp htliCt" variant="success" id="dropdown-split-basic" />
                     
                     <Dropdown.Menu>
-                      {props.hikes.map((el) => {
-                           return <Dropdown.Item onClick={(ev) => handleSelection(ev, el)} key={el.Title}>{el.Title}</Dropdown.Item>
+                      {props.hikes.map((el) => {{
+                          if(el.AssociatedGuide == auth.user.Id)
+                           return <Dropdown.Item onClick={(ev) => handleSelection(ev, el)} key={el.Title}>{el.Title}</Dropdown.Item>}
                       })
                       }
                     </Dropdown.Menu>
