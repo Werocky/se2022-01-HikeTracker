@@ -192,7 +192,7 @@ function HutDetails(props) {
                 </Statistics>
 
                 <Description>{hut.Description}</Description>
-                  { 
+                  {auth.user.Role == 'L' ?  
                     <Dropdown as={ButtonGroup}>
                     <Button onClick={handleLinkHike} className="light__NavLink-sc-7yke5y-2 light__PrimaryLink-sc-7yke5y-5 light___StyledPrimaryLink-sc-7yke5y-7 hvlBUp htliCt" variant="success">Link to this Hut</Button>
 
@@ -205,7 +205,7 @@ function HutDetails(props) {
                       })
                       }
                     </Dropdown.Menu>
-                  </Dropdown>
+                  </Dropdown> : null
                   }
               </TextContent>
             </TextColumn>
