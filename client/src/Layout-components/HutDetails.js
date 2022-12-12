@@ -1,22 +1,17 @@
 import { useContext, useEffect, useState } from "react";
-import { Button, Form, Col, Row, ButtonGroup, Alert } from "react-bootstrap";
-import { useNavigate, useParams } from "react-router-dom";
+import { Button, ButtonGroup } from "react-bootstrap";
+import { useParams } from "react-router-dom";
 import AuthContext from "../AuthContext";
-import { MapContainer, Marker, Polyline, Popup, TileLayer, useMap } from 'react-leaflet';
+import { MapContainer, Marker, Popup, TileLayer } from 'react-leaflet';
 import API from '../API';
-import NavigationBar from "./Navigationbar";
 import tw from "twin.macro";
 import styled from "styled-components";
 import { SectionHeading, Subheading as SubheadingBase } from "../components/misc/Headings.js";
-import { PrimaryButton as PrimaryButtonBase } from "../components/misc/Buttons.js";
-import StatsIllustrationSrc from "../images/stats-illustration.svg";
-import { ReactComponent as SvgDotPattern } from "../images/dot-pattern.svg";
+import StatsIllustrationSrc from "../images/pictures/map.webp";
 import AnimationRevealPage from "../helpers/AnimationRevealPage";
 import Header from "../components/headers/light.js";
 import Dropdown from 'react-bootstrap/Dropdown';
-import DropdownButton from 'react-bootstrap/DropdownButton';
-import DropdownItem from "react-bootstrap/esm/DropdownItem";
-//how to insert a file on react client
+
 const Container = tw.div`relative`;
 const TwoColumn = tw.div`flex flex-col md:flex-row justify-between max-w-screen-xl mx-auto py-20 md:py-24`;
 const Column = tw.div`w-full max-w-md mx-auto md:max-w-none md:mx-0`;
@@ -31,6 +26,7 @@ const Image = styled.div(props => [
   tw`rounded bg-contain bg-no-repeat bg-center h-full`
 ]);
 const TextContent = tw.div`lg:py-8  md:text-left`;
+const Messageheading = tw(SubheadingBase)`mt-4 text-center md:text-left text-sm md:text-base lg:text-lg font-medium leading-relaxed`;
 
 const Subheading = tw(SubheadingBase)`text-center md:text-left mt-4`;
 const Heading = tw(
@@ -43,12 +39,6 @@ const Statistic = tw.div`text-left sm:inline-block sm:mr-12 last:mr-0 mt-4`;
 const Value = tw.div`font-bold text-lg sm:text-xl lg:text-2xl text-secondary-500 tracking-wide`;
 const Key = tw.div`font-medium text-primary-700`;
 
-const PrimaryButton = tw(PrimaryButtonBase)`mt-8 md:mt-10 text-sm inline-block mx-auto md:mx-0`;
-
-const DecoratorBlob = styled(SvgDotPattern)(props => [
-  tw`w-20 h-20 absolute right-0 bottom-0 transform translate-x-1/2 translate-y-1/2 fill-current text-primary-500 -z-10`
-]);
-
 function HutDetails(props) {
   const auth = useContext(AuthContext);
   const params = useParams();
@@ -56,8 +46,6 @@ function HutDetails(props) {
   const [coords, setCoords] = useState(undefined);
   const [loading, setLoading] = useState(true);
   const [selectedHike, setSelectedHike] = useState({HikeID: undefined});
-  const navigate = useNavigate();
-  //const [hikes, setHikes] = useState();
 
   const handleLinkHike = async (event) => {
     event.preventDefault();
@@ -88,21 +76,9 @@ function HutDetails(props) {
   }, [params.hutID, auth.login])
 
 
-  const subheading = "Learn more";
-  const heading = (
-    <>
-      Hut title
-    </>
-  );
-  const description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.";
-  //primaryButtonText = "Learn More",
-  //primaryButtonUrl = "https://timerse.com",
   const imageSrc = StatsIllustrationSrc;
   const imageCss = null;
   const imageContainerCss = null;
-  const imageDecoratorBlob = false;
-  const imageDecoratorBlobCss = null;
-  const imageInsideDiv = false;
   let statistics = null;
   const textOnLeft = false;
 
@@ -134,7 +110,7 @@ function HutDetails(props) {
           <TwoColumn>
           {!auth.login &&
               <ImageMapColumn css={imageContainerCss}>
-                You should be logged to see the map
+                <Messageheading> Login to see the map</Messageheading>
                 <Image imageSrc={imageSrc} css={imageCss} />
               </ImageMapColumn>
             }

@@ -9,7 +9,7 @@ import tw from "twin.macro";
 import styled from "styled-components";
 import { SectionHeading, Subheading as SubheadingBase } from "../components/misc/Headings.js";
 import { PrimaryButton as PrimaryButtonBase } from "../components/misc/Buttons.js";
-import StatsIllustrationSrc from "../images/stats-illustration.svg";
+import StatsIllustrationSrc from "../images/pictures/profile.jpeg";
 import { ReactComponent as SvgDotPattern } from "../images/dot-pattern.svg";
 import AnimationRevealPage from "../helpers/AnimationRevealPage";
 import Header from "../components/headers/light.js";

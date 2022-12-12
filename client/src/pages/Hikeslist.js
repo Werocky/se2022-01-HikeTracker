@@ -5,7 +5,6 @@ import tw from "twin.macro";
 import styled from "styled-components";
 import { css } from "styled-components/macro";
 import Header from "../components/headers/light.js";
-import Footer from "../components/footers/FiveColumnWithInputForm.js";
 import { SectionHeading } from "../components/misc/Headings";
 import { PrimaryButton } from "../components/misc/Buttons";
 import { PrimaryButton as PrimaryButtonBase } from "../components/misc/Buttons.js";
@@ -45,16 +44,11 @@ const Category = tw.div`text-primary-500 text-xs font-bold tracking-widest leadi
 const CreationDate = tw.div`mt-4 uppercase text-gray-600 italic font-semibold text-xs`;
 const Title = tw.div`mt-1 font-extrabold text-xl text-gray-900 group-hover:text-primary-500 transition duration-300 truncate `;
 const Description = tw.div`truncate `;
-
 const ButtonContainer = tw.div`flex justify-center`;
 const LoadMoreButton = tw(PrimaryButton)`mt-16 mx-auto`;
 const PostAction = tw(PrimaryButtonBase)`w-full mt-8`;
-const ShowButton = tw(PrimaryButton)`mt-4 inline-block w-56 tracking-wide text-center py-5`;
-
-const TextContent = tw.div`lg:py-8 text-center md:text-left`;
+const ShowButton = tw(PrimaryButton)`mt-4 mr-8 inline-block w-56 tracking-wide text-center py-5`;
 const Content = tw.div`max-w-screen-xl mx-auto py-20 lg:py-24`;
-
-const Form = tw.form`mt-8 md:mt-10 text-sm flex flex-col max-w-sm mx-auto md:mx-0`
 const Input = tw.input`mt-2 first:mt-0 border-b-2 py-3 focus:outline-none font-medium transition duration-300 hocus:border-primary-500`
 const InputOption = tw.input`mt-2 first:mt-0 border-b-2 py-3 focus:outline-none text-sm font-medium transition duration-300 hocus:border-gray-300 text-gray-700 `
 const Instruction = tw.p` text-center md:text-left text-sm md:text-base lg:text-base  leading-relaxed  font-semibold text-base`
@@ -97,7 +91,8 @@ function HikeList(props) {
   const [defaultHikes, setDefaultHikes] = useState(props.hikes);
   const [locations, setLocations] = useState(undefined);
   const [hikes, setHikes] = useState(props.hikes);
-  const [show, setShow] = useState(false);
+  const [showText, setShowText] = useState(false);
+  const [showMap, setShowMap] = useState(false);
   const [loading, setLoading] = useState(true);
 
   useEffect( () => {
@@ -130,8 +125,9 @@ function HikeList(props) {
             <Heading>{headingText}</Heading>
           </HeadingRow>
           <div>
-            <ShowButton onClick={() => setShow(!show)}>{show ? 'Close The Filter' : 'Select The Filter'}</ShowButton>
-            {show && <div>
+            <ShowButton onClick={() => setShowText(!showText)}>{showText ? 'Close The Filter' : 'Text Filter'}</ShowButton>
+            <ShowButton onClick={() => setShowMap(!showMap)}>{showMap ? 'Close The Filter' : 'Map Filter'}</ShowButton>
+            {showText && <div>
               <Filters
                 sortTypeDesc={sortTypeDesc}
                 setSortTypeDesc={setSortTypeDesc}

@@ -99,16 +99,16 @@ function Register(props){
         <SubmitButtonIcon className="icon" />
         <span className="text">{submitButtonText}</span>
       </SubmitButton>
-      <p tw="mt-6 text-xs text-gray-600 text-center">
-        I agree to abide by Hike-Tracker's{" "}
-        <a href={tosUrl} tw="border-b border-gray-500 border-dotted">
-          Terms of Service
-        </a>{" "}
-        and its{" "}
-        <a href={privacyPolicyUrl} tw="border-b border-gray-500 border-dotted">
-          Privacy Policy
-        </a>
-      </p>
+      {/*<p tw="mt-6 text-xs text-gray-600 text-center">*/}
+      {/*  I agree to abide by Hike-Tracker's{" "}*/}
+      {/*  <a href={tosUrl} tw="border-b border-gray-500 border-dotted">*/}
+      {/*    Terms of Service*/}
+      {/*  </a>{" "}*/}
+      {/*  and its{" "}*/}
+      {/*  <a href={privacyPolicyUrl} tw="border-b border-gray-500 border-dotted">*/}
+      {/*    Privacy Policy*/}
+      {/*  </a>*/}
+      {/*</p>*/}
 
       <p tw="mt-8 text-sm text-gray-600 text-center">
         Already have an account?{" "}

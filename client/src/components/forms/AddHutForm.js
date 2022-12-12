@@ -54,6 +54,7 @@ const FormContainer = styled.div`
 const InputContainer = tw.div`relative py-5 mt-6`;
 const Label = tw.label`absolute top-0 left-0 tracking-wide font-semibold text-base`;
 const Recap = tw.p`mt-4 text-center md:text-left text-sm md:text-base lg:text-lg font-medium leading-relaxed text-gray-200`
+const Instruction = tw.p`text-center md:text-left text-sm md:text-sm lg:text-lg  font-bold text-sm`
 
 
 const Textarea = tw.textarea`h-24 sm:h-full resize-none`;
@@ -322,6 +323,9 @@ const ClickPick = () => {
       <Label htmlFor="numberOfBeds-input">Number Of Beds</Label>
       <Input id="numberOfBeds-input" type="number" step="1" name="numberOfBeds" value={beds} min={0} placeholder="insert number of beds" onChange={ev=>setBeds(ev.target.value)}  required={true} />
     </InputContainer>
+    <Instruction>
+      Opening Session
+    </Instruction>
 
       <InputOption id="open-input" type="whenOpen" defaultValue={'DEFAULT'} as="select" aria-label="select" onChange={ev => setWhenOpen(ev.target.value)} required={true} >
       <option value='DEFAULT' hidden>Select when it's open</option>
