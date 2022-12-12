@@ -294,19 +294,19 @@ const ClickPick = () => {
       </InputContainer>
       <InputContainer>
         <Label htmlFor="city-input">City</Label>
-        <Input id="city-input" type="text" name="city"  value={city} placeholder="select a point on the map to select the city"  onChange={ev => setCity(ev.target.value)} />
+        <Input id="city-input" type="text" name="city"  value={city} placeholder="select a point on the map to select the city"  onChange={ev => setCity(ev.target.value)} readOnly />
       </InputContainer>
       <InputContainer>
         <Label htmlFor="province-input">Province</Label>
-        <Input id="province-input" type="text" name="province" value={province} placeholder="select a point on the map to select the province"  onChange={ev => setProvince(ev.target.value)}/>
+        <Input id="province-input" type="text" name="province" value={province} placeholder="select a point on the map to select the province"  onChange={ev => setProvince(ev.target.value)} readOnly/>
       </InputContainer>
       <InputContainer>
         <Label htmlFor="region-input">Region</Label>
-        <Input id="region-input" type="text" name="region" value={region} placeholder="select a point on the map to select the region"  onChange={ev => setRegion(ev.target.value)} />
+        <Input id="region-input" type="text" name="region" value={region} placeholder="select a point on the map to select the region"  onChange={ev => setRegion(ev.target.value)} readOnly />
       </InputContainer>
       <InputContainer>
         <Label htmlFor="country-input">Country</Label>
-        <Input id="country-input" type="text" name="country" value={country} placeholder="select a point on the map to select the country" onChange={ev => setCountry(ev.target.value)} />
+        <Input id="country-input" type="text" name="country" value={country} placeholder="select a point on the map to select the country" onChange={ev => setCountry(ev.target.value)}readOnly />
       </InputContainer>
     <SubmitButton type="submit">Next</SubmitButton>
     </Form>
