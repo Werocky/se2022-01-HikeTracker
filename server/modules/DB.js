@@ -92,7 +92,7 @@ class DatabaseConnection {
  
 
         let refPoint=1;
-        let AssociatedGuide=0;
+        let AssociatedGuide="d@polito.it";
         let HikeID='0';
         let file="rocciamelone.gpx";
         let Country ='Italy'
