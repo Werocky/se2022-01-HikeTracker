@@ -20,6 +20,7 @@ async function getHikes() {
       Country: r.Country,
       Province: r.Province,
       Region: r.Region,
+      AssociatedGuide: r.AssociatedGuide,
       City: r.City,
       Picture:r.Picture
     }))
@@ -43,6 +44,7 @@ async function getHike(HikeID) {
     });
     const hike = await response.json();
     if (response.ok) {
+      console.log(hike);
       return hike;
     } else {
       throw hike; //which will contain an error if it is the case

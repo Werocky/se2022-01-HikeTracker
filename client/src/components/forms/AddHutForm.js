@@ -106,7 +106,7 @@ useEffect(()=>{
   setRegion(informations?.address?.state? informations.address.state : '');
   setProvince(informations?.address?.county? informations.address.county : '');
   setCountry(informations?.address?.country? informations.address.country : '');
-  setCity( informations?.address?.city? informations.address.city : informations?.address?.village? informations.address.village: informations?.address?.town? informations.address.town : '');
+  setCity( informations?.address?.city? informations.address.city : informations?.address?.village? informations.address.village: informations?.address?.town? informations.address.town : informations?.address?.municipality? informations.address.municipality : informations?.address?.isolated_dwelling? informations.address.isolated_dwelling : informations?.address?.croft? informations.address.croft : informations?.address?.hamlet?informations.address.hamlet:"");
 })
   }
 }, [coord])

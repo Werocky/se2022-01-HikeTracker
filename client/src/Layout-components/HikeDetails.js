@@ -64,7 +64,7 @@ function HikeDetails(props) {
   useEffect(() => {
     const loadHike = async () => {
       const hikeObj = await API.getHike(params.hikeID);
-      //console.log(hikeObj);
+      console.log(hikeObj);
       setHike(hikeObj);
       if (auth.login) {
         const gpxObj = await API.getPointsHike(params.hikeID);
