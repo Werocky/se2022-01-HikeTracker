@@ -91,7 +91,7 @@ class DatabaseConnection {
         
  
 
-        let refPoint=0;
+        let refPoint=1;
         let AssociatedGuide=0;
         let HikeID='0';
         let file="rocciamelone.gpx";
