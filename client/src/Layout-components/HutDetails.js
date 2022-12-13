@@ -59,7 +59,7 @@ function HutDetails(props) {
     setSelectedHike(el);
   }
 
-  useEffect(() => {
+  useEffect(async() => {
     const loadHut = async () => {
       const hutObj = await API.getHut(params.hutID);
       const coord = await API.getHutCoords(params.hutID);
@@ -69,7 +69,7 @@ function HutDetails(props) {
       setLoading(false);
     }
     try {
-        loadHut();
+        await loadHut();
     } catch (err) {
         
     }

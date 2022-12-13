@@ -47,7 +47,7 @@ function HikeDetails(props) {
   const [gpxData, setGpxData] = useState(undefined);  // array of [p.lat, p.lon]
   const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
+  useEffect(async() => {
     const loadHike = async () => {
       const hikeObj = await API.getHike(params.hikeID);
       console.log(hikeObj);
@@ -61,7 +61,7 @@ function HikeDetails(props) {
       setLoading(false);
     }
     try {
-      loadHike();
+      await loadHike();
     } catch (err) {
       //handling error
     }
