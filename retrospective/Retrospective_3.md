@@ -46,9 +46,38 @@ RETROSPECTIVE (Team 1)
 #### Horizonal tasks
 | Task | Hours est. | Hours actual |
 |------|------------|--------------|
+| _Refactor Layout structure_  |  _4h_  |  _4h_  |
+| _API Reorganization_  |  _4h_  |  _3h 30m_  |
+| _Database redesign_  |  _1h 30m_  |  _1h_  |
 | _DB Restructure_  |  _2h_  |  _6h 40m_  |
+| _New Layout for hike filters_  |  _2h 30m_  |  _3h_  |
+| _layout for story 5- addHut_  |  _2h_  |  _2h 55m_  |
+| _layout for story 6- addParkingLot_  |  _1h_  |  _55m_  |
+| _Layout hut's filters_  |  _2h_  |  _3h 30m_  |
+| _Fix story #5_  |  _2h_  |  _2h_  |
+| _Fix story #8_  |  _4h_  |  _3h_  |
+| _Connect functions to new login/register_  |  _2h_  |  _2h_  |
 | _Add reference point with hike_  |  _2h 30m_  |  _1h 20m_  |
 | _Hut list page_  |  _1h 30m_  |  _1h 15m_  |
+| _modify client and server AddHut_  |  _2h_  |  _1h 25m_  |
+| _Create an option box to filter the cards_  |  _2h_  |  _1h 45m_  |
+| _Message handling_  |  _3h_  |  _2h 50m_  |
+| _Fix Register function server side_  |  _1h_  |  _35m_  |
+| _ADD images server & client_  |  _4h_  |  _3h 5m_  |
+| _insert images in the db and in a folder_  |  _2h_  |  _2h 5m_  |
+| _AddParkingLot check Reference Point_  |  _45m_  |  _45m_  |
+| _Fix gpx file reading/parsing_  |  _2h 30m_  |  _2h 30m_  |
+| _Modify Add Hike, client Form_  |  _2h 30m_  |  _2h 55m_  |
+| _AddHut check Reference Point_  |  _45m_  |  _45m_  |
+| _AddHike check Reference Points_  |  _1h 30m_  |  _1h 10m_  |
+| _Modify Add Hike, server API_  |  _2h_  |  _2h_  |
+| _hut details page_  |  _2h_  |  _2h_  |
+| _modify addParkingLot_  |  _2h_  |  _1h 15m_  |
+| _Hike details page_  |  _1h 30m_  |  _1h 20m_  |
+| _create ParkingLot Server Side manual testing_  |  _30m_  |  _40m_  |
+| _addHut Server Side manual testing_  |  _30m_  |  _30m_  |
+| _createParkingLot e2e testing_  |  _30m_  |  _30m_  |
+| _addHut e2e testing_  |  _30m_  |  _25m_  |
 
 
 --------------------------------------------------
