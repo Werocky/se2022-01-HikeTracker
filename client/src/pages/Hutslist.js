@@ -118,6 +118,7 @@ function Huts(props) {
 
     useEffect(() => {        
         setHuts(props.huts);
+        console.log(props.huts)
     }, [props.huts]);
 
     const onLoadMoreClick = () => {
@@ -322,7 +323,6 @@ function HutElement(props) {
 
     const hut = props.hut;
     const imageSrc = "https://images.unsplash.com/photo-1418854982207-12f710b74003?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1024&q=80";
-    console.log(props.hut);
     const navigate = useNavigate();
 
     let loc = hut.City ? hut.City + ", " : "";
