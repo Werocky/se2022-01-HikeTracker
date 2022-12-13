@@ -95,8 +95,8 @@ function HikeList(props) {
   const [showMap, setShowMap] = useState(false);
   const [loading, setLoading] = useState(true);
 
-  useEffect( () => {
-    const updateData = async () =>{
+  useEffect(() => {
+    const updateData = async () => {
       setDefaultHikes(props.hikes);
       setHikes(props.hikes)
 
@@ -127,26 +127,31 @@ function HikeList(props) {
           <div>
             <ShowButton onClick={() => setShowText(!showText)}>{showText ? 'Close The Filter' : 'Text Filter'}</ShowButton>
             <ShowButton onClick={() => setShowMap(!showMap)}>{showMap ? 'Close The Filter' : 'Map Filter'}</ShowButton>
-            {showText && <div>
-              <Filters
-                sortTypeDesc={sortTypeDesc}
-                setSortTypeDesc={setSortTypeDesc}
-                locations={locations}
-                setHikes={setHikes}
-                setLoading={setLoading}
-                loading={loading}
-                defaultHikes={defaultHikes}
-              />
-            </div>}
+            {showText && 
+              <div>
+                <Filters
+                  sortTypeDesc={sortTypeDesc}
+                  setSortTypeDesc={setSortTypeDesc}
+                  locations={locations}
+                  setHikes={setHikes}
+                  setLoading={setLoading}
+                  loading={loading}
+                  defaultHikes={defaultHikes}
+                />
+              </div>}
+            {showMap &&
+              <div>
+                <GeoFilter />
+              </div>}
           </div>
           {!loading &&
             <Posts>
               {hikes.length > 0 ?
-              hikes.slice(0, visible).map((hike, index) => (
-                <HikeElement key={index} hike={hike} />
-              ))
-              :
-              <Heading>No hikes satisfy the filter's parameters</Heading>
+                hikes.slice(0, visible).map((hike, index) => (
+                  <HikeElement key={index} hike={hike} />
+                ))
+                :
+                <Heading>No hikes satisfy the filter's parameters</Heading>
               }
 
             </Posts>
@@ -211,45 +216,45 @@ function Filters(props) {
       t_maxDist = undefined;
 
     const data = await API.getFilteredHikes(t_minExTime, t_maxExTime, t_minAscent, t_maxAscent, t_filterType, t_filterValue, t_minDist, t_maxDist, t_difficulty);
-      if (props.sortTypeDesc !== "") {
-        const sortArray = type => {
-          const types = {
-            TitleAsc: 'Title-Asc',
-            TitleDesc: 'Title-Desc',
-            LengthAsc: 'Length-Asc',
-            LengthDesc: 'Length-Desc',
-            AscentAsc: 'Ascent-Asc',
-            AscentDesc: 'Ascent-Desc',
-            DifficultyAsc: 'Difficulty-Asc',
-            DifficultyDesc: 'Difficulty-Desc',
-            ExpectedTimeAsc: 'ExpectedTime-Asc',
-            ExpectedTimeDesc: 'ExpectedTime-Desc',
-          };
-          
-          let sortProperty = types[type].split("-")[0];
-          let sorted;
-          if (types[type].split("-")[1] === "Desc") {
-            if (sortProperty === "Title" || sortProperty === "Difficulty")
-              sorted = [...data].sort((a, b) => {
-                if (a[sortProperty].trim() > b[sortProperty].trim()) return -1
-                if (a[sortProperty].trim() < b[sortProperty].trim()) return 1
-                return 0
-              });
-            else
-              sorted = [...data].sort((a, b) => b[sortProperty] - a[sortProperty]);
-          }else {
-            if (sortProperty === "Title" || sortProperty === "Difficulty")
-              sorted = [...data].sort((a, b) => {
-                if (a[sortProperty].trim() > b[sortProperty].trim()) return 1 
-                if (a[sortProperty].trim() < b[sortProperty].trim()) return -1
-                return 0
-              });
-            else
-              sorted = [...data].sort((a, b) => a[sortProperty] - b[sortProperty]);
-          }
-          console.log(sorted)
-          props.setHikes(sorted);
+    if (props.sortTypeDesc !== "") {
+      const sortArray = type => {
+        const types = {
+          TitleAsc: 'Title-Asc',
+          TitleDesc: 'Title-Desc',
+          LengthAsc: 'Length-Asc',
+          LengthDesc: 'Length-Desc',
+          AscentAsc: 'Ascent-Asc',
+          AscentDesc: 'Ascent-Desc',
+          DifficultyAsc: 'Difficulty-Asc',
+          DifficultyDesc: 'Difficulty-Desc',
+          ExpectedTimeAsc: 'ExpectedTime-Asc',
+          ExpectedTimeDesc: 'ExpectedTime-Desc',
         };
+
+        let sortProperty = types[type].split("-")[0];
+        let sorted;
+        if (types[type].split("-")[1] === "Desc") {
+          if (sortProperty === "Title" || sortProperty === "Difficulty")
+            sorted = [...data].sort((a, b) => {
+              if (a[sortProperty].trim() > b[sortProperty].trim()) return -1
+              if (a[sortProperty].trim() < b[sortProperty].trim()) return 1
+              return 0
+            });
+          else
+            sorted = [...data].sort((a, b) => b[sortProperty] - a[sortProperty]);
+        } else {
+          if (sortProperty === "Title" || sortProperty === "Difficulty")
+            sorted = [...data].sort((a, b) => {
+              if (a[sortProperty].trim() > b[sortProperty].trim()) return 1
+              if (a[sortProperty].trim() < b[sortProperty].trim()) return -1
+              return 0
+            });
+          else
+            sorted = [...data].sort((a, b) => a[sortProperty] - b[sortProperty]);
+        }
+        console.log(sorted)
+        props.setHikes(sorted);
+      };
       sortArray(props.sortTypeDesc);
     }
   }
@@ -273,139 +278,147 @@ function Filters(props) {
   }
 
   return (
-      <>
-          {!props.loading &&
-              <Container>
-                  <Content>
-                      <FormContainer>
-                          <div tw="mx-auto max-w-4xl">
-                              <form onSubmit={handleSubmit}>
-                                  {/* SELECTS THE TYPE OF FILTER (CITY, PROVINCE, ETC) */}
-                                  <ThreeColumn>
-                                      <Column>
-                                      <Instruction>
-                                              Sorting
-                                          </Instruction>
-                                          <InputOption as="select" value={props.sortTypeDesc} onChange={ev => props.setSortTypeDesc(ev.target.value)} >
-                                            <option value="TitleAsc">Title (Ascendent)</option>
-                                            <option value="TitleDesc">Title  (Descendent)</option>
-                                            <option value="LengthAsc" >Length - km (Ascendent)</option>
-                                            <option value="LengthDesc" >Length - km (Descendent)</option>
-                                            <option value="AscentAsc" >Ascent - m (Ascendent)</option>
-                                            <option value="AscentDesc" >Ascent - m (Descendent)</option>
-                                            <option value="DifficultyAsc" >Difficulty (Ascendent)</option>
-                                            <option value="DifficultyDesc" >Difficulty (Descendent) </option>
-                                            <option value="ExpectedTimeAsc" >Expected time - h:m (Ascendent)</option>
-                                            <option value="ExpectedTimeDesc" >Expected time - h:m (Descendent)</option>
-                                          </InputOption>
+    <>
+      {!props.loading &&
+        <Container>
+          <Content>
+            <FormContainer>
+              <div tw="mx-auto max-w-4xl">
+                <form onSubmit={handleSubmit}>
+                  {/* SELECTS THE TYPE OF FILTER (CITY, PROVINCE, ETC) */}
+                  <ThreeColumn>
+                    <Column>
+                      <Instruction>
+                        Sorting
+                      </Instruction>
+                      <InputOption as="select" value={props.sortTypeDesc} onChange={ev => props.setSortTypeDesc(ev.target.value)} >
+                        <option value="TitleAsc">Title (Ascendent)</option>
+                        <option value="TitleDesc">Title  (Descendent)</option>
+                        <option value="LengthAsc" >Length - km (Ascendent)</option>
+                        <option value="LengthDesc" >Length - km (Descendent)</option>
+                        <option value="AscentAsc" >Ascent - m (Ascendent)</option>
+                        <option value="AscentDesc" >Ascent - m (Descendent)</option>
+                        <option value="DifficultyAsc" >Difficulty (Ascendent)</option>
+                        <option value="DifficultyDesc" >Difficulty (Descendent) </option>
+                        <option value="ExpectedTimeAsc" >Expected time - h:m (Ascendent)</option>
+                        <option value="ExpectedTimeDesc" >Expected time - h:m (Descendent)</option>
+                      </InputOption>
 
-                                          <Instruction>
-                                              Location Type
-                                          </Instruction>
-                                          <InputOption as="select" value={filterType} onChange={ev => setFilterType(ev.target.value)} >
-                                              <option hidden>Location</option>
-                                              <option value="City">City</option>
-                                              <option value="Province">Province</option>
-                                              <option value="Region">Region</option>
-                                              <option value="Country">Country</option>
-                                          </InputOption>
+                      <Instruction>
+                        Location Type
+                      </Instruction>
+                      <InputOption as="select" value={filterType} onChange={ev => setFilterType(ev.target.value)} >
+                        <option hidden>Location</option>
+                        <option value="City">City</option>
+                        <option value="Province">Province</option>
+                        <option value="Region">Region</option>
+                        <option value="Country">Country</option>
+                      </InputOption>
 
-                                          <Instruction>
-                                              {filterType === 'City' ? 'City'
-                                                  : filterType === 'Province' ? 'Province'
-                                                      : filterType === 'Region' ? 'Region'
-                                                          : filterType === 'Country' ? 'Country'
-                                                              : "Select location first"}
-                                          </Instruction>
-                                          { /* SELECTS THE VALUE BASED ON THE FILTER SELECTED (SHOWS ALL CITIES IN DB IF CITY FILTER IS SELECTED, PROVINCES IF PROVINCE IS SELECTED AND SO ON) */}
-                                          <InputOption as="select" value={filterValue} onChange={ev => setFilterValue(ev.target.value)} >
-                                              <option hidden>Select {filterType ? filterType : "location first"}</option>
-                                              {
-                                                  filterType === 'City' ?
-                                                      props.locations.City.map((el) => {
-                                                          return <option key={el} value={el}>{el}</option>
-                                                      })
-                                                      :
-                                                      filterType === 'Province' ?
-                                                          props.locations.Province.map((el) => {
-                                                              return <option key={el} value={el}>{el}</option>
-                                                          })
-                                                          :
-                                                          filterType === 'Region' ?
-                                                              props.locations.Region.map((el) => {
-                                                                  return <option key={el} value={el}>{el}</option>
-                                                              })
-                                                              :
-                                                              filterType === 'Country' ?
-                                                                  props.locations.Country.map((el) => {
-                                                                      return <option key={el} value={el}>{el}</option>
-                                                                  })
-                                                                  : <></>
-                                              }
-                                          </InputOption>
+                      <Instruction>
+                        {filterType === 'City' ? 'City'
+                          : filterType === 'Province' ? 'Province'
+                            : filterType === 'Region' ? 'Region'
+                              : filterType === 'Country' ? 'Country'
+                                : "Select location first"}
+                      </Instruction>
+                      { /* SELECTS THE VALUE BASED ON THE FILTER SELECTED (SHOWS ALL CITIES IN DB IF CITY FILTER IS SELECTED, PROVINCES IF PROVINCE IS SELECTED AND SO ON) */}
+                      <InputOption as="select" value={filterValue} onChange={ev => setFilterValue(ev.target.value)} >
+                        <option hidden>Select {filterType ? filterType : "location first"}</option>
+                        {
+                          filterType === 'City' ?
+                            props.locations.City.map((el) => {
+                              return <option key={el} value={el}>{el}</option>
+                            })
+                            :
+                            filterType === 'Province' ?
+                              props.locations.Province.map((el) => {
+                                return <option key={el} value={el}>{el}</option>
+                              })
+                              :
+                              filterType === 'Region' ?
+                                props.locations.Region.map((el) => {
+                                  return <option key={el} value={el}>{el}</option>
+                                })
+                                :
+                                filterType === 'Country' ?
+                                  props.locations.Country.map((el) => {
+                                    return <option key={el} value={el}>{el}</option>
+                                  })
+                                  : <></>
+                        }
+                      </InputOption>
 
-                                          <Instruction>
-                                              Hike's Difficulty
-                                          </Instruction>
-                                          <InputOption as="select" value={difficulty} onChange={ev => setDifficulty(ev.target.value)} >
-                                              <option hidden>Difficulty</option>
-                                              <option value="T">Tourist (T)</option>
-                                              <option value="H">Hiker (H)</option>
-                                              <option value="PH">Professional Hiker (PH)</option>
-                                          </InputOption>
+                      <Instruction>
+                        Hike's Difficulty
+                      </Instruction>
+                      <InputOption as="select" value={difficulty} onChange={ev => setDifficulty(ev.target.value)} >
+                        <option hidden>Difficulty</option>
+                        <option value="T">Tourist (T)</option>
+                        <option value="H">Hiker (H)</option>
+                        <option value="PH">Professional Hiker (PH)</option>
+                      </InputOption>
 
-                                      </Column>
-                                      <Column>
-                                          <InputContainer>
-                                              <Label htmlFor="price-input"> Min Lenght [KM]</Label>
-                                              <Input id="price-input" type="number" name="minLenghtFilter" placeholder="min" value={minDist} onChange={ev => setMinDist(ev.target.value)} />
-                                          </InputContainer>
-                                          <InputContainer>
-                                              <Label htmlFor="price-input">Min Ascent [M]</Label>
-                                              <Input id="price-input" type="number" name="minAscentFilter" placeholder="min" value={minAscent} onChange={ev => setMinAscent(ev.target.value)} />
-                                          </InputContainer>
-                                          <InputContainer>
-                                              <Label htmlFor="price-input">Min Expected Time[Mins]</Label>
-                                              <Input id="price-input" type="number" name="minExpTime" placeholder="min" value={minExTime} onChange={ev => setMinExTime(ev.target.value)} />
-                                          </InputContainer>
-                                      </Column>
+                    </Column>
+                    <Column>
+                      <InputContainer>
+                        <Label htmlFor="price-input"> Min Lenght [KM]</Label>
+                        <Input id="price-input" type="number" name="minLenghtFilter" placeholder="min" value={minDist} onChange={ev => setMinDist(ev.target.value)} />
+                      </InputContainer>
+                      <InputContainer>
+                        <Label htmlFor="price-input">Min Ascent [M]</Label>
+                        <Input id="price-input" type="number" name="minAscentFilter" placeholder="min" value={minAscent} onChange={ev => setMinAscent(ev.target.value)} />
+                      </InputContainer>
+                      <InputContainer>
+                        <Label htmlFor="price-input">Min Expected Time[Mins]</Label>
+                        <Input id="price-input" type="number" name="minExpTime" placeholder="min" value={minExTime} onChange={ev => setMinExTime(ev.target.value)} />
+                      </InputContainer>
+                    </Column>
 
-                                      <Column>
-                                      <InputContainer>
-                                              <Label htmlFor="price-input">Max Lenght [KM]</Label>
-                                              <Input id="price-input" type="number" name="maxLenghtFilter" placeholder="max" value={maxDist} onChange={ev => setMaxDist(ev.target.value)} />
-                                          </InputContainer>
-                                          <InputContainer>
-                                              <Label htmlFor="price-input">Max Ascent [M]</Label>
-                                              <Input id="price-input" type="number" name="maxAscentFilter" placeholder="max" value={maxAscent} onChange={ev => setMaxAscent(ev.target.value)} />
-                                          </InputContainer>
-                                          <InputContainer>
-                                              <Label htmlFor="price-input">Max Expected Time [Mins]</Label>
-                                              <Input id="price-input" type="number" name="maxExpTime" placeholder="max" value={maxExTime} onChange={ev => setMaxExTime(ev.target.value)} />
-                                          </InputContainer>
-                                      </Column>
+                    <Column>
+                      <InputContainer>
+                        <Label htmlFor="price-input">Max Lenght [KM]</Label>
+                        <Input id="price-input" type="number" name="maxLenghtFilter" placeholder="max" value={maxDist} onChange={ev => setMaxDist(ev.target.value)} />
+                      </InputContainer>
+                      <InputContainer>
+                        <Label htmlFor="price-input">Max Ascent [M]</Label>
+                        <Input id="price-input" type="number" name="maxAscentFilter" placeholder="max" value={maxAscent} onChange={ev => setMaxAscent(ev.target.value)} />
+                      </InputContainer>
+                      <InputContainer>
+                        <Label htmlFor="price-input">Max Expected Time [Mins]</Label>
+                        <Input id="price-input" type="number" name="maxExpTime" placeholder="max" value={maxExTime} onChange={ev => setMaxExTime(ev.target.value)} />
+                      </InputContainer>
+                    </Column>
 
-                                  </ThreeColumn>
-                                  <TwoColumn>
-                                      <Column2>
-                                          <ButtonContainer>
-                                              <SubmitButton type="reset" onClick={handleReset}>{resetButtonText}</SubmitButton>
-                                          </ButtonContainer>
-                                      </Column2>
-                                      <Column2>
-                                          <ButtonContainer>
-                                              <SubmitButton type="submit">{submitButtonText}</SubmitButton>
-                                          </ButtonContainer>
-                                      </Column2>
-                                  </TwoColumn>
-                              </form>
-                          </div>
+                  </ThreeColumn>
+                  <TwoColumn>
+                    <Column2>
+                      <ButtonContainer>
+                        <SubmitButton type="reset" onClick={handleReset}>{resetButtonText}</SubmitButton>
+                      </ButtonContainer>
+                    </Column2>
+                    <Column2>
+                      <ButtonContainer>
+                        <SubmitButton type="submit">{submitButtonText}</SubmitButton>
+                      </ButtonContainer>
+                    </Column2>
+                  </TwoColumn>
+                </form>
+              </div>
 
-                      </FormContainer>
-                  </Content>
-              </Container>
-          }
-      </>)
+            </FormContainer>
+          </Content>
+        </Container>
+      }
+    </>)
+}
+
+function GeoFilter(props) {
+
+  return (<>
+    --- Geo filter from file Sidebar.js ---
+  </>
+  )
 }
 
 
@@ -434,7 +447,7 @@ function HikeElement(props) {
     <PostContainer key={props.index} >
       <Post className="group" as="a" >
         <Info>
-        <Image imageSrc={process.env.PUBLIC_URL+"/"+hike.Picture} />
+          <Image imageSrc={process.env.PUBLIC_URL + "/" + hike.Picture} />
 
           <Category>
             {
@@ -451,8 +464,8 @@ function HikeElement(props) {
           <Description> <span tw="text-primary-500">Ascent:</span> {hike.Ascent} mt</Description>
           <Description> <span tw="text-primary-500">Expected Time:</span> {time}</Description>
           <Description>
-            {hike.City?hike.City:""}{hike.Province?" | "+hike.Province:""}{hike.Region?" | "+hike.Region:""}{hike.Country?" | "+hike.Country:""}
-            </Description>
+            {hike.City ? hike.City : ""}{hike.Province ? " | " + hike.Province : ""}{hike.Region ? " | " + hike.Region : ""}{hike.Country ? " | " + hike.Country : ""}
+          </Description>
 
           <PostAction onClick={() => { navigate('/' + hike.HikeID) }}>View details</PostAction>
         </Info>
