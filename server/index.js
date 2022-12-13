@@ -436,7 +436,7 @@ app.put('setStartEndPoints',
   })
 
 app.get('/HutsAndParks', async (req, res) => {
-  const errors = validationResult(res);
+  const errors = validationResult(req);
   if (!errors.isEmpty()) {
     return res.status(422).json({ error: 'Cannot process request' });
   }
@@ -450,16 +450,32 @@ app.get('/HutsAndParks', async (req, res) => {
   }
 })
 
-app.post('/HikeInfo', [check('HikeID').notEmpty], async (req, res) => {
-  const errors = validationResult(res);
+app.post('/HikeInfo', /*[check('HikeID').notEmpty],*/ async (req, res) => {
+  const errors = validationResult(req);
   if (!errors.isEmpty()) {
     return res.status(422).json({ error: 'Cannot process request' });
   }
-
-  const id = req.params.HikeID;
+  console.log(req.body);
+  const id = req.body.HikeID;
 
   try {
     const hikeInfo = await hikeRefPoints.getHikeInfo(id);
+    res.status(200).json(hikeInfo);
+  } catch (err) {
+    res.status(503).json({ error: 'Internal error' })
+  }
+})
+
+app.post('/HikeRefPoints', /*[check('HikeID').notEmpty],*/ async (req, res) => {
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    return res.status(422).json({ error: 'Cannot process request' });
+  }
+  
+  const id = req.body.HikeID;
+
+  try {
+    const hikeInfo = await hikeRefPoints.getHikeRefPoints(id);
     res.status(200).json(hikeInfo);
   } catch (err) {
     res.status(503).json({ error: 'Internal error' })

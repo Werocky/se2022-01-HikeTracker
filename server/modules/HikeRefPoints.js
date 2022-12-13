@@ -34,6 +34,7 @@ function getHutsAndParks () {
 }
 
 function getHikeInfo (HikeID) {
+  console.log(HikeID);
   return new Promise(async (resolve, reject) =>{
     const sql = 'SELECT * FROM PointsOfHike HRP, ReferencePoints RP, Hikes H WHERE H.HikeID = HRP.HikeID AND HRP.PointID = RP.RefPointID AND H.HikeID = ?';
     db.all(sql, [HikeID], function (err, rows) {
@@ -48,6 +49,25 @@ function getHikeInfo (HikeID) {
     })
   })
 }
+
+function getHikeRefPoints(HikeID) {
+  console.log(HikeID);
+  return new Promise(async (resolve, reject) =>{
+    const sql = 'SELECT RP.Lat, RP.Lng, RP.Type, RP.RefPointID, PH.IsStart, PH.IsEnd FROM PointsOfHike PH LEFT JOIN  ReferencePoints RP ON RP.RefPointID = PH.PointID WHERE PH.PointID = RP.RefPointID AND PH.HikeID=? ';
+    db.all(sql, [HikeID], function (err, rows) {
+      if(err)
+        reject(err);
+      else{
+        console.log(rows);
+        const hikes = rows.map((r) => ({ RefPointID: r.RefPointID, IsStart: r.IsStart, IsEnd: r.IsEnd, Lat: r.Lat, Lng: r.Lng, Type: r.Type}));
+        
+        resolve(hikes);
+
+      }
+    })
+  })
+}
+
 function emptyAllPoints(){
    this.emptyHikeRefPoint();
    this.emptyReferencePoints();
@@ -106,5 +126,6 @@ module.exports={
   emptyReferencePoints,
   addHikeRefPoints,
   getHutsAndParks,
-  getHikeInfo
+  getHikeInfo,
+  getHikeRefPoints
 }
