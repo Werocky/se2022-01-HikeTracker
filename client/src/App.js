@@ -12,10 +12,8 @@ import HikeDetails from './Layout-components/HikeDetails';
 //import AddHikeForm from './Layout-components/AddHikeForm';
 import ProfilePage from './Layout-components/ProfilePage';
 import Profile from './pages/Profile'
-import HutsPage from './Layout-components/Huts-components/HutsPage';
 import ParkingForm from './Layout-components/ParkingForm';
 import VerifiedMessage from './Layout-components/VerificationPage';
-import HutForm from './Layout-components/AddHut';
 
 import Register from "./pages/Signup";
 import Login from './pages/Login'
@@ -28,8 +26,6 @@ import "./style.css"
 import "tailwindcss/lib/css/preflight.css"
 import AddHutForm from './components/forms/AddHutForm';
 import HutDetails from './Layout-components/HutDetails';
-import Sidebar from './Layout-components/Sidebar';
-import SearchHuts from './Layout-components/Huts-components/SearchHuts';
 
 function App() {
 
