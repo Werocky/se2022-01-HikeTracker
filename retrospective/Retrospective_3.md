@@ -114,49 +114,61 @@ RETROSPECTIVE (Team 1)
   
 ## QUALITY MEASURES 
 
-- Unit Testing & code review:
-  - Total hours estimated 
-      - 10h30m
-  - Total hours spent 
-      - 10h40m
-  - Nr of automated unit test cases:
+- <b>Unit Testing & code review: </b>
+  - <u>Total hours estimated</u> 
+      - $8h$(_testing_) + $8h30m$(_code review_)
+      - $16h30m$ total
+  - <u>Total hours spent </u>
+      - $7h25m$(_testing_) + $9h20m$(_code review_)
+      - $16h45m$ total
+  - <u>Nr of automated unit test cases:</u>
  
-      - $67$ total cases $- 19$ existing old cases $=$
+      - $86$ total cases $- 67$ existing old cases $=$
       
-       $48$ new test cases
-
-      _*it was decided to start using smaller tests
-       to close up on issues faster_ 
-
-### Horizontal tasks
-| Task | Hours est. | Hours actual | Nr tests |
-|------|------------|--------------|---|
-| _collect DATA (¬50 Hike tracks)_  |  _1h 30m_  |  _1h_  | _0_ |
-| _DB_StartUpSystem_  |  _30m_  |  _1h_  | _0_ |
-| _fix bugs demo 1_  |  _2h30m_  |  _3h_  | _0_ |
+       $19$ new test cases
 
 
-|  File                | % Stmts | % Branch | % Funcs | % Lines | Uncovered Line #s
---------------------|---------|----------|---------|---------|--------------------------------------------
-All files           |    94.2 |    64.28 |   96.05 |   94.61 |                  
- DB.js              |   98.97 |       50 |     100 |   99.08 | 35,48,61,75,88,101,114,126
- FileNames.js       |   90.24 |       60 |     100 |   90.24 | 18,33,64,75      
- HikeLocations.js   |   87.17 |       50 |     100 |   86.48 | 12,26,40,52,64   
- HikeRefPoints.js   |   71.73 |    41.66 |      80 |   72.72 | 10,19-26,37,50,62,74
- Hikes.js           |   86.81 |    72.72 |     100 |   88.88 | 19,35,41,52,67,79,90,102,161
- Huts.js            |   90.32 |    76.92 |     100 |   89.91 | 40,52,84,91,98,105,132,144,158,172,186,200
- ReferencePoints.js |   74.54 |    43.75 |   83.33 |      75 | 10,23,34,46,60,75,83-90
- Users.js           |   87.14 |       65 |     100 |   88.23 | 22-23,40-41,77,89,103,115
+*<u>Note:</u> the 1st two task were divided 50/50 between code review and testing, else assumed purely code review or testing according to name(for simplicity of the report).
+*some tasks were thought to do code review/testing together. for the report puposes we are counting them in one of the categories instead of both, except for the 2 largest tasks.
 
-- E2E testing:
+| Task | Hours est. | Hours actual | 
+|------|------------|--------------|
+| _API Reorganization_  |  _4h_  |  _3h30_  | 
+| _DB Restructure_  |  _2h_  |  _5h_  | 
+| _Fix Register function server side_  |  _1h_  |  _35m_  |
+| _Modify Add Hike, server API_  |  _2h_  |  _2h_  |
+| _Fix gpx file reading/parsing_  |  _2h30m_  |  _2h30m_  |
+| _addHut Server Side manual testing_  |  _30m_  |  _30m_  |
+| _create ParkingLot Server Side manual testing_  |  _30m_  |  _40m_  |
+| _9-3 Testing API_  |  _2h_  |  _30m_  | 
+| _9-4 Testing DB_  |  _2h_  |  _3h_  |
+
+File                | % Stmts | % Branch | % Funcs | % Lines | Uncovered Line #s
+--------------------|---------|----------|---------|---------|----------------------------------------------------
+All files           |   95.06 |    68.27 |   99.22 |   95.47 | 
+ DB.js              |   99.48 |    55.55 |   94.11 |   99.58 | 23-28
+ FileNames.js       |   89.18 |       60 |     100 |   89.18 | 20,36,67,78
+ HikeLocations.js   |   93.65 |    79.41 |     100 |   93.44 | 12,26,86,98
+ HikeRefPoints.js   |      80 |    43.75 |   95.83 |   81.25 | 10-13,27,41,60,71,83,95
+ Hikes.js           |   86.82 |    69.64 |     100 |   88.23 | 55,69,73,84,99,112,123,135,191,205,219,233,247,263
+ Huts.js            |   91.72 |    81.03 |     100 |   91.42 | 49,59,70,149,161,179,197,211,225,239,253,268      
+ ParkingLot.js      |   83.82 |    59.09 |     100 |   85.07 | 23,38,50,73,85,97,108,120,123,137
+ ReferencePoints.js |   87.17 |       50 |     100 |   87.83 | 11,24,47,58,70,84,99,114,126
+ Users.js           |   91.02 |    68.18 |     100 |    92.1 | 45,63,109,121,136,148
+
+- <b>E2E testing:</b>
   - Total hours estimated 
-    - 4h
+    - 1h30
   - Total hours spent
-    - 4h10m
+    - 1h25m
 
+| Task | Hours est. | Hours actual |
+|------|------------|--------------|    
+| _addHut e2e testing_  |  _30m_  |  _25m_  |
+| _createParkingLot e2e testing_  |  _30m_  |  _30m_  |
+| _9-5 E2E Manual Testing_  |  _30m_  |  _30m_  |
 
-  
-*Note: some function were implemented but not tested
+*Note: some e2e testing was done while doing code review for the APIs
 
 ## ASSESSMENT
 
@@ -187,4 +199,4 @@ All files           |    94.2 |    64.28 |   96.05 |   94.61 |
 > Propose one or two
 
 - One thing you are proud of as a Team!!
-  - we managed to fill our static database with relevant and varied data.
+
