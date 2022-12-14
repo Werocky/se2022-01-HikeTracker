@@ -149,8 +149,8 @@ describe("Hut Filters",()=>{
 
         })
         test("Location is expecteda and location type is expected + 1",async()=>{
-            await expect(Huts.getHutsFilters('Name1',locationType='City',location='City1')).resolves.not.toEqual(null);
-            let h= await Huts.getHutsFilters('Name1',locationType='City',location='City1');
+            await expect(Huts.getHutsFilters('Name1','City','City1')).resolves.not.toEqual(null);
+            let h= await Huts.getHutsFilters('Name1','City','City1');
             expect(h).toHaveLength(1);
 
         })
