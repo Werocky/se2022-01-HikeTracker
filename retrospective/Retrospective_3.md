@@ -177,13 +177,18 @@ All files           |   95.06 |    68.27 |   99.22 |   95.47 |
 *Note: some e2e testing was done while doing code review for the APIs
 
 - Technical Debt management:
-  - Total hours estimated
-  - Total hours spent
+  - Total hours estimated:
+    - *10h30m*.
+  - Total hours spent:
+    - *9h40m*
   - Hours estimated for remediation by SonarQube
   - Hours estimated for remediation by SonarQube only for the selected and planned issues
   - Hours spent on remediation
   - debt ratio (as reported by SonarQube under "Measures-Maintainability")
   - rating for each quality characteristic reported in SonarQube under "Measures" (namely reliability, security, maintainability )
+    - Reliability: `C`
+    - Security: `A`
+    - Maintainability: `A`
 
 ## ASSESSMENT
 
