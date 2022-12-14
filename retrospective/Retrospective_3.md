@@ -179,10 +179,9 @@ All files           |   95.06 |    68.27 |   99.22 |   95.47 |
 ## ASSESSMENT
 
 - What caused your errors in estimation (if any)?  
-
+  - Layout restructure and the technical tasks related were trickier than thought, hence some tasks took longer than expected.
 - What lessons did you learn (both positive and negative) in this sprint?
   - Technical debt must be paid off as soon as possible, otherwise problems and issues will arise
- 
 - Which improvement goals set in the previous retrospective were you able to achieve? 
   - Task with max 4 Hours of estimation.
   - Improvement on estimation and spent hours with reference to the previous sprints.
@@ -192,4 +191,4 @@ All files           |   95.06 |    68.27 |   99.22 |   95.47 |
 - Improvement goals for the next sprint and how to achieve them (technical tasks, team coordination, etc.)
   - Satisfiable number of stories done.
 - One thing you are proud of as a Team!!
-  - 
+  
