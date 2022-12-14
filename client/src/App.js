@@ -1,18 +1,12 @@
 import 'bootstrap/dist/css/bootstrap.min.css'
-//import './App.css';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
 import { Container, Row, Col, Alert } from 'react-bootstrap';
 import { useContext, useEffect, useState } from 'react';
 import AuthContext from './AuthContext'
 import MainLayout from './Layout-components/MainLayout';
 import API from './API';
-import { LoginComponent } from './Layout-components/LoginComponent';
-import { RegisterComponent } from './Layout-components/RegisterComponent';
 import HikeDetails from './Layout-components/HikeDetails';
-//import AddHikeForm from './Layout-components/AddHikeForm';
-import ProfilePage from './Layout-components/ProfilePage';
 import Profile from './pages/Profile'
-import ParkingForm from './Layout-components/ParkingForm';
 import VerifiedMessage from './Layout-components/VerificationPage';
 
 import Register from "./pages/Signup";

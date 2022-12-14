@@ -13,7 +13,7 @@ RETROSPECTIVE (Team 1)
 - Total of 3 points committed vs. 3 points done 
 - Total of 81h 30m planned  vs. 80h 35m spent (as a team)
 
-**Notes**: we decided to focus on technical debt, so most of the task done on this sprint are horizontal or focus on fixing existing issues 
+**Notes**: we decided to focus on technical debt, so most of the task done on this sprint are horizontal ones or focused on fixing existing issues. 
 
  Definition of Done: 
 - Unit Tests passing
@@ -26,8 +26,8 @@ RETROSPECTIVE (Team 1)
 
 | Story  | # Tasks | Points | Hours est. | Hours actual |
 |--------|---------|--------|------------|--------------|
-| _9 - Link hut_        | _5_ | _3_ | _10h 10m_ | _8h 35m_ |
-| _0 - Ficticious Story_| _3_ | _*_ | _71h 20m_ | _72h_ |
+| _0 - Horizontal tasks_| _32_ | _*_ | _71h 20m_ | _72h_ |
+| _9 - Link hut_        | _6_ | _3_ | _10h 10m_ | _8h 35m_ |
 
 
 ### Tasks statistics
@@ -39,7 +39,7 @@ RETROSPECTIVE (Team 1)
 | _9-2-API save the link [SERVER side]_| _2h_ | _1h_ |
 | _9-3-Testing API_ | _2h_ | _30m_ |
 | _9-4-Testing DB_ | _2h_ | _3h_ |
-| _9-5-Manual testing_ | _30m_ | _30m_ |
+| _9-5-E2E Manual testing_ | _30m_ | _30m_ |
 |_9-6-Link Hut to Hike DB_ | _40m_ | _55m_|
 
 
@@ -81,35 +81,41 @@ RETROSPECTIVE (Team 1)
 
 
 --------------------------------------------------
-
-
+### Average, Standard Deviation and Estimation Error Ratio
 - Hours per task average: 
-  - (estimate) *2.6* 
-  - (actual) *4.2* -> less stories done than planned one and problems encountered
+  - (estimated) *total hours (81h 30m ~ 82h), numbers of tasks (38)* 
+    - *average =* $\frac{82}{38}$ *= 2.157 ~ 2.16 hours/task*
+  - (actual) *total hours (80h 35m ~ 81h), numbers of tasks (38)* 
+    - *average =* $\frac{81}{38}$ *= 2.131 ~ 2.13 hours/task*
 - standard deviation:
-  - (actual) *3.42*
-  - (estimate) *1.92*
+  - (estimated) *Estimated Avg = 2.16, number of observations = 38 (the number of tasks)*
+    - *Mean deviation:* $\sum_{n=1}^{38}(f_i - Avg_{est})^2$ *= 31.693*
+    - *Variance = Mean deviation / number of observations = 0.83*
+    - *Standard deviation =* $\sqrt{Variance}$ *= 0.91*
+  - (actual) *Actual Avg = 2.13, number of observations = 38 (the number of tasks)*
+    - *Mean deviation:* $\sum_{n=1}^{38}(f_i - Avg_{act})^2$ *= 61.3022*
+    - *Variance = Mean deviation / number of observations = 1.61*
+    - *Standard deviation =* $\sqrt{Variance}$ *= 1.27*
+##### Table for estimated standard deviation
+| Group | Frequency |
+|------|------------|
+| _1h_ |  _10_ |
+| _2h_ | _18_ |
+| _3h_ | _6_ |
+| _4h_ | _4_ |
+
 ##### Table for actual standard deviation
 | Group | Frequency |
 |------|------------|
-| _1h_ |  _3_ |
-| _2h_ | _4_ |
-| _3h_ | _6_ |
-| _4h_ | _3_ |
-| _5h_ | _2_ |
-| _18h_  | _1_ |
+| _1h_ |  _13_ |
+| _2h_ | _11_ |
+| _3h_ | _9_ |
+| _4h_ | _4_ |
+| _6h-7h_ | _1_ |
   
-##### Table for estimate standard deviation
-| Group | Frequency |
-|------|------------|
-| _1h_ |  _5_ |
-| _2h_ | _13_ |
-| _3h_ | _7_ |
-| _4h-5h_ | _2_ |
-| _12h_ | _1_ |
 - Total task estimation error ratio: 
-  -  $73/80 - 1 = -0.087$
-  > - sum of total hours estimation / sum of total hours spent - 1
+  - *sum of total hours estimation (82h)/ sum of total hours spent (81h)- 1*
+    -  $\frac{82}{81} - 1 = 0.01$
 
   
 ## QUALITY MEASURES 
@@ -173,30 +179,16 @@ All files           |   95.06 |    68.27 |   99.22 |   95.47 |
 ## ASSESSMENT
 
 - What caused your errors in estimation (if any)?  
-  - Creating the collection of 50 hikes took longer than expected, searching and inserting consistent data for all of them required a bigger effort than the estimated. The same thing can be said about the creation of the collection of hikes with all the related information.  
-  - Also solve the issues and the bugs we discovered, was more time-demanding than what we estimated.
-  - Some stories have a large time spent since we worked together and this caused a double increase of them.
-
+  - Layout restructure and the technical tasks related were trickier than thought, hence some tasks took longer than expected.
 - What lessons did you learn (both positive and negative) in this sprint?
-  - large or ambiguous tasks (like the horizontal ones we used), slug the pace and make progress hard to track and communication chaotic.
-  - use of shortcuts on immediate implementation make for fast implementation but have severe repercusions on the whole project if not handled correctly.
-  - subdividing and specializing although it gives us less flexibility, did allow team members to focus on specific fields and have a better flow of their own work
-  
- 
+  - Technical debt must be paid off as soon as possible, otherwise problems and issues will arise
 - Which improvement goals set in the previous retrospective were you able to achieve? 
- - we improved on speed communication about overall progress and problems that arise.*
-  
-  *overall although better we do believe it can still be improved
-
+  - Task with max 4 Hours of estimation.
+  - Improvement on estimation and spent hours with reference to the previous sprints.
+  - Better coordination among the members.
 - Which ones you were not able to achieve? Why?
-  - Subdivision of tasks, for the most part we would say that the biggest problem was the large tasks and the lack of technical detail on their descriptions.
-
-
+  - Write documentation to support team coordination, since the technical debt management and above all the layout restructure took the largest part of time budget.
 - Improvement goals for the next sprint and how to achieve them (technical tasks, team coordination, etc.)
-  - Improve the subdivision of stories into smaller tasks more technically specific. To help organize and improve tracking of time.
-  - Improve documentation to comunicate the set up of the project to the rest of the team.
-
-> Propose one or two
-
+  - Satisfiable number of stories done.
 - One thing you are proud of as a Team!!
-
+  - Relevant improvements since the last retrospective.
