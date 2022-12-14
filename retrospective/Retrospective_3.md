@@ -191,4 +191,4 @@ All files           |   95.06 |    68.27 |   99.22 |   95.47 |
 - Improvement goals for the next sprint and how to achieve them (technical tasks, team coordination, etc.)
   - Satisfiable number of stories done.
 - One thing you are proud of as a Team!!
-  
+  - Relevant improvements since the last retrospective.
