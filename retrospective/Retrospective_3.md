@@ -185,6 +185,7 @@ All files           |   95.06 |    68.27 |   99.22 |   95.47 |
   - Hours estimated for remediation by SonarQube only for the selected and planned issues
   - Hours spent on remediation
   - debt ratio (as reported by SonarQube under "Measures-Maintainability")
+    - *2.3%*
   - rating for each quality characteristic reported in SonarQube under "Measures" (namely reliability, security, maintainability )
     - Reliability: `C`
     - Security: `A`
