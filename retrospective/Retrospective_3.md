@@ -184,14 +184,12 @@ All files           |   95.06 |    68.27 |   99.22 |   95.47 |
   - Technical debt must be paid off as soon as possible, otherwise problems and issues will arise
  
 - Which improvement goals set in the previous retrospective were you able to achieve? 
-  - Task with max 4 Hours of estimation
-  - Improvement on estimation and spent hours with reference to the previous sprints 
-  - Better coordination among the members
+  - Task with max 4 Hours of estimation.
+  - Improvement on estimation and spent hours with reference to the previous sprints.
+  - Better coordination among the members.
 - Which ones you were not able to achieve? Why?
-  - Write documentation to support team coordination
-
+  - Write documentation to support team coordination, since the technical debt management and above all the layout restructure took the largest part of time budget.
 - Improvement goals for the next sprint and how to achieve them (technical tasks, team coordination, etc.)
-  - Satisfiable number of stories done
-
+  - Satisfiable number of stories done.
 - One thing you are proud of as a Team!!
   - 
