@@ -1,10 +1,7 @@
 import AuthContext from '../AuthContext';
 import { Button, Col, Container, Row } from 'react-bootstrap';
 import { useContext, useState, useEffect } from "react";
-import HikeList from './HikeList';
 import API from '../API';
-import Sidebar from './Sidebar';
-import NavigationBar from './Navigationbar';
 import { useNavigate } from 'react-router-dom';
 
 
