@@ -176,18 +176,26 @@ All files           |   95.06 |    68.27 |   99.22 |   95.47 |
 
 *Note: some e2e testing was done while doing code review for the APIs
 
+- Technical Debt management:
+  - Total hours estimated
+  - Total hours spent
+  - Hours estimated for remediation by SonarQube
+  - Hours estimated for remediation by SonarQube only for the selected and planned issues
+  - Hours spent on remediation
+  - debt ratio (as reported by SonarQube under "Measures-Maintainability")
+  - rating for each quality characteristic reported in SonarQube under "Measures" (namely reliability, security, maintainability )
+
 ## ASSESSMENT
 
 - What caused your errors in estimation (if any)?  
   - Layout restructure and the technical tasks related were trickier than thought, hence some tasks took longer than expected.
 - What lessons did you learn (both positive and negative) in this sprint?
-  - Technical debt must be paid off as soon as possible, otherwise problems and issues will arise
 - Which improvement goals set in the previous retrospective were you able to achieve? 
   - Task with max 4 Hours of estimation.
   - Improvement on estimation and spent hours with reference to the previous sprints.
   - Better coordination among the members.
 - Which ones you were not able to achieve? Why?
-  - Write documentation to support team coordination, since the technical debt management and above all the layout restructure took the largest part of time budget.
+  - Write documentation to support team coordination, since the the layout restructure took the largest part of time budget.
 - Improvement goals for the next sprint and how to achieve them (technical tasks, team coordination, etc.)
   - Satisfiable number of stories done.
 - One thing you are proud of as a Team!!
