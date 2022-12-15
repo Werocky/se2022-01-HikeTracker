@@ -118,6 +118,7 @@ function Huts(props) {
 
     useEffect(() => {        
         setHuts(props.huts);
+        console.log(props.huts);
     }, [props.huts]);
 
     const onLoadMoreClick = () => {

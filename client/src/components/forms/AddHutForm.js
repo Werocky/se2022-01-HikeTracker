@@ -197,8 +197,7 @@ const submitForm = async (event) => {
       setErrorMsg(res.message);
       setmsgState('primary');
       navigate("/huts");
-      props.setHuts( oldHuts => [...oldHuts, h] );
-      console.log(props.huts);
+      props.setHuts( oldHuts => [...oldHuts, res.hut] );
       //navigate("/hikes");
     })//setDirty(true)})
     .catch( err => setErrorMsg(err.error));
