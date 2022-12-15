@@ -39,7 +39,7 @@ const Statistics = tw.div`flex flex-col items-center sm:block text-center md:tex
 const Statistic = tw.div`text-left sm:inline-block sm:mr-12 last:mr-0 mt-4`;
 const Value = tw.div`font-bold text-lg sm:text-xl lg:text-2xl text-secondary-500 tracking-wide`;
 const Key = tw.div`font-medium text-primary-700`;
-
+const PostAction = tw(PrimaryButtonBase)`mt-8 mb-10 mr-8 inline-block w-56 tracking-wide text-center py-5`;
 function HikeDetails(props) {
   const auth = useContext(AuthContext);
   const params = useParams();
@@ -71,7 +71,7 @@ function HikeDetails(props) {
   const imageContainerCss = null;
   let statistics = null;
   const textOnLeft = false;
-
+  const navigate = useNavigate();
   // The textOnLeft boolean prop can be used to display either the text on left or right side of the image.
   //Change the statistics variable as you like, add or delete objects
   const defaultStatistics = [
@@ -106,6 +106,7 @@ function HikeDetails(props) {
             }
             {auth.login &&
               <ImageMapColumn css={imageContainerCss}>
+                <PostAction onClick={() => { navigate('/startHike') }}>Start A New Hike</PostAction>
                 <MapContainer
                   center={[gpxData[Math.ceil(gpxData.length / 2)].lat, gpxData[Math.ceil(gpxData.length / 2)].lon]}
                   bounds={[gpxData[0], gpxData.at(-1),]}
