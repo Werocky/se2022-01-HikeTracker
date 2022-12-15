@@ -178,9 +178,9 @@ All files           |   95.06 |    68.27 |   99.22 |   95.47 |
 
 - Technical Debt management:
   - Total hours estimated:
-    - *10h30m*. CHECK
+    - *71h20m*.
   - Total hours spent:
-    - *9h40m* CHECK
+    - *72h* 
   - Hours estimated for remediation by SonarQube:
     - After layout restructure: *41d*
     - At the end of the sprint: *8d*
