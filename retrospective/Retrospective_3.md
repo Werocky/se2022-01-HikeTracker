@@ -176,19 +176,50 @@ All files           |   95.06 |    68.27 |   99.22 |   95.47 |
 
 *Note: some e2e testing was done while doing code review for the APIs
 
+- Technical Debt management:
+  - Total hours estimated:
+    - *71h20m*.
+  - Total hours spent:
+    - *72h* 
+  - Hours estimated for remediation by SonarQube:
+    - After layout restructure: *41d*
+    - At the end of the sprint: *8d*
+    - Issues reported by SonarQube after Layout restructure and at the end of the sprint:
+    ![Alt text](Issues_8_Dec.png?raw=true "Issues in date 8/12")
+    ![Alt text](Issues_End_Sprint.png?raw=true "Issues at the end of the sprint")
+  - Hours estimated for remediation by SonarQube only for the selected and planned issues
+    - The selected issue was *Bugs*, since *Maintainability* and *Security* had a better rating (both at the first and last analysis)
+    - Remediation effort at the end of the layout restructure and at the end of the sprint
+    ![Alt text](Remained_Effort_8_Dec.png?raw=true "Remained effort in date 8/12")
+    ![Alt text](Remained_Effort_End_Sprint.png?raw=true "Remained effort in date 8/12")
+  - Hours spent on remediation
+    - *2h*, lowering the number of *Bugs* from *30* to *2*
+  - debt ratio (as reported by SonarQube under "Measures-Maintainability")
+    - *0.8%*
+  - rating for each quality characteristic reported in SonarQube under "Measures" (namely reliability, security, maintainability )
+    - Reliability: `C`
+    - Security: `A`
+    - Maintainability: `A`
+
 ## ASSESSMENT
 
 - What caused your errors in estimation (if any)?  
-  - Layout restructure and the technical tasks related were trickier than thought, hence some tasks took longer than expected.
+  - DB restructure, in order to make the data consistent and    easier to get, took more time than expected. But now we have a good DB that will allow us to be more efficent with the following stories.
+  - Layout restructure and the related technical tasks were trickier than thought, hence some tasks took longer than expected.
+  - Layout retructure introduced issues (on SonarQube), hence increasing the TD.
+  - Not so precise actual remediation effort tracked since tasks related to TD were the highest number of tasks of this sprint, taking into account different aspect such as the layout, fix of older stories and so on, having a big impact on the time spent on the overall sprint with reference to the time required by the issues reported by SonarCloud.
 - What lessons did you learn (both positive and negative) in this sprint?
-  - Technical debt must be paid off as soon as possible, otherwise problems and issues will arise
+  - To be more precise when naming tasks because this can lead to misunderstanding.
 - Which improvement goals set in the previous retrospective were you able to achieve? 
-  - Task with max 4 Hours of estimation.
+  - Tasks with max 4 Hours of estimation.
   - Improvement on estimation and spent hours with reference to the previous sprints.
   - Better coordination among the members.
 - Which ones you were not able to achieve? Why?
-  - Write documentation to support team coordination, since the technical debt management and above all the layout restructure took the largest part of time budget.
+  - Write documentation to support team coordination, since the the layout restructure took the largest part of time budget.
 - Improvement goals for the next sprint and how to achieve them (technical tasks, team coordination, etc.)
+  - Write Documentation.
   - Satisfiable number of stories done.
+  - More precise tasks' names.
+  - Lower number of issues reported by SonarCloud.
 - One thing you are proud of as a Team!!
   - Relevant improvements since the last retrospective.
