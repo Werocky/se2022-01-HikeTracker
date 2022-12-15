@@ -102,7 +102,7 @@ function Huts(props) {
     const [huts, setHuts] = useState(props.huts);
     const [show, setShow] = useState(false);
 
-    useEffect(async() => {
+    useEffect(() => {
         const loadLocation = async () => {
             const locationObj = await API.getHutsLocations();
             //console.log(locationObj);
@@ -110,7 +110,7 @@ function Huts(props) {
             setLoading(false);
         }
         try {
-            await loadLocation();
+            loadLocation();
         } catch (err) {
             //handling err
         }
@@ -118,7 +118,6 @@ function Huts(props) {
 
     useEffect(() => {        
         setHuts(props.huts);
-        console.log(props.huts)
     }, [props.huts]);
 
     const onLoadMoreClick = () => {
