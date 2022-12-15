@@ -205,8 +205,10 @@ All files           |   95.06 |    68.27 |   99.22 |   95.47 |
 
 - What caused your errors in estimation (if any)?  
   - Layout restructure and the technical tasks related were trickier than thought, hence some tasks took longer than expected.
+  - Layout retructure introduced issues (on SonarQube), hence increasing the TD.
+  - Not so precise actual remediation effort tracked.
 - What lessons did you learn (both positive and negative) in this sprint?
-  - To be more precise when naming tasks because this can bring to misunderstanding.
+  - To be more precise when naming tasks because this can lead to misunderstanding.
 - Which improvement goals set in the previous retrospective were you able to achieve? 
   - Tasks with max 4 Hours of estimation.
   - Improvement on estimation and spent hours with reference to the previous sprints.
@@ -214,7 +216,9 @@ All files           |   95.06 |    68.27 |   99.22 |   95.47 |
 - Which ones you were not able to achieve? Why?
   - Write documentation to support team coordination, since the the layout restructure took the largest part of time budget.
 - Improvement goals for the next sprint and how to achieve them (technical tasks, team coordination, etc.)
+  - Write Documentation.
   - Satisfiable number of stories done.
   - More precise tasks' names.
+  - Lower number of issues reported by SonarCloud.
 - One thing you are proud of as a Team!!
   - Relevant improvements since the last retrospective.
