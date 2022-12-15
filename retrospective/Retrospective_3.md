@@ -204,7 +204,8 @@ All files           |   95.06 |    68.27 |   99.22 |   95.47 |
 ## ASSESSMENT
 
 - What caused your errors in estimation (if any)?  
-  - Layout restructure and the technical tasks related were trickier than thought, hence some tasks took longer than expected.
+  - DB restructure, in order to make the data consistent and    easier to get, took more time than expected. But now we have a good DB that will allow us to be more efficent with the following stories.
+  - Layout restructure and the related technical tasks were trickier than thought, hence some tasks took longer than expected.
   - Layout retructure introduced issues (on SonarQube), hence increasing the TD.
   - Not so precise actual remediation effort tracked since tasks related to TD were the highest number of tasks of this sprint, taking into account different aspect such as the layout, fix of older stories and so on, having a big impact on the time spent on the overall sprint with reference to the time required by the issues reported by SonarCloud.
 - What lessons did you learn (both positive and negative) in this sprint?
