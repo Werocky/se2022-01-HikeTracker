@@ -178,19 +178,24 @@ All files           |   95.06 |    68.27 |   99.22 |   95.47 |
 
 - Technical Debt management:
   - Total hours estimated:
-    - *10h30m*.
+    - *10h30m*. CHECK
   - Total hours spent:
-    - *9h40m*
+    - *9h40m* CHECK
   - Hours estimated for remediation by SonarQube:
-    - Values at the end of the layout restructure and at the end of the sprint
-  ![Alt text](Remained_Effort_8_Dec.png?raw=true "Remained effort in date 8/12")
-  ![Alt text](Remained_Effort_End_Sprint.png?raw=true "Remained effort in date 8/12")
+    - After layout restructure: *41d*
+    - At the end of the sprint: *8d*
+    - Issues reported by SonarQube after Layout restructure and at the end of the sprint:
+    ![Alt text](Issues_8_Dec.png?raw=true "Issues in date 8/12")
+    ![Alt text](Issues_End_Sprint.png?raw=true "Issues at the end of the sprint")
   - Hours estimated for remediation by SonarQube only for the selected and planned issues
     - The selected issue was *Bugs*, since *Maintainability* and *Security* had a better rating (both at the first and last analysis)
+    - Remediation effort at the end of the layout restructure and at the end of the sprint
+    ![Alt text](Remained_Effort_8_Dec.png?raw=true "Remained effort in date 8/12")
+    ![Alt text](Remained_Effort_End_Sprint.png?raw=true "Remained effort in date 8/12")
   - Hours spent on remediation
-    - *1h*, lowering the number of *Bugs* from *30* to *22*
+    - *2h*, lowering the number of *Bugs* from *30* to *2*
   - debt ratio (as reported by SonarQube under "Measures-Maintainability")
-    - *2.3%*
+    - *0.8%*
   - rating for each quality characteristic reported in SonarQube under "Measures" (namely reliability, security, maintainability )
     - Reliability: `C`
     - Security: `A`
