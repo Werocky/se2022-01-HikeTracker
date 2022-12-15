@@ -193,7 +193,7 @@ All files           |   95.06 |    68.27 |   99.22 |   95.47 |
     ![Alt text](Remained_Effort_8_Dec.png?raw=true "Remained effort in date 8/12")
     ![Alt text](Remained_Effort_End_Sprint.png?raw=true "Remained effort in date 8/12")
   - Hours spent on remediation
-    - *2h*, lowering the number of *Bugs* from *30* to *2*
+    - *2h*, that is the remediation effort required to reduce the number of *Bugs* from *30* to *2*.
   - debt ratio (as reported by SonarQube under "Measures-Maintainability")
     - *0.8%*
   - rating for each quality characteristic reported in SonarQube under "Measures" (namely reliability, security, maintainability )
@@ -207,9 +207,10 @@ All files           |   95.06 |    68.27 |   99.22 |   95.47 |
   - DB restructure, in order to make the data consistent and    easier to get, took more time than expected. But now we have a good DB that will allow us to be more efficent with the following stories.
   - Layout restructure and the related technical tasks were trickier than thought, hence some tasks took longer than expected.
   - Layout restructure introduced issues (on SonarQube), hence increasing the TD.
-  - Not so precise *actual remediation effort tracking* since tasks related to TD were the highest number of tasks of this sprint, taking into account different aspects such as the layout, fix of older stories and so on, having a big impact on the time spent on the overall sprint with reference to the time required by the issues reported by SonarCloud.
+  - *actual remediation effort tracking* not done in a proper way, since tasks related to TD were the highest number of tasks of this sprint, taking into account different aspects such as the layout, fix of older stories and so on, hence the time spent *exclusively* on remediation of SonarCloud's issue has been incuded in other technical tasks.
 - What lessons did you learn (both positive and negative) in this sprint?
   - To be more precise when naming tasks because this can lead to misunderstanding.
+  - To plan tasks related to solving SonarCloud's complains without including it in other technical tasks.
 - Which improvement goals set in the previous retrospective were you able to achieve? 
   - Tasks with max 4 Hours of estimation.
   - Improvement on estimation and spent hours with reference to the previous sprints.
