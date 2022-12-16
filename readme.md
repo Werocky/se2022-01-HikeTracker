@@ -3,6 +3,7 @@
 
 [![SonarCloud](https://sonarcloud.io/images/project_badges/sonarcloud-black.svg)](https://sonarcloud.io/summary/new_code?id=Werocky_se2022-01-HikeTracker)
 
+
 [![Vulnerabilities](https://sonarcloud.io/api/project_badges/measure?project=Werocky_se2022-01-HikeTracker&metric=vulnerabilities)](https://sonarcloud.io/summary/new_code?id=Werocky_se2022-01-HikeTracker)
 [![Bugs](https://sonarcloud.io/api/project_badges/measure?project=Werocky_se2022-01-HikeTracker&metric=bugs)](https://sonarcloud.io/summary/new_code?id=Werocky_se2022-01-HikeTracker)
 [![Security Rating](https://sonarcloud.io/api/project_badges/measure?project=Werocky_se2022-01-HikeTracker&metric=security_rating)](https://sonarcloud.io/summary/new_code?id=Werocky_se2022-01-HikeTracker)
