@@ -13,12 +13,16 @@ import Register from "./pages/Signup";
 import Login from './pages/Login'
 import Hikes from './pages/Hikeslist'
 import Huts from './pages/Hutslist'
+import MyHikes from './pages/MyHikes'
 import AddParkingLot from './components/forms/AddParkingLot';
 import AddHikeForm from './components/forms/AddHikeForm'
-
+import AddHutForm from './components/forms/AddHutForm';
+import StartHike from './components/forms/StartHike';
+import RecordHikePoint from './components/forms/RecordHikePoint';
+import TerminateHike from './components/forms/TerminateHike';
 import "./style.css"
 import "tailwindcss/lib/css/preflight.css"
-import AddHutForm from './components/forms/AddHutForm';
+
 import HutDetails from './Layout-components/HutDetails';
 
 function App() {
@@ -170,6 +174,18 @@ function AppLayout(props) {
         } />
 
         <Route path='*' element={<Navigate to='/' replace />} />
+        <Route path='/startHike' element={
+          <StartHike />
+        }/>
+        <Route path='/recordHikePoint' element={
+          <RecordHikePoint />
+        }/>
+        <Route path='/terminateHike' element={
+          <TerminateHike />
+        }/>
+        <Route path='/myHikes' element={
+          <MyHikes />
+        }/>
 
       </Routes>
     </>

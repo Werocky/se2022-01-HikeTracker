@@ -809,7 +809,7 @@ app.post('/hutCreate',
       }
       const hutObj = new huts.Hut(rpID, hut.Name, hut.Elevation, hut.City, hut.Province, hut.Region, hut.Country, hut.WhenOpen, hut.Beds, hut.AvgPrice, hut.Description, "hutImages/default.jpg",hut.HutManagerID, hut.Website, hut.Phone);
       const result = await huts.addHut(hutObj);
-      res.status(200).json({ message: 'Hut added' });
+      res.status(200).json({ message: 'Hut added',hut:hutObj });
 
     } catch (err) {
       console.log(err);

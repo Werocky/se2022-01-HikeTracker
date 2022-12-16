@@ -44,7 +44,7 @@ async function getHike(HikeID) {
     });
     const hike = await response.json();
     if (response.ok) {
-
+      console.log(hike);
       return hike;
     } else {
       throw hike; //which will contain an error if it is the case
@@ -74,6 +74,7 @@ async function getHikeInfo(HikeID) {
   try {
     const response = await fetch(APIURL + '/HikeInfo', {
       method: 'POST',
+      credentials: 'include',
       body: JSON.stringify({
         "HikeID": HikeID,
       }),
@@ -87,32 +88,10 @@ async function getHikeInfo(HikeID) {
     else
       throw hikeInfo;
   } catch (err) {
-    console.log(err);
     throw err;
   }
 }
 
-async function getHikeRefPoints(HikeID) {
-  try {
-    const response = await fetch(APIURL + '/HikeRefPoints', {
-      method: 'POST',
-      credentials: 'include',
-      body: JSON.stringify({
-        "HikeID": HikeID,
-      }),
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    });
-    const result = await response.json();
-    if (response.ok)
-      return result
-    else
-      throw result;
-  } catch (err) {
-    throw err;
-  }
-}
 async function getHutsAndParks() {
   try {
     const response = await fetch(APIURL + '/HutsAndParks', {
@@ -645,7 +624,6 @@ const API = {
   getHut,
   getHutCoords,
   getHikesLocations,
-  linkHutToHike,
-  getHikeRefPoints
+  linkHutToHike
 };
 export default API;

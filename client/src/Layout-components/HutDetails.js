@@ -59,7 +59,7 @@ function HutDetails(props) {
     setSelectedHike(el);
   }
 
-  useEffect(async() => {
+  useEffect(() => {
     const loadHut = async () => {
       const hutObj = await API.getHut(params.hutID);
       const coord = await API.getHutCoords(params.hutID);
@@ -68,12 +68,10 @@ function HutDetails(props) {
 
       setLoading(false);
     }
-    try {
-        await loadHut();
-    } catch (err) {
-        
-    }
-  }, [params.hutID, auth.login])
+   
+     loadHut();
+   
+},[params.hutID, auth.login])
 
 
   const imageSrc = StatsIllustrationSrc;
