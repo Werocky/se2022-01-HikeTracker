@@ -1,17 +1,24 @@
+
 ![testing workflow](https://github.com/Werocky/se2022-01-HikeTracker/actions/workflows/testing.yml/badge.svg)
+
 ---
 
 [![SonarCloud](https://sonarcloud.io/images/project_badges/sonarcloud-black.svg)](https://sonarcloud.io/summary/new_code?id=Werocky_se2022-01-HikeTracker)
 
 [![Vulnerabilities](https://sonarcloud.io/api/project_badges/measure?project=Werocky_se2022-01-HikeTracker&metric=vulnerabilities)](https://sonarcloud.io/summary/new_code?id=Werocky_se2022-01-HikeTracker)
 [![Bugs](https://sonarcloud.io/api/project_badges/measure?project=Werocky_se2022-01-HikeTracker&metric=bugs)](https://sonarcloud.io/summary/new_code?id=Werocky_se2022-01-HikeTracker)
+
 [![Security Rating](https://sonarcloud.io/api/project_badges/measure?project=Werocky_se2022-01-HikeTracker&metric=security_rating)](https://sonarcloud.io/summary/new_code?id=Werocky_se2022-01-HikeTracker)
 [![Maintainability Rating](https://sonarcloud.io/api/project_badges/measure?project=Werocky_se2022-01-HikeTracker&metric=sqale_rating)](https://sonarcloud.io/summary/new_code?id=Werocky_se2022-01-HikeTracker)
+
 [![Code Smells](https://sonarcloud.io/api/project_badges/measure?project=Werocky_se2022-01-HikeTracker&metric=code_smells)](https://sonarcloud.io/summary/new_code?id=Werocky_se2022-01-HikeTracker)
 [![Lines of Code](https://sonarcloud.io/api/project_badges/measure?project=Werocky_se2022-01-HikeTracker&metric=ncloc)](https://sonarcloud.io/summary/new_code?id=Werocky_se2022-01-HikeTracker)
+
 [![Technical Debt](https://sonarcloud.io/api/project_badges/measure?project=Werocky_se2022-01-HikeTracker&metric=sqale_index)](https://sonarcloud.io/summary/new_code?id=Werocky_se2022-01-HikeTracker)
 [![Reliability Rating](https://sonarcloud.io/api/project_badges/measure?project=Werocky_se2022-01-HikeTracker&metric=reliability_rating)](https://sonarcloud.io/summary/new_code?id=Werocky_se2022-01-HikeTracker)
+
 [![Duplicated Lines (%)](https://sonarcloud.io/api/project_badges/measure?project=Werocky_se2022-01-HikeTracker&metric=duplicated_lines_density)](https://sonarcloud.io/summary/new_code?id=Werocky_se2022-01-HikeTracker)
+
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=Werocky_se2022-01-HikeTracker&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=Werocky_se2022-01-HikeTracker)
 [![Coverage](https://sonarcloud.io/api/project_badges/measure?project=Werocky_se2022-01-HikeTracker&metric=coverage)](https://sonarcloud.io/summary/new_code?id=Werocky_se2022-01-HikeTracker)
 
