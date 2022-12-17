@@ -41,9 +41,6 @@ router.post('/PassPoint',[
         if(Hike==undefined || Hike==null || Hike.HikeID!= req.body.HikeID){
             return res.status(402).json({'error': 'Hike could not be found'});
         }
-        if(Hike==undefined || Hike==null || Hike.HikeID!= req.body.HikeID){
-            return res.status(402).json({'error': 'Hike could not be found'});
-        }
         
         //check point exists
         //check point belongs to hike

@@ -44,9 +44,15 @@
          - [Huts](#huts)
          - [Parking Lots](#parking-lots)
          - [Picture](#pictures)
-5. [Testing](#testing)
+         - [Active Hike points](#activehikepoints)
+5. [API calls](#API-calls)
+    - [Active Hike](#activepoints)
+      - [POST](#post)
+        - [Pass Point](#passpoint)
+6. [Testing](#testing)
 	  - [Testing Frontend](#testing-frontend)
 	  - [Testing Backend](#testing-backend)
+
 
 
 ## Docker Documentation
@@ -266,6 +272,40 @@ RefPointID
 IsStart
 IsEnd
 ```
+### `ActiveHikePoints`
+Info of the active hike points
+```
+id
+HikeID
+HikerID
+PointID
+```
+## API calls
+### ActivePoints
+
+#### POST
+
+##### PassPoint
+
+**/api/activePoint/PassPoint**
+
+- <b> Register a the time a HikePoint was reached </b>
+- **Request header**: empty.
+- **Request body**: a JSON object containing HikeID, PointID and HikerID.
+
+Example of request body:
+```
+{
+  "HikeID": 1,
+  "HikerID": "a@polito.it",
+  "PointID": 1
+}
+```
+- **Response header**: `200 ActivePoint Saved.`
+- **Response body**: none.
+- **Permissions allowed**: Hiker
+- **Error responses**: `402 Hike not found` HikeID doesnt belong to a Hike in the DB, `403 error':'ReferencePoint not registered to Hike: '+ req.body.HikeID` the PointID doesnt belong to the HikeID or the reference point was not found. `503` generic error.
+
 ## Testing
 
 ### Testing Frontend
