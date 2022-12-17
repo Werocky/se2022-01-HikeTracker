@@ -36,8 +36,6 @@ app.use('/api/activePoint?',ActivePoints);
 
 //app.use('/api/LinktoHike?', PointsOfHike);
 
-app.use()
-
 
 /*** Set up Passport ***/
 //configurating function to verify login and password

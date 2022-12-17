@@ -27,7 +27,7 @@ router.post('/PassPoint',[
     //todo check hikerID valid
 
     //todo check pointID valid
-    
+
 ],async(req,res)=>{
 
     const errors= validationResult(req);  
@@ -50,14 +50,17 @@ router.post('/PassPoint',[
 
         const hikeRefPts= await refPoint.getHikeInfo(req.body.HikeID);
         let flag=false;
+        
         hikeRefPts.forEach(point => {
-            if(point.RefPointID== req.body.RefPointID)flag=true;
+            if(point.RefPointID== req.body.PointID){
+                flag=true;
+            }  
         });
-        if(!flag)return res.status(403).json({'error':'ReferencePoint not registered to HIke: '+ req.body.HikeID});
+        if(!flag)return res.status(403).json({'error':'ReferencePoint not registered to Hike: '+ req.body.HikeID});
         
         //set activePoint as reached in DB
-        await ActivePoints.RegisterActivePoint(req.body.HikeID,req.body.HikerID,req.body.PointID);
-        return res.status(200);
+        let answer=await ActivePoints.RegisterActivePoint(req.body.HikeID,req.body.HikerID,req.body.PointID);
+        return res.status(200).json(answer);
     }catch(error){
         res.status(503).json(error);
     }

@@ -10,14 +10,18 @@ const HRP= require("../modules/HikeRefPoints");
 
 beforeAll(async()=>{
     await db.createConnection();
+    await H.deleteHikes();
+    await HRP.emptyAllPoints();
     let h= new hike(1,'title',0,0,0,0,0,0,0,0,0,0,0,0,0,null);
     await H.addHike(h);
-    RP.addReferencePoint(1,1,'hut');
-    HRP.addHikeRefPoints(1,1,0,0);
+    await RP.emptyReferencePoint();
+    await RP.addReferencePoint(1,1,'hut');
+    
+    await HRP.addHikeRefPoints(1,1,0,0);
     await ActivePoint.emptyConnection();
 },db.timeout)
 afterAll(async()=>{
-    //await ActivePoint.emptyConnection();
+    await ActivePoint.emptyConnection();
 },db.timeout)
 
 describe("add an active point",()=>{
