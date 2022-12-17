@@ -66,7 +66,7 @@ CREATE TABLE IF NOT EXISTS `Huts`(
     `Region` TEXT NULL,
     `City` TEXT NULL,
     `Description` TEXT,
-    'Picture' VARCHAR(255),
+    `Picture` VARCHAR(255),
     FOREIGN KEY(`HutManagerID`) REFERENCES `HutWorkers`(`id`)
 );
 CREATE TABLE IF NOT EXISTS `ParkingLots`(
@@ -91,4 +91,14 @@ CREATE TABLE IF NOT EXISTS `PointsOfHike`(
     PRIMARY KEY(`HikeID`,`PointID`),
     FOREIGN KEY(`PointID`) REFERENCES `InteresPoints`(`id`),
     FOREIGN KEY(`HikeID`) REFERENCES `Hikes`(`HikeID`)
+);
+CREATE TABLE IF NOT EXISTS `ActiveHikePoint`(
+    `id` INTEGER NOT NULL PRIMARY KEY,
+    `HikeID` INTEGER NOT NULL,
+    `PointID` INTEGER NOT NULL,
+    `HikerID` TEXT NOT NULL,
+    `ArrivalTime` TEXT,
+    FOREIGN KEY(`HikeID`) REFERENCES `Hikes`(`HikeID`),
+    FOREIGN KEY(`PointID`) REFERENCES `IneterestPoints`(`id`),
+    FOREIGN KEY(`HikerID`) REFERENCES `Users`(`Id`)
 )
