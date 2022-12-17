@@ -26,12 +26,17 @@ const mail = require('./modules/mail');
 
 
 const PointsOfHike= require('./routes/PointsOfHike');
+const ActivePoints= require('./routes/ActiveHike');
 
 // init express
 const app = new express();
 const port = 3001;
 
+app.use('/api/activePoint?',ActivePoints);
+
 //app.use('/api/LinktoHike?', PointsOfHike);
+
+app.use()
 
 
 /*** Set up Passport ***/
