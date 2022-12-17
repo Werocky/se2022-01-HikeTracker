@@ -92,7 +92,7 @@ CREATE TABLE IF NOT EXISTS `PointsOfHike`(
     FOREIGN KEY(`PointID`) REFERENCES `InteresPoints`(`id`),
     FOREIGN KEY(`HikeID`) REFERENCES `Hikes`(`HikeID`)
 );
-CREATE TEBLE IF NOT EXISTS `ActiveHikePoint`(
+CREATE TABLE IF NOT EXISTS `ActiveHikePoint`(
     `id` INTEGER NOT NULL PRIMARY KEY,
     `HikeID` INTEGER NOT NULL,
     `PointID` INTEGER NOT NULL,
