@@ -9,4 +9,4 @@ DROP TABLE IF EXISTS `ReferencePoints`;
 DROP TABLE IF EXISTS `PointsOfHike`;
 DROP TABLE IF EXISTS `pictures`;
 DROP TABLE IF EXISTS `Hikes`;
-DROP TABLE IF EXISTS `ActiveHikePoint`;
+DROP TABLE IF EXISTS `ActiveHikePoints`;

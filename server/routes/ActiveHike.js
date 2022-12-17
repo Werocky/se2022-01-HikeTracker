@@ -22,10 +22,12 @@ router.use(cors(corsOptions))
 
 
 router.post('/PassPoint',[
-    //check hikeID valid
+    //todo check hikeID valid
     
-    //check hikerID valid
-    //check pointID valid
+    //todo check hikerID valid
+
+    //todo check pointID valid
+    
 ],async(req,res)=>{
 
     const errors= validationResult(req);  

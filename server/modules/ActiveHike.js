@@ -13,16 +13,16 @@ class  ActiveHikePoint{
 }
 function RegisterActivePoint(HikeID,HikerID,PointID){
     let Time= new Date();
-    let timeStamp= Time.getTime()
-    try{
-        ReserveActivePoint(HikeID,HikerID,PointID,timeStamp);
+        try{
+        let answer= ReserveActivePoint(HikeID,HikerID,PointID,Time.getTime());
+        return answer;
     }catch(error){
         throw(error);
     }
 }
 function ReserveActivePoint(HikeID,HikerID,PointID,timestamp){
     return new Promise((resolve,reject)=>{
-        const sql= "INSERT INTO ActiveHikePoint (HikeID,HikerID,PointID,ArrivalTime) VALUES (?,?,?,?)";
+        const sql= "INSERT INTO ActiveHikePoints(HikeID,HikerID,PointID, ArrivalTime) VALUES (?,?,?,?)";
 
         db.run(sql,[HikeID,HikerID,PointID,timestamp],(error)=>{
             if(error)reject(error);
@@ -32,8 +32,37 @@ function ReserveActivePoint(HikeID,HikerID,PointID,timestamp){
 }
 
 
+function getActivePoints(){
+    return new Promise((resolve,reject)=>{
+                db.all('SELECT * FROM ActiveHikePoints',[],(err,rows)=>{
+                    if(err)reject(err);
+                    
+                    if(rows!=undefined)
+                    resolve(rows);
+                }); 
+            
+        }
+    );
+}
+
+function emptyConnection(){
+    return new Promise(
+        (resolve,reject)=>{
+            db.serialize(function(){
+                db.run('DELETE FROM ActiveHikePoints',[],(err)=>{
+                    if(err)reject(err);
+                }); 
+            });
+            resolve('emptied ActivePoints DB');
+            
+        }
+    );
+}
+
 module.exports ={
     ActiveHikePoint,
     RegisterActivePoint,
-    ReserveActivePoint
+    ReserveActivePoint,
+    emptyConnection,
+    getActivePoints
 }

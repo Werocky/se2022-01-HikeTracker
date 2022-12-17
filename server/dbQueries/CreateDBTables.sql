@@ -89,16 +89,16 @@ CREATE TABLE IF NOT EXISTS `PointsOfHike`(
     `IsStart` TINYINT(1),
     `IsEnd` TINYINT(1),
     PRIMARY KEY(`HikeID`,`PointID`),
-    FOREIGN KEY(`PointID`) REFERENCES `InteresPoints`(`id`),
+    FOREIGN KEY(`PointID`) REFERENCES `ReferencePoints`(`id`),
     FOREIGN KEY(`HikeID`) REFERENCES `Hikes`(`HikeID`)
 );
-CREATE TABLE IF NOT EXISTS `ActiveHikePoint`(
+CREATE TABLE IF NOT EXISTS `ActiveHikePoints`(
     `id` INTEGER NOT NULL PRIMARY KEY,
     `HikeID` INTEGER NOT NULL,
     `PointID` INTEGER NOT NULL,
     `HikerID` TEXT NOT NULL,
-    `ArrivalTime` TEXT,
+    `ArrivalTime` NUMERIC,
     FOREIGN KEY(`HikeID`) REFERENCES `Hikes`(`HikeID`),
-    FOREIGN KEY(`PointID`) REFERENCES `IneterestPoints`(`id`),
+    FOREIGN KEY(`PointID`) REFERENCES `ReferencePoints`(`id`),
     FOREIGN KEY(`HikerID`) REFERENCES `Users`(`Id`)
 )

@@ -34,7 +34,6 @@ function getHutsAndParks () {
 }
 
 function getHikeInfo (HikeID) {
-  console.log(HikeID);
   return new Promise(async (resolve, reject) =>{
     const sql = 'SELECT * FROM PointsOfHike HRP, ReferencePoints RP, Hikes H WHERE H.HikeID = HRP.HikeID AND HRP.PointID = RP.RefPointID AND H.HikeID = ?';
     db.all(sql, [HikeID], function (err, rows) {
