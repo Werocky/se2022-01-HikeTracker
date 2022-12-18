@@ -286,35 +286,44 @@ PointID
 ```
 ## API calls
 
-### HikeAPI
+### **HikeAPI**
 #### POST
 **/getPointsHike**
+
 **/getHikeByID**
+
 **/getFilteredHikes**
+
 **/addHike**
 
 #### GET
 **/getHikes**
+
 **/getHikesLocations**
 #### PUT
 **/setDescription**
 
 
-### Hike Points API
+### **Hike Points API**
 #### POST
 **/HikeInfo**
+
 **/HikeRefPoints**
+
 **/getNearHikes**
+
 #### GET
 **/HutsAndParks**
 #### PUT
 **/setStartEndPoints**
 
 
-### ParkingLots API
+### **ParkingLots API**
 #### POST
 **/ParkingLots**
+
 **/ParkingLots**
+
 **/ParkingLots**
 #### PUT 
 **/ParkingLots**
@@ -322,31 +331,111 @@ PointID
 **/ParkingLots**
 
 
-### Huts API
+### **Huts API**
 #### POST
 **/hutsFilters**
+
 **/api/LinktoHike?/:RefPointID/Hike/:HikeID**
+
 **/getHut**
+- **Get the information of a given hut**.
+- **Request body**: Hut: hut id of which is wished to recover the coordinates.
+
+  example request body
+```json
+{
+  "Hut": 1
+}
+```
+- **Response**: `200` = JSON object with Hut informatio
+  example of a response body:
+  ```json
+  {
+    "RefPointID": 1,
+    "Name": "example name",
+    "HutManagerID": "c@polito.it",
+    "website": null,
+    "Phone": null,
+    "AvgPrice": null,
+    "WhenOpen":null,
+    "Elevation": 0,
+    "Beds": 0,
+    "Country": "country",
+    "Province":"province",
+    "Region":"region",
+    "City":"city",
+    "Description":"this is a description"
+
+  }
+  ```
+
+- **Permissions allowed**:  Hut Manager
+- **Error responses**: `401 unathorized`(non authorized user),`422 cannot process request`(wrongly or missing required parameters),`503 Internal Server Error` (generic error).
 **/getHutCoords**
+- **get the coordinates of a specific hut**.
+- **Request body**: Hut: hut id of which is wished to recover the coordinates.
+
+  example request body
+```
+{
+  "RefPointID": 1,
+  "Description": "this is a new description"
+}
+```
+- **Response**: `200` + json object{lat,lng}
+
+- **Permissions allowed**:  Hut Manager
+- **Error responses**: `401 unathorized`(non authorized user),`422 cannot process request`(wrongly or missing required parameters),`503 Internal Server Error` (generic error).
 **/hutCreate**
+
+- <b> create a new hut </b>
+- **Request header**: empty.
+- **Request body**: a JSON object containing Hut Object, HutManagerID: Hut.mail.
+
+- **Response header**: `200 Hut added.`
+- **Response body**: none.
+- **Permissions allowed**: Hut Manager
+- **Error responses**: `422 cannot process request` error with hut object,`503` generic error.
+
 #### PUT
 **/setHutDescription**
+- **Add and modify hut description**.
+- **Request body**: Description: new hut description, RefPointID: Hut assossiated reference Point ID (Hut ID).
+
+  example request body
+```json
+{
+  "RefPointID": 1,
+  "Description": "this is a new description"
+}
+```
+- **Response**: `201`
+
+- **Permissions allowed**:  Hut Manager
+- **Error responses**: `401 unathorized`(non authorized user),`422 cannot process request`(wrongly or missing required parameters),`503 Internal Server Error` (generic error).
+
 #### GET
 **/hutsLocations**
-#### User API
+
+#### **User API**
+
 #### POST
 **/sessions**
+- **Login**.
+- **Request user**: user and credentials
+- **Response**: none
+- **Error responses**:  `401 Unauthorized` (not logged in or wrong permissions)
 **/sessions/new**
 - **Creates a new user account**.
 - **Request body**: Hash, Salt, Id: user id/e-mail, role: user type, *Name: first name of user, *Surname: user surname, *Phone: contact phone of user
 *non mandatory fields
 
   example request body
-```
+```json
 {
   "Hash":"dhjyqguygfiaghiufh",
   "Salt":23456787123,
-  "Id": "a@polito.it"
+  "Id": "a@polito.it",
   "Role": "LG"
 }
 ```
@@ -376,7 +465,7 @@ PointID
 - **Response**: none
 - **Error responses**:  none
 
-### GPX file API
+### **GPX file API**
 #### POST
 **/saveFile**
 - **Save a new gpx file**.
