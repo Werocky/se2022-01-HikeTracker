@@ -46,9 +46,13 @@
          - [Picture](#pictures)
          - [Active Hike points](#activehikepoints)
 5. [API calls](#API-calls)
-    - [Active Hike](#activepoints)
-      - [POST](#post)
-        - [Pass Point](#passpoint)
+    - [Hikes](#Hikeapi)
+    - [Hike Points](#hike-points-api)
+    - [Active Hike](#activepointsapi)
+    - [Huts](#huts-api)
+    - [ParkingLots](#parkinglots-api)
+    - [User](#user-api)
+    - [Files](#gpx-file-api)
 6. [Testing](#testing)
 	  - [Testing Frontend](#testing-frontend)
 	  - [Testing Backend](#testing-backend)
@@ -281,11 +285,119 @@ HikerID
 PointID
 ```
 ## API calls
-### ActivePoints
 
+### HikeAPI
 #### POST
+**/getPointsHike**
+**/getHikeByID**
+**/getFilteredHikes**
+**/addHike**
 
-##### PassPoint
+#### GET
+**/getHikes**
+**/getHikesLocations**
+#### PUT
+**/setDescription**
+
+
+### Hike Points API
+#### POST
+**/HikeInfo**
+**/HikeRefPoints**
+**/getNearHikes**
+#### GET
+**/HutsAndParks**
+#### PUT
+**/setStartEndPoints**
+
+
+### ParkingLots API
+#### POST
+**/ParkingLots**
+**/ParkingLots**
+**/ParkingLots**
+#### PUT 
+**/ParkingLots**
+#### GET
+**/ParkingLots**
+
+
+### Huts API
+#### POST
+**/hutsFilters**
+**/api/LinktoHike?/:RefPointID/Hike/:HikeID**
+**/getHut**
+**/getHutCoords**
+**/hutCreate**
+#### PUT
+**/setHutDescription**
+#### GET
+**/hutsLocations**
+#### User API
+#### POST
+**/sessions**
+**/sessions/new**
+- **Creates a new user account**.
+- **Request body**: Hash, Salt, Id: user id/e-mail, role: user type, *Name: first name of user, *Surname: user surname, *Phone: contact phone of user
+*non mandatory fields
+
+  example request body
+```
+{
+  "Hash":"dhjyqguygfiaghiufh",
+  "Salt":23456787123,
+  "Id": "a@polito.it"
+  "Role": "LG"
+}
+```
+- **Response**: `200`
+
+- **Permissions allowed**:  Manager
+- **Error responses**: `400 user registered yet`(required parameter missing or wrongly formated),`500 Internal Server Error` (generic error).
+#### GET
+**/sessions/current**
+- **check if user is currently logged in**.
+- **Request body**: empty.
+- **Response**: `200`(if user is authenticated and logged in)
+- **Error responses**:  `401 Unauthorized` (not logged in or wrong permissions)
+
+**/verify**
+- **retrive user verification status**.
+- **Request body**: empty.
+- **Request query**: code(verification code set by manager), ID (user to be verified ID)
+- **Response**: `201 : Correctly verified`
+
+- **Permissions allowed**:  Manager
+- **Error responses**:  `401 Unauthorized` (not logged in or wrong permissions), `422 cannot process reques` wrong code or ID,`503 Internal Server Error` (generic error).
+#### DELETE 
+**/sessions/current**
+- **Logout**.
+- **Request body**: empty.
+- **Response**: none
+- **Error responses**:  none
+
+### GPX file API
+#### POST
+**/saveFile**
+- **Save a new gpx file**.
+- **Request body**: empty.
+- **Request file**: gpx file.
+- **Response**: (success); path: relative path where the file was saved
+
+    ```
+    [{
+      "status": "success",
+      "path": "./gpxFile/FileName.gpx"
+    }]
+
+    ```
+
+
+- **Permissions allowed**:  Local Guide
+- **Error responses**:  `401 Unauthorized` (not logged in or wrong permissions), `400 No files were uploaded` missing or wrogly formated file ,`503 Internal Server Error` (generic error).
+
+### ActivePointsAPI
+#### POST
 
 **/api/activePoint/PassPoint**
 
@@ -294,7 +406,7 @@ PointID
 - **Request body**: a JSON object containing HikeID, PointID and HikerID.
 
 Example of request body:
-```
+```json
 {
   "HikeID": 1,
   "HikerID": "a@polito.it",
