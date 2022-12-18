@@ -289,53 +289,155 @@ PointID
 ### **HikeAPI**
 #### POST
 **/getPointsHike**
+- **gets a parsed object of the Hike gpx file**.
+- **Request body**: req.body.HikeID: id of the specific Hike.
+- **Response**: `200` a list of all hikes which satisfy the given filters
+- **Error responses**: `422 Error! cannot process request`(wrongly or missing required parameters),`503 Internal Server Error` (generic error).
 
 **/getHikeByID**
+- **Get a specific hike**.
+- **Request body**: req.body.HikeID: id of the desired hike
+- **Response**: `200` details of the desired hike.
+- **Error responses**: `422 Error! cannot process request`(wrongly or missing required parameters),`503 Internal Server Error` (generic error).
 
 **/getFilteredHikes**
+- **Get all hikies based on given filter parameters**.
+- **Request body**: ...
+- **Response**: `200` a list of all hikes which satisfy the given filters
+- **Error responses**: `422 Error! cannot process request`(wrongly or missing required parameters),`503 Internal Server Error` (generic error).
+
 
 **/addHike**
+- **add a new hike**.
+- **Request body**: req.body.hike: given hike object to be added. req.body.points: all points which are to be added that are not already present in the DB. req.body.guideId: the username/id of the local guide creating the new hike
+- **Permissions**: Local guide.
+- **Response**: `201`+ json object with the Newly created Hike HikeID.
+- **Error responses**: `422 Error! cannot process request`(wrongly or missing required parameters),`503 Internal Server Error` (generic error).
+
 
 #### GET
 **/getHikes**
+- **Get all details of all hikes in the db**.
+- **Request body**: none.
+- **Response**: `200` a list of all hikes.
+- **Error responses**: `422 Error! cannot process request`(wrongly or missing required parameters),`500 Internal Server Error` (generic error).
 
 **/getHikesLocations**
+- **Get the location details of all hikes**.
+- **Request body**: none.
+- **Response**: `200` details of all locations
+- **Error responses**: `422 Error! cannot process request`(wrongly or missing required parameters),`503 Internal Server Error` (generic error).
 #### PUT
 **/setDescription**
+- **Modifies the description of a given Hike**.
+- **Request body**: req.body.Description: new description to be set. req.body.HikeID: id of the hike which is wished to modify.
+- **Response**: `201 Description set`.
+- **Error responses**: `422 Error! cannot process request`(wrongly or missing required parameters),`503 Internal Server Error` (generic error).
+
 
 
 ### **Hike Points API**
 #### POST
 **/HikeInfo**
+- **retrives all details of a given hike**.
+- **Request body**: req.body.HikeID: id identifying the hike.
+- **Response**: `200`+ a json object with the hike details.
+- **Error responses**: `422 Error! cannot process request`(wrongly or missing required parameters),`503 Internal Server Error` (generic error)
 
 **/HikeRefPoints**
 
+
 **/getNearHikes**
+- **retrives all hikes, whose starting points within a radius of a given point**.
+- **Request body**: req.body.redius: radius within which to search for hiking points. req.body.lat and req.body.lng: describe the location from where the search is centered.
+- **Response**: `200`+ a json object with an array containing all hikes that are within the distance from the point(req.body.lat, req.body.lng).
+- **Error responses**: `422 Error! cannot process request`(wrongly or missing required parameters),`503 Internal Server Error` (generic error).
 
 #### GET
 **/HutsAndParks**
+- **Retrives all huts and parkingLots**.
+- **Request body**: none.
+- **Response**: `200`+ a json object with an array containing all reference points which are ether of type: `hut` or `parkingLot`.
+- **Error responses**: `422 Error! cannot process request`(wrongly or missing required parameters),`503 Internal Server Error` (generic error)
+
 #### PUT
 **/setStartEndPoints**
+- **Sets the start and end points of a given hike**.
+- **Request body**: req.params.StartID: id identifying starting reference point. req.params.EndId: id identifying ending reference point. req.param.start: boolean value determining id the starting ID is set a start point of the hike, req.param.end: boolean value determining id the ending ID is set a end point of the hike. req.params.Id: Id of the given hike which is wished to modify.
+- **Response**: `201`(the changes have been applied correctly).
+- **Error responses**: `422 Error! cannot process request`(wrongly or missing required parameters),`503 Internal Server Error` (generic error)
 
 
 ### **ParkingLots API**
 #### POST
 **/ParkingLots**
+- **Create a new parking lot**.
+- **Request body**: req.body.ParkingId: ParkingLot object with an assosciated guide.
+- **Response**: `201`.
+- **Error responses**: `422 Error! cannot process request`(wrongly or missing required parameters),`503 Internal Server Error` (generic error).
 
 **/ParkingLots**
+- **Return a parkingLot idenified by id**.
+- **Request body**: req.body.ParkingId: id identifying the parking Lot.
+- **Response**: `201 ParkingLot added`(the new parking lot was created succesfully). 
+- **Error responses**: `422 Error! cannot process request`(wrongly or missing required parameters),`503 Internal Server Error` (generic error).
+
 
 **/ParkingLots**
+- **Delete a given ParkingLot**.
+- **Request body**: req.body.ParkingId: id identifying the parking Lot.
+- **Response**: `201`.
+- **Error responses**: `422 Error! cannot process request`(wrongly or missing required parameters),`503 Internal Server Error` (generic error).
+
 #### PUT 
 **/ParkingLots**
+- **Update a ParkingLot**.
+- **Request body**: req.body.ParkingId: id identifying the parking Lot. req.body.Description: a new description of the parkingLot, req.body.free: boolean value, describing if the parking lot is free, req.body.RefPointID: ReferencePointID to decided which reference point is assossiated to the parking lot. req.body.lat: new latitud value of the parking lot, req.body.lng: new value of the parking lot longitud.
+- **Response**: `201`. 
+- **Error responses**: `422 Error! cannot process request`(wrongly or missing required parameters),`503 Internal Server Error` (generic error).
 #### GET
 **/ParkingLots**
+- **Return all parking lots**.
+- **Request body**: none.
+- **Response body**: a json array with the details of all the parking lots.
+- **Response**: `201`+ json object with the parkingLot details. 
+- **Error responses**: `422 Error! cannot process request`(wrongly or missing required parameters),`503 Internal Server Error` (generic error).
 
 
 ### **Huts API**
 #### POST
 **/hutsFilters**
+- **get filtered Huts**.
+- **Request body**: a json object,with required fields: Name, Location with location type and its value, WhenOpen, beds, avgPrice.
+
+  example
+```json
+{
+  "name": "Hut Name",
+  "loc":{
+    "location": "Italy",
+    "locationType": "country"
+  }
+}
+```
+- **Response**: `200`+ json object with an array with the returning huts and their details. 
+- **Error responses**: `422 Error! cannot process request`(wrongly or missing required parameters),`503 Internal Server Error` (generic error).
 
 **/api/LinktoHike?/:RefPointID/Hike/:HikeID**
+- **Link a hut to a given hike**.
+- **Request required parameters**: Jreq.param.RefPointID: an id to the given Hut and its reference point, and req.param.HikeID: an ID to identify the hike.
+- **Request body**: none
+
+  example
+```json
+{
+  "HikeID": 1,
+  "RefPointID": 1
+}
+```
+- **Response**: `200 added`(confirmation the linking was effected). 
+- **Permissions allowed**:  Local Guide
+- **Error responses**: `401 unathorized`(non authorized user),`422 cannot process request`(wrongly or missing required parameters),`402 Error! Hike not found`(Hike not found in the DB),`403 Error! Hut not found`(Hut not found in the DB),`503 Internal Server Error` (generic error).
 
 **/getHut**
 - **Get the information of a given hut**.
@@ -368,15 +470,15 @@ PointID
 
   }
   ```
-
 - **Permissions allowed**:  Hut Manager
 - **Error responses**: `401 unathorized`(non authorized user),`422 cannot process request`(wrongly or missing required parameters),`503 Internal Server Error` (generic error).
+
 **/getHutCoords**
 - **get the coordinates of a specific hut**.
 - **Request body**: Hut: hut id of which is wished to recover the coordinates.
 
   example request body
-```
+```json
 {
   "RefPointID": 1,
   "Description": "this is a new description"
@@ -473,7 +575,7 @@ PointID
 - **Request file**: gpx file.
 - **Response**: (success); path: relative path where the file was saved
 
-    ```
+    ```json
     [{
       "status": "success",
       "path": "./gpxFile/FileName.gpx"
@@ -515,11 +617,11 @@ Example of request body:
 
 The libraries used for testing are `Jest` for unit testing
 
-To run the unit tests
+**To run the unit tests**
 ```
 npm test
 ```
-To have a coverage report of 
+**To have a coverage report** 
 ```
 npm run cover
 ```

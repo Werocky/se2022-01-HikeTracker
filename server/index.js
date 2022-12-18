@@ -687,15 +687,15 @@ async(req,res)=>{
       return res.status(422).json({error : 'Error! Bad request'});
       
      //check hike exists
-     let h=await hikes.getHikesByFilter('HikeID',req.params.HikeID);
-     if(h.Length==[])return res.status(402).json({error : 'Error! Hike not found'});
+      let h=await hikes.getHikesByFilter('HikeID',req.params.HikeID);
+      if(h.Length==[])return res.status(402).json({error : 'Error! Hike not found'});
       //check hut exists
       h=await huts.getHut(req.params.RefPointID);
-      if(h==[])return res.status(401).json({error : 'Error! Hut not'});
+      if(h==[])return res.status(403).json({error : 'Error! Hut not found'});
       //add hutToHike
-     h= await hikes.addHutToHike(req.params.HikeID,req.params.RefPointID);
-     if(h!='New HikeRefPoint added')return res.status(504).json({error : 'Error! Could not link Hut and Hike'});
-     res.status(200).json({message: 'added'});
+      h= await hikes.addHutToHike(req.params.HikeID,req.params.RefPointID);
+      if(h!='New HikeRefPoint added')return res.status(504).json({error : 'Error! Could not link Hut and Hike'});
+      res.status(200).json({message: 'added'});
   }catch(err){
       //console.error(err);
       res.status(503).json(err);
