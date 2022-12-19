@@ -1,33 +1,46 @@
 name: SonarCloud Coverage
+
 on:
   push:
-    branches: ["main"]
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
 
 jobs:
-  create-coverage:
-    name: create-coverage
+  backend-tests:
+    name: Backend Tests
     runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-        with:
-          fetch-depth: 0 
-      - uses: actions/checkout@v3
-      - name: Install dependencies
-        working-directory: ./server
-        run: npm install jest
-      - name: Test and coverage
-        working-directory: ./server
-        run: npm run cover
-      - name: Upload Unit test coverage report
-        uses: actions/upload-artifact@v3
-        with:
-          name: unit-coverage-report
-          path: ./server/coverage/lcov.info
+    
+    defaults:
+      run:
+        working-directory: server
 
-  Sonarcloud:      
+    strategy:
+      matrix:
+        node-version: [16.x, 18.x]
+
+    steps:
+    - uses: actions/checkout@v3
+    - name: CI Backend ${{ matrix.node-version }}
+      uses: actions/setup-node@v3
+      with:
+        node-version: ${{ matrix.node-version }}
+        cache: 'npm'
+        
+    - run: npm ci
+    - run: npm test
+    - run: npm run cover
+
+    - name: Upload backend unit test coverage report
+      uses: actions/upload-artifact@v3
+      with:
+        name: backend-unit-coverage-report
+        path: ./code/server/coverage/lcov.info
+
+  sonarcloud:
     name: SonarCloud Analysis
     runs-on: ubuntu-latest
-    needs: create-coverage
+    needs: [backend-tests]
     steps:
 
       - uses: actions/checkout@v3
