@@ -159,13 +159,9 @@ It Allows to set a specific filter if MaxValue is not specified or a range if a 
               }
             });
           } else {
-            let sql = '';
-            if (filterType != 'Region' && filterType != 'City' && filterType != 'Province' && filterType != 'Country' ) {
-              sql = 'SELECT * FROM Hikes WHERE Hikes.' + filterType + ' = ?'
+            let sql = 'SELECT * FROM Hikes WHERE Hikes.' + filterType + ' = ?'
 
-            } else {
-              sql = 'SELECT * FROM Hikes WHERE Hikes.' + filterType + ' = ?'
-            }
+            
             
 
             db.all(sql, [filterMinValue], (err, rows) => {
