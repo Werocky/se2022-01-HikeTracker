@@ -283,6 +283,7 @@ id
 HikeID
 HikerID
 PointID
+ActiveHikeID
 ```
 ## API calls
 
