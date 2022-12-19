@@ -1,6 +1,10 @@
 
 ![testing workflow](https://github.com/Werocky/se2022-01-HikeTracker/actions/workflows/testing.yml/badge.svg)
 
+![CI BUIL](https://github.com/Werocky/se2022-01-HikeTracker/actions/workflows/build.yml/badge.svg)
+
+![SonarCloudBuild](https://github.com/Werocky/se2022-01-HikeTracker/actions/workflows/sonarcloudCoverage.yml/badge.svg)
+
 ---
 
 [![SonarCloud](https://sonarcloud.io/images/project_badges/sonarcloud-black.svg)](https://sonarcloud.io/summary/new_code?id=Werocky_se2022-01-HikeTracker)
