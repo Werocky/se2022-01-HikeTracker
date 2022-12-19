@@ -47,7 +47,7 @@ class hike{
   }
 }
 
- function getHikes  () {
+function getHikes  () {
     return new Promise((resolve, reject) => {
       const sql = 'SELECT * FROM Hikes order by Title';
       db.all(sql, [], (err, rows) => {

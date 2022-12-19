@@ -34,7 +34,7 @@ describe("add an active point",()=>{
         let time=new Date();
         let timestamp=time.getTime();
 
-    await expect(ActivePoint.RegisterActivePoint(1,"a@polito.it",1)).resolves.toEqual('ActivePoint Saved');
+    await expect(ActivePoint.RegisterActivePoint(1,"a@polito.it",1,1)).resolves.toEqual('ActivePoint Saved');
     
     let AP= await ActivePoint.getActivePoints();
 
@@ -51,11 +51,21 @@ describe("add an active point",()=>{
     
     })
     it("add a second Point",async()=>{
-        await expect(ActivePoint.RegisterActivePoint(1,"a@polito.it",1)).resolves.toEqual('ActivePoint Saved');
+        await expect(ActivePoint.RegisterActivePoint(1,"a@polito.it",1,2)).resolves.toEqual('ActivePoint Saved');
         let AP= await ActivePoint.getActivePoints();
 
         expect(AP).toHaveLength(2);
 
 
     })
+    describe("get next active Hike",()=>{
+        it("get next active Hike",async()=>{
+            await expect(ActivePoint.getNextActiveHike()).resolves.toEqual(3);
+        })
+        it("get next active Hike empty list",async()=>{
+            await ActivePoint.emptyConnection();
+            await expect(ActivePoint.getNextActiveHike()).resolves.toEqual(1);
+        })
+    })
+    
 });

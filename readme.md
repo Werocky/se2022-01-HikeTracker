@@ -594,6 +594,26 @@ PointID
 
 - <b> Register a the time a HikePoint was reached </b>
 - **Request header**: empty.
+- **Request body**: a JSON object containing HikeID, PointID, activeHikeID and HikerID.
+
+Example of request body:
+```json
+{
+  "HikeID": 1,
+  "HikerID": "a@polito.it",
+  "PointID": 1,
+  "ActiveHikeID": 1
+}
+```
+- **Response header**: `200 ActivePoint Saved.`
+- **Response body**: none.
+- **Permissions allowed**: Hiker
+- **Error responses**: `402 Hike not found` HikeID doesnt belong to a Hike in the DB, `403 error':'ReferencePoint not registered to Hike: '+ req.body.HikeID` the PointID doesnt belong to the HikeID or the reference point was not found. `503` generic error.
+
+**/api/activePoint/GenerateActiveHike**
+
+- <b> Registers the activePoint that is passed and return the ActiveHikeID to which it was added</b>
+- **Request header**: empty.
 - **Request body**: a JSON object containing HikeID, PointID and HikerID.
 
 Example of request body:
@@ -604,11 +624,16 @@ Example of request body:
   "PointID": 1
 }
 ```
-- **Response header**: `200 ActivePoint Saved.`
-- **Response body**: none.
+- **Response header**: `200` + json object with the newly created ActiveHikeID
+- **Response body**: 
+```json
+{
+  "ActiveHikeID": 1
+}
+```
+
 - **Permissions allowed**: Hiker
 - **Error responses**: `402 Hike not found` HikeID doesnt belong to a Hike in the DB, `403 error':'ReferencePoint not registered to Hike: '+ req.body.HikeID` the PointID doesnt belong to the HikeID or the reference point was not found. `503` generic error.
-
 ## Testing
 
 ### Testing Frontend
