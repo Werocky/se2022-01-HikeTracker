@@ -3,7 +3,7 @@
 
 ![CI BUIL](https://github.com/Werocky/se2022-01-HikeTracker/actions/workflows/build.yml/badge.svg)
 
-![SonarCloudBuild](https://github.com/Werocky/se2022-01-HikeTracker/actions/workflows/sonarCloudCoverage.yml/badge.svg)
+![SonarCloudBuild](https://github.com/Werocky/se2022-01-HikeTracker/actions/workflows/sonarcloudCoverage.yml/badge.svg)
 
 ---
 
