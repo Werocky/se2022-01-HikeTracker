@@ -35,7 +35,7 @@ jobs:
       uses: actions/upload-artifact@v3
       with:
         name: backend-unit-coverage-report
-        path: ./code/server/coverage/lcov.info
+        path: ./server/coverage/lcov.info
 
   sonarcloud:
     name: SonarCloud Analysis
