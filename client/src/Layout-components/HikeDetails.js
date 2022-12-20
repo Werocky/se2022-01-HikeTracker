@@ -11,6 +11,7 @@ import StatsIllustrationSrc from "../images/pictures/map.webp";
 import { ReactComponent as SvgDotPattern } from "../images/dot-pattern.svg";
 import AnimationRevealPage from "../helpers/AnimationRevealPage";
 import Header from "../components/headers/light.js";
+import distanceBetweenPoints from "../DistanceBeteenPoints";
 
 
 const Container = tw.div`relative`;
@@ -45,9 +46,10 @@ function HikeDetails(props) {
   const params = useParams();
   const [hike, setHike] = useState(undefined);
   const [gpxData, setGpxData] = useState(undefined);  // array of [p.lat, p.lon]
+  const [bounds, setBounds] = useState(undefined);  // map bounds
   const [loading, setLoading] = useState(true);
 
-  useEffect(()=> {
+  useEffect(() => {
     const loadHike = async () => {
       const hikeObj = await API.getHike(params.hikeID);
       console.log(hikeObj);
@@ -55,42 +57,25 @@ function HikeDetails(props) {
       if (auth.login) {
         const gpxObj = await API.getPointsHike(params.hikeID);
         setGpxData(gpxObj);
-        console.log(gpxObj[0].lat + "\t" + gpxObj[0].lon + "\n" + gpxObj.at(-1).lat + "\t" + gpxObj.at(-1).lon);
+        //console.log(gpxObj[0].lat + "\t" + gpxObj[0].lon + "\n" + gpxObj.at(-1).lat + "\t" + gpxObj.at(-1).lon);
       }
 
-      setLoading(false);
     }
-      loadHike();
-   
+    loadHike();
+
   }, [params.hikeID, auth.login])
 
-
+  useEffect(() => {
+    if (gpxData) {
+      const b = calculateMapBounds(gpxData);
+      setBounds(b);
+      setLoading(false);
+    }
+  }, [gpxData])
 
   const imageSrc = StatsIllustrationSrc;
-  const imageCss = null;
-  const imageContainerCss = null;
-  let statistics = null;
   const textOnLeft = false;
   const navigate = useNavigate();
-  // The textOnLeft boolean prop can be used to display either the text on left or right side of the image.
-  //Change the statistics variable as you like, add or delete objects
-  const defaultStatistics = [
-    {
-      key: "length",
-      value: "228"
-    },
-    {
-      key: "height",
-      value: "389"
-    },
-    {
-      key: "difficulty",
-      value: "10"
-    }
-  ];
-
-  if (!statistics) statistics = defaultStatistics;
-
 
   return (
     <AnimationRevealPage>
@@ -99,17 +84,18 @@ function HikeDetails(props) {
         <Container>
           <TwoColumn>
             {!auth.login &&
-              <ImageMapColumn css={imageContainerCss}>
+              <ImageMapColumn>
                 <Messageheading> Login to see the map</Messageheading>
-                <Image imageSrc={imageSrc} css={imageCss} />
+                <Image imageSrc={imageSrc} />
               </ImageMapColumn>
             }
             {auth.login &&
-              <ImageMapColumn css={imageContainerCss}>
+              <ImageMapColumn>
                 <PostAction onClick={() => { navigate('/startHike') }}>Start A New Hike</PostAction>
                 <MapContainer
-                  center={[gpxData[Math.ceil(gpxData.length / 2)].lat, gpxData[Math.ceil(gpxData.length / 2)].lon]}
-                  bounds={[gpxData[0], gpxData.at(-1),]}
+                  //center={[gpxData[Math.ceil(gpxData.length / 2)].lat, gpxData[Math.ceil(gpxData.length / 2)].lon]}
+                  //bounds={[gpxData[0], gpxData.at(-1),]}
+                  bounds={bounds}
                   scrollWheelZoom
                   style={{ height: 500 + "px", width: "100%", }}>
                   <Polyline
@@ -168,6 +154,20 @@ function HikeDetails(props) {
     </AnimationRevealPage>
   );
 
+}
+
+function calculateMapBounds(gpxData) {
+  const start = gpxData[0];
+  let far = undefined;
+  let dist = 0.0;
+  for (const i in gpxData) {
+    let val = distanceBetweenPoints(start.lat, start.lon, gpxData[i].lat, gpxData[i].lon);
+    if (val > dist) {
+      dist = val;
+      far = gpxData[i];
+    }
+  }
+  return [gpxData[0], far]
 }
 
 
