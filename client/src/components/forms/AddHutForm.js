@@ -26,7 +26,6 @@ const TextColumn = styled(Column)(props => [
   props.textOnLeft ? tw`md:mr-12 lg:mr-16 md:order-first` : tw`md:ml-12 lg:ml-16 md:order-last`
 ]);
 
-
 const TextContent = tw.div`lg:py-8 text-center md:text-left`;
 const Heading = tw(SectionHeading)`mt-4  font-black text-left text-3xl sm:text-4xl lg:text-5xl text-center md:text-left leading-tight`;
 const Description = tw.p`mt-4 mb-12 text-center md:text-left text-sm md:text-base lg:text-lg font-medium leading-relaxed text-gray-300`
@@ -34,7 +33,10 @@ const ImageMapColumn = tw(Column)`md:w-6/12 flex-shrink-0 md:h-auto`;
 const Form = tw.form`mt-8 md:mt-10 text-sm flex flex-col max-w-sm mx-auto md:mx-0`
 const Input = tw.input`mt-6 first:mt-0 border-b-2 py-3 focus:outline-none font-medium transition duration-300 hocus:border-primary-500`
 const InputOption = tw.input`mt-6 first:mt-0 border-b-2 py-3 focus:outline-none font-medium transition duration-300 hocus:border-gray-300 text-gray-700 `
-
+const Image = styled.div(props => [
+  `background-image: url("${props.imageSrc}");`,
+  tw` rounded bg-contain bg-no-repeat bg-center h-full`,
+]);
 const FormContainer = styled.div`
   ${tw`p-10 sm:p-12 md:p-16 bg-primary-500 text-gray-100 rounded-lg relative`}
   form {
@@ -74,7 +76,7 @@ function AddHutForm(props){
 
   //subheading = "Add a hut here",
   const heading = <>Add a hut here</>;
-  const description = "Add geographical info and name of the hut here";
+  //const description = "Add geographical info and name of the hut here";
   const submitButtonText = "Confirm";
   const formAction = "#";
   const formMethod = "get";
@@ -82,8 +84,10 @@ function AddHutForm(props){
 
 // The textOnLeft boolean prop can be used to display either the text on left or right side of the image.
 
+const [description,setDescription]=useState("Add the hut cover picture here");
+//const [heading,setHeading]
 const [name,setName]=useState("");
-const [elevation,setElevation]=useState();
+const [elevation,setElevation]=useState(1000);
 const [city,setCity]=useState("");
 const [province,setProvince]=useState("");
 const [region,setRegion]=useState("");
@@ -92,13 +96,16 @@ const [geoOk,setGeoOk]=useState(false);
 const [coord,setCoord]=useState(null);
 const [errorMsg,setErrorMsg]=useState("");
 const [msgState,setmsgState]=useState("danger");
-const [phone,setPhone]=useState("");
+const [phone,setPhone]=useState("+393668726829");
 const [website,setWebsite]=useState('');
-const [email,setEmail]=useState("");
+const [email,setEmail]=useState("a@polito.it");
 const [whenOpen,setWhenOpen]=useState("");
-const [beds,setBeds]=useState();
-const [descr,setDescr]=useState("");
-const [avgPrice,setAvgPrice]=useState();
+const [beds,setBeds]=useState(10);
+const [descr,setDescr]=useState("rftrg");
+const [avgPrice,setAvgPrice]=useState(10);
+const [picture,setPicture]=useState();
+const [pictureOk,setPictureOk]=useState();
+const [msgErr, setMsgErr] = useState("");
 
 useEffect(()=>{
   if(coord!=null){
@@ -152,6 +159,17 @@ const submitGeoForm = async (event) => {
     setGeoOk(true);
   }
 }
+const handleSubmitFile = async (event) => {
+  event.preventDefault();
+  if (picture.name.toLowerCase().split(".").at(-1) !== "jpg" && picture.name.toLowerCase().split(".").at(-1) !== "jpeg" && picture.name.toLowerCase().split(".").at(-1) !== "png") {
+    setErrorMsg("The file must be jpg or jpeg or png!");
+    return;
+  }
+  setErrorMsg("");
+  //setFile(event.target[0].files[0]);
+  setPictureOk(true);
+  setDescription("Add geographical info and name of the hut here");
+}
 
 const submitForm = async (event) => {
   event.preventDefault();
@@ -189,15 +207,21 @@ const submitForm = async (event) => {
       Email:email,
       Phone:phone,
       Website:website,
-      Coord:coord
+      Coord:coord,
+      Picture:picture
   }
-  API.addHut(h)
+  API.addHut(h,picture)
     .then( (res) => {
       //props.setHuts({...props.huts, h});
       setErrorMsg(res.message);
+     // newHut.Picture="hutImages/hut-"+res.hut.RefPointID+".jpg";
       setmsgState('primary');
-      navigate("/huts");
-      props.setHuts( oldHuts => [...oldHuts, res.hut] );
+      //API.uploadHutPicture(res.hut.RefPointID,picture).then((res)=>{
+       // props.setHuts( oldHuts => [...oldHuts, newHut] );
+          navigate("/huts");
+     // });
+    
+     
       //navigate("/hikes");
     })//setDirty(true)})
     .catch( err => setErrorMsg(err.error));
@@ -239,8 +263,15 @@ const ClickPick = () => {
         <Content>
           <FormContainer>
     <TwoColumn>
+    {!pictureOk && !geoOk &&
+                <ImageMapColumn>
+                  {/*put the picture or map here*/}
+                  <Image imageSrc={EmailIllustrationSrc} />
+                </ImageMapColumn>
+              }
     {
-      geoOk &&     <TextColumn textOnLeft={textOnLeft}>
+      geoOk && pictureOk &&
+           <TextColumn textOnLeft={textOnLeft}>
           <TextContent>
       <Heading>Recap of your hut</Heading>
       <Recap>Name : {name}</Recap>
@@ -260,7 +291,7 @@ const ClickPick = () => {
         </TextColumn>
     }
   
-    {!geoOk &&
+    {!geoOk && pictureOk &&
             <ImageMapColumn>
               <TextContent>
                 <Heading>Map</Heading>
@@ -282,8 +313,18 @@ const ClickPick = () => {
     {/*{subheading && <Subheading>{subheading}</Subheading>}*/}
     <Heading>{heading}</Heading>
     {description && <Description>{description}</Description>}
+    {!pictureOk && !geoOk  &&
+                    <Form onSubmit={handleSubmitFile} >
+
+                      <Input type="file" required onChange={event => setPicture(event.target.files[0])} />
+                      {msgErr &&
+                        <Alert>{msgErr}</Alert>
+                      }
+                      <SubmitButton type="submit">{submitButtonText}</SubmitButton>
+                    </Form>
+                  }
     {
-      !geoOk &&
+      !geoOk && pictureOk &&
    
     <Form onSubmit={submitGeoForm}>
       <InputContainer>
@@ -314,7 +355,7 @@ const ClickPick = () => {
     </Form>
  }
 
- { geoOk && 
+ { geoOk && pictureOk &&
   <Form onSubmit={submitForm}>
     <InputContainer>
       <Label htmlFor="phone-input">Phone Number</Label>
