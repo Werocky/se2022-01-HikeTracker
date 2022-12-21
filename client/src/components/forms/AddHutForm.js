@@ -214,10 +214,13 @@ const submitForm = async (event) => {
     .then( (res) => {
       //props.setHuts({...props.huts, h});
       setErrorMsg(res.message);
-     // newHut.Picture="hutImages/hut-"+res.hut.RefPointID+".jpg";
+      let newHut=res.hut;
+      console.log(newHut);
+      console.log(res);
+      newHut.Picture="hutImages/hut-"+res.hut.RefPointID+".jpg";
       setmsgState('primary');
       //API.uploadHutPicture(res.hut.RefPointID,picture).then((res)=>{
-       // props.setHuts( oldHuts => [...oldHuts, newHut] );
+        props.setHuts( oldHuts => [...oldHuts, newHut] );
           navigate("/huts");
      // });
     

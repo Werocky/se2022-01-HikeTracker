@@ -931,8 +931,8 @@ app.post('/saveHutPicture/:id', async (req, res) => {
   try {
   
     const file = req.files.file;
-    //const path = "../client/public/hikeImages/hut-"+req.params.id+".jpg";
-    const path="./hutImages/hut-"+req.params.id+".jpg";
+    const path = "../client/public/hikeImages/hut-"+req.params.id+".jpg";
+   // const path="./hutImages/hut-"+req.params.id+".jpg";
     console.log(path);
     //console.log(path);
     //const hikeID = req.params.hikeID;
