@@ -525,7 +525,6 @@ async function addHut(Hut,picture) {
     if (response.ok) {
       const data = new FormData();
       data.append("hutId", hutId);
-      console.log("l'hut id è "+hutId);
       data.append("file", picture);
      
       
