@@ -302,7 +302,6 @@ app.post('/addHike', async (req, res) => {
     const hike = req.body.hike;
     const points = req.body.points;
     const Id = req.body.guideId;
-
     const hikeId = await hikes.getLastHikeId() + 1;
 
     // add hike
@@ -469,13 +468,13 @@ app.post('/HikeInfo', /*[check('HikeID').notEmpty],*/ async (req, res) => {
   }
 })
 
-app.post('/HikeRefPoints', /*[check('HikeID').notEmpty],*/ async (req, res) => {
+app.get('/hikeRefPoints/:hikeID', /*[check('HikeID').notEmpty],*/ async (req, res) => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
     return res.status(422).json({ error: 'Cannot process request' });
   }
-  
-  const id = req.body.HikeID;
+  const id = req.params.hikeID;
+  console.log(id)
 
   try {
     const hikeInfo = await hikeRefPoints.getHikeRefPoints(id);

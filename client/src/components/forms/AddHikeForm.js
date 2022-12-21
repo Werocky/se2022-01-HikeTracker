@@ -212,7 +212,7 @@ function AddHikeForm(props) {
     const refPObj = {
       position: coord,
       description: refPDesc,
-      type: refPType,
+      Type: refPType,
     }
     setRefPointArray(old => [...old, refPObj]);
     setCoordChange(false);

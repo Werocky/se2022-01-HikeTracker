@@ -44,7 +44,7 @@ async function getHike(HikeID) {
     });
     const hike = await response.json();
     if (response.ok) {
-      console.log(hike);
+      //console.log(hike);
       return hike;
     } else {
       throw hike; //which will contain an error if it is the case
@@ -596,6 +596,22 @@ async function linkHutToHike(RefPointID, HikeID) {
   }
 }
 
+//GET HIKES REF POINTS
+async function getHikeRefPoints(hikeID) {
+  try {
+    const response = await fetch(APIURL + '/hikeRefPoints/'+hikeID, {
+      method: 'GET',
+    });
+    const result = await response.json();
+    if (response.ok)
+      return result
+    else
+      throw result;
+  } catch (err) {
+    throw err;
+  }
+}
+
 const API = {
   getHikes,
   logIn,
@@ -624,6 +640,7 @@ const API = {
   getHut,
   getHutCoords,
   getHikesLocations,
-  linkHutToHike
+  linkHutToHike,
+  getHikeRefPoints
 };
 export default API;

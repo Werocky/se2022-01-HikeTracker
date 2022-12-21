@@ -91,7 +91,7 @@ class DatabaseConnection {
         
  
 
-        let refPoint=1;
+        let refPoint=0;
         let AssociatedGuide="d@polito.it";
         let HikeID='0';
         let file="rocciamelone.gpx";
@@ -117,8 +117,8 @@ class DatabaseConnection {
         let image="hikeImages/sentiero-per-il-rocciamelone.jpg";
         
         await this.wrapperPopulate(HikeID,file,Country, Region, Province, city,title,length,expTime,Ascent,Description,Difficulty,start,end,AssociatedGuide,image)
-        await this.wrapperPopulateRefP(HikeID, refPoint++, "45.177786","7.083372","hut",1,0); // start
-        await this.wrapperPopulateRefP(HikeID, refPoint++, "45.203531","7.07734","",0,1); // end
+        await this.wrapperPopulateRefP(HikeID, ++refPoint, "45.177786","7.083372","hut",1,0); // start
+        await this.wrapperPopulateRefP(HikeID, ++refPoint, "45.203531","7.07734","",0,1); // end
 
         
          HikeID='1';
@@ -139,8 +139,8 @@ class DatabaseConnection {
          end="Monte Ferra | 3094 m slm circa";
          image="hikeImages/sentiero-per-il-monte-ferra.jpg";
         await this.wrapperPopulate(HikeID,file,Country, Region, Province, city,title,length,expTime,Ascent,Description,Difficulty,start,end,AssociatedGuide,image)
-        await this.wrapperPopulateRefP(HikeID, refPoint++, "44.57425086759031","6.982689192518592","hut",1,0); // start
-         await this.wrapperPopulateRefP(HikeID, refPoint++, "44.574263943359256","6.982647031545639","",0,1); // end
+        await this.wrapperPopulateRefP(HikeID, ++refPoint, "44.57425086759031","6.982689192518592","hut",1,0); // start
+         await this.wrapperPopulateRefP(HikeID, ++refPoint, "44.574263943359256","6.982647031545639","",0,1); // end
  
         
 
@@ -160,8 +160,8 @@ class DatabaseConnection {
          end="Zossener Allee";
          image="hikeImages/default.jpg";
          await this.wrapperPopulate(HikeID,file,Country, Region, Province, city,title,length,expTime,Ascent,Description,Difficulty,start,end,AssociatedGuide,image)
-         await this.wrapperPopulateRefP(HikeID,refPoint++, "52.167248","13.371998","",1,0); // start
-         await this.wrapperPopulateRefP(HikeID, refPoint++, "52.145784","13.364947","",0,1); // end
+         await this.wrapperPopulateRefP(HikeID,++refPoint, "52.167248","13.371998","",1,0); // start
+         await this.wrapperPopulateRefP(HikeID, ++refPoint, "52.145784","13.364947","",0,1); // end
  
 
          HikeID='3';
@@ -186,8 +186,8 @@ class DatabaseConnection {
          end="Monte Chaberton | 3120 m slm circa";
          image="hikeImages/default.jpg";
          await this.wrapperPopulate(HikeID,file,Country, Region, Province, city,title,length,expTime,Ascent,Description,Difficulty,start,end,AssociatedGuide,image)
-         await this.wrapperPopulateRefP(HikeID, refPoint++, "44.93603","6.7386800000000004","parking",1,0); // start
-         await this.wrapperPopulateRefP(HikeID, refPoint++, "44.96452393010259","6.7513105273246765","",0,1); // end
+         await this.wrapperPopulateRefP(HikeID, ++refPoint, "44.93603","6.7386800000000004","parking",1,0); // start
+         await this.wrapperPopulateRefP(HikeID, ++refPoint, "44.96452393010259","6.7513105273246765","",0,1); // end
  
 
       
@@ -206,8 +206,8 @@ class DatabaseConnection {
          end="Colle Bione | 1430 m slm circa";
          image="hikeImages/anello-per-il-colle-bione.jpg";
          await this.wrapperPopulate(HikeID,file,Country, Region, Province, city,title,length,expTime,Ascent,Description,Difficulty,start,end,AssociatedGuide,image)
-         await this.wrapperPopulateRefP(HikeID, refPoint++, "45.082985027","7.333754722","parking",1,0); // start
-         await this.wrapperPopulateRefP(HikeID, refPoint++, "45.083030952","7.333762354","parking",0,1); // end
+         await this.wrapperPopulateRefP(HikeID, ++refPoint, "45.082985027","7.333754722","parking",1,0); // start
+         await this.wrapperPopulateRefP(HikeID, ++refPoint, "45.083030952","7.333762354","parking",0,1); // end
  
 
          HikeID='5';
@@ -239,8 +239,8 @@ class DatabaseConnection {
             image="hikeImages//sentiero-per-il-rifugio-toesca.jpg";
          
          await this.wrapperPopulate(HikeID,file,Country, Region, Province, city,title,length,expTime,Ascent,Description,Difficulty,start,end,AssociatedGuide,image)
-         await this.wrapperPopulateRefP(HikeID, refPoint++, "45.102780737","7.165559804","parking",1,0); // start
-         await this.wrapperPopulateRefP(HikeID, refPoint++, "45.08200127","7.14036342","",0,1); // end
+         await this.wrapperPopulateRefP(HikeID, ++refPoint, "45.102780737","7.165559804","parking",1,0); // start
+         await this.wrapperPopulateRefP(HikeID, ++refPoint, "45.08200127","7.14036342","",0,1); // end
 
 
          HikeID='6';
@@ -268,8 +268,8 @@ class DatabaseConnection {
             +"Percorso di ritorno, in 1,45-2 ore, uguale a quello di andata ."
             image="hikeImages/sentiero-per-il-lac-de-savine.jpg";             
          await this.wrapperPopulate(HikeID,file,Country, Region, Province, city,title,length,expTime,Ascent,Description,Difficulty,start,end,AssociatedGuide,image)
-         await this.wrapperPopulateRefP(HikeID, refPoint++, "45.21117802558636","6.865775956735616","parking",1,0); // start
-         await this.wrapperPopulateRefP(HikeID, refPoint++, "45.17285154374665","6.914370013504627","",0,1); // end
+         await this.wrapperPopulateRefP(HikeID, ++refPoint, "45.21117802558636","6.865775956735616","parking",1,0); // start
+         await this.wrapperPopulateRefP(HikeID, ++refPoint, "45.17285154374665","6.914370013504627","",0,1); // end
 
 
          HikeID='7';
@@ -291,8 +291,8 @@ class DatabaseConnection {
             +"Percorso di ritorno, uguale a quello di andata, con variante per poter accorciare discendendo dalla Route Nationale, direttamente verso il villaggio Gran Coix ed evitando il passaggio sulla diga."
             image="hikeImages/sentiero-per-il-plan-des-fontainettes.jpg";
         await this.wrapperPopulate(HikeID,file,Country, Region, Province, city,title,length,expTime,Ascent,Description,Difficulty,start,end,AssociatedGuide,image)
-        await this.wrapperPopulateRefP(HikeID, refPoint++, "45.21426193643276","6.955986331560386","parking",1,0); // start
-        await this.wrapperPopulateRefP(HikeID, refPoint++, "45.24035738760735","6.951468657871905","parking",0,1); // end
+        await this.wrapperPopulateRefP(HikeID, ++refPoint, "45.21426193643276","6.955986331560386","parking",1,0); // start
+        await this.wrapperPopulateRefP(HikeID, ++refPoint, "45.24035738760735","6.951468657871905","parking",0,1); // end
 
         
         HikeID='8';
@@ -319,8 +319,8 @@ class DatabaseConnection {
             +"Percorso di ritorno, in 1 ora circa, uguale a quello di andata."
        
             await this.wrapperPopulate(HikeID,file,Country, Region, Province, city,title,length,expTime,Ascent,Description,Difficulty,start,end,AssociatedGuide,image)
-        await this.wrapperPopulateRefP(HikeID, refPoint++, "45.13911717299068","6.988669510628613","",1,0); // start
-        await this.wrapperPopulateRefP(HikeID, refPoint++, "45.155868912540512","45.155868912540512","",0,1); // end
+        await this.wrapperPopulateRefP(HikeID, ++refPoint, "45.13911717299068","6.988669510628613","",1,0); // start
+        await this.wrapperPopulateRefP(HikeID, ++refPoint, "45.155868912540512","45.155868912540512","",0,1); // end
     
        HikeID='9';
        title="Sentiero per il RIFUGIO I RE MAGI | 1770 m slm";
@@ -345,8 +345,8 @@ class DatabaseConnection {
             +"In un paio d’ore raggiungerai Grange di Valle Stretta, costeggiando il rio, fino a raggiungere la fine del Sentiero per il Rifugio I Re Magi."    
             +"Purtroppo noi abbiamo trovato il rifugio chiuso, non so se perché era un giorno infrasettimanale oppure a causa dell’emergenza sanitaria."
       await this.wrapperPopulate(HikeID,file,Country, Region, Province, city,title,length,expTime,Ascent,Description,Difficulty,start,end,AssociatedGuide,image)
-      await this.wrapperPopulateRefP(HikeID, refPoint++, "45.051291","6.674392","parking",1,0); // start
-        await this.wrapperPopulateRefP(HikeID, refPoint++, "45.07032","6.622359","hut",0,1); // end
+      await this.wrapperPopulateRefP(HikeID, ++refPoint, "45.051291","6.674392","parking",1,0); // start
+        await this.wrapperPopulateRefP(HikeID, ++refPoint, "45.07032","6.622359","hut",0,1); // end
        
       HikeID='10';
       title="Sentiero per CIMA BOSSOLA da INVERSO | 1510 m slm";
@@ -381,8 +381,8 @@ class DatabaseConnection {
       +"Puoi decidere se proseguire un pezzo fino al Colletto Bossola."
       image="hikeImages/sentiero-per-cima-bossola.jpg";
       await this.wrapperPopulate(HikeID,file,Country, Region, Province, city,title,length,expTime,Ascent,Description,Difficulty,start,end,AssociatedGuide,image)
-      await this.wrapperPopulateRefP(HikeID, refPoint++, "45.488135","7.734884","parking",1,0); // start
-        await this.wrapperPopulateRefP(HikeID, refPoint++, "45.483543","7.71953","",0,1); // end
+      await this.wrapperPopulateRefP(HikeID, ++refPoint, "45.488135","7.734884","parking",1,0); // start
+        await this.wrapperPopulateRefP(HikeID, ++refPoint, "45.483543","7.71953","",0,1); // end
         
 
       HikeID='11';
@@ -414,8 +414,8 @@ class DatabaseConnection {
         +"Essendo molto larga e sempre costeggiata da vegetazione non si da fastidio agli sciatori, ed è facile trovare una traccia precedentemente battuta da seguire."
         image="hikeImages/sentiero-per-il-rifugio-meira-garneri.jpg";
       await this.wrapperPopulate(HikeID,file,Country, Region, Province, city,title,length,expTime,Ascent,Description,Difficulty,start,end,AssociatedGuide,image)
-      await this.wrapperPopulateRefP(HikeID, refPoint++, "44.57619898952544","7.180788516998291","parking",1,0); // start
-        await this.wrapperPopulateRefP(HikeID, refPoint++, "44.55683704465628","7.155619841068983","hut",0,1); // end
+      await this.wrapperPopulateRefP(HikeID, ++refPoint, "44.57619898952544","7.180788516998291","parking",1,0); // start
+        await this.wrapperPopulateRefP(HikeID, ++refPoint, "44.55683704465628","7.155619841068983","hut",0,1); // end
         
       HikeID='12';
       title="Sentiero per il RIFUGIO FONTANA MURA | 1726 m slm";
@@ -447,8 +447,8 @@ class DatabaseConnection {
         "Il ritorno si svolge sul medesimo tracciato di andata, evitando le varie deviazioni se già effettuate in precedenza."
         image="hikeImages/sentiero-per-il-rifugio-fontana-mura.jpg";
       await this.wrapperPopulate(HikeID,file,Country, Region, Province, city,title,length,expTime,Ascent,Description,Difficulty,start,end,AssociatedGuide,image)
-      await this.wrapperPopulateRefP(HikeID, refPoint++, "45.030912","7.229195","parking",1,0); // start
-        await this.wrapperPopulateRefP(HikeID, refPoint++, "45.0307","7.229943","hut",0,1); // end
+      await this.wrapperPopulateRefP(HikeID, ++refPoint, "45.030912","7.229195","parking",1,0); // start
+        await this.wrapperPopulateRefP(HikeID, ++refPoint, "45.0307","7.229943","hut",0,1); // end
         
       HikeID='13';
       title="Sentiero per il RIFUGIO SELLERIES – 2023 m";
@@ -477,8 +477,8 @@ class DatabaseConnection {
       "D’altra parte la salita a piedi d’estate da Pra Catinat può perdere parte del suo fascino proprio per il traffico veicolare, a tratti eccessivo specie nel weekend. Il ritorno è previsto sullo stesso percorso dell’andata."
       image="hikeImages/sentiero-per-il-rifugio-selleries.jpg";
       await this.wrapperPopulate(HikeID,file,Country, Region, Province, city,title,length,expTime,Ascent,Description,Difficulty,start,end,AssociatedGuide,image)
-      await this.wrapperPopulateRefP(HikeID, refPoint++, "45.03657284192741","7.0737862307578325","parking",1,0); // start
-        await this.wrapperPopulateRefP(HikeID, refPoint++, "45.047753965482116","7.120104543864727","hut",0,1); // end
+      await this.wrapperPopulateRefP(HikeID, ++refPoint, "45.03657284192741","7.0737862307578325","parking",1,0); // start
+        await this.wrapperPopulateRefP(HikeID, ++refPoint, "45.047753965482116","7.120104543864727","hut",0,1); // end
         
       HikeID='14';
       title="Sentiero per il LAGO DI MALCIAUSSIA | 1800 m slm";
@@ -526,8 +526,8 @@ class DatabaseConnection {
       
       image="hikeImages//sentiero-per-il-lago-di-malciaussia.jpg";
       await this.wrapperPopulate(HikeID,file,Country, Region, Province, city,title,length,expTime,Ascent,Description,Difficulty,start,end,AssociatedGuide,image)
-      await this.wrapperPopulateRefP(HikeID, refPoint++, "45.219954","7.188861","parking",1,0); // start
-        await this.wrapperPopulateRefP(HikeID, refPoint++, "45.206823","7.144343","",0,1); // end
+      await this.wrapperPopulateRefP(HikeID, ++refPoint, "45.219954","7.188861","parking",1,0); // start
+        await this.wrapperPopulateRefP(HikeID, ++refPoint, "45.206823","7.144343","",0,1); // end
 
 
       HikeID='15';
@@ -559,8 +559,8 @@ class DatabaseConnection {
       +"Verso Ovest le creste che rappresentano il confine francese con il colle della Croce; verso est, il sentiero per il rifugio Barant, (a ca. 1.45h) e Rifugio Barbara Lowrie (a ca. 3 h)"
       image="hikeImages/COPERTINA-SENTIERI.jpg";
       await this.wrapperPopulate(HikeID,file,Country, Region, Province, city,title,length,expTime,Ascent,Description,Difficulty,start,end,AssociatedGuide,image)
-      await this.wrapperPopulateRefP(HikeID, refPoint++, "44.799133","7.055148","parking",1,0); // start
-        await this.wrapperPopulateRefP(HikeID, refPoint++, "44.773504","7.039264","hut",0,1); // end
+      await this.wrapperPopulateRefP(HikeID, ++refPoint, "44.799133","7.055148","parking",1,0); // start
+        await this.wrapperPopulateRefP(HikeID, ++refPoint, "44.773504","7.039264","hut",0,1); // end
 
 
       HikeID='16';
@@ -594,8 +594,8 @@ class DatabaseConnection {
       "Nel periodo estivo, ti consiglio di percorrere il sentiero parallelo che taglia sui pendii per evitare la strada carrozzabile 🙂"
       image="hikeImages/sentiero-per-il-rifugio-capanna-mautino.jpg";
       await this.wrapperPopulate(HikeID,file,Country, Region, Province, city,title,length,expTime,Ascent,Description,Difficulty,start,end,AssociatedGuide,image)
-      await this.wrapperPopulateRefP(HikeID, refPoint++, "44.930862","6.820079","parking",1,0); // start
-        await this.wrapperPopulateRefP(HikeID, refPoint++, "44.902731","6.789709","hut",0,1); // end
+      await this.wrapperPopulateRefP(HikeID, ++refPoint, "44.930862","6.820079","parking",1,0); // start
+        await this.wrapperPopulateRefP(HikeID, ++refPoint, "44.902731","6.789709","hut",0,1); // end
 
 
       HikeID='17';
@@ -633,8 +633,8 @@ class DatabaseConnection {
         "Il sentiero per il ritorno si svolge sul medesimo di andata anche se sono presenti diversi tratti dove poter “tagliare” alcuni tornanti."
         image="hikeImages/sentiero-per-il-poggio-tre-croci.jpg";
       await this.wrapperPopulate(HikeID,file,Country, Region, Province, city,title,length,expTime,Ascent,Description,Difficulty,start,end,AssociatedGuide,image)
-      await this.wrapperPopulateRefP(HikeID, refPoint++, "45.079073","6.695705","parking",1,0); // start
-        await this.wrapperPopulateRefP(HikeID, refPoint++, "45.079097","6.695723","parking",0,1); // end
+      await this.wrapperPopulateRefP(HikeID, ++refPoint, "45.079073","6.695705","parking",1,0); // start
+        await this.wrapperPopulateRefP(HikeID, ++refPoint, "45.079097","6.695723","parking",0,1); // end
 
       
       HikeID='18';
@@ -675,8 +675,8 @@ class DatabaseConnection {
      image="hikeImages/sentiero-per-cima-del-bosco.jpg";
     
       await this.wrapperPopulate(HikeID,file,Country, Region, Province, city,title,length,expTime,Ascent,Description,Difficulty,start,end,AssociatedGuide,image)
-      await this.wrapperPopulateRefP(HikeID, refPoint++, "44.937484078109264373779296875","6.86268364079296588897705078125","parking",1,0); // start
-      await this.wrapperPopulateRefP(HikeID, refPoint++, "44.9376612715423107147216796875","6.8631246127188205718994140625","parking",0,1); // end
+      await this.wrapperPopulateRefP(HikeID, ++refPoint, "44.937484078109264373779296875","6.86268364079296588897705078125","parking",1,0); // start
+      await this.wrapperPopulateRefP(HikeID, ++refPoint, "44.9376612715423107147216796875","6.8631246127188205718994140625","parking",0,1); // end
 
 
       HikeID='19';
@@ -706,8 +706,8 @@ class DatabaseConnection {
       "Arrivati in cima al pendio percorriamo i pochi metri che ci separano dalla croce di vetta su di una cresta molto panoramica."
       image="hikeImages/sentiero-per-briccas.jpg";
       await this.wrapperPopulate(HikeID,file,Country, Region, Province, city,title,length,expTime,Ascent,Description,Difficulty,start,end,AssociatedGuide,image)
-      await this.wrapperPopulateRefP(HikeID, refPoint++, "44.708426780998707","7.159385243430734","parking",1,0); // start
-      await this.wrapperPopulateRefP(HikeID, refPoint++, "44.708156045526266","7.158207753673196","parking",0,1); // end
+      await this.wrapperPopulateRefP(HikeID, ++refPoint, "44.708426780998707","7.159385243430734","parking",1,0); // start
+      await this.wrapperPopulateRefP(HikeID, ++refPoint, "44.708156045526266","7.158207753673196","parking",0,1); // end
 
 
       
@@ -736,8 +736,8 @@ class DatabaseConnection {
       "Ad un certo punto il bosco sparisce e di fronte a te si aprirà lo spettacolo dell’Alpe Attia. Passeggia sulla piana e raggiungi i caseggiati in pietra, dove troverai un’altra fontana e la possibilità di rilassarti sognando di raggiungere le cime intorno."
       image="hikeImages/sentiero-per-lalpe-attia.jpg";
       await this.wrapperPopulate(HikeID,file,Country, Region, Province, city,title,length,expTime,Ascent,Description,Difficulty,start,end,AssociatedGuide,image)
-      await this.wrapperPopulateRefP(HikeID, refPoint++, "45.316959","7.304834","parking",1,0); // start
-      await this.wrapperPopulateRefP(HikeID, refPoint++, "45.331211","7.298011","",0,1); // end
+      await this.wrapperPopulateRefP(HikeID, ++refPoint, "45.316959","7.304834","parking",1,0); // start
+      await this.wrapperPopulateRefP(HikeID, ++refPoint, "45.331211","7.298011","",0,1); // end
 
 
       HikeID='21';
@@ -772,8 +772,8 @@ class DatabaseConnection {
       
       image="hikeImages/default.jpg";
       await this.wrapperPopulate(HikeID,file,Country, Region, Province, city,title,length,expTime,Ascent,Description,Difficulty,start,end,AssociatedGuide,image)
-      await this.wrapperPopulateRefP(HikeID, refPoint++, "-54.925734","-68.323590","",1,0); // start
-      await this.wrapperPopulateRefP(HikeID, refPoint++, "-55.047550","-68.148442","",0,1); // end
+      await this.wrapperPopulateRefP(HikeID, ++refPoint, "-54.925734","-68.323590","",1,0); // start
+      await this.wrapperPopulateRefP(HikeID, ++refPoint, "-55.047550","-68.148442","",0,1); // end
 
 
       HikeID='22';
@@ -796,8 +796,8 @@ class DatabaseConnection {
       "Details coming soon."
       image="hikeImages/default.jpg";
       await this.wrapperPopulate(HikeID,file,Country, Region, Province, city,title,length,expTime,Ascent,Description,Difficulty,start,end,AssociatedGuide,image)
-      await this.wrapperPopulateRefP(HikeID, refPoint++, "-13.386589","-72.573909","hut",1,0); // start
-      await this.wrapperPopulateRefP(HikeID, refPoint++, "-13.153162","-72.522880","",0,1); // end
+      await this.wrapperPopulateRefP(HikeID, ++refPoint, "-13.386589","-72.573909","hut",1,0); // start
+      await this.wrapperPopulateRefP(HikeID, ++refPoint, "-13.153162","-72.522880","",0,1); // end
 
       
       HikeID='23';
@@ -828,8 +828,8 @@ class DatabaseConnection {
       "4) Crossing of Tizi Likemt and back to Imlil."
       image="hikeImages/default.jpg";
       await this.wrapperPopulate(HikeID,file,Country, Region, Province, city,title,length,expTime,Ascent,Description,Difficulty,start,end,AssociatedGuide,image)
-      await this.wrapperPopulateRefP(HikeID, refPoint++, "31.135638","-7.919335","parking",1,0); // start
-      await this.wrapperPopulateRefP(HikeID, refPoint++, "31.135613","-7.919305","parking",0,1); // end
+      await this.wrapperPopulateRefP(HikeID, ++refPoint, "31.135638","-7.919335","parking",1,0); // start
+      await this.wrapperPopulateRefP(HikeID, ++refPoint, "31.135613","-7.919305","parking",0,1); // end
 
 
       HikeID='24';
@@ -859,8 +859,8 @@ class DatabaseConnection {
       "We started at Ormiston Gorge and finished at Serpentine Chalet Dam (arriving around midday). With an extra day it could converted to a circuit returning to Ormiston Gorge via the Larapinta Trail."
       image="hikeImages/IMG_7541.jpg";
       await this.wrapperPopulate(HikeID,file,Country, Region, Province, city,title,length,expTime,Ascent,Description,Difficulty,start,end,AssociatedGuide,image)
-      await this.wrapperPopulateRefP(HikeID, refPoint++, "-23.632482","132.727095","parking",1,0); // start
-      await this.wrapperPopulateRefP(HikeID, refPoint++, "-23.736232","132.910421","",0,1); // end
+      await this.wrapperPopulateRefP(HikeID, ++refPoint, "-23.632482","132.727095","parking",1,0); // start
+      await this.wrapperPopulateRefP(HikeID, ++refPoint, "-23.736232","132.910421","",0,1); // end
 
       
       HikeID='25';
@@ -910,8 +910,8 @@ class DatabaseConnection {
 
       image="hikeImages/default.jpg";
       await this.wrapperPopulate(HikeID,file,Country, Region, Province, city,title,length,expTime,Ascent,Description,Difficulty,start,end,AssociatedGuide,image)
-      await this.wrapperPopulateRefP(HikeID, refPoint++, "-20.463319","-66.823034","parking",1,0); // start
-      await this.wrapperPopulateRefP(HikeID, refPoint++, "-22.910191","-68.198311","parking",0,1); // end
+      await this.wrapperPopulateRefP(HikeID, ++refPoint, "-20.463319","-66.823034","parking",1,0); // start
+      await this.wrapperPopulateRefP(HikeID, ++refPoint, "-22.910191","-68.198311","parking",0,1); // end
 
 
       HikeID='26';
@@ -936,8 +936,8 @@ class DatabaseConnection {
 
       image="hikeImages/Sajama_National_Park.jpg";
       await this.wrapperPopulate(HikeID,file,Country, Region, Province, city,title,length,expTime,Ascent,Description,Difficulty,start,end,AssociatedGuide,image)
-      await this.wrapperPopulateRefP(HikeID, refPoint++, "-18.110549","-68.966962","parking",1,0); // start
-      await this.wrapperPopulateRefP(HikeID, refPoint++, "-18.108194","-68.882919","",0,1); // end
+      await this.wrapperPopulateRefP(HikeID, ++refPoint, "-18.110549","-68.966962","parking",1,0); // start
+      await this.wrapperPopulateRefP(HikeID, ++refPoint, "-18.108194","-68.882919","",0,1); // end
 
 
       HikeID='27';
@@ -955,8 +955,8 @@ class DatabaseConnection {
       Description="It was very easy but I couldn't find the waterfall. So I couldn't make circle in the Parque Nacional."
       image="hikeImages/default.jpg";
       await this.wrapperPopulate(HikeID,file,Country, Region, Province, city,title,length,expTime,Ascent,Description,Difficulty,start,end,AssociatedGuide,image)
-      await this.wrapperPopulateRefP(HikeID, refPoint++, "-18.178785","-63.873352","parking",1,0); // start
-      await this.wrapperPopulateRefP(HikeID, refPoint++, "-18.178865","-63.873278","parking",0,1); // end
+      await this.wrapperPopulateRefP(HikeID, ++refPoint, "-18.178785","-63.873352","parking",1,0); // start
+      await this.wrapperPopulateRefP(HikeID, ++refPoint, "-18.178865","-63.873278","parking",0,1); // end
 
 
       HikeID='28';
@@ -992,8 +992,8 @@ class DatabaseConnection {
       image="hikeImages/default.jpg";
 
       await this.wrapperPopulate(HikeID,file,Country, Region, Province, city,title,length,expTime,Ascent,Description,Difficulty,start,end,AssociatedGuide,image)
-      await this.wrapperPopulateRefP(HikeID, refPoint++, "-16.338158","-68.040294","",1,0); // start
-      await this.wrapperPopulateRefP(HikeID, refPoint++, "-16.203923","-67.837319","parking",0,1); // end
+      await this.wrapperPopulateRefP(HikeID, ++refPoint, "-16.338158","-68.040294","",1,0); // start
+      await this.wrapperPopulateRefP(HikeID, ++refPoint, "-16.203923","-67.837319","parking",0,1); // end
 
 
       HikeID='29';
@@ -1029,8 +1029,8 @@ class DatabaseConnection {
       image="hikeImages/default.jpg";
  
     await this.wrapperPopulate(HikeID,file,Country, Region, Province, city,title,length,expTime,Ascent,Description,Difficulty,start,end,AssociatedGuide,image)
-    await this.wrapperPopulateRefP(HikeID, refPoint++, "-18.136138","-68.975651","parking",1,0); // start
-      await this.wrapperPopulateRefP(HikeID, refPoint++, "-18.160969","-69.140142","",0,1); // end
+    await this.wrapperPopulateRefP(HikeID, ++refPoint, "-18.136138","-68.975651","parking",1,0); // start
+      await this.wrapperPopulateRefP(HikeID, ++refPoint, "-18.160969","-69.140142","",0,1); // end
 
 
     HikeID='30';
@@ -1052,8 +1052,8 @@ class DatabaseConnection {
     image="hikeImages/default.jpg";
     
   await this.wrapperPopulate(HikeID,file,Country, Region, Province, city,title,length,expTime,Ascent,Description,Difficulty,start,end,AssociatedGuide,image)
-  await this.wrapperPopulateRefP(HikeID, refPoint++, "45.933929","7.630021","parking",1,0); // start
-      await this.wrapperPopulateRefP(HikeID, refPoint++, "45.877608","7.623348","parking",0,1); // end
+  await this.wrapperPopulateRefP(HikeID, ++refPoint, "45.933929","7.630021","parking",1,0); // start
+      await this.wrapperPopulateRefP(HikeID, ++refPoint, "45.877608","7.623348","parking",0,1); // end
 
     
   HikeID='31';
@@ -1076,8 +1076,8 @@ class DatabaseConnection {
   "https://www.facebook.com/lucasbaruzzi/media_set?set=a.10207861573721238&type=3&pnref=story"
   image="hikeImages/default.jpg";
 await this.wrapperPopulate(HikeID,file,Country, Region, Province, city,title,length,expTime,Ascent,Description,Difficulty,start,end,AssociatedGuide,image)
-await this.wrapperPopulateRefP(HikeID, refPoint++, "-16.287185","-68.130311","hut",1,0); // start
-      await this.wrapperPopulateRefP(HikeID, refPoint++, "-16.274170","-68.139751","hut",0,1); // end
+await this.wrapperPopulateRefP(HikeID, ++refPoint, "-16.287185","-68.130311","hut",1,0); // start
+      await this.wrapperPopulateRefP(HikeID, ++refPoint, "-16.274170","-68.139751","hut",0,1); // end
 
 
 HikeID='32';
@@ -1096,8 +1096,8 @@ Description="Sorata's Glacier Lake is located at more than 5000 meters in elevat
 "La Laguna Glacial de Sorata de encuentra a más que 5000 metros de altura. Se recomiende tomar taxi hasta lo más cerca posible a laguna Chillata (80-100 bolivianos). De ese punto la Laguna Glacial esta todavía lejos con una subida de 1000 metros, así que se recomiende acampar por la Laguna Chillata y no hacer la caminata en un solo día. Desde la Laguna Chillata se puede subir a la Laguna Glacial en 4-6 horas. Para volver a Sorata, se debe preguntar a los comunarios de los pueblos si se puede contratar transporte."
 image="hikeImages/default.jpg";
 await this.wrapperPopulate(HikeID,file,Country, Region, Province, city,title,length,expTime,Ascent,Description,Difficulty,start,end,AssociatedGuide,image)
-await this.wrapperPopulateRefP(HikeID, refPoint++, "-15.800923","-68.598910","",1,0); // start
-      await this.wrapperPopulateRefP(HikeID, refPoint++, "-15.828727","-68.564683","",0,1); // end
+await this.wrapperPopulateRefP(HikeID, ++refPoint, "-15.800923","-68.598910","",1,0); // start
+      await this.wrapperPopulateRefP(HikeID, ++refPoint, "-15.828727","-68.564683","",0,1); // end
 
 
 HikeID='33';
@@ -1124,8 +1124,8 @@ Description= "RISERVA NATURALE SPECIALE PARCO BURCINA 'FELICE PIACENZA'"+
 image="hikeImages/default.jpg";
 
 await this.wrapperPopulate(HikeID,file,Country, Region, Province, city,title,length,expTime,Ascent,Description,Difficulty,start,end,AssociatedGuide,image)
-await this.wrapperPopulateRefP(HikeID, refPoint++, "45.585815","8.006584","parking",1,0); // start
-      await this.wrapperPopulateRefP(HikeID, refPoint++, "45.589508","8.013503","",0,1); // end
+await this.wrapperPopulateRefP(HikeID, ++refPoint, "45.585815","8.006584","parking",1,0); // start
+      await this.wrapperPopulateRefP(HikeID, ++refPoint, "45.589508","8.013503","",0,1); // end
 
 
 HikeID='34';
@@ -1153,8 +1153,8 @@ Description="Starting from the Oropa car park next to the cable car, take the pa
 "This is not a very long trail but the trail is in poor condition with little maintenance so extreme care must be taken. The effort is certainly rewarded by the view once at the top."
 image="hikeImages/MONTEMUCRONE.jpg";
 await this.wrapperPopulate(HikeID,file,Country, Region, Province, city,title,length,expTime,Ascent,Description,Difficulty,start,end,AssociatedGuide,image)
-await this.wrapperPopulateRefP(HikeID, refPoint++, "45.628837","7.97223","parking",1,0); // start
-      await this.wrapperPopulateRefP(HikeID, refPoint++, "45.62042","7.944596","",0,1); // end
+await this.wrapperPopulateRefP(HikeID, ++refPoint, "45.628837","7.97223","parking",1,0); // start
+      await this.wrapperPopulateRefP(HikeID, ++refPoint, "45.62042","7.944596","peak",0,1); // end
 
 HikeID='35';
 title="Hike to Rifugio Duca degli Abruzzi";
@@ -1180,8 +1180,8 @@ Description="Once in Cervinia, go as far as the roundabout, turn left and you wi
 "It is advisable, paying attention to the last rocky stretch, to continue for half an hour to touch the Carrel cross, which has marked the history of mountaineering, following the route which then becomes mountaineering, leading to Colle del Leone and the refuge dedicated to J.A. Carrel, support point for the Italian ascent route to Monte Cervino."
 image="hikeImages/sentiero-per-il-bivacco-gias-nuovo.jpg";
 await this.wrapperPopulate(HikeID,file,Country, Region, Province, city,title,length,expTime,Ascent,Description,Difficulty,start,end,AssociatedGuide,image)
-await this.wrapperPopulateRefP(HikeID, refPoint++, "45.93651","7.62672","parking",1,0); // start
-      await this.wrapperPopulateRefP(HikeID, refPoint++, "45.95914","7.64406","hut",0,1); // end
+await this.wrapperPopulateRefP(HikeID, ++refPoint, "45.93651","7.62672","parking",1,0); // start
+      await this.wrapperPopulateRefP(HikeID, ++refPoint, "45.95914","7.64406","hut",0,1); // end
 
       HikeID='36';
       title="Sentiero per il BIVACCO GIAS NUOVO | 1893 m slm";
@@ -1199,8 +1199,8 @@ await this.wrapperPopulateRefP(HikeID, refPoint++, "45.93651","7.62672","parking
       image="hikeImages/sentiero-per-il-bivacco-gias-nuovo.jpg";
       
       await this.wrapperPopulate(HikeID,file,Country, Region, Province, city,title,length,expTime,Ascent,Description,Difficulty,start,end,AssociatedGuide,image)
-      await this.wrapperPopulateRefP(HikeID, refPoint++, "45.36415, 7.22306","parking",1,0); // start
-            await this.wrapperPopulateRefP(HikeID, refPoint++, "45.33987", "7.18348","hut",0,1); // end
+      await this.wrapperPopulateRefP(HikeID, ++refPoint, "45.36415", "7.22306","parking",1,0); // start
+            await this.wrapperPopulateRefP(HikeID, ++refPoint, "45.33987", "7.18348","hut",0,1); // end
       
     HikeID='37';
     title="Sentiero per il BIVACCO BRUNO MOLINO | 2280 m slm";
@@ -1223,8 +1223,8 @@ await this.wrapperPopulateRefP(HikeID, refPoint++, "45.93651","7.62672","parking
     +"Consigliamo il sentiero che sale a sinistra poiché più intuitivo a livello di segnaletica, puoi tenere l’altro pezzo di sentiero per creare un anello per il ritorno. "
     image="hikeImages/sentiero-per-il-bivacco-molino.jpg";
     await this.wrapperPopulate(HikeID,file,Country, Region, Province, city,title,length,expTime,Ascent,Description,Difficulty,start,end,AssociatedGuide,image)
-    await this.wrapperPopulateRefP(HikeID, refPoint++,"45.30900", "7.24348","parking",1,0); // start
-            await this.wrapperPopulateRefP(HikeID, refPoint++, "45.32672", "7.23196","",0,1); // end
+    await this.wrapperPopulateRefP(HikeID, ++refPoint,"45.30900", "7.24348","parking",1,0); // start
+            await this.wrapperPopulateRefP(HikeID, ++refPoint, "45.32672", "7.23196","",0,1); // end
 
     HikeID='38';
     title="Sentiero per il BIVACCO BERARDO | 2700 m slm";
@@ -1255,8 +1255,8 @@ await this.wrapperPopulateRefP(HikeID, refPoint++, "45.93651","7.62672","parking
     +"Il sentiero non presenta grandi difficoltà se non nella sua ripidità specialmente nel tratto finale dove il fondo risulta un po’ scivoloso e polveroso."
     image="hikeImages/sentiero-per-il-bivacco-berardo.jpg";
     await this.wrapperPopulate(HikeID,file,Country, Region, Province, city,title,length,expTime,Ascent,Description,Difficulty,start,end,AssociatedGuide,image)
-    await this.wrapperPopulateRefP(HikeID,refPoint++, "44.61340", "7.05332" ,"hut",1,0); // start
-            await this.wrapperPopulateRefP(HikeID, refPoint++, "44.65110", "7.07395","hut",0,1); // end
+    await this.wrapperPopulateRefP(HikeID,++refPoint, "44.61340", "7.05332" ,"hut",1,0); // start
+            await this.wrapperPopulateRefP(HikeID, ++refPoint, "44.65110", "7.07395","hut",0,1); // end
 
 
         HikeID='39';
@@ -1275,8 +1275,8 @@ await this.wrapperPopulateRefP(HikeID, refPoint++, "45.93651","7.62672","parking
         image="hikeImages/FTZ-09-dolomiti-ampezzane.jpg";
 
         await this.wrapperPopulate(HikeID,file,Country, Region, Province, city,title,length,expTime,Ascent,Description,Difficulty,start,end,AssociatedGuide,image)
-        await this.wrapperPopulateRefP(HikeID,refPoint++, "46.43647", "12.07019" ,"",1,0); // start
-                await this.wrapperPopulateRefP(HikeID, refPoint++, "46.42411", "12.04409","",0,1); // end
+        await this.wrapperPopulateRefP(HikeID,++refPoint, "46.43647", "12.07019" ,"",1,0); // start
+                await this.wrapperPopulateRefP(HikeID, ++refPoint, "46.42411", "12.04409","",0,1); // end
 
         HikeID='40';
         title="Rifugio Casera Bosconero da Lago di Pontesei";
@@ -1296,8 +1296,8 @@ await this.wrapperPopulateRefP(HikeID, refPoint++, "45.93651","7.62672","parking
         image="hikeImages/Rifugio-Casera-Bosconero-Lago-Pontesei-Val-di-Zoldo-Foto-22.jpg";
 
         await this.wrapperPopulate(HikeID,file,Country, Region, Province, city,title,length,expTime,Ascent,Description,Difficulty,start,end,AssociatedGuide,image)
-        await this.wrapperPopulateRefP(HikeID,refPoint++,"46.33957", "12.22392" ,"parking",1,0); // start
-        await this.wrapperPopulateRefP(HikeID, refPoint++, "46.33835", "12.25160","hut",0,1); // end
+        await this.wrapperPopulateRefP(HikeID,++refPoint,"46.33957", "12.22392" ,"parking",1,0); // start
+        await this.wrapperPopulateRefP(HikeID, ++refPoint, "46.33835", "12.25160","hut",0,1); // end
 
         HikeID='41';
         title="Lobuche - Everest Base Camp - Gorak Shep";
@@ -1659,6 +1659,7 @@ image="hikeImages/29461789Master.jpg";
 
       await refPoints.addReferencePoint(lat,lng, type);
         let newRefPointID= await refPoints.getReferencePointIDByCoords(lat,lng);
+      //console.log(RefPointID+"\t"+newRefPointID);
       await HikeRefPoints.addHikeRefPoints(HikeID, newRefPointID, IsStart, IsEnd);
   }
 

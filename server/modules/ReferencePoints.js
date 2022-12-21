@@ -3,6 +3,7 @@
 const db = require('./DB').db;
 
 exports.addReferencePoint = (lat, lng, type) => {
+  console.log(type);
   return new Promise(async (resolve, reject) => {
     const sql = "INSERT INTO ReferencePoints(Lat, Lng, Type) VALUES (?,?,?);";
   

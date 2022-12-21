@@ -2,6 +2,7 @@ import { useContext, useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import AuthContext from "../AuthContext";
 import { MapContainer, Marker, Polyline, Popup, TileLayer, useMap } from 'react-leaflet';
+import * as L from "leaflet";
 import API from '../API';
 import tw from "twin.macro";
 import styled from "styled-components";
@@ -47,14 +48,18 @@ function HikeDetails(props) {
   const [hike, setHike] = useState(undefined);
   const [gpxData, setGpxData] = useState(undefined);  // array of [p.lat, p.lon]
   const [bounds, setBounds] = useState(undefined);  // map bounds
+  const [refPoints, setRefPoints] = useState([]);  // array of ref points
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const loadHike = async () => {
+      setLoading(true);
       const hikeObj = await API.getHike(params.hikeID);
-      console.log(hikeObj);
+      //console.log(hikeObj);
       setHike(hikeObj);
       if (auth.login) {
+        const rp = await API.getHikeRefPoints(params.hikeID);
+        setRefPoints(rp);
         const gpxObj = await API.getPointsHike(params.hikeID);
         setGpxData(gpxObj);
         //console.log(gpxObj[0].lat + "\t" + gpxObj[0].lon + "\n" + gpxObj.at(-1).lat + "\t" + gpxObj.at(-1).lon);
@@ -91,10 +96,8 @@ function HikeDetails(props) {
             }
             {auth.login &&
               <ImageMapColumn>
-                <PostAction onClick={() => { navigate('/startHike') }}>Start A New Hike</PostAction>
+                {/*<PostAction onClick={() => { navigate('/startHike') }}>Start A New Hike</PostAction>*/}
                 <MapContainer
-                  //center={[gpxData[Math.ceil(gpxData.length / 2)].lat, gpxData[Math.ceil(gpxData.length / 2)].lon]}
-                  //bounds={[gpxData[0], gpxData.at(-1),]}
                   bounds={bounds}
                   scrollWheelZoom
                   style={{ height: 500 + "px", width: "100%", }}>
@@ -102,8 +105,21 @@ function HikeDetails(props) {
                     pathOptions={{ fillColor: 'red', color: 'blue' }}
                     positions={gpxData}
                   />
-                  <StartPoint position={gpxData[0]} />
-                  <EndPoint position={gpxData.at(-1)} />
+
+                  {refPoints.map(rp => (
+                    
+                      rp.IsStart ?
+                      <StartPoint key={rp.refPointsID} position={{ lat: rp.Lat, lon: rp.Lng }} type={rp.Type} />
+                      : rp.IsEnd ?
+                      <EndPoint key={rp.refPointsID} position={{ lat: rp.Lat, lon: rp.Lng }} type={rp.Type} />
+                      :
+                      <RefPoint key={rp.refPointsID} position={{ lat: rp.Lat, lon: rp.Lng }} type={rp.Type} />
+                    
+                  ))}
+
+                  {/*<StartPoint position={gpxData[0]} />
+                  <EndPoint position={gpxData.at(-1)} />*/}
+
                   <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
                 </MapContainer>
               </ImageMapColumn>
@@ -188,9 +204,39 @@ function exp_time(time) {
   return res
 }
 
+function AllPoints(props) {
+
+
+}
+
+function MarkerColor(rpType) {
+  let iconUrl = "https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/";
+  if (rpType === "parking") {
+    iconUrl += "marker-icon-2x-green.png";
+  } else if (rpType === "hut") {
+    iconUrl += "marker-icon-2x-yellow.png";
+  } else if (rpType === "peak") {
+    iconUrl += "marker-icon-2x-red.png";
+  } else {
+    iconUrl += "marker-icon-2x-blue.png";
+
+  }
+  var icon = new L.Icon({
+    iconUrl: iconUrl,
+    shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
+    iconSize: [25, 41],
+    iconAnchor: [12, 41],
+    popupAnchor: [1, -34],
+    shadowSize: [41, 41]
+  });
+  return icon;
+}
+
 function StartPoint(props) {
+  console.log(props);
+  const icon = MarkerColor(props.type);
   return (
-    <Marker position={props.position}>
+    <Marker position={props.position} icon={icon}>
       <Popup>
         This is the starting point
       </Popup>
@@ -199,10 +245,22 @@ function StartPoint(props) {
 }
 
 function EndPoint(props) {
+  const icon = MarkerColor(props.type);
   return (
-    <Marker position={props.position}>
+    <Marker position={props.position} icon={icon}>
       <Popup>
         This is the ending point
+      </Popup>
+    </Marker>
+  );
+}
+
+function RefPoint(props) {
+  const icon = MarkerColor(props.type);
+  return (
+    <Marker position={props.position} icon={icon}>
+      <Popup>
+        This is a reference point
       </Popup>
     </Marker>
   );
