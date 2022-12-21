@@ -506,7 +506,7 @@ function setHutDescription(Description, RefPointID) {
   });
 }
 
-async function addHut(Hut) {
+async function addHut(Hut,picture) {
   try {
     const response = await fetch((APIURL + '/hutCreate'), {
       method: 'POST',
@@ -519,7 +519,23 @@ async function addHut(Hut) {
       },
     });
     const value = await response.json();
+    console.log("questo è il value: "+value);
+    const hutId=value.hut.RefPointID;
+    console.log(hutId);
     if (response.ok) {
+      const data = new FormData();
+      data.append("hutId", hutId);
+      console.log("l'hut id è "+hutId);
+      data.append("file", picture);
+     
+      
+      const response1 = await axios({
+        method: "post",
+        url: "http://localhost:3001/saveHutPicture/"+hutId,
+        data: data,
+        //headers: { "Content-Type": "multipart/form-data" },
+      });
+      console.log("finito");
       return value;
     } else {
       throw value;

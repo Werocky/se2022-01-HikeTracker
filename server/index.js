@@ -923,6 +923,32 @@ app.post('/saveFile', async (req, res) => {
   }
 })
 
+app.post('/saveHutPicture/:id', async (req, res) => {
+  if (!req.files) {
+    return res.status(400).send("No files were uploaded.");
+  }
+
+  try {
+  
+    const file = req.files.file;
+    //const path = "../client/public/hikeImages/hut-"+req.params.id+".jpg";
+    const path="./hutImages/hut-"+req.params.id+".jpg";
+    console.log(path);
+    //console.log(path);
+    //const hikeID = req.params.hikeID;
+    //const added = await fileNames.addFile(hikeID,path);
+    file.mv(path, async (err) => {
+      if (err) {
+        return res.status(500).send(err);
+      }
+      const result = await huts.setHutPicture(req.params.id,"hutImages/hut-"+req.params.id+".jpg");
+      return res.send({ status: "success", path: path });
+    });
+  } catch (err) {
+    res.status(503).json({ error: `Internal Error` });
+  }
+})
+
 // activate the server
 app.listen(port, () => {
   console.log(`Server listening at http://localhost:${port}`);

@@ -333,7 +333,9 @@ function HutElement(props) {
     return (
         <PostContainer key={props.index}>
             <Post className="group" as="a">
-                <Image imageSrc={process.env.PUBLIC_URL+"/"+hut.Picture} />
+               {<Image imageSrc={process.env.PUBLIC_URL+"/"+hut.Picture} />
+               }
+              // <Image imageSrc={`http://localhost:3001/images/hut-95.jpg`}/>
                 <Info>
                     <Title>{hut.Name}</Title>
                     <Category>{hut.Elevation} mt</Category>

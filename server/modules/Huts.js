@@ -257,6 +257,21 @@ class Hut{
     })
   })
 }
+function setHutPicture  (hutId,path)  {
+  console.log("sono nella funzione");
+  return new Promise((resolve, reject) => {
+    const sql = " UPDATE Huts SET Picture=? WHERE RefPointID=?;"
+    db.run(sql, [path, hutId], function (err, rows) {
+      if (err)
+        reject(err);
+      else {
+        console.log("sono nella funzione");
+        resolve({message: "picture set"});
+      }
+    })
+  })
+}
+
 
 function addHutToHike(HikeID,RefPointID,IsStart=0,IsEnd=0){
   const referencePoints= require("./HikeRefPoints").addHikeRefPoints;
@@ -284,5 +299,6 @@ module.exports={
   addHut,
   Hut,
   getHut,
-  getHutCoordinates
+  getHutCoordinates,
+  setHutPicture
 }
