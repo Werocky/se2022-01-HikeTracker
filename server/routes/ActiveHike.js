@@ -5,6 +5,7 @@ const router = express.Router();
 const ActivePoints= require('../modules/ActiveHike');
 const hikes= require('../modules/Hikes');
 const refPoint =require('../modules/HikeRefPoints');
+const PointsOfHike= require('../modules/HikeRefPoints');
 
 
 const { check, validationResult, body } = require('express-validator'); // validation middleware
@@ -103,5 +104,7 @@ router.post('/PassPoint',[
     }
 
 });
+
+
 
 module.exports = router;

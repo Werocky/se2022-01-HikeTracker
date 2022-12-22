@@ -33,8 +33,7 @@ const app = new express();
 const port = 3001;
 
 app.use('/api/activePoint?',ActivePoints);
-
-//app.use('/api/LinktoHike?', PointsOfHike);
+app.use('/api/PointsOfHike?',PointsOfHike);
 
 
 /*** Set up Passport ***/

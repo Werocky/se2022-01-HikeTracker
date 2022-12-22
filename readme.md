@@ -349,6 +349,25 @@ ActiveHikeID
 - **Response**: `200`+ a json object with the hike details.
 - **Error responses**: `422 Error! cannot process request`(wrongly or missing required parameters),`503 Internal Server Error` (generic error)
 
+**/api/PointsOfHike/isEnd**
+- **Answers if a given Point is the last point of a Hike**.
+- **Request body**: req.body.HikeID: id identifying the hike, req.body.PointID: id identifying the point.
+```json
+{
+  "HikeID": 1,
+  "PointID": 2
+}
+```
+- **Response**: `200`+ a json object with the boolean answer.
+```json
+{
+  true
+}
+```
+- **Error responses**: `422 Error! cannot process request`(wrongly or missing required parameters),`503 Internal Server Error` (generic error)
+
+
+
 **/HikeRefPoints**
 
 
