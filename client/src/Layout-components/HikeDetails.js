@@ -55,14 +55,15 @@ function HikeDetails(props) {
     const loadHike = async () => {
       setLoading(true);
       const hikeObj = await API.getHike(params.hikeID);
-      //console.log(hikeObj);
+      console.log(hikeObj);
       setHike(hikeObj);
       if (auth.login) {
         const rp = await API.getHikeRefPoints(params.hikeID);
+        console.log(rp);
         setRefPoints(rp);
         const gpxObj = await API.getPointsHike(params.hikeID);
         setGpxData(gpxObj);
-        //console.log(gpxObj[0].lat + "\t" + gpxObj[0].lon + "\n" + gpxObj.at(-1).lat + "\t" + gpxObj.at(-1).lon);
+        console.log("Start\n" + gpxObj[0].lat + "\t" + gpxObj[0].lon + "\nEnd\n" + gpxObj.at(-1).lat + "\t" + gpxObj.at(-1).lon);
       }
 
     }
@@ -106,6 +107,13 @@ function HikeDetails(props) {
                     positions={gpxData}
                   />
 
+                  {!refPoints.length &&
+                    <>
+                      <StartPoint position={gpxData[0]} />
+                      <EndPoint position={gpxData.at(-1)} />
+                    </>
+                  }
+
                   {refPoints.map(rp => (
                     
                       rp.IsStart ?
@@ -114,14 +122,15 @@ function HikeDetails(props) {
                       <EndPoint key={rp.refPointsID} position={{ lat: rp.Lat, lon: rp.Lng }} type={rp.Type} />
                       :
                       <RefPoint key={rp.refPointsID} position={{ lat: rp.Lat, lon: rp.Lng }} type={rp.Type} />
-                    
-                  ))}
 
-                  {/*<StartPoint position={gpxData[0]} />
-                  <EndPoint position={gpxData.at(-1)} />*/}
+                  ))}
 
                   <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
                 </MapContainer>
+                <p>Green: Parking Lot</p>
+                <p>Yellow: Hut</p>
+                <p>Red: Peak</p>
+                <p>Blu: Default - Not Specified</p>
               </ImageMapColumn>
             }
             <TextColumn textOnLeft={textOnLeft}>
@@ -204,10 +213,6 @@ function exp_time(time) {
   return res
 }
 
-function AllPoints(props) {
-
-
-}
 
 function MarkerColor(rpType) {
   let iconUrl = "https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/";
@@ -233,7 +238,6 @@ function MarkerColor(rpType) {
 }
 
 function StartPoint(props) {
-  console.log(props);
   const icon = MarkerColor(props.type);
   return (
     <Marker position={props.position} icon={icon}>
