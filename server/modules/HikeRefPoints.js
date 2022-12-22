@@ -56,7 +56,6 @@ function getHikeRefPoints(HikeID) {
       if(err)
         reject(err);
       else{
-        //console.log(rows);
         const hikes = rows.map((r) => ({ RefPointID: r.RefPointID, IsStart: r.IsStart, IsEnd: r.IsEnd, Lat: r.Lat, Lng: r.Lng, Type: r.Type}));
         
         resolve(hikes);
@@ -116,6 +115,26 @@ function setIsEnd  (HikeID, IsEnd, RefPointID) {
     })
   })
 }
+
+
+function IsLastPoint(HikeID, PointID){
+  return new Promise(async(resolve,reject)=>{
+  let points = await getHikeInfo(HikeID);
+  
+  for (let i = 0; i < points.length; i++) {
+    const point = points[i];
+    if(point.RefPointID==PointID){
+      resolve(point.IsEnd==1);
+    }
+  }
+  resolve(false);
+    
+  });
+  
+
+
+
+}
 module.exports={
   setIsEnd,
   setIsStart,
@@ -125,5 +144,6 @@ module.exports={
   addHikeRefPoints,
   getHutsAndParks,
   getHikeInfo,
-  getHikeRefPoints
+  getHikeRefPoints,
+  IsLastPoint
 }

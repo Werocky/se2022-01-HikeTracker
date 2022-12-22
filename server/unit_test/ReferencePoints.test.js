@@ -2,7 +2,7 @@ const refPts = require('../modules/ReferencePoints');
 const HikeRefPoints =require('../modules/HikeRefPoints');
 const h=require('../modules/Hikes')
 const db = require("../modules/DB");
-const { populate } = require('../modules/DB');
+
 
 
 beforeAll(async() =>{   
@@ -36,7 +36,7 @@ describe("get/Add reference points",()=>{
         await refPts.emptyReferencePoint();
         await HikeRefPoints.emptyHikeRefPoint();
         await h.deleteHikes()
-       },db.timeout  
+        },db.timeout  
     )
     afterEach(async()=>{
         await refPts.emptyReferencePoint();
@@ -63,9 +63,9 @@ describe("get/Add reference points",()=>{
     describe("Update Reference Point",()=>{
         beforeEach(async() =>{   
             await refPts.emptyReferencePoint();
-           })
+        })
 
-           it("add a RP with description",async()=>{
+        it("add a RP with description",async()=>{
             await expect(refPts.getFromType("type")).resolves.toEqual([]);
             await expect(refPts.addReferencePointWithDescription('a description',0,0,"type")).resolves.toEqual("New RefPoint added");
             await expect(refPts.getFromType("type")).resolves.not.toEqual([]);
@@ -106,9 +106,7 @@ describe("get/Add reference points",()=>{
             await expect(refPts.updateReferencePoint('n',1,1,"otherType")).resolves.toEqual('Entry updated');
             
         });
-        
-       
-
+    
     });
 
     it("Get HikeInfo", async()=>{
@@ -208,7 +206,7 @@ describe("add connections form external modules",()=>{
         await expect(PL(1,1)).resolves.toEqual("New HikeRefPoint added");
     
         let hrp =await HikeRefPoints.getHikeInfo(1);
-       
+        
         expect(hrp).toHaveLength(1);
         expect(hrp[0]).toHaveProperty('HikeID');
         expect(hrp[0]).toHaveProperty('RefPointID');
@@ -225,9 +223,9 @@ describe("add connections form external modules",()=>{
         //for getting points of a hike is neccessay to have a hike and a Hike and a RP
 
         await expect(HikeRefPoints.getHikeInfo(1)).resolves.not.toEqual([]);
-    
+        
         let hrp =await HikeRefPoints.getHikeInfo(1);
-       
+        
         expect(hrp).toHaveLength(1);
         expect(hrp[0]).toHaveProperty('HikeID');
         expect(hrp[0]).toHaveProperty('RefPointID');
@@ -245,7 +243,7 @@ describe("add connections form external modules",()=>{
         await expect(HikeRefPoints.getHikeInfo(1)).resolves.not.toEqual([]);
     
         let hrp =await HikeRefPoints.getHikeInfo(1);
-       
+        
         expect(hrp).toHaveLength(1);
         expect(hrp[0]).toHaveProperty('HikeID');
         expect(hrp[0]).toHaveProperty('RefPointID');
@@ -291,6 +289,32 @@ test("Get Huts and parkings",async()=>{
     await expect(refPts.getHutsAndParkingLots()).resolves.not.toEqual([]);
     rps= await refPts.getHutsAndParkingLots();
     expect(rps).toHaveLength(4);
+
+
+})
+
+describe("Is Last referencePoit",()=>{
+    const H=  require("../modules/Hikes").addHike;
+    const {hike}= require("../modules/Hikes");
+    const P=  require("../modules/ReferencePoints").addReferencePoint;
+    beforeEach(async()=>{
+        await h.deleteHikes();
+        await refPts.emptyReferencePoint();
+        await H(new hike(1,'title',1,null,1,'p',1,null,null,null,null,"Fakenull.gpx",0,0,0,null));
+        await refPts.addReferencePoint(0,0,"no type");
+        await refPts.addReferencePoint(0,1,"no type2");
+        await HikeRefPoints.addHikeRefPoints(1,1,1,0);
+        await HikeRefPoints.addHikeRefPoints(1,2,0,1);
+    });
+    
+    it("is Ending point",async()=>{
+        await expect(HikeRefPoints.IsLastPoint(1,2)).resolves.toEqual(true);
+
+    })
+    it("is  not Ending point",async()=>{
+        await expect(HikeRefPoints.IsLastPoint(1,1)).resolves.toEqual(false);
+
+    })
 
 
 })
