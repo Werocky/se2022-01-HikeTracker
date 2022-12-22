@@ -64,6 +64,8 @@ function HikeDetails(props) {
         const gpxObj = await API.getPointsHike(params.hikeID);
         setGpxData(gpxObj);
         console.log("Start\n" + gpxObj[0].lat + "\t" + gpxObj[0].lon + "\nEnd\n" + gpxObj.at(-1).lat + "\t" + gpxObj.at(-1).lon);
+      } else {
+        setLoading(false)
       }
 
     }
