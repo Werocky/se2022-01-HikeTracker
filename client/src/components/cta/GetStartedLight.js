@@ -28,9 +28,9 @@ function GetStartedLight(props){
   const subheading = "Interested in Treact ?";
   const heading = "Join the closed beta now.";
   const primaryLinkText = "Get Started";
-  const primaryLinkUrl = "http://timers;e.com";
+  const primaryLinkUrl = /*"http://timers;e.com"*/"";
   const secondaryLinkText = "Contact Us";
-  const secondaryLinkUrl = "http://googl;e.com";
+  const secondaryLinkUrl = /*"http://googl;e.com"*/"";
   const pushDownFooter = true;
 
   const navigate = useNavigate();

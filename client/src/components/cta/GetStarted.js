@@ -28,9 +28,9 @@ const DecoratorBlob2 = tw(SvgDecoratorBlob1)`absolute top-0 right-0 w-80 h-80 tr
 function GetStarted(props){
   const text = "Developers all over the world are happily using Treact.";
   const primaryLinkText = "Get Started";
-  const primaryLinkUrl = "http://timers;e.com";
+  const primaryLinkUrl = /*"http://timers;e.com"*/"";
   const secondaryLinkText = "Contact Us";
-  const secondaryLinkUrl = "http://googl;e.com";
+  const secondaryLinkUrl = /*"http://googl;e.com"*/"";
   const pushDownFooter = true;
 
   const navigate = useNavigate();

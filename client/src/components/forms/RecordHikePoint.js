@@ -143,7 +143,7 @@ function StartHike(props){
                             <ImageMapColumn>
                                 <TextContent>
                                     <Heading>Map</Heading>
-                                    <Description>//show the hike map and reference points here  </Description>
+                                    <Description>show the hike map and reference points here  </Description>
 
                                     <MapContainer
                                         center={{ lat: 45.063128, lng: 7.661272 }}
