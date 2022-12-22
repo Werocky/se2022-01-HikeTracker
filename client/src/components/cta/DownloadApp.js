@@ -40,10 +40,10 @@ function DownloadApp(props){
   const subheading = "Download App";
   const text = "Developers all over the world are happily using Treact.";
   const link1Text = "App Store";
-  const link1Url = "http://apple.com";
+  const link1Url = /*"http://apple.com"*/"";
   const link1IconSrc = appleIconImageSrc;
   const link2Text = "Google Play";
-  const link2Url = "http://play.google.com";
+  const link2Url = /*"http://play.google.com"*/"";
   const link2IconSrc = googlePlayIconImageSrc;
   const pushDownFooter = false;
   const imageSrc = mockupImageSrc;
