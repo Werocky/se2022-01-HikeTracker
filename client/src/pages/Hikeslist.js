@@ -447,8 +447,8 @@ function HikeElement(props) {
     <PostContainer key={props.index} >
       <Post className="group" as="a" >
         <Info>
-          <Image imageSrc={process.env.PUBLIC_URL + "/" + hike.Picture} />
-
+        {<Image imageSrc={`http://localhost:3001/${hike.Picture}`} />
+               }
           <Category>
             {
               hike.Difficulty === "T" ? "Tourist (T)"

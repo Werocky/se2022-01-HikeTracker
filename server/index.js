@@ -58,6 +58,11 @@ passport.serializeUser((user, done) => {
   done(null, user.Id);
 });
 
+
+app.use(express.static('hutImages'));
+app.use('/hutImages', express.static('hutImages'));
+app.use(express.static('hikeImages'));
+app.use('/hikeImages', express.static('hikeImages'));
 // getting user from session
 passport.deserializeUser((id, done) => {
   authN.getUserbyId(id)
@@ -809,7 +814,7 @@ app.post('/hutCreate',
         rpID = await referencePoints.getLastRefPointID();
         console.log("Ref Point Hut added");
       }
-      const hutObj = new huts.Hut(rpID, hut.Name, hut.Elevation, hut.City, hut.Province, hut.Region, hut.Country, hut.WhenOpen, hut.Beds, hut.AvgPrice, hut.Description, "hutImages/default.jpg",hut.HutManagerID, hut.Website, hut.Phone);
+      const hutObj = new huts.Hut(rpID, hut.Name, hut.Elevation, hut.City, hut.Province, hut.Region, hut.Country, hut.WhenOpen, hut.Beds, hut.AvgPrice, hut.Description, "hutImages/hut-"+rpID+".jpg",hut.HutManagerID, hut.Website, hut.Phone);
       const result = await huts.addHut(hutObj);
       res.status(200).json({ message: 'Hut added',hut:hutObj });
 
@@ -930,7 +935,7 @@ app.post('/saveHutPicture/:id', async (req, res) => {
   try {
   
     const file = req.files.file;
-    const path = "../client/public/hikeImages/hut-"+req.params.id+".jpg";
+    const path = "./hutImages/hut-"+req.params.id+".jpg";
    // const path="./hutImages/hut-"+req.params.id+".jpg";
     console.log(path);
     //console.log(path);
