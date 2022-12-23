@@ -132,7 +132,7 @@ function HikeDetails(props) {
                 <p>Green: Parking Lot</p>
                 <p>Yellow: Hut</p>
                 <p>Red: Peak</p>
-                <p>Blu: Default - Not Specified</p>
+                <p>Blue: Default - Not Specified</p>
               </ImageMapColumn>
             }
             <TextColumn textOnLeft={textOnLeft}>
