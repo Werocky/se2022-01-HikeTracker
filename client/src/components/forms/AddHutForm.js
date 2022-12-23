@@ -162,10 +162,10 @@ const submitGeoForm = async (event) => {
 const handleSubmitFile = async (event) => {
   event.preventDefault();
   if (picture.name.toLowerCase().split(".").at(-1) !== "jpg" && picture.name.toLowerCase().split(".").at(-1) !== "jpeg" && picture.name.toLowerCase().split(".").at(-1) !== "png") {
-    setErrorMsg("The file must be jpg or jpeg or png!");
+    setMsgErr("The file must be jpg or jpeg or png!");
     return;
   }
-  setErrorMsg("");
+  setMsgErr("");
   //setFile(event.target[0].files[0]);
   setPictureOk(true);
   setDescription("Add geographical info and name of the hut here");

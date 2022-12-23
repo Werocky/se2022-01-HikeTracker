@@ -309,7 +309,9 @@ app.post('/addHike', async (req, res) => {
     const Id = req.body.guideId;
     const hikeId = await hikes.getLastHikeId() + 1;
 
+
     // add hike
+    console.log("questa è l hike "+hike);
     await hikes.addHike(hike);
     
 
@@ -952,6 +954,33 @@ app.post('/saveHutPicture/:id', async (req, res) => {
     res.status(503).json({ error: `Internal Error` });
   }
 })
+
+app.post('/saveHikePicture/:id', async (req, res) => {
+  if (!req.files) {
+    return res.status(400).send("No files were uploaded.");
+  }
+
+  try {
+  
+    const file = req.files.file;
+    const path = "./hikeImages/hike-"+req.params.id+".jpg";
+   // const path="./hutImages/hut-"+req.params.id+".jpg";
+    console.log(path);
+    //console.log(path);
+    //const hikeID = req.params.hikeID;
+    //const added = await fileNames.addFile(hikeID,path);
+    file.mv(path, async (err) => {
+      if (err) {
+        return res.status(500).send(err);
+      }
+      const result = await hikes.setHikePicture(req.params.id,"hikeImages/hike-"+req.params.id+".jpg");
+      return res.send({ status: "success", path: path });
+    });
+  } catch (err) {
+    res.status(503).json({ error: `Internal Error` });
+  }
+})
+
 
 // activate the server
 app.listen(port, () => {

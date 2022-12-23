@@ -258,14 +258,12 @@ class Hut{
   })
 }
 function setHutPicture  (hutId,path)  {
-  console.log("sono nella funzione");
   return new Promise((resolve, reject) => {
     const sql = " UPDATE Huts SET Picture=? WHERE RefPointID=?;"
     db.run(sql, [path, hutId], function (err, rows) {
       if (err)
         reject(err);
       else {
-        console.log("sono nella funzione");
         resolve({message: "picture set"});
       }
     })

@@ -90,6 +90,19 @@ function getHikes  () {
     });
   });
 };
+function setHikePicture  (hikeId,path)  {
+  return new Promise((resolve, reject) => {
+    const sql = " UPDATE Hikes SET Picture=? WHERE HikeID=?;"
+    db.run(sql, [path, hikeId], function (err, rows) {
+      if (err)
+        reject(err);
+      else {
+        resolve({message: "picture set"});
+      }
+    })
+  })
+}
+
 
  function setDescription  (Description, HikeID)  {
   return new Promise(async (resolve, reject) => {
@@ -276,5 +289,6 @@ module.exports={
   getHikeCity,
   getHikeCountry,
   getHikeProvince,
-  getHikeRegion
+  getHikeRegion,
+  setHikePicture
 }

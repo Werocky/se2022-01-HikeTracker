@@ -178,7 +178,7 @@ function setDescription(Description, HikeID) {
   });
 }
 
-async function addHike(hike, file, points, guideId) {
+async function addHike(hike, file, points, guideId,picture) {
   try {
 
     const data = new FormData();
@@ -198,6 +198,7 @@ async function addHike(hike, file, points, guideId) {
           "hike": hike,
           "points": points,
           "guideId": guideId,
+          
         }),
         headers: {
           'Content-Type': 'application/json',
@@ -205,7 +206,20 @@ async function addHike(hike, file, points, guideId) {
       });
       const hikeId = await response2.json();
       if (response2.ok) {
-        return hikeId;
+        console.log(hikeId);
+        const data = new FormData();
+      data.append("hikeId", hikeId);
+      data.append("file", picture);
+     
+      
+      const response = await axios({
+        method: "post",
+        url: "http://localhost:3001/saveHikePicture/"+hikeId.hikeId,
+        data: data,
+        //headers: { "Content-Type": "multipart/form-data" },
+      });
+      if(response.ok)
+         return hikeId;
       } else {
         throw hikeId;
       }
