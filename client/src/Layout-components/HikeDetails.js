@@ -13,6 +13,7 @@ import { ReactComponent as SvgDotPattern } from "../images/dot-pattern.svg";
 import AnimationRevealPage from "../helpers/AnimationRevealPage";
 import Header from "../components/headers/light.js";
 import distanceBetweenPoints from "../DistanceBeteenPoints";
+import { Button } from "react-bootstrap";
 
 
 const Container = tw.div`relative`;
@@ -46,10 +47,11 @@ function HikeDetails(props) {
   const auth = useContext(AuthContext);
   const params = useParams();
   const [hike, setHike] = useState(undefined);
-  const [gpxData, setGpxData] = useState(undefined);  // array of [p.lat, p.lon]
+  const [gpxData, setGpxData] = useState();  // array of [p.lat, p.lon]
   const [bounds, setBounds] = useState(undefined);  // map bounds
   const [refPoints, setRefPoints] = useState([]);  // array of ref points
   const [loading, setLoading] = useState(true);
+  const [canStart,setCanStart]=useState(true);
 
   useEffect(() => {
     const loadHike = async () => {
@@ -58,6 +60,20 @@ function HikeDetails(props) {
       console.log(hikeObj);
       setHike(hikeObj);
       if (auth.login) {
+        if(auth.user.Role=="H" && props.myHikes.length>0)
+        {
+          props.myHikes.forEach(h => {
+            if(h.HikeID==params.hikeID){
+              setCanStart(false);
+            }          
+          });
+        }
+        else if (auth.user.Role=="H" && props.myHikes.length==0)
+          setCanStart(true);
+        else
+          setCanStart(false);
+
+        console.log(props.myHikes);
         const rp = await API.getHikeRefPoints(params.hikeID);
         console.log(rp);
         setRefPoints(rp);
@@ -65,12 +81,13 @@ function HikeDetails(props) {
         setGpxData(gpxObj);
         console.log("Start\n" + gpxObj[0].lat + "\t" + gpxObj[0].lon + "\nEnd\n" + gpxObj.at(-1).lat + "\t" + gpxObj.at(-1).lon);
       } else {
+        setCanStart(false);
         setLoading(false)
       }
 
     }
     loadHike();
-
+ 
   }, [params.hikeID, auth.login])
 
   useEffect(() => {
@@ -80,6 +97,11 @@ function HikeDetails(props) {
       setLoading(false);
     }
   }, [gpxData])
+
+  const startHike = () => {
+    props.setMyHikes(oldHikes => [...oldHikes, hike]);
+    setCanStart(false);
+  };
 
   const imageSrc = StatsIllustrationSrc;
   const textOnLeft = false;
@@ -109,7 +131,7 @@ function HikeDetails(props) {
                     positions={gpxData}
                   />
 
-                  {!refPoints.length &&
+                  {refPoints!=undefined && !refPoints.length && gpxData!=undefined && gpxData.length!=0 &&
                     <>
                       <StartPoint position={gpxData[0]} />
                       <EndPoint position={gpxData.at(-1)} />
@@ -132,7 +154,7 @@ function HikeDetails(props) {
                 <p>Green: Parking Lot</p>
                 <p>Yellow: Hut</p>
                 <p>Red: Peak</p>
-                <p>Blu: Default - Not Specified</p>
+                <p>Blue: Default - Not Specified</p>
               </ImageMapColumn>
             }
             <TextColumn textOnLeft={textOnLeft}>
@@ -172,6 +194,7 @@ function HikeDetails(props) {
                 </Statistics>
                 <Description>{hike.Description}</Description>
               </TextContent>
+             { canStart &&<Button onClick={startHike}>Start Hike</Button>}
             </TextColumn>
 
 

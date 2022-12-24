@@ -93,7 +93,8 @@ function AddHikeForm(props) {
   const [errorMsg,setErrorMsg]=useState("");
   const [msgState,setmsgState]=useState("danger");
   const [msgErr, setMsgErr] = useState("");
-
+  const [picture,setPicture]=useState();
+  const [pictureOk,setPictureOk]=useState();
   const [heading, setHeading] = useState("Add a new hike here");
   const [subheading, setSubHeading] = useState("Select the gpx file.");
   const [submitButtonText, setSubmitButtonText] = useState("Add");
@@ -133,9 +134,9 @@ function AddHikeForm(props) {
           setCity(informations?.address?.village ? informations.address.village : informations.address.town);
         })
 
-      setHeading("New Hike");
-      setSubHeading("Check, modify and add parameters")
-      setSubmitButtonText("Save All");
+      setHeading("Add the cover of the Hike");
+      setSubHeading("insert a png or jpg or jpeg file")
+      setSubmitButtonText("Add");
       setFileOk(true); // if nothing went wrong
     }
 
@@ -162,6 +163,20 @@ function AddHikeForm(props) {
     };
     reader.readAsText(event.target[0].files[0]);
   }
+  const handleSubmitPicture = async (event) => {
+    event.preventDefault();
+    if (picture.name.toLowerCase().split(".").at(-1) !== "jpg" && picture.name.toLowerCase().split(".").at(-1) !== "jpeg" && picture.name.toLowerCase().split(".").at(-1) !== "png") {
+      setMsgErr("The file must be jpg or jpeg or png!");
+      return;
+    }
+    setMsgErr("");
+    //setFile(event.target[0].files[0]);
+    setPictureOk(true);
+    setHeading("New Hike");
+      setSubHeading("Check, modify and add parameters")
+      setSubmitButtonText("Save All");
+  }
+  
 
   const handleSubmitForm = async (event) => {
     event.preventDefault();
@@ -199,9 +214,10 @@ function AddHikeForm(props) {
     }
     console.log(refP);
     try {
-      const res = await API.addHike(hike, file, refP, auth.user.Id);
+      const res = await API.addHike(hike, file, refP, auth.user.Id,picture);
       setmsgState('primary');
       setMsgErr('Hike Added!');
+      navigate("/hikes");
     } catch (err) {
       props.errorHandler(err);
     }
@@ -246,13 +262,20 @@ function AddHikeForm(props) {
         <Content>
           <FormContainer>
             <TwoColumn>
-              {!fileOk &&
+              {!fileOk && !pictureOk &&
                 <ImageMapColumn>
                   {/*put the picture or map here*/}
                   <Image imageSrc={EmailIllustrationSrc} />
                 </ImageMapColumn>
               }
-              {fileOk &&
+               {fileOk && !pictureOk &&
+                <ImageMapColumn>
+                  {/*put the picture or map here*/}
+                  <Image imageSrc={EmailIllustrationSrc} />
+                </ImageMapColumn>
+              }
+              
+              {fileOk && pictureOk &&
                 <ImageMapColumn>
                   <TextContent>
                     <Heading>Map</Heading>
@@ -298,7 +321,7 @@ function AddHikeForm(props) {
                   <Heading>{heading}</Heading>
                   <Description>{subheading}</Description>
 
-                  {!fileOk &&
+                  {!fileOk && !pictureOk &&
                     <Form onSubmit={handleSubmitFile} >
 
                       <Input type="file" required onChange={event => setFile(event.target.files[0])} />
@@ -308,7 +331,17 @@ function AddHikeForm(props) {
                       <SubmitButton type="submit">{submitButtonText}</SubmitButton>
                     </Form>
                   }
-                  {fileOk &&
+                    {fileOk && !pictureOk &&
+                    <Form onSubmit={handleSubmitPicture} >
+
+                      <Input type="file" required onChange={event => setPicture(event.target.files[0])} />
+                      {msgErr &&
+                        <Alert>{msgErr}</Alert>
+                      }
+                      <SubmitButton type="submit">{submitButtonText}</SubmitButton>
+                    </Form>
+                  }
+                  {fileOk && pictureOk &&
                     <Form onSubmit={handleSubmitForm}>
                       <InputContainer>
                         <Label htmlFor="title-input">Title</Label>

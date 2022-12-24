@@ -57,6 +57,11 @@ passport.serializeUser((user, done) => {
   done(null, user.Id);
 });
 
+
+app.use(express.static('hutImages'));
+app.use('/hutImages', express.static('hutImages'));
+app.use(express.static('hikeImages'));
+app.use('/hikeImages', express.static('hikeImages'));
 // getting user from session
 passport.deserializeUser((id, done) => {
   authN.getUserbyId(id)
@@ -137,7 +142,18 @@ app.get('/getHikes', (req, res) => {
     .then(list => res.json(list))
     .catch(() => res.status(500).end());
 });
-
+//get started hikes full list
+app.get('/getMyHikes', (req, res) => {
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    return res.status(422).json({ error: 'cannot process request' });
+  }
+  console.log(req);
+  console.log(req.user.Id);
+  hikes.getMyHikes(req.user.Id)
+    .then(list => res.json(list))
+    .catch(() => res.status(500).end());
+});
 //GET HIKE LOCATIONS
 app.get('/hikesLocations', async (req, res) => {
   const errors = validationResult(req);
@@ -303,7 +319,9 @@ app.post('/addHike', async (req, res) => {
     const Id = req.body.guideId;
     const hikeId = await hikes.getLastHikeId() + 1;
 
+
     // add hike
+    console.log("questa è l hike "+hike);
     await hikes.addHike(hike);
     
 
@@ -808,7 +826,7 @@ app.post('/hutCreate',
         rpID = await referencePoints.getLastRefPointID();
         console.log("Ref Point Hut added");
       }
-      const hutObj = new huts.Hut(rpID, hut.Name, hut.Elevation, hut.City, hut.Province, hut.Region, hut.Country, hut.WhenOpen, hut.Beds, hut.AvgPrice, hut.Description, "hutImages/default.jpg",hut.HutManagerID, hut.Website, hut.Phone);
+      const hutObj = new huts.Hut(rpID, hut.Name, hut.Elevation, hut.City, hut.Province, hut.Region, hut.Country, hut.WhenOpen, hut.Beds, hut.AvgPrice, hut.Description, "hutImages/hut-"+rpID+".jpg",hut.HutManagerID, hut.Website, hut.Phone);
       const result = await huts.addHut(hutObj);
       res.status(200).json({ message: 'Hut added',hut:hutObj });
 
@@ -929,7 +947,7 @@ app.post('/saveHutPicture/:id', async (req, res) => {
   try {
   
     const file = req.files.file;
-    const path = "../client/public/hikeImages/hut-"+req.params.id+".jpg";
+    const path = "./hutImages/hut-"+req.params.id+".jpg";
    // const path="./hutImages/hut-"+req.params.id+".jpg";
     console.log(path);
     //console.log(path);
@@ -946,6 +964,33 @@ app.post('/saveHutPicture/:id', async (req, res) => {
     res.status(503).json({ error: `Internal Error` });
   }
 })
+
+app.post('/saveHikePicture/:id', async (req, res) => {
+  if (!req.files) {
+    return res.status(400).send("No files were uploaded.");
+  }
+
+  try {
+  
+    const file = req.files.file;
+    const path = "./hikeImages/hike-"+req.params.id+".jpg";
+   // const path="./hutImages/hut-"+req.params.id+".jpg";
+    console.log(path);
+    //console.log(path);
+    //const hikeID = req.params.hikeID;
+    //const added = await fileNames.addFile(hikeID,path);
+    file.mv(path, async (err) => {
+      if (err) {
+        return res.status(500).send(err);
+      }
+      const result = await hikes.setHikePicture(req.params.id,"hikeImages/hike-"+req.params.id+".jpg");
+      return res.send({ status: "success", path: path });
+    });
+  } catch (err) {
+    res.status(503).json({ error: `Internal Error` });
+  }
+})
+
 
 // activate the server
 app.listen(port, () => {

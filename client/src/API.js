@@ -54,6 +54,35 @@ async function getHike(HikeID) {
   }
 }
 
+async function getMyHikes() {
+  const response = await fetch(APIURL + '/getMyHikes',
+  {
+    credentials: 'include',
+   } );
+  const hikes = await response.json();
+  if (response.ok) {
+    return hikes.map((r) => ({
+      HikeID: r.HikeID,
+      Start: r.Start,
+      End: r.End,
+      Title: r.Title,
+      Length: r.Length,
+      ExpectedTime: r.ExpectedTime,
+      Ascent: r.Ascent,
+      Difficulty: r.Difficulty,
+      Description: r.Description,
+      Country: r.Country,
+      Province: r.Province,
+      Region: r.Region,
+      AssociatedGuide: r.AssociatedGuide,
+      City: r.City,
+      Picture:r.Picture
+    }))
+  } else {
+    throw hikes; //which will contain an error if it is the case
+  }
+}
+
 //GET HIKES LOCATIONS
 async function getHikesLocations() {
   try {
@@ -178,7 +207,7 @@ function setDescription(Description, HikeID) {
   });
 }
 
-async function addHike(hike, file, points, guideId) {
+async function addHike(hike, file, points, guideId,picture) {
   try {
 
     const data = new FormData();
@@ -198,6 +227,7 @@ async function addHike(hike, file, points, guideId) {
           "hike": hike,
           "points": points,
           "guideId": guideId,
+          
         }),
         headers: {
           'Content-Type': 'application/json',
@@ -205,7 +235,20 @@ async function addHike(hike, file, points, guideId) {
       });
       const hikeId = await response2.json();
       if (response2.ok) {
-        return hikeId;
+        console.log(hikeId);
+        const data = new FormData();
+      data.append("hikeId", hikeId);
+      data.append("file", picture);
+     
+      
+      const response = await axios({
+        method: "post",
+        url: "http://localhost:3001/saveHikePicture/"+hikeId.hikeId,
+        data: data,
+        //headers: { "Content-Type": "multipart/form-data" },
+      });
+      if(response.ok)
+         return hikeId;
       } else {
         throw hikeId;
       }
@@ -656,6 +699,7 @@ const API = {
   getHutCoords,
   getHikesLocations,
   linkHutToHike,
-  getHikeRefPoints
+  getHikeRefPoints,
+  getMyHikes
 };
 export default API;

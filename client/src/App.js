@@ -13,7 +13,7 @@ import Register from "./pages/Signup";
 import Login from './pages/Login'
 import Hikes from './pages/Hikeslist'
 import Huts from './pages/Hutslist'
-import MyHikes from './pages/MyHikes'
+import MyHikesList from './pages/MyHikes'
 import AddParkingLot from './components/forms/AddParkingLot';
 import AddHikeForm from './components/forms/AddHikeForm'
 import AddHutForm from './components/forms/AddHutForm';
@@ -96,7 +96,7 @@ function AppLayout(props) {
   const [hikes, setHikes] = useState([]);
   const [huts, setHuts] = useState([]);
   const [loading, setLoading] = useState(true);
-
+  const [myHikes,setMyHikes]=useState([]);
 
   useEffect(() => {
     const reloadHikes = async () => {
@@ -116,6 +116,19 @@ function AppLayout(props) {
     }
   }, []);
 
+  useEffect(()=>
+  {
+    const reloadMyHikes=async()=>{
+      const myHikesArray=await API.getMyHikes();
+      setMyHikes(myHikesArray);
+    }
+    if (auth.login && auth.user.Role == "H") {
+      reloadMyHikes();
+    }
+    else
+      setMyHikes([]);
+    },[auth.login]);
+
   return (
     <>
       <Container>
@@ -130,7 +143,7 @@ function AppLayout(props) {
           />
         } />
         <Route path='/:hikeID' element={
-          <HikeDetails logout={props.logout} />
+          <HikeDetails logout={props.logout}  myHikes={myHikes} setMyHikes={setMyHikes} />
         } />
         <Route path='/huts/:hutID' element={
           <HutDetails logout={props.logout} hikes={hikes} errorHandler={props.errorHandler}/>
@@ -149,7 +162,7 @@ function AppLayout(props) {
           <AddHikeForm logout={props.logout} message={props.message} errorHandler={props.errorHandler} /> 
         } />
         <Route path='/hikes' element={
-          <Hikes hikes={hikes} loading={loading} setHikes={setHikes} logout={props.logout} />
+          <Hikes hikes={hikes} loading={loading} setHikes={setHikes} logout={props.logout} myHikes={myHikes} setMyHikes={setMyHikes} />
         } />
         <Route path='/huts' element={
 
@@ -183,8 +196,8 @@ function AppLayout(props) {
         <Route path='/terminateHike' element={
           <TerminateHike />
         }/>
-        <Route path='/myHikes' element={
-          <MyHikes />
+        <Route path='/myHikes'  element={
+          <MyHikesList myHikes={myHikes} setMyHikes={setMyHikes} />
         }/>
 
       </Routes>
