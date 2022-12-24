@@ -13,7 +13,7 @@ import Register from "./pages/Signup";
 import Login from './pages/Login'
 import Hikes from './pages/Hikeslist'
 import Huts from './pages/Hutslist'
-import MyHikes from './pages/MyHikes'
+import MyHikesList from './pages/MyHikes'
 import AddParkingLot from './components/forms/AddParkingLot';
 import AddHikeForm from './components/forms/AddHikeForm'
 import AddHutForm from './components/forms/AddHutForm';
@@ -197,7 +197,7 @@ function AppLayout(props) {
           <TerminateHike />
         }/>
         <Route path='/myHikes'  element={
-          <MyHikes myHikes={myHikes} setMyHikes={setMyHikes} />
+          <MyHikesList myHikes={myHikes} setMyHikes={setMyHikes} />
         }/>
 
       </Routes>
