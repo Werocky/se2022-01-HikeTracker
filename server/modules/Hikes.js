@@ -58,6 +58,17 @@ function getHikes  () {
       });
     });
   };
+  function getMyHikes  (id) {
+    return new Promise((resolve, reject) => {
+      const sql = 'SELECT * FROM Hikes where HikeID in (SELECT HikeID from ActiveHikePoints where HikerId=?)';
+      db.all(sql, [id], (err, rows) => {
+        if (err) {
+          reject(err);
+        }
+        resolve(rows);
+      });
+    });
+  };
 
  function getHike  (hikeID)  {
 
@@ -75,6 +86,8 @@ function getHikes  () {
     });
   });
 };
+
+
 
  function getLastHikeId  () {
   return new Promise((resolve,reject) => {
@@ -290,5 +303,6 @@ module.exports={
   getHikeCountry,
   getHikeProvince,
   getHikeRegion,
-  setHikePicture
+  setHikePicture,
+  getMyHikes
 }

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect,useContext } from "react";
 import AnimationRevealPage from "../helpers/AnimationRevealPage.js";
 import { Container, ContentWithPaddingXl } from "../components/misc/Layouts";
 import tw from "twin.macro";
@@ -9,6 +9,7 @@ import { SectionHeading } from "../components/misc/Headings";
 import { PrimaryButton } from "../components/misc/Buttons";
 import { PrimaryButton as PrimaryButtonBase } from "../components/misc/Buttons.js";
 import { useNavigate } from "react-router-dom";
+import AuthContext from "../AuthContext.js";
 import API from "../API";
 
 const HeadingRow = tw.div`flex  justify-center`;
@@ -80,6 +81,7 @@ const Column2 = tw.div`sm:w-1/2 flex flex-col `;
 
 function HikeList(props) {
 
+  const auth = useContext(AuthContext);
   const headingText = "Hikes";
   //const hikes = props.hikes;
 
@@ -94,7 +96,7 @@ function HikeList(props) {
   const [showText, setShowText] = useState(false);
   const [showMap, setShowMap] = useState(false);
   const [loading, setLoading] = useState(true);
-
+  
   useEffect(() => {
     const updateData = async () => {
       setDefaultHikes(props.hikes);
@@ -107,6 +109,8 @@ function HikeList(props) {
 
     updateData();
   }, [props.hikes]);
+
+
 
   const onLoadMoreClick = () => {
     setVisible(v => v + 6);

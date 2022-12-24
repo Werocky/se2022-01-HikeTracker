@@ -143,7 +143,18 @@ app.get('/getHikes', (req, res) => {
     .then(list => res.json(list))
     .catch(() => res.status(500).end());
 });
-
+//get started hikes full list
+app.get('/getMyHikes', (req, res) => {
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    return res.status(422).json({ error: 'cannot process request' });
+  }
+  console.log(req);
+  console.log(req.user.Id);
+  hikes.getMyHikes(req.user.Id)
+    .then(list => res.json(list))
+    .catch(() => res.status(500).end());
+});
 //GET HIKE LOCATIONS
 app.get('/hikesLocations', async (req, res) => {
   const errors = validationResult(req);
