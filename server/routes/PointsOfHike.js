@@ -25,13 +25,16 @@ router.use(cors(corsOptions))
 router.post('/addReferencePointToHike',[//TODO check params
 
 ],async(req,res)=>{
+
     const errors= validationResult(req);
     if(!errors.isEmpty()){
         return res.status(422).json({ error: 'cannot process request' });
     }
-    try{//TODO implement
+    try{
         //check hike exists
+        
         let check= await hikes.getHike(req.body.HikeID);
+
         if(check==null || check.HikeID==null)return res.status(401).json({ error: 'HikeID not found in DB' });
         //check hike belongs to the HikeID
         if(check.AssociatedGuide==null || check.AssociatedGuide!= req.body.GuideID)return res.status(522).json({ error: 'Hike not assigned to user' });
@@ -40,9 +43,12 @@ router.post('/addReferencePointToHike',[//TODO check params
         if(check==undefined || check==null)return res.status(401).json({ error: 'Point not found in DB' });
 
         //addReferencePoint to Hike.-> not as start or End
-        PointsOfHike.addHikeRefPoints(req.body.HikeID,req.body.PointID,0,0);
+        await PointsOfHike.addHikeRefPoints(req.body.HikeID,req.body.PointID,0,0);
+        res.status(200).end();
 
-    }catch(error){//TODO implement better error handling
+    }catch(error){
+        if(error=="Linked yet")res.status(504).json(error);
+
         res.status(503).json(error);
     }
 })
