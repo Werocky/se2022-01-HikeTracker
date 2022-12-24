@@ -366,6 +366,22 @@ ActiveHikeID
 ```
 - **Error responses**: `422 Error! cannot process request`(wrongly or missing required parameters),`503 Internal Server Error` (generic error)
 
+**/api/PointsOfHike/addReferencePointToHike**//TODO
+- **Adds an existing reference point to a hike.**.
+- **Request body**: req.body.HikeID: id identifying the hike, req.body.PointID: id identifying the point, req.body.GuideID: ID of the associated guide to the given hike.
+
+```json
+{
+  "HikeID": 1,
+  "PointID": 82,
+  "GuideID": "d@polito.it"
+
+}
+```
+- **Response**: `200`(the reference point was linked correctly to the hike).
+- **Error responses**: `422 Error! cannot process request`(wrongly or missing required parameters),`503 Internal Server Error` (generic error),
+`401 HikeID not  in DB`(the HikeID did not belong to any hike in the DB),
+`522 Hike not assigned to user`(the user is not registered or doenst have the permissions to modify the given hike),`402 ReferencePoint not  in DB`(the PointID did not belong to any reference point in the DB).
 
 
 **/HikeRefPoints**

@@ -3,8 +3,8 @@
 const express = require('express');
 const router = express.Router();
 const hikes= require('../modules/Hikes');
-const refPoint =require('../modules/HikeRefPoints');
 const PointsOfHike= require('../modules/HikeRefPoints');
+const referencePoint= require('../modules/ReferencePoints');
 
 
 const { check, validationResult, body } = require('express-validator'); // validation middleware
@@ -21,8 +21,35 @@ const corsOptions = {
 router.use(cors(corsOptions))
 
 
+//add a specific -existing- reference point to a Hike
+router.post('/addReferencePointToHike',[//TODO check params
+
+],async(req,res)=>{
+    const errors= validationResult(req);
+    if(!errors.isEmpty()){
+        return res.status(422).json({ error: 'cannot process request' });
+    }
+    try{//TODO implement
+        //check hike exists
+        let check= await hikes.getHike(req.body.HikeID);
+        if(check==null || check.HikeID==null)return res.status(401).json({ error: 'HikeID not found in DB' });
+        //check hike belongs to the HikeID
+        if(check.AssociatedGuide==null || check.AssociatedGuide!= req.body.GuideID)return res.status(522).json({ error: 'Hike not assigned to user' });
+        //check referencePoint Exists
+        check= await referencePoint.getReferencePoint(req.body.PointID);
+        if(check==undefined || check==null)return res.status(401).json({ error: 'Point not found in DB' });
+
+        //addReferencePoint to Hike.-> not as start or End
+        PointsOfHike.addHikeRefPoints(req.body.HikeID,req.body.PointID,0,0);
+
+    }catch(error){//TODO implement better error handling
+        res.status(503).json(error);
+    }
+})
+
+//not usre if its the best way to work.
 router.post('/isEnd',[
-    //todo check hikeID and PointID
+    //TODO check hikeID and PointID
 ],async(req,res)=>{
 
     const errors= validationResult(req);  
