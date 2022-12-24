@@ -47,7 +47,7 @@ function HikeDetails(props) {
   const auth = useContext(AuthContext);
   const params = useParams();
   const [hike, setHike] = useState(undefined);
-  const [gpxData, setGpxData] = useState(undefined);  // array of [p.lat, p.lon]
+  const [gpxData, setGpxData] = useState();  // array of [p.lat, p.lon]
   const [bounds, setBounds] = useState(undefined);  // map bounds
   const [refPoints, setRefPoints] = useState([]);  // array of ref points
   const [loading, setLoading] = useState(true);
@@ -131,7 +131,7 @@ function HikeDetails(props) {
                     positions={gpxData}
                   />
 
-                  {!refPoints.length &&
+                  {refPoints!=undefined && !refPoints.length && gpxData!=undefined && gpxData.length!=0 &&
                     <>
                       <StartPoint position={gpxData[0]} />
                       <EndPoint position={gpxData.at(-1)} />
