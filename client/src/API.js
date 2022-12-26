@@ -259,6 +259,31 @@ async function addHike(hike, file, points, guideId,picture) {
   }
 }
 
+
+async function startHike(hikeId,PointId) {
+  try {
+
+      const response = await fetch((APIURL + '/api/activePoint/GenerateActiveHike'), {
+        method: 'POST',
+        credentials: 'include',
+        body: JSON.stringify({
+          "HikeID": hikeId,
+          "PointID": PointId,          
+        }),
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+      if (response.ok) {
+         return hikeId;
+      } else {
+        throw hikeId;
+      }
+  } catch (err) {
+    throw err;
+  }
+}
+
 //retrieve points of the hike's track, given HikeID
 async function getPointsHike(HikeID) {
   try {
@@ -587,6 +612,9 @@ async function addHut(Hut,picture) {
   }
 }
 
+
+
+
 async function getHut(Hut) {
   try {
     const response = await fetch((APIURL + '/getHut'), {
@@ -700,6 +728,7 @@ const API = {
   getHikesLocations,
   linkHutToHike,
   getHikeRefPoints,
-  getMyHikes
+  getMyHikes,
+  startHike
 };
 export default API;

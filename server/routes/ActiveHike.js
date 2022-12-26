@@ -26,6 +26,7 @@ router.post('/GenerateActiveHike',[
     //todo check params
 ],async(req,res)=>{
     const errors= validationResult(req);
+    const userID=req.user.Id;
     if(!errors.isEmpty()){
         return res.status(422).json({ error: 'cannot process request' });
     } 

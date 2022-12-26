@@ -100,6 +100,9 @@ function HikeDetails(props) {
 
   const startHike = () => {
     props.setMyHikes(oldHikes => [...oldHikes, hike]);
+    console.log(hike.HikeID);
+    console.log(refPoints[0]);
+    API.startHike(hike.HikeID,refPoints[0]);
     setCanStart(false);
   };
 
