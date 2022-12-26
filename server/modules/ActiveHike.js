@@ -1,5 +1,7 @@
 'use strict';
 
+const { getMyHikes } = require('./Hikes');
+
 const db = require('./DB').db;
 
 
@@ -73,6 +75,15 @@ function getNextActiveHike(){
         })
     })
 }
+function getUserHikeDetails(User, AHikeID){
+    return new Promise((resolve,reject)=>{
+        let sql="SELECT RP.RefPointID as PointID, RP.description as description, RP.Lat as Lat, RP.Lng as Lng RP.Type as Type, AH.ArrivalTime as ArrivalTime FROM ActiveHikePoints AH, ReferencePoints RP WHERE RP.RefPointID = AH.PointID AND HikerID = ? AND ActiveHikeID = ?";
+        db.all(sql,[User, AHikeID],(err,rows)=>{
+            if(err)reject(err);
+            resolve(rows);
+        });
+    })
+}
 
 module.exports ={
     ActiveHikePoint,
@@ -80,5 +91,6 @@ module.exports ={
     ReserveActivePoint,
     emptyConnection,
     getActivePoints, 
-    getNextActiveHike
+    getNextActiveHike,
+    getUserHikeDetails
 }

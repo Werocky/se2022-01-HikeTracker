@@ -23,7 +23,7 @@ router.use(cors(corsOptions))
 
 
 router.post('/GenerateActiveHike',[
-    //todo check params
+    //TODO check params
 ],async(req,res)=>{
     const errors= validationResult(req);
     const userID=req.user.Id;
@@ -52,7 +52,7 @@ router.post('/GenerateActiveHike',[
         if(!flag)return res.status(403).json({'error':'ReferencePoint not registered to Hike: '+ req.body.HikeID});
         
         //set activePoint as reached in DB
-        await ActivePoints.RegisterActivePoint(req.body.HikeID,req.user.id,req.body.PointID, NextActiveHikeID);
+        await ActivePoints.RegisterActivePoint(req.body.HikeID,userID,req.body.PointID, NextActiveHikeID);
         
         return res.status(200).json({"ActiveHikeID":NextActiveHikeID});
 
@@ -104,6 +104,28 @@ router.post('/PassPoint',[
         res.status(503).json(error);
     }
 
+});
+
+
+router.get('/myHikeReferencePoints',[
+    //TODO check params
+],async(req,res)=>{
+    const errors= validationResult(req);
+    
+    if(!errors.isEmpty()){
+        return res.status(422).json({ error: 'cannot process request' });
+    } try{
+        //TODO implement get /myHikes
+
+
+        let answer=await ActivePoints.getUserHikeDetails(req.user.Id, req.body.ActiveHikeID);
+
+        res.status(200).json(answer);
+
+
+    }catch(error){
+        res.status(503).json(error);
+    }
 });
 
 

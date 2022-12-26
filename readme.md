@@ -673,7 +673,27 @@ Example of request body:
 ```
 
 - **Permissions allowed**: Hiker
-- **Error responses**: `402 Hike not found` HikeID doesnt belong to a Hike in the DB, `403 error':'ReferencePoint not registered to Hike: '+ req.body.HikeID` the PointID doesnt belong to the HikeID or the reference point was not found. `503` generic error.
+- **Error responses**: `402 Hike not found` HikeID doesnt belong to a Hike in the DB, `403 error':'ReferencePoint not registered to Hike: '+ req.body.HikeID` the PointID doesnt belong to the HikeID or the reference point was not found. <page>`503` generic error</page>.
+
+#### GET
+
+**/api/activePoint/myHikeReferencePoints**
+
+- <b> Get all reference point details of a given active Hike </b>
+- **Request header**: empty.
+- **Request body**: a JSON object containing `ActiveHikeID`
+
+Example of request body:
+```json
+{
+  "ActiveHikeID": 1
+}
+```
+- **Response header**: `200`(the points were returned correctly)
+- **Response body**: a JSON object with an array containing all the ActiveHike Reference points that were reached by the user  + the time of arrival at each point 
+- **Permissions allowed**: Hiker
+- **Error responses**: `422` cannot process request,`503` generic error.
+
 ## Testing
 
 ### Testing Frontend
