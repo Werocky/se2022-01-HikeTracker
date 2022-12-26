@@ -37,7 +37,7 @@ router.post('/addReferencePointToHike',[//TODO check params
 
         if(check==null || check.HikeID==null)return res.status(401).json({ error: 'HikeID not found in DB' });
         //check hike belongs to the HikeID
-        if(check.AssociatedGuide==null || check.AssociatedGuide!= req.body.GuideID)return res.status(522).json({ error: 'Hike not assigned to user' });
+        if(check.AssociatedGuide==null || check.AssociatedGuide!= req.user.id)return res.status(522).json({ error: 'Hike not assigned to user' });
         //check referencePoint Exists
         check= await referencePoint.getReferencePoint(req.body.PointID);
         if(check==undefined || check==null)return res.status(401).json({ error: 'Point not found in DB' });

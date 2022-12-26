@@ -51,7 +51,7 @@ router.post('/GenerateActiveHike',[
         if(!flag)return res.status(403).json({'error':'ReferencePoint not registered to Hike: '+ req.body.HikeID});
         
         //set activePoint as reached in DB
-        await ActivePoints.RegisterActivePoint(req.body.HikeID,req.body.HikerID,req.body.PointID, NextActiveHikeID);
+        await ActivePoints.RegisterActivePoint(req.body.HikeID,req.user.id,req.body.PointID, NextActiveHikeID);
         
         return res.status(200).json({"ActiveHikeID":NextActiveHikeID});
 
@@ -97,7 +97,7 @@ router.post('/PassPoint',[
         if(!flag)return res.status(403).json({'error':'ReferencePoint not registered to Hike: '+ req.body.HikeID});
         
         //set activePoint as reached in DB
-        let answer=await ActivePoints.RegisterActivePoint(req.body.HikeID,req.body.HikerID,req.body.PointID, req.body.ActiveHikeID);
+        let answer=await ActivePoints.RegisterActivePoint(req.body.HikeID,req.user.id,req.body.PointID, req.body.ActiveHikeID);
         return res.status(200).json(answer);
     }catch(error){
         res.status(503).json(error);
