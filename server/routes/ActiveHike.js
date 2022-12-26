@@ -26,6 +26,7 @@ router.post('/GenerateActiveHike',[
     //todo check params
 ],async(req,res)=>{
     const errors= validationResult(req);
+    const userID=req.user.Id;
     if(!errors.isEmpty()){
         return res.status(422).json({ error: 'cannot process request' });
     } 
@@ -51,7 +52,7 @@ router.post('/GenerateActiveHike',[
         if(!flag)return res.status(403).json({'error':'ReferencePoint not registered to Hike: '+ req.body.HikeID});
         
         //set activePoint as reached in DB
-        await ActivePoints.RegisterActivePoint(req.body.HikeID,req.body.HikerID,req.body.PointID, NextActiveHikeID);
+        await ActivePoints.RegisterActivePoint(req.body.HikeID,userID,req.body.PointID, NextActiveHikeID);
         
         return res.status(200).json({"ActiveHikeID":NextActiveHikeID});
 
