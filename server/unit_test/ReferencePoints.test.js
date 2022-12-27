@@ -293,7 +293,6 @@ test("Get Huts and parkings",async()=>{
     await expect(refPts.getAllRefPoints()).resolves.not.toEqual([]);
     let rps= await refPts.getAllRefPoints();
     expect(rps).toHaveLength(5);
-    await expect(HikeRefPoints.getHutsAndParkingLots()).resolves.not.toEqual([]);
     await expect(refPts.getHutsAndParkingLots()).resolves.not.toEqual([]);
     rps= await refPts.getHutsAndParkingLots();
     expect(rps).toHaveLength(4);
