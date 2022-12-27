@@ -4,17 +4,6 @@ const { getMyHikes } = require('./Hikes');
 
 const db = require('./DB').db;
 
-
-class  ActiveHikePoint{
-    constructor(HikeID,HikerID,PointID,ArrivalTime,activeHikeID){
-
-        this.HikeID=HikeID;
-        this.HikerID=HikerID;
-        this.PointID=PointID;
-        this.ArrivalTime=ArrivalTime;
-        this.activeHikeID=activeHikeID;
-    }
-}
 function RegisterActivePoint(HikeID,HikerID,PointID,activeHikeID){
     let Time= new Date();
         try{
@@ -77,16 +66,16 @@ function getNextActiveHike(){
 }
 function getUserHikeDetails(User, AHikeID){
     return new Promise((resolve,reject)=>{
-        let sql="SELECT RP.RefPointID as PointID, RP.description as description, RP.Lat as Lat, RP.Lng as Lng RP.Type as Type, AH.ArrivalTime as ArrivalTime FROM ActiveHikePoints AH, ReferencePoints RP WHERE RP.RefPointID = AH.PointID AND HikerID = ? AND ActiveHikeID = ?";
+        let sql="SELECT RP.RefPointID AS PointID, RP.description AS description, RP.Lat AS Lat, RP.Lng AS Lng, RP.Type AS Type, AH.ArrivalTime AS ArrivalTime FROM ActiveHikePoints AH, ReferencePoints RP WHERE RP.RefPointID = AH.PointID AND HikerID = ? AND ActiveHikeID = ?";
         db.all(sql,[User, AHikeID],(err,rows)=>{
             if(err)reject(err);
+
             resolve(rows);
         });
     })
 }
 
 module.exports ={
-    ActiveHikePoint,
     RegisterActivePoint,
     ReserveActivePoint,
     emptyConnection,

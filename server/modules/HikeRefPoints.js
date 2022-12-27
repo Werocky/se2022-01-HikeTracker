@@ -40,7 +40,7 @@ function getHikeInfo (HikeID) {
       if(err)
         reject(err);
       else{
-        const hikes = rows.map((r) => ({ HikeID: r.HikeID, RefPointID: r.PointID, IsStart: r.IsStart, IsEnd: r.IsEnd, Lat: r.Lat, Lng: r.Lng, Type: r.Type, Title: r.Title, Length: r.Length, ExpectedTime: r.ExpectedTime, Ascent: r.Ascent, Difficulty: r.Difficulty, Start: r.STart, End: r.End, Description: r.Description }));
+        const hikes = rows.map((r) => ({ HikeID: r.HikeID, RefPointID: r.PointID, IsStart: r.IsStart, IsEnd: r.IsEnd, Lat: r.Lat, Lng: r.Lng, Type: r.Type, Title: r.Title, Length: r.Length, ExpectedTime: r.ExpectedTime, Ascent: r.Ascent, Difficulty: r.Difficulty, Start: r.Start, End: r.End, Description: r.Description }));
         
         resolve(hikes);
 
