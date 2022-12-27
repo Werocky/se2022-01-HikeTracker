@@ -81,13 +81,14 @@ router.post('/GenerateActiveHike',[
     //TODO check params
 ],async(req,res)=>{
     const errors= validationResult(req);
-    console.log(req.user.Id);
+  
+    console.log(req.user);
    
     if(!errors.isEmpty()){
         return res.status(422).json({ error: 'cannot process request' });
     } 
     try{
-        console.log(req.user.Id);
+        //console.log(req.user.Id);
         const userID=req.user.Id;
         let NextActiveHikeID= await ActivePoints.getNextActiveHike();
 

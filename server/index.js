@@ -32,9 +32,6 @@ const ActivePoints= require('./routes/ActiveHike');
 const app = new express();
 const port = 3001;
 
-app.use('/api/activePoint?',ActivePoints);
-app.use('/api/PointsOfHike?',PointsOfHike);
-
 
 /*** Set up Passport ***/
 //configurating function to verify login and password
@@ -110,6 +107,9 @@ app.use(
     preserveExtension: true,
   })
 );
+
+app.use('/api/activePoint?',ActivePoints);
+app.use('/api/PointsOfHike?',PointsOfHike);
 
 //get hikes gpx
 app.post('/getPointsHike', (req, res) => {
