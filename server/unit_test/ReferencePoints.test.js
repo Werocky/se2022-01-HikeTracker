@@ -357,7 +357,7 @@ describe("get reference point",()=>{
 
 })
 
-describe.only("get activeHike details",()=>{
+describe("get activeHike details",()=>{
     beforeEach(async()=>{
         const {hike}= require("../modules/Hikes");
         await h.deleteHikes();
@@ -436,7 +436,7 @@ describe.only("get activeHike details",()=>{
             expect(ans[i]).toHaveProperty('Lat');
             expect(ans[i]).toHaveProperty('Lng');
             expect(ans[i]).toHaveProperty('Type');
-            
+
         }
         
 
