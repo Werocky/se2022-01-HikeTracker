@@ -17,6 +17,7 @@ const InputOption = tw.input`mt-6 first:mt-0 border-b-2 py-3 focus:outline-none 
 const Label = tw.label`absolute top-0 left-0 tracking-wide font-medium text-lg`;
 const Input = tw.input`mt-6 first:mt-0 border-b-2 py-3 focus:outline-none font-medium transition duration-300 hocus:border-primary-500`
 const SubmitButton = tw.button`w-full  mt-6 py-3 bg-gray-100 text-primary-500 rounded-full font-bold tracking-wide shadow-lg uppercase text-sm transition duration-300 transform focus:outline-none focus:shadow-outline hover:bg-gray-300 hover:text-primary-700 hocus:-translate-y-px hocus:shadow-xl`;
+const SubmitButtonLarge = tw.button` w-full mt-6 py-3 bg-gray-100 text-primary-500 rounded-full font-bold tracking-wide shadow-lg uppercase text-3xl transition duration-300 transform focus:outline-none focus:shadow-outline hover:bg-gray-300 hover:text-primary-700 hocus:-translate-y-px hocus:shadow-xl`;
 
 const Container = tw.div`relative`;
 const TwoColumn = tw.div`flex flex-col md:flex-row justify-between max-w-screen-xl mx-auto py-20 md:py-24`;
@@ -33,7 +34,11 @@ function HikeRefPoints(props) {
   const location = useLocation();
 
   const [loading, setLoading] = useState(true);
+
+  const [oldRefPoints, setOldRefPoints] = useState([]);
+  const [deletedRefPoints, setDeletedRefPoints] = useState([]);
   const [refPoints, setRefPoints] = useState([]);
+
   const [gpxData, setGpxData] = useState();
   const [bounds, setBounds] = useState(undefined);
 
@@ -52,6 +57,7 @@ function HikeRefPoints(props) {
       setLoading(true);
       setRefPoints(location.state.refPoints);
       //console.log(location.state.refPoints);
+      setOldRefPoints(location.state.refPoints);
       setGpxData(location.state.gpxData);
       setBounds(location.state.bounds);
     }
@@ -67,7 +73,7 @@ function HikeRefPoints(props) {
   }, [coord]);
 
   useEffect(() => {
-    console.log(refPoints)
+    //console.log(refPoints)
     refPoints.forEach(rp => {
       if (rp.IsStart) {
         setStartPresent(true);
@@ -78,7 +84,7 @@ function HikeRefPoints(props) {
     })
   }, [refPoints]);
 
-  
+
 
   const handleSubmitRefPoint = async (event) => {
     event.preventDefault();
@@ -94,6 +100,9 @@ function HikeRefPoints(props) {
     //console.log(refPObj);
     setRefPoints(old => [...old, refPObj]);
     setCoordChange(false);
+    setRefPType("");
+    setRefPDesc("");
+    setRefPStartEnd("");
   }
 
   const clickDelete = (id) => {
@@ -103,9 +112,36 @@ function HikeRefPoints(props) {
     tmpRP = tmpRP.map((rp, i) => (
       { ...rp, RefPointID: isNaN(rp.RefPointID) ? "N" + i : rp.RefPointID }
     ));
+    if (!isNaN(id)) {
+      setDeletedRefPoints(del => [...del, (refPoints.filter(rp => {
+        return rp.RefPointID === id;
+      }))[0]])
+    }
     setStartPresent(false);
     setEndPresent(false);
     setRefPoints(tmpRP);
+
+  }
+
+  const saveAll = async (event) => {
+    event.preventDefault();
+    let finalRP = refPoints.filter((rp) => {
+      return oldRefPoints.every((orp) => {
+        return orp.RefPointID !== rp.RefPointID;
+      });
+    }).map(rp => (
+      {
+        IsStart: rp.IsStart,
+        IsEnd: rp.IsEnd,
+        Type: rp.Type,
+        description: rp.description,
+        position: { coord: { lat: rp.Lat, lng: rp.Lng, } },
+      }
+    ))
+    console.log(finalRP);
+    console.log(deletedRefPoints);
+
+
 
   }
 
@@ -138,6 +174,8 @@ function HikeRefPoints(props) {
                 ))}
                 <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
               </MapContainer>
+
+              <SubmitButtonLarge type="submit" onClick={saveAll}>SAVE ALL</SubmitButtonLarge>
             </MapColumn>
 
             <TextColumn>
