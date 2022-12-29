@@ -316,7 +316,6 @@ app.post('/addHike', async (req, res) => {
   try {
     const hike = req.body.hike;
     const points = req.body.points;
-    const Id = req.body.guideId;
     const hikeId = await hikes.getLastHikeId() + 1;
 
 

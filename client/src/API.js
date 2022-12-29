@@ -207,7 +207,7 @@ function setDescription(Description, HikeID) {
   });
 }
 
-async function addHike(hike, file, points, guideId,picture) {
+async function addHike(hike, file, points,picture) {
   try {
 
     const data = new FormData();
@@ -226,7 +226,6 @@ async function addHike(hike, file, points, guideId,picture) {
         body: JSON.stringify({
           "hike": hike,
           "points": points,
-          "guideId": guideId,
           
         }),
         headers: {
