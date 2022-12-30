@@ -215,7 +215,7 @@ function HikeDetails(props) {
                 </PrimaryLink>}
 
               {hike.AssociatedGuide === auth.user.Id &&
-                <PrimaryLink onClick={() => navigate("/" + hike.HikeID + "/edit", { state: { refPoints: refPoints, gpxData: gpxData, bounds: bounds } })}>
+                <PrimaryLink onClick={() => navigate("/" + hike.HikeID + "/edit", { state: { hikeId: hike.HikeID, refPoints: refPoints, gpxData: gpxData, bounds: bounds } })}>
                   Modify Reference Points
                 </PrimaryLink>}
 

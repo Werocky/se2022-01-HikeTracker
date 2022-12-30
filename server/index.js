@@ -25,8 +25,8 @@ const huts = require('./modules/Huts');
 const mail = require('./modules/mail');
 
 
-const PointsOfHike= require('./routes/PointsOfHike');
-const ActivePoints= require('./routes/ActiveHike');
+const PointsOfHike = require('./routes/PointsOfHike');
+const ActivePoints = require('./routes/ActiveHike');
 
 // init express
 const app = new express();
@@ -108,8 +108,8 @@ app.use(
   })
 );
 
-app.use('/api/activePoint?',ActivePoints);
-app.use('/api/PointsOfHike?',PointsOfHike);
+app.use('/api/activePoint?', ActivePoints);
+app.use('/api/PointsOfHike?', PointsOfHike);
 
 //get hikes gpx
 app.post('/getPointsHike', (req, res) => {
@@ -235,7 +235,7 @@ const checkFiltersPresence = (filters) => {
     flag = false;
     if (name[i] === 'ExpectedTime' || name[i] === 'Ascent' || name[i] === 'Length') {
       if (filters[name[i]][0] !== null)
-      flag = true;
+        flag = true;
     }
     else if (name[i] === 'filterType' || name[i] === 'Difficulty') {
       if (filters[name[i]][0] !== '' && typeof filters[name[i]][0] !== 'undefined' && filters[name[i]][0] !== null && filters[name[i]][1] !== null)
@@ -266,14 +266,14 @@ const filtering = async (filters, list_curr) => {
     flag = checkFiltersPresent(filters[list_filters[i]], list_filters[i]);
     //console.log(filters[list_filters[i]], list_filters[i], flag);  
     if (flag == true) {
-      if(list_filters[i] === 'Difficulty')
+      if (list_filters[i] === 'Difficulty')
         list_prev = await hikes.getHikesByFilter(list_filters[i], filters[list_filters[i]]);
       else if (list_filters[i] !== 'filterType')
         list_prev = await hikes.getHikesByFilter(list_filters[i], ...filters[list_filters[i]])
           .then(l => l);
       else
         list_prev = await hikes.getHikesByFilter(filters[list_filters[i]][0], filters[list_filters[i]][1])
-        .then(l => l);
+          .then(l => l);
       if (j === 0) {
         prov_list = [...list_prev];
         j = 1;
@@ -320,9 +320,9 @@ app.post('/addHike', async (req, res) => {
 
 
     // add hike
-    console.log("questa è l hike "+hike);
+    console.log("questa è l hike " + hike);
     await hikes.addHike(hike);
-    
+
 
 
     //get all ref point already saved
@@ -403,6 +403,30 @@ app.post('/addHike', async (req, res) => {
   console.log("All hike points added");
 
 })
+
+/*** Delete Reference Points ***/
+app.delete('/deleteRefPoints/:hikeID', async (req, res) => {
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    return res.status(422).json({ error: 'cannot process request' });
+  }
+  try {
+    const hikeID = req.params.hikeID;
+    const points = req.body.refPoints;
+
+    console.log("\n" + hikeID);
+    console.log(points);
+    console.log("\n\n");
+
+    for (let i in points) {
+      await hikeRefPoints.deleteHikeRefPoint(hikeID, points[i].RefPointID);
+    }
+    res.status(201).end();
+  } catch (err) {
+    throw err;
+  }
+})
+
 
 /*** Geographical filter ***/
 function distance(lat1, lon1, lat2, lon2) {
@@ -574,7 +598,7 @@ app.post('/ParkingLots', [],
         rpID = await referencePoints.getLastRefPointID();
         console.log("Ref Point ParkingLot added");
       }
-      const parkingLotObj = new ParkingLot(rpID, parkingLot.AssociatedGuide, parkingLot.Free,parkingLot.NumAuto);
+      const parkingLotObj = new ParkingLot(rpID, parkingLot.AssociatedGuide, parkingLot.Free, parkingLot.NumAuto);
       console.log(parkingLotObj);
       await createParkingLot(parkingLotObj);
       res.status(201).json({ message: 'Parking Lot added' });
@@ -690,33 +714,33 @@ app.post('/hutsFilters', async (req, res) => {
   }
 });
 //link hut to an hike
-app.post('/api/LinktoHike?/:RefPointID/Hike/:HikeID',[
+app.post('/api/LinktoHike?/:RefPointID/Hike/:HikeID', [
   check('HikeID').notEmpty(),
   check('RefPointID').notEmpty()
 ],
-async(req,res)=>{
-  console.log(req.params.RefPointID, req.params.HikeID);
-  try{
-      const errors= validationResult(req);
-      if(!errors.isEmpty())
-      return res.status(422).json({error : 'Error! Bad request'});
-      
-     //check hike exists
-      let h=await hikes.getHikesByFilter('HikeID',req.params.HikeID);
-      if(h.Length==[])return res.status(402).json({error : 'Error! Hike not found'});
+  async (req, res) => {
+    console.log(req.params.RefPointID, req.params.HikeID);
+    try {
+      const errors = validationResult(req);
+      if (!errors.isEmpty())
+        return res.status(422).json({ error: 'Error! Bad request' });
+
+      //check hike exists
+      let h = await hikes.getHikesByFilter('HikeID', req.params.HikeID);
+      if (h.Length == []) return res.status(402).json({ error: 'Error! Hike not found' });
       //check hut exists
-      h=await huts.getHut(req.params.RefPointID);
-      if(h==[])return res.status(403).json({error : 'Error! Hut not found'});
+      h = await huts.getHut(req.params.RefPointID);
+      if (h == []) return res.status(403).json({ error: 'Error! Hut not found' });
       //add hutToHike
-      h= await hikes.addHutToHike(req.params.HikeID,req.params.RefPointID);
-      if(h!='New HikeRefPoint added')return res.status(504).json({error : 'Error! Could not link Hut and Hike'});
-      res.status(200).json({message: 'added'});
-  }catch(err){
+      h = await hikes.addHutToHike(req.params.HikeID, req.params.RefPointID);
+      if (h != 'New HikeRefPoint added') return res.status(504).json({ error: 'Error! Could not link Hut and Hike' });
+      res.status(200).json({ message: 'added' });
+    } catch (err) {
       //console.error(err);
       res.status(503).json(err);
-  }
+    }
 
-});
+  });
 
 //GET locations
 app.get('/hutsLocations', async (req, res) => {
@@ -825,9 +849,9 @@ app.post('/hutCreate',
         rpID = await referencePoints.getLastRefPointID();
         console.log("Ref Point Hut added");
       }
-      const hutObj = new huts.Hut(rpID, hut.Name, hut.Elevation, hut.City, hut.Province, hut.Region, hut.Country, hut.WhenOpen, hut.Beds, hut.AvgPrice, hut.Description, "hutImages/hut-"+rpID+".jpg",hut.HutManagerID, hut.Website, hut.Phone);
+      const hutObj = new huts.Hut(rpID, hut.Name, hut.Elevation, hut.City, hut.Province, hut.Region, hut.Country, hut.WhenOpen, hut.Beds, hut.AvgPrice, hut.Description, "hutImages/hut-" + rpID + ".jpg", hut.HutManagerID, hut.Website, hut.Phone);
       const result = await huts.addHut(hutObj);
-      res.status(200).json({ message: 'Hut added',hut:hutObj });
+      res.status(200).json({ message: 'Hut added', hut: hutObj });
 
     } catch (err) {
       console.log(err);
@@ -889,7 +913,7 @@ app.post('/sessions/new', [
     const Surname = req.body.Surname;
     const Phone = req.body.Phone;
     const verificationCode = Math.floor((Math.random() * 100) + 1);
-    const user = {Hash: Hash, Salt: Salt, Id: Id, Role: Role, code: verificationCode, Name: Name, Surname: Surname, Phone: Phone};
+    const user = { Hash: Hash, Salt: Salt, Id: Id, Role: Role, code: verificationCode, Name: Name, Surname: Surname, Phone: Phone };
     const result = await users.register(user);
     mail.sendConfirmationMail(req.body.Id, verificationCode);
     return res.status(200).json(result);
@@ -944,10 +968,10 @@ app.post('/saveHutPicture/:id', async (req, res) => {
   }
 
   try {
-  
+
     const file = req.files.file;
-    const path = "./hutImages/hut-"+req.params.id+".jpg";
-   // const path="./hutImages/hut-"+req.params.id+".jpg";
+    const path = "./hutImages/hut-" + req.params.id + ".jpg";
+    // const path="./hutImages/hut-"+req.params.id+".jpg";
     console.log(path);
     //console.log(path);
     //const hikeID = req.params.hikeID;
@@ -956,7 +980,7 @@ app.post('/saveHutPicture/:id', async (req, res) => {
       if (err) {
         return res.status(500).send(err);
       }
-      const result = await huts.setHutPicture(req.params.id,"hutImages/hut-"+req.params.id+".jpg");
+      const result = await huts.setHutPicture(req.params.id, "hutImages/hut-" + req.params.id + ".jpg");
       return res.send({ status: "success", path: path });
     });
   } catch (err) {
@@ -970,10 +994,10 @@ app.post('/saveHikePicture/:id', async (req, res) => {
   }
 
   try {
-  
+
     const file = req.files.file;
-    const path = "./hikeImages/hike-"+req.params.id+".jpg";
-   // const path="./hutImages/hut-"+req.params.id+".jpg";
+    const path = "./hikeImages/hike-" + req.params.id + ".jpg";
+    // const path="./hutImages/hut-"+req.params.id+".jpg";
     console.log(path);
     //console.log(path);
     //const hikeID = req.params.hikeID;
@@ -982,7 +1006,7 @@ app.post('/saveHikePicture/:id', async (req, res) => {
       if (err) {
         return res.status(500).send(err);
       }
-      const result = await hikes.setHikePicture(req.params.id,"hikeImages/hike-"+req.params.id+".jpg");
+      const result = await hikes.setHikePicture(req.params.id, "hikeImages/hike-" + req.params.id + ".jpg");
       return res.send({ status: "success", path: path });
     });
   } catch (err) {

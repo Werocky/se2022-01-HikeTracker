@@ -34,7 +34,7 @@ function HikeRefPoints(props) {
   const location = useLocation();
 
   const [loading, setLoading] = useState(true);
-
+  const [hikeId, setHikeId] = useState("");
   const [oldRefPoints, setOldRefPoints] = useState([]);
   const [deletedRefPoints, setDeletedRefPoints] = useState([]);
   const [refPoints, setRefPoints] = useState([]);
@@ -55,6 +55,7 @@ function HikeRefPoints(props) {
     const load = async () => {
       //console.log(location);
       setLoading(true);
+      setHikeId(location.state.hikeId);
       setRefPoints(location.state.refPoints);
       //console.log(location.state.refPoints);
       setOldRefPoints(location.state.refPoints);
@@ -140,7 +141,13 @@ function HikeRefPoints(props) {
     ))
     console.log(finalRP);
     console.log(deletedRefPoints);
-
+    if (deletedRefPoints.length) {
+      console.log("\n\nHERE\n\n");
+      await API.deleteRefPoints(hikeId, deletedRefPoints.map(({RefPointID})=>({RefPointID})));
+    }
+    if (finalRP.length) {
+      //await API.addRefPoints(hikeId, finalRP);
+    }
 
 
   }
