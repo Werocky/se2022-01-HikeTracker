@@ -368,10 +368,10 @@ app.post('/addHike', async (req, res) => {
 
     // add other points
     let pIdVec = [];
-    for (let iPoint of points.otherPoints) {
+    for (let newRP of points.otherPoints) {
       let rpID = -1;
       function distancePoint(p) {
-        const dist = distance(p.Lat, p.Lng, iPoint.position.lat, iPoint.position.lon);
+        const dist = distance(p.Lat, p.Lng, newRP.position.lat, newRP.position.lon);
         return dist < 0.1;
       }
       pointAlreadyPresent = refPoints.find(distancePoint);
@@ -379,7 +379,7 @@ app.post('/addHike', async (req, res) => {
         console.log("Reference point already present")
         rpID = pointAlreadyPresent.RefPointID;
       } else {
-        await addReferencePoint(iPoint.position.lat, iPoint.position.lng, iPoint.Type);
+        await addReferencePoint(newRP.position.lat, newRP.position.lng, newRP.Type);
         rpID = await referencePoints.getLastRefPointID();
         console.log("Reference Point added");
       }
@@ -416,11 +416,51 @@ app.delete('/deleteRefPoints/:hikeID', async (req, res) => {
 
     console.log("\n" + hikeID);
     console.log(points);
-    console.log("\n\n");
 
     for (let i in points) {
       await hikeRefPoints.deleteHikeRefPoint(hikeID, points[i].RefPointID);
     }
+    res.status(201).end();
+  } catch (err) {
+    throw err;
+  }
+})
+
+/*** Add Reference Points ***/
+app.post('/addRefPoints/:hikeID', async (req, res) => {
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    return res.status(422).json({ error: 'cannot process request' });
+  }
+  try {
+    const hikeID = req.params.hikeID;
+    const points = req.body.refPoints;
+
+    console.log("\n" + hikeID);
+    console.log(points);
+    
+    const refPoints = await referencePoints.getAllRefPoints();
+    let pointAlreadyPresent = undefined;
+
+    for (let newRP of points) {
+      let rpID = -1;
+      function distancePoint(p) {
+        const dist = distance(p.Lat, p.Lng, newRP.position.lat, newRP.position.lon);
+        return dist < 0.1;
+      }
+      pointAlreadyPresent = refPoints.find(distancePoint);
+      if (pointAlreadyPresent) {
+        console.log("Reference point already present")
+        rpID = pointAlreadyPresent.RefPointID;
+      } else {
+        await addReferencePoint(newRP.position.lat, newRP.position.lng, newRP.Type);
+        rpID = await referencePoints.getLastRefPointID();
+        console.log("Reference Point added");
+      }
+      await hikeRefPoints.addHikeRefPoints(hikeID, rpID, newRP.IsStart, newRP.IsEnd);
+      console.log("RefP "+rpID+", hike "+hikeID);
+    }    
+
     res.status(201).end();
   } catch (err) {
     throw err;

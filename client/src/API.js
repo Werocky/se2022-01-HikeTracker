@@ -246,10 +246,10 @@ async function addHike(hike, file, points,picture) {
         data: data,
         //headers: { "Content-Type": "multipart/form-data" },
       });
-      if(response.ok)
-         return hikeId;
+      if(response.statusText==="OK")
+         return hikeId.hikeId;
       } else {
-        throw hikeId;
+        throw hikeId.hikeId;
       }
 
     }
@@ -270,11 +270,10 @@ async function addRefPoints(hikeId, refPoints) {
         'Content-Type': 'application/json',
       },
     });
-    const res = await response.json();
     if (response.ok) {
-      return res;
+      return true;
     } else {
-      throw res;
+      return false;
     }
   } catch (err) {
     throw err;

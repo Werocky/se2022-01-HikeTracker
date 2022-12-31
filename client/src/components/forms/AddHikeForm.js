@@ -214,10 +214,11 @@ function AddHikeForm(props) {
     }
     console.log(refP);
     try {
-      const res = await API.addHike(hike, file, refP,picture);
+      const hikeID = await API.addHike(hike, file, refP,picture);
       setmsgState('primary');
       setMsgErr('Hike Added!');
-      navigate("/hikes");
+      console.log("\n\n"+hikeID+"\n\n")
+      navigate("/"+hikeID);
     } catch (err) {
       props.errorHandler(err);
     }

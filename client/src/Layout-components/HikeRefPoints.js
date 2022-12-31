@@ -4,7 +4,7 @@ import tw from "twin.macro";
 import styled from "styled-components";
 import { MapContainer, Marker, Polyline, Popup, TileLayer, useMap, useMapEvents } from 'react-leaflet';
 import * as L from "leaflet";
-import { useLocation, useParams } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import API from "../API";
 import { StartPoint, EndPoint, RefPoint } from "./RefPointsTypes";
@@ -30,10 +30,12 @@ const TextColumn = styled(Column)(props => [
 
 function HikeRefPoints(props) {
 
-  const params = useParams();
+  const navigate = useNavigate();
   const location = useLocation();
 
   const [loading, setLoading] = useState(true);
+  const [changes, setChanges] = useState(false);
+
   const [hikeId, setHikeId] = useState("");
   const [oldRefPoints, setOldRefPoints] = useState([]);
   const [deletedRefPoints, setDeletedRefPoints] = useState([]);
@@ -55,6 +57,7 @@ function HikeRefPoints(props) {
     const load = async () => {
       //console.log(location);
       setLoading(true);
+      setChanges(false);
       setHikeId(location.state.hikeId);
       setRefPoints(location.state.refPoints);
       //console.log(location.state.refPoints);
@@ -104,6 +107,7 @@ function HikeRefPoints(props) {
     setRefPType("");
     setRefPDesc("");
     setRefPStartEnd("");
+    setChanges(true);
   }
 
   const clickDelete = (id) => {
@@ -121,7 +125,7 @@ function HikeRefPoints(props) {
     setStartPresent(false);
     setEndPresent(false);
     setRefPoints(tmpRP);
-
+    setChanges(true);
   }
 
   const saveAll = async (event) => {
@@ -136,19 +140,22 @@ function HikeRefPoints(props) {
         IsEnd: rp.IsEnd,
         Type: rp.Type,
         description: rp.description,
-        position: { coord: { lat: rp.Lat, lng: rp.Lng, } },
+        position: { lat: rp.Lat, lng: rp.Lng, },
       }
     ))
     console.log(finalRP);
     console.log(deletedRefPoints);
+    let res = false;
     if (deletedRefPoints.length) {
-      console.log("\n\nHERE\n\n");
-      await API.deleteRefPoints(hikeId, deletedRefPoints.map(({RefPointID})=>({RefPointID})));
+      res = await API.deleteRefPoints(hikeId, deletedRefPoints.map(({ RefPointID }) => ({ RefPointID })));
     }
-    if (finalRP.length) {
-      //await API.addRefPoints(hikeId, finalRP);
+    if (finalRP.length && (res || !deletedRefPoints.length)) {
+      res = await API.addRefPoints(hikeId, finalRP);
     }
-
+    setChanges(false);
+    if (res) {
+      navigate("/"+hikeId);
+    }
 
   }
 
@@ -182,7 +189,8 @@ function HikeRefPoints(props) {
                 <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
               </MapContainer>
 
-              <SubmitButtonLarge type="submit" onClick={saveAll}>SAVE ALL</SubmitButtonLarge>
+              {changes &&
+                <SubmitButtonLarge type="submit" onClick={saveAll}>SAVE ALL</SubmitButtonLarge>}
             </MapColumn>
 
             <TextColumn>
