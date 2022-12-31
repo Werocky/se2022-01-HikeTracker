@@ -2,7 +2,6 @@ import { useContext, useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import AuthContext from "../AuthContext";
 import { MapContainer, Marker, Polyline, Popup, TileLayer, useMap } from 'react-leaflet';
-import * as L from "leaflet";
 import API from '../API';
 import tw from "twin.macro";
 import styled from "styled-components";
@@ -13,7 +12,21 @@ import { ReactComponent as SvgDotPattern } from "../images/dot-pattern.svg";
 import AnimationRevealPage from "../helpers/AnimationRevealPage";
 import Header from "../components/headers/light.js";
 import distanceBetweenPoints from "../DistanceBeteenPoints";
+import { Button } from "react-bootstrap";
+import { StartPoint, EndPoint, RefPoint } from "./RefPointsTypes";
 
+export const NavLink = tw.button`
+  text-lg my-2 lg:text-sm lg:mx-6 lg:my-0
+  font-semibold tracking-wide transition duration-300
+  pb-1 border-b-2 border-transparent hover:border-primary-500 hocus:text-primary-500
+`;
+
+export const PrimaryLink = tw(NavLink)`
+  lg:mx-0
+  px-8 py-3 rounded bg-primary-500 text-gray-100
+  hocus:bg-primary-700 hocus:text-gray-200 focus:shadow-outline
+  border-b-0
+`;
 
 const Container = tw.div`relative`;
 const TwoColumn = tw.div`flex flex-col md:flex-row justify-between max-w-screen-xl mx-auto py-20 md:py-24`;
@@ -46,10 +59,11 @@ function HikeDetails(props) {
   const auth = useContext(AuthContext);
   const params = useParams();
   const [hike, setHike] = useState(undefined);
-  const [gpxData, setGpxData] = useState(undefined);  // array of [p.lat, p.lon]
+  const [gpxData, setGpxData] = useState();  // array of [p.lat, p.lon]
   const [bounds, setBounds] = useState(undefined);  // map bounds
   const [refPoints, setRefPoints] = useState([]);  // array of ref points
   const [loading, setLoading] = useState(true);
+  const [canStart, setCanStart] = useState(true);
 
   useEffect(() => {
     const loadHike = async () => {
@@ -58,6 +72,19 @@ function HikeDetails(props) {
       console.log(hikeObj);
       setHike(hikeObj);
       if (auth.login) {
+        if (auth.user.Role == "H" && props.myHikes.length > 0) {
+          props.myHikes.forEach(h => {
+            if (h.HikeID == params.hikeID) {
+              setCanStart(false);
+            }
+          });
+        }
+        else if (auth.user.Role == "H" && props.myHikes.length == 0)
+          setCanStart(true);
+        else
+          setCanStart(false);
+
+        console.log(props.myHikes);
         const rp = await API.getHikeRefPoints(params.hikeID);
         console.log(rp);
         setRefPoints(rp);
@@ -65,6 +92,7 @@ function HikeDetails(props) {
         setGpxData(gpxObj);
         console.log("Start\n" + gpxObj[0].lat + "\t" + gpxObj[0].lon + "\nEnd\n" + gpxObj.at(-1).lat + "\t" + gpxObj.at(-1).lon);
       } else {
+        setCanStart(false);
         setLoading(false)
       }
 
@@ -80,6 +108,14 @@ function HikeDetails(props) {
       setLoading(false);
     }
   }, [gpxData])
+
+  const startHike = () => {
+    props.setMyHikes(oldHikes => [...oldHikes, hike]);
+    console.log(hike.HikeID);
+    console.log(refPoints[0]);
+    API.startHike(hike.HikeID, refPoints[0]);
+    setCanStart(false);
+  };
 
   const imageSrc = StatsIllustrationSrc;
   const textOnLeft = false;
@@ -109,7 +145,7 @@ function HikeDetails(props) {
                     positions={gpxData}
                   />
 
-                  {!refPoints.length &&
+                  {refPoints != undefined && !refPoints.length && gpxData != undefined && gpxData.length != 0 &&
                     <>
                       <StartPoint position={gpxData[0]} />
                       <EndPoint position={gpxData.at(-1)} />
@@ -117,13 +153,13 @@ function HikeDetails(props) {
                   }
 
                   {refPoints.map(rp => (
-                    
-                      rp.IsStart ?
+
+                    rp.IsStart ?
                       <StartPoint key={rp.refPointsID} position={{ lat: rp.Lat, lon: rp.Lng }} type={rp.Type} />
                       : rp.IsEnd ?
-                      <EndPoint key={rp.refPointsID} position={{ lat: rp.Lat, lon: rp.Lng }} type={rp.Type} />
-                      :
-                      <RefPoint key={rp.refPointsID} position={{ lat: rp.Lat, lon: rp.Lng }} type={rp.Type} />
+                        <EndPoint key={rp.refPointsID} position={{ lat: rp.Lat, lon: rp.Lng }} type={rp.Type} />
+                        :
+                        <RefPoint key={rp.refPointsID} position={{ lat: rp.Lat, lon: rp.Lng }} type={rp.Type} />
 
                   ))}
 
@@ -132,7 +168,7 @@ function HikeDetails(props) {
                 <p>Green: Parking Lot</p>
                 <p>Yellow: Hut</p>
                 <p>Red: Peak</p>
-                <p>Blu: Default - Not Specified</p>
+                <p>Blue: Default - Not Specified</p>
               </ImageMapColumn>
             }
             <TextColumn textOnLeft={textOnLeft}>
@@ -172,6 +208,17 @@ function HikeDetails(props) {
                 </Statistics>
                 <Description>{hike.Description}</Description>
               </TextContent>
+
+              {canStart &&
+                <PrimaryLink onClick={startHike}>
+                  Start Hike
+                </PrimaryLink>}
+
+              {hike.AssociatedGuide === auth.user.Id &&
+                <PrimaryLink onClick={() => navigate("/" + hike.HikeID + "/edit", { state: { hikeId: hike.HikeID, refPoints: refPoints, gpxData: gpxData, bounds: bounds } })}>
+                  Modify Reference Points
+                </PrimaryLink>}
+
             </TextColumn>
 
 
@@ -215,61 +262,5 @@ function exp_time(time) {
   return res
 }
 
-
-function MarkerColor(rpType) {
-  let iconUrl = "https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/";
-  if (rpType === "parking") {
-    iconUrl += "marker-icon-2x-green.png";
-  } else if (rpType === "hut") {
-    iconUrl += "marker-icon-2x-yellow.png";
-  } else if (rpType === "peak") {
-    iconUrl += "marker-icon-2x-red.png";
-  } else {
-    iconUrl += "marker-icon-2x-blue.png";
-
-  }
-  var icon = new L.Icon({
-    iconUrl: iconUrl,
-    shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
-    iconSize: [25, 41],
-    iconAnchor: [12, 41],
-    popupAnchor: [1, -34],
-    shadowSize: [41, 41]
-  });
-  return icon;
-}
-
-function StartPoint(props) {
-  const icon = MarkerColor(props.type);
-  return (
-    <Marker position={props.position} icon={icon}>
-      <Popup>
-        This is the starting point
-      </Popup>
-    </Marker>
-  );
-}
-
-function EndPoint(props) {
-  const icon = MarkerColor(props.type);
-  return (
-    <Marker position={props.position} icon={icon}>
-      <Popup>
-        This is the ending point
-      </Popup>
-    </Marker>
-  );
-}
-
-function RefPoint(props) {
-  const icon = MarkerColor(props.type);
-  return (
-    <Marker position={props.position} icon={icon}>
-      <Popup>
-        This is a reference point
-      </Popup>
-    </Marker>
-  );
-}
 
 export default HikeDetails;

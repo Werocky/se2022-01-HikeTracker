@@ -5,6 +5,8 @@ const db = require("../modules/DB");
 
 
 
+
+
 beforeAll(async() =>{   
     await db.createConnection();
     await refPts.emptyReferencePoint();
@@ -58,6 +60,12 @@ describe("get/Add reference points",()=>{
             await expect(refPts.getStartingPoints()).resolves.not.toEqual([]);
             await expect(refPts.getFromType("type")).resolves.not.toEqual([]);
         });
+        it("add a SP already present",async()=>{
+            await HikeRefPoints.addHikeRefPoints(1,1,1,0);
+
+            await expect(HikeRefPoints.addHikeRefPoints(1,1,1,0)).rejects.toEqual("Linked yet");
+
+        })
 
     });
     describe("Update Reference Point",()=>{
@@ -285,7 +293,6 @@ test("Get Huts and parkings",async()=>{
     await expect(refPts.getAllRefPoints()).resolves.not.toEqual([]);
     let rps= await refPts.getAllRefPoints();
     expect(rps).toHaveLength(5);
-
     await expect(refPts.getHutsAndParkingLots()).resolves.not.toEqual([]);
     rps= await refPts.getHutsAndParkingLots();
     expect(rps).toHaveLength(4);
@@ -296,7 +303,6 @@ test("Get Huts and parkings",async()=>{
 describe("Is Last referencePoit",()=>{
     const H=  require("../modules/Hikes").addHike;
     const {hike}= require("../modules/Hikes");
-    const P=  require("../modules/ReferencePoints").addReferencePoint;
     beforeEach(async()=>{
         await h.deleteHikes();
         await refPts.emptyReferencePoint();
@@ -315,6 +321,127 @@ describe("Is Last referencePoit",()=>{
         await expect(HikeRefPoints.IsLastPoint(1,1)).resolves.toEqual(false);
 
     })
+
+
+})
+
+
+describe("get reference point",()=>{
+    const H=  require("../modules/Hikes").addHike;
+    const {hike}= require("../modules/Hikes");
+    beforeEach(async()=>{
+        await h.deleteHikes();
+        await refPts.emptyReferencePoint();
+        await H(new hike(1,'title',1,null,1,'p',1,null,null,null,null,"Fakenull.gpx",0,0,'Guide',null));
+        await refPts.addReferencePoint(0,0,"no type");
+        await refPts.addReferencePoint(0,1,"no type2");
+        await HikeRefPoints.addHikeRefPoints(1,1,1,0);
+        await HikeRefPoints.addHikeRefPoints(1,2,0,1);
+    });
+    
+    it("get point",async()=>{
+        await expect(refPts.getReferencePoint(1)).resolves.not.toEqual([]);
+        let rp= await refPts.getReferencePoint(1);
+        expect(rp).toHaveProperty('RefPointID');
+        expect(rp.RefPointID).toEqual(1);
+    })
+
+    it("get non existing point",async()=>{
+        await expect(refPts.getReferencePoint(-1)).resolves.toEqual(undefined);
+        
+    })
+
+
+
+
+})
+
+describe("get activeHike details",()=>{
+    beforeEach(async()=>{
+        const {hike}= require("../modules/Hikes");
+        await h.deleteHikes();
+        await h.addHike(new hike(1,'title',1,null,1,'p',1,null,null,null,null,"Fakenull.gpx",0,0,'Guide',null));
+
+        const RP1= require("../modules/ReferencePoints");
+
+        await RP1.emptyReferencePoint();
+        await RP1.addReferencePoint(0,0,'parkingLot');
+        await RP1.addReferencePoint(1,0,null);
+        await RP1.addReferencePoint(0,1,'hut');
+
+        const RP =require("../modules/HikeRefPoints");
+        await RP.emptyHikeRefPoint();
+        await RP.addHikeRefPoints(1,1,1,0);
+        await RP.addHikeRefPoints(1,2,0,0);
+        await RP.addHikeRefPoints(1,3,0,1);
+
+
+
+
+    });
+    afterEach(async()=>{
+        await h.deleteHikes();
+        await HikeRefPoints.emptyAllPoints();
+    });
+
+    it("get active Hike Info",async()=>{
+        await expect(HikeRefPoints.getHikeInfo(1)).resolves.not.toEqual([]);
+        let ans= await HikeRefPoints.getHikeInfo(1);
+        expect(ans).toHaveLength(3);
+
+        for (let i = 0; i < ans.length; i++) {
+            expect(ans[i]).toHaveProperty('HikeID');
+            expect(ans[i].HikeID).toEqual(1);
+            expect(ans[i]).toHaveProperty('RefPointID');
+            expect(ans[i].RefPointID).toEqual(i+1);
+            expect(ans[i]).toHaveProperty('IsStart');
+            expect(ans[i].IsStart).toEqual(i==0? 1:0);
+            expect(ans[i]).toHaveProperty('IsEnd');
+            expect(ans[i].IsEnd).toEqual(i==2? 1:0);
+            expect(ans[i]).toHaveProperty('Lat');
+            expect(ans[i]).toHaveProperty('Lng');
+            expect(ans[i]).toHaveProperty('Type');
+            expect(ans[i]).toHaveProperty('Length');
+            expect(ans[i]).toHaveProperty('Title');
+            expect(ans[i].Title).toEqual('title');
+            expect(ans[i]).toHaveProperty('ExpectedTime');
+            expect(ans[i].ExpectedTime).toEqual(1);
+            expect(ans[i]).toHaveProperty('Ascent');
+            expect(ans[i].Ascent).toEqual(1);
+            expect(ans[i]).toHaveProperty('Difficulty');
+            expect(ans[i].Difficulty).toEqual('p');
+            expect(ans[i]).toHaveProperty('Start');
+            expect(ans[i].Start).toEqual(0);
+            expect(ans[i]).toHaveProperty('End');
+            expect(ans[i].End).toEqual(0);
+            expect(ans[i]).toHaveProperty('Description');
+            expect(ans[i].Description).toEqual(null);
+        }
+        
+
+
+    })
+
+    it("get Hike reference Points",async()=>{
+        await expect(HikeRefPoints.getHikeRefPoints(1)).resolves.not.toEqual([]);
+        let ans= await HikeRefPoints.getHikeRefPoints(1);
+        expect(ans).toHaveLength(3);
+
+        for (let i = 0; i < ans.length; i++) {
+            expect(ans[i]).toHaveProperty('IsStart');
+            expect(ans[i].IsStart).toEqual(i==0? 1:0);
+            expect(ans[i]).toHaveProperty('IsEnd');
+            expect(ans[i].IsEnd).toEqual(i==2? 1:0);
+            expect(ans[i]).toHaveProperty('Lat');
+            expect(ans[i]).toHaveProperty('Lng');
+            expect(ans[i]).toHaveProperty('Type');
+
+        }
+        
+
+
+    })
+
 
 
 })

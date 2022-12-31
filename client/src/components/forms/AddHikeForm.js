@@ -194,7 +194,7 @@ function AddHikeForm(props) {
       GpxFile: "./gpx/" + file.name,
       Start: startDescr,
       End: endDescr,
-      AssociatedGuide: 0 /* auth.user.Id*/,
+      AssociatedGuide: auth.user.Id,
       Length: parseFloat(dataFromGpx.Length / 1000).toFixed(2),
       Picture:"hikeImages/default.jpg"
     }
@@ -214,7 +214,7 @@ function AddHikeForm(props) {
     }
     console.log(refP);
     try {
-      const res = await API.addHike(hike, file, refP, auth.user.Id,picture);
+      const res = await API.addHike(hike, file, refP,picture);
       setmsgState('primary');
       setMsgErr('Hike Added!');
       navigate("/hikes");

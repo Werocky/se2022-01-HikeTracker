@@ -141,3 +141,16 @@ exports.getHutsAndParkingLots = () =>{
     })
   })
 }
+
+exports.getReferencePoint=(ID)=>{
+  return new Promise(async (resolve, reject) =>{
+    const sql = "SELECT * FROM ReferencePoints WHERE RefPointID = ?";
+    db.get(sql, [ID], function (err, row) {
+      if(err)
+        reject(err)
+      else{ 
+        resolve(row);
+      }
+    })
+  })
+}

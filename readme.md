@@ -349,6 +349,41 @@ ActiveHikeID
 - **Response**: `200`+ a json object with the hike details.
 - **Error responses**: `422 Error! cannot process request`(wrongly or missing required parameters),`503 Internal Server Error` (generic error)
 
+**/api/PointsOfHike/isEnd**
+- **Answers if a given Point is the last point of a Hike**.
+- **Request body**: req.body.HikeID: id identifying the hike, req.body.PointID: id identifying the point.
+```json
+{
+  "HikeID": 1,
+  "PointID": 2
+}
+```
+- **Response**: `200`+ a json object with the boolean answer.
+```json
+{
+  true
+}
+```
+- **Error responses**: `422 Error! cannot process request`(wrongly or missing required parameters),`503 Internal Server Error` (generic error)
+
+**/api/PointsOfHike/addReferencePointToHike**
+- **Adds an existing reference point to a hike.**.
+- **Request body**: req.body.HikeID: id identifying the hike, req.body.PointID: id identifying the point, req.body.GuideID: ID of the associated guide to the given hike.
+
+```json
+{
+  "HikeID": 1,
+  "PointID": 82,
+  "GuideID": "d@polito.it"
+
+}
+```
+- **Response**: `200`(the reference point was linked correctly to the hike).
+- **Error responses**: `422 Error! cannot process request`(wrongly or missing required parameters),`503 Internal Server Error` (generic error),
+`401 HikeID not  in DB`(the HikeID did not belong to any hike in the DB),
+`522 Hike not assigned to user`(the user is not registered or doenst have the permissions to modify the given hike),`402 ReferencePoint not  in DB`(the PointID did not belong to any reference point in the DB),`504 Linked yet`(the given point is already linked to the given Hike).
+
+
 **/HikeRefPoints**
 
 
@@ -638,7 +673,27 @@ Example of request body:
 ```
 
 - **Permissions allowed**: Hiker
-- **Error responses**: `402 Hike not found` HikeID doesnt belong to a Hike in the DB, `403 error':'ReferencePoint not registered to Hike: '+ req.body.HikeID` the PointID doesnt belong to the HikeID or the reference point was not found. `503` generic error.
+- **Error responses**: `402 Hike not found` HikeID doesnt belong to a Hike in the DB, `403 error':'ReferencePoint not registered to Hike: '+ req.body.HikeID` the PointID doesnt belong to the HikeID or the reference point was not found. <page>`503` generic error</page>.
+
+#### GET
+
+**/api/activePoint/myHikeReferencePoints**
+
+- <b> Get all reference point details of a given active Hike </b>
+- **Request header**: empty.
+- **Request body**: a JSON object containing `ActiveHikeID`
+
+Example of request body:
+```json
+{
+  "ActiveHikeID": 1
+}
+```
+- **Response header**: `200`(the points were returned correctly)
+- **Response body**: a JSON object with an array containing all the ActiveHike Reference points that were reached by the user  + the time of arrival at each point 
+- **Permissions allowed**: Hiker
+- **Error responses**: `422` cannot process request,`503` generic error.
+
 ## Testing
 
 ### Testing Frontend

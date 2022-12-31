@@ -13,7 +13,7 @@ import Register from "./pages/Signup";
 import Login from './pages/Login'
 import Hikes from './pages/Hikeslist'
 import Huts from './pages/Hutslist'
-import MyHikes from './pages/MyHikes'
+import MyHikesList from './pages/MyHikes'
 import AddParkingLot from './components/forms/AddParkingLot';
 import AddHikeForm from './components/forms/AddHikeForm'
 import AddHutForm from './components/forms/AddHutForm';
@@ -24,6 +24,7 @@ import "./style.css"
 import "tailwindcss/lib/css/preflight.css"
 
 import HutDetails from './Layout-components/HutDetails';
+import HikeRefPoints from './Layout-components/HikeRefPoints';
 
 function App() {
 
@@ -43,9 +44,9 @@ function App() {
     else
       {setMessage(() => err.toString()); setMsgType('danger');}
 
-    const timeout = setTimeout(() => {
+    setTimeout(() => {
       setAlert(false);
-    }, 5000);
+    }, 3000);
   }
 
   const login = (email, password) => {
@@ -89,7 +90,7 @@ function App() {
   return (
     <BrowserRouter>
       <AuthContext.Provider value={auth}>   {/* this is used to pass user information*/}
-        <AppLayout login={login} logout={logout} register={register} setLogged={setAuth} message={message} setMessage={setMessage} msgType={msgType} setMsgType={setMsgType} errorHandler={errorHandler}/>
+        <AppLayout alert={alert} login={login} logout={logout} register={register} setLogged={setAuth} message={message} setMessage={setMessage} msgType={msgType} setMsgType={setMsgType} errorHandler={errorHandler}/>
       </AuthContext.Provider>
     </BrowserRouter>
   );
@@ -100,7 +101,8 @@ function AppLayout(props) {
 
   const [hikes, setHikes] = useState([]);
   const [huts, setHuts] = useState([]);
-  const [loading, setLoading] = useState(true); 
+  const [loading, setLoading] = useState(true);
+  const [myHikes,setMyHikes]=useState([]);
 
   useEffect(() => {
     const reloadHikes = async () => {
@@ -120,11 +122,24 @@ function AppLayout(props) {
     }
   }, []);
 
+  useEffect(()=>
+  {
+    const reloadMyHikes=async()=>{
+      const myHikesArray=await API.getMyHikes();
+      setMyHikes(myHikesArray);
+    }
+    if (auth.login && auth.user.Role == "H") {
+      reloadMyHikes();
+    }
+    else
+      setMyHikes([]);
+    },[auth.login]);
+
   return (
     <>
       <Container>
         <Row><Col>
-          {props.message && alert ? <Alert variant={props.msgType} onClose={() => props.setMessage('')} dismissible>{props.message}</Alert> : false}
+          {props.message && props.alert ? <Alert variant={props.msgType} onClose={() => props.setMessage('')} dismissible>{props.message}</Alert> : false}
         </Col></Row>
       </Container>
       <Routes>
@@ -134,8 +149,11 @@ function AppLayout(props) {
           />
         } />
         <Route path='/:hikeID' element={
-          <HikeDetails logout={props.logout} />
+          <HikeDetails logout={props.logout}  myHikes={myHikes} setMyHikes={setMyHikes} />
         } />
+        <Route path='/:hikeID/edit' element={
+          <HikeRefPoints logout={props.logout} />
+        } />        
         <Route path='/huts/:hutID' element={
           <HutDetails logout={props.logout} hikes={hikes} errorHandler={props.errorHandler}/>
         } />
@@ -153,7 +171,7 @@ function AppLayout(props) {
           <AddHikeForm logout={props.logout} message={props.message} errorHandler={props.errorHandler} /> 
         } />
         <Route path='/hikes' element={
-          <Hikes hikes={hikes} loading={loading} setHikes={setHikes} logout={props.logout} />
+          <Hikes hikes={hikes} loading={loading} setHikes={setHikes} logout={props.logout} myHikes={myHikes} setMyHikes={setMyHikes} />
         } />
         <Route path='/huts' element={
 
@@ -187,8 +205,8 @@ function AppLayout(props) {
         <Route path='/terminateHike' element={
           <TerminateHike />
         }/>
-        <Route path='/myHikes' element={
-          <MyHikes />
+        <Route path='/myHikes'  element={
+          <MyHikesList myHikes={myHikes} setMyHikes={setMyHikes} />
         }/>
 
       </Routes>

@@ -54,6 +54,35 @@ async function getHike(HikeID) {
   }
 }
 
+async function getMyHikes() {
+  const response = await fetch(APIURL + '/getMyHikes',
+  {
+    credentials: 'include',
+   } );
+  const hikes = await response.json();
+  if (response.ok) {
+    return hikes.map((r) => ({
+      HikeID: r.HikeID,
+      Start: r.Start,
+      End: r.End,
+      Title: r.Title,
+      Length: r.Length,
+      ExpectedTime: r.ExpectedTime,
+      Ascent: r.Ascent,
+      Difficulty: r.Difficulty,
+      Description: r.Description,
+      Country: r.Country,
+      Province: r.Province,
+      Region: r.Region,
+      AssociatedGuide: r.AssociatedGuide,
+      City: r.City,
+      Picture:r.Picture
+    }))
+  } else {
+    throw hikes; //which will contain an error if it is the case
+  }
+}
+
 //GET HIKES LOCATIONS
 async function getHikesLocations() {
   try {
@@ -178,7 +207,7 @@ function setDescription(Description, HikeID) {
   });
 }
 
-async function addHike(hike, file, points, guideId,picture) {
+async function addHike(hike, file, points,picture) {
   try {
 
     const data = new FormData();
@@ -197,7 +226,6 @@ async function addHike(hike, file, points, guideId,picture) {
         body: JSON.stringify({
           "hike": hike,
           "points": points,
-          "guideId": guideId,
           
         }),
         headers: {
@@ -225,6 +253,75 @@ async function addHike(hike, file, points, guideId,picture) {
       }
 
     }
+  } catch (err) {
+    throw err;
+  }
+}
+
+async function addRefPoints(hikeId, refPoints) {
+  try {
+    const response = await fetch((APIURL + '/addRefPoints/'+hikeId), {
+      method: 'POST',
+      credentials: 'include',
+      body: JSON.stringify({
+        refPoints: refPoints,
+      }),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+    const res = await response.json();
+    if (response.ok) {
+      return res;
+    } else {
+      throw res;
+    }
+  } catch (err) {
+    throw err;
+  }
+}
+
+async function deleteRefPoints(hikeId, refPoints) {
+  try {
+    const response = await fetch((APIURL + '/deleteRefPoints/'+hikeId), {
+      method: 'DELETE',
+      credentials: 'include',
+      body: JSON.stringify({
+        refPoints: refPoints,
+      }),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+    if (response.ok) {
+      return true;
+    } else {
+      return false;
+    }
+  } catch (err) {
+    throw err;
+  }
+}
+
+async function startHike(hikeId,PointId) {
+  try {
+
+      const response = await fetch((APIURL + '/api/activePoint/GenerateActiveHike'), {
+        method: 'POST',
+        credentials: 'include',
+        body: JSON.stringify({
+          "HikeID": hikeId,
+          "PointID": PointId,          
+        }),
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+      if (response.ok) {
+         return hikeId;
+      } else {
+        throw hikeId;
+      }
   } catch (err) {
     throw err;
   }
@@ -558,6 +655,9 @@ async function addHut(Hut,picture) {
   }
 }
 
+
+
+
 async function getHut(Hut) {
   try {
     const response = await fetch((APIURL + '/getHut'), {
@@ -660,6 +760,8 @@ const API = {
   getHutsFilters,
   getHutsLocations,
   addHike,
+  addRefPoints,
+  deleteRefPoints,
   getHikeInfo,
   getHutsAndParks,
   setStartEndPoints,
@@ -670,6 +772,8 @@ const API = {
   getHutCoords,
   getHikesLocations,
   linkHutToHike,
-  getHikeRefPoints
+  getHikeRefPoints,
+  getMyHikes,
+  startHike
 };
 export default API;
