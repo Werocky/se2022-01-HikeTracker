@@ -29,6 +29,7 @@ function App() {
 
   const [message, setMessage] = useState(''); //message error state
   const [msgType, setMsgType] = useState('danger'); //change color of the message
+  const [alert, setAlert] = useState(true);
   const [auth, setAuth] = useState({  // login information
     login: false,
     user: { Role: '' },
@@ -41,6 +42,10 @@ function App() {
       {setMessage(() => err.message); setMsgType('primary');}
     else
       {setMessage(() => err.toString()); setMsgType('danger');}
+
+    const timeout = setTimeout(() => {
+      setAlert(false);
+    }, 5000);
   }
 
   const login = (email, password) => {
@@ -95,8 +100,7 @@ function AppLayout(props) {
 
   const [hikes, setHikes] = useState([]);
   const [huts, setHuts] = useState([]);
-  const [loading, setLoading] = useState(true);
-
+  const [loading, setLoading] = useState(true); 
 
   useEffect(() => {
     const reloadHikes = async () => {
@@ -120,7 +124,7 @@ function AppLayout(props) {
     <>
       <Container>
         <Row><Col>
-          {props.message ? <Alert variant={props.msgType} onClose={() => props.setMessage('')} dismissible>{props.message}</Alert> : false}
+          {props.message && alert ? <Alert variant={props.msgType} onClose={() => props.setMessage('')} dismissible>{props.message}</Alert> : false}
         </Col></Row>
       </Container>
       <Routes>
