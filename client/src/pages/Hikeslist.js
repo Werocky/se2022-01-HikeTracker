@@ -11,6 +11,8 @@ import { PrimaryButton as PrimaryButtonBase } from "../components/misc/Buttons.j
 import { useNavigate } from "react-router-dom";
 import AuthContext from "../AuthContext.js";
 import API from "../API";
+import { MapContainer, Marker, Popup, TileLayer, useMapEvents } from "react-leaflet";
+import { Button } from "react-bootstrap";
 
 const HeadingRow = tw.div`flex  justify-center`;
 const Heading = tw(SectionHeading)`text-gray-700  font-medium  `;
@@ -145,7 +147,7 @@ function HikeList(props) {
               </div>}
             {showMap &&
               <div>
-                <GeoFilter />
+                <GeoFilter setHikes={setHikes}/>
               </div>}
           </div>
           {!loading &&
@@ -418,16 +420,109 @@ function Filters(props) {
 }
 
 function GeoFilter(props) {
+  const [coord, setCoord] = useState(null);
+  const [radius, setRadius] = useState(undefined);
+  const [msg, setMsg] = useState('');
 
-  return (<>
-    --- Geo filter from file Sidebar.js ---
-  </>
-  )
+  const ClickPick = () => {
+    useMapEvents({
+      click(e) {
+        if (e !== undefined) {
+          setCoord(e.latlng);
+        }
+      }
+    })
+
+    return (
+      <>
+        {coord !== null &&
+          <Marker position={{ lat: coord.lat, lng: coord.lng }}>
+            <Popup>
+              You selected this point <br /> Click on another place to change it.
+            </Popup>
+          </Marker>
+        }
+      </>
+    )
+  }
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    //console.log("Radius " + radius + "\nCoord: " + coord.lat + " " + coord.lng);
+    if (coord === null) {
+      setMsg("You did not selected any point!");
+    } else if (radius === undefined) {
+      setMsg("You did not select a radius!");
+    } else {
+      setMsg('');
+      API.getNearHikes(radius, coord.lat, coord.lng).then(array => props.setHikes(array));
+    }
+  }
+
+  
+  const handleReset = (event) => {
+    setRadius(undefined);
+    setCoord(null);
+    API.getHikes().then(array => props.setHikes(array));
+  }
+
+
+  return (
+    <Container>
+      <FormContainer>
+      <form onSubmit={handleSubmit}>
+        <FormContainer className="mb-3" controlId="formLength">
+          <Instruction>Center's radius [KM]</Instruction>
+              <InputOption type="number"
+                value={radius}
+                placeholder="Radius"
+                onChange={(event) => {
+                  setRadius(event.target.value);
+                }}
+                />
+        </FormContainer>
+
+        <MapContainer center={{ lat: 45.063128, lng: 7.661272 }} zoom={8} scrollWheelZoom style={{ height: 250 + "px", width: "100%", }}>
+          <ClickPick />
+          <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
+        </MapContainer>
+
+        <br />
+
+        {msg &&
+          <alert variant="danger" onClose={() => setMsg('')} dismissible>
+            {msg}
+          </alert>
+        }
+
+        <TwoColumn>
+          <Column>
+            <ButtonContainer>
+              <SubmitButton type="submit">
+                Submit
+              </SubmitButton>
+            </ButtonContainer>
+          </Column>
+
+          <Column>
+            <ButtonContainer>
+              <SubmitButton type="reset" onClick={handleReset}>
+                Reset
+              </SubmitButton>
+            </ButtonContainer>
+          </Column>
+        </TwoColumn>
+
+      </form>
+      </FormContainer>
+
+      <br />
+    </Container>
+  );
 }
 
-
 function HikeElement(props) {
-
+  
   const navigate = useNavigate();
 
   const hike = props.hike;
