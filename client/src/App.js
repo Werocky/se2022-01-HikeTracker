@@ -30,6 +30,7 @@ function App() {
 
   const [message, setMessage] = useState(''); //message error state
   const [msgType, setMsgType] = useState('danger'); //change color of the message
+  const [alert, setAlert] = useState(true);
   const [auth, setAuth] = useState({  // login information
     login: false,
     user: { Role: '' },
@@ -42,6 +43,10 @@ function App() {
       {setMessage(() => err.message); setMsgType('primary');}
     else
       {setMessage(() => err.toString()); setMsgType('danger');}
+
+    setTimeout(() => {
+      setAlert(false);
+    }, 3000);
   }
 
   const login = (email, password) => {
@@ -85,7 +90,7 @@ function App() {
   return (
     <BrowserRouter>
       <AuthContext.Provider value={auth}>   {/* this is used to pass user information*/}
-        <AppLayout login={login} logout={logout} register={register} setLogged={setAuth} message={message} setMessage={setMessage} msgType={msgType} setMsgType={setMsgType} errorHandler={errorHandler}/>
+        <AppLayout alert={alert} login={login} logout={logout} register={register} setLogged={setAuth} message={message} setMessage={setMessage} msgType={msgType} setMsgType={setMsgType} errorHandler={errorHandler}/>
       </AuthContext.Provider>
     </BrowserRouter>
   );
@@ -134,7 +139,7 @@ function AppLayout(props) {
     <>
       <Container>
         <Row><Col>
-          {props.message ? <Alert variant={props.msgType} onClose={() => props.setMessage('')} dismissible>{props.message}</Alert> : false}
+          {props.message && props.alert ? <Alert variant={props.msgType} onClose={() => props.setMessage('')} dismissible>{props.message}</Alert> : false}
         </Col></Row>
       </Container>
       <Routes>
