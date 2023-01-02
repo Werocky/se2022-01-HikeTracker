@@ -14,6 +14,8 @@ import Header from "../components/headers/light.js";
 import distanceBetweenPoints from "../DistanceBeteenPoints";
 import { Button } from "react-bootstrap";
 import { StartPoint, EndPoint, RefPoint } from "./RefPointsTypes";
+import { css } from "styled-components/macro";
+
 
 export const NavLink = tw.button`
   text-lg my-2 lg:text-sm lg:mx-6 lg:my-0
@@ -36,6 +38,11 @@ const TextColumn = styled(Column)(props => [
   tw`md:w-7/12 mt-16 md:mt-0`,
   props.textOnLeft ? tw`md:mr-12 lg:mr-16 md:order-first` : tw`md:ml-12 lg:ml-16 md:order-last`
 ]);
+
+const CoverImage = styled.div`
+  ${props => css`background-image: url("${props.imageSrc}");`}
+  ${tw`h-48 w-full bg-cover bg-center rounded-lg`}
+`;
 
 const Image = styled.div(props => [
   `background-image: url("${props.imageSrc}");`,
@@ -64,6 +71,7 @@ function HikeDetails(props) {
   const [refPoints, setRefPoints] = useState([]);  // array of ref points
   const [loading, setLoading] = useState(true);
   const [canStart, setCanStart] = useState(true);
+  const [showImg, setShowImg] = useState(false);
 
   useEffect(() => {
     const loadHike = async () => {
@@ -169,6 +177,9 @@ function HikeDetails(props) {
                 <p>Yellow: Hut</p>
                 <p>Red: Peak</p>
                 <p>Blue: Default - Not Specified</p>
+
+                <CoverImage imageSrc={`http://localhost:3001/${hike.Picture}`} onClick={() => setShowImg(true)} />
+
               </ImageMapColumn>
             }
             <TextColumn textOnLeft={textOnLeft}>
@@ -261,6 +272,5 @@ function exp_time(time) {
   }
   return res
 }
-
 
 export default HikeDetails;

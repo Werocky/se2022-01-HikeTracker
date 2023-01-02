@@ -233,6 +233,8 @@ function AddHikeForm(props) {
     }
     setRefPointArray(old => [...old, refPObj]);
     setCoordChange(false);
+    setRefPType("");
+    setRefPDesc("");
   }
 
   const PointForm = (props) => {
