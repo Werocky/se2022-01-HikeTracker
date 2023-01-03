@@ -80,7 +80,7 @@ router.use(session({
 
 router.post('/GenerateActiveHike',[
   check('HikeID').notEmpty(),
-    //TODO check params
+  
 ],async(req,res)=>{
     const errors= validationResult(req);
   
@@ -90,16 +90,17 @@ router.post('/GenerateActiveHike',[
         return res.status(422).json({ error: 'cannot process request' });
     } 
     try{
-        //console.log(req.user.Id);
         console.log("userId: "+req.user.Id);
-        console.log("request: "+req);
+        console.log("request: "+req.body.HikeID);
+        console.log("request: "+req.body.PointID);
         const userID=req.user.Id;
         const HikeID=JSON.parse(req.body.HikeID);
         const PointID=req.body.PointID;
         console.log(PointID);
+        
         console.log(HikeID);
         let NextActiveHikeID= await ActivePoints.getNextActiveHike();
-        console.log(NextActiveHikeID);
+        console.log("NxtActiveHikeID: "+NextActiveHikeID);
 
         const Hike= await hikes.getHike(HikeID);
 
@@ -110,13 +111,17 @@ router.post('/GenerateActiveHike',[
         }
         //check point exists
         //check point belongs to hike
+
+        console.log("Getting HikeInfo");
         const hikeRefPts= await refPoint.getHikeInfo(HikeID);
-        console.log("hikeRefPts "+hikeRefPts);
-        
+        console.log("HikeRefPoints: " + hikeRefPts);
+
+        console.log("PointID:"+PointID);
         let flag=false;
-        
+        console.log("PointID.ID:"+PointID.RefPointID);
         hikeRefPts.forEach(point => {
-            if(point.RefPointID== PointID){
+          console.log("search pointID:"+point.RefPointID);
+            if(point.RefPointID == PointID.RefPointID){
                 flag=true;
             }  
         });
@@ -124,12 +129,13 @@ router.post('/GenerateActiveHike',[
         if(!flag)return res.status(403).json({'error':'ReferencePoint not registered to Hike: '+ HikeID});
         
         //set activePoint as reached in DB
-        await ActivePoints.RegisterActivePoint(HikeID,userID,PointID, NextActiveHikeID);
+        await ActivePoints.RegisterActivePoint(HikeID,userID,PointID.RefPointID, NextActiveHikeID);
 
         
         return res.status(200).json({"ActiveHikeID":NextActiveHikeID});
 
     }catch(error){
+      console.log(error);
         res.status(503).json(error);
     }
 })
