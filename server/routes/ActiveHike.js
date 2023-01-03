@@ -12,7 +12,7 @@ const PointsOfHike= require('../modules/HikeRefPoints');
 const authN = require('../modules/authN.js');
 
 
-const { check, validationResult, body } = require('express-validator'); // validation middleware
+const { check, validationResult } = require('express-validator'); // validation middleware
 const { response } = require('express');
 const cors = require('cors');
 
@@ -53,6 +53,7 @@ passport.use(new LocalStrategy({
         done(err, null);
       });
   });
+
   
   // checking if the request is coming from an authenticated user or not, so to allow authorized users to perform actions
   const isLoggedIn = (req, res, next) => {
@@ -78,6 +79,7 @@ router.use(session({
   
 
 router.post('/GenerateActiveHike',[
+  check('HikeID').notEmpty(),
     //TODO check params
 ],async(req,res)=>{
     const errors= validationResult(req);
@@ -89,29 +91,41 @@ router.post('/GenerateActiveHike',[
     } 
     try{
         //console.log(req.user.Id);
+        console.log("userId: "+req.user.Id);
+        console.log("request: "+req);
         const userID=req.user.Id;
+        const HikeID=JSON.parse(req.body.HikeID);
+        const PointID=req.body.PointID;
+        console.log(PointID);
+        console.log(HikeID);
         let NextActiveHikeID= await ActivePoints.getNextActiveHike();
+        console.log(NextActiveHikeID);
 
-        const Hike= await hikes.getHike(req.body.HikeID);
+        const Hike= await hikes.getHike(HikeID);
+
+        console.log("this is the hike "+Hike.HikeID);
         
-        if(Hike==undefined || Hike==null || Hike.HikeID!= req.body.HikeID){
+        if(Hike==undefined || Hike==null || Hike.HikeID!= HikeID){
             return res.status(402).json({'error': 'Hike could not be found'});
         }
         //check point exists
         //check point belongs to hike
-        const hikeRefPts= await refPoint.getHikeInfo(req.body.HikeID);
+        const hikeRefPts= await refPoint.getHikeInfo(HikeID);
+        console.log("hikeRefPts "+hikeRefPts);
+        
         let flag=false;
         
         hikeRefPts.forEach(point => {
-            if(point.RefPointID== req.body.PointID){
+            if(point.RefPointID== PointID){
                 flag=true;
             }  
         });
 
-        if(!flag)return res.status(403).json({'error':'ReferencePoint not registered to Hike: '+ req.body.HikeID});
+        if(!flag)return res.status(403).json({'error':'ReferencePoint not registered to Hike: '+ HikeID});
         
         //set activePoint as reached in DB
-        await ActivePoints.RegisterActivePoint(req.body.HikeID,userID,req.body.PointID, NextActiveHikeID);
+        await ActivePoints.RegisterActivePoint(HikeID,userID,PointID, NextActiveHikeID);
+
         
         return res.status(200).json({"ActiveHikeID":NextActiveHikeID});
 
