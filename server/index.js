@@ -202,17 +202,13 @@ app.post('/getFilteredHikes', async (req, res) => {
   if (!errors.isEmpty()) {
     return res.status(422).json({ error: 'cannot process request' });
   }
-
-  let filters = req.body;
-  let list = [];
-  //console.log(filters);
-  if (checkFiltersPresence(filters) === false) {
-    list = await hikes.getHikes();
-  }
-  else {
-    await filtering(filters, list);
-  }
+  
   try {
+    let filters = req.body;
+    if(filters.filterType[0] === null)
+      delete filters.filterType;
+    let list = [];
+    await filtering(filters, list);
     res.status(200).json(list);
   } catch (err) {
     res.status(503).json({ error: `Error, was not possible to process your request` });
@@ -227,23 +223,6 @@ const checkFiltersPresent = (filter, name) => {
     return typeof filter != 'undefined';
 }
 
-//check if filters are specified, otherwise getFilteredHikes returns same value as getHikes
-const checkFiltersPresence = (filters) => {
-  let flag = false;
-  const name = Object.getOwnPropertyNames(filters);
-  for (let i = 0; i < name.length; i++) {
-    flag = false;
-    if (name[i] === 'ExpectedTime' || name[i] === 'Ascent' || name[i] === 'Length') {
-      if (filters[name[i]][0] !== null)
-        flag = true;
-    }
-    else if (name[i] === 'filterType' || name[i] === 'Difficulty') {
-      if (filters[name[i]][0] !== '' && typeof filters[name[i]][0] !== 'undefined' && filters[name[i]][0] !== null && filters[name[i]][1] !== null)
-        flag = true;
-    }
-  }
-  return flag;
-}
 
 //function used to search if an HikeID is presents, given an array of Hikes
 const searchHikeInArray = (HikeID, array) => {
