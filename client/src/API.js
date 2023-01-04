@@ -740,6 +740,31 @@ async function getHikeRefPoints(hikeID) {
   }
 }
 
+async function reachedPoint(PointID, HikeID) {
+  try {
+    console.log(PointID, HikeID);
+    const response = await fetch((APIURL + '/api/activePoint/PassPoint'), {
+      method: 'POST',
+      credentials: 'include',
+      body: JSON.stringify({
+        "PointID": PointID,
+        "HikeID": HikeID
+      }),
+      headers: {
+        'Content-Type': 'application/json',
+      }
+    });
+    const value = await response.json();
+    if (response.ok) {
+      return value;
+    } else {
+      throw value;
+    }
+  } catch (err) {
+    throw err;
+  }
+}
+
 const API = {
   getHikes,
   logIn,
@@ -773,6 +798,7 @@ const API = {
   linkHutToHike,
   getHikeRefPoints,
   getMyHikes,
-  startHike
+  startHike,
+  reachedPoint
 };
 export default API;
