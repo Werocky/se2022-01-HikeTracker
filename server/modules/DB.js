@@ -74,7 +74,7 @@ class DatabaseConnection {
     await hikes.deleteHikes();
     await Users.emptyUsers();
     await huts.emptyHuts();
-    await pntMngr.emptyAllPoints();
+    pntMngr.emptyAllPoints();
   }
 
   static populate = async () => {

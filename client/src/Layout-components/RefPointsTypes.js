@@ -13,7 +13,7 @@ function MarkerColor(rpType) {
     iconUrl += "marker-icon-2x-blue.png";
 
   }
-  var icon = new L.Icon({
+  let icon = new L.Icon({
     iconUrl: iconUrl,
     shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
     iconSize: [25, 41],

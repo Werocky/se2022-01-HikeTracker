@@ -43,20 +43,23 @@ exports.addLocation= (hikeID,Country=null,Province=null,Region=null,City=null)=>
       flag++;
       args.push(Country)
       sql= sql + "Country = '"+Country+"'"
-    }if(  City!=null  ){
+    }
+    if(  City!=null  ){
       if(flag>0){
         flag++;
         sql=sql+', '
       } 
       sql= sql + "City = '"+City+"'"
       args.push(City)
-    }if(  Region!=null  ){
+    }
+    if(  Region!=null  ){
       if(flag>0){
         sql=sql+', '
       } 
       args.push(Region)
       sql= sql + "Region = '"+Region+"'";
-    }if(  Province!=null  ){
+    }
+    if(  Province!=null  ){
       if(flag>0){
         sql=sql+', '
       } 
