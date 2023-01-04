@@ -9,10 +9,8 @@ import { SectionHeading } from "../components/misc/Headings";
 import { PrimaryButton } from "../components/misc/Buttons";
 import { PrimaryButton as PrimaryButtonBase } from "../components/misc/Buttons.js";
 import { useNavigate } from "react-router-dom";
-import AuthContext from "../AuthContext.js";
 import API from "../API";
 import { MapContainer, Marker, Popup, TileLayer, useMapEvents } from "react-leaflet";
-import { Button } from "react-bootstrap";
 
 const HeadingRow = tw.div`flex  justify-center`;
 const Heading = tw(SectionHeading)`text-gray-700  font-medium  `;
@@ -83,9 +81,7 @@ const Column2 = tw.div`sm:w-1/2 flex flex-col `;
 
 function HikeList(props) {
 
-  const auth = useContext(AuthContext);
   const headingText = "Hikes";
-  //const hikes = props.hikes;
 
   const [visible, setVisible] = useState(6);
 
@@ -176,8 +172,6 @@ function HikeList(props) {
 
 function Filters(props) {
 
-  const [submitButtonText, setSubmitButtonText] = useState('Submit');
-  const [resetButtonText, setResetButtonText] = useState('Reset');
 
   //FILTERS LOCATION
   const [filterType, setFilterType] = useState(undefined);
@@ -400,12 +394,12 @@ function Filters(props) {
                   <TwoColumn>
                     <Column2>
                       <ButtonContainer>
-                        <SubmitButton type="reset" onClick={handleReset}>{resetButtonText}</SubmitButton>
+                        <SubmitButton type="reset" onClick={handleReset}>Reset</SubmitButton>
                       </ButtonContainer>
                     </Column2>
                     <Column2>
                       <ButtonContainer>
-                        <SubmitButton type="submit">{submitButtonText}</SubmitButton>
+                        <SubmitButton type="submit">Submit</SubmitButton>
                       </ButtonContainer>
                     </Column2>
                   </TwoColumn>
@@ -448,7 +442,6 @@ function GeoFilter(props) {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    //console.log("Radius " + radius + "\nCoord: " + coord.lat + " " + coord.lng);
     if (coord === null) {
       setMsg("You did not selected any point!");
     } else if (radius === undefined) {
@@ -526,7 +519,6 @@ function HikeElement(props) {
   const navigate = useNavigate();
 
   const hike = props.hike;
-  const imageSrc = "https://images.unsplash.com/photo-1418854982207-12f710b74003?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1024&q=80";
 
   let hh = Math.floor(hike.ExpectedTime / 60);
   let mm = Math.floor(hike.ExpectedTime % 60);

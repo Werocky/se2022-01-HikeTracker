@@ -1,13 +1,11 @@
 import React, { useState, useEffect, useContext } from "react";
 import tw from "twin.macro";
 import styled from "styled-components";
-import { css } from "styled-components/macro"; //eslint-disable-line
-import { SectionHeading, Subheading as SubheadingBase } from "../misc/Headings.js";
-import { PrimaryButton as PrimaryButtonBase } from "../misc/Buttons.js";
+import { SectionHeading } from "../misc/Headings.js";
 import EmailIllustrationSrc from "../../images/email-illustration.svg";
 import AnimationRevealPage from "../../helpers/AnimationRevealPage.js";
 import Header from "../headers/light.js";
-import { Alert, Button, FloatingLabel, Row, Col } from "react-bootstrap";
+import { Alert, Row, Col } from "react-bootstrap";
 import { MapContainer, Marker, Polyline, Popup, TileLayer, useMapEvents } from "react-leaflet";
 import AuthContext from "../../AuthContext.js";
 import API from "../../API.js";
@@ -90,11 +88,11 @@ function AddHikeForm(props) {
   const [refPointArray, setRefPointArray] = useState([]);
   const [refPType, setRefPType] = useState("");
   const [refPDesc, setRefPDesc] = useState("");
-  const [errorMsg,setErrorMsg]=useState("");
-  const [msgState,setmsgState]=useState("danger");
+  const [errorMsg, setErrorMsg] = useState("");
+  const [msgState, setmsgState] = useState("danger");
   const [msgErr, setMsgErr] = useState("");
-  const [picture,setPicture]=useState();
-  const [pictureOk,setPictureOk]=useState();
+  const [picture, setPicture] = useState();
+  const [pictureOk, setPictureOk] = useState();
   const [heading, setHeading] = useState("Add a new hike here");
   const [subheading, setSubHeading] = useState("Select the gpx file.");
   const [submitButtonText, setSubmitButtonText] = useState("Add");
@@ -111,7 +109,7 @@ function AddHikeForm(props) {
   useEffect(() => {
     if (fileString) {
       let gpxParser = require('gpxparser');
-      var gpx = new gpxParser(); //Create gpxParser Object
+      let gpx = new gpxParser(); //Create gpxParser Object
       gpx.parse(fileString);
 
       setGpxPoints(gpx.tracks[0].points);
@@ -156,7 +154,6 @@ function AddHikeForm(props) {
       return;
     }
     setMsgErr("");
-    //setFile(event.target[0].files[0]);
     const reader = new FileReader();
     reader.onload = (event) => {
       setFileString(reader.result);
@@ -170,13 +167,12 @@ function AddHikeForm(props) {
       return;
     }
     setMsgErr("");
-    //setFile(event.target[0].files[0]);
     setPictureOk(true);
     setHeading("New Hike");
-      setSubHeading("Check, modify and add parameters")
-      setSubmitButtonText("Save All");
+    setSubHeading("Check, modify and add parameters")
+    setSubmitButtonText("Save All");
   }
-  
+
 
   const handleSubmitForm = async (event) => {
     event.preventDefault();
@@ -196,7 +192,7 @@ function AddHikeForm(props) {
       End: endDescr,
       AssociatedGuide: auth.user.Id,
       Length: parseFloat(dataFromGpx.Length / 1000).toFixed(2),
-      Picture:"hikeImages/default.jpg"
+      Picture: "hikeImages/default.jpg"
     }
     console.log(hike);
     const refP = {
@@ -214,11 +210,11 @@ function AddHikeForm(props) {
     }
     console.log(refP);
     try {
-      const hikeID = await API.addHike(hike, file, refP,picture);
+      const hikeID = await API.addHike(hike, file, refP, picture);
       setmsgState('primary');
       setMsgErr('Hike Added!');
-      console.log("\n\n"+hikeID+"\n\n")
-      navigate("/"+hikeID);
+      console.log("\n\n" + hikeID + "\n\n")
+      navigate("/" + hikeID);
     } catch (err) {
       props.errorHandler(err);
     }
@@ -237,27 +233,12 @@ function AddHikeForm(props) {
     setRefPDesc("");
   }
 
-  const PointForm = (props) => {
-    return (
-      <>
-        <InputContainer>
-          <Label htmlFor="lat-input">Latitude</Label>
-          <Input id="lat-input" type="text" name="lat" defaultValue={props.coord.lat} readOnly />
-        </InputContainer>
-        <InputContainer>
-          <Label htmlFor="lng-input">Longitude</Label>
-          <Input id="lng-input" type="text" name="lng" defaultValue={props.coord.lng} readOnly />
-        </InputContainer>
-      </>
-
-    )
-  }
 
   return (
     <AnimationRevealPage>
-            <Container>
+      <Container>
         <Row><Col>
-          {errorMsg ? <Alert variant={msgState} onClose={() => {setErrorMsg(''); setmsgState('danger');}} dismissible>{errorMsg}</Alert> : false}
+          {errorMsg ? <Alert variant={msgState} onClose={() => { setErrorMsg(''); setmsgState('danger'); }} dismissible>{errorMsg}</Alert> : false}
         </Col></Row>
       </Container>
       <Header logout={props.logout} />
@@ -271,13 +252,13 @@ function AddHikeForm(props) {
                   <Image imageSrc={EmailIllustrationSrc} />
                 </ImageMapColumn>
               }
-               {fileOk && !pictureOk &&
+              {fileOk && !pictureOk &&
                 <ImageMapColumn>
                   {/*put the picture or map here*/}
                   <Image imageSrc={EmailIllustrationSrc} />
                 </ImageMapColumn>
               }
-              
+
               {fileOk && pictureOk &&
                 <ImageMapColumn>
                   <TextContent>
@@ -334,7 +315,7 @@ function AddHikeForm(props) {
                       <SubmitButton type="submit">{submitButtonText}</SubmitButton>
                     </Form>
                   }
-                    {fileOk && !pictureOk &&
+                  {fileOk && !pictureOk &&
                     <Form onSubmit={handleSubmitPicture} >
 
                       <Input type="file" required onChange={event => setPicture(event.target.files[0])} />
@@ -365,12 +346,12 @@ function AddHikeForm(props) {
 
 
                       <Instruction>Difficulty</Instruction>
-                        <InputOption as="select" value={difficulty} onChange={ev => setDifficulty(ev.target.value)} required >
-                          <option hidden>Difficulty</option>
-                          <option value="T">Tourist (T)</option>
-                          <option value="H">Hiker (H)</option>
-                          <option value="PH">Professional Hiker (PH)</option>
-                        </InputOption>
+                      <InputOption as="select" value={difficulty} onChange={ev => setDifficulty(ev.target.value)} required >
+                        <option hidden>Difficulty</option>
+                        <option value="T">Tourist (T)</option>
+                        <option value="H">Hiker (H)</option>
+                        <option value="PH">Professional Hiker (PH)</option>
+                      </InputOption>
 
 
                       <InputContainer>
@@ -406,15 +387,28 @@ function AddHikeForm(props) {
   );
 };
 
+function PointForm(props) {
+  return (
+    <>
+      <InputContainer>
+        <Label htmlFor="lat-input">Latitude</Label>
+        <Input id="lat-input" type="text" name="lat" defaultValue={props.coord.lat} readOnly />
+      </InputContainer>
+      <InputContainer>
+        <Label htmlFor="lng-input">Longitude</Label>
+        <Input id="lng-input" type="text" name="lng" defaultValue={props.coord.lng} readOnly />
+      </InputContainer>
+    </>
+
+  )
+}
+
 async function getInfo(lat, lon) {
   let response = await fetch((`https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=${lat}&lon=${lon}&addressdetails=1`), {
     method: 'GET'
   });
   if (response.ok) {
-    //console.log(response)
     const informations = await response.json();
-    //console.log(informations);
-    // setInformation(informations);
     return informations;
   } else {
     const errDetail = await response.json();

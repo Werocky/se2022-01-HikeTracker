@@ -1,14 +1,12 @@
-import React from "react";
-import { useState, useEffect, useContext } from "react";
+import { React, useState, useEffect, useContext } from "react";
 import tw from "twin.macro";
 import styled from "styled-components";
-import { css } from "styled-components/macro"; //eslint-disable-line
-import { SectionHeading, Subheading as SubheadingBase } from "../misc/Headings.js";
+import { SectionHeading } from "../misc/Headings.js";
 import { PrimaryButton as PrimaryButtonBase } from "../misc/Buttons.js";
 import EmailIllustrationSrc from "../../images/email-illustration.svg";
 import AnimationRevealPage from "../../helpers/AnimationRevealPage.js";
 import Header from "../headers/light.js";
-import { Alert, Button, FloatingLabel, FormLabel, Row, Col } from "react-bootstrap";
+import { Alert, Row, Col } from "react-bootstrap";
 import { MapContainer, TileLayer, Marker, Popup, useMapEvents } from 'react-leaflet';
 import PhoneInput from 'react-phone-number-input'
 import 'react-phone-number-input/style.css'
@@ -74,18 +72,13 @@ function AddHutForm(props) {
     }
   }, [])
 
-  //subheading = "Add a hut here",
   const heading = <>Add a hut here</>;
-  //const description = "Add geographical info and name of the hut here";
   const submitButtonText = "Confirm";
-  const formAction = "#";
-  const formMethod = "get";
   const textOnLeft = false;
 
   // The textOnLeft boolean prop can be used to display either the text on left or right side of the image.
 
   const [description, setDescription] = useState("Add the hut cover picture here");
-  //const [heading,setHeading]
   const [name, setName] = useState("");
   const [elevation, setElevation] = useState(1000);
   const [city, setCity] = useState("");
@@ -127,7 +120,6 @@ function AddHutForm(props) {
       console.log(response)
       const informations = await response.json();
       console.log(informations);
-      // setInformation(informations);
       return informations;
     } else {
       const errDetail = await response.json();
@@ -165,7 +157,6 @@ function AddHutForm(props) {
       return;
     }
     setMsgErr("");
-    //setFile(event.target[0].files[0]);
     setPictureOk(true);
     setDescription("Add geographical info and name of the hut here");
   }
@@ -210,25 +201,16 @@ function AddHutForm(props) {
       }
       API.addHut(h, picture)
         .then((res) => {
-          //props.setHuts({...props.huts, h});
           setErrorMsg(res.message);
           let newHut = res.hut;
           console.log(newHut);
           console.log(res);
-          // newHut.Picture="hutImages/hut-"+res.hut.RefPointID+".jpg";
           setmsgState('primary');
-          //API.uploadHutPicture(res.hut.RefPointID,picture).then((res)=>{
           props.setHuts(oldHuts => [...oldHuts, newHut]);
           navigate("/huts");
-          // });
-
-
-          //navigate("/hikes");
-        })//setDirty(true)})
+          
+        })
         .catch(err => setErrorMsg(err.error));
-
-      //setErrorMsg("Hut aggiunto");//static values
-      //setmsgState('primary');
     }
   }
 
@@ -266,7 +248,6 @@ function AddHutForm(props) {
             <TwoColumn>
               {!pictureOk && !geoOk &&
                 <ImageMapColumn>
-                  {/*put the picture or map here*/}
                   <Image imageSrc={EmailIllustrationSrc} />
                 </ImageMapColumn>
               }
