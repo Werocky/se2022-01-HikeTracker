@@ -15,7 +15,9 @@ import distanceBetweenPoints from "../DistanceBeteenPoints";
 import { Button } from "react-bootstrap";
 import { StartPoint, EndPoint, RefPoint } from "./RefPointsTypes";
 import { css } from "styled-components/macro";
-
+import Calendar from 'react-calendar';
+import 'react-calendar/dist/Calendar.css';
+import TimePicker from 'react-time-picker'
 
 export const NavLink = tw.button`
   text-lg my-2 lg:text-sm lg:mx-6 lg:my-0
@@ -72,6 +74,8 @@ function HikeDetails(props) {
   const [loading, setLoading] = useState(true);
   const [canStart, setCanStart] = useState(true);
   const [showImg, setShowImg] = useState(false);
+  const [startDate,setStartDate]=useState(new Date());
+  const [startTime,setStartTime]=useState('10:00')
 
   useEffect(() => {
     const loadHike = async () => {
@@ -118,11 +122,25 @@ function HikeDetails(props) {
   }, [gpxData])
 
   const startHike = () => {
-    props.setMyHikes(oldHikes => [...oldHikes, hike]);
-    console.log(hike.HikeID);
-    console.log(refPoints[0]);
-    API.startHike(hike.HikeID, refPoints[0]);
-    setCanStart(false);
+    let i=0;
+    let rp;
+    console.log(refPoints);
+    for (i=0;i<refPoints.length;i++)
+    {
+      if(refPoints[i].IsStart){
+        rp=refPoints[i];
+      }
+    }
+    console.log(rp);
+    
+    
+    API.startHike(hike.HikeID,rp).then(()=>
+    {
+      props.setMyHikes(oldHikes => [...oldHikes, hike]);
+      setCanStart(false);
+    });
+
+    
   };
 
   const imageSrc = StatsIllustrationSrc;
@@ -220,14 +238,17 @@ function HikeDetails(props) {
                 <Description>{hike.Description}</Description>
               </TextContent>
 
-              {canStart &&
+              {canStart && <>
                 <PrimaryLink onClick={startHike}>
                   Start Hike
-                </PrimaryLink>}
+                </PrimaryLink>
+                <Calendar onChange={setStartDate} value={startDate}></Calendar>
+                <TimePicker onChange={setStartTime} value={startTime} /></>
+                }
 
               {hike.AssociatedGuide === auth.user.Id &&
-                <PrimaryLink onClick={() => navigate("/" + hike.HikeID + "/edit", { state: { hikeId: hike.HikeID, refPoints: refPoints, gpxData: gpxData, bounds: bounds } })}>
-                  Modify Reference Points
+                <PrimaryLink onClick={() => navigate("/" + hike.HikeID + "/edit", { state: { hikeId: hike.HikeID, refPoints: refPoints, gpxData: gpxData, bounds: bounds } })}> 
+                 Modify Reference Points
                 </PrimaryLink>}
 
             </TextColumn>
