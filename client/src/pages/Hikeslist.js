@@ -143,6 +143,9 @@ function HikeList(props) {
               </div>}
             {showMap &&
               <div>
+                <br/>
+                <br/>
+                <br/>
                 <GeoFilter setHikes={setHikes}/>
               </div>}
           </div>

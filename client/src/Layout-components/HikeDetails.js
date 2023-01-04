@@ -191,11 +191,14 @@ function HikeDetails(props) {
 
                   <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
                 </MapContainer>
-                <p>Green: Parking Lot</p>
-                <p>Yellow: Hut</p>
-                <p>Red: Peak</p>
-                <p>Blue: Default - Not Specified</p>
-
+                <br/>
+                <div>
+                  <p>Green: Parking Lot</p>
+                  <p>Yellow: Hut</p>
+                  <p>Red: Peak</p>
+                  <p>Blue: Default - Not Specified</p>
+                </div>
+                <br/>
                 <CoverImage imageSrc={`http://localhost:3001/${hike.Picture}`} onClick={() => setShowImg(true)} />
 
               </ImageMapColumn>
