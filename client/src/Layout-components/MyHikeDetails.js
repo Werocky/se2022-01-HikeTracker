@@ -150,12 +150,12 @@ function MyHikeDetails(props) {
                     positions={gpxData}
                   />
 
-                  {refPoints != undefined && !refPoints.length && gpxData != undefined && gpxData.length != 0 &&
+                  {/*refPoints != undefined && !refPoints.length && gpxData != undefined && gpxData.length != 0 &&
                     <>
                       <StartPoint position={gpxData[0]} />
                       <EndPoint position={gpxData.at(-1)} />
                     </>
-                  }
+            */}
 
                   {refPoints.map(rp => (
 
