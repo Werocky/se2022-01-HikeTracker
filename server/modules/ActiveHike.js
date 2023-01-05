@@ -38,6 +38,19 @@ function getActivePoints(){
     );
 }
 
+function getPointReachedInfo(HikeID, PointID, HikerID){
+    return new Promise((resolve,reject)=>{
+                db.all('SELECT ArrivalTime, PointID FROM ActiveHikePoints WHERE HikeID = ? AND PointID = ? AND HikerID = ?',[HikeID, PointID, HikerID],(err,rows)=>{
+                    if(err)reject('Cannot find info on the point');
+                    
+                    if(rows!=undefined)
+                    resolve(rows);
+                }); 
+            
+        }
+    );
+}
+
 function emptyConnection(){
     return new Promise(
         (resolve,reject)=>{
@@ -81,5 +94,6 @@ module.exports ={
     emptyConnection,
     getActivePoints, 
     getNextActiveHike,
-    getUserHikeDetails
+    getUserHikeDetails,
+    getPointReachedInfo
 }

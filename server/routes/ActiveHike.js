@@ -185,6 +185,45 @@ router.post('/PassPoint',[
 
 });
 
+router.post('/getPointReachedInfo',[
+  check('HikeID').notEmpty(),
+  check('HikerID').notEmpty(),
+  check('PointID').notEmpty()
+],async(req,res)=>{
+
+  const errors= validationResult(req);  
+  if(!errors.isEmpty()){
+      return res.status(422).json({ error: 'cannot process request' });
+  } 
+  try{
+      //check hike exists
+      const Hike= await hikes.getHike(req.body.HikeID);
+      
+      if(Hike==undefined || Hike==null || Hike.HikeID!= req.body.HikeID){
+          return res.status(402).json({'error': 'Hike could not be found'});
+      }
+      
+      //check point belongs to hike
+
+      const hikeRefPts= await refPoint.getHikeInfo(req.body.HikeID);
+      let flag=false;
+      
+      hikeRefPts.forEach(point => {
+          if(point.RefPointID== req.body.PointID){
+              flag=true;
+          }  
+      });
+      if(!flag)return res.status(403).json({'error':'ReferencePoint not registered to Hike: '+ req.body.HikeID});
+      
+      //set activePoint as reached in DB
+      let answer=await ActivePoints.getPointReachedInfo(req.body.HikeID,req.body.PointID,req.body.HikerID);
+      return res.status(200).json(answer);
+  }catch(error){
+      res.status(503).json(error);
+  }
+
+});
+
 
 router.get('/myHikeReferencePoints',[
     //TODO check params
