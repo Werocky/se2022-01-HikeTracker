@@ -101,8 +101,8 @@ function HikeDetails(props) {
           setCanStart(false);
 
         console.log(props.myHikes);
-        const rp = await API.getHikeRefPoints(params.hikeID);
-       
+      const rp = await API.getHikeRefPoints(params.hikeID);
+       setRefPoints(rp);
         const gpxObj = await API.getPointsHike(params.hikeID);
         setGpxData(gpxObj);
        // console.log("Start\n" + gpxObj[0].lat + "\t" + gpxObj[0].lon + "\nEnd\n" + gpxObj.at(-1).lat + "\t" + gpxObj.at(-1).lon);
@@ -146,6 +146,7 @@ function HikeDetails(props) {
       {
         props.setMyHikes(oldHikes => [...oldHikes, hike]);
         setCanStart(false);
+        navigate("/myHikes");
       });
   
     }

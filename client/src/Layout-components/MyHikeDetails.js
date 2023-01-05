@@ -68,18 +68,15 @@ function MyHikeDetails(props) {
   const [hike, setHike] = useState(undefined);
   const [gpxData, setGpxData] = useState();  // array of [p.lat, p.lon]
   const [bounds, setBounds] = useState(undefined);  // map bounds
-  const [refPoints, setRefPoints] = useState([]);  // array of ref points
+  const [refPoints, setRefPoints] = useState([]);  // array of ref points della hike
   const [loading, setLoading] = useState(true);
   const [showImg, setShowImg] = useState(false);
-  const [startDate,setStartDate]=useState(new Date());
-  const [startTime,setStartTime]=useState('10:00')
-  const [points,setMyPoints]=useState([]);
+  const [points,setMyPoints]=useState([]); //tutti i punti raggiunti dall hiker in questa hike
 
   useEffect(() => {
     const loadHike = async () => {
       setLoading(true);
       const hikeObj = await API.getHike(params.hikeID);
-      console.log(hikeObj);
       setHike(hikeObj);
       let exit=true;
       if (auth.login) {
@@ -97,7 +94,7 @@ function MyHikeDetails(props) {
           navigate("/");
         }
         const rp = await API.getHikeRefPoints(params.hikeID);
-       
+        setRefPoints(rp);
         const gpxObj = await API.getPointsHike(params.hikeID);
         setGpxData(gpxObj);
        // console.log("Start\n" + gpxObj[0].lat + "\t" + gpxObj[0].lon + "\nEnd\n" + gpxObj.at(-1).lat + "\t" + gpxObj.at(-1).lon);
@@ -113,6 +110,7 @@ function MyHikeDetails(props) {
         console.log(res);
       });
 
+      console.log("reference points: ");
   }, [params.hikeID, auth.login])
 
 
