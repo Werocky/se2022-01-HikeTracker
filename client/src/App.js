@@ -193,7 +193,7 @@ function AppLayout(props) {
           <AddParkingLot logout={props.logout} message={props.message} errorHandler={props.errorHandler} setMessage={props.setMessage} setMsgType={props.setMsgType}/> 
         } />
         <Route path='/verify' element={
-          < VerifiedMessage />
+          < VerifiedMessage logout={props.logout} errorHandler={props.errorHandler}/>
         } />
          <Route path='/addHut' element={
           < AddHutForm huts = {huts} setHuts={setHuts} message={props.message} errorHandler={props.errorHandler} logout={props.logout} /> 
