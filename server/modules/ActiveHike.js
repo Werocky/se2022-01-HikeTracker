@@ -88,6 +88,19 @@ function getUserHikeDetails(User, AHikeID){
     })
 }
 
+function getHikerPointsOfHike(HikerID, HikeID){
+    return new Promise((resolve,reject)=>{
+                db.all('SELECT * FROM ActiveHikePoints WHERE HikerID = ? AND HikeID = ?',[HikerID, HikeID],(err,rows)=>{
+                    if(err)reject(err);
+                    
+                    if(rows!=undefined)
+                    resolve(rows);
+                }); 
+            
+        }
+    );
+}
+
 module.exports ={
     RegisterActivePoint,
     ReserveActivePoint,
@@ -95,5 +108,6 @@ module.exports ={
     getActivePoints, 
     getNextActiveHike,
     getUserHikeDetails,
-    getPointReachedInfo
+    getPointReachedInfo,
+    getHikerPointsOfHike
 }

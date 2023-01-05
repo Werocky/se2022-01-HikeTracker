@@ -224,6 +224,32 @@ router.post('/getPointReachedInfo',[
 
 });
 
+router.post('/getHikerPointsOfHike',[
+  check('HikeID').notEmpty(),
+  check('HikerID').notEmpty()
+],async(req,res)=>{
+
+  const errors= validationResult(req);  
+  if(!errors.isEmpty()){
+      return res.status(422).json({ error: 'cannot process request' });
+  } 
+  try{
+      //check hike exists
+      const Hike= await hikes.getHike(req.body.HikeID);
+      
+      if(Hike==undefined || Hike==null || Hike.HikeID!= req.body.HikeID){
+          return res.status(402).json({'error': 'Hike could not be found'});
+      }
+      
+      //set activePoint as reached in DB
+      let answer=await ActivePoints.getHikerPointsOfHike(req.body.HikerID, req.body.HikeID);
+      return res.status(200).json(answer);
+  }catch(error){
+      res.status(503).json(error);
+  }
+
+});
+
 
 router.get('/myHikeReferencePoints',[
     //TODO check params
