@@ -6,6 +6,7 @@ import AuthContext from './AuthContext'
 import MainLayout from './Layout-components/MainLayout';
 import API from './API';
 import HikeDetails from './Layout-components/HikeDetails';
+import MyHikeDetails from './Layout-components/MyHikeDetails';
 import Profile from './pages/Profile'
 import VerifiedMessage from './Layout-components/VerificationPage';
 
@@ -150,6 +151,9 @@ function AppLayout(props) {
         } />
         <Route path='/:hikeID' element={
           <HikeDetails logout={props.logout}  myHikes={myHikes} setMyHikes={setMyHikes} />
+        } />
+         <Route path='/myHike/:hikeID' element={
+          <MyHikeDetails logout={props.logout}  myHikes={myHikes} setMyHikes={setMyHikes} />
         } />
         <Route path='/:hikeID/edit' element={
           <HikeRefPoints logout={props.logout} />

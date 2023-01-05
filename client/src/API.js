@@ -790,14 +790,13 @@ async function reachedPointInfo(PointID, HikeID, HikerID) {
   }
 }
 
-async function getHikerPointsOfHike(HikeID, HikerID) {
+async function getHikerPointsOfHike(HikeID) {
   try {
     const response = await fetch((APIURL + '/api/activePoint/getHikerPointsOfHike'), {
       method: 'POST',
       credentials: 'include',
       body: JSON.stringify({
         "HikeID": HikeID,
-        "HikerID": HikerID
       }),
       headers: {
         'Content-Type': 'application/json',
