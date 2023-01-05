@@ -89,6 +89,7 @@ function getUserHikeDetails(User, AHikeID){
 }
 
 function getHikerPointsOfHike(HikerID, HikeID){
+    console.log("ciao  "+HikerID+" ah "+HikeID );
     return new Promise((resolve,reject)=>{
                 db.all('SELECT * FROM ActiveHikePoints WHERE HikerID = ? AND HikeID = ?',[HikerID, HikeID],(err,rows)=>{
                     if(err)reject(err);

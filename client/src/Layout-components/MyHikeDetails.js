@@ -16,12 +16,6 @@ import { Button } from "react-bootstrap";
 import { StartPoint, EndPoint, RefPoint } from "./RefPointsTypes";
 import { css } from "styled-components/macro";
 
-import Calendar from 'react-calendar';
-import 'react-calendar/dist/Calendar.css';
-import TimePicker from 'react-time-picker'
-import Popup from 'reactjs-popup';
-import 'reactjs-popup/dist/index.css';
-
 
 export const NavLink = tw.button`
   text-lg my-2 lg:text-sm lg:mx-6 lg:my-0
@@ -68,7 +62,7 @@ const Statistic = tw.div`text-left sm:inline-block sm:mr-12 last:mr-0 mt-4`;
 const Value = tw.div`font-bold text-lg sm:text-xl lg:text-2xl text-secondary-500 tracking-wide`;
 const Key = tw.div`font-medium text-primary-700`;
 const PostAction = tw(PrimaryButtonBase)`mt-8 mb-10 mr-8 inline-block w-56 tracking-wide text-center py-5`;
-function HikeDetails(props) {
+function MyHikeDetails(props) {
   const auth = useContext(AuthContext);
   const params = useParams();
   const [hike, setHike] = useState(undefined);
@@ -76,10 +70,10 @@ function HikeDetails(props) {
   const [bounds, setBounds] = useState(undefined);  // map bounds
   const [refPoints, setRefPoints] = useState([]);  // array of ref points
   const [loading, setLoading] = useState(true);
-  const [canStart, setCanStart] = useState(true);
   const [showImg, setShowImg] = useState(false);
   const [startDate,setStartDate]=useState(new Date());
   const [startTime,setStartTime]=useState('10:00')
+  const [points,setMyPoints]=useState([]);
 
   useEffect(() => {
     const loadHike = async () => {
@@ -87,34 +81,40 @@ function HikeDetails(props) {
       const hikeObj = await API.getHike(params.hikeID);
       console.log(hikeObj);
       setHike(hikeObj);
+      let exit=true;
       if (auth.login) {
         if (auth.user.Role == "H" && props.myHikes.length > 0) {
           props.myHikes.forEach(h => {
             if (h.HikeID == params.hikeID) {
-              setCanStart(false);
+                exit=false;
             }
           });
+          if(exit===true)
+            navigate("/");
         }
-        else if (auth.user.Role == "H" && props.myHikes.length == 0)
-          setCanStart(true);
         else
-          setCanStart(false);
-
-        console.log(props.myHikes);
+        {
+          navigate("/");
+        }
         const rp = await API.getHikeRefPoints(params.hikeID);
        
         const gpxObj = await API.getPointsHike(params.hikeID);
         setGpxData(gpxObj);
        // console.log("Start\n" + gpxObj[0].lat + "\t" + gpxObj[0].lon + "\nEnd\n" + gpxObj.at(-1).lat + "\t" + gpxObj.at(-1).lon);
       } else {
-        setCanStart(false);
-        setLoading(false)
+        navigate("/");
       }
 
     }
     loadHike();
+    API.getHikerPointsOfHike(params.hikeID).then((res)=>
+      {
+        setMyPoints(res);
+        console.log(res);
+      });
 
   }, [params.hikeID, auth.login])
+
 
   useEffect(() => {
     if (gpxData) {
@@ -123,57 +123,6 @@ function HikeDetails(props) {
       setLoading(false);
     }
   }, [gpxData])
-
-  const startHikeCurrent = () => {
-    let i=0;
-    let rp;
-    //console.log(refPoints);
-    for (i=0;i<refPoints.length;i++)
-    {
-      if(refPoints[i].IsStart){
-        rp=refPoints[i];
-      }
-    }
-    //console.log(rp);
-    if(rp==undefined)
-    {
-      //TODO
-      console.log(undefined)
-    }
-    else
-    {
-      API.startHike(hike.HikeID,rp).then(()=>
-      {
-        props.setMyHikes(oldHikes => [...oldHikes, hike]);
-        setCanStart(false);
-      });
-  
-    }
-    
-   
-    
-  };
-  const startHikeSelected = () => {
-    let i=0;
-    let rp;
-    //console.log(refPoints);
-    for (i=0;i<refPoints.length;i++)
-    {
-      if(refPoints[i].IsStart){
-        rp=refPoints[i];
-      }
-    }
-    //console.log(rp);
-    
-    
-    API.startHike(hike.HikeID,rp).then(()=>
-    {
-      props.setMyHikes(oldHikes => [...oldHikes, hike]);
-      setCanStart(false);
-    });
-
-    
-  };
 
   const imageSrc = StatsIllustrationSrc;
   const textOnLeft = false;
@@ -270,28 +219,7 @@ function HikeDetails(props) {
 
 
                 </Statistics>
-                <Description>{hike.Description}</Description>
               </TextContent>
-
-              {canStart && <>
-
-                <Popup trigger={<PrimaryLink> Start Hike</PrimaryLink>} position="right center">
-                <Container>
-                <Calendar onChange={setStartDate} value={startDate}></Calendar>
-                  <TimePicker onChange={setStartTime} value={startTime} />
-                  <PrimaryLink onClick={startHikeSelected}>Use selected date and hour</PrimaryLink>
-                  <PrimaryLink onClick={startHikeCurrent}>Use current date and hour</PrimaryLink>
-                </Container>
-                </Popup>
-             
-               </>
-                }
-
-              {hike.AssociatedGuide === auth.user.Id &&
-                <PrimaryLink onClick={() => navigate("/" + hike.HikeID + "/edit", { state: { hikeId: hike.HikeID, refPoints: refPoints, gpxData: gpxData, bounds: bounds } })}> 
-                 Modify Reference Points
-                </PrimaryLink>}
-
             </TextColumn>
 
 
@@ -335,4 +263,4 @@ function exp_time(time) {
   return res
 }
 
-export default HikeDetails;
+export default MyHikeDetails;

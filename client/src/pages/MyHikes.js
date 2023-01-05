@@ -195,7 +195,7 @@ function HikeElement(props) {
             {hike.City ? hike.City : ""}{hike.Province ? " | " + hike.Province : ""}{hike.Region ? " | " + hike.Region : ""}{hike.Country ? " | " + hike.Country : ""}
           </Description>
 
-          <PostAction onClick={() => { navigate('/' + hike.HikeID) }}>View details</PostAction>
+          <PostAction onClick={() => { navigate('/myHike/' + hike.HikeID) }}>View details</PostAction>
         </Info>
 
       </Post>

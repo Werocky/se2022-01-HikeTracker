@@ -226,7 +226,6 @@ router.post('/getPointReachedInfo',[
 
 router.post('/getHikerPointsOfHike',[
   check('HikeID').notEmpty(),
-  check('HikerID').notEmpty()
 ],async(req,res)=>{
 
   const errors= validationResult(req);  
@@ -242,7 +241,8 @@ router.post('/getHikerPointsOfHike',[
       }
       
       //set activePoint as reached in DB
-      let answer=await ActivePoints.getHikerPointsOfHike(req.body.HikerID, req.body.HikeID);
+      console.log(req.user);
+      let answer=await ActivePoints.getHikerPointsOfHike(req.user.Id,req.body.HikeID );
       return res.status(200).json(answer);
   }catch(error){
       res.status(503).json(error);
