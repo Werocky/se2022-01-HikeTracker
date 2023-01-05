@@ -13,8 +13,9 @@ import AnimationRevealPage from "../helpers/AnimationRevealPage";
 import Header from "../components/headers/light.js";
 import distanceBetweenPoints from "../DistanceBeteenPoints";
 import { Button } from "react-bootstrap";
-import { StartPoint, EndPoint, RefPoint } from "./RefPointsTypes";
+import { StartPoint, EndPoint, RefPoint,MyStartPoint, MyEndPoint, MyRefPoint } from "./RefPointsTypes";
 import { css } from "styled-components/macro";
+import { marker } from "leaflet";
 
 
 export const NavLink = tw.button`
@@ -72,7 +73,8 @@ function MyHikeDetails(props) {
   const [loading, setLoading] = useState(true);
   const [showImg, setShowImg] = useState(false);
   const [points,setMyPoints]=useState([]); //tutti i punti raggiunti dall hiker in questa hike
-
+  const [show,setShow]=useState(false);
+  const [text,setText]=useState()
   useEffect(() => {
     const loadHike = async () => {
       setLoading(true);
@@ -95,6 +97,8 @@ function MyHikeDetails(props) {
         }
         const rp = await API.getHikeRefPoints(params.hikeID);
         setRefPoints(rp);
+        
+      console.log(rp);
         const gpxObj = await API.getPointsHike(params.hikeID);
         setGpxData(gpxObj);
        // console.log("Start\n" + gpxObj[0].lat + "\t" + gpxObj[0].lon + "\nEnd\n" + gpxObj.at(-1).lat + "\t" + gpxObj.at(-1).lon);
@@ -110,7 +114,10 @@ function MyHikeDetails(props) {
         console.log(res);
       });
 
-      console.log("reference points: ");
+
+    
+    
+
   }, [params.hikeID, auth.login])
 
 
@@ -126,6 +133,18 @@ function MyHikeDetails(props) {
   const textOnLeft = false;
   const navigate = useNavigate();
 
+  function markerInfo(rp)
+  {
+    console.log('questo è l rp');
+    console.log(rp);
+    refPoints.forEach(refP => {
+     if (refP.refPointID ==rp.RefPointID) {
+          setShow(false);
+          setText(refP.ArrivalTime);
+      }
+    });
+  }
+
   return (
     <AnimationRevealPage>
       <Header logout={props.logout} />
@@ -139,7 +158,7 @@ function MyHikeDetails(props) {
               </ImageMapColumn>
             }
             {auth.login &&
-              <ImageMapColumn>
+              <ImageMapColumn> 
                 {/*<PostAction onClick={() => { navigate('/startHike') }}>Start A New Hike</PostAction>*/}
                 <MapContainer
                   bounds={bounds}
@@ -158,13 +177,12 @@ function MyHikeDetails(props) {
                   }
 
                   {refPoints.map(rp => (
-
                     rp.IsStart ?
-                      <StartPoint key={rp.refPointsID} position={{ lat: rp.Lat, lon: rp.Lng }} type={rp.Type} />
+                      <MyStartPoint key={rp.RefPointsID} position={{ lat: rp.Lat, lon: rp.Lng }} type={rp.Type}  text={text} />
                       : rp.IsEnd ?
-                        <EndPoint key={rp.refPointsID} position={{ lat: rp.Lat, lon: rp.Lng }} type={rp.Type} />
+                        <MyEndPoint key={rp.RefPointsID} position={{ lat: rp.Lat, lon: rp.Lng }} type={rp.Type} />
                         :
-                        <RefPoint key={rp.refPointsID} position={{ lat: rp.Lat, lon: rp.Lng }} type={rp.Type} />
+                        <MyRefPoint key={rp.RefPointsID} position={{ lat: rp.Lat, lon: rp.Lng }} type={rp.Type} />
 
                   ))}
 

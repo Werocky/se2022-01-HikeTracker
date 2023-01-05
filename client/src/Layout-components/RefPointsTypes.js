@@ -56,3 +56,38 @@ export function RefPoint(props) {
     </Marker>
   );
 }
+
+export function MyStartPoint(props) {
+  const icon = MarkerColor(props.type);
+  return (
+    <Marker position={props.position} icon={icon}>
+      <Popup>
+        {props.text}
+      </Popup>
+    </Marker>
+  );
+}
+
+export function MyEndPoint(props) {
+  const icon = MarkerColor(props.type);
+  return (
+    <Marker position={props.position} icon={icon}>
+      <Popup>
+        {props.onClick}
+      </Popup>
+    </Marker>
+  );
+}
+
+export function MyRefPoint(props) {
+  const icon = MarkerColor(props.type);
+  return (
+
+    <Marker position={props.position} icon={icon} >
+      <Popup>
+        This is a reference point
+      </Popup>
+      
+    </Marker>
+  );
+}
