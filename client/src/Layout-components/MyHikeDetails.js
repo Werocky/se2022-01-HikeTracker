@@ -84,13 +84,20 @@ function MyHikeDetails(props) {
   const [show,setShow]=useState(false);
   const [text,setText]=useState("");
   const [startDate,setStartDate]=useState(new Date());
-  const [startTime,setStartTime]=useState('10:00')
+  const [startTime,setStartTime]=useState('10:00');
+  const [endDate,setEndDate]=useState(new Date());
+  const [endTime,setEndTime]=useState('10:00')
+  const [canTerminate, setCanTerminate] = useState(true);
 
   useEffect(() => {
     const loadHike = async () => {
       setLoading(true);
       const hikeObj = await API.getHike(params.hikeID);
       setHike(hikeObj);
+      const pointsOfHike = await API.getHikerPointsOfHike(params.hikeID);
+      let check = await API.getHikeInfo(params.hikeID);
+      check = check.filter(val => val.IsEnd != 0);
+      pointsOfHike.forEach(point => {if(point.PointID == check[0].RefPointID) setCanTerminate(false)});
       let exit=true;
       if (auth.login) {
         if (auth.user.Role == "H" && props.myHikes.length > 0) {
@@ -155,13 +162,13 @@ function MyHikeDetails(props) {
     });
   }
 */
-  const startHikeCurrent = () => {
+  const terminateHikeCurrent = () => {
     let i=0;
     let rp;
     //console.log(refPoints);
     for (i=0;i<refPoints.length;i++)
     {
-      if(refPoints[i].IsStart){
+      if(refPoints[i].IsEnd){
         rp=refPoints[i];
       }
     }
@@ -173,9 +180,9 @@ function MyHikeDetails(props) {
     }
     else
     {
-      API.startHike(hike.HikeID,rp, null).then(()=>
-      {
-        props.setMyHikes(oldHikes => [...oldHikes, hike]);
+      API.terminateHike(hike.HikeID,rp, null).then(()=>
+      { setCanTerminate(false);
+        props.setMyHikes((oldHikes) => oldHikes.filter((val) => val.HikeID != hike.hikeID));
         navigate("/myHikes");
       });
   
@@ -184,13 +191,13 @@ function MyHikeDetails(props) {
    
     
   };
-  const startHikeSelected = () => {
+  const terminateHikeSelected = () => {
     let i=0;
     let rp;
     //console.log(refPoints);
     for (i=0;i<refPoints.length;i++)
     {
-      if(refPoints[i].IsStart){
+      if(refPoints[i].IsEnd){
         rp=refPoints[i];
       }
     }
@@ -199,16 +206,17 @@ function MyHikeDetails(props) {
     if(rp==undefined)
     {
       //TODO
-      console.log(undefined)
+      
     }
     else
     {
-      let start_Date = new Date(startDate);
-      start_Date.setHours(startTime.split(':')[0], startTime.split(':')[1]);
-      console.log(start_Date);
-      API.startHike(hike.HikeID,rp,start_Date.getTime()).then(()=>
+      let end_Date = new Date(endDate);
+      end_Date.setHours(endTime.split(':')[0], endTime.split(':')[1]);
+      console.log(end_Date);
+      API.terminateHike(hike.HikeID,rp,end_Date.getTime()).then(()=>
       {
-        props.setMyHikes(oldHikes => [...oldHikes, hike]);
+        setCanTerminate(false);
+        props.setMyHikes((oldHikes) => oldHikes.filter((val) => val.HikeID != hike.HikeID));
         navigate("/myHikes");
       });
   
@@ -305,7 +313,21 @@ function MyHikeDetails(props) {
 
                 </Statistics>
 
-                {show && <>
+                {canTerminate && <>
+
+                  <Popup trigger={<PrimaryLink> End Hike</PrimaryLink>} position="right center">
+                  <Container>
+                  <Calendar onChange={setEndDate} value={endDate}></Calendar>
+                    <TimePicker onChange={setEndTime} value={endTime} />
+                    <PrimaryLink onClick={terminateHikeSelected}>Use selected date and hour</PrimaryLink>
+                    <PrimaryLink onClick={terminateHikeCurrent}>Use current date and hour</PrimaryLink>
+                  </Container>
+                  </Popup>
+
+                  </>
+                  }
+
+                {/*show && <>
 
                   <Popup trigger={<PrimaryLink> point reached</PrimaryLink>} position="right center">
                   <Container>
@@ -317,7 +339,7 @@ function MyHikeDetails(props) {
                   </Popup>
 
                   </>
-                  }
+                */}
               </TextContent>
             </TextColumn>
 

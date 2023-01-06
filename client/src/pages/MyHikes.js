@@ -104,7 +104,7 @@ function MyHikeList(props) {
     }
 
     updateData();
-  }, [props.hikes]);
+  }, [props.myHikes]);
 
 
 

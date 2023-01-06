@@ -65,6 +65,19 @@ function emptyConnection(){
     );
 }
 
+function getCurrentActiveHike(HikerID, HikeID){
+    return new Promise((resolve,reject)=>{
+        db.get("SELECT MAX(ActiveHikeID) AS MHID FROM ActiveHikePoints WHERE HikeID=? AND HikerID=?",[HikeID, HikerID],(err,row)=>{
+
+            
+            if(err)reject(err);
+            
+            if(row==undefined || row== null)resolve(1);
+            resolve(row.MHID);
+        })
+    })
+}
+
 function getNextActiveHike(){
     return new Promise((resolve,reject)=>{
         db.get("SELECT MAX(ActiveHikeID) AS MHID FROM ActiveHikePoints",[],(err,row)=>{
@@ -110,5 +123,6 @@ module.exports ={
     getNextActiveHike,
     getUserHikeDetails,
     getPointReachedInfo,
-    getHikerPointsOfHike
+    getHikerPointsOfHike,
+    getCurrentActiveHike
 }

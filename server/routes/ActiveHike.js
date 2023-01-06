@@ -143,6 +143,71 @@ router.post('/GenerateActiveHike',[
     }
 })
 
+router.post('/TerminateActiveHike',[
+  check('HikeID').notEmpty(),
+  check('PointID').notEmpty()
+],async(req,res)=>{
+    const errors= validationResult(req);
+  
+    console.log(req.user);
+   
+    if(!errors.isEmpty()){
+        return res.status(422).json({ error: 'cannot process request' });
+    } 
+    try{
+        console.log("userId: "+req.user.Id);
+        console.log("request: "+req.body.HikeID);
+        console.log("request: "+req.body.PointID);
+        const userID=req.user.Id;
+        const HikeID=JSON.parse(req.body.HikeID);
+        const PointID=req.body.PointID;
+        console.log(PointID);
+        
+        console.log(HikeID);
+        let CurrentActiveID= await ActivePoints.getCurrentActiveHike(userID, HikeID);
+        console.log("CurrentActiveHikeID: "+CurrentActiveID);
+
+        const Hike= await hikes.getHike(HikeID);
+
+        console.log("this is the hike "+Hike.HikeID);
+        
+        if(Hike==undefined || Hike==null || Hike.HikeID!= HikeID){
+            return res.status(402).json({'error': 'Hike could not be found'});
+        }
+        //check point exists
+        //check point belongs to hike
+
+        console.log("Getting HikeInfo");
+        const hikeRefPts= await refPoint.getHikeInfo(HikeID);
+        console.log("HikeRefPoints: " + hikeRefPts);
+
+        console.log("PointID:"+PointID);
+        let flag=false;
+        console.log("PointID.ID:"+PointID.RefPointID);
+        hikeRefPts.forEach(point => {
+          console.log("search pointID:"+point.RefPointID);
+            if(point.RefPointID == PointID.RefPointID){
+                flag=true;
+            }  
+        });
+
+        if(!flag)return res.status(403).json({'error':'ReferencePoint not registered to Hike: '+ HikeID});
+        
+        //set activePoint as reached in DB
+        if(req.body.Timestamp == null)
+          await ActivePoints.RegisterActivePoint(HikeID,userID,PointID.RefPointID, CurrentActiveID);
+        else {
+          await ActivePoints.ReserveActivePoint(HikeID, userID, PointID.RefPointID, req.body.Timestamp, CurrentActiveID);
+        }
+        
+        return res.status(200).json({"ActiveHikeID":CurrentActiveID});
+
+    }catch(error){
+      console.log(error);
+        res.status(503).json(error);
+    }
+})
+
 router.post('/PassPoint',[
     //todo check hikeID valid
     

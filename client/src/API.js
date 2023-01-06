@@ -326,6 +326,31 @@ async function startHike(HikeID,PointID,Timestamp) {
   }
 }
 
+async function terminateHike(HikeID,PointID,Timestamp) {
+  try {
+      console.log("API "+HikeID);
+      const response = await fetch((APIURL + '/api/activePoint/TerminateActiveHike'), {
+        method: 'POST',
+        credentials: 'include',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          "HikeID": HikeID,
+          "PointID": PointID,
+          "Timestamp" : Timestamp
+        }),
+      });
+      if (response.ok) {
+         return HikeID;
+      } else {
+        throw HikeID;
+      }
+  } catch (err) {
+    throw err;
+  }
+}
+
 //retrieve points of the hike's track, given HikeID
 async function getPointsHike(HikeID) {
   try {
@@ -849,6 +874,7 @@ const API = {
   startHike,
   reachedPoint,
   reachedPointInfo,
-  getHikerPointsOfHike
+  getHikerPointsOfHike,
+  terminateHike
 };
 export default API;
