@@ -210,7 +210,7 @@ function AppLayout(props) {
           <TerminateHike />
         }/>
         <Route path='/myHikes'  element={
-          <MyHikesList myHikes={myHikes} setMyHikes={setMyHikes} />
+          <MyHikesList myHikes={myHikes} setMyHikes={setMyHikes} logout={props.logout}/>
         }/>
 
       </Routes>
