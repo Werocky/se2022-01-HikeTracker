@@ -129,8 +129,11 @@ router.post('/GenerateActiveHike',[
         if(!flag)return res.status(403).json({'error':'ReferencePoint not registered to Hike: '+ HikeID});
         
         //set activePoint as reached in DB
-        await ActivePoints.RegisterActivePoint(HikeID,userID,PointID.RefPointID, NextActiveHikeID);
-
+        if(req.body.Timestamp == null)
+          await ActivePoints.RegisterActivePoint(HikeID,userID,PointID.RefPointID, NextActiveHikeID);
+        else {
+          await ActivePoints.ReserveActivePoint(HikeID, userID, PointID.RefPointID, req.body.Timestamp, NextActiveHikeID);
+        }
         
         return res.status(200).json({"ActiveHikeID":NextActiveHikeID});
 

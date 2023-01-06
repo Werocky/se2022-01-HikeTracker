@@ -142,7 +142,7 @@ function HikeDetails(props) {
     }
     else
     {
-      API.startHike(hike.HikeID,rp).then(()=>
+      API.startHike(hike.HikeID,rp,null).then(()=>
       {
         props.setMyHikes(oldHikes => [...oldHikes, hike]);
         setCanStart(false);
@@ -167,13 +167,24 @@ function HikeDetails(props) {
     //console.log(rp);
     
     
-    API.startHike(hike.HikeID,rp).then(()=>
+    if(rp==undefined)
     {
-      props.setMyHikes(oldHikes => [...oldHikes, hike]);
-      setCanStart(false);
-    });
-
-    
+      //TODO
+      console.log(undefined)
+    }
+    else
+    {
+      let start_Date = new Date(startDate);
+      start_Date.setHours(startTime.split(':')[0], startTime.split(':')[1]);
+      console.log(start_Date);
+      API.startHike(hike.HikeID,rp,start_Date.getTime()).then(()=>
+      {
+        props.setMyHikes(oldHikes => [...oldHikes, hike]);
+        setCanStart(false);
+        navigate("/myHikes");
+      });
+  
+    }
   };
 
   const imageSrc = StatsIllustrationSrc;

@@ -301,7 +301,7 @@ async function deleteRefPoints(hikeId, refPoints) {
   }
 }
 
-async function startHike(HikeID,PointID) {
+async function startHike(HikeID,PointID,Timestamp) {
   try {
       console.log("API "+HikeID);
       const response = await fetch((APIURL + '/api/activePoint/GenerateActiveHike'), {
@@ -313,7 +313,7 @@ async function startHike(HikeID,PointID) {
         body: JSON.stringify({
           "HikeID": HikeID,
           "PointID": PointID,
-          
+          "Timestamp" : Timestamp
         }),
       });
       if (response.ok) {
