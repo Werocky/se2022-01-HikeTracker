@@ -39,15 +39,15 @@ function App() {
 
   function errorHandler(err) {
     if (err.hasOwnProperty('error'))
-      {setMessage(() => err.error.toString()); setMsgType('danger');}
+      {setMessage(() => err.error.toString()); setMsgType('danger'); setAlert(true);}
     else if (err.hasOwnProperty('message'))
-      {setMessage(() => err.message); setMsgType('primary');}
+      {setMessage(() => err.message); setMsgType('primary'); setAlert(true);}
     else
-      {setMessage(() => err.toString()); setMsgType('danger');}
+      {setMessage(() => err.toString()); setMsgType('danger'); setAlert(true);}
 
-    //setTimeout(() => {
-     // setAlert(false);
-    //}, 3000);
+    setTimeout(() => {
+      setAlert(false);
+    }, 3000);
   }
 
   const login = (email, password) => {
