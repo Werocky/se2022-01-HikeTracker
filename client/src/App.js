@@ -172,10 +172,10 @@ function AppLayout(props) {
           // < LoginComponent  login={props.login} />
         } />
         <Route path='/addHike' element={
-          <AddHikeForm logout={props.logout} message={props.message} errorHandler={props.errorHandler} /> 
+          <AddHikeForm hikes={hikes} setHikes={setHikes} logout={props.logout} message={props.message} errorHandler={props.errorHandler} /> 
         } />
         <Route path='/hikes' element={
-          <Hikes hikes={hikes} loading={loading} setHikes={setHikes} logout={props.logout} myHikes={myHikes} setMyHikes={setMyHikes} />
+          <Hikes hikes={hikes} loading={loading} setHikes={setHikes} logout={props.logout} myHikes={myHikes} setMyHikes={setMyHikes} errorHandler={props.errorHandler}/>
         } />
         <Route path='/huts' element={
 

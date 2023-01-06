@@ -97,8 +97,9 @@ function HikeList(props) {
   
   useEffect(() => {
     const updateData = async () => {
-      setDefaultHikes(props.hikes);
-      setHikes(props.hikes)
+      const list = await API.getHikes().then(list => {setHikes(list); setDefaultHikes(props.hikes);}).catch(err => props.errorHandler(err));
+      //setDefaultHikes(props.hikes);
+      //setHikes(props.hikes)
 
       const hikeLocations = await API.getHikesLocations();
       setLocations(hikeLocations);
