@@ -96,8 +96,14 @@ function MyHikeDetails(props) {
       setHike(hikeObj);
       const pointsOfHike = await API.getHikerPointsOfHike(params.hikeID);
       let check = await API.getHikeInfo(params.hikeID);
+      let check2 = check.filter(val => val.IsStart != 0);
       check = check.filter(val => val.IsEnd != 0);
+      console.log(pointsOfHike, check, check2);
       pointsOfHike.forEach(point => {if(point.PointID == check[0].RefPointID) setCanTerminate(false)});
+      let endPoint = pointsOfHike.filter(point => point.PointID == check[0].RefPointID);
+      console.log(endPoint);
+      if(endPoint.length > 0)
+        pointsOfHike.forEach(point => {if(point.PointID == check2[0].RefPointID && point.ActiveHikeID > endPoint[0].ActiveHikeID ) setCanTerminate(true)});
       let exit=true;
       if (auth.login) {
         if (auth.user.Role == "H" && props.myHikes.length > 0) {
