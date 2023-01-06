@@ -60,7 +60,10 @@ export function RefPoint(props) {
 export function MyStartPoint(props) {
   const icon = MarkerColor(props.type);
   return (
-    <Marker position={props.position} icon={icon}>
+    <Marker position={props.position} icon={icon}  eventHandlers={{
+      click: () => {
+        markerInfo(props);
+      },}}>
       <Popup>
         {props.text}
       </Popup>
@@ -71,9 +74,12 @@ export function MyStartPoint(props) {
 export function MyEndPoint(props) {
   const icon = MarkerColor(props.type);
   return (
-    <Marker position={props.position} icon={icon}>
+    <Marker position={props.position} icon={icon}  eventHandlers={{
+      click: () => {
+        markerInfo(props);
+      },}} >
       <Popup>
-        {props.onClick}
+      {props.text}
       </Popup>
     </Marker>
   );
@@ -83,11 +89,34 @@ export function MyRefPoint(props) {
   const icon = MarkerColor(props.type);
   return (
 
-    <Marker position={props.position} icon={icon} >
+    <Marker position={props.position} icon={icon}  eventHandlers={{
+      click: () => {
+        markerInfo(props);
+      },}}>
       <Popup>
-        This is a reference point
+      {props.text}
       </Popup>
       
     </Marker>
   );
+}
+
+const markerInfo=(props)=>
+{
+  console.log('questo è l rp');
+  let ok=0;
+  console.log(props.rp);
+  props.myPoints.forEach(refP => {
+   if (refP.PointID ==props.rp.RefPointID) {
+        props.setShow(false);
+        props.setText(refP.ArrivalTime);
+        ok=1;
+    }
+  });
+  if(ok==0)
+  {
+    props.setShow(true);
+    props.setText("ciao");
+  }
+  
 }

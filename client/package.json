@@ -14,6 +14,7 @@
     "bootstrap": "^5.2.2",
     "bootstrap-icons": "^1.10.2",
     "crypto": "^1.0.1",
+    "dayjs": "^1.11.7",
     "feather-icons": "^4.29.0",
     "framer-motion": "^7.6.12",
     "fs": "^0.0.1-security",

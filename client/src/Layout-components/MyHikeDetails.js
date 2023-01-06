@@ -1,7 +1,7 @@
 import { useContext, useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import AuthContext from "../AuthContext";
-import { MapContainer, Marker, Polyline, TileLayer, useMap } from 'react-leaflet';
+import { MapContainer, Marker, Polyline, TileLayer } from 'react-leaflet';
 import API from '../API';
 import tw from "twin.macro";
 import styled from "styled-components";
@@ -16,6 +16,14 @@ import { Button } from "react-bootstrap";
 import { StartPoint, EndPoint, RefPoint,MyStartPoint, MyEndPoint, MyRefPoint } from "./RefPointsTypes";
 import { css } from "styled-components/macro";
 import { marker } from "leaflet";
+import dayjs from 'dayjs';
+
+import Calendar from 'react-calendar';
+import 'react-calendar/dist/Calendar.css';
+import TimePicker from 'react-time-picker'
+import Popup from 'reactjs-popup';
+import 'reactjs-popup/dist/index.css';
+
 
 
 export const NavLink = tw.button`
@@ -72,9 +80,12 @@ function MyHikeDetails(props) {
   const [refPoints, setRefPoints] = useState([]);  // array of ref points della hike
   const [loading, setLoading] = useState(true);
   const [showImg, setShowImg] = useState(false);
-  const [points,setMyPoints]=useState([]); //tutti i punti raggiunti dall hiker in questa hike
+  const [myPoints,setMyPoints]=useState([]); //tutti i punti raggiunti dall hiker in questa hike
   const [show,setShow]=useState(false);
-  const [text,setText]=useState()
+  const [text,setText]=useState("");
+  const [startDate,setStartDate]=useState(new Date());
+  const [startTime,setStartTime]=useState('10:00')
+
   useEffect(() => {
     const loadHike = async () => {
       setLoading(true);
@@ -98,7 +109,6 @@ function MyHikeDetails(props) {
         const rp = await API.getHikeRefPoints(params.hikeID);
         setRefPoints(rp);
         
-      console.log(rp);
         const gpxObj = await API.getPointsHike(params.hikeID);
         setGpxData(gpxObj);
        // console.log("Start\n" + gpxObj[0].lat + "\t" + gpxObj[0].lon + "\nEnd\n" + gpxObj.at(-1).lat + "\t" + gpxObj.at(-1).lon);
@@ -111,7 +121,7 @@ function MyHikeDetails(props) {
     API.getHikerPointsOfHike(params.hikeID).then((res)=>
       {
         setMyPoints(res);
-        console.log(res);
+       // console.log(res);
       });
 
 
@@ -133,7 +143,7 @@ function MyHikeDetails(props) {
   const textOnLeft = false;
   const navigate = useNavigate();
 
-  function markerInfo(rp)
+ /* const markerInfo=(rp)=>
   {
     console.log('questo è l rp');
     console.log(rp);
@@ -144,7 +154,56 @@ function MyHikeDetails(props) {
       }
     });
   }
+*/
+  const startHikeCurrent = () => {
+    let i=0;
+    let rp;
+    //console.log(refPoints);
+    for (i=0;i<refPoints.length;i++)
+    {
+      if(refPoints[i].IsStart){
+        rp=refPoints[i];
+      }
+    }
+    //console.log(rp);
+    if(rp==undefined)
+    {
+      //TODO
+      console.log(undefined)
+    }
+    else
+    {
+      API.startHike(hike.HikeID,rp).then(()=>
+      {
+        props.setMyHikes(oldHikes => [...oldHikes, hike]);
+        navigate("/myHikes");
+      });
+  
+    }
+    
+   
+    
+  };
+  const startHikeSelected = () => {
+    let i=0;
+    let rp;
+    //console.log(refPoints);
+    for (i=0;i<refPoints.length;i++)
+    {
+      if(refPoints[i].IsStart){
+        rp=refPoints[i];
+      }
+    }
+    //console.log(rp);
+    
+    
+    API.startHike(hike.HikeID,rp).then(()=>
+    {
+      props.setMyHikes(oldHikes => [...oldHikes, hike]);
+    });
 
+    
+  };
   return (
     <AnimationRevealPage>
       <Header logout={props.logout} />
@@ -178,11 +237,11 @@ function MyHikeDetails(props) {
 
                   {refPoints.map(rp => (
                     rp.IsStart ?
-                      <MyStartPoint key={rp.RefPointsID} position={{ lat: rp.Lat, lon: rp.Lng }} type={rp.Type}  text={text} />
+                      <MyStartPoint key={rp.RefPointsID} position={{ lat: rp.Lat, lon: rp.Lng }} type={rp.Type}  text={text}  rp={rp}  myPoints={myPoints} setShow={setShow} setText={setText}/>
                       : rp.IsEnd ?
-                        <MyEndPoint key={rp.RefPointsID} position={{ lat: rp.Lat, lon: rp.Lng }} type={rp.Type} />
+                        <MyEndPoint key={rp.RefPointsID} position={{ lat: rp.Lat, lon: rp.Lng }} type={rp.Type} text={text}  rp={rp}  myPoints={myPoints} setShow={setShow} setText={setText}/>
                         :
-                        <MyRefPoint key={rp.RefPointsID} position={{ lat: rp.Lat, lon: rp.Lng }} type={rp.Type} />
+                        <MyRefPoint key={rp.RefPointsID} position={{ lat: rp.Lat, lon: rp.Lng }} type={rp.Type} text={text}  rp={rp}  myPoints={myPoints} setShow={setShow} setText={setText}/>
 
                   ))}
 
@@ -235,6 +294,20 @@ function MyHikeDetails(props) {
 
 
                 </Statistics>
+
+                {show && <>
+
+                  <Popup trigger={<PrimaryLink> point reached</PrimaryLink>} position="right center">
+                  <Container>
+                  <Calendar onChange={setStartDate} value={startDate}></Calendar>
+                    <TimePicker onChange={setStartTime} value={startTime} />
+                    <PrimaryLink onClick={startHikeSelected}>Use selected date and hour</PrimaryLink>
+                    <PrimaryLink onClick={startHikeCurrent}>Use current date and hour</PrimaryLink>
+                  </Container>
+                  </Popup>
+
+                  </>
+                  }
               </TextContent>
             </TextColumn>
 
