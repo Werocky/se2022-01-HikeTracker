@@ -168,7 +168,7 @@ function MyHikeDetails(props) {
     });
   }
 */
-  const terminateHikeCurrent = () => {
+  const terminateHikeCurrent = async () => {
     let i=0;
     let rp;
     //console.log(refPoints);
@@ -185,19 +185,30 @@ function MyHikeDetails(props) {
       console.log(undefined)
     }
     else
-    {
-      API.terminateHike(hike.HikeID,rp, null).then(()=>
-      { setCanTerminate(false);
-        props.setMyHikes((oldHikes) => oldHikes.filter((val) => val.HikeID != hike.hikeID));
-        navigate("/myHikes");
-      });
-  
+    { 
+      let Time = new Date();
+      const pointsOfHike = await API.getHikerPointsOfHike(params.hikeID);
+      let check = await API.getHikeInfo(params.hikeID);
+      check = check.filter(val => val.IsEnd == 0);
+      let startingTimestamp = pointsOfHike.filter(point => point.PointID == check[0].RefPointID)[0].ArrivalTime;
+      console.log(startingTimestamp);
+      let time = new Date(startingTimestamp);
+      if(startingTimestamp - Time.getTime() >= 0)
+        props.errorHandler({error: "Cannot end The hike before the Starting Time! Starting Time for this Hike:" + time});
+      else{
+            API.terminateHike(hike.HikeID,rp, null).then(()=>
+          { setCanTerminate(false);
+            props.setMyHikes((oldHikes) => oldHikes.filter((val) => val.HikeID != hike.hikeID));
+            navigate("/myHikes");
+          });
+        }
+      
     }
     
    
     
   };
-  const terminateHikeSelected = () => {
+  const terminateHikeSelected = async () => {
     let i=0;
     let rp;
     //console.log(refPoints);
@@ -216,15 +227,27 @@ function MyHikeDetails(props) {
     }
     else
     {
+      const pointsOfHike = await API.getHikerPointsOfHike(params.hikeID);
+      let check = await API.getHikeInfo(params.hikeID);
+      check = check.filter(val => val.IsEnd == 0);
+      console.log(pointsOfHike, check);
+      let startingTimestamp = pointsOfHike.filter(point => point.PointID == check[0].RefPointID)[0].ArrivalTime;
+      console.log(startingTimestamp);
       let end_Date = new Date(endDate);
       end_Date.setHours(endTime.split(':')[0], endTime.split(':')[1]);
-      console.log(end_Date);
-      API.terminateHike(hike.HikeID,rp,end_Date.getTime()).then(()=>
-      {
-        setCanTerminate(false);
-        props.setMyHikes((oldHikes) => oldHikes.filter((val) => val.HikeID != hike.HikeID));
-        navigate("/myHikes");
-      });
+      console.log(end_Date.getTime());
+      console.log(startingTimestamp - end_Date.getTime());
+      let time = new Date(startingTimestamp);
+      if(startingTimestamp - end_Date.getTime() >= 0)
+        props.errorHandler({error: "Cannot end The hike before the Starting Time! Starting Time for this Hike:" + time});
+      else {
+        API.terminateHike(hike.HikeID,rp,end_Date.getTime()).then(()=>
+        {
+          setCanTerminate(false);
+          props.setMyHikes((oldHikes) => oldHikes.filter((val) => val.HikeID != hike.HikeID));
+          navigate("/myHikes");
+        });
+      }
   
     }
   };
