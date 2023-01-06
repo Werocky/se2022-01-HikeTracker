@@ -45,9 +45,9 @@ function App() {
     else
       {setMessage(() => err.toString()); setMsgType('danger');}
 
-    setTimeout(() => {
-      setAlert(false);
-    }, 3000);
+    //setTimeout(() => {
+     // setAlert(false);
+    //}, 3000);
   }
 
   const login = (email, password) => {
@@ -150,10 +150,10 @@ function AppLayout(props) {
           />
         } />
         <Route path='/:hikeID' element={
-          <HikeDetails logout={props.logout}  myHikes={myHikes} setMyHikes={setMyHikes} />
+          <HikeDetails logout={props.logout}  myHikes={myHikes} setMyHikes={setMyHikes} errorHandler={props.errorHandler}/>
         } />
          <Route path='/myHike/:hikeID' element={
-          <MyHikeDetails logout={props.logout}  myHikes={myHikes} setMyHikes={setMyHikes} />
+          <MyHikeDetails logout={props.logout}  myHikes={myHikes} setMyHikes={setMyHikes} errorHandler={props.errorHandler}/>
         } />
         <Route path='/:hikeID/edit' element={
           <HikeRefPoints logout={props.logout} />
@@ -210,7 +210,7 @@ function AppLayout(props) {
           <TerminateHike />
         }/>
         <Route path='/myHikes'  element={
-          <MyHikesList myHikes={myHikes} setMyHikes={setMyHikes} logout={props.logout}/>
+          <MyHikesList myHikes={myHikes} setMyHikes={setMyHikes} logout={props.logout} errorHandler={props.errorHandler}/>
         }/>
 
       </Routes>

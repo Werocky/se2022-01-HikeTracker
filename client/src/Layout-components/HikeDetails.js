@@ -138,7 +138,7 @@ function HikeDetails(props) {
     if(rp==undefined)
     {
       //TODO
-      console.log(undefined)
+      props.errorHandler({error: "This hike cannot be started now! Soon it will be possible..."});
     }
     else
     {
@@ -170,7 +170,7 @@ function HikeDetails(props) {
     if(rp==undefined)
     {
       //TODO
-      console.log(undefined)
+      props.errorHandler({error: "This hike cannot be started now! Soon it will be possible..."});
     }
     else
     {
