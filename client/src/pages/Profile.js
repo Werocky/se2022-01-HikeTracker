@@ -101,7 +101,8 @@ function Profile(props) {
                     </TextContent>
                 </TextColumn>
             </TwoColumn>
-            <TextColumn textOnLeft={!textOnLeft}>
+            
+            {auth.user.Role == 'H' && <><TextColumn textOnLeft={!textOnLeft}>
                     <TextContent>
                         <Subheading>Completed Hikes:</Subheading>
                     </TextContent>
@@ -135,6 +136,7 @@ function Profile(props) {
                   );
             })}
             </Table>
+            </>}
         </Container>
         </AnimationRevealPage>
     );
