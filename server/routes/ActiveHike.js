@@ -10,8 +10,7 @@ const passport = require('passport'); // auth middleware
 const LocalStrategy = require('passport-local').Strategy; // username and password for login
 const PointsOfHike= require('../modules/HikeRefPoints');
 const authN = require('../modules/authN.js');
-
-
+const hikeRefPoints = require('../modules/HikeRefPoints');
 const { check, validationResult } = require('express-validator'); // validation middleware
 const { response } = require('express');
 const cors = require('cors');
@@ -84,7 +83,7 @@ router.post('/GenerateActiveHike',[
 ],async(req,res)=>{
     const errors= validationResult(req);
   
-    console.log(req.user);
+    
    
     if(!errors.isEmpty()){
         return res.status(422).json({ error: 'cannot process request' });
@@ -96,9 +95,7 @@ router.post('/GenerateActiveHike',[
         const userID=req.user.Id;
         const HikeID=JSON.parse(req.body.HikeID);
         const PointID=req.body.PointID;
-        console.log(PointID);
-        
-        console.log(HikeID);
+      
         let NextActiveHikeID= await ActivePoints.getNextActiveHike();
         console.log("NxtActiveHikeID: "+NextActiveHikeID);
 
@@ -148,8 +145,7 @@ router.post('/TerminateActiveHike',[
   check('PointID').notEmpty()
 ],async(req,res)=>{
     const errors= validationResult(req);
-  
-    console.log(req.user);
+
    
     if(!errors.isEmpty()){
         return res.status(422).json({ error: 'cannot process request' });
@@ -199,6 +195,10 @@ router.post('/TerminateActiveHike',[
         else {
           await ActivePoints.ReserveActivePoint(HikeID, userID, PointID.RefPointID, req.body.Timestamp, CurrentActiveID);
         }
+        let vec = await ActivePoints.getStartingTime(HikeID, CurrentActiveID, userID);
+        let startingTime = vec[0].ArrivalTime;
+        let completionTime = vec[vec.length - 1].ArrivalTime - startingTime;
+        await hikes.insertCompletedHike(userID, HikeID, completionTime);
         
         return res.status(200).json({"ActiveHikeID":CurrentActiveID});
 
@@ -309,7 +309,7 @@ router.post('/getHikerPointsOfHike',[
       }
       
       //set activePoint as reached in DB
-      console.log(req.user);
+      
       let answer=await ActivePoints.getHikerPointsOfHike(req.user.Id,req.body.HikeID );
       return res.status(200).json(answer);
   }catch(error){

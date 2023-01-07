@@ -838,6 +838,22 @@ async function getHikerPointsOfHike(HikeID) {
   }
 }
 
+async function getCompletedHikes() {
+  try {
+    const response = await fetch(APIURL + '/getCompletedHikes', {
+      method: 'GET',
+      credentials: 'include',
+    });
+    const result = await response.json();
+    if (response.ok)
+      return result
+    else
+      throw result;
+  } catch (err) {
+    throw err;
+  }
+}
+
 const API = {
   getHikes,
   logIn,
@@ -875,6 +891,7 @@ const API = {
   reachedPoint,
   reachedPointInfo,
   getHikerPointsOfHike,
-  terminateHike
+  terminateHike,
+  getCompletedHikes
 };
 export default API;

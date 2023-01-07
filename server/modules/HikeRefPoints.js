@@ -144,10 +144,24 @@ function IsLastPoint(HikeID, PointID) {
 
   });
 
+}
 
+function IsFirstPoint(HikeID, PointID) {
+  return new Promise(async (resolve, reject) => {
+    let points = await getHikeInfo(HikeID);
 
+    for (let i = 0; i < points.length; i++) {
+      const point = points[i];
+      if (point.RefPointID == PointID) {
+        resolve(point.IsEnd == 1);
+      }
+    }
+    resolve(false);
+
+  });
 
 }
+
 module.exports = {
   setIsEnd,
   setIsStart,
@@ -159,5 +173,6 @@ module.exports = {
   getHutsAndParks,
   getHikeInfo,
   getHikeRefPoints,
-  IsLastPoint
+  IsLastPoint,
+  IsFirstPoint
 }

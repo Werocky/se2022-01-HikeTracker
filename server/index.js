@@ -151,7 +151,7 @@ app.get('/getMyHikes', async (req, res) => {
   try{
     let list = await hikes.getMyHikes(req.user.Id);
     let vec = [];
-    console.log(list);
+  
     for(let i = 0; i < list.length; i++){
       let max = 0;
       let activePoints = await ActivePointsAPI.getHikerPointsOfHike(req.user.Id, list[i].HikeID);
@@ -159,13 +159,23 @@ app.get('/getMyHikes', async (req, res) => {
       activePoints = activePoints.filter(val => val.ActiveHikeID==max);
       if(await hikeRefPoints.IsLastPoint(list[i].HikeID, activePoints[activePoints.length - 1].PointID) == false) {vec.push(Object.assign({}, list[i]))}
     }
-    console.log(vec);
      res.status(200).json(vec);
   }catch(err){
     console.log(err);
     res.status(500).json(err);
   }
 });
+
+app.get('/getCompletedHikes', (req, res) => {
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    return res.status(422).json({ error: 'cannot process request' });
+  }
+  hikes.getCompletedHikes(req.user.Id)
+    .then(list => res.json(list))
+    .catch(() => res.status(500).end());
+});
+
 
 //GET HIKE LOCATIONS
 app.get('/hikesLocations', async (req, res) => {

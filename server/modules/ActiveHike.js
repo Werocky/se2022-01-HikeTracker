@@ -51,6 +51,19 @@ function getPointReachedInfo(HikeID, PointID, HikerID){
     );
 }
 
+function getStartingTime(HikeID, ActiveHikeID, HikerID){
+    return new Promise((resolve,reject)=>{
+                db.all('SELECT * FROM ActiveHikePoints A JOIN PointsOfHike P ON A.HikeID=P.HikeID WHERE A.HikeID = ? AND A.ActiveHikeID = ? AND A.HikerID = ? AND P.IsStart=?' ,[HikeID, ActiveHikeID, HikerID, 1],(err,rows)=>{
+                    if(err)reject('Cannot find info on the point');
+                    
+                    if(rows!=undefined)
+                    resolve(rows);
+                }); 
+            
+        }
+    );
+}
+
 function emptyConnection(){
     return new Promise(
         (resolve,reject)=>{
@@ -102,7 +115,21 @@ function getUserHikeDetails(User, AHikeID){
 }
 
 function getHikerPointsOfHike(HikerID, HikeID){
-    console.log("ciao  "+HikerID+" ah "+HikeID );
+
+    return new Promise((resolve,reject)=>{
+                db.all('SELECT * FROM ActiveHikePoints WHERE HikerID = ? AND HikeID = ?',[HikerID, HikeID],(err,rows)=>{
+                    if(err)reject(err);
+                    
+                    if(rows!=undefined)
+                    resolve(rows);
+                }); 
+            
+        }
+    );
+}
+
+function getHikerPointsOfHike(HikerID, HikeID){
+
     return new Promise((resolve,reject)=>{
                 db.all('SELECT * FROM ActiveHikePoints WHERE HikerID = ? AND HikeID = ?',[HikerID, HikeID],(err,rows)=>{
                     if(err)reject(err);
@@ -124,5 +151,6 @@ module.exports ={
     getUserHikeDetails,
     getPointReachedInfo,
     getHikerPointsOfHike,
-    getCurrentActiveHike
+    getCurrentActiveHike,
+    getStartingTime
 }

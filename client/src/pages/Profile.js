@@ -14,6 +14,7 @@ import { ReactComponent as SvgDotPattern } from "../images/dot-pattern.svg";
 import AnimationRevealPage from "../helpers/AnimationRevealPage";
 import Header from "../components/headers/light.js";
 import Slider from "react-slick";
+import { Table } from "react-bootstrap";
 
 
 const Container = tw.div`relative`;
@@ -55,8 +56,33 @@ function Profile(props) {
     const imageDecoratorBlobCss = null;
     const imageInsideDiv = true;
     const textOnLeft = false;
+    const [completedHikes, setCompletedHikes] = useState([]);
 
     let role = auth.user.Role == 'H' ? 'Hiker' : (auth.user.Role == 'L' ? 'Local guide' : 'Hut Manager');
+
+    useEffect(() => {
+        const loadCompletedHikes = async () => {
+            await API.getCompletedHikes().then(list => {
+                setCompletedHikes(list);
+            }).catch(err => {
+                console.log(err);
+            })
+        }
+        loadCompletedHikes();
+    },[])
+
+    function msToTime(msDurata) {
+        var millisecondi = parseInt((msDurata%1000)/100)
+            , secondi = parseInt((msDurata/1000)%60)
+            , minuti = parseInt((msDurata/(1000*60))%60)
+            , ore = parseInt((msDurata/(1000*60*60))%24);
+    
+        ore = (ore < 10) ? "0" + ore : ore;
+        minuti = (minuti < 10) ? "0" + minuti : minuti;
+        secondi = (secondi < 10) ? "0" + secondi : secondi;
+    
+        return ore + ":" + minuti + ":" + secondi + "." + millisecondi;
+    }
 
     return (
         <AnimationRevealPage>
@@ -75,6 +101,40 @@ function Profile(props) {
                     </TextContent>
                 </TextColumn>
             </TwoColumn>
+            <TextColumn textOnLeft={!textOnLeft}>
+                    <TextContent>
+                        <Subheading>Completed Hikes:</Subheading>
+                    </TextContent>
+                </TextColumn>
+            <Table striped>
+            <thead>
+                <tr>
+                    <th>HikeID</th>
+                    <th>Title</th>
+                    <th>City</th>
+                    <th>Expected Time</th>
+                    <th>Ascent</th>
+                    <th>Completion time</th>
+                </tr>
+            </thead>
+            {completedHikes.map(hike => {
+                console.log(hike);
+                return (
+                    <>
+                      <tbody>
+                        <tr>
+                          <td>{hike.HikeID}</td>
+                          <td>{hike.Title}</td>
+                          <td>{hike.City}</td>
+                          <td>{Math.floor(hike.ExpectedTime/60)}h:{hike.ExpectedTime%60}m</td>
+                          <td>{hike.Ascent}</td>
+                          <td>{msToTime(hike.CompletionTime)}</td>
+                        </tr>
+                      </tbody>
+                    </>
+                  );
+            })}
+            </Table>
         </Container>
         </AnimationRevealPage>
     );

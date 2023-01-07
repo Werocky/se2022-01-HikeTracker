@@ -87,6 +87,33 @@ function getHikes  () {
   });
 };
 
+function getCompletedHikes(HikerID) {
+  return new Promise(async (resolve, reject) => {
+    const sql = "SELECT * FROM CompletedHikes C LEFT JOIN Hikes H ON C.HikeID=H.HikeID WHERE HikerID=?";
+    db.all(sql, [HikerID], (err, rows) => {
+      if (err) {
+          reject(err);
+      }
+      else {
+        resolve(rows);
+      }
+    });
+  });
+};
+
+function insertCompletedHike(HikerID, HikeID, CompletionTime) {
+  return new Promise(async (resolve, reject) => {
+    const sql = "INSERT INTO CompletedHikes(HikeID, HikerID, CompletionTime) VALUES(?,?,?)";
+    db.all(sql, [HikeID, HikerID, CompletionTime], (err, rows) => {
+      if (err) {
+          reject(err);
+      }
+      else {
+        resolve("Hike Completed!");
+      }
+    });
+  });
+};
 
 
  function getLastHikeId  () {
@@ -304,5 +331,7 @@ module.exports={
   getHikeProvince,
   getHikeRegion,
   setHikePicture,
-  getMyHikes
+  getMyHikes,
+  insertCompletedHike,
+  getCompletedHikes
 }

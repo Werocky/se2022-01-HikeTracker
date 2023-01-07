@@ -102,4 +102,12 @@ CREATE TABLE IF NOT EXISTS `ActiveHikePoints`(
     FOREIGN KEY(`HikeID`) REFERENCES `Hikes`(`HikeID`),
     FOREIGN KEY(`PointID`) REFERENCES `ReferencePoints`(`id`),
     FOREIGN KEY(`HikerID`) REFERENCES `Users`(`Id`)
+);
+CREATE TABLE IF NOT EXISTS `CompletedHikes`(
+    `id` INTEGER NOT NULL PRIMARY KEY,
+    `HikeID` INTEGER NOT NULL,
+    `HikerID` TEXT NOT NULL,
+    `CompletionTime` TEXT NOT NULL,
+    FOREIGN KEY(`HikeID`) REFERENCES `Hikes`(`HikeID`),
+    FOREIGN KEY(`HikerID`) REFERENCES `Users`(`Id`)
 )
