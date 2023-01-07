@@ -24,10 +24,9 @@ const { addReferencePoint, updateReferencePoint } = require('./modules/Reference
 const huts = require('./modules/Huts');
 const mail = require('./modules/mail');
 
-
 const PointsOfHike = require('./routes/PointsOfHike');
 const ActivePoints = require('./routes/ActiveHike');
-
+const ActivePointsAPI= require('./modules/ActiveHike');
 // init express
 const app = new express();
 const port = 3001;
@@ -142,18 +141,32 @@ app.get('/getHikes', (req, res) => {
     .then(list => res.json(list))
     .catch(() => res.status(500).end());
 });
+
 //get started hikes full list
-app.get('/getMyHikes', (req, res) => {
+app.get('/getMyHikes', async (req, res) => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
     return res.status(422).json({ error: 'cannot process request' });
   }
-  console.log(req);
-  console.log(req.user.Id);
-  hikes.getMyHikes(req.user.Id)
-    .then(list => res.json(list))
-    .catch(() => res.status(500).end());
+  try{
+    let list = await hikes.getMyHikes(req.user.Id);
+    let vec = [];
+    console.log(list);
+    for(let i = 0; i < list.length; i++){
+      let max = 0;
+      let activePoints = await ActivePointsAPI.getHikerPointsOfHike(req.user.Id, list[i].HikeID);
+      activePoints.forEach(val => {if(val.ActiveHikeID > max) max = val.ActiveHikeID});
+      activePoints = activePoints.filter(val => val.ActiveHikeID==max);
+      if(await hikeRefPoints.IsLastPoint(list[i].HikeID, activePoints[activePoints.length - 1].PointID) == false) {vec.push(Object.assign({}, list[i]))}
+    }
+    console.log(vec);
+     res.status(200).json(vec);
+  }catch(err){
+    console.log(err);
+    res.status(500).json(err);
+  }
 });
+
 //GET HIKE LOCATIONS
 app.get('/hikesLocations', async (req, res) => {
   const errors = validationResult(req);

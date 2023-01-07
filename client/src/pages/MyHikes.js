@@ -97,7 +97,7 @@ function MyHikeList(props) {
     const updateData = async () => {
       setDefaultHikes(props.myHikes);
       setHikes(props.myHikes);
-      console.log(props.myHikes);
+      
       const hikeLocations = await API.getHikesLocations();
       setLocations(hikeLocations);
       setLoading(false);

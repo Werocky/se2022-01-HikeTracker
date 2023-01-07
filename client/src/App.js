@@ -127,6 +127,7 @@ function AppLayout(props) {
   {
     const reloadMyHikes=async()=>{
       const myHikesArray=await API.getMyHikes();
+      console.log(myHikesArray);
       setMyHikes(myHikesArray);
     }
     if (auth.login && auth.user.Role == "H") {

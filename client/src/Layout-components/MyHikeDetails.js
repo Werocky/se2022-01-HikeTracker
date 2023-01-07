@@ -198,7 +198,7 @@ function MyHikeDetails(props) {
       else{
             API.terminateHike(hike.HikeID,rp, null).then(()=>
           { setCanTerminate(false);
-           // props.setMyHikes((oldHikes) => oldHikes.filter((val) => val.HikeID != hike.HikeID));
+            props.setMyHikes((oldHikes) => oldHikes.filter((val) => val.HikeID != hike.HikeID));
             navigate("/myHikes");
           });
         }
@@ -244,7 +244,7 @@ function MyHikeDetails(props) {
         API.terminateHike(hike.HikeID,rp,end_Date.getTime()).then(()=>
         {
           setCanTerminate(false);
-          //props.setMyHikes((oldHikes) => oldHikes.filter((val) => val.HikeID != hike.HikeID));
+          props.setMyHikes((oldHikes) => oldHikes.filter((val) => val.HikeID != hike.HikeID));
           navigate("/myHikes");
         });
       }
