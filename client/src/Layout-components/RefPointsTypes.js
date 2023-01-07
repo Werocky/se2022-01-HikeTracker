@@ -1,5 +1,6 @@
 import { Marker, Popup } from "react-leaflet";
 import * as L from "leaflet";
+import dayjs from 'dayjs';
 
 function MarkerColor(rpType) {
   let iconUrl = "https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/";
@@ -103,20 +104,21 @@ export function MyRefPoint(props) {
 
 const markerInfo=(props)=>
 {
+  
   console.log('questo è l rp');
   let ok=0;
   console.log(props.rp);
   props.myPoints.forEach(refP => {
    if (refP.PointID ==props.rp.RefPointID) {
         props.setShow(false);
-        props.setText(refP.ArrivalTime);
         ok=1;
+        props.setText(dayjs(refP.ArrivalTime).format("DD/MM/YY hh:mm"));
     }
   });
   if(ok==0)
   {
     props.setShow(true);
-    props.setText("ciao");
+    props.setText("punto ancora non segnato come oltrepassato");
   }
   
 }

@@ -88,7 +88,7 @@ function MyHikeDetails(props) {
   const [endDate,setEndDate]=useState(new Date());
   const [endTime,setEndTime]=useState('10:00')
   const [canTerminate, setCanTerminate] = useState(true);
-
+  const [done,setDone]=useState(true);
   useEffect(() => {
     const loadHike = async () => {
       setLoading(true);
@@ -284,11 +284,11 @@ function MyHikeDetails(props) {
 
                   {refPoints.map(rp => (
                     rp.IsStart ?
-                      <MyStartPoint key={rp.RefPointsID} position={{ lat: rp.Lat, lon: rp.Lng }} type={rp.Type}  text={text}  rp={rp}  myPoints={myPoints} setShow={setShow} setText={setText}/>
+                      <MyStartPoint key={rp.RefPointsID} position={{ lat: rp.Lat, lon: rp.Lng }} type={rp.Type}  text={text}  rp={rp}  myPoints={myPoints} setShow={setShow} setText={setText} done={done} setDone={setDone}/>
                       : rp.IsEnd ?
-                        <MyEndPoint key={rp.RefPointsID} position={{ lat: rp.Lat, lon: rp.Lng }} type={rp.Type} text={text}  rp={rp}  myPoints={myPoints} setShow={setShow} setText={setText}/>
+                        <MyEndPoint key={rp.RefPointsID} position={{ lat: rp.Lat, lon: rp.Lng }} type={rp.Type} text={text}  rp={rp}  myPoints={myPoints} setShow={setShow} setText={setText}  done={done} setDone={setDone}/>
                         :
-                        <MyRefPoint key={rp.RefPointsID} position={{ lat: rp.Lat, lon: rp.Lng }} type={rp.Type} text={text}  rp={rp}  myPoints={myPoints} setShow={setShow} setText={setText}/>
+                        <MyRefPoint key={rp.RefPointsID} position={{ lat: rp.Lat, lon: rp.Lng }} type={rp.Type} text={text}  rp={rp}  myPoints={myPoints} setShow={setShow} setText={setText}  done={done} setDone={setDone}/>
 
                   ))}
 
