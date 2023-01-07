@@ -214,6 +214,8 @@ function AddHikeForm(props) {
       setmsgState('primary');
       setMsgErr('Hike Added!');
       console.log("\n\n" + hikeID + "\n\n")
+      const hikes_array = await API.getHikes();
+      props.setHikes(hikes_array);
       navigate("/" + hikeID);
     } catch (err) {
       props.errorHandler(err);
