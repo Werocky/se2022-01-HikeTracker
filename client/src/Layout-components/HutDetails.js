@@ -133,10 +133,10 @@ function HutDetails(props) {
               <TextContent>
                 <Heading>{hut.Name}</Heading>
                 <Subheading>
-                  Website: {hut.Website === undefined ? 'None' : hut.Website}
+                  Website: {hut.Website === undefined || hut.Website === null ? 'None' : hut.Website}
                 </Subheading>
                 <Subheading>
-                  Phone number: {hut.Phone === undefined ? 'None' : hut.Phone}
+                  Phone number: {hut.Phone === undefined || hut.Phone === null ? 'None' : hut.Phone}
                 </Subheading>
                 <Statistics>
                   <Statistic>
