@@ -23,7 +23,7 @@ const { createParkingLot, updateParkingLot, getParkingLots, getParkingLot, delet
 const { addReferencePoint, updateReferencePoint, addReferencePointWithDescription } = require('./modules/ReferencePoints.js');
 const huts = require('./modules/Huts');
 const mail = require('./modules/mail');
-
+const bcrypt = require('bcrypt');
 const PointsOfHike = require('./routes/PointsOfHike');
 const ActivePoints = require('./routes/ActiveHike');
 const ActivePointsAPI= require('./modules/ActiveHike');
@@ -959,7 +959,7 @@ app.post('/sessions/new', [
     const Name = req.body.Name;
     const Surname = req.body.Surname;
     const Phone = req.body.Phone;
-    const verificationCode = Math.floor((Math.random() * 100) + 1);
+    const verificationCode = await bcrypt.genSalt();
     const user = { Hash: Hash, Salt: Salt, Id: Id, Role: Role, code: verificationCode, Name: Name, Surname: Surname, Phone: Phone };
     const result = await users.register(user);
     mail.sendConfirmationMail(req.body.Id, verificationCode);
