@@ -109,11 +109,9 @@ function Huts(props) {
             setLocations(locationObj);
             setLoading(false);
         }
-        try {
+        
             loadLocation().catch(err => console.log(err));
-        } catch (err) {
-            console.log(err);
-        }
+        
     }, []);
 
     useEffect(() => {        
