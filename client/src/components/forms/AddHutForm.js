@@ -89,12 +89,12 @@ function AddHutForm(props) {
   const [coord, setCoord] = useState(null);
   const [errorMsg, setErrorMsg] = useState("");
   const [msgState, setmsgState] = useState("danger");
-  const [phone, setPhone] = useState("+393668726829");
+  const [phone, setPhone] = useState("");
   const [website, setWebsite] = useState('');
-  const [email, setEmail] = useState("a@polito.it");
+  const [email, setEmail] = useState("");
   const [whenOpen, setWhenOpen] = useState("");
-  const [beds, setBeds] = useState(10);
-  const [descr, setDescr] = useState("rftrg");
+  const [beds, setBeds] = useState();
+  const [descr, setDescr] = useState("");
   const [avgPrice, setAvgPrice] = useState(10);
   const [picture, setPicture] = useState();
   const [pictureOk, setPictureOk] = useState();
@@ -129,7 +129,7 @@ function AddHutForm(props) {
   const submitGeoForm = async (event) => {
     event.preventDefault();
     if (!name || name.trim().length === "") {
-      setErrorMsg("insert a name");
+      setErrorMsg("insert a title");
     }
     else if (!elevation) {
       setErrorMsg("insert an elevation");
@@ -163,10 +163,11 @@ function AddHutForm(props) {
 
   const submitForm = async (event) => {
     event.preventDefault();
-    if (!name || name.trim().length === "") {
+   /* if (!name || name.trim().length === "") {
       setErrorMsg("insert a name");
     }
-    else if (!beds) {
+    else*/
+    if (!beds) {
       setErrorMsg("insert beds number");
     }
     else if (!phone || phone.trim().length === "") {
