@@ -1,19 +1,15 @@
 import { useContext, useEffect, useState } from "react";
-import { Button, Form, Col, Row } from "react-bootstrap";
-import { useNavigate, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import AuthContext from "../AuthContext";
-import { MapContainer, Marker, Polyline, Popup, TileLayer, useMap } from 'react-leaflet';
 import API from '../API';
 
 import tw from "twin.macro";
 import styled from "styled-components";
 import { SectionHeading, Subheading as SubheadingBase } from "../components/misc/Headings.js";
-import { PrimaryButton as PrimaryButtonBase } from "../components/misc/Buttons.js";
 import StatsIllustrationSrc from "../images/pictures/profile.jpeg";
 import { ReactComponent as SvgDotPattern } from "../images/dot-pattern.svg";
-import AnimationRevealPage from "../helpers/AnimationRevealPage";
+import AnimationRevealPage from "./AnimationRevealPage";
 import Header from "../components/headers/light.js";
-import Slider from "react-slick";
 import { Table } from "react-bootstrap";
 
 
@@ -38,17 +34,13 @@ const Heading = tw(
     SectionHeading
 )`mt-8 font-black text-left text-3xl sm:text-4xl lg:text-3xl text-center md:text-left leading-tight`;
 
-const DecoratorBlob = styled(SvgDotPattern)(props => [
-    tw`w-20 h-20 absolute right-0 bottom-0 transform translate-x-1/2 translate-y-1/2 fill-current text-primary-500 -z-10`
-]);
+const DecoratorBlob = styled(SvgDotPattern);
 
 
 
 function Profile(props) {
     const auth = useContext(AuthContext);
     const params = useParams();
-    const navigate = useNavigate();
-
     const imageSrc = StatsIllustrationSrc;
     const imageCss = null;
     const imageContainerCss = null;

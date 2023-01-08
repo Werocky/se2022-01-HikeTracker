@@ -2,15 +2,13 @@ import React from "react";
 import { useState,useEffect,useContext } from "react";
 import tw from "twin.macro";
 import styled from "styled-components";
-import { css } from "styled-components/macro"; //eslint-disable-line
-import { SectionHeading, Subheading as SubheadingBase } from "../misc/Headings.js";
-import { PrimaryButton as PrimaryButtonBase } from "../misc/Buttons.js";
-import EmailIllustrationSrc from "../../images/email-illustration.svg";
-import AnimationRevealPage from "../../helpers/AnimationRevealPage.js";
+
+import { SectionHeading } from "../misc/Headings.js";
+
+import AnimationRevealPage from "../../pages/AnimationRevealPage.js";
 import Header from "../headers/light.js";
-import {Alert, Button, FloatingLabel, FormLabel, Row, Col} from "react-bootstrap";
+import {Alert, Row, Col} from "react-bootstrap";
 import { MapContainer, TileLayer, Marker, Popup, useMapEvents } from 'react-leaflet';
-import PhoneInput from 'react-phone-number-input'
 import 'react-phone-number-input/style.css'
 import AuthContext from "../../AuthContext.js";
 import API from "../../API.js";
@@ -68,9 +66,6 @@ function AddParkingLot(props){
   //subheading = "Add a hut here",
   const heading = <>Add a parking lot here</>;
   const description = "Add parking lot details  here";
-  const submitButtonText = "Confirm";
-  const formAction = "#";
-  const formMethod = "get";
   const textOnLeft = false;
 
     const [descr,setDescr]=useState("");

@@ -8,7 +8,7 @@ import tw from "twin.macro";
 import styled from "styled-components";
 import { SectionHeading, Subheading as SubheadingBase } from "../components/misc/Headings.js";
 import StatsIllustrationSrc from "../images/pictures/map.webp";
-import AnimationRevealPage from "../helpers/AnimationRevealPage";
+import AnimationRevealPage from "../pages/AnimationRevealPage";
 import Header from "../components/headers/light.js";
 import Dropdown from 'react-bootstrap/Dropdown';
 

@@ -2,15 +2,13 @@ import React from "react";
 import { useState,useEffect,useContext } from "react";
 import tw from "twin.macro";
 import styled from "styled-components";
-import { css } from "styled-components/macro"; //eslint-disable-line
 import { SectionHeading, Subheading as SubheadingBase } from "../misc/Headings.js";
-import { PrimaryButton as PrimaryButtonBase } from "../misc/Buttons.js";
-import EmailIllustrationSrc from "../../images/email-illustration.svg";
-import AnimationRevealPage from "../../helpers/AnimationRevealPage.js";
+
+import AnimationRevealPage from "../../pages/AnimationRevealPage.js";
 import Header from "../headers/light.js";
-import {Alert, Button, FloatingLabel, FormLabel, Row, Col} from "react-bootstrap";
+import {Alert, Row, Col} from "react-bootstrap";
 import { MapContainer, TileLayer, Marker, Popup, useMapEvents } from 'react-leaflet';
-import PhoneInput from 'react-phone-number-input'
+
 import 'react-phone-number-input/style.css'
 import AuthContext from "../../AuthContext.js";
 import API from "../../API.js";
@@ -33,7 +31,6 @@ const Description = tw.p`mt-4 mb-12 text-center md:text-left text-sm md:text-bas
 const ImageMapColumn = tw(Column)`md:w-5/12 flex-shrink-0 md:h-auto mr-12`;
 const Form = tw.form`mt-8 md:mt-10 text-sm flex flex-col max-w-sm mx-auto md:mx-0`
 const Input = tw.input`mt-6 first:mt-0 border-b-2 py-3 focus:outline-none font-medium transition duration-300 hocus:border-primary-500`
-const InputOption = tw.input`mt-6 first:mt-0 border-b-2 py-3 focus:outline-none font-medium transition duration-300 hocus:border-gray-300 text-gray-700 `;
 const FormContainer = styled.div`
   ${tw`p-10 sm:p-12 md:p-16 bg-primary-500 text-gray-100 rounded-lg relative`}
   form {
@@ -52,7 +49,6 @@ const FormContainer = styled.div`
 `;
 const InputContainer = tw.div`relative py-5 mt-6`;
 const Label = tw.label`absolute top-0 left-0 tracking-wide font-semibold text-base`;
-const Textarea = tw.textarea`mt-6 h-24 sm:h-full resize-none`;
 const SubmitButton = tw.button`w-full  mt-6 py-3 bg-gray-100 text-primary-500 rounded-full font-bold tracking-wide shadow-lg uppercase text-sm transition duration-300 transform focus:outline-none focus:shadow-outline hover:bg-gray-300 hover:text-primary-700 hocus:-translate-y-px hocus:shadow-xl`;
 
 function StartHike(props){

@@ -1,17 +1,16 @@
 import React, { useContext } from "react";
 import styled from "styled-components";
 import tw from "twin.macro";
-import { css } from "styled-components/macro"; //eslint-disable-line
-import HeaderBase, { NavLinks, NavLink, PrimaryLink } from "../headers/light.js";
-import { SectionHeading } from "../misc/Headings.js";
-import { SectionDescription } from "../misc/Typography.js";
-import { PrimaryButton as PrimaryButtonBase } from "../misc/Buttons.js";
-import { Container, ContentWithVerticalPadding } from "../misc/Layouts.js";
+import HeaderBase, { NavLinks, NavLink, PrimaryLink } from "../components/headers/light.js";
+import { SectionHeading } from "../components/misc/Headings.js";
+import { SectionDescription } from "../components/misc/Typography.js";
+import { PrimaryButton as PrimaryButtonBase } from "../components/misc/Buttons.js";
+import { Container} from "../components/misc/Layouts.js";
 import { ReactComponent as CheckboxIcon } from "feather-icons/dist/icons/check-circle.svg";
-import { ReactComponent as QuotesLeftIconBase } from "../../images/quotes-l.svg"
-import { ReactComponent as SvgDecoratorBlob1 } from "../../images/dot-pattern.svg"
+import { ReactComponent as QuotesLeftIconBase } from "../images/quotes-l.svg"
+import { ReactComponent as SvgDecoratorBlob1 } from "../images/dot-pattern.svg"
 import { useNavigate } from "react-router-dom";
-import AuthContext from "../../AuthContext.js";
+import AuthContext from "../AuthContext.js";
 
 const Header = tw(HeaderBase)`max-w-none`;
 const Row = tw.div`flex flex-col lg:flex-row justify-between items-center lg:pt-16 max-w-screen-2xl mx-auto sm:px-8`;
@@ -35,7 +34,6 @@ const Testimonial = tw.div`max-w-sm rounded-b md:rounded-none relative sm:absolu
 const QuotesLeftIcon = tw(QuotesLeftIconBase)`w-16 h-16 md:w-12 md:h-12 absolute top-0 left-0 text-gray-100 md:text-red-500 transform translate-x-1 md:-translate-x-1/2 md:-translate-y-5 opacity-10 md:opacity-100`
 const Quote = tw.blockquote``
 const CustomerName = tw.p`mt-4 font-bold`
-const CustomerCompany = tw.p`mt-1 text-sm text-gray-500`
 
 function LandingPage(props){
   let heading = "Find Perfect Hikes anywhere you go.";
@@ -117,6 +115,6 @@ function LandingPage(props){
       </Container>
     </>
   );
-};
+}
 
 export default LandingPage;

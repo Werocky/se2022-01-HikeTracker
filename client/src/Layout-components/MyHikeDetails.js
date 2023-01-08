@@ -8,15 +8,13 @@ import styled from "styled-components";
 import { SectionHeading, Subheading as SubheadingBase } from "../components/misc/Headings.js";
 import { PrimaryButton as PrimaryButtonBase } from "../components/misc/Buttons.js";
 import StatsIllustrationSrc from "../images/pictures/map.webp";
-import { ReactComponent as SvgDotPattern } from "../images/dot-pattern.svg";
-import AnimationRevealPage from "../helpers/AnimationRevealPage";
+
+import AnimationRevealPage from "../pages/AnimationRevealPage";
 import Header from "../components/headers/light.js";
 import distanceBetweenPoints from "../DistanceBeteenPoints";
-import { Button } from "react-bootstrap";
-import { StartPoint, EndPoint, RefPoint,MyStartPoint, MyEndPoint, MyRefPoint } from "./RefPointsTypes";
+import {MyStartPoint, MyEndPoint, MyRefPoint } from "./RefPointsTypes";
 import { css } from "styled-components/macro";
-import { marker } from "leaflet";
-import dayjs from 'dayjs';
+
 
 import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
@@ -64,13 +62,12 @@ const Messageheading = tw(SubheadingBase)`mt-4 text-center md:text-left text-sm 
 const Heading = tw(
   SectionHeading
 )`mt-4 font-black text-left text-3xl sm:text-4xl lg:text-4xl text-center md:text-left leading-tight`;
-const Description = tw.p`mt-4 text-center md:text-left text-sm md:text-base lg:text-lg font-medium leading-relaxed text-secondary-100`;
 
 const Statistics = tw.div`flex flex-col items-center sm:block text-center md:text-left mt-4`;
 const Statistic = tw.div`text-left sm:inline-block sm:mr-12 last:mr-0 mt-4`;
 const Value = tw.div`font-bold text-lg sm:text-xl lg:text-2xl text-secondary-500 tracking-wide`;
 const Key = tw.div`font-medium text-primary-700`;
-const PostAction = tw(PrimaryButtonBase)`mt-8 mb-10 mr-8 inline-block w-56 tracking-wide text-center py-5`;
+
 function MyHikeDetails(props) {
   const auth = useContext(AuthContext);
   const params = useParams();

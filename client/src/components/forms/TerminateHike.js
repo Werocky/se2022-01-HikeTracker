@@ -6,7 +6,7 @@ import { css } from "styled-components/macro"; //eslint-disable-line
 import { SectionHeading, Subheading as SubheadingBase } from "../misc/Headings.js";
 import { PrimaryButton as PrimaryButtonBase } from "../misc/Buttons.js";
 import EmailIllustrationSrc from "../../images/email-illustration.svg";
-import AnimationRevealPage from "../../helpers/AnimationRevealPage.js";
+import AnimationRevealPage from "../../pages/AnimationRevealPage.js";
 import Header from "../headers/light.js";
 import {Alert, Button, FloatingLabel, FormLabel, Row, Col} from "react-bootstrap";
 import { MapContainer, TileLayer, Marker, Popup, useMapEvents } from 'react-leaflet';
