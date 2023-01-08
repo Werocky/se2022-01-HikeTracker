@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from "react";
-import AnimationRevealPage from "../helpers/AnimationRevealPage.js";
+import AnimationRevealPage from "./AnimationRevealPage.js";
 import { ContentWithPaddingXl } from "../components/misc/Layouts";
 import tw from "twin.macro";
 import styled from "styled-components";
 import { css } from "styled-components/macro";
 import Header from "../components/headers/light.js";
-import Footer from "../components/footers/FiveColumnWithInputForm.js";
 import { SectionHeading } from "../components/misc/Headings";
 import { PrimaryButton } from "../components/misc/Buttons";
 import { PrimaryButton as PrimaryButtonBase } from "../components/misc/Buttons.js";
@@ -14,7 +13,6 @@ import API from "../API";
 
 const HeadingRow = tw.div`flex  justify-center`;
 const Heading = tw(SectionHeading)`text-gray-700  font-medium `;
-const Heading2 = tw(SectionHeading)`text-gray-100`;
 const Posts = tw.div`mt-6 sm:-mr-8 flex flex-wrap`;
 const PostContainer = styled.div`
   ${tw`mt-10 w-full sm:w-1/2 lg:w-1/3 sm:pr-8`}
@@ -37,11 +35,8 @@ const PostContainer = styled.div`
           `}
 `;
 
-const TextContent = tw.div`lg:py-8 text-center md:text-left`;
 const Container = tw.div`relative`;
 const Content = tw.div`max-w-screen-xl mx-auto py-20 lg:py-24`;
-
-const Form = tw.form`mt-8 md:mt-10 text-sm flex flex-col max-w-sm mx-auto md:mx-0`
 const Input = tw.input`mt-2 first:mt-0 border-b-2 py-3 focus:outline-none font-medium transition duration-300 hocus:border-primary-500`
 const InputOption = tw.input`mt-2 first:mt-0 border-b-2 py-3 focus:outline-none text-sm font-medium transition duration-300 hocus:border-gray-300 text-gray-700 `
 const Instruction = tw.p` text-center md:text-left text-sm md:text-base lg:text-base  leading-relaxed  font-semibold text-base`
@@ -78,7 +73,6 @@ const Image = styled.div`
 `;
 const Info = tw.div`p-8 border-2 border-t-0 rounded-lg rounded-t-none`;
 const Category = tw.div`uppercase text-primary-500 text-xs font-bold tracking-widest leading-loose after:content after:block after:border-b-2 after:border-primary-500 after:w-8`;
-const CreationDate = tw.div`mt-4 uppercase text-gray-600 italic font-semibold text-xs`;
 const Title = tw.div`mt-1 font-extrabold text-2xl text-gray-900 group-hover:text-primary-500 transition duration-300 truncate `;
 const Description = tw.div`truncate `;
 
@@ -336,7 +330,6 @@ function HutElement(props) {
                 <Info>
                     <Title>{hut.Name}</Title>
                     <Category>{hut.Elevation} mt</Category>
-                    <CreationDate>date</CreationDate>
                     <Description>{loc}</Description>
                     <PostAction onClick={() => navigate('/huts/' + hut.RefPointID)}>View details</PostAction>
                 </Info>

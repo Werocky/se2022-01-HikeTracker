@@ -1,10 +1,9 @@
-import AnimationRevealPage from "../helpers/AnimationRevealPage";
+import AnimationRevealPage from "../pages/AnimationRevealPage";
 import Header from "../components/headers/light.js";
 import tw from "twin.macro";
 import styled from "styled-components";
-import { MapContainer, Marker, Polyline, Popup, TileLayer, useMap, useMapEvents } from 'react-leaflet';
-import * as L from "leaflet";
-import { useLocation, useNavigate, useParams } from "react-router-dom";
+import { MapContainer, Marker, Polyline, Popup, TileLayer, useMapEvents } from 'react-leaflet';
+import { useLocation, useNavigate} from "react-router-dom";
 import { useEffect, useState } from "react";
 import API from "../API";
 import { StartPoint, EndPoint, RefPoint } from "./RefPointsTypes";

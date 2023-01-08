@@ -1,5 +1,5 @@
-import React, { useState, useEffect,useContext } from "react";
-import AnimationRevealPage from "../helpers/AnimationRevealPage.js";
+import React, { useState, useEffect} from "react";
+import AnimationRevealPage from "./AnimationRevealPage.js";
 import { Container, ContentWithPaddingXl } from "../components/misc/Layouts";
 import tw from "twin.macro";
 import styled from "styled-components";
@@ -42,7 +42,6 @@ const Image = styled.div`
 `;
 const Info = tw.div`p-8 border-2 rounded-lg`;
 const Category = tw.div`text-primary-500 text-xs font-bold tracking-widest leading-loose after:content after:block after:border-b-2 after:border-primary-500 after:w-8`;
-const CreationDate = tw.div`mt-4 uppercase text-gray-600 italic font-semibold text-xs`;
 const Title = tw.div`mt-1 font-extrabold text-xl text-gray-900 group-hover:text-primary-500 transition duration-300 truncate `;
 const Description = tw.div`truncate `;
 const ButtonContainer = tw.div`flex justify-center`;
@@ -169,7 +168,6 @@ function HikeList(props) {
           )}
         </ContentWithPaddingXl>
       </Container>
-      {/*<Footer />*/}
     </AnimationRevealPage>
   )
 }
@@ -551,10 +549,7 @@ function HikeElement(props) {
                   : hike.Difficulty === "PH" ? "Professional Hiker (PH)" : ""
             }
           </Category>
-
-          <CreationDate>dd/mm/yyyy</CreationDate>
           <Title>{hike.Title}</Title>
-
           <Description> <span tw="text-primary-500">Length:</span> {hike.Length} km</Description>
           <Description> <span tw="text-primary-500">Ascent:</span> {hike.Ascent} mt</Description>
           <Description> <span tw="text-primary-500">Expected Time:</span> {time}</Description>

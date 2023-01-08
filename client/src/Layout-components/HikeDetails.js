@@ -1,18 +1,15 @@
 import { useContext, useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import AuthContext from "../AuthContext";
-import { MapContainer, Marker, Polyline, TileLayer, useMap } from 'react-leaflet';
+import { MapContainer,Polyline, TileLayer } from 'react-leaflet';
 import API from '../API';
 import tw from "twin.macro";
 import styled from "styled-components";
 import { SectionHeading, Subheading as SubheadingBase } from "../components/misc/Headings.js";
-import { PrimaryButton as PrimaryButtonBase } from "../components/misc/Buttons.js";
 import StatsIllustrationSrc from "../images/pictures/map.webp";
-import { ReactComponent as SvgDotPattern } from "../images/dot-pattern.svg";
-import AnimationRevealPage from "../helpers/AnimationRevealPage";
+import AnimationRevealPage from "../pages/AnimationRevealPage";
 import Header from "../components/headers/light.js";
 import distanceBetweenPoints from "../DistanceBeteenPoints";
-import { Button } from "react-bootstrap";
 import { StartPoint, EndPoint, RefPoint } from "./RefPointsTypes";
 import { css } from "styled-components/macro";
 
@@ -72,7 +69,7 @@ const Statistics = tw.div`flex flex-col items-center sm:block text-center md:tex
 const Statistic = tw.div`text-left sm:inline-block sm:mr-12 last:mr-0 mt-4`;
 const Value = tw.div`font-bold text-lg sm:text-xl lg:text-2xl text-secondary-500 tracking-wide`;
 const Key = tw.div`font-medium text-primary-700`;
-const PostAction = tw(PrimaryButtonBase)`mt-8 mb-10 mr-8 inline-block w-56 tracking-wide text-center py-5`;
+
 function HikeDetails(props) {
   const auth = useContext(AuthContext);
   const params = useParams();
