@@ -42,47 +42,16 @@ const Image = styled.div`
 `;
 const Info = tw.div`p-8 border-2 rounded-lg`;
 const Category = tw.div`text-primary-500 text-xs font-bold tracking-widest leading-loose after:content after:block after:border-b-2 after:border-primary-500 after:w-8`;
-const CreationDate = tw.div`mt-4 uppercase text-gray-600 italic font-semibold text-xs`;
 const Title = tw.div`mt-1 font-extrabold text-xl text-gray-900 group-hover:text-primary-500 transition duration-300 truncate `;
 const Description = tw.div`truncate `;
 const ButtonContainer = tw.div`flex justify-center`;
 const LoadMoreButton = tw(PrimaryButton)`mt-16 mx-auto`;
 const PostAction = tw(PrimaryButtonBase)`w-full mt-8`;
-const ShowButton = tw(PrimaryButton)`mt-4 mr-8 inline-block w-56 tracking-wide text-center py-5`;
-const Content = tw.div`max-w-screen-xl mx-auto py-20 lg:py-24`;
-const Input = tw.input`mt-2 first:mt-0 border-b-2 py-3 focus:outline-none font-medium transition duration-300 hocus:border-primary-500`
-const InputOption = tw.input`mt-2 first:mt-0 border-b-2 py-3 focus:outline-none text-sm font-medium transition duration-300 hocus:border-gray-300 text-gray-700 `
-const Instruction = tw.p` text-center md:text-left text-sm md:text-base lg:text-base  leading-relaxed  font-semibold text-base`
-const Label = tw.label`absolute top-0 left-0 tracking-wide font-semibold text-base`;
-
-const FormContainer = styled.div`
-  ${tw`p-5 sm:p-12 md:p-16 bg-primary-500 text-gray-100 rounded-lg relative`}
-  form {
-    ${tw`mt-4`}
-  }
-  h2 {
-    ${tw`text-3xl sm:text-4xl font-bold`}
-  }
-  input,textarea {
-    ${tw`w-full bg-transparent text-gray-100 text-base font-medium tracking-wide border-b-2 py-2 text-gray-100 hocus:border-pink-400 focus:outline-none transition duration-200`};
-
-    ::placeholder {
-      ${tw`text-gray-100`}
-    }
-  }
-`;
-const InputContainer = tw.div`relative py-5 mt-6`;
-
-const SubmitButton = tw.button`w-full sm:w-32 mt-6 py-3 bg-gray-100 text-primary-500 rounded-full font-bold tracking-wide shadow-lg uppercase text-sm transition duration-300 transform focus:outline-none focus:shadow-outline hover:bg-gray-300 hover:text-primary-700 hocus:-translate-y-px hocus:shadow-xl`;
-const ThreeColumn = tw.div`mt-6 flex flex-col sm:flex-row justify-between`;
-const TwoColumn = tw.div`flex flex-col sm:flex-row justify-between`;
-const Column = tw.div`sm:w-3/12 flex flex-col`;
-const Column2 = tw.div`sm:w-1/2 flex flex-col `;
 
 function MyHikeList(props) {
 
   const auth = useContext(AuthContext);
-  const headingText = "My Hikes";
+  const headingText = "My Ongoing Hikes";
   //const hikes = props.hikes;
 
   const [visible, setVisible] = useState(6);
@@ -131,7 +100,7 @@ function MyHikeList(props) {
                   <HikeElement key={index} hike={hike} />
                 ))
                 :
-                <Heading>You don't have started hikes. Start and hike than return on this page</Heading>
+                <Heading>You don't have ongoing hikes. Start and hike then return on this page</Heading>
               }
 
             </Posts>
@@ -185,7 +154,6 @@ function HikeElement(props) {
             }
           </Category>
 
-          <CreationDate>dd/mm/yyyy</CreationDate>
           <Title>{hike.Title}</Title>
 
           <Description> <span tw="text-primary-500">Length:</span> {hike.Length} km</Description>

@@ -36,6 +36,7 @@ export const PrimaryLink = tw(NavLink)`
 const Container = tw.div`relative`;
 const TwoColumn = tw.div`flex flex-col md:flex-row justify-between max-w-screen-xl mx-auto py-20 md:py-24`;
 const Column = tw.div`w-full max-w-md mx-auto md:max-w-none md:mx-0`;
+const Link = tw.div`w-full max-w-md mx-auto md:max-w-none md:mx-0 mt-4`;
 const ImageMapColumn = tw(Column)`md:w-5/12 flex-shrink-0  md:h-auto relative `;
 const TextColumn = styled(Column)(props => [
   tw`md:w-7/12 mt-16 md:mt-0`,
@@ -247,6 +248,7 @@ function HikeDetails(props) {
 
                   <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
                 </MapContainer>
+                <br />
                 <MapLegend />
                 <br />
                 <div>
@@ -299,11 +301,18 @@ function HikeDetails(props) {
 
                 <Popup trigger={<PrimaryLink> Start Hike</PrimaryLink>} position="right center">
                   <Container>
-                    <Calendar onChange={setStartDate} value={startDate}></Calendar>
-                    <TimePicker onChange={setStartTime} value={startTime} />
-                    <PrimaryLink onClick={startHikeSelected}>Use selected date and hour</PrimaryLink>
-                    <PrimaryLink onClick={startHikeCurrent}>Use current date and hour</PrimaryLink>
-                  </Container>
+
+                      <Calendar  onChange={setStartDate} value={startDate}></Calendar>
+                      <br/>
+                      <TimePicker onChange={setStartTime} value={startTime} />
+                      <Link >
+                        <PrimaryLink onClick={startHikeSelected}>Use selected date and hour</PrimaryLink>
+                      </Link>
+                      <Link>
+                        <PrimaryLink onClick={startHikeCurrent}>Use current date and hour</PrimaryLink>
+                      </Link>
+
+                 </Container>
                 </Popup>
 
               </>

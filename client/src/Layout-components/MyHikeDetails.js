@@ -1,12 +1,11 @@
 import { useContext, useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import AuthContext from "../AuthContext";
-import { MapContainer, Marker, Polyline, TileLayer } from 'react-leaflet';
+import { MapContainer, Polyline, TileLayer } from 'react-leaflet';
 import API from '../API';
 import tw from "twin.macro";
 import styled from "styled-components";
 import { SectionHeading, Subheading as SubheadingBase } from "../components/misc/Headings.js";
-import { PrimaryButton as PrimaryButtonBase } from "../components/misc/Buttons.js";
 import StatsIllustrationSrc from "../images/pictures/map.webp";
 
 import AnimationRevealPage from "../helpers/AnimationRevealPage";
@@ -40,6 +39,7 @@ export const PrimaryLink = tw(NavLink)`
 const Container = tw.div`relative`;
 const TwoColumn = tw.div`flex flex-col md:flex-row justify-between max-w-screen-xl mx-auto py-20 md:py-24`;
 const Column = tw.div`w-full max-w-md mx-auto md:max-w-none md:mx-0`;
+const Link = tw.div`w-full max-w-md mx-auto md:max-w-none md:mx-0 mt-4`;
 const ImageMapColumn = tw(Column)`md:w-5/12 flex-shrink-0  md:h-auto relative `;
 const TextColumn = styled(Column)(props => [
   tw`md:w-7/12 mt-16 md:mt-0`,
@@ -338,15 +338,21 @@ function MyHikeDetails(props) {
 
 
                 </Statistics>
+                <br/>
 
                 {canTerminate && <>
 
                   <Popup trigger={<PrimaryLink> End Hike</PrimaryLink>} position="right center">
                   <Container>
                   <Calendar onChange={setEndDate} value={endDate}></Calendar>
+                    <br/>
                     <TimePicker onChange={setEndTime} value={endTime} />
+                    <Link >
                     <PrimaryLink onClick={terminateHikeSelected}>Use selected date and hour</PrimaryLink>
-                    <PrimaryLink onClick={terminateHikeCurrent}>Use current date and hour</PrimaryLink>
+                    </Link>
+                    <Link >
+                      <PrimaryLink onClick={terminateHikeCurrent}>Use current date and hour</PrimaryLink>
+                    </Link>
                   </Container>
                   </Popup>
 

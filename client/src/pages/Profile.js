@@ -28,12 +28,7 @@ const Image = styled.div(props => [
 ]);
 
 const TextContent = tw.div`lg:py-8 text-center md:text-left`;
-
 const Subheading = tw(SubheadingBase)`text-center md:text-left mt-4 sm:text-3xl`;
-const Heading = tw(
-    SectionHeading
-)`mt-8 font-black text-left text-3xl sm:text-4xl lg:text-3xl text-center md:text-left leading-tight`;
-
 const DecoratorBlob = styled(SvgDotPattern);
 
 
@@ -78,7 +73,7 @@ function Profile(props) {
         <AnimationRevealPage>
         <Header logout={props.logout} />
         <Container>
-            <Heading> Hello, {role} </Heading>
+
             <TwoColumn css={!imageInsideDiv && tw`md:items-center`}>
                 <ImageColumn >
                     {imageInsideDiv ? <Image imageSrc={imageSrc} /> : <img src={imageSrc}  alt="" />}
