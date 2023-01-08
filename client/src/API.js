@@ -465,11 +465,8 @@ async function getParkingLots() {
 
 async function getParkingLot(id) {
   try {
-    const response = await fetch(APIURL + '/ParkingLots', {
+    const response = await fetch(APIURL + '/ParkingLot/'+id, {
       method: 'GET',
-      body: JSON.stringify({
-        "ParkingID": id
-      }),
       headers: {
         'Content-Type': 'application/json',
       },

@@ -702,18 +702,17 @@ app.get('/ParkingLots', async (req, res) => {
 });
 
 //Return parking lot identified by id
-app.post('/ParkingLots',
-  [check('ParkingId').notEmpty()], async (req, res) => {
-
+app.get('/ParkingLot/:id', async (req, res) => {
     const errors = validationResult(res);
     if (!errors.isEmpty()) {
       return res.status(422).json({ error: 'cannot process request' });
     }
 
-    const id = req.body.ParkingId;
+    const id = req.params.id;
+    console.log("\n\n"+id);
     try {
       const parkingLot = await getParkingLot(id);
-      res.status(201).json(parkingLot);
+      res.status(200).json(parkingLot);
     } catch (err) {
       res.status(503).json({ error: 'Internal error' });
     }
