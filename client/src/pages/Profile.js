@@ -58,7 +58,7 @@ function Profile(props) {
     const textOnLeft = false;
     const [completedHikes, setCompletedHikes] = useState([]);
 
-    let role = auth.user.Role == 'H' ? 'Hiker' : (auth.user.Role == 'L' ? 'Local guide' : 'Hut Manager');
+    let role = auth.user.Role === 'H' ? 'Hiker' : (auth.user.Role === 'L' ? 'Local guide' : 'Hut Manager');
 
     useEffect(() => {
         const loadCompletedHikes = async () => {
@@ -102,7 +102,7 @@ function Profile(props) {
                 </TextColumn>
             </TwoColumn>
             
-            {auth.user.Role == 'H' && <><TextColumn textOnLeft={!textOnLeft}>
+            {auth.user.Role === 'H' && <><TextColumn textOnLeft={!textOnLeft}>
                     <TextContent>
                         <Subheading>Completed Hikes:</Subheading>
                     </TextContent>

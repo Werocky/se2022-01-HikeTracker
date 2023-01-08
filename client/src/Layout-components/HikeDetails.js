@@ -50,6 +50,11 @@ const CoverImage = styled.div`
   ${tw`h-48 w-full bg-cover bg-center rounded-lg`}
 `;
 
+const PopupImage = styled.div`
+  ${props => css`background-image: url("${props.imageSrc}");`}
+  ${tw`h-96 w-full bg-cover bg-center rounded-lg`}
+`;
+
 const Image = styled.div(props => [
   `background-image: url("${props.imageSrc}");`,
   tw`rounded bg-contain bg-no-repeat bg-center h-full`
@@ -80,6 +85,7 @@ function HikeDetails(props) {
   const [loading, setLoading] = useState(true);
   const [canStart, setCanStart] = useState(true);
   const [showImg, setShowImg] = useState(false);
+  const closeModal = () => setShowImg(false);
   const [startDate, setStartDate] = useState(new Date());
   const [startTime, setStartTime] = useState('10:00')
 
@@ -206,6 +212,11 @@ function HikeDetails(props) {
                 <Image imageSrc={imageSrc} />
               </ImageMapColumn>
             }
+            <Popup open={showImg} closeOnDocumentClick onClose={closeModal}>
+              <Container>
+                <PopupImage imageSrc={`http://localhost:3001/${hike.Picture}`} />
+              </Container>
+            </Popup>
             {auth.login &&
               <ImageMapColumn>
                 {/*<PostAction onClick={() => { navigate('/startHike') }}>Start A New Hike</PostAction>*/}
@@ -238,13 +249,7 @@ function HikeDetails(props) {
 
                   <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
                 </MapContainer>
-                <br />
-                <div>
-                  <p>Green: Parking Lot</p>
-                  <p>Yellow: Hut</p>
-                  <p>Red: Peak</p>
-                  <p>Blue: Default - Not Specified</p>
-                </div>
+                <MapLegend />
                 <br />
                 <CoverImage imageSrc={`http://localhost:3001/${hike.Picture}`} onClick={() => setShowImg(true)} />
 
@@ -348,6 +353,21 @@ function exp_time(time) {
     res = hh + " h " + mm + " m";
   }
   return res
+}
+
+function MapLegend(props) {
+  {/* <div>
+    <MapPinIcon className="h-6 w-6 text-green-500" />
+    <p> Parking Lot</p>
+</div>*/}
+  return (
+    <small>
+      <p>Green: Parking Lots</p>
+      <p>Yellow: Hut</p>
+      <p>Red: Peak</p>
+      <p>Blue: Default - Not Specified</p>
+    </small>
+  )
 }
 
 export default HikeDetails;

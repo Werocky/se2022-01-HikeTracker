@@ -157,7 +157,7 @@ class DatabaseConnection {
     Difficulty = "H";
     start = "Chausseestraße";
     end = "Zossener Allee";
-    image = "hikeImages/default.jpg";
+    image = "hikeImages/nationaler-Geotop-sperenberg-2-klein.jpg";
     await this.wrapperPopulate(HikeID, file, Country, Region, Province, city, title, length, expTime, Ascent, Description, Difficulty, start, end, AssociatedGuide, image)
     await this.wrapperPopulateRefP(HikeID, ++refPoint, "52.167248", "13.371998", "", 1, 0); // start
     await this.wrapperPopulateRefP(HikeID, ++refPoint, "52.145784", "13.364947", "", 0, 1); // end
@@ -183,7 +183,7 @@ class DatabaseConnection {
     Difficulty = "H";
     start = "Village du Soleil, Monginevro (TO) | 1850 m slm circa";
     end = "Monte Chaberton | 3120 m slm circa";
-    image = "hikeImages/default.jpg";
+    image = "hikeImages/chaberton.jpg";
     await this.wrapperPopulate(HikeID, file, Country, Region, Province, city, title, length, expTime, Ascent, Description, Difficulty, start, end, AssociatedGuide, image)
     await this.wrapperPopulateRefP(HikeID, ++refPoint, "44.93603", "6.7386800000000004", "parking", 1, 0); // start
     await this.wrapperPopulateRefP(HikeID, ++refPoint, "44.96452393010259", "6.7513105273246765", "", 0, 1); // end
@@ -769,7 +769,7 @@ class DatabaseConnection {
       "- be aware of the risk that in case of trouble nobody will or can help you in this remote area" +
       "- under 'Cabo de Hornos, Walaia – Ruta Patrimonial Nº16' you can find in the WWW a good description (68 pages) of the track from the 'Ministerio de Bienes Nacionale'. But note: all named GPS-coordinates are wrong. Even with transformation from datum PSAD56 or SA69 to WSG84. The named datum 'P. South America 69' is not existing."
 
-    image = "hikeImages/default.jpg";
+    image = "hikeImages/Wulaia.jpg";
     await this.wrapperPopulate(HikeID, file, Country, Region, Province, city, title, length, expTime, Ascent, Description, Difficulty, start, end, AssociatedGuide, image)
     await this.wrapperPopulateRefP(HikeID, ++refPoint, "-54.925734", "-68.323590", "", 1, 0); // start
     await this.wrapperPopulateRefP(HikeID, ++refPoint, "-55.047550", "-68.148442", "", 0, 1); // end
@@ -793,7 +793,7 @@ class DatabaseConnection {
       "Days: 6 days / 5 nights (Machu Picchu visit included)." +
 
       "Details coming soon."
-    image = "hikeImages/default.jpg";
+    image = "hikeImages/salkantay.jpg";
     await this.wrapperPopulate(HikeID, file, Country, Region, Province, city, title, length, expTime, Ascent, Description, Difficulty, start, end, AssociatedGuide, image)
     await this.wrapperPopulateRefP(HikeID, ++refPoint, "-13.386589", "-72.573909", "hut", 1, 0); // start
     await this.wrapperPopulateRefP(HikeID, ++refPoint, "-13.153162", "-72.522880", "", 0, 1); // end
@@ -825,7 +825,7 @@ class DatabaseConnection {
       "2) Crossing of Tizi-n-Ouamoums, and then down to Amsouzert. Night at the known gite d'etape run by Omar;" +
       "3) Up the Tisgui and down to the azib before the gorge. Night under te stars in the sleeping bag;" +
       "4) Crossing of Tizi Likemt and back to Imlil."
-    image = "hikeImages/default.jpg";
+    image = "hikeImages/ToubkalCircuit.jpg";
     await this.wrapperPopulate(HikeID, file, Country, Region, Province, city, title, length, expTime, Ascent, Description, Difficulty, start, end, AssociatedGuide, image)
     await this.wrapperPopulateRefP(HikeID, ++refPoint, "31.135638", "-7.919335", "parking", 1, 0); // start
     await this.wrapperPopulateRefP(HikeID, ++refPoint, "31.135613", "-7.919305", "parking", 0, 1); // end
@@ -907,7 +907,7 @@ class DatabaseConnection {
       "You will make some stops but the time is limited but the place is huge, so you will have to take pictures from the car a lot, make sure the car can open the windows. The Lexus version of the car have windows in the 3rd row of seat (the normal Toyota version has fixed glass, cannot open)"
 
 
-    image = "hikeImages/default.jpg";
+    image = "hikeImages/uyuni.jpg";
     await this.wrapperPopulate(HikeID, file, Country, Region, Province, city, title, length, expTime, Ascent, Description, Difficulty, start, end, AssociatedGuide, image)
     await this.wrapperPopulateRefP(HikeID, ++refPoint, "-20.463319", "-66.823034", "parking", 1, 0); // start
     await this.wrapperPopulateRefP(HikeID, ++refPoint, "-22.910191", "-68.198311", "parking", 0, 1); // end
@@ -952,7 +952,7 @@ class DatabaseConnection {
     expTime = 1620;
     file = "samaipata-bosque-de-los-helechos-gigantes.gpx"
     Description = "It was very easy but I couldn't find the waterfall. So I couldn't make circle in the Parque Nacional."
-    image = "hikeImages/default.jpg";
+    image = "hikeImages/samaipata.jpg";
     await this.wrapperPopulate(HikeID, file, Country, Region, Province, city, title, length, expTime, Ascent, Description, Difficulty, start, end, AssociatedGuide, image)
     await this.wrapperPopulateRefP(HikeID, ++refPoint, "-18.178785", "-63.873352", "parking", 1, 0); // start
     await this.wrapperPopulateRefP(HikeID, ++refPoint, "-18.178865", "-63.873278", "parking", 0, 1); // end
@@ -988,7 +988,7 @@ class DatabaseConnection {
       "- http://www.trekkingchile.com/Images/choro-trail-map.jpg" +
       "- http://www.turismoboliviaperu.com/imgs/mapa-choro.gif" +
       "- http://coroico-info.com/webs/incatrail/sitebuilder/images/mappage-572x557.jpg"
-    image = "hikeImages/default.jpg";
+    image = "hikeImages/desktoglory_el_choro_trek-20.jpg";
 
     await this.wrapperPopulate(HikeID, file, Country, Region, Province, city, title, length, expTime, Ascent, Description, Difficulty, start, end, AssociatedGuide, image)
     await this.wrapperPopulateRefP(HikeID, ++refPoint, "-16.338158", "-68.040294", "", 1, 0); // start
@@ -1025,7 +1025,7 @@ class DatabaseConnection {
       "- http://www.trekkingchile.com/Images/choro-trail-map.jpg" +
       "- http://www.turismoboliviaperu.com/imgs/mapa-choro.gif" +
       "- http://coroico-info.com/webs/incatrail/sitebuilder/images/mappage-572x557.jpg"
-    image = "hikeImages/default.jpg";
+    image = "hikeImages/Parinacota_volcano.jpg";
 
     await this.wrapperPopulate(HikeID, file, Country, Region, Province, city, title, length, expTime, Ascent, Description, Difficulty, start, end, AssociatedGuide, image)
     await this.wrapperPopulateRefP(HikeID, ++refPoint, "-18.136138", "-68.975651", "parking", 1, 0); // start
@@ -1048,7 +1048,7 @@ class DatabaseConnection {
     Description = "Departure from Cervinia, following the path towards the Lago Blu, we take the path 107 after a few meters of the state road where there is then the indication for the lake of Cignana (about 2 hours)." +
       "Arriving at the lake, we went to visit the church and then continue the path towards the Barmasse refuge crossing the dam. From the latter, following path 1 we went down to Valtournenche." +
       "Not so difficult but it's a long path, worth it for the evocative landscape and the route itself.";
-    image = "hikeImages/default.jpg";
+    image = "hikeImages/cignana.jpg";
 
     await this.wrapperPopulate(HikeID, file, Country, Region, Province, city, title, length, expTime, Ascent, Description, Difficulty, start, end, AssociatedGuide, image)
     await this.wrapperPopulateRefP(HikeID, ++refPoint, "45.933929", "7.630021", "parking", 1, 0); // start
@@ -1073,7 +1073,7 @@ class DatabaseConnection {
       "Day 2: Refugio Anselme Baud/Casa de Guias - Summit - La Paz" +
       "For a full report see '20 days in the Cordillera Real - Trekking and Montanhism'" +
       "https://www.facebook.com/lucasbaruzzi/media_set?set=a.10207861573721238&type=3&pnref=story"
-    image = "hikeImages/default.jpg";
+    image = "hikeImages/Huayna.jpg";
     await this.wrapperPopulate(HikeID, file, Country, Region, Province, city, title, length, expTime, Ascent, Description, Difficulty, start, end, AssociatedGuide, image)
     await this.wrapperPopulateRefP(HikeID, ++refPoint, "-16.287185", "-68.130311", "hut", 1, 0); // start
     await this.wrapperPopulateRefP(HikeID, ++refPoint, "-16.274170", "-68.139751", "hut", 0, 1); // end
@@ -1093,7 +1093,7 @@ class DatabaseConnection {
     Description = "Sorata's Glacier Lake is located at more than 5000 meters in elevation. You best way to start the hike is to take a taxi as far up towards Laguna Chillata as you can (80-100 bolivianos). From there, the Glacier Lake is still pretty far away (1000 meters higher) and so it's best to camp at Laguna Chillata and not do the entire hike in a single day. From Laguna Chillata, it takes 4-6 hours to hike up the Glacier Lake. Te get back to Sorata, it's best to talk to the locals on your way down and see if you can hire a driver." +
 
       "La Laguna Glacial de Sorata de encuentra a más que 5000 metros de altura. Se recomiende tomar taxi hasta lo más cerca posible a laguna Chillata (80-100 bolivianos). De ese punto la Laguna Glacial esta todavía lejos con una subida de 1000 metros, así que se recomiende acampar por la Laguna Chillata y no hacer la caminata en un solo día. Desde la Laguna Chillata se puede subir a la Laguna Glacial en 4-6 horas. Para volver a Sorata, se debe preguntar a los comunarios de los pueblos si se puede contratar transporte."
-    image = "hikeImages/default.jpg";
+    image = "hikeImages/Laguna_Glaciar_Bolivia.jpg";
     await this.wrapperPopulate(HikeID, file, Country, Region, Province, city, title, length, expTime, Ascent, Description, Difficulty, start, end, AssociatedGuide, image)
     await this.wrapperPopulateRefP(HikeID, ++refPoint, "-15.800923", "-68.598910", "", 1, 0); // start
     await this.wrapperPopulateRefP(HikeID, ++refPoint, "-15.828727", "-68.564683", "", 0, 1); // end
@@ -1120,7 +1120,7 @@ class DatabaseConnection {
       "It is also possible to reach the peaks by choosing one of the many paths that branch off from the main route, lengthening or shortening the journey" +
       "This is a very busy place, especially on weekends and during flowering or foliage periods, but it is worth a visit for an easy walk."
 
-    image = "hikeImages/default.jpg";
+    image = "hikeImages/burcina.jpg";
 
     await this.wrapperPopulate(HikeID, file, Country, Region, Province, city, title, length, expTime, Ascent, Description, Difficulty, start, end, AssociatedGuide, image)
     await this.wrapperPopulateRefP(HikeID, ++refPoint, "45.585815", "8.006584", "parking", 1, 0); // start
@@ -1432,7 +1432,7 @@ class DatabaseConnection {
       + "Another way to make the circuit would be leaving from Timbu, south Tarkeghyang (3-4hrs walk). From this population may begin around both clockwise (Timbu-Melanchigaon-Goisankund-Thula Syabru Lama Hotel-Langtang Ganja Kyangin Gompa-the-Tarkeghyang-Timbu) or inverse."
       + "" +
       +"The advantage of this option is saving hours bus as Timbu is closer to Kathmandu than Syabrubesi. Conversely, if we do the circuit clockwise (logical acclimating to take the Ganja La acclimated correctly) we charged many days everything needed for the four days of camping (gas, food, matress...)"
-    image = "hikeImages/default.jpg";
+    image = "hikeImages/Langtang.jpg";
     await this.wrapperPopulate(HikeID, file, Country, Region, Province, city, title, length, expTime, Ascent, Description, Difficulty, start, end, AssociatedGuide, image)
 
 
@@ -1488,7 +1488,7 @@ class DatabaseConnection {
       "Great combination of a good walk with stunning views and archaeology. Mostly on obvious tracks, limited roadways, easy for the most part but with some steep inclines. So I've rated the walk moderate. Latter part a bit tricky as one necropolis seems to be in someone's back yard/garden! Just pick your way through a few houses to get back on track. Also the descent is off the road down a dirt trackway." +
       "I followed the Wikilocs route by mikeledzep." +
       "Many thanks Mike "
-    image = "hikeImages/default.jpg";
+    image = "hikeImages/PedreirinhaHill.jpg";
     await this.wrapperPopulate(HikeID, file, Country, Region, Province, city, title, length, expTime, Ascent, Description, Difficulty, start, end, AssociatedGuide, image)
 
     HikeID = '46';
