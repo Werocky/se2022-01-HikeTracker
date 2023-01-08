@@ -11,7 +11,6 @@ import StatsIllustrationSrc from "../images/pictures/map.webp";
 import AnimationRevealPage from "../helpers/AnimationRevealPage";
 import Header from "../components/headers/light.js";
 import Dropdown from 'react-bootstrap/Dropdown';
-//import Calendar from 'react-calendar';
 
 const Container = tw.div`relative`;
 const TwoColumn = tw.div`flex flex-col md:flex-row justify-between max-w-screen-xl mx-auto py-20 md:py-24`;
@@ -46,14 +45,14 @@ function HutDetails(props) {
   const [hut, setHut] = useState({});
   const [coords, setCoords] = useState(undefined);
   const [loading, setLoading] = useState(true);
-  const [selectedHike, setSelectedHike] = useState({HikeID: undefined});
+  const [selectedHike, setSelectedHike] = useState({ HikeID: undefined });
 
   const handleLinkHike = async (event) => {
     event.preventDefault();
-    if(typeof selectedHike.HikeID !== "undefined")
-    await API.linkHutToHike(params.hutID, selectedHike.HikeID).then((val) => {props.errorHandler(val);}).catch(err => {props.errorHandler(err)});
-    else 
-    props.errorHandler({error: "You must select an hike to link"});
+    if (typeof selectedHike.HikeID !== "undefined")
+      await API.linkHutToHike(params.hutID, selectedHike.HikeID).then((val) => { props.errorHandler(val); }).catch(err => { props.errorHandler(err) });
+    else
+      props.errorHandler({ error: "You must select an hike to link" });
   }
 
   const handleSelection = (ev, el) => {
@@ -63,42 +62,23 @@ function HutDetails(props) {
   useEffect(() => {
     const loadHut = async () => {
       const hutObj = await API.getHut(params.hutID);
+      console.log(hutObj);
       const coord = await API.getHutCoords(params.hutID);
       setHut(hutObj);
       setCoords(coord);
 
       setLoading(false);
     }
-   
-     loadHut();
-   
-},[params.hutID, auth.login])
+
+    loadHut();
+
+  }, [params.hutID, auth.login])
 
 
   const imageSrc = StatsIllustrationSrc;
-  const imageCss = null;
-  const imageContainerCss = null;
-  let statistics = null;
   const textOnLeft = false;
 
   // The textOnLeft boolean prop can be used to display either the text on left or right side of the image.
-  //Change the statistics variable as you like, add or delete objects
-  const defaultStatistics = [
-    {
-      key: "length",
-      value: "228"
-    },
-    {
-      key: "height",
-      value: "389"
-    },
-    {
-      key: "difficulty",
-      value: "10"
-    }
-  ];
-
-  if (!statistics) statistics = defaultStatistics;
 
 
   return (
@@ -107,14 +87,14 @@ function HutDetails(props) {
       {!loading &&
         <Container>
           <TwoColumn>
-          {!auth.login &&
-              <ImageMapColumn css={imageContainerCss}>
+            {!auth.login &&
+              <ImageMapColumn >
                 <Messageheading> Login to see the map</Messageheading>
-                <Image imageSrc={imageSrc} css={imageCss} />
+                <Image imageSrc={imageSrc} />
               </ImageMapColumn>
             }
             {auth.login &&
-              <ImageMapColumn css={imageContainerCss}>
+              <ImageMapColumn >
                 <MapContainer
                   center={[coords.Lat, coords.Lng]}
                   zoom={14}
@@ -123,7 +103,7 @@ function HutDetails(props) {
                   <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
                   <Marker position={[coords.Lat, coords.Lng]}>
                     <Popup>
-                        Hut's location
+                      Hut's location
                     </Popup>
                   </Marker>
                 </MapContainer>
@@ -133,10 +113,10 @@ function HutDetails(props) {
               <TextContent>
                 <Heading>{hut.Name}</Heading>
                 <Subheading>
-                  Website: {hut.Website === undefined || hut.Website === null ? 'None' : hut.Website}
+                  Website: {hut.Website ? hut.Website : "None"}
                 </Subheading>
                 <Subheading>
-                  Phone number: {hut.Phone === undefined || hut.Phone === null ? 'None' : hut.Phone}
+                  Phone number: {hut.Phone ? hut.Phone : "None"}
                 </Subheading>
                 <Statistics>
                   <Statistic>
@@ -146,9 +126,10 @@ function HutDetails(props) {
 
                   <Statistic>
                     <Value>{hut.WhenOpen === 'W' ? 'Winter Only' :
-                    hut.WhenOpen === 'SW' ? 'Summer and Winter' :
-                    hut.WhenOpen === 'S' ? 'Summer only' :
-                    hut.WhenOpen === 'Y' ? 'All year' : 'Permanently closed'}</Value>
+                      hut.WhenOpen === 'SW' ? 'Summer and Winter' :
+                        hut.WhenOpen === 'WS' ? 'Summer and Winter' :
+                          hut.WhenOpen === 'S' ? 'Summer only' :
+                            hut.WhenOpen === 'Y' ? 'All year' : 'Permanently closed'}</Value>
                     <Key>Opening session</Key>
                   </Statistic>
 
@@ -165,21 +146,23 @@ function HutDetails(props) {
                 </Statistics>
 
                 <Description>{hut.Description}</Description>
-                  {auth.user.Role == 'L' ?  
-                    <Dropdown as={ButtonGroup}>
+                {auth.user.Role === 'L' ?
+                  <Dropdown as={ButtonGroup}>
                     <Button onClick={handleLinkHike} className="light__NavLink-sc-7yke5y-2 light__PrimaryLink-sc-7yke5y-5 light___StyledPrimaryLink-sc-7yke5y-7 hvlBUp htliCt" variant="success">Link to this Hut</Button>
 
                     <Dropdown.Toggle split className="light__NavLink-sc-7yke5y-2 light__PrimaryLink-sc-7yke5y-5 light___StyledPrimaryLink-sc-7yke5y-7 hvlBUp htliCt" variant="success" id="dropdown-split-basic" />
-                    
+
                     <Dropdown.Menu>
-                      {props.hikes.map((el) => {{
-                          if(el.AssociatedGuide == auth.user.Id)
-                           return <Dropdown.Item onClick={(ev) => handleSelection(ev, el)} key={el.Title}>{el.Title}</Dropdown.Item>}
+                      {props.hikes.map((el) => {
+                        {
+                          if (el.AssociatedGuide === auth.user.Id)
+                            return <Dropdown.Item onClick={(ev) => handleSelection(ev, el)} key={el.Title}>{el.Title}</Dropdown.Item>
+                        }
                       })
                       }
                     </Dropdown.Menu>
                   </Dropdown> : null
-                  }
+                }
               </TextContent>
             </TextColumn>
           </TwoColumn>

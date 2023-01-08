@@ -64,12 +64,12 @@ function getHikeInfo(HikeID) {
 
 function getHikeRefPoints(HikeID) {
   return new Promise(async (resolve, reject) => {
-    const sql = 'SELECT RP.Lat, RP.Lng, RP.Type, RP.RefPointID, PH.IsStart, PH.IsEnd FROM PointsOfHike PH LEFT OUTER JOIN ReferencePoints RP ON PH.PointID = RP.RefPointID WHERE PH.HikeID=? ';
+    const sql = 'SELECT RP.Lat, RP.Lng, RP.Type, RP.RefPointID, RP.description, PH.IsStart, PH.IsEnd FROM PointsOfHike PH LEFT OUTER JOIN ReferencePoints RP ON PH.PointID = RP.RefPointID WHERE PH.HikeID=? ';
     db.all(sql, [HikeID], function (err, rows) {
       if (err)
         reject(err);
       else {
-        const hikes = rows.map((r) => ({ RefPointID: r.RefPointID, IsStart: r.IsStart, IsEnd: r.IsEnd, Lat: r.Lat, Lng: r.Lng, Type: r.Type }));
+        const hikes = rows.map((r) => ({ RefPointID: r.RefPointID, IsStart: r.IsStart, IsEnd: r.IsEnd, Lat: r.Lat, Lng: r.Lng, Type: r.Type, description: r.description }));
 
         resolve(hikes);
 

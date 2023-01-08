@@ -162,7 +162,7 @@ class Hut{
       else{
         const huts = [];
         rows.forEach(r => {
-          let h = new Hut(id, r.Name, r.Elevation, r.City, r.Province, r.Region, r.Country, r.WhenOpen, r.Beds, r.AvgPrice, r.Description);
+          let h = new Hut(id, r.Name, r.Elevation, r.City, r.Province, r.Region, r.Country, r.WhenOpen, r.Beds, r.AvgPrice, r.Description, r.Picture, r.HutManagerID, r.Website, r.Phone);
           huts.push(h);
         })
         resolve(huts[0]);

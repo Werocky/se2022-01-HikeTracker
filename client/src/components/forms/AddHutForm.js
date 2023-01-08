@@ -197,7 +197,8 @@ function AddHutForm(props) {
         Phone: phone,
         Website: website,
         Coord: coord,
-        Picture: picture
+        Picture: picture,
+        description: name
       }
       API.addHut(h, picture)
         .then((res) => {
@@ -262,13 +263,13 @@ function AddHutForm(props) {
                     <Recap>Province : {province}  </Recap>
                     <Recap>Region : {region} &nbsp; </Recap>
                     <Recap>Country : {country}</Recap>
-                    {phone != undefined && <Recap>Phone : {phone}</Recap>}
-                    {whenOpen != "" && <Recap>Opening Session : {whenOpen}</Recap>}
-                    {avgPrice != undefined && <Recap>Average price : {avgPrice}</Recap>}
-                    {beds != undefined && <Recap>Number of beds : {beds}</Recap>}
-                    {email.trim().length != 0 && <Recap>Email : {email}</Recap>}
-                    {website.trim().length != 0 && <Recap>Website : {website}</Recap>}
-                    {descr.trim().length != 0 && <Recap>Description : {descr}</Recap>}
+                    {phone !== undefined && <Recap>Phone : {phone}</Recap>}
+                    {whenOpen !== "" && <Recap>Opening Session : {whenOpen}</Recap>}
+                    {avgPrice !== undefined && <Recap>Average price : {avgPrice}</Recap>}
+                    {beds !== undefined && <Recap>Number of beds : {beds}</Recap>}
+                    {email.trim().length !== 0 && <Recap>Email : {email}</Recap>}
+                    {website.trim().length !== 0 && <Recap>Website : {website}</Recap>}
+                    {descr.trim().length !== 0 && <Recap>Description : {descr}</Recap>}
                   </TextContent>
                 </TextColumn>
               }

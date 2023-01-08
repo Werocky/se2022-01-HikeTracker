@@ -20,7 +20,7 @@ const fs = require('fs');
 const fileUpload = require("express-fileupload");
 const { builtinModules } = require('module');
 const { createParkingLot, updateParkingLot, getParkingLots, getParkingLot, deleteParkingLot, getLastParkingID, ParkingLot } = require('./modules/ParkingLot.js');
-const { addReferencePoint, updateReferencePoint } = require('./modules/ReferencePoints.js');
+const { addReferencePoint, updateReferencePoint, addReferencePointWithDescription } = require('./modules/ReferencePoints.js');
 const huts = require('./modules/Huts');
 const mail = require('./modules/mail');
 
@@ -344,7 +344,8 @@ app.post('/addHike', async (req, res) => {
       console.log("Starting point already present")
       startId = pointAlreadyPresent.RefPointID;
     } else {
-      await addReferencePoint(start.position.lat, start.position.lon, start.Type);
+      await addReferencePointWithDescription(start.description, start.position.lat, start.position.lon, start.Type);
+      //await addReferencePoint(start.position.lat, start.position.lon, start.Type);
       startId = await referencePoints.getLastRefPointID();
       console.log("Start Point added");
     }
@@ -362,7 +363,8 @@ app.post('/addHike', async (req, res) => {
       console.log("Ending point already present")
       endId = pointAlreadyPresent.RefPointID;
     } else {
-      await addReferencePoint(end.position.lat, end.position.lon, end.Type);
+      await addReferencePointWithDescription(end.description, end.position.lat, end.position.lon, end.Type);
+      //await addReferencePoint(end.position.lat, end.position.lon, end.Type);
       endId = await referencePoints.getLastRefPointID();
       console.log("End Point added");
     }
@@ -381,7 +383,8 @@ app.post('/addHike', async (req, res) => {
         console.log("Reference point already present")
         rpID = pointAlreadyPresent.RefPointID;
       } else {
-        await addReferencePoint(newRP.position.lat, newRP.position.lng, newRP.Type);
+        await addReferencePointWithDescription(newRP.description, newRP.position.lat, newRP.position.lng, newRP.Type);
+        //await addReferencePoint(newRP.position.lat, newRP.position.lng, newRP.Type);
         rpID = await referencePoints.getLastRefPointID();
         console.log("Reference Point added");
       }
@@ -455,7 +458,8 @@ app.post('/addRefPoints/:hikeID', async (req, res) => {
         console.log("Reference point already present")
         rpID = pointAlreadyPresent.RefPointID;
       } else {
-        await addReferencePoint(newRP.position.lat, newRP.position.lng, newRP.Type);
+        await addReferencePointWithDescription(newRP.description, newRP.position.lat, newRP.position.lng, newRP.Type);
+        //await addReferencePoint(newRP.position.lat, newRP.position.lng, newRP.Type);
         rpID = await referencePoints.getLastRefPointID();
         console.log("Reference Point added");
       }
@@ -636,7 +640,8 @@ app.post('/ParkingLots', [],
         console.log("Reference Point already present");
         rpID = pointAlreadyPresent.RefPointID;
       } else {
-        await addReferencePoint(parkingLot.Coord.lat, parkingLot.Coord.lng, "parking");
+        await addReferencePointWithDescription(parkingLot.description, parkingLot.Coord.lat, parkingLot.Coord.lng, "parking");
+        //await addReferencePoint(parkingLot.Coord.lat, parkingLot.Coord.lng, "parking");
         rpID = await referencePoints.getLastRefPointID();
         console.log("Ref Point ParkingLot added");
       }
@@ -887,7 +892,8 @@ app.post('/hutCreate',
         console.log("Reference Point already present");
         rpID = pointAlreadyPresent.RefPointID;
       } else {
-        await addReferencePoint(hut.Coord.lat, hut.Coord.lng, "hut");
+        await addReferencePointWithDescription(hut.description, hut.Coord.lat, hut.Coord.lng, "hut");
+        //await addReferencePoint(hut.Coord.lat, hut.Coord.lng, "hut");
         rpID = await referencePoints.getLastRefPointID();
         console.log("Ref Point Hut added");
       }

@@ -75,11 +75,13 @@ function HikeDetails(props) {
   const [gpxData, setGpxData] = useState();  // array of [p.lat, p.lon]
   const [bounds, setBounds] = useState(undefined);  // map bounds
   const [refPoints, setRefPoints] = useState([]);  // array of ref points
+  const [startDescription, setStartDescription] = useState("");
+  const [endDescription, setEndDescription] = useState("");
   const [loading, setLoading] = useState(true);
   const [canStart, setCanStart] = useState(true);
   const [showImg, setShowImg] = useState(false);
-  const [startDate,setStartDate]=useState(new Date());
-  const [startTime,setStartTime]=useState('10:00')
+  const [startDate, setStartDate] = useState(new Date());
+  const [startTime, setStartTime] = useState('10:00')
 
   useEffect(() => {
     const loadHike = async () => {
@@ -88,24 +90,33 @@ function HikeDetails(props) {
       console.log(hikeObj);
       setHike(hikeObj);
       if (auth.login) {
-        if (auth.user.Role == "H" && props.myHikes.length > 0) {
+        if (auth.user.Role === "H" && props.myHikes.length > 0) {
           props.myHikes.forEach(h => {
-            if (h.HikeID == params.hikeID) {
+            if (h.HikeID === params.hikeID) {
               setCanStart(false);
             }
           });
         }
-        else if (auth.user.Role == "H" && props.myHikes.length == 0)
+        else if (auth.user.Role === "H" && props.myHikes.length === 0)
           setCanStart(true);
         else
           setCanStart(false);
 
         console.log(props.myHikes);
-      const rp = await API.getHikeRefPoints(params.hikeID);
-       setRefPoints(rp);
+        const rp = await API.getHikeRefPoints(params.hikeID);
+        setRefPoints(rp);
+        console.log(rp);
+        rp.forEach(rp => {
+          if (rp.IsStart) {
+            setStartDescription(rp.description);
+          }
+          if (rp.IsEnd) {
+            setEndDescription(rp.description);
+          }
+        })
         const gpxObj = await API.getPointsHike(params.hikeID);
         setGpxData(gpxObj);
-       // console.log("Start\n" + gpxObj[0].lat + "\t" + gpxObj[0].lon + "\nEnd\n" + gpxObj.at(-1).lat + "\t" + gpxObj.at(-1).lon);
+        // console.log("Start\n" + gpxObj[0].lat + "\t" + gpxObj[0].lon + "\nEnd\n" + gpxObj.at(-1).lat + "\t" + gpxObj.at(-1).lon);
       } else {
         setCanStart(false);
         setLoading(false)
@@ -125,65 +136,57 @@ function HikeDetails(props) {
   }, [gpxData])
 
   const startHikeCurrent = () => {
-    let i=0;
+    let i = 0;
     let rp;
     //console.log(refPoints);
-    for (i=0;i<refPoints.length;i++)
-    {
-      if(refPoints[i].IsStart){
-        rp=refPoints[i];
+    for (i = 0; i < refPoints.length; i++) {
+      if (refPoints[i].IsStart) {
+        rp = refPoints[i];
       }
     }
     //console.log(rp);
-    if(rp==undefined)
-    {
+    if (rp === undefined) {
       //TODO
-      props.errorHandler({error: "This hike cannot be started now! Soon it will be possible..."});
+      props.errorHandler({ error: "This hike cannot be started now! Soon it will be possible..." });
     }
-    else
-    {
-      API.startHike(hike.HikeID,rp,null).then(()=>
-      {
+    else {
+      API.startHike(hike.HikeID, rp, null).then(() => {
         props.setMyHikes(oldHikes => [...oldHikes, hike]);
         setCanStart(false);
         navigate("/myHikes");
       });
-  
+
     }
-    
-   
-    
+
+
+
   };
   const startHikeSelected = () => {
-    let i=0;
+    let i = 0;
     let rp;
     //console.log(refPoints);
-    for (i=0;i<refPoints.length;i++)
-    {
-      if(refPoints[i].IsStart){
-        rp=refPoints[i];
+    for (i = 0; i < refPoints.length; i++) {
+      if (refPoints[i].IsStart) {
+        rp = refPoints[i];
       }
     }
     //console.log(rp);
-    
-    
-    if(rp==undefined)
-    {
+
+
+    if (rp === undefined) {
       //TODO
-      props.errorHandler({error: "This hike cannot be started now! Soon it will be possible..."});
+      props.errorHandler({ error: "This hike cannot be started now! Soon it will be possible..." });
     }
-    else
-    {
+    else {
       let start_Date = new Date(startDate);
       start_Date.setHours(startTime.split(':')[0], startTime.split(':')[1]);
       console.log(start_Date);
-      API.startHike(hike.HikeID,rp,start_Date.getTime()).then(()=>
-      {
+      API.startHike(hike.HikeID, rp, start_Date.getTime()).then(() => {
         props.setMyHikes(oldHikes => [...oldHikes, hike]);
         setCanStart(false);
         navigate("/myHikes");
       });
-  
+
     }
   };
 
@@ -215,7 +218,7 @@ function HikeDetails(props) {
                     positions={gpxData}
                   />
 
-                  {refPoints != undefined && !refPoints.length && gpxData != undefined && gpxData.length != 0 &&
+                  {refPoints !== undefined && !refPoints.length && gpxData !== undefined && gpxData.length !== 0 &&
                     <>
                       <StartPoint position={gpxData[0]} />
                       <EndPoint position={gpxData.at(-1)} />
@@ -235,14 +238,14 @@ function HikeDetails(props) {
 
                   <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
                 </MapContainer>
-                <br/>
+                <br />
                 <div>
                   <p>Green: Parking Lot</p>
                   <p>Yellow: Hut</p>
                   <p>Red: Peak</p>
                   <p>Blue: Default - Not Specified</p>
                 </div>
-                <br/>
+                <br />
                 <CoverImage imageSrc={`http://localhost:3001/${hike.Picture}`} onClick={() => setShowImg(true)} />
 
               </ImageMapColumn>
@@ -259,10 +262,10 @@ function HikeDetails(props) {
                 </Subheading>
                 <Heading>{hike.Title}</Heading>
                 <Subheading>
-                  Start: {hike.Start}
+                  Start: {startDescription ? startDescription : hike.Start}
                 </Subheading>
                 <Subheading>
-                  End: {hike.End}
+                  End: {endDescription ? endDescription : hike.End}
                 </Subheading>
                 <Statistics>
                   <Statistic>
@@ -288,20 +291,20 @@ function HikeDetails(props) {
               {canStart && <>
 
                 <Popup trigger={<PrimaryLink> Start Hike</PrimaryLink>} position="right center">
-                <Container>
-                <Calendar onChange={setStartDate} value={startDate}></Calendar>
-                  <TimePicker onChange={setStartTime} value={startTime} />
-                  <PrimaryLink onClick={startHikeSelected}>Use selected date and hour</PrimaryLink>
-                  <PrimaryLink onClick={startHikeCurrent}>Use current date and hour</PrimaryLink>
-                </Container>
+                  <Container>
+                    <Calendar onChange={setStartDate} value={startDate}></Calendar>
+                    <TimePicker onChange={setStartTime} value={startTime} />
+                    <PrimaryLink onClick={startHikeSelected}>Use selected date and hour</PrimaryLink>
+                    <PrimaryLink onClick={startHikeCurrent}>Use current date and hour</PrimaryLink>
+                  </Container>
                 </Popup>
-             
-               </>
-                }
+
+              </>
+              }
 
               {hike.AssociatedGuide === auth.user.Id &&
-                <PrimaryLink onClick={() => navigate("/" + hike.HikeID + "/edit", { state: { hikeId: hike.HikeID, refPoints: refPoints, gpxData: gpxData, bounds: bounds } })}> 
-                 Modify Reference Points
+                <PrimaryLink onClick={() => navigate("/" + hike.HikeID + "/edit", { state: { hikeId: hike.HikeID, refPoints: refPoints, gpxData: gpxData, bounds: bounds } })}>
+                  Modify Reference Points
                 </PrimaryLink>}
 
             </TextColumn>
