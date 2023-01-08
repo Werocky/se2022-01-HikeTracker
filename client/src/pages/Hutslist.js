@@ -104,13 +104,13 @@ function Huts(props) {
 
     useEffect(() => {
         const loadLocation = async () => {
-            const locationObj = await API.getHutsLocations().catch(err => console.log(err));
+            const locationObj = await API.getHutsLocations();
             //console.log(locationObj);
             setLocations(locationObj);
             setLoading(false);
         }
         try {
-            loadLocation();
+            loadLocation().catch(err => console.log(err));
         } catch (err) {
             console.log(err);
         }
