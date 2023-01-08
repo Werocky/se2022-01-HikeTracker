@@ -4,7 +4,7 @@ import tw from "twin.macro";
 import styled from "styled-components";
 import { SectionHeading, Subheading as SubheadingBase } from "../misc/Headings.js";
 
-import AnimationRevealPage from "../../pages/AnimationRevealPage.js";
+import AnimationRevealPage from "../../helpers/AnimationRevealPage.js";
 import Header from "../headers/light.js";
 import {Alert, Row, Col} from "react-bootstrap";
 import { MapContainer, TileLayer, Marker, Popup, useMapEvents } from 'react-leaflet';

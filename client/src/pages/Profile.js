@@ -8,7 +8,7 @@ import styled from "styled-components";
 import { SectionHeading, Subheading as SubheadingBase } from "../components/misc/Headings.js";
 import StatsIllustrationSrc from "../images/pictures/profile.jpeg";
 import { ReactComponent as SvgDotPattern } from "../images/dot-pattern.svg";
-import AnimationRevealPage from "./AnimationRevealPage";
+import AnimationRevealPage from "../helpers/AnimationRevealPage";
 import Header from "../components/headers/light.js";
 import { Table } from "react-bootstrap";
 

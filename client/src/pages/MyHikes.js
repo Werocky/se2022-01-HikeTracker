@@ -1,5 +1,5 @@
 import React, { useState, useEffect,useContext } from "react";
-import AnimationRevealPage from "./AnimationRevealPage.js";
+import AnimationRevealPage from "../helpers/AnimationRevealPage.js";
 import { Container, ContentWithPaddingXl } from "../components/misc/Layouts";
 import tw from "twin.macro";
 import styled from "styled-components";

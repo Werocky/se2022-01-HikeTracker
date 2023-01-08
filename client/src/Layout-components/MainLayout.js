@@ -1,6 +1,6 @@
 import "../style.css"
 import "tailwindcss/lib/css/preflight.css"
-import AnimationRevealPage from "../pages/AnimationRevealPage"
+import AnimationRevealPage from "../helpers/AnimationRevealPage"
 import Hero from "../pages/LandingPage"
 
 function MainLayout(props) {

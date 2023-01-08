@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import API from '../API';
 import "../style.css"
 import "tailwindcss/lib/css/preflight.css"
-import AnimationRevealPage from "../pages/AnimationRevealPage"
+import AnimationRevealPage from "../helpers/AnimationRevealPage"
 import React from "react";
 import tw from "twin.macro";
 import styled from "styled-components";

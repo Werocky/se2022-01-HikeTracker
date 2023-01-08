@@ -9,7 +9,7 @@ import { SectionHeading, Subheading as SubheadingBase } from "../components/misc
 import { PrimaryButton as PrimaryButtonBase } from "../components/misc/Buttons.js";
 import StatsIllustrationSrc from "../images/pictures/map.webp";
 
-import AnimationRevealPage from "../pages/AnimationRevealPage";
+import AnimationRevealPage from "../helpers/AnimationRevealPage";
 import Header from "../components/headers/light.js";
 import distanceBetweenPoints from "../DistanceBeteenPoints";
 import {MyStartPoint, MyEndPoint, MyRefPoint } from "./RefPointsTypes";

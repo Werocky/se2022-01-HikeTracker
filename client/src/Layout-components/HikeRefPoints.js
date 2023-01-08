@@ -1,4 +1,4 @@
-import AnimationRevealPage from "../pages/AnimationRevealPage";
+import AnimationRevealPage from "../helpers/AnimationRevealPage";
 import Header from "../components/headers/light.js";
 import tw from "twin.macro";
 import styled from "styled-components";
