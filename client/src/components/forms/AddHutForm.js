@@ -313,7 +313,7 @@ function AddHutForm(props) {
                     <Form onSubmit={submitGeoForm}>
                       <InputContainer>
                         <Label htmlFor="name-input">Title</Label>
-                        <Input id="name-input" type="text" name="name" value={name} placeholder="name" onChange={ev => setName(ev.target.value)} required />
+                        <Input id="name-input" type="text" name="title" value={name} placeholder="name" onChange={ev => setName(ev.target.value)} required />
                       </InputContainer>
                       <InputContainer>
                         <Label htmlFor="elevation-input">Elevation</Label>
