@@ -8,6 +8,8 @@ const nodemailer = require('nodemailer');
     
     const smtpTransport= nodemailer.createTransport({
         service: 'outlook',
+        requireTLS: true,
+        port: 465,
         auth: {
           user: 'team1se2@outlook.it',
           pass: 'Password0.1'
