@@ -6,7 +6,6 @@ import API from '../API';
 import tw from "twin.macro";
 import styled from "styled-components";
 import { SectionHeading, Subheading as SubheadingBase } from "../components/misc/Headings.js";
-import { PrimaryButton as PrimaryButtonBase } from "../components/misc/Buttons.js";
 import StatsIllustrationSrc from "../images/pictures/map.webp";
 import AnimationRevealPage from "../pages/AnimationRevealPage";
 import Header from "../components/headers/light.js";
