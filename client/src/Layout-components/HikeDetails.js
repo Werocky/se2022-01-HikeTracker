@@ -219,7 +219,8 @@ function HikeDetails(props) {
             </Popup>
             {auth.login &&
               <ImageMapColumn>
-                {/*<PostAction onClick={() => { navigate('/startHike') }}>Start A New Hike</PostAction>*/}
+                <CoverImage imageSrc={`http://localhost:3001/${hike.Picture}`} onClick={() => setShowImg(true)} />
+                <br />
                 <MapContainer
                   bounds={bounds}
                   scrollWheelZoom
@@ -251,7 +252,11 @@ function HikeDetails(props) {
                 </MapContainer>
                 <MapLegend />
                 <br />
-                <CoverImage imageSrc={`http://localhost:3001/${hike.Picture}`} onClick={() => setShowImg(true)} />
+                <div>
+                  {refPoints.map(rp => (
+                    <RefPointsDetails rp={rp} />
+                  ))}
+                </div>
 
               </ImageMapColumn>
             }
@@ -368,6 +373,68 @@ function MapLegend(props) {
       <p>Blue: Default - Not Specified</p>
     </small>
   )
+}
+
+function RefPointsDetails(props) {
+  const rp = props.rp;
+  const [parking, setParking] = useState(undefined);
+  const [hut, setHut] = useState("");
+  const [loading, setLoading] = useState(true);
+
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const loadPL = async () => {
+      const pl = await API.getParkingLot(rp.RefPointID);
+      console.log(pl);
+      setParking(pl);
+    }
+    const loadH = async () => {
+      const h = await API.getHut(rp.RefPointID);
+      if (h) {
+        setHut("/huts/" + rp.RefPointID);
+      }
+    }
+    if (rp.Type === "parking") {
+      loadPL();
+    } else if (rp.Type === "hut") {
+      loadH();
+    }
+    setLoading(false)
+  }, [])
+
+
+  return (
+    <>
+      {(rp.Type === "parking" || rp.Type === "hut") &&
+        <p>
+          {rp.IsStart ? "Starting Point"
+            : rp.IsEnd ? "Ending Point"
+              : "Reference Point"}</p>}
+      {rp.Type === "parking" && !loading && parking &&
+        <>
+          <p>Parking details</p>
+          <small>Number of cars: {parking.NumAuto}</small><p></p>
+          <small>Type: {parking.Free ? "Free" : "For a fee"}</small>
+        </>
+      }
+      {rp.Type === "parking" && !loading && !parking &&
+      <small>This parking lot is not present in the db yet</small>
+      }
+      {rp.Type === "hut" && !loading && hut &&
+      <p>
+        <small onClick={()=>navigate(hut)} style={{textDecorationLine: 'underline'}}>
+          Click to see hut details</small>
+        </p>
+      }
+      {rp.Type === "hut" && !loading && !hut &&
+      <small>This Hut is not present in the db yet</small>
+
+      }
+      <br />
+      <br />
+    </>
+  );
 }
 
 export default HikeDetails;

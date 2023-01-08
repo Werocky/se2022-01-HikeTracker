@@ -50,8 +50,6 @@ function Profile(props) {
     const navigate = useNavigate();
 
     const imageSrc = StatsIllustrationSrc;
-    const imageCss = null;
-    const imageContainerCss = null;
     const imageDecoratorBlob = false;
     const imageDecoratorBlobCss = null;
     const imageInsideDiv = true;
@@ -90,8 +88,8 @@ function Profile(props) {
         <Container>
             <Heading> Hello, {role} </Heading>
             <TwoColumn css={!imageInsideDiv && tw`md:items-center`}>
-                <ImageColumn css={imageContainerCss}>
-                    {imageInsideDiv ? <Image imageSrc={imageSrc} css={imageCss} /> : <img src={imageSrc} css={imageCss} alt="" />}
+                <ImageColumn >
+                    {imageInsideDiv ? <Image imageSrc={imageSrc} /> : <img src={imageSrc}  alt="" />}
                     {imageDecoratorBlob && <DecoratorBlob css={imageDecoratorBlobCss} />}
                 </ImageColumn>
                 <TextColumn textOnLeft={textOnLeft}>
