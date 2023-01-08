@@ -117,21 +117,7 @@ function Profile(props) {
                 </tr>
             </thead>
             {completedHikes.map(hike => {
-                console.log(hike);
-                return (
-                    <>
-                      <tbody>
-                        <tr>
-                          <td>{hike.HikeID}</td>
-                          <td>{hike.Title}</td>
-                          <td>{hike.City}</td>
-                          <td>{Math.floor(hike.ExpectedTime/60)}h:{hike.ExpectedTime%60}m</td>
-                          <td>{hike.Ascent}</td>
-                          <td>{msToTime(hike.CompletionTime)}</td>
-                        </tr>
-                      </tbody>
-                    </>
-                  );
+                return <HikeRow key={hike.HikeID + Math.random()} hike={hike}></HikeRow>
             })}
             </Table>
             </>}
@@ -139,6 +125,35 @@ function Profile(props) {
         </AnimationRevealPage>
     );
 
+}
+
+function HikeRow(props){
+    function msToTime(msDurata) {
+        var millisecondi = parseInt((msDurata%1000)/100)
+            , secondi = parseInt((msDurata/1000)%60)
+            , minuti = parseInt((msDurata/(1000*60))%60)
+            , ore = parseInt((msDurata/(1000*60*60)));
+    
+        ore = (ore < 10) ? "0" + ore : ore;
+        minuti = (minuti < 10) ? "0" + minuti : minuti;
+        secondi = (secondi < 10) ? "0" + secondi : secondi;
+    
+        return ore + ":" + minuti + ":" + secondi + "." + millisecondi;
+    }
+    return (
+        <>
+          <tbody>
+            <tr>
+              <td>{props.hike.HikeID}</td>
+              <td>{props.hike.Title}</td>
+              <td>{props.hike.City}</td>
+              <td>{Math.floor(props.hike.ExpectedTime/60)}h:{props.hike.ExpectedTime%60}m</td>
+              <td>{props.hike.Ascent}</td>
+              <td>{msToTime(props.hike.CompletionTime)}</td>
+            </tr>
+          </tbody>
+        </>
+      );
 }
 
 

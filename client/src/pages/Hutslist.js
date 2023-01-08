@@ -110,9 +110,9 @@ function Huts(props) {
             setLoading(false);
         }
         try {
-            loadLocation();
+            loadLocation().catch(err => console.log(err));
         } catch (err) {
-            //handling err
+            console.log(err);
         }
     }, []);
 

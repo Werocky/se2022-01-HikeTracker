@@ -89,12 +89,12 @@ function AddHutForm(props) {
   const [coord, setCoord] = useState(null);
   const [errorMsg, setErrorMsg] = useState("");
   const [msgState, setmsgState] = useState("danger");
-  const [phone, setPhone] = useState("+393668726829");
+  const [phone, setPhone] = useState("");
   const [website, setWebsite] = useState('');
-  const [email, setEmail] = useState("a@polito.it");
+  const [email, setEmail] = useState("");
   const [whenOpen, setWhenOpen] = useState("");
-  const [beds, setBeds] = useState(10);
-  const [descr, setDescr] = useState("rftrg");
+  const [beds, setBeds] = useState();
+  const [descr, setDescr] = useState("");
   const [avgPrice, setAvgPrice] = useState(10);
   const [picture, setPicture] = useState();
   const [pictureOk, setPictureOk] = useState();
@@ -129,7 +129,7 @@ function AddHutForm(props) {
   const submitGeoForm = async (event) => {
     event.preventDefault();
     if (!name || name.trim().length === "") {
-      setErrorMsg("insert a name");
+      setErrorMsg("insert a title");
     }
     else if (!elevation) {
       setErrorMsg("insert an elevation");
@@ -163,10 +163,11 @@ function AddHutForm(props) {
 
   const submitForm = async (event) => {
     event.preventDefault();
-    if (!name || name.trim().length === "") {
+   /* if (!name || name.trim().length === "") {
       setErrorMsg("insert a name");
     }
-    else if (!beds) {
+    else*/
+    if (!beds) {
       setErrorMsg("insert beds number");
     }
     else if (!phone || phone.trim().length === "") {
@@ -312,11 +313,11 @@ function AddHutForm(props) {
                     <Form onSubmit={submitGeoForm}>
                       <InputContainer>
                         <Label htmlFor="name-input">Title</Label>
-                        <Input id="name-input" type="text" name="name" value={name} placeholder="name" onChange={ev => setName(ev.target.value)} />
+                        <Input id="name-input" type="text" name="title" value={name} placeholder="name" onChange={ev => setName(ev.target.value)} required />
                       </InputContainer>
                       <InputContainer>
                         <Label htmlFor="elevation-input">Elevation</Label>
-                        <Input id="elevation-input" type="number" step="1" name="elevation" value={elevation} min={0} placeholder="elevation" onChange={ev => setElevation(ev.target.value)} />
+                        <Input id="elevation-input" type="number" step="1" name="elevation" value={elevation} min={0} placeholder="elevation" onChange={ev => setElevation(ev.target.value)} required/>
                       </InputContainer>
                       <InputContainer>
                         <Label htmlFor="city-input">City</Label>
