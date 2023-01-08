@@ -75,7 +75,7 @@ function Profile(props) {
         var millisecondi = parseInt((msDurata%1000)/100)
             , secondi = parseInt((msDurata/1000)%60)
             , minuti = parseInt((msDurata/(1000*60))%60)
-            , ore = parseInt((msDurata/(1000*60*60))%24);
+            , ore = parseInt((msDurata/(1000*60*60)));
     
         ore = (ore < 10) ? "0" + ore : ore;
         minuti = (minuti < 10) ? "0" + minuti : minuti;
