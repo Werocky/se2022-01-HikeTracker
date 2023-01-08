@@ -321,6 +321,14 @@ describe("Is Last referencePoit",()=>{
         await expect(HikeRefPoints.IsLastPoint(1,1)).resolves.toEqual(false);
 
     })
+    it("is Starting point",async()=>{
+        await expect(HikeRefPoints.IsFirstPoint(1,1)).resolves.toEqual(true);
+
+    })
+    it("is Not Starting point",async()=>{
+        await expect(HikeRefPoints.IsFirstPoint(1,2)).resolves.toEqual(false);
+
+    })
 
 
 })
@@ -349,10 +357,11 @@ describe("get reference point",()=>{
     it("get non existing point",async()=>{
         await expect(refPts.getReferencePoint(-1)).resolves.toEqual(undefined);
         
+
     })
-
-
-
+    it( "delete ref point", async()=>{
+        await expect(HikeRefPoints.deleteHikeRefPoint(1,1)).resolves.not.toEqual(null)
+    })
 
 })
 

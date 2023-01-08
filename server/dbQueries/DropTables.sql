@@ -10,3 +10,4 @@ DROP TABLE IF EXISTS `PointsOfHike`;
 DROP TABLE IF EXISTS `pictures`;
 DROP TABLE IF EXISTS `Hikes`;
 DROP TABLE IF EXISTS `ActiveHikePoints`;
+DROP TABLE IF EXISTS `CompletedHikes`;

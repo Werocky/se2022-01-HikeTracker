@@ -6,6 +6,7 @@ const{hike}=require("../modules/Hikes");
 const RP =require("../modules/ReferencePoints");
 const HRP= require("../modules/HikeRefPoints");
 
+const Hikes= require("../modules/Hikes");
 
 
 
@@ -204,8 +205,7 @@ describe("add an active point",()=>{
 });
 
 describe("get Active Hikes",()=>{
-    const Hikes= require("../modules/Hikes");
-    const{hike}= require("../modules/Hikes");
+    
     beforeEach(async()=>{
     
     
@@ -228,3 +228,60 @@ it("Change Picture path", async()=>{
     expect(ans[0].Picture).toEqual("/newPath");
 })
 })
+
+describe("Missing tests",()=>{
+    beforeEach(async()=>{
+            
+            
+        await Hikes.deleteHikes();
+        await Hikes.addHike(new hike(1,'title',1,null,1,'p',1,null,null,null,null,"Fakenull.gpx",0,0,'Guide',null));
+
+
+        const RP1= require("../modules/ReferencePoints");
+        await RP1.emptyReferencePoint();
+        await RP1.addReferencePoint(0,0,'parkingLot');
+        await RP1.addReferencePoint(1,0,null);
+        await RP1.addReferencePoint(0,1,'hut');
+
+        const RP =require("../modules/HikeRefPoints");
+        await RP.emptyHikeRefPoint();
+        await RP.addHikeRefPoints(1,1,1,0);
+        await RP.addHikeRefPoints(1,2,0,0);
+        await RP.addHikeRefPoints(1,3,0,1);
+
+
+        //create all active points for the same Hike 2 for the same hiker and one for another hiker. points of failure
+        await ActivePoint.emptyConnection();
+        await ActivePoint.RegisterActivePoint(1,"d@polito.it",1,1);
+        await ActivePoint.RegisterActivePoint(1,"d@polito.it",2,1);
+        await ActivePoint.RegisterActivePoint(1,"d@polito.it",3,1);
+        await ActivePoint.RegisterActivePoint(1,"b@polito.it",1,1);
+        await ActivePoint.RegisterActivePoint(1,"b@polito.it",2,1);
+        await ActivePoint.RegisterActivePoint(1,"d@polito.it",1,2);
+        await ActivePoint.RegisterActivePoint(1,"d@polito.it",1,2);
+        await ActivePoint.RegisterActivePoint(1,"d@polito.it",1,2);
+        
+
+
+    });
+    afterEach(async()=>{
+        const RP =require("../modules/HikeRefPoints");
+        await RP.emptyAllPoints();
+        await ActivePoint.emptyConnection();
+
+        await Hikes.deleteHikes();
+
+    });
+    it("test get starting time",async()=>{
+        await expect(ActivePoint.getStartingTime(1,1,"d@polito.it")).resolves.not.toEqual(null);
+    });
+    it("test get current active hike",async()=>{
+        await expect(ActivePoint.getCurrentActiveHike("d@polito.it",1)).resolves.not.toEqual(null);
+    });
+    it("test get hiker points of hike",async()=>{
+        await expect(ActivePoint.getHikerPointsOfHike("d@polito.it",1)).resolves.not.toEqual(null);
+    });
+    it("test get point reached info",async()=>{
+        await expect(ActivePoint.getPointReachedInfo(1,1,"d@polito.it")).resolves.not.toEqual(null);
+    });
+});

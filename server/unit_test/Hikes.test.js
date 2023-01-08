@@ -5,14 +5,16 @@ const {hike}= require('../modules/Hikes');
 
 
 
+
 beforeAll(async() =>{   
     await db.createConnection();
     await hikes.deleteHikes();
+    await hikes.deleteCompletedHikes();
 
-   } )
+} )
 afterAll(async()=>{
-   await hikes.deleteHikes();
-
+    await hikes.deleteHikes();
+    await hikes.deleteCompletedHikes();
 } )
 const h0= new hike(null,'0','0','0','0','0','0','0','0','0','0','0','0','0');
 describe("Get/add Hikes",()=>{
@@ -20,6 +22,13 @@ describe("Get/add Hikes",()=>{
         await expect(hikes.deleteHikes()).resolves.toEqual('Hikes emptied');
         await expect(hikes.getHikes()).resolves.toEqual([]);
     });
+    test("Get completed Hikes",async()=>{
+        await expect(hikes.getCompletedHikes("a@polito.it")).resolves.not.toEqual(null);
+    })
+    test("insert/delete completed Hikes",async()=>{
+        await expect(hikes.insertCompletedHike("a@polito.it",1,1)).resolves.not.toEqual(null);
+        await expect(hikes.deleteCompletedHikes()).resolves.not.toEqual(null);
+    })
 
     test('insert a new hike', async()=>{
         await expect(hikes.addHike(h0)).resolves.toEqual('New Hike inserted')

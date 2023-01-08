@@ -314,6 +314,17 @@ function addHutToHike(HikeID,RefPointID,IsStart=0,IsEnd=0){
 
   });
 } 
+
+function deleteCompletedHikes(){
+  return new Promise(async (resolve, reject) => {
+    db.run("DELETE FROM CompletedHikes", [], function (err) {
+      if (err)
+        reject(err);
+      else
+        resolve('Hikes emptied');
+    });
+  })
+}
 module.exports={
   acceptableFilters,
   addHutToHike,
@@ -333,5 +344,6 @@ module.exports={
   setHikePicture,
   getMyHikes,
   insertCompletedHike,
-  getCompletedHikes
+  getCompletedHikes,
+  deleteCompletedHikes
 }
