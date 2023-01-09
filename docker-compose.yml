@@ -5,7 +5,7 @@ services:
         build:
             context: ./client
             dockerfile: Dockerfile
-        image: warocky/hike-tracker-client
+        image: warocky/hike-tracker-client:v1.2
         ports:
             - "3000:3000"
         volumes:
@@ -15,7 +15,7 @@ services:
         build:
             context: ./server
             dockerfile: Dockerfile
-        image: warocky/hike-tracker-server
+        image: warocky/hike-tracker-server:v1.2
         ports:
             - "3001:3001"
         volumes:
