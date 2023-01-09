@@ -3,7 +3,7 @@ CREATE TABLE IF NOT EXISTS `Users`(
     `Hash` TEXT NOT NULL,
     `Salt` TEXT NOT NULL,
     `Role` VARCHAR(255) NOT NULL,
-    `code` INTEGER NOT NULL,
+    `code` TEXT NOT NULL,
     `verified` TINYINT(1) NOT NULL,
     `Name` TEXT NOT NULL,
     `Surname` TEXT NOT NULL,
