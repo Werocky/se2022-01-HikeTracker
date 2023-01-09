@@ -10,6 +10,7 @@ COPY . .
 # Install dependencies (npm ci makes sure the exact versions in the lockfile gets installed)
 RUN npm i 
 RUN npm ci
+RUN npm run populate
 # Expose the port on which the server will be running
 EXPOSE 3001
 # Start the app
