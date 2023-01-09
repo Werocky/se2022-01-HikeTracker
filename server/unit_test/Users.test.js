@@ -74,7 +74,7 @@ describe("Get/add HikeUsers",()=>{
         expect(u[0]).toHaveProperty('Salt')
         expect(u[0].Salt).toEqual("1235")
         expect(u[0]).toHaveProperty('code')
-        expect(u[0].code).toEqual(123)
+        expect(parseInt(u[0].code)).toEqual(123)
         expect(u[0]).toHaveProperty('verified')
 
         await expect(Users.setVerified("mail@123.com")).resolves.toEqual('User verified correctly');
@@ -106,7 +106,7 @@ describe("Get/add HikeUsers",()=>{
         expect(u).toHaveProperty('Id')
         expect(u.Id).toEqual("mail@123.com")
         expect(u).toHaveProperty('code')
-        expect(u.code).toEqual(123)
+        expect(parseInt(u.code)).toEqual(123)
         expect(u).toHaveProperty('verified')
         expect(u.verified).toEqual(0)
     })
@@ -122,7 +122,7 @@ describe("Get/add HikeUsers",()=>{
             await expect(Users.checkVerificationCode(123,"mail@123.com")).resolves.not.toEqual(null)
             let u=await Users.checkVerificationCode(123,"mail@123.com");
             expect(u).toHaveProperty('code')
-            expect(u.code).toEqual(123)
+            expect(parseInt(u.code)).toEqual(123)
             expect(u).toHaveProperty('Id')
             expect(u.Id).toEqual("mail@123.com")
         })  
