@@ -221,7 +221,7 @@ All files           |   95.06 |    68.27 |   99.22 |   95.47 |
     - Issues reported by SonarQube at the beginning of the sprint:
     ![Alt text](./Retrospective_4_images/Issues_18_Dec.png?raw=true "Issues in date 18/12")
     - Issues reported by SonarQube at the end of the sprint: 
-    ![Alt text](./Retrospective_4_images/Issues_End_Sprint.png?raw=true "Issues at the end of the sprint")
+    ![Alt text](./Retrospective_4_images/Issues_End_sprint.png?raw=true "Issues at the end of the sprint")
   - Hours estimated for remediation by SonarQube only for the selected and planned issues
     - The selected issue was *Bugs*, since *Maintainability* and *Security* had a better rating (both at the first and last analysis)
     - Remediation effort at the end of the layout restructure and at the end of the sprint
