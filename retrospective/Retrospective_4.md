@@ -210,26 +210,31 @@ All files           |   95.06 |    68.27 |   99.22 |   95.47 |
 
 - Technical Debt management:
   - Total hours estimated:
-    - *71h20m*.
+    - *1h20m*.
   - Total hours spent:
-    - *72h* 
+    - *1h20m* 
   - Hours estimated for remediation by SonarQube:
-    - After layout restructure: *41d*
-    - At the end of the sprint: *8d*
-    - Issues reported by SonarQube after Layout restructure and at the end of the sprint:
-    ![Alt text](Issues_8_Dec.png?raw=true "Issues in date 8/12")
-    ![Alt text](Issues_End_Sprint.png?raw=true "Issues at the end of the sprint")
+    - At the beginning of the sprint: *9d*
+    ![Alt text](./Retrospective_4_images/TD_estimated_by_SC_Beginning.png?raw=true "Estimated TD at the Beginning of the sprint")
+    - At the end of the sprint: *6d 6h*
+    ![Alt text](./Retrospective_4_images/TD_estimated_by_SC_End.png?raw=true "Estimated TD at the End of the sprint")
+    - Issues reported by SonarQube at the beginning of the sprint:
+    ![Alt text](./Retrospective_4_images/Issues_18_Dec.png?raw=true "Issues in date 18/12")
+    - Issues reported by SonarQube at the end of the sprint: 
+    ![Alt text](./Retrospective_4_images/Issues_End_Sprint.png?raw=true "Issues at the end of the sprint")
   - Hours estimated for remediation by SonarQube only for the selected and planned issues
     - The selected issue was *Bugs*, since *Maintainability* and *Security* had a better rating (both at the first and last analysis)
     - Remediation effort at the end of the layout restructure and at the end of the sprint
-    ![Alt text](Remained_Effort_8_Dec.png?raw=true "Remained effort in date 8/12")
-    ![Alt text](Remained_Effort_End_Sprint.png?raw=true "Remained effort in date 8/12")
+    ![Alt text](./Retrospective_4_images/Remained_effort_18_Dec.png?raw=true "Remained effort in date 18/12")
+    ![Alt text](./Retrospective_4_images/Remained_effort_End_Sprint.png?raw=true "Remained effort at the End of the sprint")
   - Hours spent on remediation
-    - *2h*, that is the remediation effort required to reduce the number of *Bugs* from *30* to *2*.
+    - *40m*, that is the remediation effort required to reduce the number of *Bugs* from *6* to *0*. Besides that, *40m* have been spent on reducing the number of the *Security Hotspots* from *10* to *3*. The remained ones are false positives.
+    ![Alt text](./Retrospective_4_images/Security_Hotspot_Bugs_Beginning.png?raw=true "Security Hotspot and Bugs at the Beginning of the sprint")
+    ![Alt text](./Retrospective_4_images/Security_Hotspot_Bugs_End.png?raw=true "Security Hotspot and Bugs at the End of the sprint")
   - debt ratio (as reported by SonarQube under "Measures-Maintainability")
-    - *0.8%*
+    - *0.9%*
   - rating for each quality characteristic reported in SonarQube under "Measures" (namely reliability, security, maintainability )
-    - Reliability: `C`
+    - Reliability: `A`
     - Security: `A`
     - Maintainability: `A`
 
