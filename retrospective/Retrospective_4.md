@@ -11,7 +11,7 @@ RETROSPECTIVE (Team 1)
 
 - __7__ of stories committed vs. __4__ done (_+1 started but not finished_) 
 - Total of __26__ points committed vs. __19__ points done 
-- Total of __70h 50m__ planned  vs. __????__ spent (as a team)
+- Total of __72h 50m__ planned  vs. __65h 05m__ spent (as a team)
 
 **Notes**: we also solve some horizontal tasks related to issues from the previous demo, bugs that we found and TD. 
 
@@ -27,12 +27,12 @@ RETROSPECTIVE (Team 1)
 
 | Story  | # Tasks | Points | Hours est. | Hours actual |
 |--------|---------|--------|------------|--------------|
-| _0 - Horizontal tasks_| _??_ | _*_ | _71h 20m_ | _??_ |
-| _17 - Start hike_     | _5_ | _8_ | _1d 4h 30m_ | _??_ |
-| _18 - Terminate hike_ | _3_ | _5_ | _5h 30m_ | _??_ |
-| _34 - Completed hikes_| _4_ | _3_ | _1d 1h_ | _??_ |
-| _33 - Start hike_     | _6_ | _3_ | _1d 1h 25m_ | _??_ |
-| _19 - Record Point_   | _6_ | _3_ | _1d 1h_ | _??_ |
+| _0 - Horizontal tasks_| _23_ | _*_ | _3d 5h 25m_ | _3d 4h 05m_ |
+| _17 - Start hike_     | _5_ | _8_ | _1d 4h 30m_ | _1d 5h 30m_ |
+| _18 - Terminate hike_ | _3_ | _5_ | _5h 30m_ | _1d 15m_ |
+| _34 - Completed hikes_| _4_ | _3_ | _1d 1h_ | _4h_ |
+| _33 - Define Reference Points_     | _6_ | _3_ | _1d 1h 25m_ | _1d 2h 20m_ |
+| _19 - Record Point_   | _6_ | _3_ | _1d 1h_ | _2h 55m_ |
 
 <br/>
 
@@ -50,104 +50,104 @@ RETROSPECTIVE (Team 1)
 #### 18 - Terminate hike
 | Task | Hours est. | Hours actual |
 |------|------------|--------------|
-| _18-1 Layout to end hike [CLIENT]_| _1h 30m_ | _???_ |
-| _18-2 API to end hike tracking [SERVER]_| _2h_ | _???_ |
-| _18-3 Testing_| _2h_ | _???_ |
+| _18-1 Layout to end hike [CLIENT]_| _1h 30m_ | _2h 30m_ |
+| _18-2 API to end hike tracking [SERVER]_| _2h_ | _2h 55m_ |
+| _18-3 Testing_| _2h_ | _2h 50m_ |
 
 #### 34 - Completed hikes
 | Task | Hours est. | Hours actual |
 |------|------------|--------------|
-| _34-1 Layout_| _3h_ | _???_ |
-| _34-2 API to get completed and saved hikes [SERVER]_| _2h_ | _???_ |
-| _34-3 API to show completed hikes [CLIENT]_| _2h_ | _???_ |
-| _34-4 Testing_| _2h_ | _???_ |
+| _34-1 Layout_| _3h_ | _2h_ |
+| _34-2 API to get completed and saved hikes [SERVER]_| _2h_ | _1h_ |
+| _34-3 API to show completed hikes [CLIENT]_| _2h_ | _30m_ |
+| _34-4 Testing_| _2h_ | _30m_ |
 
-#### 33 - Start hike
+#### 33 - Define Reference Points
 | Task | Hours est. | Hours actual |
 |------|------------|--------------|
-| _33-1 API to add a Reference Point [SERVER]_| _1h_ | _???_ |
-| _33-2 Map to insert a Reference Point [CLIENT]_| _2h_ | _???_ |
-| _33-3 API to add info related to Reference Point [SERVER]_| _1h 40m_ | _???_ |
-| _33-4 Page to add info related to Reference Point_| _2h_ | _???_ |
-| _33-5 Testing_| _2h_ | _???_ |
-| _33-6 Api to delete a Reference Point_| _45m_ | _???_ |
+| _33-1 API to add a Reference Point [SERVER]_| _1h_ | _1h_ |
+| _33-2 Map to insert a Reference Point [CLIENT]_| _2h_ | _2h_ |
+| _33-3 API to add info related to Reference Point [SERVER]_| _1h 40m_ | _2h 10m_ |
+| _33-4 Page to add info related to Reference Point_| _2h_ | _2h 30m_ |
+| _33-5 Testing_| _2h_ | _1h 10m_ |
+| _33-6 Api to delete a Reference Point_| _45m_ | _30m_ |
 
 #### 19 - Record Point
 | Task | Hours est. | Hours actual |
 |------|------------|--------------|
-| _19-1 Record point API[CLIENT SIDE]_| _2h_ | _???_ |
-| _19-2 Record point API[SERVER SIDE]_| _1h 30m_ | _???_ |
-| _19-3 DB modify_| _2h_ | _???_ |
-| _19-4 Layout_| _1h 30m_ | _???_ |
-| _19-5DB testing_| _1h_ | _???_ |
-| _19-6 E2E testing_| _1h_ | _???_ |
+| _19-1 Record point API[CLIENT SIDE]_| _2h_ | _30m_ |
+| _19-2 Record point API[SERVER SIDE]_| _1h 30m_ | _20m_ |
+| _19-3 DB modify_| _2h_ | _0h_ |
+| _19-4 Layout_| _1h 30m_ | _1h 25m_ |
+| _19-5 DB testing_| _1h_ | _30m_ |
+| _19-6 E2E testing_| _1h_ | _10m_ |
 
 <br/>
 
 #### Horizonal tasks
 | Task | Hours est. | Hours actual |
 |------|------------|--------------|
-| _Update README.MD_  |  _45m_  |  __  |
-| _Notification's timeout_  |  _10m_  |  __  |
-| _Filtering E2E testing_  |  _30m_  |  __  |
-| _Show Reference Points in Hike Details_  |  _30m_  |  __  |
-| _insert new hike in hikes list_  |  _1h 30m_  |  __  |
-| _Fix filtering_  |  _1h_  |  __  |
-| _Add map filter_  |  _50m_  |  __  |
-| _Cover Photo for AddHike [CLIENT+SERVER]_  |  _4h_  |  __  |
-| _resolve hikedetails bug_  |  _30m_  |  __  |
-| _Map Bounds_  |  _1h_  |  __  |
-| _Cover Photo for AddHut [CLIENT+SERVER]_  |  _4h_  |  __  |
-| _Fix SonarCloud Bugs (TD)_  |  _40m_  |  __  |
-| _Fix SonarCloud Security Hotspots (TD)_  |  _40m_  |  __  |
-| _Show Reference Point in hike's path_  |  _2h_  |  __  |
-| _Add markers to hike's paths_  |  _2h_  |  __  |
-| _Verification Page New Layout_  |  _1h_  |  __  |
-| __  |  __  |  __  |
-| __  |  __  |  __  |
-| __  |  __  |  __  |
-
-<br/>
-
-__--- FROM HERE IT'S A COPY OF THE OLD ONE ---__
+| _Layout profile_  |  _2h_  |  _2h_  |
+| _Fix SonarCloud Code Smells_  |  _1h 20m_  |  _10m_  |
+| _Update README.MD_  |  _45m_  |  _1h 30m_  |
+| _Notification's timeout_  |  _10m_  |  _10m_  |
+| _Filtering E2E testing_  |  _30m_  |  _30m_  |
+| _Show Reference Points in Hike Details_  |  _30m_  |  _25m_  |
+| _insert new hike in hikes list_  |  _1h 30m_  |  _15m_  |
+| _Fix filtering_  |  _1h_  |  _2h_  |
+| _Add map filter_  |  _50m_  |  _50m_  |
+| _Cover Photo for AddHike [CLIENT+SERVER]_  |  _4h_  |  _3h 40m_  |
+| _resolve hikedetails bug_  |  _30m_  |  _25m_  |
+| _Clean the layout components_  |  _3h_  |  _3h_  |
+| _Map Bounds_  |  _1h_  |  _40m_  |
+| _Cover Photo for AddHut [CLIENT+SERVER]_  |  _4h_  |  _4h 15m_  |
+| _Fix SonarCloud Bugs (TD)_  |  _40m_  |  _40m_  |
+| _Fix SonarCloud Security Hotspots (TD)_  |  _40m_  |  _35m_  |
+| _Show Reference Point in hike's path_  |  _2h_  |  _2h_  |
+| _Add markers to hike's paths_  |  _2h_  |  _2h_  |
+| _Verification Page New Layout_  |  _1h_  |  _1h_  |
+| _Fix update of new hikes_  |  _20m_  |  _20m_  |
+| _Fix data visualization in hut's details_  |  _20m_  |  _20m_  |
+| _Fix docker's db population and updates_  |  _1h 20m_  |  _1h 20m_  |
 
 <br/>
 
 ### Average, Standard Deviation and Estimation Error Ratio
 - Hours per task average: 
-  - (estimated) *total hours (81h 30m ~ 82h), numbers of tasks (38)* 
-    - *average =* $\frac{82}{38}$ *= 2.157 ~ 2.16 hours/task*
-  - (actual) *total hours (80h 35m ~ 81h), numbers of tasks (38)* 
-    - *average =* $\frac{81}{38}$ *= 2.131 ~ 2.13 hours/task*
+  - (estimated) *total hours (72h 50m ~ 73h), numbers of tasks (46)* 
+    - *average =* $\frac{73}{46}$ *= 1.587 ~ 1.6 hours/task*
+  - (actual) *total hours (65h 05m ~ 65h), numbers of tasks (46)* 
+    - *average =* $\frac{65}{46}$ *= 1.413 ~ 1.4 hours/task*
 - standard deviation:
-  - (estimated) *Estimated Avg = 2.16, number of observations = 38 (the number of tasks)*
-    - *Mean deviation:* $\sum_{n=1}^{38}(f_i - Avg_{est})^2$ *= 31.693*
-    - *Variance = Mean deviation / number of observations = 0.83*
-    - *Standard deviation =* $\sqrt{Variance}$ *= 0.91*
-  - (actual) *Actual Avg = 2.13, number of observations = 38 (the number of tasks)*
-    - *Mean deviation:* $\sum_{n=1}^{38}(f_i - Avg_{act})^2$ *= 61.3022*
-    - *Variance = Mean deviation / number of observations = 1.61*
-    - *Standard deviation =* $\sqrt{Variance}$ *= 1.27*
+  - (estimated) *Estimated Avg = 1.6, number of observations = 46 (the number of tasks)*
+    - *Mean deviation:* $\sum_{n=1}^{46}(f_i - Avg_{est})^2$ *= 30.96*
+    - *Variance = Mean deviation / number of observations = 0.67*
+    - *Standard deviation =* $\sqrt{Variance}$ *= 0.81*
+  - (actual) *Actual Avg = 1.4, number of observations = 46 (the number of tasks)*
+    - *Mean deviation:* $\sum_{n=1}^{46}(f_i - Avg_{act})^2$ *= 48.56*
+    - *Variance = Mean deviation / number of observations = 1.055*
+    - *Standard deviation =* $\sqrt{Variance}$ *= 1.027*
+
 ##### Table for estimated standard deviation
 | Group | Frequency |
 |------|------------|
-| _1h_ |  _10_ |
-| _2h_ | _18_ |
-| _3h_ | _6_ |
-| _4h_ | _4_ |
+| _1h_ |  _17_ |
+| _2h_ | _22_ |
+| _3h_ | _5_ |
+| _4h_ | _2_ |
 
 ##### Table for actual standard deviation
 | Group | Frequency |
 |------|------------|
-| _1h_ |  _13_ |
-| _2h_ | _11_ |
-| _3h_ | _9_ |
-| _4h_ | _4_ |
-| _6h-7h_ | _1_ |
-  
+| _1h_ |  _24_ |
+| _2h_ | _10_ |
+| _3h_ | _8_ |
+| _4h_ | _3_ |
+| _5h_ | _1_ |
+
 - Total task estimation error ratio: 
-  - *sum of total hours estimation (82h)/ sum of total hours spent (81h)- 1*
-    -  $\frac{82}{81} - 1 = 0.01$
+  - *sum of total hours estimation (73h)/ sum of total hours spent (65h)- 1*
+    -  $\frac{73}{65} - 1 = 0.12$
 
   
 ## QUALITY MEASURES 
