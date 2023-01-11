@@ -234,14 +234,19 @@ All files           |   94.05 |    65.88 |   98.43 |   95.01 |
 ## ASSESSMENT
 
 - What caused your errors in estimation (if any)?  
+ 
   
 - What lessons did you learn (both positive and negative) in this sprint?
   
 - Which improvement goals set in the previous retrospective were you able to achieve? 
+  - Complete a satisfiable number of stories, we completed 4 stories.
+  - Creation of tasks with more precise name, we also added a short description in some cases
+  - We solved the major/critical issues reported by SonarCloud
+  - We provided a good documentation of the DB and the APIs
   
 - Which ones you were not able to achieve? Why?
   
-- Improvement goals for the next sprint and how to achieve them (technical tasks, team coordination, etc.)
   
 - One thing you are proud of as a Team!!
+  - We are satisfied with the final result of this web application
 
