@@ -234,18 +234,20 @@ All files           |   94.05 |    65.88 |   98.43 |   95.01 |
 ## ASSESSMENT
 
 - What caused your errors in estimation (if any)?  
- 
+  - We didn't have big errors in the estimation as we managed to be quite faithful to it. Some errors in testing estimation as some new parts required writing more tests than expected and more articulated, while some modification operations required simpler tests.
   
 - What lessons did you learn (both positive and negative) in this sprint?
+  - With a better tasks naming and a good coordination among each other we were able to work faster
+  - (negative?)
   
 - Which improvement goals set in the previous retrospective were you able to achieve? 
   - Complete a satisfiable number of stories, we completed 4 stories.
-  - Creation of tasks with more precise name, we also added a short description in some cases
+  - Ceation of tasks with more precise name, since we also added, in several cases, a short description to explain better the task
   - We solved the major/critical issues reported by SonarCloud
   - We provided a good documentation of the DB and the APIs
   
 - Which ones you were not able to achieve? Why?
-  
+  - ?
   
 - One thing you are proud of as a Team!!
   - We are satisfied with the final result of this web application
