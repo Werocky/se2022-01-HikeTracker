@@ -27,7 +27,7 @@ RETROSPECTIVE (Team 1)
 
 | Story  | # Tasks | Points | Hours est. | Hours actual |
 |--------|---------|--------|------------|--------------|
-| _0 - Horizontal tasks_| _23_ | _*_ | _3d 5h 25m_ | _3d 4h 05m_ |
+| _0 - Horizontal tasks_| _22_ | _*_ | _3d 5h 25m_ | _3d 4h 05m_ |
 | _17 - Start hike_     | _5_ | _8_ | _1d 4h 30m_ | _1d 5h 30m_ |
 | _18 - Terminate hike_ | _3_ | _5_ | _5h 30m_ | _1d 15m_ |
 | _34 - Completed hikes_| _4_ | _3_ | _1d 1h_ | _4h_ |
