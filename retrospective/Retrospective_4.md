@@ -217,7 +217,7 @@ All files           |   94.05 |    65.88 |   98.43 |   95.01 |
     ![Alt text](./Retrospective_4_images/Issues_End_sprint.png?raw=true "Issues at the end of the sprint")
   - Hours estimated for remediation by SonarQube only for the selected and planned issues
     - The selected issue was *Bugs*, since *Maintainability* and *Security* had a better rating (both at the first and last analysis)
-    - Remediation effort at the end of the layout restructure and at the end of the sprint
+    - Remediation effort at the beginning and at the end of the sprint
     ![Alt text](./Retrospective_4_images/Remained_effort_18_Dec.png?raw=true "Remained effort in date 18/12")
     ![Alt text](./Retrospective_4_images/Remained_effort_End_Sprint.png?raw=true "Remained effort at the End of the sprint")
   - Hours spent on remediation
