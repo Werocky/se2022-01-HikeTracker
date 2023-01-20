@@ -336,7 +336,7 @@ app.post('/addHike', async (req, res) => {
     let startId = -1;
     const start = points.start;
     function distanceStart(p) {
-      const dist = distance(p.Lat, p.Lng, start.position.lat, start.position.lon);
+      const dist = distance(p.Lat, p.Lng, start.position.lat, start.position.lng);
       return dist < 0.1;
     }
     pointAlreadyPresent = refPoints.find(distanceStart);
@@ -355,7 +355,7 @@ app.post('/addHike', async (req, res) => {
     let endId = -1;
     const end = points.end;
     function distanceEnd(p) {
-      const dist = distance(p.Lat, p.Lng, end.position.lat, end.position.lon);
+      const dist = distance(p.Lat, p.Lng, end.position.lat, end.position.lng);
       return dist < 0.1;
     }
     pointAlreadyPresent = refPoints.find(distanceEnd);
@@ -375,7 +375,7 @@ app.post('/addHike', async (req, res) => {
     for (let newRP of points.otherPoints) {
       let rpID = -1;
       function distancePoint(p) {
-        const dist = distance(p.Lat, p.Lng, newRP.position.lat, newRP.position.lon);
+        const dist = distance(p.Lat, p.Lng, newRP.position.lat, newRP.position.lng);
         return dist < 0.1;
       }
       pointAlreadyPresent = refPoints.find(distancePoint);
@@ -450,7 +450,7 @@ app.post('/addRefPoints/:hikeID', async (req, res) => {
     for (let newRP of points) {
       let rpID = -1;
       function distancePoint(p) {
-        const dist = distance(p.Lat, p.Lng, newRP.position.lat, newRP.position.lon);
+        const dist = distance(p.Lat, p.Lng, newRP.position.lat, newRP.position.lng);
         return dist < 0.1;
       }
       pointAlreadyPresent = refPoints.find(distancePoint);
