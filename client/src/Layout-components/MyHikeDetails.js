@@ -186,7 +186,14 @@ function MyHikeDetails(props) {
       let Time = new Date();
       const pointsOfHike = await API.getHikerPointsOfHike(params.hikeID);
       let check = await API.getHikeInfo(params.hikeID);
-      check = check.filter(val => val.IsEnd == 0);
+      check = check.filter(val => val.IsEnd == 0 && val.IsStart == 1);
+
+      //
+      let temp=pointsOfHike[0];
+      console.log("it got here and arrival time failed:"+ temp.PointID + "  :  "+check[0].RefPointID);
+      //
+
+
       let startingTimestamp = pointsOfHike.filter(point => point.PointID == check[0].RefPointID)[0].ArrivalTime;
       console.log(startingTimestamp);
       let time = new Date(startingTimestamp);
@@ -226,8 +233,9 @@ function MyHikeDetails(props) {
     {
       const pointsOfHike = await API.getHikerPointsOfHike(params.hikeID);
       let check = await API.getHikeInfo(params.hikeID);
-      check = check.filter(val => val.IsEnd == 0);
+      check = check.filter(val => val.IsEnd == 0 && val.IsStart == 1);
       console.log(pointsOfHike, check);
+
       let startingTimestamp = pointsOfHike.filter(point => point.PointID == check[0].RefPointID)[0].ArrivalTime;
       console.log(startingTimestamp);
       let end_Date = new Date(endDate);
